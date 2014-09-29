@@ -2,10 +2,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 
-    <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
     <meta name="description" content="{{ site.description }}">
 
-    <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
     <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+
+    <meta name="robots" content="index,follow" />
+    <meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+
+    <link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+    <link rel="stylesheet" href="/css/Common.css" type="text/css" media="screen,print" />
+    <link rel="stylesheet" href="/css/common_print.css" type="text/css" media="print" />
+    <link rel="stylesheet" href="/css/DynamicStyle.css" type="text/css" media="screen" />
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+    <style type="text/css"> body { font-size: 84%; } </style>
 </head>
+

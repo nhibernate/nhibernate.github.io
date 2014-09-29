@@ -99,7 +99,7 @@ module Jekyll
           # the <![CDATA[ markers in the content.  this caused the Ruby REXML parser
           # to ignore all content within element.  i had to remove all of those
           # in order for this line to parse.
-          content = item.elements["content"].text   
+          content = item.elements["content"].text
 
           ## i'd like to insert a diclaimer that I have imported these posts.
           # note that you'll have to create the file source/_includes/imported_disclaimer.html
@@ -110,7 +110,7 @@ module Jekyll
           # it requires <!-- more --> to be inserted, we'll just do it at the
           # very top.  someone with more time can make it insert after the first
           # paragraph or something.
-          content = "<!-- more -->\r\n" + content
+          #content = "<!-- more -->\r\n" + content
           
           ## This section is used to cleanup any content data.
           #

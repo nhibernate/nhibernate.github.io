@@ -1,0 +1,37 @@
+/*
+Blog List Columns
+*/
+
+.BlogBlogNameColumn
+{
+	width: 25%;
+}
+
+.BlogAuthorColumn
+{
+	width: 14%;
+}
+
+.BlogPostsColumn
+{
+	text-align: center;
+	width: 9%;
+}
+
+.BlogArticlesColumn
+{
+	text-align: center;
+	width: 9%;
+}
+
+.BlogCommentsColumn
+{
+	text-align: center;
+	width: 9%;
+}
+
+.BlogTrackbacksColumn
+{
+	text-align: center;
+	width: 9%;
+}

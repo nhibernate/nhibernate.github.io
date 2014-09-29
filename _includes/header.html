@@ -1,27 +1,35 @@
-<header class="site-header">
-
-  <div class="wrapper">
-
-    <a class="site-title" href="{{ site.baseurl }}/">{{ site.title }}</a>
-
-    <nav class="site-nav">
-      <a href="#" class="menu-icon">
-        <svg viewBox="0 0 18 15">
-          <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-          <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-          <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-        </svg>
-      </a>
-
-      <div class="trigger">
-        {% for page in site.pages %}
-          {% if page.title %}
-          <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-          {% endif %}
-        {% endfor %}
-      </div>
-    </nav>
-
+<div id="CommonHeader">
+  <div class="Common">
+    <div id="CommonHeaderTitleArea">
+      <table cellpadding="0" cellspacing="0" border="0">
+        <tr valign="middle">
+          <td>
+            <div style="margin-right: 10px;"><img src="images/LogoNH.gif" alt="" style="border-width:0px;" /></div>
+          </td>
+          <td>
+            <div class="CommonHeaderTitle">NHibernate Forge</div>
+            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
-
-</header>
+</div> 
+<div id="CommonNavigation">
+  <div class="Common">
+    <div class="Inner">
+      <ul>
+        <li><a {% if page.url == '/index.html' %} class="Selected" {% endif %} href="/">Home</a></li>
+        <li><a {% if page.url == '/blog.html' %} class="Selected" {% endif %} href="blog.html">Blog</a></li>
+        <li><a href="https://github.com/nhibernate/nhibernate-core/wiki">Wikis</a></li>
+        <li><a {% if page.url == '/groups.html' %} class="Selected" {% endif %} href="groups.html">Groups</a></li>
+        <li><a href="doc/nh/en/index.html">Reference</a></li>
+        <li><a href="http://nhibernate.jira.com/">Issue tracker</a></li>
+        <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+      </ul>
+      <div style="clear: both;"></div>
+    </div>
+  </div>
+</div>
+<div id="CommonNavigation2Empty"></div>
+<div id="CommonNavigationShadow"></div>

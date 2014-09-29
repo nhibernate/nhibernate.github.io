@@ -1,7 +1,7 @@
 # Site settings
-title: NHibernate Forge
-email: 
-description: > # this means to ignore newlines until "baseurl:"
+title: "NHibernate Forge"
+email: "" 
+description: "The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation."
 baseurl: "" 
 url: "http://nhibernate.github.io"
 twitter_username: nhibernate
