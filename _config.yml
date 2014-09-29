@@ -6,6 +6,7 @@ baseurl: ""
 url: "http://nhibernate.github.io"
 twitter_username: nhibernate
 github_username:  nhibernate
+timezone: 'ART+03:00'
 
 # Build settings
 markdown: kramdown
