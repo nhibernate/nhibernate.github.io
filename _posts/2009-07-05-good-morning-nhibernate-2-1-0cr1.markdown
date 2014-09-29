@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Good morning NHibernate 2.1.0CR1"
-date: 2009-07-05 05:02:00 +1200
+date: 2009-07-05 05:02:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

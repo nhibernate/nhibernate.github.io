@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Dynamic LINQ to NHibernate"
-date: 2011-11-17 13:18:00 +1300
+date: 2011-11-17 13:18:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

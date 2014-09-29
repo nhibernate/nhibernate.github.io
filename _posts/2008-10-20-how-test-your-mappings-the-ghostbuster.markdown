@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How Test your mappings: the Ghostbuster"
-date: 2008-10-20 13:48:00 +1300
+date: 2008-10-20 13:48:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 2.1.0.Alpha2 is released"
-date: 2009-03-29 17:01:00 +1300
+date: 2009-03-29 17:01:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

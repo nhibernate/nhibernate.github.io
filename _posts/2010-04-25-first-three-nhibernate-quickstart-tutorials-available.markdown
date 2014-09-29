@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "First three NHibernate quickstart tutorials available"
-date: 2010-04-25 20:43:00 +1200
+date: 2010-04-25 20:43:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

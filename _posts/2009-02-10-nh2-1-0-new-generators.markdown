@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH2.1.0: New generators"
-date: 2009-02-10 00:12:00 +1300
+date: 2009-02-10 00:12:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nhibernate and WPF: ViewModels and Views"
-date: 2009-08-19 16:23:46 +1200
+date: 2009-08-19 16:23:46 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

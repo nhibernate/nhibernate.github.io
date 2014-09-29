@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Value objects"
-date: 2008-09-17 11:29:56 +1200
+date: 2008-09-17 11:29:56 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

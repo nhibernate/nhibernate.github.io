@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Identity: The never ending story"
-date: 2008-12-21 12:38:00 +1300
+date: 2008-12-21 12:38:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

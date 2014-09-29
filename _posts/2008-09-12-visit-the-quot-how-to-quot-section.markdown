@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Visit the &quot;How To&quot; section"
-date: 2008-09-12 17:42:00 +1200
+date: 2008-09-12 17:42:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

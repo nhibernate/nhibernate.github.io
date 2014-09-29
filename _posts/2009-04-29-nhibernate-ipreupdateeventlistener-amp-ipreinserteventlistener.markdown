@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate IPreUpdateEventListener &amp; IPreInsertEventListener"
-date: 2009-04-29 15:04:00 +1200
+date: 2009-04-29 15:04:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate in Action Book is Out!"
-date: 2009-02-06 06:40:00 +1300
+date: 2009-02-06 06:40:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

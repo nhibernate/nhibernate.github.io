@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Ensuring updates on Flush"
-date: 2009-04-03 15:01:00 +1300
+date: 2009-04-03 15:01:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

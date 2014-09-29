@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nhibernate and WPF: Validations"
-date: 2009-08-28 01:06:36 +1200
+date: 2009-08-28 01:06:36 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

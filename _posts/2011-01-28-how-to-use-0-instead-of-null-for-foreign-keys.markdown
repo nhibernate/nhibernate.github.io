@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to use 0 instead of null for foreign keys"
-date: 2011-01-28 12:46:00 +1300
+date: 2011-01-28 12:46:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

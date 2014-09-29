@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 3 - Mapping Relations"
-date: 2008-09-06 16:39:00 +1200
+date: 2008-09-06 16:39:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

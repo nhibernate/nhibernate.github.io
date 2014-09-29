@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator Quickstart"
-date: 2009-05-18 04:31:00 +1200
+date: 2009-05-18 04:31:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

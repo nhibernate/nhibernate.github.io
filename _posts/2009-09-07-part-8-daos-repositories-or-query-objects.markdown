@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 8: DAOs, Repositories, or Query Objects"
-date: 2009-09-07 20:17:50 +1200
+date: 2009-09-07 20:17:50 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

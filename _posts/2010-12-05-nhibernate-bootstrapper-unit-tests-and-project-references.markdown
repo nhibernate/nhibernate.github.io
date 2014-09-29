@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Bootstrapper: Unit Tests and Project References"
-date: 2010-12-05 15:59:00 +1300
+date: 2010-12-05 15:59:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "State (or Strategy) Pattern with NHibernate"
-date: 2009-12-18 15:08:00 +1300
+date: 2009-12-18 15:08:00 -0300
 comments: true
 published: false
 categories: ["blogs", "nhibernate", "archive"]

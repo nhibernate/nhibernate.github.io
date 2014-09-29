@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using convention to resolve sequence names"
-date: 2010-12-14 00:03:00 +1300
+date: 2010-12-14 00:03:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

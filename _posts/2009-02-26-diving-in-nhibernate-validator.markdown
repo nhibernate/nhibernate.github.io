@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Diving in NHibernate.Validator"
-date: 2009-02-26 14:46:00 +1300
+date: 2009-02-26 14:46:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

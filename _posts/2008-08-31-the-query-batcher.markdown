@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The Query Batcher"
-date: 2008-08-31 15:05:00 +1200
+date: 2008-08-31 15:05:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

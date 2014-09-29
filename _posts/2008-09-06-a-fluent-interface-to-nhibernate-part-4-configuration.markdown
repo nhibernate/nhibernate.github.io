@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 4 - Configuration"
-date: 2008-09-06 20:45:31 +1200
+date: 2008-09-06 20:45:31 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

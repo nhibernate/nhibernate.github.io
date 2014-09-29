@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate isn't integrated to the compiler, so what?"
-date: 2008-09-05 00:23:00 +1200
+date: 2008-09-05 00:23:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

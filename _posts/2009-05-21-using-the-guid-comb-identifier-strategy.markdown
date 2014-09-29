@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using The Guid.Comb Identifier Strategy"
-date: 2009-05-21 11:48:00 +1200
+date: 2009-05-21 11:48:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

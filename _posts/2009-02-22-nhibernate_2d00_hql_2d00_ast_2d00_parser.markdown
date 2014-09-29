@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate HQL AST Parser"
-date: 2009-02-22 20:12:58 +1300
+date: 2009-02-22 20:12:58 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

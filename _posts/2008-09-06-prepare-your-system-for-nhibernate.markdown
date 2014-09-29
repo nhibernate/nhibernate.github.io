@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Prepare your system for NHibernate"
-date: 2008-09-06 22:12:52 +1200
+date: 2008-09-06 22:12:52 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

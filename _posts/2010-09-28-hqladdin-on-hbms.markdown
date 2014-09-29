@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HqlAddin on Hbms!"
-date: 2010-09-28 02:37:00 +1300
+date: 2010-09-28 02:37:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

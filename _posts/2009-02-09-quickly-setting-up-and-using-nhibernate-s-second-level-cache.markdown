@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Quickly Setting Up And Using NHibernate's Second Level Cache"
-date: 2009-02-09 22:19:00 +1300
+date: 2009-02-09 22:19:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

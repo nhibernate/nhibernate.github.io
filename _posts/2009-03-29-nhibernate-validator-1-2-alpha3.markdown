@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator 1.2 alpha3"
-date: 2009-03-29 19:47:00 +1300
+date: 2009-03-29 19:47:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

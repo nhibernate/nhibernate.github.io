@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate.Burrow 1.0.0 CR 1 released"
-date: 2008-09-05 03:54:00 +1200
+date: 2008-09-05 03:54:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

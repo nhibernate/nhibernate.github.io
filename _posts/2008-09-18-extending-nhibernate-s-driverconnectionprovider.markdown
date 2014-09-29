@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Extending NHibernate's DriverConnectionProvider"
-date: 2008-09-18 14:48:00 +1200
+date: 2008-09-18 14:48:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

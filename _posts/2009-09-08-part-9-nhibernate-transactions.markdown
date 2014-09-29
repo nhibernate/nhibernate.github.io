@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 9: NHibernate transactions"
-date: 2009-09-08 13:26:05 +1200
+date: 2009-09-08 13:26:05 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

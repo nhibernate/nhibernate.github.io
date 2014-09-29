@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH Mapping by code VS the Untouchable DB"
-date: 2011-09-12 08:30:00 +1200
+date: 2011-09-12 08:30:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

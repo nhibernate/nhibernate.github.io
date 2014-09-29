@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate and Composite Keys"
-date: 2010-07-01 05:11:00 +1200
+date: 2010-07-01 05:11:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

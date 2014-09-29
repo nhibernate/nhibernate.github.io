@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "entity-name in action: Entity Abstraction"
-date: 2008-10-31 22:53:00 +1300
+date: 2008-10-31 22:53:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

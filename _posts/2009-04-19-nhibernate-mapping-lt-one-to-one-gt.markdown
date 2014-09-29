@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;one-to-one/&gt;"
-date: 2009-04-19 01:31:00 +1200
+date: 2009-04-19 01:31:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Db2hbm: convert db schema to hbm"
-date: 2010-02-25 13:23:00 +1300
+date: 2010-02-25 13:23:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

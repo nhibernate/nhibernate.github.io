@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Lazy Loading - Eager Loading"
-date: 2008-09-06 16:59:00 +1200
+date: 2008-09-06 16:59:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

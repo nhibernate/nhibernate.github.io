@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Bulk Data Operations With NHibernate's Stateless Sessions"
-date: 2008-10-30 20:28:00 +1300
+date: 2008-10-30 20:28:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 3.0 released"
-date: 2010-12-05 13:51:00 +1300
+date: 2010-12-05 13:51:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

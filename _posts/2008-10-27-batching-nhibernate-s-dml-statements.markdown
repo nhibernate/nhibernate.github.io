@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Batching NHibernate’s DML Statements"
-date: 2008-10-27 15:23:00 +1300
+date: 2008-10-27 15:23:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

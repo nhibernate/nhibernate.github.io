@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Get/Load Polymorphism in NHibernate 3"
-date: 2011-02-16 22:46:00 +1300
+date: 2011-02-16 22:46:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

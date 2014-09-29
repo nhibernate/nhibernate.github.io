@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate and Ms Sql Server 2008: Date, Time, DateTime2 and DateTimeOffset"
-date: 2009-03-12 00:44:00 +1300
+date: 2009-03-12 00:44:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

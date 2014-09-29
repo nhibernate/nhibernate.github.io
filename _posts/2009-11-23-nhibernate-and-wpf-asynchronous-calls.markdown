@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate and WPF: Asynchronous calls"
-date: 2009-11-23 01:48:18 +1300
+date: 2009-11-23 01:48:18 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

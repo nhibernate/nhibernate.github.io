@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate mapping - &lt;database-object/&gt;"
-date: 2009-04-15 22:47:00 +1200
+date: 2009-04-15 22:47:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

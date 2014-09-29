@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Persisting custom values for enums"
-date: 2008-10-13 00:17:00 +1300
+date: 2008-10-13 00:17:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "HqlAddin vers. 1.0.0.45 - Alpha 2"
-date: 2010-08-20 00:41:00 +1200
+date: 2010-08-20 00:41:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

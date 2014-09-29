@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate.Burrow 1.0.1 GA is released!   "
-date: 2008-11-14 22:45:00 +1300
+date: 2008-11-14 22:45:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

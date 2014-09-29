@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Registering FREETEXT or CONTAINS functions into a NHibernate dialect"
-date: 2009-03-13 13:04:00 +1300
+date: 2009-03-13 13:04:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

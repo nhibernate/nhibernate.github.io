@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Data Access With NHibernate"
-date: 2008-08-31 15:07:00 +1200
+date: 2008-08-31 15:07:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

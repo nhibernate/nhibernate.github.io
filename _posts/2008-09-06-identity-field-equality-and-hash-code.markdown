@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Identity Field, Equality and Hash Code"
-date: 2008-09-06 21:02:27 +1200
+date: 2008-09-06 21:02:27 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

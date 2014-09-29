@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 6: Ninject and MVC or How to be a Web Ninja"
-date: 2009-08-29 05:34:47 +1200
+date: 2009-08-29 05:34:47 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

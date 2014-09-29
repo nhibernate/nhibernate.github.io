@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH-Forge News"
-date: 2009-02-15 17:47:00 +1300
+date: 2009-02-15 17:47:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

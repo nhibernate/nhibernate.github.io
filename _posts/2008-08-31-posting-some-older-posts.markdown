@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Posting some older posts"
-date: 2008-08-31 14:51:00 +1200
+date: 2008-08-31 14:51:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

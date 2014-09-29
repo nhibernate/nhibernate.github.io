@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 3 Beginners Guide published"
-date: 2011-08-29 20:27:00 +1200
+date: 2011-08-29 20:27:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

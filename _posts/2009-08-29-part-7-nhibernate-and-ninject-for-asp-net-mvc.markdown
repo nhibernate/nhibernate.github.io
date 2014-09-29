@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 7: NHibernate and Ninject for ASP.NET MVC"
-date: 2009-08-29 20:47:58 +1200
+date: 2009-08-29 20:47:58 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

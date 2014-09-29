@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mapping different types - IUserType"
-date: 2009-10-15 18:21:00 +1300
+date: 2009-10-15 18:21:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

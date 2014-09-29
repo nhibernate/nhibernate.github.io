@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Integrating Adobe Flex Applications with NHibernate"
-date: 2011-03-01 05:03:00 +1300
+date: 2011-03-01 05:03:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

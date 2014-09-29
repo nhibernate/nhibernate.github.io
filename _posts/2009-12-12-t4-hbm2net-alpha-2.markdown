@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "T4 hbm2net alpha 2"
-date: 2009-12-12 22:12:00 +1300
+date: 2009-12-12 22:12:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

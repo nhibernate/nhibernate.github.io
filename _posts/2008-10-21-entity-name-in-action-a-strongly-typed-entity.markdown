@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "entity-name in action: a strongly typed entity"
-date: 2008-10-21 13:18:00 +1300
+date: 2008-10-21 13:18:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

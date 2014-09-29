@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Two new NHibernate Quickstart Tutorials"
-date: 2010-05-15 04:12:00 +1200
+date: 2010-05-15 04:12:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 2.1.0 on the road"
-date: 2009-03-15 13:29:00 +1300
+date: 2009-03-15 13:29:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

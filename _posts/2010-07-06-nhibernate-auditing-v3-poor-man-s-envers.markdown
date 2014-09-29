@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Auditing v3 – Poor Man’s Envers"
-date: 2010-07-06 05:25:00 +1200
+date: 2010-07-06 05:25:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

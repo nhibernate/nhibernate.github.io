@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Welcome to the NHibernate blog"
-date: 2008-08-30 02:33:00 +1200
+date: 2008-08-30 02:33:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

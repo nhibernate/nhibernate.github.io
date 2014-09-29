@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate.Linq 1.0.0 GA released"
-date: 2009-07-26 10:52:00 +1200
+date: 2009-07-26 10:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

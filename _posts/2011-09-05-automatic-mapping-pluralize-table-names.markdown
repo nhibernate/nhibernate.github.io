@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Automatic Mapping: Pluralize table names"
-date: 2011-09-05 07:28:00 +1200
+date: 2011-09-05 07:28:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

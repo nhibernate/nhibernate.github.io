@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Effective NHibernate Session management for web apps"
-date: 2011-03-03 04:09:00 +1300
+date: 2011-03-03 04:09:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

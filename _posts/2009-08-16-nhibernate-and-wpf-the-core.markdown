@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nhibernate and WPF: The core"
-date: 2009-08-16 00:30:52 +1200
+date: 2009-08-16 00:30:52 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

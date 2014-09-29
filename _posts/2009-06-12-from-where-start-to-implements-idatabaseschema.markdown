@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "From where start to implements IDataBaseSchema"
-date: 2009-06-12 17:30:00 +1200
+date: 2009-06-12 17:30:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

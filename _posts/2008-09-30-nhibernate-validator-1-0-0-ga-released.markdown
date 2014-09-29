@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator 1.0.0 GA released !"
-date: 2008-09-30 00:44:00 +1300
+date: 2008-09-30 00:44:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

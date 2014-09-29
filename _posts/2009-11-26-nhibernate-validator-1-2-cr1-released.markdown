@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator 1.2 CR1 released"
-date: 2009-11-26 12:44:00 +1300
+date: 2009-11-26 12:44:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

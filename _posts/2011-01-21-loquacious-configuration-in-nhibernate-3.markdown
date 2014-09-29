@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Loquacious Configuration in NHibernate 3"
-date: 2011-01-21 21:54:07 +1300
+date: 2011-01-21 21:54:07 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

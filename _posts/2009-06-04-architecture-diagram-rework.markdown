@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Architecture Diagram Rework"
-date: 2009-06-04 13:34:00 +1200
+date: 2009-06-04 13:34:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

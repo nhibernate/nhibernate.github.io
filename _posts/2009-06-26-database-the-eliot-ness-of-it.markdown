@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DataBase; The Eliot Ness of IT ?"
-date: 2009-06-26 13:23:00 +1200
+date: 2009-06-26 13:23:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHForge article at InfoQ"
-date: 2008-09-05 16:09:00 +1200
+date: 2008-09-05 16:09:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

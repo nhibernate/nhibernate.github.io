@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Caches 2.1.0CR1"
-date: 2009-07-05 15:15:00 +1200
+date: 2009-07-05 15:15:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

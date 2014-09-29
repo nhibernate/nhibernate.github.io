@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The month of NH Forge"
-date: 2008-09-29 18:55:00 +1300
+date: 2008-09-29 18:55:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

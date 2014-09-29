@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Nhibernate and WPF: Models concept"
-date: 2009-08-16 00:33:46 +1200
+date: 2009-08-16 00:33:46 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

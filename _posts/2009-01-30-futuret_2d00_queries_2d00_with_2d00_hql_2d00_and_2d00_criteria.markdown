@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Future&lt;T&gt; Queries with HQL and Criteria"
-date: 2009-01-30 16:10:00 +1300
+date: 2009-01-30 16:10:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

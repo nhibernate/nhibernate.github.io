@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Introducing NHibernate ProxyGenerators"
-date: 2008-09-23 04:28:22 +1200
+date: 2008-09-23 04:28:22 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

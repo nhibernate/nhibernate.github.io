@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "An improvement on SessionFactory Initialization"
-date: 2009-03-13 19:18:00 +1300
+date: 2009-03-13 19:18:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

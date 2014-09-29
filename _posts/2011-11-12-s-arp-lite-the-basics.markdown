@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "S#arp Lite: The Basics"
-date: 2011-11-12 00:19:00 +1300
+date: 2011-11-12 00:19:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

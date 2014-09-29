@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Exploring NHibernate Statistics, Part 1: Simple Data Fetching"
-date: 2008-10-26 18:52:00 +1300
+date: 2008-10-26 18:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

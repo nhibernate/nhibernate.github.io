@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate – The difference between Get, Load and querying by id"
-date: 2009-04-30 06:55:00 +1200
+date: 2009-04-30 06:55:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

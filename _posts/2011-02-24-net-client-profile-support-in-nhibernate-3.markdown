@@ -1,7 +1,7 @@
 ---
 layout: post
 title: ".NET Client Profile Support in NHibernate 3"
-date: 2011-02-24 16:00:00 +1300
+date: 2011-02-24 16:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

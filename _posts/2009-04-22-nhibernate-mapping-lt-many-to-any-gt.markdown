@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;many-to-any/&gt;"
-date: 2009-04-22 03:52:00 +1200
+date: 2009-04-22 03:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

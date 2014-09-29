@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator and Asp.Net MVC"
-date: 2009-04-03 00:07:00 +1300
+date: 2009-04-03 00:07:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

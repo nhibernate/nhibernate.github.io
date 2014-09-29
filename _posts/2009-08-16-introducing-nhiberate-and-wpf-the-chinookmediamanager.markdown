@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Introducing NHiberate and WPF: The ChinookMediaManager"
-date: 2009-08-16 00:26:25 +1200
+date: 2009-08-16 00:26:25 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

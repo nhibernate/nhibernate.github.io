@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Visual NHibernate – Using Templates"
-date: 2011-02-07 23:51:00 +1300
+date: 2011-02-07 23:51:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

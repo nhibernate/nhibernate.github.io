@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How to configure Log4Net for use with NHibernate"
-date: 2008-09-06 21:12:50 +1200
+date: 2008-09-06 21:12:50 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

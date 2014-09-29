@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Oh… beautiful SQL"
-date: 2009-05-08 13:39:00 +1200
+date: 2009-05-08 13:39:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

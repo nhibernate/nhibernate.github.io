@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate ProxyGenerators 1.0.0 Beta Released"
-date: 2008-10-07 14:44:21 +1300
+date: 2008-10-07 14:44:21 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Futures"
-date: 2009-04-27 05:33:00 +1200
+date: 2009-04-27 05:33:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

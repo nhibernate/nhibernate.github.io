@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "The best way to solve NHibernate bugs? Submit good unit test"
-date: 2008-10-04 07:04:00 +1300
+date: 2008-10-04 07:04:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

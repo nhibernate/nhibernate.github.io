@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate hbm2ddl"
-date: 2008-11-22 22:04:00 +1300
+date: 2008-11-22 22:04:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

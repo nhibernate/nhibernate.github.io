@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mapping Source: How map a class without use nothing"
-date: 2008-11-17 00:13:00 +1300
+date: 2008-11-17 00:13:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

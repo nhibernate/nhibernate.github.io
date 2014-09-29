@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Less than “Few” is GoF"
-date: 2008-10-12 20:40:00 +1300
+date: 2008-10-12 20:40:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

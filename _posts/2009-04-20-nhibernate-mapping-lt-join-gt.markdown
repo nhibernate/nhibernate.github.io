@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;join/&gt;"
-date: 2009-04-20 01:56:00 +1200
+date: 2009-04-20 01:56:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

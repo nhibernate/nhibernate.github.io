@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 10: Testing and Refactoring"
-date: 2009-09-20 19:07:41 +1200
+date: 2009-09-20 19:07:41 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

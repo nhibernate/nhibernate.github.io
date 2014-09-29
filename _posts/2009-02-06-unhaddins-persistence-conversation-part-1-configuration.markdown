@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "uNHaddins Persistence Conversation – Part 1: Configuration"
-date: 2009-02-06 16:33:00 +1300
+date: 2009-02-06 16:33:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

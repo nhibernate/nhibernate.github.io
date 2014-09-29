@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate with Spring.NET"
-date: 2009-03-03 21:00:00 +1300
+date: 2009-03-03 21:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

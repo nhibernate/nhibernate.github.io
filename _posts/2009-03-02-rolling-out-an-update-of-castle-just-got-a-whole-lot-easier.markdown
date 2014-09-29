@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Rolling out an update of Castle just got a whole lot easier"
-date: 2009-03-02 21:36:00 +1300
+date: 2009-03-02 21:36:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Entities behavior injection"
-date: 2008-12-12 11:50:00 +1300
+date: 2008-12-12 11:50:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Delphi Conference - Brazil (Introducing NH to Delphi world)"
-date: 2010-10-07 17:33:00 +1300
+date: 2010-10-07 17:33:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

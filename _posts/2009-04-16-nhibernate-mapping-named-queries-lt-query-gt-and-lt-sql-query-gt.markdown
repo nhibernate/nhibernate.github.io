@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping – Named queries &lt;query/&gt; and &lt;sql-query/&gt;"
-date: 2009-04-16 22:55:00 +1200
+date: 2009-04-16 22:55:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

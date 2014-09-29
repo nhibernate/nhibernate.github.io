@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHIbernate Grok! "
-date: 2008-09-08 09:55:00 +1200
+date: 2008-09-08 09:55:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

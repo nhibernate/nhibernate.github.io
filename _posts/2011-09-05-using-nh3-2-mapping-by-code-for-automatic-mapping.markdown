@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using NH3.2 mapping by code for Automatic Mapping"
-date: 2011-09-05 07:24:00 +1200
+date: 2011-09-05 07:24:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

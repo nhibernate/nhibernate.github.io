@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "hbm2net "
-date: 2009-10-19 07:43:00 +1300
+date: 2009-10-19 07:43:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

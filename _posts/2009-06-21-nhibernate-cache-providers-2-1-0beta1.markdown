@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Cache Providers 2.1.0Beta1"
-date: 2009-06-21 15:52:00 +1200
+date: 2009-06-21 15:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

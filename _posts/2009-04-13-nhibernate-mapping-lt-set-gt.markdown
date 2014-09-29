@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;set/&gt;"
-date: 2009-04-13 20:00:18 +1200
+date: 2009-04-13 20:00:18 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

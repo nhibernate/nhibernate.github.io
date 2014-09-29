@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "How-To: Using the N* Stack, part 2"
-date: 2009-08-11 20:21:00 +1200
+date: 2009-08-11 20:21:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

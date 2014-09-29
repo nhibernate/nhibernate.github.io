@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 1"
-date: 2008-09-05 18:07:46 +1200
+date: 2008-09-05 18:07:46 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

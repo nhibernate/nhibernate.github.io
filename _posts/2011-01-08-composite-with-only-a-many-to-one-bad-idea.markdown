@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Composite with only a Many-To-One = Bad Idea"
-date: 2011-01-08 11:54:35 +1300
+date: 2011-01-08 11:54:35 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

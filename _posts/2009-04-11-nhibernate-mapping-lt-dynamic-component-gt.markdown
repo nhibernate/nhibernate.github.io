@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;dynamic-component/&gt;"
-date: 2009-04-11 05:23:00 +1200
+date: 2009-04-11 05:23:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

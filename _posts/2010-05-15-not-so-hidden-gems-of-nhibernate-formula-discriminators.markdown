@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Not So Hidden Gems of NHibernate – Formula Discriminators"
-date: 2010-05-15 20:49:53 +1200
+date: 2010-05-15 20:49:53 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

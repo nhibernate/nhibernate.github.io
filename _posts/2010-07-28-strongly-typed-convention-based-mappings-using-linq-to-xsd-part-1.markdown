@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Strongly typed convention based mappings using Linq to Xsd - Part 1"
-date: 2010-07-28 16:11:00 +1200
+date: 2010-07-28 16:11:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

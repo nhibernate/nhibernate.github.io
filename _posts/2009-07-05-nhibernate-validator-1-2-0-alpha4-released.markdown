@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Validator 1.2.0 Alpha4 released"
-date: 2009-07-05 18:21:00 +1200
+date: 2009-07-05 18:21:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

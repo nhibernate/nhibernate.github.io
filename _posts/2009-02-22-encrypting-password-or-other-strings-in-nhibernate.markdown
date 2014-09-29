@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Encrypting password (or other strings) in NHibernate"
-date: 2009-02-22 05:18:00 +1300
+date: 2009-02-22 05:18:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

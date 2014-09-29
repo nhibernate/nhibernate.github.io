@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Documentation Project Launch"
-date: 2009-06-02 16:52:00 +1200
+date: 2009-06-02 16:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

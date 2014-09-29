@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Custom Collections using Extension Methods"
-date: 2008-09-03 23:31:00 +1200
+date: 2008-09-03 23:31:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

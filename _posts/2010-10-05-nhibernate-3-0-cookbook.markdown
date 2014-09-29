@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 3.0 Cookbook"
-date: 2010-10-05 16:28:00 +1300
+date: 2010-10-05 16:28:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

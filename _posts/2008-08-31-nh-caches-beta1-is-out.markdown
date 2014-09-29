@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH.Caches Beta1 Is Out!"
-date: 2008-08-31 20:21:00 +1200
+date: 2008-08-31 20:21:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

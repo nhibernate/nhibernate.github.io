@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Tuning NHibernate: Tolerant QueryCache"
-date: 2009-04-18 00:05:00 +1200
+date: 2009-04-18 00:05:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

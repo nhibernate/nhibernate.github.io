@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate and WPF: Test Databinding with Caliburn"
-date: 2009-11-15 16:42:25 +1300
+date: 2009-11-15 16:42:25 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

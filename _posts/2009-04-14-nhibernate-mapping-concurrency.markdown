@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Mapping - Concurrency"
-date: 2009-04-14 22:40:00 +1200
+date: 2009-04-14 22:40:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

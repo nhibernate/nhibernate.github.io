@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Bootstrapper: UnitOfWork and SessionPerRequest"
-date: 2010-07-11 21:17:00 +1200
+date: 2010-07-11 21:17:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

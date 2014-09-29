@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Simple CQRS + NHibernate event store"
-date: 2010-10-10 22:10:00 +1300
+date: 2010-10-10 22:10:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

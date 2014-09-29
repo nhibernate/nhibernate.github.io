@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "New AST Parser as default in 2.1"
-date: 2009-04-24 06:46:00 +1200
+date: 2009-04-24 06:46:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

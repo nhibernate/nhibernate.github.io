@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate and WPF: The GuyWire"
-date: 2009-11-07 19:12:52 +1300
+date: 2009-11-07 19:12:52 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

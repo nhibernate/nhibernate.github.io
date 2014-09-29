@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using &lt;set /&gt; in mappings without Iesi.Collections (.Net 4)"
-date: 2011-03-16 01:26:06 +1300
+date: 2011-03-16 01:26:06 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

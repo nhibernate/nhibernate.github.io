@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Typesafe ICriteria using Lambda Expressions"
-date: 2009-01-07 10:08:00 +1300
+date: 2009-01-07 10:08:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH2.1: Executable HQL"
-date: 2009-05-05 13:54:00 +1200
+date: 2009-05-05 13:54:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

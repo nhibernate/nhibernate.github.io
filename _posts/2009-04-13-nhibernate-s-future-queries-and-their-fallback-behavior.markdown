@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate’s Future Queries And Their Fallback Behavior"
-date: 2009-04-13 18:09:00 +1200
+date: 2009-04-13 18:09:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

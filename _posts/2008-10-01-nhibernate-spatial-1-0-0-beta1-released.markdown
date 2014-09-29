@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate.Spatial 1.0.0 Beta1 released"
-date: 2008-10-01 04:44:00 +1300
+date: 2008-10-01 04:44:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

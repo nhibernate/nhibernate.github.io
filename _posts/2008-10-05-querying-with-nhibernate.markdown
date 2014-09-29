@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Querying With NHibernate"
-date: 2008-10-05 11:00:00 +1300
+date: 2008-10-05 11:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

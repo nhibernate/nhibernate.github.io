@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Date/Time Support in NHibernate"
-date: 2011-01-26 16:00:00 +1300
+date: 2011-01-26 16:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

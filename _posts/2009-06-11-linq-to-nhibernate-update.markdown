@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "LINQ to NHibernate Update"
-date: 2009-06-11 13:50:40 +1200
+date: 2009-06-11 13:50:40 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

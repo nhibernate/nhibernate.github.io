@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH2.1.0: Reference to Castle removed"
-date: 2008-10-11 22:58:44 +1300
+date: 2008-10-11 22:58:44 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

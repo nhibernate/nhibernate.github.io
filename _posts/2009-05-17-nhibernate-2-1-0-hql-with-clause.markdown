@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 2.1.0: HQL With clause"
-date: 2009-05-17 19:56:00 +1200
+date: 2009-05-17 19:56:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

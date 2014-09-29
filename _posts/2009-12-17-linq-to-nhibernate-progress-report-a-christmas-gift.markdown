@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Linq to NHibernate Progress Report - A Christmas Gift?"
-date: 2009-12-17 00:00:00 +1300
+date: 2009-12-17 00:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

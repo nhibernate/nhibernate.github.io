@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH-1711 – Inappropriate error handling with NH 2.1 Alpha 1 when distributed transaction fails can cause application crashes"
-date: 2009-03-22 14:23:22 +1300
+date: 2009-03-22 14:23:22 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

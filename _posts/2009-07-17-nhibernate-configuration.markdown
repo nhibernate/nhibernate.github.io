@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Configuration"
-date: 2009-07-17 21:30:00 +1200
+date: 2009-07-17 21:30:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

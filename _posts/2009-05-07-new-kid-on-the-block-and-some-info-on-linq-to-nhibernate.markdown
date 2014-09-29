@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "New Kid on the Block.  And some info on Linq to NHibernate"
-date: 2009-05-07 18:52:00 +1200
+date: 2009-05-07 18:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

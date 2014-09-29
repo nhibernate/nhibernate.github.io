@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Filters"
-date: 2009-05-04 08:33:00 +1200
+date: 2009-05-04 08:33:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

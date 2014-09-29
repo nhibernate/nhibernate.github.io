@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 2nd Level Cache"
-date: 2009-04-24 12:28:00 +1200
+date: 2009-04-24 12:28:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

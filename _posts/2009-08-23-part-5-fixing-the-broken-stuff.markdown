@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Part 5: Fixing the Broken Stuff"
-date: 2009-08-23 22:20:04 +1200
+date: 2009-08-23 22:20:04 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

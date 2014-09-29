@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Generate better NHibernate logs"
-date: 2011-05-05 21:57:43 +1200
+date: 2011-05-05 21:57:43 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

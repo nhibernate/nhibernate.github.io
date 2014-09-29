@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Many-to-many relationships with properties"
-date: 2010-12-26 11:52:00 +1300
+date: 2010-12-26 11:52:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

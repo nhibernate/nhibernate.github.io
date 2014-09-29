@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "hbm2net: first alpha ready"
-date: 2009-11-22 22:43:00 +1300
+date: 2009-11-22 22:43:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

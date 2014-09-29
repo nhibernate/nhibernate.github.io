@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate POID Generators revealed"
-date: 2009-03-20 07:49:00 +1300
+date: 2009-03-20 07:49:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

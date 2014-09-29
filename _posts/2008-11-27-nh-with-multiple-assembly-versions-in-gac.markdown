@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NH with Multiple Assembly versions in GAC"
-date: 2008-11-27 15:32:00 +1300
+date: 2008-11-27 15:32:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Eager loading aggregate with many child collections"
-date: 2008-09-06 17:05:00 +1200
+date: 2008-09-06 17:05:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

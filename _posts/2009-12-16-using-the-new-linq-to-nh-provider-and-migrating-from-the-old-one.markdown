@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Using the new Linq to NH Provider and migrating from the old one"
-date: 2009-12-16 23:52:39 +1300
+date: 2009-12-16 23:52:39 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

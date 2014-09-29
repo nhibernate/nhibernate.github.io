@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate.Validator: fluent-interface configuration"
-date: 2009-02-18 15:00:00 +1300
+date: 2009-02-18 15:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

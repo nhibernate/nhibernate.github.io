@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 2 - Value Objects"
-date: 2008-09-06 16:18:00 +1200
+date: 2008-09-06 16:18:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

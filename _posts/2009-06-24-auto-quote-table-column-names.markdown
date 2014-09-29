@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Auto Quote Table/Column names"
-date: 2009-06-24 03:25:00 +1200
+date: 2009-06-24 03:25:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

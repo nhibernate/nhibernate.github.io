@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Code Base Analysis"
-date: 2010-11-26 13:40:00 +1300
+date: 2010-11-26 13:40:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

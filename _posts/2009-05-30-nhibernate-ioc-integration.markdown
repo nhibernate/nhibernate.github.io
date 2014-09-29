@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate IoC integration"
-date: 2009-05-30 13:20:00 +1200
+date: 2009-05-30 13:20:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

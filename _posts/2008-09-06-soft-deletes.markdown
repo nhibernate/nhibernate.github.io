@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Soft Deletes"
-date: 2008-09-06 17:25:00 +1200
+date: 2008-09-06 17:25:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

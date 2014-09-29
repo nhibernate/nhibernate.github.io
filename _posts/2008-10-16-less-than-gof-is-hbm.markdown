@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Less than GoF is hbm"
-date: 2008-10-16 17:30:00 +1300
+date: 2008-10-16 17:30:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

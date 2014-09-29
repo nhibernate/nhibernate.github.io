@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Manage SQL Databases"
-date: 2008-09-06 20:54:15 +1200
+date: 2008-09-06 20:54:15 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

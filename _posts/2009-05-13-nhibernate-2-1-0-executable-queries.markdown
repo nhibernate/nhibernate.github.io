@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 2.1.0 : Executable queries"
-date: 2009-05-13 05:00:00 +1200
+date: 2009-05-13 05:00:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]

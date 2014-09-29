@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate Tidbit – using &lt;set/&gt; without referencing Iesi.Collections"
-date: 2009-04-23 04:11:00 +1200
+date: 2009-04-23 04:11:00 -0300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
