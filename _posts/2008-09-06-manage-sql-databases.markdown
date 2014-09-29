@@ -4,7 +4,7 @@ title: "Manage SQL Databases"
 date: 2008-09-06 20:54:15 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "continuous integration"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/manage-sql-databases.aspx"]
 ---

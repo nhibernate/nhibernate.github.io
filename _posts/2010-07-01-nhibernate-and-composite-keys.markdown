@@ -4,7 +4,7 @@ title: "NHibernate and Composite Keys"
 date: 2010-07-01 05:11:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["&quot;Composite Keys&quot;"]
 alias: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx"]
 ---

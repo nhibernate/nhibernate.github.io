@@ -4,7 +4,7 @@ title: "NHibernate 2.1.0.Alpha2 is released"
 date: 2009-03-29 17:01:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.aspx"]
 ---

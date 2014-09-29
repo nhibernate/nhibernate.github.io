@@ -4,7 +4,7 @@ title: "NHibernate Mapping – Named queries &lt;query/&gt; and &lt;sql-query/&g
 date: 2009-04-16 22:55:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/17/nhibernate-mapping-named-queries-lt-query-gt-and-lt-sql-query-gt.aspx"]
 ---

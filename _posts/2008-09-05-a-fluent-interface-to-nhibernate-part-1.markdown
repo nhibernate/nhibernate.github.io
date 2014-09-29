@@ -4,7 +4,7 @@ title: "A fluent interface to NHibernate - Part 1"
 date: 2008-09-05 18:07:46 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2008/09/05/a-fluent-interface-to-nhibernate-part-1.aspx"]
 ---

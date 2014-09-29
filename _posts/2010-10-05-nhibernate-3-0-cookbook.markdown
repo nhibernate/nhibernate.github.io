@@ -4,7 +4,7 @@ title: "NHibernate 3.0 Cookbook"
 date: 2010-10-05 16:28:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2010/10/05/nhibernate-3-0-cookbook.aspx"]
 ---

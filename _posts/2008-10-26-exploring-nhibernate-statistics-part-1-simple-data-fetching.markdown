@@ -4,7 +4,7 @@ title: "Exploring NHibernate Statistics, Part 1: Simple Data Fetching"
 date: 2008-10-26 18:52:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["statistics"]
 alias: ["/blogs/nhibernate/archive/2008/10/26/exploring-nhibernate-statistics-part-1-simple-data-fetching.aspx"]
 ---

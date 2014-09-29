@@ -4,7 +4,7 @@ title: "NHibernate Bootstrapper: UnitOfWork and SessionPerRequest"
 date: 2010-07-11 21:17:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/07/11/nhibernate-bootstrapper-unitofwork-and-sessionperrequest.aspx"]
 ---

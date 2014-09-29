@@ -4,7 +4,7 @@ title: "TOP SECRET"
 date: 2009-05-27 13:14:47 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/05/27/top-secret.aspx"]
 ---

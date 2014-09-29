@@ -4,7 +4,7 @@ title: "NHibernate Code Base Analysis"
 date: 2010-11-26 13:40:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx"]
 ---

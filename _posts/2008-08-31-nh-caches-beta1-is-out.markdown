@@ -4,7 +4,7 @@ title: "NH.Caches Beta1 Is Out!"
 date: 2008-08-31 20:21:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches"]
 alias: ["/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.aspx"]
 ---

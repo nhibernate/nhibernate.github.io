@@ -4,7 +4,7 @@ title: "NHibernate 2nd Level Cache"
 date: 2009-04-24 12:28:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches"]
 alias: ["/blogs/nhibernate/archive/2009/04/24/nhibernate-2nd-level-cache.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate mapping - &lt;database-object/&gt;"
 date: 2009-04-15 22:47:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/16/nhibernate-mapping-lt-database-object-gt.aspx"]
 ---

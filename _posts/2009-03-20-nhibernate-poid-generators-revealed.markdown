@@ -4,7 +4,7 @@ title: "NHibernate POID Generators revealed"
 date: 2009-03-20 07:49:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "poid", "identifier"]
 alias: ["/blogs/nhibernate/archive/2009/03/20/nhibernate-poid-generators-revealed.aspx"]
 ---

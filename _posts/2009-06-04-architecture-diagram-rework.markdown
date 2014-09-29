@@ -4,7 +4,7 @@ title: "Architecture Diagram Rework"
 date: 2009-06-04 13:34:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx"]
 ---

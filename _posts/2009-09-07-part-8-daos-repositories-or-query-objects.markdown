@@ -4,7 +4,7 @@ title: "Part 8: DAOs, Repositories, or Query Objects"
 date: 2009-09-07 20:17:50 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.aspx"]
 ---

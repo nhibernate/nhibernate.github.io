@@ -4,7 +4,7 @@ title: "NHIbernate Grok! "
 date: 2008-09-08 09:55:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News"]
 alias: ["/blogs/nhibernate/archive/2008/09/08/nhibernate-resource-search-site.aspx"]
 ---

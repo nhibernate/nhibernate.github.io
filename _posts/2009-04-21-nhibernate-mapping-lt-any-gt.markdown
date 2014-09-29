@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;any/&gt;"
 date: 2009-04-21 03:29:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/21/nhibernate-mapping-lt-any-gt.aspx"]
 ---

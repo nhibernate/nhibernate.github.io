@@ -4,7 +4,7 @@ title: "NHibernate Auditing v3 – Poor Man’s Envers"
 date: 2010-07-06 05:25:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "schema action", "uNHAddins"]
 alias: ["/blogs/nhibernate/archive/2010/07/05/nhibernate-auditing-v3-poor-man-s-envers.aspx"]
 ---

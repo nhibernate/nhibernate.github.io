@@ -4,7 +4,7 @@ title: "NHibernate ProxyGenerators 1.0.0 Beta Released"
 date: 2008-10-07 14:44:21 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "lazy loading"]
 alias: ["/blogs/nhibernate/archive/2008/10/07/nhibernate-proxygenerators-1-0-0-beta-released.aspx"]
 ---

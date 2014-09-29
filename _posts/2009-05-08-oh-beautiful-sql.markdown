@@ -4,7 +4,7 @@ title: "Oh… beautiful SQL"
 date: 2009-05-08 13:39:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "HQL"]
 alias: ["/blogs/nhibernate/archive/2009/05/08/oh-beautiful-sql.aspx"]
 ---

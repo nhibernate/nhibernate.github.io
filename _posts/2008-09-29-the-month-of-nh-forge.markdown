@@ -4,7 +4,7 @@ title: "The month of NH Forge"
 date: 2008-09-29 18:55:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/09/29/the-month-of-nh-forge.aspx"]
 ---

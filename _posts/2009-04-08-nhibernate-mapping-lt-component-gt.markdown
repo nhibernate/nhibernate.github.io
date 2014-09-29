@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;component/&gt;"
 date: 2009-04-08 14:20:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-component-gt.aspx"]
 ---

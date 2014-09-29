@@ -4,7 +4,7 @@ title: "Mapping different types - IUserType"
 date: 2009-10-15 18:21:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "IUserType"]
 alias: ["/blogs/nhibernate/archive/2009/10/15/mapping-different-types-iusertype.aspx"]
 ---

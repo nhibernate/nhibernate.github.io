@@ -4,7 +4,7 @@ title: "New AST Parser as default in 2.1"
 date: 2009-04-24 06:46:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.aspx"]
 ---

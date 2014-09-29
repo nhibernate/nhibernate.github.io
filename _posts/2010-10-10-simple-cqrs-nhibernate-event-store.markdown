@@ -4,7 +4,7 @@ title: "Simple CQRS + NHibernate event store"
 date: 2010-10-10 22:10:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/10/10/simple-cqrs-nhibernate-event-store.aspx"]
 ---

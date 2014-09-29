@@ -4,7 +4,7 @@ title: "Using the new Linq to NH Provider and migrating from the old one"
 date: 2009-12-16 23:52:39 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/12/17/using-the-new-linq-to-nh-provider-and-migrating-from-the-old-one.aspx"]
 ---

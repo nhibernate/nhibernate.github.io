@@ -4,7 +4,7 @@ title: "Bulk Data Operations With NHibernate's Stateless Sessions"
 date: 2008-10-30 20:28:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["bulk", "Stateless", "Session"]
 alias: ["/blogs/nhibernate/archive/2008/10/30/bulk-data-operations-with-nhibernate-s-stateless-sessions.aspx"]
 ---

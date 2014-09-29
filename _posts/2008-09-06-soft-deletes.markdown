@@ -4,7 +4,7 @@ title: "Soft Deletes"
 date: 2008-09-06 17:25:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "introduction", "event listener"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx"]
 ---

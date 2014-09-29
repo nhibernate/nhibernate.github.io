@@ -4,7 +4,7 @@ title: "Strongly typed convention based mappings using Linq to Xsd - Part 2"
 date: 2010-07-30 14:08:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "linqtoxsdmappings"]
 alias: ["/blogs/nhibernate/archive/2010/07/30/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-2.aspx"]
 ---

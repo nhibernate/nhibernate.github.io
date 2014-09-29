@@ -4,7 +4,7 @@ title: "NHibernate 3.0 released"
 date: 2010-12-05 13:51:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-3-0-released.aspx"]
 ---

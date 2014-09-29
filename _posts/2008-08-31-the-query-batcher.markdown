@@ -4,7 +4,7 @@ title: "The Query Batcher"
 date: 2008-08-31 15:05:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "batcher"]
 alias: ["/blogs/nhibernate/archive/2008/08/31/the-query-batcher.aspx"]
 ---

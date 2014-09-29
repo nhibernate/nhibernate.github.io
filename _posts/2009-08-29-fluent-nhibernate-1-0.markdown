@@ -4,7 +4,7 @@ title: "Fluent NHibernate 1.0"
 date: 2009-08-29 00:33:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Fluent NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx"]
 ---

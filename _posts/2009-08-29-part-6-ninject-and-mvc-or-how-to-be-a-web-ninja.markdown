@@ -4,7 +4,7 @@ title: "Part 6: Ninject and MVC or How to be a Web Ninja"
 date: 2009-08-29 05:34:47 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/08/28/part-6-ninject-and-mvc-or-how-to-be-a-web-ninja.aspx"]
 ---

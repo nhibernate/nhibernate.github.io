@@ -4,7 +4,7 @@ title: "NHibernate Filters"
 date: 2009-05-04 08:33:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "mapping", "HowTo", "querying"]
 alias: ["/blogs/nhibernate/archive/2009/05/04/nhibernate-filters.aspx"]
 ---

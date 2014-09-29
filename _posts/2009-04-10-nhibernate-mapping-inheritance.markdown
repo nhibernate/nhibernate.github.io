@@ -4,7 +4,7 @@ title: "NHibernate Mapping – Inheritance"
 date: 2009-04-10 04:43:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/10/nhibernate-mapping-inheritance.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "Loquacious Configuration in NHibernate 3"
 date: 2011-01-21 21:54:07 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "fluent configuration"]
 alias: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx"]
 ---

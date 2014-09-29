@@ -4,7 +4,7 @@ title: "NHibernate Unit Testing"
 date: 2009-04-28 07:32:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Tests"]
 alias: ["/blogs/nhibernate/archive/2009/04/28/nhibernate-unit-testing.aspx"]
 ---

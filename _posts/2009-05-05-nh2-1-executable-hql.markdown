@@ -4,7 +4,7 @@ title: "NH2.1: Executable HQL"
 date: 2009-05-05 13:54:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "News", "NHibernate", "NH2.1", "querying", "HQL"]
 alias: ["/blogs/nhibernate/archive/2009/05/05/nh2-1-executable-hql.aspx"]
 ---

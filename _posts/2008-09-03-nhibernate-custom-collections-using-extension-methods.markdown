@@ -4,7 +4,7 @@ title: "NHibernate Custom Collections using Extension Methods"
 date: 2008-09-03 23:31:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
 alias: ["/blogs/nhibernate/archive/2008/09/03/nhibernate-custom-collections-using-extension-methods.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "Generate better NHibernate logs"
 date: 2011-05-05 21:57:43 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging"]
 alias: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx"]
 ---

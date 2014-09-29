@@ -4,7 +4,7 @@ title: "Using &lt;set /&gt; in mappings without Iesi.Collections (.Net 4)"
 date: 2011-03-16 01:26:06 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
 alias: ["/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.aspx"]
 ---

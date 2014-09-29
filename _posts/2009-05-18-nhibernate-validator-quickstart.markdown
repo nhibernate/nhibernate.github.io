@@ -4,7 +4,7 @@ title: "NHibernate Validator Quickstart"
 date: 2009-05-18 04:31:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "examples", "quickstart"]
 alias: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx"]
 ---

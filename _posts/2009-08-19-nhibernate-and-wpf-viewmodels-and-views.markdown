@@ -4,7 +4,7 @@ title: "Nhibernate and WPF: ViewModels and Views"
 date: 2009-08-19 16:23:46 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Session", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/08/19/nhibernate-and-wpf-viewmodels-and-views.aspx"]
 ---

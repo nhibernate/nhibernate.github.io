@@ -4,7 +4,7 @@ title: "First three NHibernate quickstart tutorials available"
 date: 2010-04-25 20:43:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/04/25/first-three-nhibernate-quickstart-tutorials-available.aspx"]
 ---

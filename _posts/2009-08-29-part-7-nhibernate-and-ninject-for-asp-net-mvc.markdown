@@ -4,7 +4,7 @@ title: "Part 7: NHibernate and Ninject for ASP.NET MVC"
 date: 2009-08-29 20:47:58 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow", "NHibernate", "ASP.NET MVC", "Ninject"]
 alias: ["/blogs/nhibernate/archive/2009/08/29/part-7-nhibernate-and-ninject-for-asp-net-mvc.aspx"]
 ---

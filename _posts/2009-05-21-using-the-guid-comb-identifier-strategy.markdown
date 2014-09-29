@@ -4,7 +4,7 @@ title: "Using The Guid.Comb Identifier Strategy"
 date: 2009-05-21 11:48:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/05/21/using-the-guid-comb-identifier-strategy.aspx"]
 ---

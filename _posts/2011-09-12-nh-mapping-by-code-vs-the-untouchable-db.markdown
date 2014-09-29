@@ -4,7 +4,7 @@ title: "NH Mapping by code VS the Untouchable DB"
 date: 2011-09-12 08:30:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
 alias: ["/blogs/nhibernate/archive/2011/09/12/nh-mapping-by-code-vs-the-untouchable-db.aspx"]
 ---

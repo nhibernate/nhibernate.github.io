@@ -4,7 +4,7 @@ title: "Db2hbm: convert db schema to hbm"
 date: 2010-02-25 13:23:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "generators"]
 alias: ["/blogs/nhibernate/archive/2010/02/25/db2hbm-convert-dbschema-to-hbm.aspx"]
 ---

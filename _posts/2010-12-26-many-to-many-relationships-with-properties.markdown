@@ -4,7 +4,7 @@ title: "Many-to-many relationships with properties"
 date: 2010-12-26 11:52:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/12/26/many-to-many-relationships-with-properties.aspx"]
 ---

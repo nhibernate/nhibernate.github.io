@@ -4,7 +4,7 @@ title: "Quickly Setting Up And Using NHibernate's Second Level Cache"
 date: 2009-02-09 22:19:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/02/09/quickly-setting-up-and-using-nhibernate-s-second-level-cache.aspx"]
 ---

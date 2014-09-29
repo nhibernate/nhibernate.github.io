@@ -4,7 +4,7 @@ title: "NHibernate SchemaValidator"
 date: 2008-11-22 21:55:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/22/nhibernate-schemavalidator.aspx"]
 ---

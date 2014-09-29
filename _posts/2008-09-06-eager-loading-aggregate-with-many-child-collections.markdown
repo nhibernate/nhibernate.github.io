@@ -4,7 +4,7 @@ title: "Eager loading aggregate with many child collections"
 date: 2008-09-06 17:05:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["relation", "lazy loading"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/eager-loading-aggregate-with-many-child-collections.aspx"]
 ---

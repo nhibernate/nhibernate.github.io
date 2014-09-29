@@ -4,7 +4,7 @@ title: "Using convention to resolve sequence names"
 date: 2010-12-14 00:03:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["identifier"]
 alias: ["/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.aspx"]
 ---

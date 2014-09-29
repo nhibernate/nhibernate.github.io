@@ -4,7 +4,7 @@ title: "NHibernate in Action Book is Out!"
 date: 2009-02-06 06:40:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News"]
 alias: ["/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate Configuration"
 date: 2009-07-17 21:30:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "configuration", "NHibernate", "fluent configuration"]
 alias: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate Mapping - Concurrency"
 date: 2009-04-14 22:40:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.aspx"]
 ---

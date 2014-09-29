@@ -4,7 +4,7 @@ title: "Encrypting password (or other strings) in NHibernate"
 date: 2009-02-22 05:18:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/02/22/encrypting-password-or-other-strings-in-nhibernate.aspx"]
 ---

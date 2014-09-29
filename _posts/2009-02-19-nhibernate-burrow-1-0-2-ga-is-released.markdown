@@ -4,7 +4,7 @@ title: "NHibernate.Burrow 1.0.2 GA is released!"
 date: 2009-02-19 21:10:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow Release"]
 alias: ["/blogs/nhibernate/archive/2009/02/19/nhibernate-burrow-1-0-2-ga-is-released.aspx"]
 ---

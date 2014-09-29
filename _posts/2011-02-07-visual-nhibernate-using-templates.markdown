@@ -4,7 +4,7 @@ title: "Visual NHibernate – Using Templates"
 date: 2011-02-07 23:51:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "generators", "visual nhibernate"]
 alias: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx"]
 ---

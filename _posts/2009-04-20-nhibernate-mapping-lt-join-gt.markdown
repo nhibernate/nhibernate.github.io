@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;join/&gt;"
 date: 2009-04-20 01:56:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/20/nhibernate-mapping-lt-join-gt.aspx"]
 ---

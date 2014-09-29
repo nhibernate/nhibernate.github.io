@@ -4,7 +4,7 @@ title: "Nhibernate and WPF: The core"
 date: 2009-08-16 00:30:52 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["AOP", "Session", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/08/15/nhibernate-and-wpf-the-core.aspx"]
 ---

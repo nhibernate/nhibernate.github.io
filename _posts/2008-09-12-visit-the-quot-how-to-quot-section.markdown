@@ -4,7 +4,7 @@ title: "Visit the &quot;How To&quot; section"
 date: 2008-09-12 17:42:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Wiki", "HowTo"]
 alias: ["/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "Persisting custom values for enums"
 date: 2008-10-13 00:17:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "user-types"]
 alias: ["/blogs/nhibernate/archive/2008/10/13/persisting-custom-values-for-enums.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "An improvement on SessionFactory Initialization"
 date: 2009-03-13 19:18:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/03/13/an-improvement-on-sessionfactory-initialization.aspx"]
 ---

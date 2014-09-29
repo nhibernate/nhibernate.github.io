@@ -4,7 +4,7 @@ title: "Prepare your system for NHibernate"
 date: 2008-09-06 22:12:52 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["introduction"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx"]
 ---

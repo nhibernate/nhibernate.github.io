@@ -4,7 +4,7 @@ title: "LINQ to NHibernate Update"
 date: 2009-06-11 13:50:40 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "linq"]
 alias: ["/blogs/nhibernate/archive/2009/06/11/linq-to-nhibernate-update.aspx"]
 ---

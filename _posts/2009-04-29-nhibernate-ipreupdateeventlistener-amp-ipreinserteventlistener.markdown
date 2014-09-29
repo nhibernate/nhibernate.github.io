@@ -4,7 +4,7 @@ title: "NHibernate IPreUpdateEventListener &amp; IPreInsertEventListener"
 date: 2009-04-29 15:04:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["event listener"]
 alias: ["/blogs/nhibernate/archive/2009/04/29/nhibernate-ipreupdateeventlistener-amp-ipreinserteventlistener.aspx"]
 ---

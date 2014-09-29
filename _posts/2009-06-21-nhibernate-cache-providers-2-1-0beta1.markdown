@@ -4,7 +4,7 @@ title: "NHibernate Cache Providers 2.1.0Beta1"
 date: 2009-06-21 15:52:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "News", "Release"]
 alias: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-cache-providers-2-1-0beta1.aspx"]
 ---

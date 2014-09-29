@@ -4,7 +4,7 @@ title: "NHibernate Caches 2.1.0GA"
 date: 2009-07-19 14:24:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "News", "NH2.1", "Release"]
 alias: ["/blogs/nhibernate/archive/2009/07/19/nhibernate-caches-2-1-0ga.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "Value objects"
 date: 2008-09-17 11:29:56 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["value object"]
 alias: ["/blogs/nhibernate/archive/2008/09/17/value-objects.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate Workbench"
 date: 2010-05-19 15:29:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "mapping", "querying", "HQL"]
 alias: ["/blogs/nhibernate/archive/2010/05/19/nhibernate-workbench.aspx"]
 ---

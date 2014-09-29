@@ -4,7 +4,7 @@ title: "Identity: The never ending story"
 date: 2008-12-21 12:38:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "NHibernate", "Session", "Unit of Work"]
 alias: ["/blogs/nhibernate/archive/2008/12/21/identity-the-never-ending-story.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate Futures"
 date: 2009-04-27 05:33:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Future"]
 alias: ["/blogs/nhibernate/archive/2009/04/27/nhibernate-futures.aspx"]
 ---

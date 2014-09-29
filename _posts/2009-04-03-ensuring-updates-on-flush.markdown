@@ -4,7 +4,7 @@ title: "Ensuring updates on Flush"
 date: 2009-04-03 15:01:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["event listener", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/03/ensuring-updates-on-flush.aspx"]
 ---

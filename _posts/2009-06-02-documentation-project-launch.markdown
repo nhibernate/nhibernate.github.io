@@ -4,7 +4,7 @@ title: "Documentation Project Launch"
 date: 2009-06-02 16:52:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/06/02/documentation-project-launch.aspx"]
 ---

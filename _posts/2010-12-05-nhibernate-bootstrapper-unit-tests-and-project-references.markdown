@@ -4,7 +4,7 @@ title: "NHibernate Bootstrapper: Unit Tests and Project References"
 date: 2010-12-05 15:59:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Criteria", "linq"]
 alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "entity-name in action: Entity Abstraction"
 date: 2008-10-31 22:53:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Entity-Name", "Inversion of Control"]
 alias: ["/blogs/nhibernate/archive/2008/10/31/entity-name-in-action-entity-abstraction.aspx"]
 ---

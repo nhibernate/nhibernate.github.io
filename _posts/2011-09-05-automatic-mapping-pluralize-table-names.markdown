@@ -4,7 +4,7 @@ title: "Automatic Mapping: Pluralize table names"
 date: 2011-09-05 07:28:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
 alias: ["/blogs/nhibernate/archive/2011/09/05/automatic-mapping-pluralize-table-names.aspx"]
 ---

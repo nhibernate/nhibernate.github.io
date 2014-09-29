@@ -4,7 +4,7 @@ title: "NHibernate with Spring.NET"
 date: 2009-03-03 21:00:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "ProxyGenerators", "NHibernate", "AOP", "IoC"]
 alias: ["/blogs/nhibernate/archive/2009/03/03/nhibernate-with-spring-net.aspx"]
 ---

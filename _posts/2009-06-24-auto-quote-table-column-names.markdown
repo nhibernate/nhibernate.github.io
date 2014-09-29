@@ -4,7 +4,7 @@ title: "Auto Quote Table/Column names"
 date: 2009-06-24 03:25:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["configuration", "NHibernate", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/06/24/auto-quote-table-column-names.aspx"]
 ---

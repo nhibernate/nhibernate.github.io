@@ -4,7 +4,7 @@ title: "How-To: Using the N* Stack, part 4"
 date: 2009-08-16 23:44:22 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/08/16/how-to-using-the-n-stack-part-4.aspx"]
 ---

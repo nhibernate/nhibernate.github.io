@@ -4,7 +4,7 @@ title: "HqlAddin on Hbms!"
 date: 2010-09-28 02:37:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["HQL"]
 alias: ["/blogs/nhibernate/archive/2010/09/27/hqladdin-on-hbms.aspx"]
 ---

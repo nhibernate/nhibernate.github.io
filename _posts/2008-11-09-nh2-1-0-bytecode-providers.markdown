@@ -4,7 +4,7 @@ title: "NH2.1.0: Bytecode providers"
 date: 2008-11-09 15:04:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx"]
 ---

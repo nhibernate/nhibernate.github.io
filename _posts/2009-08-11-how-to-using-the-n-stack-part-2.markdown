@@ -4,7 +4,7 @@ title: "How-To: Using the N* Stack, part 2"
 date: 2009-08-11 20:21:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "poid", "ASP.NET MVC"]
 alias: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-2.aspx"]
 ---

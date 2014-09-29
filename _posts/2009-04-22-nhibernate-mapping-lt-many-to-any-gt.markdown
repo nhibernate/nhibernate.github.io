@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;many-to-any/&gt;"
 date: 2009-04-22 03:52:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/22/nhibernate-mapping-lt-many-to-any-gt.aspx"]
 ---

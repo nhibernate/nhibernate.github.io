@@ -4,7 +4,7 @@ title: "NHibernate 2.1.0 : Executable queries"
 date: 2009-05-13 05:00:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "querying", "HQL"]
 alias: ["/blogs/nhibernate/archive/2009/05/13/nhibernate-2-1-0-executable-queries.aspx"]
 ---

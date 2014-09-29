@@ -4,7 +4,7 @@ title: "Welcome to the NHibernate blog"
 date: 2008-08-30 02:33:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/08/29/welcome-to-the-nhibernate-blog.aspx"]
 ---

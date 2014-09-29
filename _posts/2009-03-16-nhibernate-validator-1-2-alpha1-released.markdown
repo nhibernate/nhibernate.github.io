@@ -4,7 +4,7 @@ title: "NHibernate Validator 1.2 alpha1 released"
 date: 2009-03-16 13:35:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/03/16/nhibernate-validator-1-2-alpha1-released.aspx"]
 ---

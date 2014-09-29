@@ -4,7 +4,7 @@ title: "S#arp Lite: The Basics"
 date: 2011-11-12 00:19:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["S#arp Lite"]
 alias: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx"]
 ---

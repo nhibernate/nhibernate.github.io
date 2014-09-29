@@ -4,7 +4,7 @@ title: "NHForge article at InfoQ"
 date: 2008-09-05 16:09:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/09/05/nhforge-article-at-infoq.aspx"]
 ---

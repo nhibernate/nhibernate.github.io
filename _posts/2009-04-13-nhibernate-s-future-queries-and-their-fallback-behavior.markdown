@@ -4,7 +4,7 @@ title: "NHibernate’s Future Queries And Their Fallback Behavior"
 date: 2009-04-13 18:09:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx"]
 ---

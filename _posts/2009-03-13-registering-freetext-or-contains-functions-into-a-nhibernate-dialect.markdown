@@ -4,7 +4,7 @@ title: "Registering FREETEXT or CONTAINS functions into a NHibernate dialect"
 date: 2009-03-13 13:04:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server", "NH2.1", "Dialect", "Function"]
 alias: ["/blogs/nhibernate/archive/2009/03/13/registering-freetext-or-contains-functions-into-a-nhibernate-dialect.aspx"]
 ---

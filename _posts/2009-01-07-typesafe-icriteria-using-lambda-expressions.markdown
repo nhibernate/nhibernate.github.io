@@ -4,7 +4,7 @@ title: "Typesafe ICriteria using Lambda Expressions"
 date: 2009-01-07 10:08:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/01/07/typesafe-icriteria-using-lambda-expressions.aspx"]
 ---

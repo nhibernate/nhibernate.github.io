@@ -4,7 +4,7 @@ title: "Delphi Conference - Brazil (Introducing NH to Delphi world)"
 date: 2010-10-07 17:33:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/10/07/delphi-conference-brazil-introducing-nh-to-delphi-world.aspx"]
 ---

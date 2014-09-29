@@ -4,7 +4,7 @@ title: "Part 5: Fixing the Broken Stuff"
 date: 2009-08-23 22:20:04 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.aspx"]
 ---

@@ -180,7 +180,7 @@ title: "#{title}"
 date: #{timestamp.strftime("%Y-%m-%d %H:%M:%S %z")}
 comments: true
 published: #{published}
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: #{tags}
 alias: #{old_url}
 ---

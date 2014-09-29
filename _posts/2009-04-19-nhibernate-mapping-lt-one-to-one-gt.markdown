@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;one-to-one/&gt;"
 date: 2009-04-19 01:31:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/19/nhibernate-mapping-lt-one-to-one-gt.aspx"]
 ---

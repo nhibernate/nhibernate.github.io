@@ -4,7 +4,7 @@ title: "HqlAddin vers. 1.0.0.45 - Alpha 2"
 date: 2010-08-20 00:41:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["HQL"]
 alias: ["/blogs/nhibernate/archive/2010/08/19/hqladdin-vers-1-0-0-45-alpha-2.aspx"]
 ---

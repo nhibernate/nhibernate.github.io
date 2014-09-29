@@ -4,7 +4,7 @@ title: "NHibernate.Linq 1.0.0 GA released"
 date: 2009-07-26 10:52:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
 alias: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx"]
 ---

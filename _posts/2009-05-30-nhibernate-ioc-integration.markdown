@@ -4,7 +4,7 @@ title: "NHibernate IoC integration"
 date: 2009-05-30 13:20:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Inversion of Control", "IoC"]
 alias: ["/blogs/nhibernate/archive/2009/05/30/nhibernate-ioc-integration.aspx"]
 ---

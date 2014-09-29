@@ -4,7 +4,7 @@ title: "Welcome NH2.1.0"
 date: 2009-07-19 13:27:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "NH2.1", "Release", "NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/07/19/welcome-nh2-1-0.aspx"]
 ---

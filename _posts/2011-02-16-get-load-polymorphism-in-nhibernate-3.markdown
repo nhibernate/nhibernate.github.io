@@ -4,7 +4,7 @@ title: "Get/Load Polymorphism in NHibernate 3"
 date: 2011-02-16 22:46:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["querying"]
 alias: ["/blogs/nhibernate/archive/2011/02/16/get-load-polymorphism-in-nhibernate-3.aspx"]
 ---

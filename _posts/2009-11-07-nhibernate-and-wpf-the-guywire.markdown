@@ -4,7 +4,7 @@ title: "NHibernate and WPF: The GuyWire"
 date: 2009-11-07 19:12:52 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/11/07/nhibernate-and-wpf-the-guywire.aspx"]
 ---

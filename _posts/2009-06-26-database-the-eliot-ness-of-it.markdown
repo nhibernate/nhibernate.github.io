@@ -4,7 +4,7 @@ title: "DataBase; The Eliot Ness of IT ?"
 date: 2009-06-26 13:23:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/06/26/database-the-eliot-ness-of-it.aspx"]
 ---

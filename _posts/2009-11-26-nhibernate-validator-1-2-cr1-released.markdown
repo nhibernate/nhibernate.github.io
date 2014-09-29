@@ -4,7 +4,7 @@ title: "NHibernate Validator 1.2 CR1 released"
 date: 2009-11-26 12:44:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/11/26/nhibernate-validator-1-2-cr1-released.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate 3 Beginners Guide published"
 date: 2011-08-29 20:27:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx"]
 ---

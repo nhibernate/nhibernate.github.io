@@ -4,7 +4,7 @@ title: "NHibernate and Future Queries"
 date: 2009-01-25 12:08:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Future"]
 alias: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx"]
 ---

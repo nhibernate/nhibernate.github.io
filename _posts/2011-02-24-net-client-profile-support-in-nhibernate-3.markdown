@@ -4,7 +4,7 @@ title: ".NET Client Profile Support in NHibernate 3"
 date: 2011-02-24 16:00:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging", "ClientProfile"]
 alias: ["/blogs/nhibernate/archive/2011/02/24/net-client-profile-support-in-nhibernate-3.aspx"]
 ---

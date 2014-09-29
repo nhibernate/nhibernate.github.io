@@ -4,7 +4,7 @@ title: "Rolling out an update of Castle just got a whole lot easier"
 date: 2009-03-02 21:36:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/03/02/rolling-out-an-update-of-castle-just-got-a-whole-lot-easier.aspx"]
 ---

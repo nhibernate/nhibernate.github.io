@@ -4,7 +4,7 @@ title: "Tuning NHibernate: Tolerant QueryCache"
 date: 2009-04-18 00:05:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/17/tuning-nhibernate-tolerant-querycache.aspx"]
 ---

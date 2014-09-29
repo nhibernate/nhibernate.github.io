@@ -4,7 +4,7 @@ title: "Populating Entities From Stored Procedures With NHibernate"
 date: 2008-11-23 14:37:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/23/populating-entities-from-stored-procedures-with-nhibernate.aspx"]
 ---

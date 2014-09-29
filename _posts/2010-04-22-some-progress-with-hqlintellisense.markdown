@@ -4,7 +4,7 @@ title: "Some Progress with HqlIntellisense…"
 date: 2010-04-22 17:08:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate Validator"
 date: 2009-05-01 08:28:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx"]
 ---

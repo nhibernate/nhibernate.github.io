@@ -4,7 +4,7 @@ title: "State (or Strategy) Pattern with NHibernate"
 date: 2009-12-18 15:08:00 +1300
 comments: true
 published: false
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx"]
 ---

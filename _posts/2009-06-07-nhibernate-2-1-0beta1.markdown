@@ -4,7 +4,7 @@ title: "NHibernate 2.1.0Beta1"
 date: 2009-06-07 15:28:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/06/07/nhibernate-2-1-0beta1.aspx"]
 ---

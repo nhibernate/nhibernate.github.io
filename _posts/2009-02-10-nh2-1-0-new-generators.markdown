@@ -4,7 +4,7 @@ title: "NH2.1.0: New generators"
 date: 2009-02-10 00:12:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "NH2.1", "generators"]
 alias: ["/blogs/nhibernate/archive/2009/02/09/nh2-1-0-new-generators.aspx"]
 ---

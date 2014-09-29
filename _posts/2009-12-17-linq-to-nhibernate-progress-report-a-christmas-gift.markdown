@@ -4,7 +4,7 @@ title: "Linq to NHibernate Progress Report - A Christmas Gift?"
 date: 2009-12-17 00:00:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/12/17/linq-to-nhibernate-progress-report-a-christmas-gift.aspx"]
 ---

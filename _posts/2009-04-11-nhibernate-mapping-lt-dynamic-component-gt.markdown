@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;dynamic-component/&gt;"
 date: 2009-04-11 05:23:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/11/nhibernate-mapping-lt-dynamic-component-gt.aspx"]
 ---

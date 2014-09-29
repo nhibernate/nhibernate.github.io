@@ -4,7 +4,7 @@ title: "Entities behavior injection"
 date: 2008-12-12 11:50:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "IoC"]
 alias: ["/blogs/nhibernate/archive/2008/12/12/entities-behavior-injection.aspx"]
 ---

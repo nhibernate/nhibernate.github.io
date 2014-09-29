@@ -4,7 +4,7 @@ title: "T4 hbm2net alpha 2"
 date: 2009-12-12 22:12:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
 alias: ["/blogs/nhibernate/archive/2009/12/12/t4-hbm2net-alpha-2.aspx"]
 ---

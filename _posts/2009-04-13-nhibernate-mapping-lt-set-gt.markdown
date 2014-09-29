@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;set/&gt;"
 date: 2009-04-13 20:00:18 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-mapping-lt-set-gt.aspx"]
 ---

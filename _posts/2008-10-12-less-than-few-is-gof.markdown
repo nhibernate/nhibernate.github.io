@@ -4,7 +4,7 @@ title: "Less than “Few” is GoF"
 date: 2008-10-12 20:40:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "Castle", "NH2.1", "Dynamic Entities", "Tuplizers", "AOP"]
 alias: ["/blogs/nhibernate/archive/2008/10/12/less-than-few-is-gof.aspx"]
 ---

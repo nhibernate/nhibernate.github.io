@@ -4,7 +4,7 @@ title: "A fluent interface to NHibernate - Part 4 - Configuration"
 date: 2008-09-06 20:45:31 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "configuration"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-4-configuration.aspx"]
 ---

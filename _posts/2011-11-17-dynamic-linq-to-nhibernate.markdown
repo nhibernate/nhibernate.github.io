@@ -4,7 +4,7 @@ title: "Dynamic LINQ to NHibernate"
 date: 2011-11-17 13:18:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
 alias: ["/blogs/nhibernate/archive/2011/11/17/dynamic-linq-to-nhibernate.aspx"]
 ---

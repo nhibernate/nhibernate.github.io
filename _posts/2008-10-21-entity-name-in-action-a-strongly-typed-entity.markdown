@@ -4,7 +4,7 @@ title: "entity-name in action: a strongly typed entity"
 date: 2008-10-21 13:18:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Entity-Name", "auto propeties", "backfield"]
 alias: ["/blogs/nhibernate/archive/2008/10/21/entity-name-in-action-a-strongly-typed-entity.aspx"]
 ---

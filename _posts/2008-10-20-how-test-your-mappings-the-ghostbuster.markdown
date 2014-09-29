@@ -4,7 +4,7 @@ title: "How Test your mappings: the Ghostbuster"
 date: 2008-10-20 13:48:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "Tests"]
 alias: ["/blogs/nhibernate/archive/2008/10/20/how-test-your-mappings-the-ghostbuster.aspx"]
 ---

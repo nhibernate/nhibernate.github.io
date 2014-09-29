@@ -4,7 +4,7 @@ title: "NHibernate.Burrow 1.0.0 CR2 is released!"
 date: 2008-10-21 19:28:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow", "Session", "Release"]
 alias: ["/blogs/nhibernate/archive/2008/10/21/nhibernate-burrow-1-0-0-cr2-is-released.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "hbm2net "
 date: 2009-10-19 07:43:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net"]
 alias: ["/blogs/nhibernate/archive/2009/10/19/hbm2net.aspx"]
 ---

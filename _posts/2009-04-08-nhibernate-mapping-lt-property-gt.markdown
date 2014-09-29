@@ -4,7 +4,7 @@ title: "NHibernate Mapping - &lt;property/&gt;"
 date: 2009-04-08 02:07:13 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-property-gt.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "NHibernate and WPF: Asynchronous calls"
 date: 2009-11-23 01:48:18 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["WPF"]
 alias: ["/blogs/nhibernate/archive/2009/11/22/nhibernate-and-wpf-asynchronous-calls.aspx"]
 ---

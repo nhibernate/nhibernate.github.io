@@ -4,7 +4,7 @@ title: "Querying With NHibernate"
 date: 2008-10-05 11:00:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "querying"]
 alias: ["/blogs/nhibernate/archive/2008/10/05/querying-with-nhibernate.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "Not So Hidden Gems of NHibernate – Formula Discriminators"
 date: 2010-05-15 20:49:53 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/05/15/not-so-hidden-gems-of-nhibernate-formula-discriminators.aspx"]
 ---

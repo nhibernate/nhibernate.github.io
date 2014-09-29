@@ -4,7 +4,7 @@ title: "Populating Entities With Associations From Stored Procedures With NHiber
 date: 2008-11-24 02:27:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/24/populating-entities-with-associations-from-stored-procedures-with-nhibernate.aspx"]
 ---

@@ -4,7 +4,7 @@ title: "How to configure Log4Net for use with NHibernate"
 date: 2008-09-06 21:12:50 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["configuration", "logging"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/how-to-configure-log4net-for-use-with-nhibernate.aspx"]
 ---

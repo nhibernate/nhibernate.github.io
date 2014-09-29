@@ -4,7 +4,7 @@ title: "Data Access With NHibernate"
 date: 2008-08-31 15:07:00 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/08/31/data-access-with-nhibernate.aspx"]
 ---

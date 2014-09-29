@@ -4,7 +4,7 @@ title: "The best way to solve NHibernate bugs? Submit good unit test"
 date: 2008-10-04 07:04:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["HowTo"]
 alias: ["/blogs/nhibernate/archive/2008/10/04/the-best-way-to-solve-nhibernate-bugs-submit-good-unit-test.aspx"]
 ---

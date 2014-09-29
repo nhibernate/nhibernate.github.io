@@ -4,7 +4,7 @@ title: "NH with Multiple Assembly versions in GAC"
 date: 2008-11-27 15:32:00 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "GAC"]
 alias: ["/blogs/nhibernate/archive/2008/11/27/nh-with-multiple-assembly-versions-in-gac.aspx"]
 ---

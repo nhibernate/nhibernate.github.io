@@ -4,7 +4,7 @@ title: "Identity Field, Equality and Hash Code"
 date: 2008-09-06 21:02:27 +1200
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "equality"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx"]
 ---

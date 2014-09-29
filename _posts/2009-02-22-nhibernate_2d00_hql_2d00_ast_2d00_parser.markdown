@@ -4,7 +4,7 @@ title: "NHibernate HQL AST Parser"
 date: 2009-02-22 20:12:58 +1300
 comments: true
 published: true
-categories: ["blog", "archives"]
+categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "querying", "linq"]
 alias: ["/blogs/nhibernate/archive/2009/02/22/nhibernate_2D00_hql_2D00_ast_2D00_parser.aspx", "/blogs/nhibernate/archive/2009/02/22/nhibernate_2d00_hql_2d00_ast_2d00_parser.aspx"]
 ---
