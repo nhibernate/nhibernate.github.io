@@ -1,0 +1,13 @@
+---
+layout: post
+title: "hbm2net "
+date: 2009-10-19 07:43:00 +1300
+comments: true
+published: true
+categories: ["blog", "archives"]
+tags: ["hbm2net"]
+alias: ["/blogs/nhibernate/archive/2009/10/19/hbm2net.aspx"]
+---
+<!-- more -->
+{% include imported_disclaimer.html %}
+<p>I did an attempt of resuming the project hbm2net, creating a <a href="http://msdn.microsoft.com/en-us/library/bb126445.aspx" target="_blank">Text Template Transformation Toolkit (T4)</a>&nbsp; renderer, hosting the T4 engine. T4 templates allow to easily mix templates with additional code.The current version is not production code, but a proof-of-concept. If anyone interested a <a href="http://cid-b8821720666a55e7.skydrive.live.com/self.aspx/.Public/NHibernate.Tool.hbm2net.zip">download</a> is provided, containing the source and a single unit test to show the idea. A ready to use binary version could be found <a href="http://www.felicepollano.com/post/hbm2net-tentativo-di-resurrezione.aspx">here</a> (post is in italian, but is easy to grasp how to try it),as I said, it is not tested for production. Please let me know if the idea is useful / interesting.</p>
