@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "mapping", "HowTo", "querying"]
 alias: ["/blogs/nhibernate/archive/2009/05/04/nhibernate-filters.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>One of the more interesting ability of NHibernate is to selectively filter records based on some global filters. This allow us to very easily create global where clauses that we can flip on and off at the touch of a switch. </p>
 <p>Let us take a look at see what I mean.</p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-3-0-released.aspx"]
+author: Jason Dentler
+gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>First, <a href="http://www.packtpub.com/nhibernate-3-0-cookbook/book?utm_source=jasondentler.com&amp;utm_medium=blog&amp;utm_content=authorsite&amp;utm_campaign=mdb_004974">NHibernate 3.0 Cookbook</a> is now a Packt Publishing best seller. Thank you everyone who bought a copy. The NHibernate project gets a portion of each and every sale.</p>
 <p>Yesterday, <a href="http://fabiomaulo.blogspot.com/">Fabio</a> announced the release of <a href="/">NHibernate</a> 3.0 General Availability. Go get it! </p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Validation is one of those things that goes hand in hand with data access. I guess it is not much of surprise that one of the contrib projects for NHibernate is extensive validation support.</p>  <p>True, there are about as many validation frameworks as there are ToDo applications, but NHibernate Validator bring something special to the table, it brings tight integration with NHibernate itself and:</p>  <blockquote>   <p>“…multi-layered data validation, where constraints are expressed in a single place and checked in various different layers of the application.”</p> </blockquote>  <p>I am sorry, I just love this quote. :-)</p>  <p>Anyway, let me jump right it and show you what I mean by that.</p>  <p>We can initialize the validation framework using <a href="http://nhforge.org/wikis/validator/nhibernate-validator-1-0-0-documentation.aspx">several ways</a>, but probably the easier would be:</p>  <blockquote>   <pre>var configuration = <span style="color: #0000ff">new</span> Configuration()
 	.Configure(&quot;<span style="color: #8b0000">hibernate.cfg.xml</span>&quot;);

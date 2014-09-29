@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "querying", "HQL"]
 alias: ["/blogs/nhibernate/archive/2009/05/13/nhibernate-2-1-0-executable-queries.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[<a href="http://fabiomaulo.blogspot.com/">My blog</a>]</p>
 <p>I&rsquo;m proud to announce NH2.1.0 is passing all tests (same of H3.3.1) for bulk actions using HQL.</p>

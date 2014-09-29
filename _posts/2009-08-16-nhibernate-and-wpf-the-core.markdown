@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["AOP", "Session", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/08/15/nhibernate-and-wpf-the-core.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>   <br />Part I: <a href="http://jfromaniello.blogspot.com/2009/08/introducing-nhiberate-and-wpf.html">Introducing NHiberate and WPF: The ChinookMediaManager</a></p>  <h3>Introduction</h3>  <p>   <br />This is my second post about the Chinook Media Manager, an example application for NHibernate and WPF. In this post I will outline some concepts behind the architecture that I’ve chosen.</p>  <h3>Note</h3>  <p>Probably at some points you will feel that this is over-architected, YAGNI and so on. Yes, you are right I’m not trying to bind a grid to a collection of objects there are tons of samples on the net about that subject.    <br /></p>  <h3>The four musketeers</h3>  <p>The core of the application is composed of four components:</p>  <ul>   <li>ChinookMediaManager.Data: Contains the definition of repositories interfaces. </li>    <li>ChinookMediaManager.DataImpl: Contains the implementation of these repositories plus other nhibernate things that we will need to make work the implementation of repositories (like mappings). </li>    <li>ChinookMediaManager.Domain: Contains the domain classes plus model interfaces (we will focus on this concept latter) </li>    <li>ChinookMediaManager.DomainImpl: Contains the implementation of the models. </li> </ul>  <p>My base repository definition is as follows: </p>  <pre class="code"><span style="color: blue">public interface </span><span style="color: #2b91af">IRepository</span>&lt;T&gt; : IQueryable&lt;T&gt;
     {

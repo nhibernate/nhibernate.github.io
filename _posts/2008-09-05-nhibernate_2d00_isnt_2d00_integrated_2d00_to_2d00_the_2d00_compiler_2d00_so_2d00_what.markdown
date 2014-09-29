@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Xml", "SessionFactory", "BuildSessionFactory", "Xsd", "Named Query"]
 alias: ["/blogs/nhibernate/archive/2008/09/04/nhibernate_2D00_isnt_2D00_integrated_2D00_to_2D00_the_2D00_compiler_2D00_so_2D00_what.aspx", "/blogs/nhibernate/archive/2008/09/04/nhibernate_2d00_isnt_2d00_integrated_2d00_to_2d00_the_2d00_compiler_2d00_so_2d00_what.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I know, this title sounds like: "hmm?" Let me explain it with more detail.</p>
 <p>NHibernate is a framework that use natively Xml in order to configure a mapping between objects and tables, is in charged of join these different worlds. </p>

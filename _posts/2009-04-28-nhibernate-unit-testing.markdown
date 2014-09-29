@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Tests"]
 alias: ["/blogs/nhibernate/archive/2009/04/28/nhibernate-unit-testing.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>When using NHibernate we generally want to test only three things, that properties are persisted, that cascade works as expected and that queries return the correct result. In order to do all of those, we generally have to talk to a real database, trying to fake any of those at this level is futile and going to be very complicated.</p>  <p>We can either use a standard RDBMS or use an in memory database such as SQLite in order to get very speedy tests.</p>  <p>I have a pretty big implementation of a base class for unit testing NHibernate in Rhino Commons, but that has so many features that I forget how to use it sometimes. Most of those features, by the way, are now null &amp; void because we have <a href="http://nhprof.com/">NH Prof</a>, and can easily see what is going on without resorting to the SQL Profiler. </p>  <p>At any rate, here is a very simple implementation of that base class, which gives us the ability to execute NHibernate tests in memory.</p>  <blockquote>   <pre><span style="color: #0000ff">public</span> <span style="color: #0000ff">class</span> InMemoryDatabaseTest : IDisposable
 {

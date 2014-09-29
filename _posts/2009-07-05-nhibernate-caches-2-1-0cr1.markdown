@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "News", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/07/05/nhibernate-caches-2-1-0cr1.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>
 <p><strong>NHibernate Caches 2.1.0CR1 was released today.</strong></p>

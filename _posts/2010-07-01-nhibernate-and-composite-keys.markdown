@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["&quot;Composite Keys&quot;"]
 alias: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx"]
+author: ajepst
+gravatar: fad7db02ad0cbbcd20f8bba5fdc1fc81
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>(If this post looks familiar, it&rsquo;s because I originally posted this over on <a href="http://devlicio.us/">http://devlicio.us/</a> and I have given myself full permission to repost it here, with minor edits)</p>
 <p>Composite IDs are a common pain point a beginning NHibernate user runs into.&nbsp; Here's everything you need to get them up and running. </p>

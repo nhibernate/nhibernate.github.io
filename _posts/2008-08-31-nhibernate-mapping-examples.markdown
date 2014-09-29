@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this post was originally posted on <a href="http://davybrion.com/blog/2007/07/nhibernate-mapping-examples/">July 15, 2007</a>
 </p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx"]
+author: Patrick Smacchia
+gravatar: 526161a664210d3946ca432ee787f2af
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Patrick Smacchia writing. I am not a NH developer but the creator of a static analysis tool for .NET developer: <a href="http://www.NDepend.com">NDepend</a>. I recently analyzed NH v3.0.0 Candidate Release 1 with NDepend and I had a chance to discuss some results with NH developer Fabio Maulo. Fabio suggested me to show some results on the NH blog, so here it is.</p>
 <p>NDepend generated a report by analyzing NH v3.0.0 CR1 code base. See the report <a target="_blank" href="http://www.ndepend.com/SampleReports/OnNHibernate/NDependReport.html">here</a>. NDepend has also the ability to show static analysis results live, inside Visual Studio. The live results are richer than the static report results. Here, I will mostly focus on results extracted from the report, but a few additional results will be obtained from the richer NDepend live capabilities.</p>

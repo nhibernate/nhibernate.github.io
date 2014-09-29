@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
 alias: ["/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I’ve created a new nuget package; “NHibernate.SetForNet4”. </p>  <p>The package is only one file that will be inserted in your project. This class contains the implementation for the Set&lt;T&gt; and SortedSet&lt;T&gt;.</p>  <p>After you install NHibernate.SetForNet4; the only thing you have to do is to add the collection factory to your configuration as follows:</p>  <pre class="csharpcode">configuration.Properties[Environment.CollectionTypeFactoryClass] 
         = <span class="kwrd">typeof</span>(Net4CollectionTypeFactory).AssemblyQualifiedName; </pre>

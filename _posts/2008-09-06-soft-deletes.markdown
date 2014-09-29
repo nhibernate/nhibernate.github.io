@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "introduction", "event listener"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx"]
+author: gabriel.schenker
+gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_6.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_2.png" width="244" border="0" height="21" /></a> </p>
 <p>What can I do if instead of physically delete a record in the database I just want to mark it as deleted?</p>

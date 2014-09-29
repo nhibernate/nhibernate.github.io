@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/09/29/the-month-of-nh-forge.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>A month ago we started this new challenge.</p>
 <p>As first result two projects accepted our invitation to be together, with us, in <a href="http://sourceforge.net/projects/nhcontrib/">NHibernate.Contrib</a>.</p>

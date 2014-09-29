@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx"]
+author: gabriel.schenker
+gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: This post has been cross posted from my <a href="http://lostechies.com/gabrielschenker/2011/08/29/nhibernate-3-beginners-guide-published/">own blog</a> at Los Techies.</p>
 <p>I am very pleased to announce that my book <a href="http://www.packtpub.com/nhibernate-3-beginners-guide/book">NHibernate 3 Beginners Guide</a> has finally been published. It is a wonderful feeling to finally have a book in my hands that cost me a couple of months of intense work. But I think the result is well worth it.</p>

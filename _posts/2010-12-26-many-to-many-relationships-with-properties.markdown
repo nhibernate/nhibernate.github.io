@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/12/26/many-to-many-relationships-with-properties.aspx"]
+author: diegose
+gravatar: f00318698e65fce00b7cbd612a466571
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>There's a question that seems to appear at least once a month in StackOverflow or the <a href="https://groups.google.com/forum/#!forum/nhusers">NH users</a> group:</p>  <blockquote>   <p><em>How can I add properties to a many-to-many relationship?</em></p> </blockquote>  <p>The user of course means adding columns to the &quot;junction&quot; table used to store the many-to-many relationship, and being able to populate them without changing his object model.</p>  <p>That makes some sense from a relational perspective (a table is just a table after all), but not from an OOP one: <strong>a relationship does not have properties</strong>.</p>  <p>The easiest solution, of course, is to map the relationship as an entity, with regular one-to-many collections from both sides.</p>  <p>This would be the end of it... if it weren't for the fact that it's <strong>not</strong> what the user wants. If you dig a little further, you'll find that, in most of his use cases, the additional properties don't matter. They are used for auditing purposes, activation/deactivation, etc.</p>  <p>So, how can we code such a model? Answer: using LINQ-to-objects.</p>  <p>Let's consider a typical <strong>Users - Roles</strong> relationship (a user has many roles, a role is applied by many users).</p>  <p><em>Step 1: Create the entities</em></p>  <p>   <div style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: none; padding-top: 0px" id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:f119f9c6-53a0-419c-ba56-f60a33879f1e" class="wlWriterEditableSmartContent"><pre style=" width: 640px; height: 576px;background-color:White;overflow: visible;;font-family:Consolas;font-size:12"><div><!--
 

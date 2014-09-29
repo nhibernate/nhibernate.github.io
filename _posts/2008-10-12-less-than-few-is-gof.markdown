@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "Castle", "NH2.1", "Dynamic Entities", "Tuplizers", "AOP"]
 alias: ["/blogs/nhibernate/archive/2008/10/12/less-than-few-is-gof.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Some years ago a phrase broke my mind:</p>
 <p><strong><span style="color: #000080">&ldquo;Program to an interface and not to an implementation&rdquo;</span></strong></p>

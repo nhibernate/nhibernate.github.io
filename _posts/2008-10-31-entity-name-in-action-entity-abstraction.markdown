@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Entity-Name", "Inversion of Control"]
 alias: ["/blogs/nhibernate/archive/2008/10/31/entity-name-in-action-entity-abstraction.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><a href="http://fabiomaulo.blogspot.com/2008/10/less-than-few-is-gof.html">Another time</a> I start from :</p>
 <p><strong><span style="font-size: 130%; color: #000080; font-family: t">&ldquo;Program to an interface and not to an implementation&rdquo;</span></strong></p>

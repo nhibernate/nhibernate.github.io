@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "HQL"]
 alias: ["/blogs/nhibernate/archive/2009/05/17/nhibernate-2-1-0-hql-with-clause.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[<a href="http://fabiomaulo.blogspot.com/" target="_blank">My blog</a>]</p>
 <p>A simple SQL:</p>

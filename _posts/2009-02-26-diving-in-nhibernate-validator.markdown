@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "HowTo", "fluent configuration", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Surfing in the NET, to find some NHibernate.Validator (NHV) example, I saw that there are various things not so clear about how NHV is working. In this post I&rsquo;ll try to give you a more deep explication.</p>
 <h4>Class validation definition</h4>

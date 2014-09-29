@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["provider", "connection"]
 alias: ["/blogs/nhibernate/archive/2008/09/18/extending-nhibernate-s-driverconnectionprovider.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this was orginally posted on my <a target="_blank" href="http://davybrion.com/blog/2008/09/extending-nhibernates-driverconnectionprovider/">own blog</a>
 </p>

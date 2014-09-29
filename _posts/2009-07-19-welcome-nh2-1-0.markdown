@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "NH2.1", "Release", "NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/07/19/welcome-nh2-1-0.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NHibernate 2.1.0GA was released today.</p>
 <p><a target="_blank" href="http://sourceforge.net/projects/nhibernate/files/">Download it!</a></p>

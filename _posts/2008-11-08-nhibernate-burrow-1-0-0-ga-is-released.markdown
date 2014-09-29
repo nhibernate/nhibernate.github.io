@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow Release"]
 alias: ["/blogs/nhibernate/archive/2008/11/08/nhibernate-burrow-1-0-0-ga-is-released.aspx"]
+author: kailuowang
+gravatar: c573cf31007f29236e1641e492bee036
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NHibernate.Burrow is a light weight middleware developed to support
 .Net applications using NHibernate (maybe also referred as NH in this

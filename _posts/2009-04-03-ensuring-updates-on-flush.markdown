@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["event listener", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/03/ensuring-updates-on-flush.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Two assertions:</p>
 <ul>

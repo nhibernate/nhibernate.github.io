@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "linqtoxsdmappings"]
 alias: ["/blogs/nhibernate/archive/2010/07/28/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-1.aspx"]
+author: mcintyre321
+gravatar: 4908618aea7c32eb0f94d398b57fa28d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This is part 1 in a blog series about <a href="http://fabiomaulo.blogspot.com/2010/03/nhibernate-mappings-path.html" target="_blank">yet another </a>method for configuring your NHibernate mappings in code and writing conventions. Although there are mature solutions for doing this like <a href="http://fluentnhibernate.org/" target="_blank">Fluent NHibernate</a>, I have found that they have required me to learn a new API and set of conventions, and sometimes the extension points I need haven't yet been implemented. I, like a lot of people, am most familiar with configuring NHibernate using xml files, so having a code based API that is very close in structure to an hbm document means I spend less time learning a new API, and more time getting my mappings written and out of the way. In this series, I will show you this API, and show you how simple it is to write your own custom mapping conventions on top of it.</p>
 <p align="left">Given the formula <strong>domain assemblies + automapping framework = nhibernate mapping.xml </strong>it is obvious we will need to somehow manipulate and produce an nhibernate mapping xml file in a structured way, using c# code. The way I do this is to use the <a target="_blank" href="http://linqtoxsd.codeplex.com/">LINQ To Xsd project</a> to generate&nbsp; a statically typed representation of an NHibernate mapping file. Here is a simple mapping file, with the classic xml mapping on the left (thanks <a href="http://www.fincher.org/tips/Languages/NHibernate.shtml">fincher.org</a>), and Linq To Xsd based mapping on the right:</p>

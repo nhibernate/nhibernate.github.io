@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>There is some interesting progress with my project <a href="http://sourceforge.net/projects/faticalabshqled/" target="_blank">Fatica.Labs.HqlEditor</a>. I just want to share some screenshot:</p>
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s5_5F00_08413719.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s5" alt="s5" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s5_5F00_thumb_5F00_65E8DFF8.png" border="0" height="356" width="490" /></a> </p>

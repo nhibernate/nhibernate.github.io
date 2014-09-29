@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2010/10/05/nhibernate-3-0-cookbook.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This week Packt published the <a href="https://www.packtpub.com/nhibernate-3-0-cookbook/book">NHibernate 3.0 Cookbook</a>. Packt are offering all members of the NHibernate community 20% off the book. </p>
 <p>The book helps users to get solutions to common NHibernate problems to develop high-quality performance-critical data access applications.</p>

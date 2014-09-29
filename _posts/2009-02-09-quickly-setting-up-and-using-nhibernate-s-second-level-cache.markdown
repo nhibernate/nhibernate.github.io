@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/02/09/quickly-setting-up-and-using-nhibernate-s-second-level-cache.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>The purpose of this post is just to quickly go over what you need to do to get NHibernate's 2nd Level Cache working in your application.  If you want to read how the 1st and 2nd Level Caches work, please read Gabriel Schenker's excellent and thorough <a href="http://blogs.hibernatingrhinos.com/nhibernate/archive/2008/11/09/first-and-second-level-caching-in-nhibernate.aspx">post about it</a>.
 Anyways, the first thing you need to do, is to enable the 2nd level cache.  </p>

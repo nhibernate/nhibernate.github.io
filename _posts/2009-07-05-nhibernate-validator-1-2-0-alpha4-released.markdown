@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/07/05/nhibernate-validator-1-2-0-alpha4-released.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" /></p>
 <p>This release of NHibernate Validator is for use it with NHibernate 2.1CR1. 

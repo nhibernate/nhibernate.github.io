@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["bulk", "Stateless", "Session"]
 alias: ["/blogs/nhibernate/archive/2008/10/30/bulk-data-operations-with-nhibernate-s-stateless-sessions.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this was originally posted on my <a target="_blank" href="http://davybrion.com/blog/2008/10/bulk-data-operations-with-nhibernates-stateless-sessions/">own blog</a></p>
 <p>In my previous <a href="http://davybrion.com/blog/2008/10/batching-nhibernates-dm-statements/">post</a>, i showed how you can configure NHibernate to batch create/update/delete statements and what kind of performance benefits you can get from it.  In this post, we're going to take this a bit further so we can actually use NHibernate in bulk data operations, an area where ORM's traditionally perform pretty badly.

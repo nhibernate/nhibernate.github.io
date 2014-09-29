@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/02/22/encrypting-password-or-other-strings-in-nhibernate.aspx"]
+author: Gustavo
+gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As you can read in every forum the solution to encrypting/decrypting a password is using an IUserType. Implementing an IUserType in NH is somewhat easy, so we added to uNHAddins a user type which will do the encryption.</p>
 <p>The source code can be grabbed from <a href="http://code.google.com/p/unhaddins/" target="_blank">uNHAddins</a> <a href="http://unhaddins.googlecode.com/svn/trunk/" target="_blank">trunk</a>.</p>

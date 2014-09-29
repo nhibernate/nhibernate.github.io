@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "NHibernate", "Session", "uNHAddin"]
 alias: ["/blogs/nhibernate/archive/2009/02/10/unhaddins-persistence-conversation-part-2-configuring-the-conversation.aspx"]
+author: Gustavo
+gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>In the <a href="http://gustavoringel.blogspot.com/2009/02/unhaddins-persistence-conversation-part.html" target="_blank">first post</a> I showed how to configure the uNHAddins conversation. Now I will show how to use the PersistenceConversation aspects to manage a uNHAddins conversation.</p>
 <p>A class which will rule a conversation should be marked as [PersistenceConversational] every public method that is part of a conversation should be marked as [PersistenceConversation]. </p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/11/07/nhibernate-and-wpf-the-guywire.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><strong><em>Note: I owe this knowledge to my friend <a href="http://fabiomaulo.blogspot.com/">Fabio Maulo</a>, so I would like to thank him for teaching me and letting me share.</em></strong> </p>  <h1>Introduction</h1>  <p>I will show you in this post a nice way to configure your IoC container and some other aspects of your applications. I assume for this article that you have good knowledge of dependency injection and inversion of control.</p>  <h1>The problem</h1>  <p>There was a time when we used to configure our containers with xml, and all was fine. Then we started to use fluent and strongly typed interfaces and a problem became more frequent and acute. Basically, when we use a fluent interface, we do something like this:</p>  <pre class="brush: csharp;">container.Register(Component.For&lt;IAlbumRepository&gt;()
                        .ImplementedBy&lt;AlbumRepository&gt;()

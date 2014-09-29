@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "configuration", "NHibernate", "fluent configuration"]
 alias: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[<a target="_blank" href="http://fabiomaulo.blogspot.com/">My blog</a>]</p>
 <p>Perhaps not so many people know in how many ways NH can be configured since NH2.0.0. In this post I&rsquo;ll try to summarize some one before implement <em><a target="_blank" href="http://fabiomaulo.blogspot.com/2009/02/nhvloquacious-fluent-configuration-for.html">Loquacious configuration</a></em> in NH3.0.0.</p>

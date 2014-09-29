@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Entity-Name", "auto propeties", "backfield"]
 alias: ["/blogs/nhibernate/archive/2008/10/21/entity-name-in-action-a-strongly-typed-entity.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>(<a href="http://www.fabiomaulo.blogspot.com/">my blog</a>)</p>
 <p>The <span style="color: #ff0000">entity-name</span> is another powerful feature of NH2.1.</p>

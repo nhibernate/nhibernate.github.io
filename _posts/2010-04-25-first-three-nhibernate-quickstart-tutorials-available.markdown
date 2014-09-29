@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/04/25/first-three-nhibernate-quickstart-tutorials-available.aspx"]
+author: BobPalmer
+gravatar: b57e71c1a3aa72469b644b92fabcaaac
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As some of you may already know, I've begun work on a series of NHibernate tutorials as the first steps in a larger effort to help update the NHibernate reference documentation.</p>
 <p>For many users, starting out with NHibernate is less of a learning curve and more of a learning cliff - so the intent with this first article series is to gradually expose the user to the features of NHibernate, from basic mapping through advanced techniques.</p>

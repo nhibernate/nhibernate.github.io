@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "ProxyGenerators", "NHibernate", "AOP", "IoC"]
 alias: ["/blogs/nhibernate/archive/2009/03/03/nhibernate-with-spring-net.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>A new Dynamic-Proxy provider is available in NHibernate trunk (<a href="/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx">here</a> the others two)</p>
 <p><a href="http://eeichinger.blogspot.com/">Erich Eichinger</a> (Spring.NET team member) sent us the implementation of <strong>NHibernate.ByteCode.Spring</strong>.</p>

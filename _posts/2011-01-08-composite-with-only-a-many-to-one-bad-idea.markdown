@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2011/01/08/composite-with-only-a-many-to-one-bad-idea.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I can’t count with one hand, how many times I’ve seen this mapping in my few years of using nhibernate:</p>  <pre class="code">  <span style="color: blue">&lt;</span><span style="color: #a31515">class </span><span style="color: red">name</span><span style="color: blue">=</span>&quot;<span style="color: blue">Profile</span>&quot;<span style="color: blue">&gt;
     &lt;</span><span style="color: #a31515">composite-id</span><span style="color: blue">&gt;

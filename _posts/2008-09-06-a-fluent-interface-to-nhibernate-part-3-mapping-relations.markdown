@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "collections", "value object", "relation"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-3-mapping-relations.aspx"]
+author: gabriel.schenker
+gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
 <p>This is the third post in a series of articles where I want to analyze and describe the new upcoming mapping interface providing a fluent interface to NHibernate for the mapping of a domain model to the underlying database. </p>

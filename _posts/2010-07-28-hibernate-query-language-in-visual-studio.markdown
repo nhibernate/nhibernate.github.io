@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Named Query", "HQL", "Tooling"]
 alias: ["/blogs/nhibernate/archive/2010/07/28/hibernate-query-language-in-visual-studio.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I started to work in an HQL addin for Visual Studio two weeks ago. As described in the <a href="http://hqladdin.codeplex.com/">project site</a>:</p>
 <blockquote>

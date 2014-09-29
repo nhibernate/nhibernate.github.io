@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/09/nhibernate-mapping-lt-many-to-one-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Next up for inspection is the &lt;many-to-one/&gt; element. This element is defined as:</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">many</span>-<span style="color: #ff0000">to</span>-<span style="color: #ff0000">one</span>
         <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;PropertyName&quot;</span>                                (<span style="color: #ff0000">1</span>)

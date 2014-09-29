@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/03/16/nhibernate-validator-1-2-alpha1-released.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Glad to announce this great release of NHibernate Validator 1.2 alpha1.</p>
 <p>See this post for examples:</p>

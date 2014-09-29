@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Inversion of Control", "IoC"]
 alias: ["/blogs/nhibernate/archive/2009/05/30/nhibernate-ioc-integration.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[<a target="_blank" href="http://fabiomaulo.blogspot.com/">my Blog</a>]</p>
 <p>Do you remember <a target="_blank" href="http://fabiomaulo.blogspot.com/2008/11/entities-behavior-injection.html">this</a> post ?</p>

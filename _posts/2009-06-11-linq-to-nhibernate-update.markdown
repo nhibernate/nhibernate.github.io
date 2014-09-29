@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "linq"]
 alias: ["/blogs/nhibernate/archive/2009/06/11/linq-to-nhibernate-update.aspx"]
+author: srstrong
+gravatar: be49dc22186b4215272ffa6a46599424
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>We're long overdue for another update. Progress as been somewhat slower over the last few weeks, largely due to other commitments and holidays meaning that I've probably only spent a total of around 10 days working on this stuff.</p>
 <p>Where we are is that I'm pretty comfortable with what needs to happen, and have a fairly clear route for moving forward from my prototype / exploratory coding phase to something that I can actually release to the wild and let folk start playing with.</p>

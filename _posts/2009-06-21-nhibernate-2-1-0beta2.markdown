@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-2-1-0beta2.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NHibernate 2.1.0 Beta2 is on the road.</p>
 <p><a target="_blank" href="https://sourceforge.net/project/showfiles.php?group_id=73818&amp;package_id=73969">Download NHibernate 2.1.0.Beta2</a></p>

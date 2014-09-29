@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/03/13/an-improvement-on-sessionfactory-initialization.aspx"]
+author: tehlike
+gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <div class="wlWriterEditableSmartContent" id="scid:0767317B-992E-4b12-91E0-4F059A8CECA8:3b4c0626-425a-42e1-8d34-4ea8a11191ad" style="padding-right: 0px; display: inline; padding-left: 0px; float: none; padding-bottom: 0px; margin: 0px; padding-top: 0px"><b>UPDATE: I have just committed the PersistentConfigurationBuilder for Castle NHibernate Facility. Thank you Jonathon Rossi for informing me!</b><a href="http://technorati.com/tags/nhibernate" rel="tag"></a></div>
 <p>We have received several complaints about slowness of SessionFactory initialization when there&rsquo;s hundreds of entities, and <a href="http://ayende.com/Blog/" target="_blank">Ayende</a> has replied <a href="http://ayende.com/Blog/archive/2007/10/26/Real-World-NHibernate-Reducing-startup-times-for-large-amount-of.aspx" target="_blank">one of them here</a>. It even gets worse if you&rsquo;re using it in a web environment. You may think that it is not a problem since SessionFactory is initialized once in a web environment, but the major impact is not on production but development. Think how many times you start your application a day. </p>

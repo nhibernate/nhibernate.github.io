@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/23/nhibernate-hbm2ddl.aspx"]
+author: tehlike
+gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NHibernate has a number of configuration options: Enabling statistics, Caching etc. You can check more from <a href="http://nhibernate.svn.sourceforge.net/viewvc/nhibernate/trunk/nhibernate/src/NHibernate/Cfg/Settings.cs?revision=3870&amp;view=markup" target="_blank">here</a></p>
 <p>I will now talk about an unknown feature(well, at least I didn&rsquo;t know until I implement SchemaValidator): <b>hbm2ddl.auto</b></p>

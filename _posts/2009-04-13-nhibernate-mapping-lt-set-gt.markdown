@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-mapping-lt-set-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>And now it is time to go to the &lt;set/&gt; and explore it. Most of the collections in NHibernate follow much the same rules, so I am not going to go over them in details:</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">set</span>
     <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;propertyName&quot;</span>                                         (<span style="color: #ff0000">1</span>)

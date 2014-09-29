@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "value object"]
 alias: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-2-value-objects.aspx"]
+author: gabriel.schenker
+gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-right: 0px; border-top: 0px; border-left: 0px; border-bottom: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
 <p>This is the second of a series of articles on the topic. Other posts will follow</p>

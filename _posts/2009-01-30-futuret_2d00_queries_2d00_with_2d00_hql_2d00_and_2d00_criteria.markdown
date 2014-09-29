@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "querying", "HQL", "Criteria", "Future"]
 alias: ["/blogs/nhibernate/archive/2009/01/30/futuret_2D00_queries_2D00_with_2D00_hql_2D00_and_2D00_criteria.aspx", "/blogs/nhibernate/archive/2009/01/30/futuret_2d00_queries_2d00_with_2d00_hql_2d00_and_2d00_criteria.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>A few days ago Oren Eini and Davy Brion were working in a new feature for NH 2.1 (no a release yet) called Future, in the <i>ICriteria</i> API. You can see and explanation of the job <a href="/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx">here</a>. Now I&rsquo;ve committed a complement to enable that use into the <i>IQuery</i> API, for those who prefer to use HQL.</p>
 <p>What is Future Query anyway? Future are queries that are kept, waiting to be executed as a group in just one roundtrip, making use of an underlying NHibernate feature: <i>MultiCriteria/MultiQuery</i>.</p>

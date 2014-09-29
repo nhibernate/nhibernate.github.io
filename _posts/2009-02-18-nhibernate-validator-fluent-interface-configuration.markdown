@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["fluent configuration", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/02/18/nhibernate-validator-fluent-interface-configuration.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As announced in the <a href="http://fabiomaulo.blogspot.com/2009/02/nhvloquacious-fluent-configuration-for.html">this post</a> NHibernate.Validator (NHV for friends) has its own embedded configuration based on fluent-interface (<strong>Loquacious</strong> for friends). This new feature will be general-available with the next version <strong>NHV1.2.0</strong>.</p>
 <h4>The NHV configuration</h4>

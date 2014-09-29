@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "NHibernate", "Session", "Unit of Work"]
 alias: ["/blogs/nhibernate/archive/2008/12/21/identity-the-never-ending-story.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>How many times you heard us saying &ldquo;don&rsquo;t use identity POID generator!&rdquo; ?</p>
 <p>To understand it better you must move your mind to an application, or a <a href="http://en.wikipedia.org/wiki/Use_case">use-case</a>, where the pattern <a href="http://www.hibernate.org/43.html">open-session-in-view</a> (aka session-per-request) is not applicable.</p>

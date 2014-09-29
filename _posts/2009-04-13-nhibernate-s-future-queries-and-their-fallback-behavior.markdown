@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I've blogged about NHibernate's Future queries a <a href="http://davybrion.com/blog/2009/01/nhibernate-and-future-queries/">couple</a> <a href="http://davybrion.com/blog/2009/01/nhibernate-and-future-queries-part-2/">of</a> <a href="http://davybrion.com/blog/2009/04/transparent-query-batching-through-your-repository/">times</a> already.  But as you know, NHibernate aims to offer you a way to write your code completely independent of the actual database you're using.  So what happens if you run your code, which is using the Future and FutureValue features, on a database that doesn't support batched queries?  Previously, this would fail with a NotSupportedException being thrown.
 </p>

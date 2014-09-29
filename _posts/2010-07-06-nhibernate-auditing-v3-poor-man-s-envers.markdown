@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "schema action", "uNHAddins"]
 alias: ["/blogs/nhibernate/archive/2010/07/05/nhibernate-auditing-v3-poor-man-s-envers.aspx"]
+author: Jason Dentler
+gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>First, let me explain the title of this post. The Hibernate folks &ndash; you know, that <a target="_blank" href="http://nhforge.org">NHibernate</a> knock off written in the Java (pronounced &ldquo;ex em el&rdquo;) programming language &ndash; have a project called Envers. Among other things, It audits changes to entities, then allows you to easily retrieve the entity as it was at any previous point in time. </p>
 <p>Well, Simon Duduica is porting this over to .NET and NHibernate, and he&rsquo;s making some AMAZING progress. On June 28th, he shared this news with us on the NH Contrib development group:</p>

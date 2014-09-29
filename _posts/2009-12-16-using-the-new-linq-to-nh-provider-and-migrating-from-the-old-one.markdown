@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/12/17/using-the-new-linq-to-nh-provider-and-migrating-from-the-old-one.aspx"]
+author: srstrong
+gravatar: be49dc22186b4215272ffa6a46599424
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Using the new Linq provider is pretty simple. It all hangs of a Query() extension method on ISession, so you can do things like the following:</p><code>  from c in session.Query&lt;Customer&gt;() select c</code><br />
 <p>In my tests, I've tended to wrap the session.Query() call behind a simple facade, along the lines of:</p><code>  public class Northwind<br />

@@ -7,8 +7,9 @@ published: false
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx"]
+author: diegose
+gravatar: f00318698e65fce00b7cbd612a466571
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>The State/Strategy patterns are among the simplest design patterns, yet they can help a lot when designing maintainable applications.</p>
 <p>If you've never read about them, it's a good time to do so: <a href="http://en.wikipedia.org/wiki/State_pattern">State Pattern 1</a>, <a href="http://www.dofactory.com/patterns/PatternState.aspx">State Pattern 2</a>, <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern 1</a>, <a href="http://www.dofactory.com/patterns/PatternStrategy.aspx">Strategy Pattern 2</a>.</p>

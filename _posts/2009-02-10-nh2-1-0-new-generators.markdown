@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "NH2.1", "generators"]
 alias: ["/blogs/nhibernate/archive/2009/02/09/nh2-1-0-new-generators.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This post is an recognition that we had lost the fight with Identity's fans. As you probably know <a href="http://fabiomaulo.blogspot.com/2008/12/identity-never-ending-story.html">I don&rsquo;t like Identity</a>, but as a NHibernate-developer I can&rsquo;t ignore ours users requests. </p>
 <p>This is the complete list of <strong>POID</strong> (<strong>P</strong>ersistent <strong>O</strong>bject <strong>ID</strong>entifier) generators provided by NHibernate2.1.0:</p>

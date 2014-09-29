@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Dynamic-Map", "Entity-Name", "EntityMode"]
 alias: ["/blogs/nhibernate/archive/2008/10/16/less-than-gof-is-hbm.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>In <a href="/blogs/nhibernate/archive/2008/10/12/less-than-few-is-gof.aspx">Less than &ldquo;Few&rdquo; is GoF</a> I show how have a single implementation for the whole domain entities using <strong>Tuplizers</strong>.</p>
 <p>In this post I will show another NH2.1 feature : <strong><span style="color: #0080ff">EntityMode</span>.Map</strong></p>

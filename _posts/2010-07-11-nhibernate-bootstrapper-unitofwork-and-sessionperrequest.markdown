@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/07/11/nhibernate-bootstrapper-unitofwork-and-sessionperrequest.aspx"]
+author: jwdavidson
+gravatar: 7b8c11bc19a524da9aac988120936d9a
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This is the first sample in a series of blogs about NHibernate in ASP.Net environment. This version gives a user new to NHibernate the absolute minimum pieces to start a well architected application. A number of the pieces necessary for an enterprise-capable application are not yet included, but the foundation has been laid. Source code and starter solution described in this post are available at <a target="_blank" href="http://public.me.com/jw_davidson/NHibernateBootstrap_V1.0.zip">NHibernateBootstrap Download</a>. </p>
 <p>The key pieces in this sample are demonstrations of the correct UnitOfWork pattern, using the NHibernate ISession based object with its transaction support. A DataAccessObject / Repository is also introduced that uses features from both styles of implementations and is also intended to work with Query Objects. The <em>Web.Config</em> file includes a starter configuration for NHibernate, using the LinFu proxy. The connection between the web application and NHibernate demonstrates a best practice, where the Session Per Request pattern is initialized in an<em> IHttpModule</em> -<em> RequestHttpModule.cs</em>. This is an implementation base on the<em> ManagedWebSessionContext</em>, and shows how to bind and unbind the session correctly.  </p>

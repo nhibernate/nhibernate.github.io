@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2009/07/05/good-morning-nhibernate-2-1-0cr1.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NHibernate 2.1.0 CR1 is on the road.</p>
 <p><a target="_blank" href="https://sourceforge.net/projects/nhibernate/files/">Download NHibernate 2.1.0.CR1</a></p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/23/populating-entities-from-stored-procedures-with-nhibernate.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this was orginally posted on my <a target="_blank" href="http://davybrion.com/blog/2008/11/populating-entities-from-stored-procedures-with-nhibernate/">own blog</a>.</p>
 <p>A short while ago we needed to fetch the data for some entities through a stored procedure for performance reasons.  We already use NHibernate in the typical way to fetch and modify the data of this entity type, but we just wanted something so we could also use the resultset of the stored procedure to populate the entities.  One of my team members spent some time figuring out how to get the data returned by the stored procedure into the entities without actually having to write the code ourselves.  Turns out this was pretty easy to do.  Let's go over the solution with a very simple example.

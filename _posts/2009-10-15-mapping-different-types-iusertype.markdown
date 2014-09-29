@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "IUserType"]
 alias: ["/blogs/nhibernate/archive/2009/10/15/mapping-different-types-iusertype.aspx"]
+author: krzysztof.kozmic
+gravatar: fab7062ee87e12adc67846764e6be668
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Recently I had a problem with the application I&rsquo;ve been working on. One of entity types in my domain had a property of type <i>uint</i>. Not a big deal, until you want to store it in Microsoft SQL Server database which <a target="_blank" href="http://msdn.microsoft.com/en-us/library/ms187752.aspx">does not support unsigned types</a>. I&rsquo;ve been scratching my head for a moment and then I found a solution &ndash; let&rsquo;s map it as <i>long</i> in our database. Since <i>long</i> can represent any legal value of <i>uint</i>, we should be all good, right? So let&rsquo;s do it.</p>
 <div class="csharpcode">

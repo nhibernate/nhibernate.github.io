@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/20/nhibernate-mapping-lt-join-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>We have previously explored the <a href="http://ayende.com/Blog/archive/2009/04/19/nhibernate-mapping-ltone-to-onegt.aspx">one-to-one</a> mapping, which let you create 1:1 association in the database, but there is actually another way to map several tables to an object model. We aren’t constrained by the database model, and we can merge several tables into a single entity. </p>  <p>We do that using the &lt;join/&gt; element:</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">join</span>
         <span style="color: #ff0000">table</span>=<span style="color: #0000ff">&quot;tablename&quot;</span>                        (<span style="color: #ff0000">1</span>)

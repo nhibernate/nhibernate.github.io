@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Future"]
 alias: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As some of you already know, i'm a big fan of avoiding excessive roundtrips by batching queries and/or service calls.  For NHibernate, i wrote the <a href="http://davybrion.com/blog/2008/06/the-query-batcher/">QueryBatcher</a> class which makes this pretty easy to do.  Ayende recently added a much easier approach for this to NHibernate.  
 </p>

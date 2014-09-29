@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
 alias: ["/blogs/nhibernate/archive/2011/09/05/using-nh3-2-mapping-by-code-for-automatic-mapping.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this is a cross post <a href="http://www.felicepollano.com/2011/09/01/UsingNH32MappingByCodeForAutomaticMapping.aspx" target="_blank">from my own blog</a>.</p>
 <p>Since version 3.2.0 <a href="http://nhforge.org" target="_blank">NHibernate</a>&nbsp; has an embedded strategy for mapping by code, that basically comes from <a href="http://fabiomaulo.blogspot.com/" target="_blank">Fabio Maulo</a>&rsquo;s <a href="http://code.google.com/p/codeconform/" target="_blank">ConfORM</a>. With some reading at <a href="http://fabiomaulo.blogspot.com/2011/04/nhibernate-32-mapping-by-code.html" target="_blank">this</a> Fabio post,&nbsp; <a href="http://fabiomaulo.blogspot.com/search?updated-max=2011-07-19T13%3A34%3A00-03%3A00&amp;max-results=3" target="_blank">this other one</a>, <a href="http://fabiomaulo.blogspot.com/2011/07/nhibernate-playing-with-mapping-by-code.html" target="_blank">and this one too</a>, I wrote my own sample just to see what we can do.</p>

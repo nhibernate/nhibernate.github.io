@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "examples", "quickstart"]
 alias: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" /></p>
 <p>The NHibernate Validator Team had prepared examples to you be able to use this validation framework in a easy way. With four examples we are covering the following topics:</p>

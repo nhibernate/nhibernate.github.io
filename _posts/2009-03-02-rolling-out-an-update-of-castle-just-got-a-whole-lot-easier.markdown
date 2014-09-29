@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/03/02/rolling-out-an-update-of-castle-just-got-a-whole-lot-easier.aspx"]
+author: christianacca
+gravatar: bf3c707b9c35add15287382e4ab3a5af
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <div><span id="misspell-cursor" class="unmark"></span>I
 just released yesterday, that the recent change to NHibernate that removed all dependency from any kind of &ldquo;Proxy framework&rdquo;, has made it a whole lot easier to <span class="mark" id="misspell-1">rollout</span> a fresh build of the Castle trunk to the Enterprise.</div>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/02/22/unhaddins-conversation-additions.aspx"]
+author: Gustavo
+gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Well <a href="http://www.fabiomaulo.blogspot.com/" target="_blank">Fabio</a> and i discussed some ideas&hellip;as always i only started thinking about how to implement them and he already had a complete solution for the things being discussed.</p>
 <p>At least to feel I collaborate I will resume some of the things Fabio had been working on. </p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server 2008", "NH2.1", "Date", "DateTimeOffset", "DateTime2", "Time"]
 alias: ["/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Ms Sql Server 2008 come with a lot of features talking about Date/Time. Besides the already known DbType.DateTime, now we have new types:</p>
 <ul>

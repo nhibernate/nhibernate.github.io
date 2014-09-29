@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Session"]
 alias: ["/blogs/nhibernate/archive/2009/02/06/unhaddins-persistence-conversation-part-1-configuration.aspx"]
+author: Gustavo
+gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><i>This post was previously published in my blog <a target="_blank" title="uNHaddins Persistence Conversation &ndash; Part 1: Configuration" href="http://gustavoringel.blogspot.com/">here </a></i></p>
 <p>uNHAddins Conversation and motivations where widely presented on Fabio&rsquo;s blog <a href="http://fabiomaulo.blogspot.com/2009/01/aspect-conversation-per.html" target="_blank">here</a>.</p>

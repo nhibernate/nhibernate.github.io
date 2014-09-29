@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["statistics"]
 alias: ["/blogs/nhibernate/archive/2008/10/26/exploring-nhibernate-statistics-part-1-simple-data-fetching.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this was originally posted on my <a target="_blank" href="http://davybrion.com/blog/2008/10/exploring-nhibernate-statistics-part-1-simple-data-fetching/">own blog</a></p>
 <p>One of the new features that NHibernate 2.0 introduced is NHibernate Statistics. This feature can be pretty useful during development (or while debugging) to keep an eye on what NHibernate is doing.  Not a lot of people know about this feature, so i've decided to write a short series of posts about it.  In this first episode, we'll explore some stats which can show you some useful information regarding the efficiency of your (simple) data fetching strategies.  Later episodes will cover insert/update/delete statistics, query specific statistics and caching statistics.  I don't know yet when the other episodes will be posted, but they are definitely on my TODO list so they will get written eventually ;)

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server", "NH2.1", "Dialect", "Function"]
 alias: ["/blogs/nhibernate/archive/2009/03/13/registering-freetext-or-contains-functions-into-a-nhibernate-dialect.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Ms Sql Server FREETEXT and CONTAINS functions are used into FullText search capabilities to querying. These functions are of course natives to this particular RDBMS and even comes a with particular structure: they don&rsquo;t return a value. So far, till NH 2.0, you couldn&rsquo;t do it because a little parser issue, but from <b>NHibernate 2.1</b> in forward you&rsquo;re enable register them.</p>
 <p>First of all, we define the new dialect with the new functions in order that when we run a query, NHibernate can recognize those functions and can transform to native-sql, in this case, Transact-SQL.</p>

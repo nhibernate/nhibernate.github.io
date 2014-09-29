@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/06/02/documentation-project-launch.aspx"]
+author: ssteinegger
+gravatar: 5d9c48ac94a9376f1b7bccdd13c4d987
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I started to restructure and enhance the NHibernate documentation. I want to move from a "Reference Documentation" to a "Programmers Manual". The difference is, that when you read a reference documentation you already know the concepts and only need to know details like xml elements or HQL syntax. A manual should explain the concepts in detail and you should be able to understand it even if you are new to NHibernate.</p>
 <p>The current documentation is explaining quite a lot - it is not only a reference. Most of the documentation is already there. But in my opinion it is sometimes on the wrong place.</p>

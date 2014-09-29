@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/01/07/typesafe-icriteria-using-lambda-expressions.aspx"]
+author: FlukeFan
+gravatar: 2075ce3339bd0f16c52adac5b8e4b7b1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><i>
 <p>Originally announced on my own blog here: <a target="_blank" href="http://broloco.blogspot.com/2008/12/using-lambda-expressions-with.html" style="background:#c0ffc0;">Using Lambda Expressions with NHibernate </a></p>

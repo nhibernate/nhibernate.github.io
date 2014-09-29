@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "mapping", "querying", "HQL"]
 alias: ["/blogs/nhibernate/archive/2010/05/19/nhibernate-workbench.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p align="justify">In the spirit of &ldquo;<i>Release early. Release often. And listen to your customers</i>&rdquo; ( cit. ), even if not so early in term of time since the <a href="http://www.felicepollano.com/2010/04/22/SomeProgressWithHqlIntellisense.aspx">preview</a>, I decided to <a href="http://sourceforge.net/projects/faticalabshqled/files/">release a first drop</a> of the &ldquo;HQL Intellisense thing&rdquo; I&rsquo;m working on. The current version is just able to load an existing mapping assembly, a configuration, help us to write an hql query, submit it to NH and see some results. Here an overall screenshot: </p>
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s1_5F00_6D3E666D.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s1" alt="s1" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s1_5F00_thumb_5F00_55E33C2F.png" border="0" width="580" height="407" /></a></p>

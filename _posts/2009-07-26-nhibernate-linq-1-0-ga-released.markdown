@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
 alias: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx"]
+author: tehlike
+gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>We have just released the first version of Linq provider for NHibernate.</p>
 <p>The current implementation you'll find in the provided links are based on the NHibernate Contrib project which uses Criteria API. It can support almost everything you can do with Criteria API.</p>

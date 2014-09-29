@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["views", "export", "schema action"]
 alias: ["/blogs/nhibernate/archive/2008/12/15/customizing-schema-export-with-schema-action.aspx"]
+author: Woil
+gravatar: 7be987ee1e38d64e17712ba97a4c525c
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Mapping views with NHibernate just got a whole lot easier. Previous to revisions committed to the trunk today (Dec 15, 2008) there was no good way to exclude certain files from being exported with a schema export. </p>
 <p>Now a new attribute has been added to the &lt;class&gt; schema. </p>

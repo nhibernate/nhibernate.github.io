@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/05/21/using-the-guid-comb-identifier-strategy.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As you may have read by now, it's a good idea to <a href="http://ayende.com/Blog/archive/2009/03/20/nhibernate-avoid-identity-generator-when-possible.aspx">avoid identity-style identifier strategies</a> with ORM's.  One of the better alternatives that i kinda like is the guid.comb strategy.  Using regular guids as a primary key value leads to fragmented indexes (due to the randomness of the guid's value) which leads to bad performance.  This is a problem that the guid.comb strategy can solve quite easily for you.
 If you want to learn how the guid.comb strategy really works, be sure to check out <a href="http://www.informit.com/articles/article.aspx?p=25862">Jimmy Nilsson's article on it</a>. Basically, this strategy generates sequential guids which solves the fragmented index issue.  You can generate these sequential guids in your database, but the downside of that is that your ORM would still need to insert each record seperately and fetch the generated primary key value each time.  NHibernate includes the guid.comb strategy which will generate the sequential guids before actually inserting the records in your database.

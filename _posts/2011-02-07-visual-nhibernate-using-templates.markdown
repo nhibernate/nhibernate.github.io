@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "generators", "visual nhibernate"]
 alias: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx"]
+author: gareth
+gravatar: bf3577d9d1dfe9ef620b5326e5970091
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><a target="_blank" href="http://www.slyce.com/VisualNHibernate/">Visual NHibernate</a> can be customized in many ways. Today we&rsquo;ll look at the built-in template engine. You can easily create the exact output you need by tweaking the built-in templates or creating new custom templates.</p>
 <p>Visual NHibernate currently has two built-in templates: </p>

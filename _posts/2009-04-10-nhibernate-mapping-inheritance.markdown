@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/10/nhibernate-mapping-inheritance.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I wanted to explore a few options regarding the way we can map inheritance using NHibernate. Here is the model that we are going to use:<a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6D1D2D68.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="329" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_34972EB0.png" width="379" border="0" /></a> </p>  <p>And the code that we are going to execute:</p>  <blockquote>   <pre><span style="color: #0000ff">using</span> (var session = sessionFactory.OpenSession())
 <span style="color: #0000ff">using</span> (var tx = session.BeginTransaction())

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging"]
 alias: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I will show you in this post two tricks you can do to enhance and add value to your nhibernate logs. </p>  <h1>Format Sql</h1>  <p>This is widely know trick, you can add a configuration setting to your hibernate.cfg.xml, app.config or web.config as follow:</p>  <pre class="brush: xml; wrap-line: false;">&lt;property name=&quot;hibernate.format_sql&quot; value=&quot;true&quot; /&gt;</pre>
 

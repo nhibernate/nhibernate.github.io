@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "IoC"]
 alias: ["/blogs/nhibernate/archive/2008/12/12/entities-behavior-injection.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>If you are working with NH you know that NH likes POCOs and you must have a default constructor without parameters. Starting from today that is the past.</p>
 <h4>The domain</h4>

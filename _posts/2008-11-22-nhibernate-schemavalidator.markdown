@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/11/22/nhibernate-schemavalidator.aspx"]
+author: tehlike
+gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This post was originally posted <a href="http://tunatoksoz.com/post/NHibernate-SchemaValidator.aspx">here</a></p>
 <p><span style="font-size: small;">NHibernate provides <a href="http://blogs.hibernatingrhinos.com/nhibernate/archive/2008/04/28/create-and-update-database-schema.aspx" target="_blank">a number of tools</a>

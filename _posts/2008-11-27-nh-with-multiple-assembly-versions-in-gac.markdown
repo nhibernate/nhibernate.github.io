@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "GAC"]
 alias: ["/blogs/nhibernate/archive/2008/11/27/nh-with-multiple-assembly-versions-in-gac.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I know that the title have something strange because NH don&rsquo;t have nothing to do with GAC, but in NH-JIRA we have an issue with this title: &ldquo;NHibernate does not support multiple versions of the same assembly for entity mapping&rdquo;</p>
 <p>Perhaps I don&rsquo;t understand what that issue mean; I can&rsquo;t understand what mean work we two mappings versions of the same entity&hellip; mean it work with two tables versions in the same DB at the same time ?</p>

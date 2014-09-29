@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
 alias: ["/blogs/nhibernate/archive/2011/09/05/automatic-mapping-pluralize-table-names.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this is a cross post <a href="http://www.felicepollano.com/2011/09/02/AutomaticMappingPluralizeTableNames.aspx" target="_blank">from my own blog</a>.</p>
 <p>In <a href="http://www.felicepollano.com/2011/09/01/UsingNH32MappingByCodeForAutomaticMapping.aspx" target="_blank">this post</a> we done some effort in automatically generate the mapping based on convention, but we miss a very common one: table names is usually the pluralized entity name. This is usually done by using an inflector. Thanks to <a href="http://www.stackoverflow.com" target="_blank">Stack Overflow</a>, <a href="http://stackoverflow.com/questions/2552816/alternatives-to-inflector-net" target="_blank">I found this question about it</a>, and choose <a href="http://cid-net.googlecode.com/svn/trunk/src/Cid.Mvc/Inflector.cs" target="_blank">that one</a>, that is a single easily embeddable file. So we modify a little our AutoMapper class as below:</p>

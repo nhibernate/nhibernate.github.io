@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Fluent NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx"]
+author: jagregory
+gravatar: 94afce4e8f9766b629aba101b50cfc18
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>The 1.0 RTM is now available <a href="http://fluentnhibernate.org/downloads">here</a>.</p>
 

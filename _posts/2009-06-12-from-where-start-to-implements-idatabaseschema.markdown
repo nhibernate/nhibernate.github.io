@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/06/12/from-where-start-to-implements-idatabaseschema.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>The <a target="_blank" href="http://fabiomaulo.blogspot.com/2009/06/auto-quote-tablecolumn-names.html">auto-quote and auto import KeyWords features</a> are now available in NHibernate but only for those dialects are providing an implementation of <span style="color: #2b91af">IDataBaseSchema</span>.</p>
 <p>If the NHibernate&rsquo;s dialect, for your favorite RDBMS, does not provide an implementation of <span style="color: #2b91af">IDataBaseSchema</span>, what can you do ?</p>

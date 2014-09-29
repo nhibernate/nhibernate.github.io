@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["S#arp Lite"]
 alias: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx"]
+author: bmccafferty
+gravatar: 3ce3492b12738e1a6f3cb595e70dec96
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><span style="font-weight: normal;"><i>[The motivations for releasing S#arp Lite, in relation to S#arp Architecture, are described <a href="http://devlicio.us/blogs/billy_mccafferty/archive/2011/10/26/s-arp-lite-like-beer-but-better.aspx">here</a>.]</i></span></p>
 <h2><strong>What is S#arp Lite?</strong></h2>

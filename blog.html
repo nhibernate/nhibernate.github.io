@@ -6,9 +6,9 @@ layout: default
 		{% for post in site.posts %}
 		<li class="CommonAvatarListItemArea Custom">
 			<div class="CustomAvatarListItemCustomAvatar">
-				<!--
-				<img src="http://www.gravatar.com/avatar/bf8ff77ca000b80a2b19d07dbb257645.png" alt="" style="border-width:0px;max-height:60px;max-width:60px;">
-				-->
+				{% if post.gravatar %}
+				<img src="http://www.gravatar.com/avatar/{{post.gravatar}}.png" alt="" style="border-width:0px;max-height:60px;max-width:60px;">
+				{% endif %}
 			</div>
 
 			<div class="CustomAvatarListCustomContent">
@@ -18,7 +18,7 @@ layout: default
 				<div class="CommonAvatarListItem"><!--{{}}--></div>
 				<div class="CommonAvatarListItemDetails">
 					<div>
-						Published <a href="{{ post.url | prepend: site.baseurl }}">{{ post.date | short_date }}</a>
+						Published <a href="{{ post.url | prepend: site.baseurl }}">{{ post.date | date: "%a, %d %B %Y %r" }}</a>
 						by {{ post.author }}
 					</div>
 					<div>

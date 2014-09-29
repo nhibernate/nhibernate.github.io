@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/08/13/how-to-using-the-n-stack-part-3.aspx"]
+author: Jason Dentler
+gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This is the third installment in my series. In <a href="http://jasondentler.com/blog/2009/08/how-to-using-the-n-stack-part-1/" target="_blank">part 1</a>, we downloaded our libraries and set up our solution. In <a href="http://jasondentler.com/blog/2009/08/how-to-using-the-n-stack-part-2/" target="_blank">part 2</a>, we built our model. In this part, we&rsquo;ll configure <a href="http://sourceforge.net/projects/nhibernate/" target="_blank">NHibernate</a> and set up our database mappings. We&rsquo;ll also set up our database schema.</p>
 <h3>Java &ndash; A language of XML files loosely coupled by code.</h3>

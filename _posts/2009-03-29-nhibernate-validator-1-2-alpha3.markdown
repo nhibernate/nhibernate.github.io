@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NH2.1", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-validator-1-2-alpha3.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" /></p>
 <p>Download NHibernate Validator 1.2 alpha3 with sources and binaries <a href="http://is.gd/pxyc">here</a></p>

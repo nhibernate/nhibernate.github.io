@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "linqtoxsdmappings"]
 alias: ["/blogs/nhibernate/archive/2010/07/30/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-2.aspx"]
+author: mcintyre321
+gravatar: 4908618aea7c32eb0f94d398b57fa28d
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>In <a target="_blank" href="http://www.adverseconditionals.com/2010/07/fluent-xml-free-convention-based.html">part 1</a> we found out how to generate a mapping file using c# and Linq To XSD. In this post we will extend that to show the use of conventions.</p>
 <p>The first thing we need an automapping framework to do is to create a class element in our xml mapping file for each of the entity types in our project. We will need a list of the entities in our project:</p>

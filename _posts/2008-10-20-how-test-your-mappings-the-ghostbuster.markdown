@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "Tests"]
 alias: ["/blogs/nhibernate/archive/2008/10/20/how-test-your-mappings-the-ghostbuster.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>In NHibernate, when you have the <span style="color: #2b91af;">FlushMode</span> configured to <b>AutoFlush</b>, session.Flush() is called when NH detects a dirty entity instance and when&nbsp;a query with&nbsp;an intersected <i>QuerySpace</i>&nbsp;is performed. (The <i>QuerySpace</i> is represented by all tables affected in a query.)</p>
 <p>Example:</p>

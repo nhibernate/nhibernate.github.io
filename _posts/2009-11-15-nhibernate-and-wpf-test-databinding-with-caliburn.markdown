@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WPF"]
 alias: ["/blogs/nhibernate/archive/2009/11/15/nhibernate-and-wpf-test-databinding-with-caliburn.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>As I said before, for the Chinook Media Manager I’m not using neither <a href="http://www.codeplex.com/caliburn">Caliburn</a> nor <a href="www.codeplex.com/CompositeWPF">Prism</a>.     <br />But, whenever I found a limitation on the current tools, I start looking a solution elsewhere. This is how I meet Caliburn.Testability, a great tool.</p>  <h1>The problem</h1>  <p>We don’t know what would be the ViewModel for the View at design time. This is the reason why we don’t have intelliscence in XAML, and in general our databinding are not strongly typed in XAML. So, we can write “naem” instead of “Name”.</p>  <h1>The solution</h1>  <p>Caliburn has a great tool named “Caliburn Testability”, you can read the full <a href="http://devlicio.us/blogs/rob_eisenberg/archive/2009/10/30/nhprof-and-caliburn-testability.aspx">post here</a>. As <a href="http://devlicio.us/blogs/rob_eisenberg/">Rob Eisenberg</a> said, I take this one step farther to build an automatic test.</p>  <p>This is the code:</p>  <pre class="code"><span style="color: blue">public class </span><span style="color: #2b91af">DataBindingValidator
 </span>{

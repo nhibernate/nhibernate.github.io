@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-property-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I am going to post a few things about NHibernate, going in depth into seemingly understood mapping. We will start with the most basic of them all: &lt;property/&gt;</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">property</span>
         <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;propertyName&quot;</span>                 (<span style="color: #ff0000">1</span>)

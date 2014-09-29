@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "MVC", "Asp.Net"]
 alias: ["/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <h4>&nbsp;<a href="http://darioquintana.googlecode.com/files/MvcNhvExample.zip">Download the example here.</a></h4>
 <p>Asp.Net MVC has a cool way to add validation errors from the model and display them all into the View. It&rsquo;s actually using the ModelState. As you may know NHibernate Validator (NHV) is a framework to validate entities, so what about if we let the validation to the framework that can manage it? So the integration of NHV to Asp.Net MVC is easy. I created a new Asp.Net MVC project and added some files to my solution to make they look like this: <img src="http://darioquintana.com.ar/files/MvcNhv00.png" style="display: block; float: none; margin-left: auto; margin-right: auto" /></p>

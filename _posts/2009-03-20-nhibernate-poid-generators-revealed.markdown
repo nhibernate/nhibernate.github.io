@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "poid", "identifier"]
 alias: ["/blogs/nhibernate/archive/2009/03/20/nhibernate-poid-generators-revealed.aspx"]
+author: tehlike
+gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><b>(Disclaimer: This post will be more or less a paraphrase of <a href="http://fabiomaulo.blogspot.com/2009/02/nh210-generators-behavior-explained.html" target="_blank">Fabio Maulo&rsquo;s post</a>, and I hope I can improve it a bit)</b></p>
 <p>This topic is something that I wanted to write because I wasn&rsquo;t aware of the drawbacks of &ldquo; native/identity<a href="http://nhforge.org"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" alt="image" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image8_5F00_3AC8A74C.png" align="right" border="0" width="244" height="137" /></a>&rdquo; generator has unt<a href="http://fabiomaulo.blogspot.com" target="_blank"></a>il <a href="http://fabiomaulo.blogspot.com" target="_blank">Fabio</a> told me. Now it is my turn to spread the information to those who aren&rsquo;t aware too. I even made a small poll via twitter, to see who uses what, and the result turns out to be that majority of people <b>use identity/native </b>for some reasons.</p>

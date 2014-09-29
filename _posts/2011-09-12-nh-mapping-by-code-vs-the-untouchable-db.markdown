@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
 alias: ["/blogs/nhibernate/archive/2011/09/12/nh-mapping-by-code-vs-the-untouchable-db.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this is a cross post <a href="http://www.felicepollano.com/2011/09/09/NHMappingByCodeVSTheUntouchableDB.aspx">from my own blog</a>.</p>
 <p>This post is an exercise, similar to <a href="/blogs/nhibernate/archive/2011/09/05/automatic-mapping-pluralize-table-names.aspx" target="_blank">this</a> and <a href="http://www.felicepollano.com/2011/09/01/UsingNH32MappingByCodeForAutomaticMapping.aspx">this</a> previous posts about using <a href="http://nhforge.org" target="_blank">NHibernate</a>&nbsp; mapping by code new features present form version 3.2. The source inspiring it is an <a href="http://ayende.com/blog/4695/nhibernate-complex-relationships" target="_blank">old post form</a> <a href="http://ayende.com/blog/" target="_blank">Ayende</a>, showing a non trivial requirement to map.</p>

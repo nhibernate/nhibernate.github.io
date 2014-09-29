@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "batcher"]
 alias: ["/blogs/nhibernate/archive/2008/08/31/the-query-batcher.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NOTE: this post was originally published on <a href="http://davybrion.com/blog/2008/06/the-query-batcher/">June 14, 2008</a></p>
 <p>One of my favorite NHibernate features must be the MultiCriteria/MultiQuery support. This basically allows you to execute a set of queries in one database call. In case you don't know, an ICriteria instance is basically a programmatic query. If you use MultiCriteria, you can batch either ICriteria or DetachedCriteria instances. And if you use MultiQuery, you can batch regular HQL strings, IQuery instances (which are in fact also HQL queries) or references to named queries.

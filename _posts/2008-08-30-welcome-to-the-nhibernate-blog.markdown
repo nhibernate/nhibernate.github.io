@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/08/29/welcome-to-the-nhibernate-blog.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Hello community !</p>
 <p>This is the NHibernate blog, you will find here a lot of news about this amazing framework. </p>

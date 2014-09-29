@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["BuildSessionFactory", "HowTo", "NHibernate", "Mapping source"]
 alias: ["/blogs/nhibernate/archive/2008/11/16/mapping-source-how-map-a-class-without-use-nothing.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I don&rsquo;t know how many times you heard a mad man talking about &ldquo;mapping source&rdquo; in NHibernate&hellip;</p>
 <p><strong>Map a class in NH without use XML at all ? </strong>only a crazy man can say that [;)].</p>

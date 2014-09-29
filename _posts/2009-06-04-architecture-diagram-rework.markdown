@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
 alias: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx"]
+author: ssteinegger
+gravatar: 5d9c48ac94a9376f1b7bccdd13c4d987
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>While working on the <a title="NHibernate Documentation Structure Proposal" href="/wikis/reference2-0en/nhibernate-documentation-structure-proposal.aspx">NHibernate Documentation</a>, I&rsquo;m drawing some pretty pictures. I actually never liked the architecture diagrams much, because I never knew what exactly they are trying to show.</p>
 <p>The original architecture diagram looks like this:</p>

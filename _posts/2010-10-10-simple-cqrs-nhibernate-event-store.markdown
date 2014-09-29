@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2010/10/10/simple-cqrs-nhibernate-event-store.aspx"]
+author: Jason Dentler
+gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>(From my personal blog @ <a href="http://jasondentler.com">http://jasondentler.com</a>)</p>
 <p>I had hoped to include a CQRS-related recipe in the <a target="_blank" href="https://www.packtpub.com/nhibernate-3-0-cookbook/book">Data Access Layer chapter of my book</a>. Of course, not having any real world CQRS experience myself, I couldn't offer any authoritative guidance. Now that I have some free time, I'm determined to remedy that situation. </p>

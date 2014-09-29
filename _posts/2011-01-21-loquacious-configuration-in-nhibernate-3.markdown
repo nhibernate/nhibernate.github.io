@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "fluent configuration"]
 alias: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx"]
+author: James Kovacs
+gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[This article was originally published on my personal blog <a href="http://jameskovacs.com/2011/01/21/loquacious-configuration-in-nhibernate-3/">here</a>. I hereby grant myself permission to re-publish it on NHForge.org.]</p>  <p>[Code for this article is available on GitHub <a href="https://github.com/JamesKovacs/NH3Features/tree/01-Loquacious">here</a>.]</p>  <p>One of the new features in NHibernate 3 is the addition of a fluent API for configuring NHibernate through code. Fluent NHibernate has provided a fluent configuration API for awhile, but now we have an option built into NHibernate itself. (Personally I prefer the new Loquacious API to Fluent NHibernate’s configuration API as I find Loquacious more discoverable. Given that Fluent NHibernate is built on top of NHibernate, you can always use Loquacious with Fluent NHibernate too. N.B. I still really like Fluent NHibernate’s ClassMap&lt;T&gt;, automapping capabilities, and PersistenceSpecification&lt;T&gt;. So don’t take my preference regarding fluent configuration as a denouncement of Fluent NHibernate.)</p>  <p>The fluent configuration API built into NHibernate is called Loquacious configuration and exists as a set of extensions methods on NHibernate.Cfg.Configuration. You can access these extension methods by importing in the NHibernate.Cfg.Loquacious namespace.</p>  <pre class="brush: csharp;">var cfg = new Configuration();
 cfg.Proxy(p =&gt; p.ProxyFactoryFactory&lt;ProxyFactoryFactory&gt;())

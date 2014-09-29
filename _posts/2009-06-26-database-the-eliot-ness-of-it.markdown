@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/06/26/database-the-eliot-ness-of-it.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[<a target="_blank" href="http://fabiomaulo.blogspot.com/">My blog</a>]</p>
 <p>How many times we heard : </p>

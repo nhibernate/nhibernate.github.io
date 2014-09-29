@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
 alias: ["/blogs/nhibernate/archive/2009/12/12/t4-hbm2net-alpha-2.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>You can download from <a href="/media/p/546.aspx">here</a> a new version of the hbm2net T4 enabled. This version has a better command line parsing/error handling, and the configuration file to provide ( optionally ) is validate in order to report some meaningful error messages when needed. The utility is still command line, I suggest to use as a pre-build step in Visual Studio&nbsp; to generate your entities, or other code artifacts you need.</p>
 <p>Unzip the files in a folder, and launch hbm2net:</p>

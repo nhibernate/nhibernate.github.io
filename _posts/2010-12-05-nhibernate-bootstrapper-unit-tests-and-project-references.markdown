@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Criteria", "linq"]
 alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx"]
+author: jwdavidson
+gravatar: 7b8c11bc19a524da9aac988120936d9a
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This post is the second one about the NHibernate Bootstrapper. <a target="_blank" href="/blogs/nhibernate/archive/2010/07/11/nhibernate-bootstrapper-unitofwork-and-sessionperrequest.aspx">The first is located here</a>. The first post set up the project structure, introduced the generic DAO, and demonstrated the SessionPerRequest implementation in an IHttpModule. This post will factor the reference to NHibernate out of the web application project and cover some unit testing techniques.&nbsp; Programmers that are not familiar with <a target="_blank" href="http://en.wikipedia.org/wiki/Solid_(object-oriented_design)">SOLID</a> should review the Wikipedia page and the references there. The first post noted that the version of NHibernate Bootstrapper presented there was not suitable for use in anything other than a demonstration program. The version of the solution discussed in this post is suitable for use in a small-scale system where there no more than 15 classes involved. The version following this post should be suitable for even the largest deployments, though there will be at least one additional post that refines the capabilities of an enterprise ready solution. The project sources are in a zip file located <a target="_blank" href="https://public.me.com/jw_davidson/NHibernateBootstrap_V2.0.zip">here</a> and are updated to use the NHibernate 3.0.0 GA release.</p>
 <h3>PresentationManager</h3>

@@ -46,6 +46,7 @@ module Jekyll
   require 'time'
   require "YAML"
   require 'fileutils'
+  require 'digest/md5'
 
   module BlogML
     #Reads posts from an BlogML dump.
@@ -163,6 +164,13 @@ module Jekyll
             tags.push(cats[category.attributes["ref"]])
           end
           puts "tags: #{tags}"
+
+          author = item.elements.to_a("authors/author/title").first.text
+          puts "author: #{author}"
+          author_email = item.elements.to_a("authors/author").first.attributes["email"]
+	        email_address = author_email ? author_email.downcase.strip : ''
+          gravatar = Digest::MD5.hexdigest(email_address)
+          puts "gravatar: #{gravatar}"
         
           # puts "#{link} -> #{filename}"
           File.open(filename, "w") do |f|
@@ -183,6 +191,8 @@ published: #{published}
 categories: ["blogs", "nhibernate", "archive"]
 tags: #{tags}
 alias: #{old_url}
+author: #{author}
+gravatar: #{gravatar}
 ---
             HEADER
             # f.puts

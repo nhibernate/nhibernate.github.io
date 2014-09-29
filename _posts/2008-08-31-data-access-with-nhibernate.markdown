@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2008/08/31/data-access-with-nhibernate.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>NOTE: this post was originally published on <a href="http://davybrion.com/blog/2008/06/data-access-with-nhibernate/">June 23rd, 2008</a></p>
 <p>&nbsp;</p>

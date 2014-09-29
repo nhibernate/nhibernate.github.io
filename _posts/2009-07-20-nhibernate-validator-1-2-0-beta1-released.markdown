@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News", "Release", "Validator"]
 alias: ["/blogs/nhibernate/archive/2009/07/20/nhibernate-validator-1-2-0-beta1-released.aspx"]
+author: darioquintana
+gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" /></p>
 <p><a href="http://sourceforge.net/projects/nhcontrib/files/">Download binaries, source and examples here</a></p>

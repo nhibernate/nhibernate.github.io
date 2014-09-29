@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/04/17/tuning-nhibernate-tolerant-querycache.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>[From <a href="http://fabiomaulo.blogspot.com/">My Blog</a>]</p>
 <p>Before reading this post you should know something about <a href="/doc/nh/en/index.html#performance-querycache">QueryCache</a> and its imply tuning NH.</p>

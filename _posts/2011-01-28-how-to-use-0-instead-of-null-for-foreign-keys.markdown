@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["relation", "Tuplizers", "EntityMode"]
 alias: ["/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.aspx"]
+author: jfromainello
+gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>My twitter friend <a href="http://twitter.com/#!/hotgazpacho">@hotgazpacho</a> is having a nightmare with a legacy database, which has the following rule:</p>  <blockquote>   <p>“0 represents the absence of an entity without an actual row in the database”</p> </blockquote>  <p>It is pretty interesting how many times I’ve seen this scenario on nhibernate forums. </p>  <p>The first thing people do is to add “not-found=ignore” to every relationship, but not-found ignore is an evil, because NHibernate need to know if the row exist when lazy load. So not-found ignore is like a lazy loading killer. Also, with not-found=ignore doesn’t work when you insert or update, nhibernate will persist a null value instead of 0. </p>  <p>We want to keep and follow the rule until no legacy applications use this database and we can fix the data, maybe never (or like the spanish saying “provisoriamente para siempre”).</p>  <p>NHibernate is bad in many aspects, but the only thing we can’t blame is extensibility. We can tweak NHibernate to work in this scenario and in many more.</p>  <p>First a test:</p>  <pre class="code">[<span style="color: #2b91af">TestFixture</span>]
 <span style="color: blue">public class </span><span style="color: #2b91af">Fixture

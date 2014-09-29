@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["querying"]
 alias: ["/blogs/nhibernate/archive/2009/04/30/nhibernate-the-difference-between-get-load-and-querying-by-id.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>One of the more common mistakes that I see people doing with NHibernate is related to how they are loading entities by the primary key. This is because there are important differences between the three options.</p>  <p>The most common mistake that I see is using a query to load by id. in particular when using Linq for NHibernate.</p>  <blockquote>   <pre>var customer = (
 	select customer from s.Linq&lt;Customer&gt;()

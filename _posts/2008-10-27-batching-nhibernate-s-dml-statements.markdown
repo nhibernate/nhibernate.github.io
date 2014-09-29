@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["batch", "DML"]
 alias: ["/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.aspx"]
+author: DavyBrion
+gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Note: this was originally posted on <a target="_blank" href="http://davybrion.com/blog/2008/10/batching-nhibernates-dm-statements/">my own blog</a></p>
 <p>&nbsp;</p>

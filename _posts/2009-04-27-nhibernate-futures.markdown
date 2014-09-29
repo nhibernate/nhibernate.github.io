@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Future"]
 alias: ["/blogs/nhibernate/archive/2009/04/27/nhibernate-futures.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>One of the nicest new features in NHibernate 2.1 is the Future&lt;T&gt;() and FutureValue&lt;T&gt;() functions. They essentially function as a way to defer query execution to a later date, at which point NHibernate will have more information about what the application is supposed to do, and optimize for it accordingly. This build on an existing feature of NHibernate, Multi Queries, but does so in a way that is easy to use and almost seamless.</p>  <p>Let us take a look at the following piece of code:</p>  <blockquote>   <pre><span style="color: #0000ff">using</span> (var s = sf.OpenSession())
 <span style="color: #0000ff">using</span> (var tx = s.BeginTransaction())

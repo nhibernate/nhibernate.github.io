@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
 alias: ["/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.aspx"]
+author: FlukeFan
+gravatar: 2075ce3339bd0f16c52adac5b8e4b7b1
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <h4><a name="Introduction"></a>Introduction</h4>
 <p>

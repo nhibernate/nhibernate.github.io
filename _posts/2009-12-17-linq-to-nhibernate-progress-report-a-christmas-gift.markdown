@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
 alias: ["/blogs/nhibernate/archive/2009/12/17/linq-to-nhibernate-progress-report-a-christmas-gift.aspx"]
+author: srstrong
+gravatar: be49dc22186b4215272ffa6a46599424
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Time for another progress report, and this one's a biggie :)</p>
 <p>Barring a couple of pretty minor things that won't take much fixing, all the original Linq tests have now been ported over to the new provider and are all passing. That means the new provider is now (from the perspective of the tests, at least) in better shape that the version 1 provider. It can do everything the original provider could, plus a whole bunch more. A couple of example queries that now work just fine are:</p>

@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
 alias: ["/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.aspx"]
+author: felicepollano
+gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>I've just published a first drop of an hbm2net modified version to enable T4.<br />&nbsp;<br />You can find it <a href="/media/p/546.aspx">here</a> or <a href="https://sourceforge.net/projects/nhcontrib/files/NHibernate.Hbm2Net/hbm2net.zip/download">here</a>.<br /><br />Hbm2net is useful in generating the classes dto views or whatever you want starting from the hbm files.<br />The presented version supports code generation via T4, so you can use the same renderer with different templates to produce different codes artefacts.<br />To try it, please do the follow:</p>
 <p>&nbsp;</p>

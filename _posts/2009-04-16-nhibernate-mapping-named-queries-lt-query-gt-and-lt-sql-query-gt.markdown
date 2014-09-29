@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/17/nhibernate-mapping-named-queries-lt-query-gt-and-lt-sql-query-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>Queries are <a href="http://ayende.com/Blog/archive/2007/03/09/Querying-is-a-business-concern.aspx">business</a> <a href="http://ayende.com/Blog/archive/2007/03/12/Querying-Is-A-Business-Concern-Sample.aspx">logic</a>, as such, they can be pretty complex, and they also tend to be pretty perf sensitive. As such, you usually want to have a good control over any complex queries. You can do that by extracting your queries to the mapping, so they don’t reside, hardcoded, in the code:</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">query</span> <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;PeopleByName&quot;</span><span style="color: #0000ff">&gt;</span>
 	from Person p

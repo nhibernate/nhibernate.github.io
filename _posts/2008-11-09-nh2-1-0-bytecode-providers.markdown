@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "NH2.1"]
 alias: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx"]
+author: fabiomaulo
+gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>This post is an update of <a href="/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.aspx">&ldquo;Reference to Castle removed&rdquo;</a>.</p>
 <p>In the trunk we had removed all dependency from any kind of &ldquo;Proxy framework&rdquo; trough various implementations of <span style="color: #2b91af">IProxyFactoryFactory</span>.</p>

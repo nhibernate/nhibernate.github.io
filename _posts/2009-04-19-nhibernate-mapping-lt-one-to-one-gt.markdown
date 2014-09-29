@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
 alias: ["/blogs/nhibernate/archive/2009/04/19/nhibernate-mapping-lt-one-to-one-gt.aspx"]
+author: Ayende
+gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>In the database world, we have three kind of associations: 1:m, m:1, m:n.</p>  <p>However, occasionally we want to have a one to one relationship. We could simulate it easily enough on the database side using two many to one relations, but that would require us to add the association column to both tables, and things gets… tricky when it comes the time to insert or update to the database, because of the cycle that this creates.</p>  <p>NHibernate solves the problem by introducing a one-to-one mapping association, which allow you to define the two relationships based on a single column in the database, which controls the two way association.</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">one</span>-<span style="color: #ff0000">to</span>-<span style="color: #ff0000">one</span>
         <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;PropertyName&quot;</span>                                (<span style="color: #ff0000">1</span>)

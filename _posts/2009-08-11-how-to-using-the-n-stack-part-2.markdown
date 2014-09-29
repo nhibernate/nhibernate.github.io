@@ -7,8 +7,9 @@ published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "poid", "ASP.NET MVC"]
 alias: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-2.aspx"]
+author: Jason Dentler
+gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---
-<!-- more -->
 {% include imported_disclaimer.html %}
 <p>&nbsp;</p>
 <div>
