@@ -10,3 +10,7 @@ timezone: 'GMT-03:00'
 
 # Build settings
 markdown: kramdown
+
+gems:
+  - jekyll-redirect-from
+  - jekyll-archives
