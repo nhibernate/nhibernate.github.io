@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Fluent NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx/"]
 author: jagregory
 gravatar: 94afce4e8f9766b629aba101b50cfc18
 ---

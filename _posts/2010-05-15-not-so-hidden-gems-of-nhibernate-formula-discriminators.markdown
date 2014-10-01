@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2010/05/15/not-so-hidden-gems-of-nhibernate-formula-discriminators.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/05/15/not-so-hidden-gems-of-nhibernate-formula-discriminators.aspx/"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

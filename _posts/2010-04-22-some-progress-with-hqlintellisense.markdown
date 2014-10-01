@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx/"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

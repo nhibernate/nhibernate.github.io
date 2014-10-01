@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "NH2.1"]
-redirect_from: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

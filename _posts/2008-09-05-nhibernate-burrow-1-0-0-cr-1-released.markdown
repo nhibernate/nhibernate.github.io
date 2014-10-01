@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow", "News"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/04/nhibernate-burrow-1-0-0-cr-1-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/04/nhibernate-burrow-1-0-0-cr-1-released.aspx/"]
 author: kailuowang
 gravatar: c573cf31007f29236e1641e492bee036
 ---

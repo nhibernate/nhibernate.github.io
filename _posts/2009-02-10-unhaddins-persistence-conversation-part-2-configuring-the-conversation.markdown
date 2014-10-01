@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "NHibernate", "Session", "uNHAddin"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/10/unhaddins-persistence-conversation-part-2-configuring-the-conversation.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/10/unhaddins-persistence-conversation-part-2-configuring-the-conversation.aspx/"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

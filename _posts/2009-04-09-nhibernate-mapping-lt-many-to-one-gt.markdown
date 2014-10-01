@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/04/09/nhibernate-mapping-lt-many-to-one-gt.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/09/nhibernate-mapping-lt-many-to-one-gt.aspx/"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

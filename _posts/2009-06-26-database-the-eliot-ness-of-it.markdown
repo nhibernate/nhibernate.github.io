@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/06/26/database-the-eliot-ness-of-it.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/26/database-the-eliot-ness-of-it.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

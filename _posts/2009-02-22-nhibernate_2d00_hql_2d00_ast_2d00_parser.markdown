@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "querying", "linq"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/22/nhibernate_2D00_hql_2D00_ast_2D00_parser.aspx", "/blogs/nhibernate/archive/2009/02/22/nhibernate_2d00_hql_2d00_ast_2d00_parser.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/22/nhibernate_2D00_hql_2D00_ast_2D00_parser.aspx/", "/blogs/nhibernate/archive/2009/02/22/nhibernate_2d00_hql_2d00_ast_2d00_parser.aspx/"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

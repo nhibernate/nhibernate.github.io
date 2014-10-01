@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/03/nhibernate-custom-collections-using-extension-methods.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/03/nhibernate-custom-collections-using-extension-methods.aspx/"]
 author: bmccafferty
 gravatar: 3ce3492b12738e1a6f3cb595e70dec96
 ---

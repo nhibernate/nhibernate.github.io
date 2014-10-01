@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net"]
-redirect_from: ["/blogs/nhibernate/archive/2009/10/19/hbm2net.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/10/19/hbm2net.aspx/"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

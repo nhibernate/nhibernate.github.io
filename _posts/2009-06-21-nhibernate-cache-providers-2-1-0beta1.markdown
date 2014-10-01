@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "News", "Release"]
-redirect_from: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-cache-providers-2-1-0beta1.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-cache-providers-2-1-0beta1.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

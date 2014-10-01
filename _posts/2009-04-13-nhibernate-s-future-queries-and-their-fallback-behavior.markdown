@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx/"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

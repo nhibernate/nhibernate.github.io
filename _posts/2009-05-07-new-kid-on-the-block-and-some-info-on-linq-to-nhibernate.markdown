@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
-redirect_from: ["/blogs/nhibernate/archive/2009/05/07/new-kid-on-the-block-and-some-info-on-linq-to-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/07/new-kid-on-the-block-and-some-info-on-linq-to-nhibernate.aspx/"]
 author: srstrong
 gravatar: be49dc22186b4215272ffa6a46599424
 ---

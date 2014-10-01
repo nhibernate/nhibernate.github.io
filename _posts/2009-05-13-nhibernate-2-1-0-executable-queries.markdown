@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "querying", "HQL"]
-redirect_from: ["/blogs/nhibernate/archive/2009/05/13/nhibernate-2-1-0-executable-queries.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/13/nhibernate-2-1-0-executable-queries.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

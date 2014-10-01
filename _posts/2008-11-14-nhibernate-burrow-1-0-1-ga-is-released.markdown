@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["release Burrow 2.0.1GA 1.0.1GA"]
-redirect_from: ["/blogs/nhibernate/archive/2008/11/14/nhibernate-burrow-1-0-1-ga-is-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/14/nhibernate-burrow-1-0-1-ga-is-released.aspx/"]
 author: kailuowang
 gravatar: c573cf31007f29236e1641e492bee036
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Session"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/06/unhaddins-persistence-conversation-part-1-configuration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/06/unhaddins-persistence-conversation-part-1-configuration.aspx/"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

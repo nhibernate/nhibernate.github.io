@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "linq"]
-redirect_from: ["/blogs/nhibernate/archive/2009/06/11/linq-to-nhibernate-update.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/11/linq-to-nhibernate-update.aspx/"]
 author: srstrong
 gravatar: be49dc22186b4215272ffa6a46599424
 ---

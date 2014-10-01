@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/06/12/from-where-start-to-implements-idatabaseschema.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/12/from-where-start-to-implements-idatabaseschema.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

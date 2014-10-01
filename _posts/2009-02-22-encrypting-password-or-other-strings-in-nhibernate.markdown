@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/02/22/encrypting-password-or-other-strings-in-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/22/encrypting-password-or-other-strings-in-nhibernate.aspx/"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

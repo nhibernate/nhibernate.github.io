@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WebORB", "Flex to dot NET"]
-redirect_from: ["/blogs/nhibernate/archive/2011/03/01/integrating-adobe-flex-applications-with-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/03/01/integrating-adobe-flex-applications-with-nhibernate.aspx/"]
 author: mcoderkat
 gravatar: a3d57a33f613921a948aca86ec97aa09
 ---

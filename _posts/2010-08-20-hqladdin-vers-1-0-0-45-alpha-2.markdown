@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["HQL"]
-redirect_from: ["/blogs/nhibernate/archive/2010/08/19/hqladdin-vers-1-0-0-45-alpha-2.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/08/19/hqladdin-vers-1-0-0-45-alpha-2.aspx/"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

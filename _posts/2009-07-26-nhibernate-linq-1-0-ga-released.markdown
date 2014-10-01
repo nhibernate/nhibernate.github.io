@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
-redirect_from: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx/"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

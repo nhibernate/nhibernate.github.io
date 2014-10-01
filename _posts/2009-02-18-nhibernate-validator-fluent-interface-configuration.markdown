@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["fluent configuration", "Validator"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/18/nhibernate-validator-fluent-interface-configuration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/18/nhibernate-validator-fluent-interface-configuration.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

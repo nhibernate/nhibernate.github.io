@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/08/nhibernate-resource-search-site.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/08/nhibernate-resource-search-site.aspx/"]
 author: tobinharris
 gravatar: e7535eb2c5709c34cfa767c66cd8a0ad
 ---

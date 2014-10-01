@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "examples", "quickstart"]
-redirect_from: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx/"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

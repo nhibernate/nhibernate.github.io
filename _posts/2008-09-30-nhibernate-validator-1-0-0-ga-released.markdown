@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/29/nhibernate-validator-1-0-0-ga-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/29/nhibernate-validator-1-0-0-ga-released.aspx/"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

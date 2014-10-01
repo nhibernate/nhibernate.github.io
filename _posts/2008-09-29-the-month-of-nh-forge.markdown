@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2008/09/29/the-month-of-nh-forge.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/29/the-month-of-nh-forge.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["S#arp Lite"]
-redirect_from: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx/"]
 author: bmccafferty
 gravatar: 3ce3492b12738e1a6f3cb595e70dec96
 ---

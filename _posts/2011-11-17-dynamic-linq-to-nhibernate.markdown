@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
-redirect_from: ["/blogs/nhibernate/archive/2011/11/17/dynamic-linq-to-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/11/17/dynamic-linq-to-nhibernate.aspx/"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

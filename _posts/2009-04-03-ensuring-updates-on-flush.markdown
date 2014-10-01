@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["event listener", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/03/ensuring-updates-on-flush.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/03/ensuring-updates-on-flush.aspx/"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

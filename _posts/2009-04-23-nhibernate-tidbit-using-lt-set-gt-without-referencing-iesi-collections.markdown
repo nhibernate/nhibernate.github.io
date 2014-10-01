@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/23/nhibernate-tidbit-using-lt-set-gt-without-referencing-iesi-collections.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/23/nhibernate-tidbit-using-lt-set-gt-without-referencing-iesi-collections.aspx/"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

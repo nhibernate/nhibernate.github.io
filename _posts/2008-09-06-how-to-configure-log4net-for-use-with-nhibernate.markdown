@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["configuration", "logging"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/06/how-to-configure-log4net-for-use-with-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/how-to-configure-log4net-for-use-with-nhibernate.aspx/"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
