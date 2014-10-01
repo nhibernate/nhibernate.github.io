@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate.Validator: fluent-interface configuration"
-date: 2009-02-18 15:00:00 -0300
+date: 2009-02-18 15:00:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["fluent configuration", "Validator"]
-alias: ["/blogs/nhibernate/archive/2009/02/18/nhibernate-validator-fluent-interface-configuration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/18/nhibernate-validator-fluent-interface-configuration.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

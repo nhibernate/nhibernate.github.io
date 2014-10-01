@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 3 - Mapping Relations"
-date: 2008-09-06 16:39:00 -0300
+date: 2008-09-06 16:39:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "collections", "value object", "relation"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-3-mapping-relations.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-3-mapping-relations.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

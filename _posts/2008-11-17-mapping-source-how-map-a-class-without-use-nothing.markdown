@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Mapping Source: How map a class without use nothing"
-date: 2008-11-17 00:13:00 -0300
+date: 2008-11-17 00:13:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["BuildSessionFactory", "HowTo", "NHibernate", "Mapping source"]
-alias: ["/blogs/nhibernate/archive/2008/11/16/mapping-source-how-map-a-class-without-use-nothing.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/16/mapping-source-how-map-a-class-without-use-nothing.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

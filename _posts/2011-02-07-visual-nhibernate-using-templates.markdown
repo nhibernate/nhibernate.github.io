@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Visual NHibernate – Using Templates"
-date: 2011-02-07 23:51:00 -0300
+date: 2011-02-07 23:51:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "generators", "visual nhibernate"]
-alias: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx"]
 author: gareth
 gravatar: bf3577d9d1dfe9ef620b5326e5970091
 ---

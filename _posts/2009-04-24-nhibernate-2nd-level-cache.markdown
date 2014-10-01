@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 2nd Level Cache"
-date: 2009-04-24 12:28:00 -0300
+date: 2009-04-24 12:28:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches"]
-alias: ["/blogs/nhibernate/archive/2009/04/24/nhibernate-2nd-level-cache.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/24/nhibernate-2nd-level-cache.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

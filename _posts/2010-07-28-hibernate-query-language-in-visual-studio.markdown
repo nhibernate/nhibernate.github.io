@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Hibernate Query Language in Visual Studio"
-date: 2010-07-28 21:57:00 -0300
+date: 2010-07-28 21:57:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Named Query", "HQL", "Tooling"]
-alias: ["/blogs/nhibernate/archive/2010/07/28/hibernate-query-language-in-visual-studio.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/07/28/hibernate-query-language-in-visual-studio.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

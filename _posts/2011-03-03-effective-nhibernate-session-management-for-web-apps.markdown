@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Effective NHibernate Session management for web apps"
-date: 2011-03-03 04:09:00 -0300
+date: 2011-03-03 04:09:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "Session", "Asp.Net", "ASP.NET MVC"]
-alias: ["/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

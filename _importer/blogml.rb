@@ -190,7 +190,7 @@ comments: true
 published: #{published}
 categories: ["blogs", "nhibernate", "archive"]
 tags: #{tags}
-alias: #{old_url}
+redirect_from: #{old_url}
 author: #{author}
 gravatar: #{gravatar}
 ---

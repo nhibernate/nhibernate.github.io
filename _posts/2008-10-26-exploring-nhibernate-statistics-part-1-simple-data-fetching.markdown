@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Exploring NHibernate Statistics, Part 1: Simple Data Fetching"
-date: 2008-10-26 18:52:00 -0300
+date: 2008-10-26 18:52:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["statistics"]
-alias: ["/blogs/nhibernate/archive/2008/10/26/exploring-nhibernate-statistics-part-1-simple-data-fetching.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/26/exploring-nhibernate-statistics-part-1-simple-data-fetching.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

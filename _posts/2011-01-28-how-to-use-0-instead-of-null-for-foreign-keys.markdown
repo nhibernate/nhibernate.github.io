@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "How to use 0 instead of null for foreign keys"
-date: 2011-01-28 12:46:00 -0300
+date: 2011-01-28 12:46:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["relation", "Tuplizers", "EntityMode"]
-alias: ["/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

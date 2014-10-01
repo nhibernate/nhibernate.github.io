@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Part 6: Ninject and MVC or How to be a Web Ninja"
-date: 2009-08-29 05:34:47 -0300
+date: 2009-08-29 05:34:47 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/08/28/part-6-ninject-and-mvc-or-how-to-be-a-web-ninja.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/28/part-6-ninject-and-mvc-or-how-to-be-a-web-ninja.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "QueryOver in NH 3.0"
-date: 2009-12-17 23:22:00 -0300
+date: 2009-12-17 23:22:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.aspx"]
 author: FlukeFan
 gravatar: 2075ce3339bd0f16c52adac5b8e4b7b1
 ---

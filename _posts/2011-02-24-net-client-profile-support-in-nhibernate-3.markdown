@@ -1,12 +1,12 @@
 ---
 layout: post
 title: ".NET Client Profile Support in NHibernate 3"
-date: 2011-02-24 16:00:00 -0300
+date: 2011-02-24 16:00:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging", "ClientProfile"]
-alias: ["/blogs/nhibernate/archive/2011/02/24/net-client-profile-support-in-nhibernate-3.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/02/24/net-client-profile-support-in-nhibernate-3.aspx"]
 author: James Kovacs
 gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---

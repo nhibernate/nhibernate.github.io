@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Using convention to resolve sequence names"
-date: 2010-12-14 00:03:00 -0300
+date: 2010-12-14 00:03:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identifier"]
-alias: ["/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

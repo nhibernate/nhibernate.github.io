@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "A fluent interface to NHibernate - Part 2 - Value Objects"
-date: 2008-09-06 16:18:00 -0300
+date: 2008-09-06 16:18:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "value object"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-2-value-objects.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/a-fluent-interface-to-nhibernate-part-2-value-objects.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "TOP SECRET"
-date: 2009-05-27 13:14:47 -0300
+date: 2009-05-27 13:14:47 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/05/27/top-secret.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/27/top-secret.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

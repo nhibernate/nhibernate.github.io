@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate isn't integrated to the compiler, so what?"
-date: 2008-09-05 00:23:00 -0300
+date: 2008-09-05 00:23:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Xml", "SessionFactory", "BuildSessionFactory", "Xsd", "Named Query"]
-alias: ["/blogs/nhibernate/archive/2008/09/04/nhibernate_2D00_isnt_2D00_integrated_2D00_to_2D00_the_2D00_compiler_2D00_so_2D00_what.aspx", "/blogs/nhibernate/archive/2008/09/04/nhibernate_2d00_isnt_2d00_integrated_2d00_to_2d00_the_2d00_compiler_2d00_so_2d00_what.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/04/nhibernate_2D00_isnt_2D00_integrated_2D00_to_2D00_the_2D00_compiler_2D00_so_2D00_what.aspx", "/blogs/nhibernate/archive/2008/09/04/nhibernate_2d00_isnt_2d00_integrated_2d00_to_2d00_the_2d00_compiler_2d00_so_2d00_what.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

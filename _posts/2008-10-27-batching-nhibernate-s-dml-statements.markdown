@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Batching NHibernate’s DML Statements"
-date: 2008-10-27 15:23:00 -0300
+date: 2008-10-27 15:23:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["batch", "DML"]
-alias: ["/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

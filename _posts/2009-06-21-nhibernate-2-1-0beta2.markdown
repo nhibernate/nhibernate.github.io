@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 2.1.0Beta2"
-date: 2009-06-21 13:05:00 -0300
+date: 2009-06-21 13:05:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-2-1-0beta2.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/21/nhibernate-2-1-0beta2.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

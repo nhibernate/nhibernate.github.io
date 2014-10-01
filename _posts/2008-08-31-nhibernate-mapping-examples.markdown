@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Mapping Examples"
-date: 2008-08-31 14:56:00 -0300
+date: 2008-08-31 14:56:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-alias: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate in Action Book is Out!"
-date: 2009-02-06 06:40:00 -0300
+date: 2009-02-06 06:40:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News"]
-alias: ["/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.aspx"]
 author: tobinharris
 gravatar: e7535eb2c5709c34cfa767c66cd8a0ad
 ---

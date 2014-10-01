@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "How-To: Using the N* Stack, part 2"
-date: 2009-08-11 20:21:00 -0300
+date: 2009-08-11 20:21:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "poid", "ASP.NET MVC"]
-alias: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-2.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-2.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and WPF: Test Databinding with Caliburn"
-date: 2009-11-15 16:42:25 -0300
+date: 2009-11-15 16:42:25 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WPF"]
-alias: ["/blogs/nhibernate/archive/2009/11/15/nhibernate-and-wpf-test-databinding-with-caliburn.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/11/15/nhibernate-and-wpf-test-databinding-with-caliburn.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

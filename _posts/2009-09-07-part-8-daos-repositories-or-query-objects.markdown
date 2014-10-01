@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Part 8: DAOs, Repositories, or Query Objects"
-date: 2009-09-07 20:17:50 -0300
+date: 2009-09-07 20:17:50 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

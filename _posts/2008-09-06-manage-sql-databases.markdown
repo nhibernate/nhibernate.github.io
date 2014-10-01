@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Manage SQL Databases"
-date: 2008-09-06 20:54:15 -0300
+date: 2008-09-06 20:54:15 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "continuous integration"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/manage-sql-databases.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/manage-sql-databases.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "First three NHibernate quickstart tutorials available"
-date: 2010-04-25 20:43:00 -0300
+date: 2010-04-25 20:43:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2010/04/25/first-three-nhibernate-quickstart-tutorials-available.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/04/25/first-three-nhibernate-quickstart-tutorials-available.aspx"]
 author: BobPalmer
 gravatar: b57e71c1a3aa72469b644b92fabcaaac
 ---

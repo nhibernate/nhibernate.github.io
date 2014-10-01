@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator and Asp.Net MVC"
-date: 2009-04-03 00:07:00 -0300
+date: 2009-04-03 00:07:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "MVC", "Asp.Net"]
-alias: ["/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

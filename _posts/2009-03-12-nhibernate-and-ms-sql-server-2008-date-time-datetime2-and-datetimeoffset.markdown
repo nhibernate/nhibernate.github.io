@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and Ms Sql Server 2008: Date, Time, DateTime2 and DateTimeOffset"
-date: 2009-03-12 00:44:00 -0300
+date: 2009-03-12 00:44:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server 2008", "NH2.1", "Date", "DateTimeOffset", "DateTime2", "Time"]
-alias: ["/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

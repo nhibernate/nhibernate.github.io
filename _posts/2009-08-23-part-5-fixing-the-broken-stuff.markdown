@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Part 5: Fixing the Broken Stuff"
-date: 2009-08-23 22:20:04 -0300
+date: 2009-08-23 22:20:04 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator 1.2 alpha3"
-date: 2009-03-29 19:47:00 -0300
+date: 2009-03-29 19:47:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NH2.1", "Release", "Validator"]
-alias: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-validator-1-2-alpha3.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-validator-1-2-alpha3.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

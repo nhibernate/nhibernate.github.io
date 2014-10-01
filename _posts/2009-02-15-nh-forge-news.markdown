@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NH-Forge News"
-date: 2009-02-15 17:47:00 -0300
+date: 2009-02-15 17:47:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/02/15/nh-forge-news.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/15/nh-forge-news.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

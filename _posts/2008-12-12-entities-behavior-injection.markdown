@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Entities behavior injection"
-date: 2008-12-12 11:50:00 -0300
+date: 2008-12-12 11:50:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "IoC"]
-alias: ["/blogs/nhibernate/archive/2008/12/12/entities-behavior-injection.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/12/12/entities-behavior-injection.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

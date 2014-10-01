@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Diving in NHibernate.Validator"
-date: 2009-02-26 14:46:00 -0300
+date: 2009-02-26 14:46:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "HowTo", "fluent configuration", "Validator"]
-alias: ["/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

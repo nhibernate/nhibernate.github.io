@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Architecture Diagram Rework"
-date: 2009-06-04 13:34:00 -0300
+date: 2009-06-04 13:34:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
-alias: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx"]
 author: ssteinegger
 gravatar: 5d9c48ac94a9376f1b7bccdd13c4d987
 ---

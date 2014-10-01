@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "uNHAddins Persistence Conversation – Part 2: Configuring the conversation"
-date: 2009-02-10 07:17:00 -0300
+date: 2009-02-10 07:17:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "NHibernate", "Session", "uNHAddin"]
-alias: ["/blogs/nhibernate/archive/2009/02/10/unhaddins-persistence-conversation-part-2-configuring-the-conversation.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/10/unhaddins-persistence-conversation-part-2-configuring-the-conversation.aspx"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

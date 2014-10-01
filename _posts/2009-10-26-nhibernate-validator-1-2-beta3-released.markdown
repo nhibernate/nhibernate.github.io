@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator 1.2 Beta3 released"
-date: 2009-10-26 16:12:00 -0300
+date: 2009-10-26 16:12:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News", "Release", "Validator"]
-alias: ["/blogs/nhibernate/archive/2009/10/26/nhibernate-validator-1-2-beta3-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/10/26/nhibernate-validator-1-2-beta3-released.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

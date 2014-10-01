@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Good morning NHibernate 2.1.0CR1"
-date: 2009-07-05 05:02:00 -0300
+date: 2009-07-05 05:02:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2009/07/05/good-morning-nhibernate-2-1-0cr1.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/05/good-morning-nhibernate-2-1-0cr1.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

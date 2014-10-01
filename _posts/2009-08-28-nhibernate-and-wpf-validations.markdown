@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Nhibernate and WPF: Validations"
-date: 2009-08-28 01:06:36 -0300
+date: 2009-08-28 01:06:36 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Castle", "uNHAddins", "Validator", "WPF"]
-alias: ["/blogs/nhibernate/archive/2009/08/27/nhibernate-and-wpf-validations.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/27/nhibernate-and-wpf-validations.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

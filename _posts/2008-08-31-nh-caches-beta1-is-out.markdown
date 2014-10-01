@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NH.Caches Beta1 Is Out!"
-date: 2008-08-31 20:21:00 -0300
+date: 2008-08-31 20:21:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches"]
-alias: ["/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.aspx"]
 author: diegojancic
 gravatar: d5874a9362fed58bb2df043c20345fa2
 ---

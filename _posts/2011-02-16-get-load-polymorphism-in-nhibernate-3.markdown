@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Get/Load Polymorphism in NHibernate 3"
-date: 2011-02-16 22:46:00 -0300
+date: 2011-02-16 22:46:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["querying"]
-alias: ["/blogs/nhibernate/archive/2011/02/16/get-load-polymorphism-in-nhibernate-3.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/02/16/get-load-polymorphism-in-nhibernate-3.aspx"]
 author: James Kovacs
 gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---

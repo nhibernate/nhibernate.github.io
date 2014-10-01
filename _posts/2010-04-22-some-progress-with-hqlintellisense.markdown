@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Some Progress with HqlIntellisense…"
-date: 2010-04-22 17:08:00 -0300
+date: 2010-04-22 17:08:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/04/22/some-progress-with-hqlintellisense.aspx"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

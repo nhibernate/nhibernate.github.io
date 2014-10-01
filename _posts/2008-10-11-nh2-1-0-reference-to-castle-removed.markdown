@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NH2.1.0: Reference to Castle removed"
-date: 2008-10-11 22:58:44 -0300
+date: 2008-10-11 22:58:44 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "lazy loading", "ProxyGenerators", "NHibernate", "Deploy", "Castle", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

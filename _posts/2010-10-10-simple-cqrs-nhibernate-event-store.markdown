@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Simple CQRS + NHibernate event store"
-date: 2010-10-10 22:10:00 -0300
+date: 2010-10-10 22:10:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2010/10/10/simple-cqrs-nhibernate-event-store.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/10/10/simple-cqrs-nhibernate-event-store.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate’s Future Queries And Their Fallback Behavior"
-date: 2009-04-13 18:09:00 -0300
+date: 2009-04-13 18:09:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/13/nhibernate-s-future-queries-and-their-fallback-behavior.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

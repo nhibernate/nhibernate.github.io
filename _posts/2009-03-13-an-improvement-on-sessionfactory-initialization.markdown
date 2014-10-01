@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "An improvement on SessionFactory Initialization"
-date: 2009-03-13 19:18:00 -0300
+date: 2009-03-13 19:18:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2009/03/13/an-improvement-on-sessionfactory-initialization.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/13/an-improvement-on-sessionfactory-initialization.aspx"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

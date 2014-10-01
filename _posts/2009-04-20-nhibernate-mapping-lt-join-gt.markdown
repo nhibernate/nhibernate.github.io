@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;join/&gt;"
-date: 2009-04-20 01:56:00 -0300
+date: 2009-04-20 01:56:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-alias: ["/blogs/nhibernate/archive/2009/04/20/nhibernate-mapping-lt-join-gt.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/20/nhibernate-mapping-lt-join-gt.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

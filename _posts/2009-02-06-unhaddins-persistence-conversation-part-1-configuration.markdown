@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "uNHaddins Persistence Conversation – Part 1: Configuration"
-date: 2009-02-06 16:33:00 -0300
+date: 2009-02-06 16:33:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Session"]
-alias: ["/blogs/nhibernate/archive/2009/02/06/unhaddins-persistence-conversation-part-1-configuration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/06/unhaddins-persistence-conversation-part-1-configuration.aspx"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

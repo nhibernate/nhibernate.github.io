@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "New AST Parser as default in 2.1"
-date: 2009-04-24 06:46:00 -0300
+date: 2009-04-24 06:46:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.aspx"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Tidbit – using &lt;set/&gt; without referencing Iesi.Collections"
-date: 2009-04-23 04:11:00 -0300
+date: 2009-04-23 04:11:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
-alias: ["/blogs/nhibernate/archive/2009/04/23/nhibernate-tidbit-using-lt-set-gt-without-referencing-iesi-collections.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/23/nhibernate-tidbit-using-lt-set-gt-without-referencing-iesi-collections.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

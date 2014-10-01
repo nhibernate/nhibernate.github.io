@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate mapping - &lt;database-object/&gt;"
-date: 2009-04-15 22:47:00 -0300
+date: 2009-04-15 22:47:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-alias: ["/blogs/nhibernate/archive/2009/04/16/nhibernate-mapping-lt-database-object-gt.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/16/nhibernate-mapping-lt-database-object-gt.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

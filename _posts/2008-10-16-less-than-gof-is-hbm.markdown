@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Less than GoF is hbm"
-date: 2008-10-16 17:30:00 -0300
+date: 2008-10-16 17:30:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Dynamic-Map", "Entity-Name", "EntityMode"]
-alias: ["/blogs/nhibernate/archive/2008/10/16/less-than-gof-is-hbm.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/16/less-than-gof-is-hbm.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

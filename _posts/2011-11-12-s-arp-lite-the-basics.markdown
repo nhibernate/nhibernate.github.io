@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "S#arp Lite: The Basics"
-date: 2011-11-12 00:19:00 -0300
+date: 2011-11-12 00:19:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["S#arp Lite"]
-alias: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/11/11/s-arp-lite-the-basics.aspx"]
 author: bmccafferty
 gravatar: 3ce3492b12738e1a6f3cb595e70dec96
 ---

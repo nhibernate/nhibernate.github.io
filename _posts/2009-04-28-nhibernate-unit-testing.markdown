@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Unit Testing"
-date: 2009-04-28 07:32:00 -0300
+date: 2009-04-28 07:32:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Tests"]
-alias: ["/blogs/nhibernate/archive/2009/04/28/nhibernate-unit-testing.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/28/nhibernate-unit-testing.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

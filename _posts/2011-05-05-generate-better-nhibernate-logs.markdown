@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Generate better NHibernate logs"
-date: 2011-05-05 21:57:43 -0300
+date: 2011-05-05 21:57:43 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging"]
-alias: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Soft Deletes"
-date: 2008-09-06 17:25:00 -0300
+date: 2008-09-06 17:25:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "introduction", "event listener"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

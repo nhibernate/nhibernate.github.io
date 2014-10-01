@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "How Test your mappings: the Ghostbuster"
-date: 2008-10-20 13:48:00 -0300
+date: 2008-10-20 13:48:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "Tests"]
-alias: ["/blogs/nhibernate/archive/2008/10/20/how-test-your-mappings-the-ghostbuster.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/20/how-test-your-mappings-the-ghostbuster.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

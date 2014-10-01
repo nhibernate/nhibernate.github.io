@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Integrating Adobe Flex Applications with NHibernate"
-date: 2011-03-01 05:03:00 -0300
+date: 2011-03-01 05:03:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WebORB", "Flex to dot NET"]
-alias: ["/blogs/nhibernate/archive/2011/03/01/integrating-adobe-flex-applications-with-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/03/01/integrating-adobe-flex-applications-with-nhibernate.aspx"]
 author: mcoderkat
 gravatar: a3d57a33f613921a948aca86ec97aa09
 ---

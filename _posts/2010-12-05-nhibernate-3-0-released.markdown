@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 3.0 released"
-date: 2010-12-05 13:51:00 -0300
+date: 2010-12-05 13:51:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-3-0-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-3-0-released.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

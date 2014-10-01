@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Future&lt;T&gt; Queries with HQL and Criteria"
-date: 2009-01-30 16:10:00 -0300
+date: 2009-01-30 16:10:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "querying", "HQL", "Criteria", "Future"]
-alias: ["/blogs/nhibernate/archive/2009/01/30/futuret_2D00_queries_2D00_with_2D00_hql_2D00_and_2D00_criteria.aspx", "/blogs/nhibernate/archive/2009/01/30/futuret_2d00_queries_2d00_with_2d00_hql_2d00_and_2d00_criteria.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/01/30/futuret_2D00_queries_2D00_with_2D00_hql_2D00_and_2D00_criteria.aspx", "/blogs/nhibernate/archive/2009/01/30/futuret_2d00_queries_2d00_with_2d00_hql_2d00_and_2d00_criteria.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

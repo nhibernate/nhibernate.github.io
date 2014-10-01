@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate SchemaValidator"
-date: 2008-11-22 21:55:00 -0300
+date: 2008-11-22 21:55:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2008/11/22/nhibernate-schemavalidator.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/22/nhibernate-schemavalidator.aspx"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

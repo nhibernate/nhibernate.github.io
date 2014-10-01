@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Introducing NHiberate and WPF: The ChinookMediaManager"
-date: 2009-08-16 00:26:25 -0300
+date: 2009-08-16 00:26:25 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Session", "WPF"]
-alias: ["/blogs/nhibernate/archive/2009/08/15/introducing-nhiberate-and-wpf-the-chinookmediamanager.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/15/introducing-nhiberate-and-wpf-the-chinookmediamanager.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator Quickstart"
-date: 2009-05-18 04:31:00 -0300
+date: 2009-05-18 04:31:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "examples", "quickstart"]
-alias: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quickstart.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

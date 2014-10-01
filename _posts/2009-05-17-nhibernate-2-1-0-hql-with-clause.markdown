@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 2.1.0: HQL With clause"
-date: 2009-05-17 19:56:00 -0300
+date: 2009-05-17 19:56:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "HQL"]
-alias: ["/blogs/nhibernate/archive/2009/05/17/nhibernate-2-1-0-hql-with-clause.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/17/nhibernate-2-1-0-hql-with-clause.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

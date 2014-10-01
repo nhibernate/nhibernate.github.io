@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "State (or Strategy) Pattern with NHibernate"
-date: 2009-12-18 15:08:00 -0300
+date: 2009-12-18 15:08:00 +1300
 comments: true
 published: false
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx"]
 author: diegose
 gravatar: f00318698e65fce00b7cbd612a466571
 ---

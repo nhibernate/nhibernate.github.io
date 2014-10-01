@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate with Spring.NET"
-date: 2009-03-03 21:00:00 -0300
+date: 2009-03-03 21:00:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "ProxyGenerators", "NHibernate", "AOP", "IoC"]
-alias: ["/blogs/nhibernate/archive/2009/03/03/nhibernate-with-spring-net.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/03/nhibernate-with-spring-net.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

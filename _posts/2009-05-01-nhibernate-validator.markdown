@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator"
-date: 2009-05-01 08:28:00 -0300
+date: 2009-05-01 08:28:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator"]
-alias: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

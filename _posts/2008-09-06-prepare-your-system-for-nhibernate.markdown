@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Prepare your system for NHibernate"
-date: 2008-09-06 22:12:52 -0300
+date: 2008-09-06 22:12:52 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["introduction"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

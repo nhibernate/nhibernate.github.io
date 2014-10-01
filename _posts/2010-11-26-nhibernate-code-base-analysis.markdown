@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Code Base Analysis"
-date: 2010-11-26 13:40:00 -0300
+date: 2010-11-26 13:40:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-alias: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx"]
 author: Patrick Smacchia
 gravatar: 526161a664210d3946ca432ee787f2af
 ---

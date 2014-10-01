@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Customizing Schema Export with schema-action"
-date: 2008-12-16 00:50:00 -0300
+date: 2008-12-16 00:50:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["views", "export", "schema action"]
-alias: ["/blogs/nhibernate/archive/2008/12/15/customizing-schema-export-with-schema-action.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/12/15/customizing-schema-export-with-schema-action.aspx"]
 author: Woil
 gravatar: 7be987ee1e38d64e17712ba97a4c525c
 ---

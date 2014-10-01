@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 3 Beginners Guide published"
-date: 2011-08-29 20:27:00 -0300
+date: 2011-08-29 20:27:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NHibernate Documentation"]
-alias: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

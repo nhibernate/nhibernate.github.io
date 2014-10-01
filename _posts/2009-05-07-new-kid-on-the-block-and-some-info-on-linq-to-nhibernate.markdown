@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "New Kid on the Block.  And some info on Linq to NHibernate"
-date: 2009-05-07 18:52:00 -0300
+date: 2009-05-07 18:52:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
-alias: ["/blogs/nhibernate/archive/2009/05/07/new-kid-on-the-block-and-some-info-on-linq-to-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/07/new-kid-on-the-block-and-some-info-on-linq-to-nhibernate.aspx"]
 author: srstrong
 gravatar: be49dc22186b4215272ffa6a46599424
 ---

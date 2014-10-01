@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Many-to-many relationships with properties"
-date: 2010-12-26 11:52:00 -0300
+date: 2010-12-26 11:52:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2010/12/26/many-to-many-relationships-with-properties.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/26/many-to-many-relationships-with-properties.aspx"]
 author: diegose
 gravatar: f00318698e65fce00b7cbd612a466571
 ---

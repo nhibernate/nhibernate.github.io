@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate 2.1.0.Alpha2 is released"
-date: 2009-03-29 17:01:00 -0300
+date: 2009-03-29 17:01:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-alias: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

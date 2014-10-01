@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "The Query Batcher"
-date: 2008-08-31 15:05:00 -0300
+date: 2008-08-31 15:05:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "batcher"]
-alias: ["/blogs/nhibernate/archive/2008/08/31/the-query-batcher.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/the-query-batcher.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

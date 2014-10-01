@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Workbench"
-date: 2010-05-19 15:29:00 -0300
+date: 2010-05-19 15:29:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "mapping", "querying", "HQL"]
-alias: ["/blogs/nhibernate/archive/2010/05/19/nhibernate-workbench.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/05/19/nhibernate-workbench.aspx"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

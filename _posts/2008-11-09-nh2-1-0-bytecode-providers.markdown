@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NH2.1.0: Bytecode providers"
-date: 2008-11-09 15:04:00 -0300
+date: 2008-11-09 15:04:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/09/nh2-1-0-bytecode-providers.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

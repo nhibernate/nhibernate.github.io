@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate IoC integration"
-date: 2009-05-30 13:20:00 -0300
+date: 2009-05-30 13:20:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Inversion of Control", "IoC"]
-alias: ["/blogs/nhibernate/archive/2009/05/30/nhibernate-ioc-integration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/30/nhibernate-ioc-integration.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

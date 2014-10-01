@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Part 7: NHibernate and Ninject for ASP.NET MVC"
-date: 2009-08-29 20:47:58 -0300
+date: 2009-08-29 20:47:58 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow", "NHibernate", "ASP.NET MVC", "Ninject"]
-alias: ["/blogs/nhibernate/archive/2009/08/29/part-7-nhibernate-and-ninject-for-asp-net-mvc.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/29/part-7-nhibernate-and-ninject-for-asp-net-mvc.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

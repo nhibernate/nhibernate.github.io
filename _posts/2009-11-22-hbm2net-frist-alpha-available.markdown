@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "hbm2net: first alpha ready"
-date: 2009-11-22 22:43:00 -0300
+date: 2009-11-22 22:43:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
-alias: ["/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.aspx"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

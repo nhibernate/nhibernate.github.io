@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Loquacious Configuration in NHibernate 3"
-date: 2011-01-21 21:54:07 -0300
+date: 2011-01-21 21:54:07 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "fluent configuration"]
-alias: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx"]
 author: James Kovacs
 gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;dynamic-component/&gt;"
-date: 2009-04-11 05:23:00 -0300
+date: 2009-04-11 05:23:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/04/11/nhibernate-mapping-lt-dynamic-component-gt.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/11/nhibernate-mapping-lt-dynamic-component-gt.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

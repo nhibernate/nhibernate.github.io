@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate.Linq 1.0.0 GA released"
-date: 2009-07-26 10:52:00 -0300
+date: 2009-07-26 10:52:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["linq"]
-alias: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/26/nhibernate-linq-1-0-ga-released.aspx"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

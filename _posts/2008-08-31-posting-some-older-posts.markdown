@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Posting some older posts"
-date: 2008-08-31 14:51:00 -0300
+date: 2008-08-31 14:51:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2008/08/31/posting-some-older-posts.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/posting-some-older-posts.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

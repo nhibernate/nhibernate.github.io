@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Part 10: Testing and Refactoring"
-date: 2009-09-20 19:07:41 -0300
+date: 2009-09-20 19:07:41 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/09/20/part-10-testing-and-refactoring.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/09/20/part-10-testing-and-refactoring.aspx"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

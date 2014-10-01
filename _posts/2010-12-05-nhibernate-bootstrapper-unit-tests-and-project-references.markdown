@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Bootstrapper: Unit Tests and Project References"
-date: 2010-12-05 15:59:00 -0300
+date: 2010-12-05 15:59:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Criteria", "linq"]
-alias: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx"]
 author: jwdavidson
 gravatar: 7b8c11bc19a524da9aac988120936d9a
 ---

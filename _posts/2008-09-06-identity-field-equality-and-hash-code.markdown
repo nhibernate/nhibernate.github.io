@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Identity Field, Equality and Hash Code"
-date: 2008-09-06 21:02:27 -0300
+date: 2008-09-06 21:02:27 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "equality"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

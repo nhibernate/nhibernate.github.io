@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Welcome to the NHibernate blog"
-date: 2008-08-30 02:33:00 -0300
+date: 2008-08-30 02:33:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2008/08/29/welcome-to-the-nhibernate-blog.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/29/welcome-to-the-nhibernate-blog.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

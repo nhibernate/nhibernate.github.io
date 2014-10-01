@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Extending NHibernate's DriverConnectionProvider"
-date: 2008-09-18 14:48:00 -0300
+date: 2008-09-18 14:48:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["provider", "connection"]
-alias: ["/blogs/nhibernate/archive/2008/09/18/extending-nhibernate-s-driverconnectionprovider.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/18/extending-nhibernate-s-driverconnectionprovider.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

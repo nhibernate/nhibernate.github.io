@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Lazy Loading - Eager Loading"
-date: 2008-09-06 16:59:00 -0300
+date: 2008-09-06 16:59:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "lazy loading"]
-alias: ["/blogs/nhibernate/archive/2008/09/06/lazy-loading-eager-loading.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/lazy-loading-eager-loading.aspx"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

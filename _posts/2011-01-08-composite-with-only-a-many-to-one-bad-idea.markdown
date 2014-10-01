@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Composite with only a Many-To-One = Bad Idea"
-date: 2011-01-08 11:54:35 -0300
+date: 2011-01-08 11:54:35 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-alias: ["/blogs/nhibernate/archive/2011/01/08/composite-with-only-a-many-to-one-bad-idea.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/08/composite-with-only-a-many-to-one-bad-idea.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

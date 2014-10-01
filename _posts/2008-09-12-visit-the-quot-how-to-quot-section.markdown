@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Visit the &quot;How To&quot; section"
-date: 2008-09-12 17:42:00 -0300
+date: 2008-09-12 17:42:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Wiki", "HowTo"]
-alias: ["/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

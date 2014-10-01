@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Querying With NHibernate"
-date: 2008-10-05 11:00:00 -0300
+date: 2008-10-05 11:00:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["query", "querying"]
-alias: ["/blogs/nhibernate/archive/2008/10/05/querying-with-nhibernate.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/05/querying-with-nhibernate.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "uNHAddins conversation additions"
-date: 2009-02-22 05:18:00 -0300
+date: 2009-02-22 05:18:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/02/22/unhaddins-conversation-additions.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/22/unhaddins-conversation-additions.aspx"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

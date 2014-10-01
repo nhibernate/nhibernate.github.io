@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and Composite Keys"
-date: 2010-07-01 05:11:00 -0300
+date: 2010-07-01 05:11:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["&quot;Composite Keys&quot;"]
-alias: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx"]
 author: ajepst
 gravatar: fad7db02ad0cbbcd20f8bba5fdc1fc81
 ---

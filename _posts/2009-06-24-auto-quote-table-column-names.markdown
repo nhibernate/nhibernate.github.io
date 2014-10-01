@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Auto Quote Table/Column names"
-date: 2009-06-24 03:25:00 -0300
+date: 2009-06-24 03:25:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["configuration", "NHibernate", "NH2.1"]
-alias: ["/blogs/nhibernate/archive/2009/06/24/auto-quote-table-column-names.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/24/auto-quote-table-column-names.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

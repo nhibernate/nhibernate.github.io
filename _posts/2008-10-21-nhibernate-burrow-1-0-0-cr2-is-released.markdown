@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate.Burrow 1.0.0 CR2 is released!"
-date: 2008-10-21 19:28:00 -0300
+date: 2008-10-21 19:28:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow", "Session", "Release"]
-alias: ["/blogs/nhibernate/archive/2008/10/21/nhibernate-burrow-1-0-0-cr2-is-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/21/nhibernate-burrow-1-0-0-cr2-is-released.aspx"]
 author: kailuowang
 gravatar: c573cf31007f29236e1641e492bee036
 ---

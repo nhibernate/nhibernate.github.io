@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Introducing NHibernate ProxyGenerators"
-date: 2008-09-23 04:28:22 -0300
+date: 2008-09-23 04:28:22 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "lazy loading", "ProxyGenerators"]
-alias: ["/blogs/nhibernate/archive/2008/09/22/introducing-nhibernate-proxygenerators.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/22/introducing-nhibernate-proxygenerators.aspx"]
 author: wcpierce
 gravatar: dcc92e164f39a824d68fd053c950a041
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and WPF: The GuyWire"
-date: 2009-11-07 19:12:52 -0300
+date: 2009-11-07 19:12:52 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "WPF"]
-alias: ["/blogs/nhibernate/archive/2009/11/07/nhibernate-and-wpf-the-guywire.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/11/07/nhibernate-and-wpf-the-guywire.aspx"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

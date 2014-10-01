@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and virtual methods/properties"
-date: 2008-08-31 15:02:00 -0300
+date: 2008-08-31 15:02:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["postsharp", "virtual", "validation", "proxy"]
-alias: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-and-virtual-methods-properties.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-and-virtual-methods-properties.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

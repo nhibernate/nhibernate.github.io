@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Fluent NHibernate 1.0"
-date: 2009-08-29 00:33:00 -0300
+date: 2009-08-29 00:33:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Fluent NHibernate"]
-alias: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/29/fluent-nhibernate-1-0.aspx"]
 author: jagregory
 gravatar: 94afce4e8f9766b629aba101b50cfc18
 ---

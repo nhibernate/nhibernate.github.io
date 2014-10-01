@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate.Spatial 1.0.0 Beta1 released"
-date: 2008-10-01 04:44:00 -0300
+date: 2008-10-01 04:44:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["MsSqlSpatial", "OpenGIS", "OGC", "SQL Server 2008", "PostGis", "NTS", "SQL Server", "GIS", "spatial"]
-alias: ["/blogs/nhibernate/archive/2008/10/01/nhibernate-spatial-1-0-0-beta1-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/01/nhibernate-spatial-1-0-0-beta1-released.aspx"]
 author: rstuven
 gravatar: adf23b5f68a2546a56673af23f50c110
 ---

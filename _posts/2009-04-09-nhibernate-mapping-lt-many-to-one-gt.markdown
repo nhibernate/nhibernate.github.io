@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Mapping - &lt;many-to-one/&gt;"
-date: 2009-04-09 03:22:00 -0300
+date: 2009-04-09 03:22:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-alias: ["/blogs/nhibernate/archive/2009/04/09/nhibernate-mapping-lt-many-to-one-gt.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/09/nhibernate-mapping-lt-many-to-one-gt.aspx"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate and Future Queries"
-date: 2009-01-25 12:08:00 -0300
+date: 2009-01-25 12:08:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Future"]
-alias: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

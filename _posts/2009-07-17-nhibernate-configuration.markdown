@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Configuration"
-date: 2009-07-17 21:30:00 -0300
+date: 2009-07-17 21:30:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "configuration", "NHibernate", "fluent configuration"]
-alias: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

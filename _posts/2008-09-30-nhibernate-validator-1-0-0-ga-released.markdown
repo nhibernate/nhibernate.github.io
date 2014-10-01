@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "NHibernate Validator 1.0.0 GA released !"
-date: 2008-09-30 00:44:00 -0300
+date: 2008-09-30 00:44:00 +1300
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "News"]
-alias: ["/blogs/nhibernate/archive/2008/09/29/nhibernate-validator-1-0-0-ga-released.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/29/nhibernate-validator-1-0-0-ga-released.aspx"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

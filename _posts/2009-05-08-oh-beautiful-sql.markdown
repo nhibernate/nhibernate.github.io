@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Oh… beautiful SQL"
-date: 2009-05-08 13:39:00 -0300
+date: 2009-05-08 13:39:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate", "HQL"]
-alias: ["/blogs/nhibernate/archive/2009/05/08/oh-beautiful-sql.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/08/oh-beautiful-sql.aspx"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

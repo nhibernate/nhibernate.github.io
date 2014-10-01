@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Using NH3.2 mapping by code for Automatic Mapping"
-date: 2011-09-05 07:24:00 -0300
+date: 2011-09-05 07:24:00 +1200
 comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "mapping by code"]
-alias: ["/blogs/nhibernate/archive/2011/09/05/using-nh3-2-mapping-by-code-for-automatic-mapping.aspx"]
+redirect_from: ["/blogs/nhibernate/archive/2011/09/05/using-nh3-2-mapping-by-code-for-automatic-mapping.aspx"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
