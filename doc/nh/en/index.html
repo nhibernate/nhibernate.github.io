@@ -7917,7 +7917,7 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 (ie. dereferencing) the original collection and returning a newly instantiated collection with
                 all the current elements. This can be very useful and powerful from time to time.
             </p><p>
-                one-shot-delete apply to collections mapped <tt class="literal">inverse="true"</tt>.
+                Of course, one-shot-delete does not apply to collections mapped <tt class="literal">inverse="true"</tt>.
             </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-batch-updates"></a>19.6.&nbsp;Batch updates</h2></div></div><div></div></div><p>
             NHibernate supports batching SQL update commands (<tt class="literal">INSERT</tt>,
             <tt class="literal">UPDATE</tt>, <tt class="literal">DELETE</tt>) with the following limitations:
