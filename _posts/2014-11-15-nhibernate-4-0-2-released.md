@@ -7,13 +7,11 @@ gravatar: 849b5057cdc84934daae1942749f0270
 tags:
   - Release Notes
 ---
-NHibernate 4.0.2 General Availability is now available for download from Sourceforge and Nuget.
-
-http://sourceforge.net/projects/nhibernate/?source=directory
+NHibernate 4.0.2 General Availability is now available for download from [Sourceforge](https://sourceforge.net/projects/nhibernate/files/NHibernate/4.0.2.GA/) and [Nuget](https://www.nuget.org/packages/NHibernate/4.0.2.4000).
 
 This includes fixes for regressions in NH 4.0.1, and some fixes for mapping-by-code and Firebird issues.
 Please see the full release notes for more information:
-https://github.com/nhibernate/nhibernate-core/blob/4.0.2.GA/releasenotes.txt
+[releasenotes.txt](https://github.com/nhibernate/nhibernate-core/blob/4.0.2.GA/releasenotes.txt)
 
 Full list of changes:
 
