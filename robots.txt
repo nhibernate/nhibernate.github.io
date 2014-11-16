@@ -1,0 +1,4 @@
+---
+layout:
+---
+Sitemap: {{site.url}}/sitemap.xml
