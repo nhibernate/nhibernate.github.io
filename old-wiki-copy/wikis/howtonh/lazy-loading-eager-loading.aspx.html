@@ -53,7 +53,7 @@
 		            <div class="Common">
 		                <div id="CommonHeaderTitleArea">
 		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
-		                        <td><div style="margin-right: 10px;"><img src="../../cfs-file_ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td><div style="margin-right: 10px;"><img src="../../cfs-file_ashx/key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
 		                        <td>
 		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
 		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
@@ -184,7 +184,7 @@
 	                <div class="CommonContentBox">
                         <h4 class="CommonContentBoxHeader">Attachments</h4>
 	                    <div class="CommonContentBoxContent">
-	            <ul class="CommonSidebarList"><li><a href="../../cfs-file_ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingDomain.png">LazyLoadingEagerLoadingDomain.png</a></li><li><a href="../../cfs-file_ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingAggDomain.png">LazyLoadingEagerLoadingAggDomain.png</a></li></ul>
+	            <ul class="CommonSidebarList"><li><a href="../../cfs-file_ashx/key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingDomain.png">LazyLoadingEagerLoadingDomain.png</a></li><li><a href="../../cfs-file_ashx/key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingAggDomain.png">LazyLoadingEagerLoadingAggDomain.png</a></li></ul>
 				        </div>
 				        
 			        </div>
@@ -230,7 +230,7 @@
 	                <div class="CommonContentBox">
                         <h4 class="CommonContentBoxHeader">Page Details</h4>
 	                    <div class="CommonContentBoxContent">
-	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/__key/CommunityServer.Components.Avatars/00.00.00.21.34/4TA9FMIYGIH8.jpg" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/gabriel.schenker/default.aspx.html">gabriel.schenker</a><br/> on 09-06-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/MarkCranness/default.aspx.html">MarkCranness</a><br/> on 07-08-2011</div></div><div class="WikiPageDetailsSummaryArea"><strong>5</strong> people found this article useful.</div>
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.34/4TA9FMIYGIH8.jpg" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/gabriel.schenker/default.aspx.html">gabriel.schenker</a><br/> on 09-06-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/MarkCranness/default.aspx.html">MarkCranness</a><br/> on 07-08-2011</div></div><div class="WikiPageDetailsSummaryArea"><strong>5</strong> people found this article useful.</div>
 				        </div>
 				        
 			        </div>
@@ -305,7 +305,7 @@
 <p>In my previous posts I showed&nbsp;<a href="http://blogs.hibernatingrhinos.com/nhibernate/archive/2008/03/31/prepare-your-system-for-nhibernate.aspx">how to prepare your system for NHibernate</a>&nbsp;and&nbsp;<a href="your-first-nhibernate-based-application.aspx.html">how to implement a first NHibernate base application</a>. This post is based on those two articles. </p>
 <h2>The Domain</h2>
 <p>Let&#39;s first define a simple domain. It shows part of an order entry system. I keep this model as simple as possible (a real domain model would be more complex) but it contains all aspects we want to discuss in this post. Below is the class diagram of our model</p>
-<p><img src="../../cfs-file_ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingDomain.png" alt="" /></p>
+<p><img src="../../cfs-file_ashx/key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingDomain.png" alt="" /></p>
 <p>We have an order entity which can be placed by a customer entity. Each order can have many order line entities. Each of the three entity types is uniquely identified by a property Id (surrogate key).</p>
 <h2>The Mapping Files</h2>
 <p>We have to write one mapping file per entity. It is recommended that you always have one mapping per file. Don&#39;t forget to set the&nbsp;<b>Build Action</b>&nbsp;of each mapping file to&nbsp;<b>Embedded Resource</b>. People often tend to forget it and the subsequent errors raised by NHibernate are not always obvious. Also do not forget to give the mapping files the correct name, that is *.<b>hbm</b>.xml where * denotes the placeholder for the entity name.</p>
@@ -665,7 +665,7 @@
 <p>NHibernate has created an SQL select statement which joins the 3 tables involved, namely&nbsp;<b>Orders</b>,&nbsp;<b>Customer</b>&nbsp;and<b>OrderLine</b>. The returned (flat) set of records is then used by NHibernate to build up the object tree with the order entity as a root.</p>
 <h2>Aggregates in the Domain</h2>
 <p>DDD defines the concept of&nbsp;<a href="http://domaindrivendesign.org/discussion/messageboardarchive/Aggregates.html">aggregates</a>. A short definition of an aggregate is &quot;<i>A cluster of associated objects that are treated as a unit for the purpose of data changes.&quot;.&nbsp;</i>An aggregate always has a&nbsp;<i>root</i>.<i>&nbsp;</i>In this context we can define the following aggregate in our domain</p>
-<p><img src="../../cfs-file_ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingAggDomain.png" alt="" /></p>
+<p><img src="../../cfs-file_ashx/key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/LazyLoadingEagerLoadingAggDomain.png" alt="" /></p>
 <p>The order entity is the&nbsp;<i>root</i>&nbsp;and the order lines belong to the aggregate (can be regarded as children of the&nbsp;<i>root</i>). When creating a new order or changing an existing one we only want to modify either the order itself or its order lines. We certainly do not want to change the customer entity because this would be a completely different use case and does not belong to the&nbsp;<i>order management</i>&nbsp;use case.</p>
 <p>So, when dealing with aggregates we often want to load the complete aggregate in one go! This is the perfect example for using&nbsp;<b>eager loading</b>&nbsp;techniques.</p>
 <h2>Summary</h2>
