@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="Mapping the same class to a view and a table using entity-name (RSS 2.0)" href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="How to (RSS 2.0)" href="http://nhforge.org/wikis/howtonh/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="John Davidson&#39;s Announcements (RSS 2.0)" href="../../members/jwdavidson/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="John Davidson&#39;s Comments (RSS 2.0)" href="../../members/jwdavidson/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="John Davidson&#39;s Activities (RSS 2.0)" href="../../members/jwdavidson/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="John Davidson&#39;s Friends Activity (RSS 2.0)" href="../../members/jwdavidson/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Mapping the same class to a view and a table using entity-name - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0MjI1NzA4NTBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRnkoeGkMFUl/GCfp0jWEl0wBWF5g==" />
+</div>
+
+
+<script src="../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=kMYUTUavSIm2PfhqImV65wSrGgvlXLz6y2I9w1Ny3wgQ9Mr8YxqHob4FEFjJCAuSefb7UiiHarHcIuJD4xiKEgAWZ6bkGuLRZKuFDCHjRSswzwvX2HIxCYe1LS8DvrUxi4omY-uxichRl_7QG7gvnymf7ji60ufX0GdWKCPuYuKcXuCoaDwpH8N3g3tlQpPEgpisGg2&amp;t=634395149480000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=ooIwVX8behGAEmhMCiixHbDdkMUOVYaZRdlMT8IcoNg04bCvP2nwsB6TYoQ7d2Jv_3l4oJ1T22OjM-M-2DunSYiieujBrutwDXLnAl2vCYvC2eq5i-t1eW9X33MvMiQlvp4qyu1-rLPWkjuV_LZnUetgmSNTxQbJe-EddFxbtbp-DYr30&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=xXlM6p6Z55_L0aHC_AFQRK0Cjmpbijxk7GNNsmfNwwA1waqkaV-hG1FcycUhTX3miKHBKKxRY86jAc_xya2ioQnh8uEZNMdbhp5EeN7LrycYZRTwA1RkyBpeEDeC_6M7Ye32k1z4nBfateiS4xaRnrrk7zAUyXGK9sqQp9FDULq-nwZx0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../cfs-file.ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Fhowtonh%252Fmapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Sign in </a>
+         | <a href="../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_View">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../general/default.aspx.html">General</a></li>
+                    
+                        <li><a class="Selected" href="default.aspx.html">How to</a></li>
+                        
+                    
+                        
+                        <li><a href="../patternsandpractices/default.aspx.html">Patterns&Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Wikis</a>
+        &raquo;
+        <a href="default.aspx.html">How to</a>
+        &raquo;
+        <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Mapping the same class to a view and a table using entity-name</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="default.aspx.html">Home</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(30, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a></li><li><a href="run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="using-user-types.aspx.html">Using User Types</a></li><li><a href="lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html" class="Selected">Mapping the same class to a view and a table using entity-name</a></li><li><a href="creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="localization-techniques.aspx.html">Localization techniques</a></li><li><a href="calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="mapping-tables.aspx.html">Mapping tables</a></li><li><a href="wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(30, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a></li><li><a href="run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="using-user-types.aspx.html">Using User Types</a></li><li><a href="lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html" class="Selected">Mapping the same class to a view and a table using entity-name</a></li><li><a href="creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="localization-techniques.aspx.html">Localization techniques</a></li><li><a href="calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="mapping-tables.aspx.html">Mapping tables</a></li><li><a href="wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag6"><a href="tags/equality/default.aspx.html" rel="tag">equality</a></li>
+<li class="CommonTag6"><a href="tags/identity/default.aspx.html" rel="tag">identity</a></li>
+<li class="CommonTag1"><a href="tags/pattern/default.aspx.html" rel="tag">pattern</a></li>
+<li class="CommonTag6"><a href="tags/unit+of+work/default.aspx.html" rel="tag">unit of work</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/Robert-Byrne/default.aspx.html">Robert Byrne</a><br/> on 02-27-2009</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br/> on 09-07-2011</div></div><div class="WikiPageDetailsSummaryArea"><strong>3</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /> Article
+                            </div>
+                        </td>
+                        
+                                
+                                                            
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/comments.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/comments.aspx.html">Comments</a> (1)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/history.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/history.aspx.html">History</a> (6)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">                
+
+                <div id="ctl00_ctl00_bcr_bcr_ctl08" class="WikiRating" title="Rated: 3 Ratings - 3 Yes, 0 No" ><div><img src="../../utility/images/thumbsup.png" id="ctl00_ctl00_bcr_bcr_ctl08_image" alt="" /><span id="ctl00_ctl00_bcr_bcr_ctl08_percent" class="WikiRatingGood">100%</span> <span id="ctl00_ctl00_bcr_bcr_ctl08_percenttext">of people found this useful</span></div></div>
+
+                <h2 class="CommonContentBoxHeaderSmall">
+                        <span><a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a></span>
+                        
+                    </h2>
+                                
+                <div class="CommonDescription" style="font-size: 90%;">
+                    <span id="ctl00_ctl00_bcr_bcr_ctl09_ctl01">Filed under: <a href="tags/Architecture/default.aspx.html" rel="tag">Architecture</a>, <a href="tags/entity+name/default.aspx.html" rel="tag">entity name</a>, <a href="tags/query/default.aspx.html" rel="tag">query</a>, <a href="tags/Session/default.aspx.html" rel="tag">Session</a></span><input type="hidden" name="ctl00$ctl00$bcr$bcr$ctl09$ctl01" id="ctl00_ctl00_bcr_bcr_ctl09_ctl01_State" value="nochange" /> <a onclick="ctl00_ctl00_bcr_bcr_ctl09_ctl01.Edit(new Function('tags','successFunction','failureFunction','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl09\',\'saveAndFormat:\' + tags,successFunction,tags,failureFunction,false)'));return false;" href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html#">[Edit Tags]</a>
+                </div>
+                <div><div>
+<h2>The Scenario</h2>
+<p>You have a single class which you must map to both a table and a database view (or perhaps another table). The view is returning records from the table itself, usually filtered, and the view may have more or less columns than the table. A more practical example is a multi tenant database, where a table has a tenant column, and the view filters the records to show only the ones associated with the current tenant. In this case, the backing table has a tenant column, but the view doesn&#39;t. To make things even more interesting, the table is in a separate database schema. For more details on this multi tenant architectural pattern <a href="http://msdn.microsoft.com/en-us/library/aa479086.aspx#mlttntda_tvf">see this article</a>. Other possible uses for this mapping technique include dynamically mapping the same base class to multiple subclass tables, which is <a href="http://www.mattfreeman.co.uk/2009/01/nhibernate-21-trunk-entity-name-some-inheritance-and-dynamic-component/">described here</a>, </p>
+<p>You want to map this in NHibernate, in a way that will allow you to specify which &#39;representation&#39; of the entity you want to see, either the table containing records for all tenants, or the view containing records for the currently active tenant. Perhaps your system needs to access all the records for all tenants to perform auditing or cleanup. In all other cases, you only want to show the records filtered for the current tenant, via the mapped view. </p>
+<p>So, can this be done? Thankfully, yes, but only if you like living on the cutting edge! </p>
+</div>
+<div>
+<h2>Prerequisites</h2>
+<p>In order to set this up with NHibernate, you will need to use the up and coming version 2.1, as we will be taking advantage of the new &#39;entity-name&#39; feature. This means you will need to checkout and build the latest version of NHibernate. There&#39;s plenty of <a href="../../blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx.html">guidance online about this</a>.</p>
+<p>In this article, I&#39;ll be working against version 2.1.0.1001, revision 4099. </p>
+<p>If you are using NHibernate.Linq, there&#39;s some special considerations that I&#39;ll explain later. You&#39;ll need to modify this library to take advantage of entity names, so you will need to checkout and build it <a href="https://nhcontrib.svn.sourceforge.net/svnroot/nhcontrib/trunk/src/NHibernate.Linq/">from the nhcontrib project:</a>&nbsp; </p>
+<p>I&#39;ll be working against version 1.0.0.0, revision 803. </p>
+</div>
+<div>
+<h2>Setting up the mappings</h2>
+<p>The class we&#39;re using is fairly simple, as the magic happens in the mapping. Note that the TenantId property is nullable, as it wont be mapped when we are using the view, more on that later. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;"><span style="color:#0000ff;">
+public</span><span> </span><span style="color:#0000ff;">class</span><span> </span><span style="color:#2b91af;">MyEntity</span><span> {
+	</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">virtual</span><span> </span><span style="color:#0000ff;">int</span><span> Id { </span><span style="color:#0000ff;">get</span><span>; </span><span style="color:#0000ff;">private</span><span> </span><span style="color:#0000ff;">set</span><span>; }
+	
+	</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">virtual</span><span> </span><span style="color:#0000ff;">string</span><span> MyProperty { </span><span style="color:#0000ff;">get</span><span>; </span><span style="color:#0000ff;">set</span><span>; }
+	
+	</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">virtual</span><span> </span><span style="color:#0000ff;">int</span><span>? TenantId { </span><span style="color:#0000ff;">get</span><span>; </span><span style="color:#0000ff;">private</span><span> </span><span style="color:#0000ff;">set</span><span>; }
+}
+</span></pre>
+<p>The database is also pretty straightforward, we have a table which maps to the entity class, and a view which returns records from that table. Notice that the view has no tenant id. Also notice that both of these objects are in different schemas. This just highlights the fact that the mappings for the two objects would have to be different, even if the properties were identical. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;"><span style="color:#0000ff;">
+CREATE</span><span> </span><span style="color:#0000ff;">TABLE</span><span> [AllItemsSchema]</span><span style="color:#808080;">.</span><span>[MyEntity]</span><span style="color:#808080;">(
+</span><span>
+	[ID] </span><span style="color:#0000ff;">int</span><span> </span><span style="color:#808080;">not</span><span> </span><span style="color:#808080;">null,
+</span><span>
+	[MyProperty] </span><span style="color:#0000ff;">varchar</span><span style="color:#808080;">(</span><span>200</span><span style="color:#808080;">)</span><span> </span><span style="color:#808080;">NULL,
+	</span><span>
+	[TenantId] </span><span style="color:#0000ff;">int</span><span> </span><span style="color:#808080;">not</span><span> </span><span style="color:#808080;">null,
+	</span><span>
+	</span><span style="color:#0000ff;">CONSTRAINT</span><span> [PK_MyEntity] </span><span style="color:#0000ff;">PRIMARY</span><span> </span><span style="color:#0000ff;">KEY</span><span> </span><span style="color:#0000ff;">CLUSTERED</span><span> </span><span style="color:#808080;">(</span><span>[ID]</span><span style="color:#808080;">)
+)
+</span>
+
+<span style="color:#0000ff;">
+CREATE</span><span> </span><span style="color:#0000ff;">VIEW</span><span> [TenantSpecificSchema]</span><span style="color:#808080;">.</span><span>[MyEntity]
+</span><span style="color:#0000ff;">
+AS</span><span>
+</span><span style="color:#0000ff;">
+SELECT</span><span> [ID]</span><span style="color:#808080;">,</span><span> [MyProperty] </span><span style="color:#0000ff;">FROM</span><span> [AllItemsSchema]</span><span style="color:#808080;">.</span><span>[MyEntity] </span><span style="color:#0000ff;">WHERE</span><span> [TenantId] </span><span style="color:#808080;">=</span><span> dbo</span><span style="color:#808080;">.</span><span>GetCurrentTenant</span><span style="color:#808080;">()
+</span>
+</pre>
+<p>So far so good. Now we move on to the mappings. Firstly, the table specific mapping. This will allow us to access all of the records for a particular entity, regardless of the tenant they are associated with. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;"><span style="color:#0000ff;">
+&lt;?</span><span style="color:#a31515;">xml</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">version</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">1.0</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">utf-8</span><span>&quot;</span><span style="color:#0000ff;"> ?&gt;
+&lt;</span><span style="color:#a31515;">hibernate-mapping</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">urn:nhibernate-mapping-2.2</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyAssembly</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">namespace</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyAssembly.MyNamespace</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+	&lt;</span><span style="color:#a31515;">class</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyEntity</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">table</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">`MyEntity`</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">entity-name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">Table</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">schema</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">`<span>AllItemsSchema</span>`</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+		&lt;</span><span style="color:#a31515;">id</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">Id</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+			&lt;</span><span style="color:#a31515;">generator</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">class</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">native</span><span>&quot;</span><span style="color:#0000ff;"> /&gt;
+		&lt;/</span><span style="color:#a31515;">id</span><span style="color:#0000ff;">&gt;
+		&lt;</span><span style="color:#a31515;">property</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyProperty</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">length</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">200</span><span>&quot;</span><span style="color:#0000ff;"> /&gt;
+		&lt;</span><span style="color:#a31515;">property</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">TenantId</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">not-null</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">true</span><span>&quot;</span><span style="color:#0000ff;"> /&gt;
+	&lt;/</span><span style="color:#a31515;">class</span><span style="color:#0000ff;">&gt;
+&lt;/</span><span style="color:#a31515;">hibernate-mapping</span><span style="color:#0000ff;">&gt;
+</span>
+</pre>
+<p>Some things to notice here are: </p>
+<ul>
+<li>
+			The &#39;schema&#39; attribute is set to &#39;AllItemsSchema&#39;</li>
+<li>
+			The new &#39;entity-name&#39; attribute is specified. In this case we are keeping it fairly simple, in the real world you would want to use something that&#39;s unique for each entity.
+		</li>
+<li>
+			The TenantId property is mapped
+		</li>
+</ul>
+<p>The rest of the mapping is the exactly the same as you would expect. As I noted above, the entity name here is deliberately simplistic. Its also worth mentioning that the entity name is used to uniquely identity an entity mapping across the entire session factory, so you cant repeat it on different class mappings. Next, on to the mapping of the view, which will provide only the records for the currently active tenant. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;"><span style="color:#0000ff;">
+&lt;?</span><span style="color:#a31515;">xml</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">version</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">1.0</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">utf-8</span><span>&quot;</span><span style="color:#0000ff;"> ?&gt;
+&lt;</span><span style="color:#a31515;">hibernate-mapping</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">urn:nhibernate-mapping-2.2</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyAssembly</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">namespace</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyAssembly.MyNamespace</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+	&lt;</span><span style="color:#a31515;">class</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyEntity</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">table</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">`MyEntity`</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">entity-name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">View</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">schema</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">`<span>TenantSpecificSchema</span>`</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">schema-action</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">none</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+		&lt;</span><span style="color:#a31515;">id</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">Id</span><span>&quot;</span><span style="color:#0000ff;">&gt;
+			&lt;</span><span style="color:#a31515;">generator</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">class</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">native</span><span>&quot;</span><span style="color:#0000ff;"> /&gt;
+		&lt;/</span><span style="color:#a31515;">id</span><span style="color:#0000ff;">&gt;
+		&lt;</span><span style="color:#a31515;">property</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">MyProperty</span><span>&quot;</span><span style="color:#0000ff;"> </span><span style="color:#ff0000;">length</span><span style="color:#0000ff;">=</span><span>&quot;</span><span style="color:#0000ff;">200</span><span>&quot;</span><span style="color:#0000ff;"> /&gt;
+	&lt;/</span><span style="color:#a31515;">class</span><span style="color:#0000ff;">&gt;
+&lt;/</span><span style="color:#a31515;">hibernate-mapping</span><span style="color:#0000ff;">&gt;
+</span>
+</pre>
+<p>This is where things get interesting: </p>
+<ul>
+<li>
+			We have used the same table and class name, but notice that the &#39;entity-name&#39; is different
+		</li>
+<li>
+			We have a different database schema
+			&#39;<span>TenantSpecificSchema</span>&#39;</li>
+<li>
+			The TenantId property is absent as the view does not provide this
+		</li>
+<li>
+			The new &#39;schema-action&#39; is set to none, this will prevent NHibernate from including this mapping in its schema export, it would otherwise attempt to create a table for this view
+		</li>
+</ul>
+<p>Although we are using the same class in both cases, the mappings can be quite different. In this example I&#39;ve included the TenantId property on the entity class even though it will always be null when the view mapping is used. Whether you want to do this yourself is a matter of taste. One possibility would be to implement the TenantId property with an explicit interface, which would hide it from the consumers of the class unless needed. </p>
+<p>Now that we have the mappings we can spin up a session factory using your favorite technique. Because we have used entity names for both of our mappings, you will see that we cant just store and retrieve entities by their type as usual. The entities are no longer identified by their types, but their entity name instead. Initially, I had planned to specify the entity name only for one of the mappings, and leave the other mapping as a &#39;default&#39; with just its [Type] &#39;name&#39; specified, but as I will explain later in more detail, this wont work as expected. If you want to reliably use entity name on one mapping of the class, you must use an entity name on them all. </p>
+</div>
+<div>
+<h2>Entity name and the ISession</h2>
+<p>In the latest revision of NHibernate, all the methods of ISession which take a System.Type have been overloaded to accept a string specifying the entity name. Apart form this, working with entity name mappings is exactly the same as their Type counterparts. If you are using a generic implementation of IRepository, things get even easier, as you can control the entity name in a single place, for example: </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;"><span>
+</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">enum</span><span> </span><span style="color:#2b91af;">EntityNameMode</span><span> {
+	Default,
+	Table,
+	View
+}
+
+</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">class</span><span> </span><span style="color:#2b91af;">NHibernateRepository</span><span>&lt;TEntity, TKey&gt; : </span><span style="color:#2b91af;">IRepository</span><span>&lt;TEntity, TKey&gt; {
+	</span><span style="color:#0000ff;">public</span><span> NHibernateRepository(</span><span style="color:#2b91af;">ISession</span><span> session, </span><span style="color:#2b91af;">EntityNameMode</span><span> mode) {
+		</span><span style="color:#0000ff;">this</span><span>.session = session;
+	</span><span style="color:#0000ff;">	this</span><span>.mode = mode;
+	}
+	
+	</span><span style="color:#0000ff;">public</span><span> TEntity Get(TKey key) {
+	</span><span style="color:#0000ff;">	return</span><span> (TEntity)session.Get(GetEntityName(), key);
+	}
+	
+	</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#2b91af;">IList</span><span>&lt;TEntity&gt; List() {
+	</span><span style="color:#0000ff;">	return</span><span> session.CreateCriteria(GetEntityName()).List&lt;TEntity&gt;();
+	}
+	
+	</span><span style="color:#0000ff;">public</span><span> </span><span style="color:#0000ff;">void</span><span> SaveOrUpdate(TEntity entity) {
+		session.SaveOrUpdate(GetEntityName(), entity);
+	}
+	
+	</span><span style="color:#0000ff;">private</span><span> </span><span style="color:#0000ff;">string</span><span> GetEntityName() {
+		</span><span style="color:#0000ff;">switch</span><span> (mode) {
+			</span><span style="color:#0000ff;">case</span><span> </span><span style="color:#2b91af;">EntityNameMode</span><span>.Table: </span><span style="color:#0000ff;">return</span><span> </span><span style="color:#a31515;">&quot;Table&quot;</span><span>;
+			</span><span style="color:#0000ff;">case</span><span> </span><span style="color:#2b91af;">EntityNameMode</span><span>.View: </span><span style="color:#0000ff;">return</span><span> </span><span style="color:#a31515;">&quot;View&quot;</span><span>;
+			</span><span style="color:#0000ff;">default</span><span>: </span><span style="color:#0000ff;">return</span><span> </span><span style="color:#0000ff;">typeof</span><span>(TEntity).FullName;
+		}
+	}
+	
+	</span><span style="color:#0000ff;">private</span><span> </span><span style="color:#2b91af;">ISession</span><span> session;
+	</span><span style="color:#0000ff;">private</span><span> </span><span style="color:#2b91af;">EntityNameMode</span><span> mode;
+}
+</span>
+</pre>
+<p>The entity name to use is based on the parameter we pass into the repository. In the real world you will want to use something more sophisticated to control the entity names. By specifying the Table mode when creating this repository, all the operations we perform against it will now deal with the records for all tenants. If we only want to deal with the records for a specific tenant, then we pass in the View mode. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;">	<span>
+	</span><span style="color:#008000;">//this repository will work with data for all tenants</span>
+	<span style="color:#0000ff;">var</span><span> allTenantsRepository = </span><span style="color:#0000ff;">new</span><span> </span><span style="color:#2b91af;">NHibernateRepository</span><span>&lt;</span><span style="color:#2b91af;">MyEntity</span><span>, </span><span style="color:#0000ff;">int</span><span>&gt;(session, </span><span style="color:#2b91af;">EntityNameMode</span><span>.Table);
+
+	</span><span style="color:#008000;">//this repository will work with data for the current tenant only</span>
+	<span style="color:#0000ff;">var</span><span> currentTenantRepository = </span><span style="color:#0000ff;">new</span><span> </span><span style="color:#2b91af;">NHibernateRepository</span><span>&lt;</span><span style="color:#2b91af;">MyEntity</span><span>, </span><span style="color:#0000ff;">int</span><span>&gt;(session, </span><span style="color:#2b91af;">EntityNameMode</span><span>.View);
+	</span>
+	</pre>
+<p>One thing that&#39;s important to realize is that internally, NHibernate implicitly creates an entity name whether you specify one explicitly or not. The entity name it uses by default is the FullName of the mapped type. This means that passing in the Type.FullName to the methods accepting a string has the same effect as passing in the System.Type itself. This can make it easier to manage your Repository implementation as you can use the string overloads exclusively, and pass in the type name when no specific entity name is required. </p>
+<p>Now we have a repository that we can use to work with the two different profiles for our entities, as well as falling back to the standard behavior when no entity name mappings are required. This approach can be extended in any number of ways to support various complex mapping scenarios. </p>
+<p>Its worth mentioning that you can also specify the entity name via IInterceptor.GetEntityName(object), but I haven&#39;t done that here because it only kicks in when saving or updating transient instances, as far as I could tell. You still have to supply the entity name to the ISession methods when querying the database, and I prefer to keep the entity name behavior in one place. </p>
+<p>If you want to use NHibernate.Linq with this approach then you will soon find that there&#39;s currently (r.803) no way to specify the entity name when using the Linq&lt;T&gt; extension method on ISession. Not to fear, there&#39;s a fairly straightforward way to provide this feature with minimal impact on any querying code you may have. </p>
+</div>
+<div>
+<h2>Using Entity Name with Linq to NHibernate</h2>
+<p>Lets start by adding a protected property to our Repository implementation which will provide us with an INHibernateQueryable&lt;T&gt;. All we need to know about that type for now is that its returned from the ISession.Linq&lt;T&gt; extension method. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;">	<span>
+	</span><span style="color:#0000ff;">protected</span><span> </span><span style="color:#2b91af;">INHibernateQueryable</span><span>&lt;TEntity&gt; Linq {
+		</span><span style="color:#0000ff;">get</span><span> {
+			</span><span style="color:#0000ff;">return</span><span> session.Linq&lt;TEntity&gt;();
+		}
+	}
+</span>
+	<span style="color:#008000;">//the rest of the repository is exactly the same...</span>
+	</pre>
+<p>We can now use Linq functionality in our repository by starting with that property. Lets add a useful Find() method to our repository that accepts a predicate which we can pass to the Linq implementation. </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;">	<span>
+	</span><span style="color:#0000ff;">public</span><span> TEntity Find(</span><span style="color:#2b91af;">Expression</span><span>&lt;</span><span style="color:#2b91af;">Func</span><span>&lt;TEntity, </span><span style="color:#0000ff;">bool</span><span>&gt;&gt; predicate) {
+		</span><span style="color:#0000ff;">return</span><span> Linq.Where(predicate).FirstOrDefault();
+	}
+	</span>
+	</pre>
+<p>There&#39;s one problem with this approach however. As you can see in the Linq property, we are passing in the current generic type of our repository. This means that our entity name mappings are not being used, and even worse than that, NHibernate will throw an error informing us that the type in question could not be found. This is to be expected, recall that we are overriding the implicit entity name, which defaults to the mapped types name, with our own. </p>
+<p>The current implementation of NHibernate.Linq is based on ICriteria, and ISession.CreateCriteria has an overload that will accept an entity name, just like all the other ISession methods. Because the entity name (or the Type) of an ICriteria can not be modified after it is created, we must control the creation of the ICriteria ourselves. The way I chose to do it was by adding a function callback to the QueryOptions object in NHibernate.Linq. This callback accepts the Linq ISession and the current expression tree and returns a new ICriteria. This lets us quickly create a delegate that will call Session.CreateCriteria(string) </p>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;">	<span>
+	</span><span style="color:#0000ff;">protected</span><span> </span><span style="color:#2b91af;">INHibernateQueryable</span><span>&lt;TEntity&gt; Linq {
+		</span><span style="color:#0000ff;">get</span><span> {
+			</span><span style="color:#008000;">//create the new ICriteria with the current entity name, as opposed to the entity type</span>
+			<span style="color:#0000ff;">var</span><span> queryable = Session.Linq&lt;TEntity&gt;();
+			queryable.QueryOptions.CreateCriteraFunction = (s, e) =&gt; s.CreateCriteria(GetEntityName());</span>
+			
+			<span style="color:#0000ff;">return</span><span> queryable;
+		}
+	}
+	</span>
+	</pre>
+<p>Because we are already using this property in our Find() method above, no changes are necessary, it will pick up this functionality automatically. </p>
+<p>The changes to the NHibernate.Linq assembly are quite modest, I have included a diff in this article which you can apply to r.803 to enable this feature. </p>
+</div>
+<div>
+<h2>Some Gotchas</h2>
+<p>As I mentioned previously, NHibernate specifies an entity name for all entities, whether you specify one or not. If you don&#39;t, the entity name is taken from the full name of the mapped type. This means that NHibernate (currently) has no way of telling whether the entity name was explicitly specified, or taken from the class. This has an interesting side effect, which I alluded to at the start of the article, and answers the question of why you cant use a &#39;default&#39; mapping with no explicit entity name. </p>
+<p>The internals of NHibernate still have some assumptions that an entity name will be a full type name, including namespaces. The way things are currently implemented, it will examine the entity name to see if it contains a period (&#39;.&#39;), and if it does, it is assumed to be a class name, if it does not, it is assumed to be a user specified entity name. This means that all the existing code that expects an entity to be identified by its type will continue to work, and therefore, this behaviour is not likely to change any time soon. </p>
+<p>So why is that important? Well, if you provide an entity name that contains a period, some sections of NHibernate (specifically <a href="https://nhibernate.svn.sourceforge.net/svnroot/nhibernate/trunk/nhibernate/src/NHibernate/Impl/SessionFactoryImpl.cs">SessionFactoryImpl.GetImplementors(string)</a>) will assume it to be a type name and will start looking for all the mappings related to the persistent class. The upshot of this is that it will eventually find all of the mappings, regardless of their entity names that we defined, and use them both. </p>
+<p>I first noticed this when I was getting an unexpected number of results in my tests, sometimes twice as many as I was expecting. The NHibernate logs showed that there were two queries being issued, one for each of the mappings, (table and view). It turned out to be the entity names I was using: </p>
+<ul>
+<li>
+			The view specific mapping used the default (that us, unspecified) entity name: &quot;My.Namespace.TypeName&quot;
+		</li>
+<li>
+			The table specific mapping used a mangled type name: &quot;[AllTenants] My.Namespace.TypeName&quot;
+		</li>
+</ul>
+<p>As you can see, both of these entity names contain periods. This caused NHibernate to use both sets of mappings when performing any operation, regardless of the entity name I specified, hence the two queries being issued. The solution is to specify an explicit entity name for both mappings which contains no periods: </p>
+<ul>
+<li>
+			View specific: &quot;My_Namspace_TypeName&quot;
+		</li>
+<li>
+			Table specific: &quot;[AllTenants] My_Namespace_TypeName&quot;
+		</li>
+</ul>
+<p>One downside of this approach, is that you must use the entity name in all references to the persistent class, i.e. in many-to-one and one-to-many elements. If you don&#39;t, you will get an error when you try to create the session factory complaining about a reference to an unmapped type. Remember that we are overriding the default entity name behavior with our own, so NHibernate can no longer identify an entity using its type. In my particular case, I am generating the mappings dynamically, so this extra check is not a big problem, but if you are mapping by hand or using Fluent NHibernate, its something to be aware of. </p>
+</div>
+<div>
+<h2>Conclusion</h2>
+<p>I&#39;ve talked about mapping a single class to multiple tables (or views) using the new entity name feature in the upcoming version of NHibernate. I&#39;ve also provided some suggestions on working with entity specific mappings, as well as some of the things you need to be aware of when using them. Finally, I&#39;ve shown how Linq to NHibernate can be adapted for use with entity names.</p>
+<p>The example given here, of tenant specific filtering, is perhaps not the best way to get the job done. Something more along the lines of <a href="contextual-data-using-nhibernate-filters.aspx.html">this article</a> may be more appropriate for a greenfield application. But if you find yourself dealing with a legacy database that exhibits this requirement, the new features in NHibernate 2.1 will allow you to do so with little or no impact on your domain architecture.</p>
+<h2>Patch for NHibernate.Linq r.803</h2>
+<pre style="overflow-x:auto;background-color:#fafafa;font-family:monospace;">Index: trunk/src/NHibernate.Linq/src/NHibernate.Linq/Visitors/NHibernateQueryTranslator.cs
+===================================================================
+--- trunk/src/NHibernate.Linq/src/NHibernate.Linq/Visitors/NHibernateQueryTranslator.cs	(revision 803)
++++ trunk/src/NHibernate.Linq/src/NHibernate.Linq/Visitors/NHibernateQueryTranslator.cs	(working copy)
+@@ -39,7 +39,12 @@
+ 		{
+ 			if (rootCriteria == null)
+ 			{
+-				rootCriteria = session.CreateCriteria(expr.ElementType, expr.Alias);
++				if (options.CreateCriteraFunction != null) {
++					rootCriteria = options.CreateCriteraFunction(session, expr);
++				}
++				else {
++					rootCriteria = session.CreateCriteria(expr.ElementType, expr.Alias);
++				}
+ 				options.Execute(rootCriteria);
+ 			}
+ 			return expr;
+Index: trunk/src/NHibernate.Linq/src/NHibernate.Linq/QueryOptions.cs
+===================================================================
+--- trunk/src/NHibernate.Linq/src/NHibernate.Linq/QueryOptions.cs	(revision 803)
++++ trunk/src/NHibernate.Linq/src/NHibernate.Linq/QueryOptions.cs	(working copy)
+@@ -1,4 +1,6 @@
+ using System;
++using NHibernate.Criterion;
++using NHibernate.Linq.Expressions;
+ 
+ namespace NHibernate.Linq
+ {
+@@ -9,6 +11,8 @@
+ 	{
+ 		private Action&lt;ICriteria&gt; action;
+ 
++		public Func&lt;ISession, QuerySourceExpression, ICriteria&gt; CreateCriteraFunction;
++
+ 		public QueryOptions()
+ 		{
+ 			this.action = delegate { };
+	</pre>
+</div></div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="CommonContentBox">
+    <div style="float: right;">
+        
+                <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Fhowtonh%252Fmapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html"><img src="../../Themes/hawaii/images/wiki/add-a-new-comment.gif" alt="" style="border-width:0px;" /></a>
+            
+    </div>
+    <h3 class="CommonContentBoxHeader">Recent Comments</h3>
+    <div class="CommonContentBoxContent">
+        
+                <div class="WikiCommentArea">
+                    <div class="WikiCommentBubble">
+                        <div class="WikiCommentBubbleRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                        <div class="WikiCommentContent">
+                            <div class="WikiCommentHeaderIcon"><a href="../../members/RiskFactor/default.aspx.html">
+                                    <img src="http://www.gravatar.com/avatar/60cac72e52b4e1caf283dde972a8fac2.png" alt="" style="border-width:0px;max-height:32px;max-width:32px;" />
+                                </a></div>
+                            
+                            <div class="WikiCommentHeader">
+                                By: 
+                                <a href="../../members/RiskFactor/default.aspx.html">RiskFactor</a>
+                                Posted on 
+                                01-04-2011 17:28
+                                
+                            </div>
+                            <div style="clear: both;"></div>
+                            
+                            <div><p>This is a great article for what it covers! &nbsp;The question I have is if you use this method, how do you actually pass the tenant id to the view so that the view can be properly filtered?</p>
+</div>
+
+                            <div style="float: right; font-size: 80%;">
+                                
+                                
+                            </div><div style="clear: both;"></div>
+                        </div>
+                        <div class="WikiCommentBubbleRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    </div>
+                    <div class="WikiCommentArrow"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div><div class="r6"></div><div class="r7"></div><div class="r8"></div><div class="r9"></div><div class="r10"></div></div>
+                </div>     
+            
+                <a href="mapping-the-same-class-to-a-view-and-a-table-using-entity-name/comments.aspx.html">View All</a>
+            
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+var ctl00_ctl00_bcr_bcr_ctl08 = new RateableContentYesNoRating('ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08_image','ctl00_ctl00_bcr_bcr_ctl08_percent','ctl00_ctl00_bcr_bcr_ctl08_percenttext','ctl00_ctl00_bcr_bcr_ctl08_buttons','ctl00_ctl00_bcr_bcr_ctl08_thanks','WikiRating','WikiRatingActive',new Function('r','s','f','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl08\',r,s,r,f,false)'));
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_bcr_bcr_ctl09_ctl01 = new Telligent_InlineEditorPanel('ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01_State','ctl00_ctl00_bcr_bcr_ctl09_ctl00',false,null,null,null);
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

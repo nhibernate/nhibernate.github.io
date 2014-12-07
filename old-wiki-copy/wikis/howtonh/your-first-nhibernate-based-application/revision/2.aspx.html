@@ -1,0 +1,959 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="Your first NHibernate based application (RSS 2.0)" href="../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="How to (RSS 2.0)" href="http://nhforge.org/wikis/howtonh/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Announcements (RSS 2.0)" href="../../../../members/fabiomaulo/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Comments (RSS 2.0)" href="../../../../members/fabiomaulo/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Activities (RSS 2.0)" href="../../../../members/fabiomaulo/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Friends Activity (RSS 2.0)" href="../../../../members/fabiomaulo/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Your first NHibernate based application: Revision #2 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="2.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2ODYxODYyODBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRS2dku67jB2SYXikwjMUBFR1YWDw==" />
+</div>
+
+
+<script src="../../../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="http://nhforge.org/login.aspx?ReturnUrl=%2fwikis%2fhowtonh%2fyour-first-nhibernate-based-application%2frevision%2f2.aspx">Sign in </a>
+         | <a href="../../../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_ViewRevision">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../../../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../../../general/default.aspx.html">General</a></li>
+                    
+                        <li><a class="Selected" href="../../default.aspx.html">How to</a></li>
+                        
+                    
+                        
+                        <li><a href="../../../patternsandpractices/default.aspx.html">Patterns&Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../../../index.html">Wikis</a>
+        &raquo;
+        <a href="../../default.aspx.html">How to</a>
+        &raquo;
+        <a href="../../your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a>
+        &raquo;
+        Revision #2
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Your first NHibernate based application: 
+            Revision #2
+        </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="../../default.aspx.html">Home</a></li><li><a href="../rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Attachments</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarList"><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/solutionex.png">solutionex.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/ProductDef.png">ProductDef.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/properties.png">properties.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/AddNewItem.png">AddNewItem.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/SharedLibs.png">SharedLibs.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/sqlce.png">sqlce.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/solutionex1.png">solutionex1.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/AppProperties.png">AppProperties.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RunTest.png">RunTest.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestResult.png">TestResult.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RSTestinfo.png">RSTestinfo.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RSRunTest.png">RSRunTest.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/InCaseOfPb.png">InCaseOfPb.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/ShouldBeVirtual.png">ShouldBeVirtual.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestOutput.png">TestOutput.png</a></li><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestSucceed.png">TestSucceed.png</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="../../lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="../../configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="../../get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._collapse(30, this); return false;"><img src="../../../../WebResource.axd%3Fd=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000" alt="-" style="border-width: 0;" /></a><a href="../../your-first-nhibernate-based-application.aspx.html" class="Selected">Your first NHibernate based application</a><div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-3-0.aspx.html">nhibernate 3.0</a></li></ul></div></li><li><a href="../../run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="../../pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../using-user-types.aspx.html">Using User Types</a></li><li><a href="../../lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="../../dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="../../contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="../../mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a></li><li><a href="../../creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="../../use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="../../retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="../../tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="../../nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="../../the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="../../simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="../../prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="../../creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="../../currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="../../customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="../../how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="../../localization-techniques.aspx.html">Localization techniques</a></li><li><a href="../../calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="../../how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="../../nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="../../using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="../../keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="../../enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="../../hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="../../nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="../../conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="../../conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="../../view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="../../net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="../../a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="../../checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="../../mapping-tables.aspx.html">Mapping tables</a></li><li><a href="../../wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="../../lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="../../configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="../../get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._collapse(30, this); return false;"><img src="../../../../WebResource.axd%3Fd=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000" alt="-" style="border-width: 0;" /></a><a href="../../your-first-nhibernate-based-application.aspx.html" class="Selected">Your first NHibernate based application</a><div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-3-0.aspx.html">nhibernate 3.0</a></li></ul></div></li><li><a href="../../run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="../../pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../using-user-types.aspx.html">Using User Types</a></li><li><a href="../../lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="../../dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="../../contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="../../mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a></li><li><a href="../../creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="../../use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="../../retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="../../tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="../../nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="../../the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="../../simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="../../prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="../../creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="../../currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="../../customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="../../how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="../../localization-techniques.aspx.html">Localization techniques</a></li><li><a href="../../calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="../../how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="../../nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="../../using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="../../keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="../../enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="../../hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="../../nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="../../conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="../../conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="../../view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="../../net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="../../a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="../../checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="../../mapping-tables.aspx.html">Mapping tables</a></li><li><a href="../../wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag2"><a href="../../tags/Architecture/default.aspx.html" rel="tag">Architecture</a></li>
+<li class="CommonTag6"><a href="../../tags/Audit/default.aspx.html" rel="tag">Audit</a></li>
+<li class="CommonTag6"><a href="../../tags/Concurrency/default.aspx.html" rel="tag">Concurrency</a></li>
+<li class="CommonTag6"><a href="../../tags/Configuration/default.aspx.html" rel="tag">Configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/convention+over+configuration/default.aspx.html" rel="tag">convention over configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/Conversation/default.aspx.html" rel="tag">Conversation</a></li>
+<li class="CommonTag6"><a href="../../tags/entity+name/default.aspx.html" rel="tag">entity name</a></li>
+<li class="CommonTag3"><a href="../../tags/events/default.aspx.html" rel="tag">events</a></li>
+<li class="CommonTag6"><a href="../../tags/Filters/default.aspx.html" rel="tag">Filters</a></li>
+<li class="CommonTag2"><a href="../../tags/FluentNH/default.aspx.html" rel="tag">FluentNH</a></li>
+<li class="CommonTag6"><a href="../../tags/IIdentifierGenerator/default.aspx.html" rel="tag">IIdentifierGenerator</a></li>
+<li class="CommonTag6"><a href="../../tags/Interceptor/default.aspx.html" rel="tag">Interceptor</a></li>
+<li class="CommonTag6"><a href="../../tags/IoC+container/default.aspx.html" rel="tag">IoC container</a></li>
+<li class="CommonTag2"><a href="../../tags/IUserType/default.aspx.html" rel="tag">IUserType</a></li>
+<li class="CommonTag3"><a href="../../tags/lazy+loading/default.aspx.html" rel="tag">lazy loading</a></li>
+<li class="CommonTag6"><a href="../../tags/listener/default.aspx.html" rel="tag">listener</a></li>
+<li class="CommonTag6"><a href="../../tags/log/default.aspx.html" rel="tag">log</a></li>
+<li class="CommonTag6"><a href="../../tags/logging/default.aspx.html" rel="tag">logging</a></li>
+<li class="CommonTag1"><a href="../../tags/Mapping/default.aspx.html" rel="tag">Mapping</a></li>
+<li class="CommonTag6"><a href="../../tags/Mapping+by+code/default.aspx.html" rel="tag">Mapping by code</a></li>
+<li class="CommonTag1"><a href="../../tags/Nhibernate/default.aspx.html" rel="tag">Nhibernate</a></li>
+<li class="CommonTag6"><a href="../../tags/Nhibernate+Documentation/default.aspx.html" rel="tag">Nhibernate Documentation</a></li>
+<li class="CommonTag3"><a href="../../tags/property/default.aspx.html" rel="tag">property</a></li>
+<li class="CommonTag2"><a href="../../tags/query/default.aspx.html" rel="tag">query</a></li>
+<li class="CommonTag1"><a href="../../tags/Session/default.aspx.html" rel="tag">Session</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="../../tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../resized-image.ashx/__size/50x50/__key/CommunityServer.Components.Avatars/00.00.00.21.02/4TA8XMWXSUMY.png" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/fabiomaulo/default.aspx.html">Fabio Maulo</a><br/> on 09-16-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/mStyle/default.aspx.html">mStyle</a><br/> on 04-16-2011</div></div><div class="WikiPageDetailsSummaryArea"><strong>112</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden; width: 100%;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../../your-first-nhibernate-based-application.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /></a>                            
+                                <a href="../../your-first-nhibernate-based-application.aspx.html">Article</a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                                    <div class="CommonPaneTab">
+                                    
+                                    
+                                    </div>
+                                
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../comments.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../comments.aspx.html">Comments</a> (119)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <a href="../history.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../history.aspx.html">History</a> (17)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">
+                <h2 class="CommonContentBoxHeaderSmall"><span><a href="../../your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a></span></h2>
+                <div><h4><strong><span style="color:#ff8000;">Wiki extracted from the original blog post of</span>&nbsp;<span style="font-weight:normal;"><a href="../../../../members/gabriel.schenker/default.aspx.html">Gabriel&nbsp;<span style="font-weight:normal;"><strong>Schenker</strong></span></a></span></strong></h4>
+<h4><strong>Define the Domain</strong></h4>
+<p>Lets start by defining a very simple domain. For the moment it consists of one entity called <strong>Product</strong>. The product has 3 properties Name, Category and Discontinued.</p>
+<p style="padding-left:210px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/ProductDef.png" alt="" /></p>
+<p>Add a folder Domain to the FirstSample project of your solution. Add a new class <strong>Product.cs</strong> to this folder. The code is very simple and uses automatic properties (a feature of the new C# 3.0 compiler) </p>
+<div>
+<div>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">namespace</span> FirstSolution.Domain
+{
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Product
+    {
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Category { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> Discontinued { get; set; }
+    }
+}</pre>
+</div>
+</div>
+</div>
+<p>Now we want to be able to persist instances of this entity in a (relational) database. We have chosen <strong>NHibernate</strong>for this task. An instance of an entity in the domain corresponds to a <strong>row in a table</strong> in the database. So we have to define a mapping between the entity and the corresponding table in the database. This mapping can be done either by defining a mapping file (an xml-document) or by decorating the entity with attributes. I&#39;ll start with the mapping file.</p>
+<h4><strong>Define the Mapping</strong></h4>
+<p>Create a folder <strong>Mappings</strong> in the FirstSample project. Add a new xml-document to this folder and call it <strong><strong>Product</strong>.hbm.xml</strong>. Please note the &quot;hbm&quot; part of the file name. This is a convention used by NHibernate to automatically recognize the file as a mapping file. Define &quot;Embedded Resource&quot; as <strong>Build Action</strong> for this xml file.</p>
+<p>In the Windows Explorer locate the nhibernate-mapping.xsd in the src folder of NHibernate and copy it to your SharedLibs folder. We can now use this xml schema definition file when defining our mapping files. VS will then provide intellisense and validation when editing an xml mapping document.</p>
+<p>Back in VS add the schema to the Product.hbm.xml file</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/properties.png" alt="" /></p>
+<p>Let&#39;s start now. Each mapping file has to define a &lt;hibernate-mapping&gt; root node</p>
+<div id="scid:F2210F5F-69EB-4d4c-AFF7-B8A050E9CC72:73647d35-a397-46d8-ad1c-a9edf8bbe509" class="wlWriterSmartContent">
+<pre><div><pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-mapping</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&quot;urn:nhibernate-mapping-2.2&quot;</span> 
+                   <span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=&quot;FirstSolution&quot;</span> 
+                   <span style="color:#ff0000;">namespace</span><span style="color:#0000ff;">=&quot;FirstSolution.Domain&quot;</span><span style="color:#0000ff;">&gt;</span>
+ 
+  <span style="color:#008000;">&lt;!-- more mapping info here --&gt;</span>
+  
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-mapping</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+</pre>
+</div>
+<p>In a mapping file when referencing a domain class you always have to provide the fully qualified name of the class (e.g. FirstSample.Domain.Product, FirstSample). To make the xml less verbose you can define the assembly name (in which the domain classes are implemented and the namespace of the domain classes in the two attributes <strong>assembly</strong> and <strong>namespace</strong> of the root node. It&#39;s similar to the <strong>using</strong> statement in C#.</p>
+<p>Now we have to first define a <strong>primary key</strong> for the product entity. Technically we could take the property <strong>Name</strong> of the product since this property must be defined and has to be unique. But it is common to use a surrogate key instead. For thus we add a property to our entity and call it <strong>Id</strong>. We use <strong>Guid</strong> as the type of the Id but it can as well be an int or a long.</p>
+<div>
+<div>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> System;
+ 
+<span style="color:#0000ff;">namespace</span> FirstSolution.Domain
+{
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Product
+    {
+        <span style="color:#0000ff;">public</span> Guid Id { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Category { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> Discontinued { get; set; }
+    }
+}</pre>
+</div>
+</div>
+</div>
+<p>The complete mapping file</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-mapping</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&quot;urn:nhibernate-mapping-2.2&quot;</span> 
+                   <span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=&quot;FirstSolution&quot;</span> 
+                   <span style="color:#ff0000;">namespace</span><span style="color:#0000ff;">=&quot;FirstSolution.Domain&quot;</span><span style="color:#0000ff;">&gt;</span>
+  
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">class</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Product&quot;</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">id</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Id&quot;</span><span style="color:#0000ff;">&gt;</span>
+      <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">generator</span> <span style="color:#ff0000;">class</span><span style="color:#0000ff;">=&quot;guid&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">id</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Name&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Category&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Discontinued&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+  <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">class</span><span style="color:#0000ff;">&gt;</span>
+  
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-mapping</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+<p>NHibernate doesn&#39;t get in our way such as that it defines many reasonable defaults. So if you don&#39;t provide a column name for a property explicitly it will name the column according to the property. Or NHibernate can automatically infer the name of the table or the type of the column from the class definition. As a consequence my xml mapping file is not cluttered with redundant information. Please refer to the online documentation for more detailed explanation of the mapping. You can find it <a href="http://www.hibernate.org/hib_docs/nhibernate/1.2/reference/en/html/mapping.html">here</a>.</p>
+<p>Your solution explorer should look like this now (<strong>Domain.cd</strong> contains the class diagram of our simple domain)</p>
+<p style="padding-left:150px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/solutionex.png" alt="" /></p>
+<h4><strong>Configure NHibernate</strong></h4>
+<p>We now have to tell NHibernate which database product we want to use and provide it the connection details in form of a connection string. NHibernate supports many many database products!</p>
+<p>Add a new xml file to the FirstSolution project and call it hibernate.cfg.xml. Set its property &quot;<strong>Copy to Output</strong>&quot; to &quot;<strong>Copy always</strong>&quot;. Since we are using SQL Server Compact Edition in this first sample enter the following information into the xml file</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-configuration</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&quot;urn:nhibernate-configuration-2.2&quot;</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">session-factory</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;connection.provider&quot;</span><span style="color:#0000ff;">&gt;</span>NHibernate.Connection.DriverConnectionProvider<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;dialect&quot;</span><span style="color:#0000ff;">&gt;</span>NHibernate.Dialect.MsSqlCeDialect<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;connection.driver_class&quot;</span><span style="color:#0000ff;">&gt;</span>NHibernate.Driver.SqlServerCeDriver<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;connection.connection_string&quot;</span><span style="color:#0000ff;">&gt;</span>Data Source=FirstSample.sdf<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;show_sql&quot;</span><span style="color:#0000ff;">&gt;</span>true<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">session-factory</span><span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-configuration</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+<p>With this configuration file we tell NHibernate that we want to use MS SQL Server Compact Edition as our target database and that the name of the database shall be FirstSample.sdf (=connection string). We have also defined that we want to see the <strong>SQL</strong> NHibernate generates and sends to the datbase (highly recommended for debugging purposes during development). Double check that you have no typos in the code!</p>
+<p>Add an empty database called <strong>FirstSample.sdf</strong> to the FirstSample project (choose <strong>Local Database</strong> as template)</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/AddNewItem.png" alt="" /></p>
+<p>Click Add and ignore the DataSet creation wizard (just hit Cancel).</p>
+<h4><strong>Test the Setup</strong></h4>
+<p>It&#39;s now time to test our setup. First verify that you have the following files in your SharedLibs folder</p>
+<p style="padding-left:180px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/SharedLibs.png" alt="" /></p>
+<p>The last 8 files you can find in the &quot;<strong>Microsoft SQL Server Compact Edition</strong>&quot; directory in your Programs folder.</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/sqlce.png" alt="" /></p>
+<p>Note: the <strong>System.Data.SqlServerCe.dll</strong> is located in the sub-folder <strong>Desktop</strong>.</p>
+<p>All other files can be found in the NHibernate folder</p>
+<p>Add a reference to the FirstSample project in your test project. Additionally add references to NHibernate.dll, nunit.framework.dll and Systm.Data.SqlServerCe.dll (remember to reference the files located in the SharedLibs folder!). Pay attention to set the property &quot;<strong>Copy Local</strong>&quot; to <strong>true</strong> for the assembly System.Data.SqlServerCe.dll since by default it is set to false!</p>
+<p>Add a class called <strong>GenerateSchema_Fixture</strong> to your test project. Your test project should now look like this</p>
+<p style="padding-left:120px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/solutionex1.png" alt="" /></p>
+<p>We further need the 7 files sqce*.dll in the output directory. We can do this by using a post-build event in VS. Enter the following command in the &quot;Post-build event command line&quot;</p>
+<p>copy $(ProjectDir)..\..\SharedLibs\sqlce*.dll $(ProjectDir)$(OutDir)</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/AppProperties.png" alt="" /></p>
+<p>Now add the following code to the GenerateSchema_Fixture file</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:370px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> FirstSolution.Domain;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NHibernate.Cfg;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NHibernate.Tool.hbm2ddl;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NUnit.Framework;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">namespace</span> FirstSolution.Tests</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">{</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    [TestFixture]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> GenerateSchema_Fixture</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        [Test]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_generate_schema()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            var cfg = <span style="color:#0000ff;">new</span> Configuration();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            cfg.Configure();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            cfg.AddAssembly(<span style="color:#0000ff;">typeof</span> (Product).Assembly);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">new</span> SchemaExport(cfg).Execute(<span style="color:#0000ff;">false</span>, <span style="color:#0000ff;">true</span>, <span style="color:#0000ff;">false</span>, <span style="color:#0000ff;">false</span>);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">}</pre>
+</div>
+</div>
+</div>
+<p>The first line of the test method creates a new instance of the NHibernate configuration class. This class is used to configure NHibernate. In the second line we tell NHibernate to configure itself. NHibernate will look out for configuration information since we do not provide any information here in the test method. So NHibernate will search for a file called <strong>hibernate.cfg.xml</strong> in the output directory. That&#39;s exactly what we want since we have defined our settings in this file.</p>
+<p>In the third line of the code we tell NHibernate that it can find mapping information in the assembly which contains also the class Product. At the time being it will only find one such file (Product.hbm.xml) as an embedded resource.</p>
+<p>The fourth line of code uses the SchemaExport helper class of NHibernate to auto-&quot;magically&quot; generate the schema in the database for us.</p>
+<p>Note: with this test method we do <strong>NOT</strong> want to find out whether NHibernate does its job correctly (you can be sure it does) but rater whether we have setup our system correctly.</p>
+<p>If you have <a href="http://www.testdriven.net/">TestDriven.Net</a> installed you can now just right click inside the test method and choose &quot;<strong>Run Test(s)</strong>&quot; to execute the test.</p>
+<p style="padding-left:30px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RunTest.png" alt="" /></p>
+<p>If every thing is ok you should see the following result in the output window</p>
+<p style="padding-left:30px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestResult.png" alt="" /></p>
+<p>If you have <a href="http://www.jetbrains.com/resharper/">ReSharper</a> installed you can just start the test by clicking the yellow-green circle on the left border and choose <strong>Run</strong>.</p>
+<p style="padding-left:120px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RSTestinfo.png" alt="" /></p>
+<p>The result is as follows</p>
+<p style="padding-left:90px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/RSRunTest.png" alt="" /></p>
+<h4><strong>In case of Problems</strong></h4>
+<p>If your test fails double check that you find the following files in your target directory (that is: m:dev\projects\FirstSolution\src\FirstSolution.Tests\bin\debug)</p>
+<p style="padding-left:150px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/InCaseOfPb.png" alt="" /></p>
+<p>Double check also if you have no typos in the NHibernate configuration file (hibernate.cfg.xml) or in the mapping file (Product.hbm.xml). Finally check whether you have set the &quot;<strong>Build Action</strong>&quot; of the mapping file (Product.hbm.xml) to &quot;<strong>Embedded Resource</strong>&quot;. Only continue if the test succeeds.</p>
+<h4><strong>Our first CRUD operations</strong></h4>
+<p>Now obviously our system is ready to start. We have successfully implemented our Domain, defined the mapping files and configured NHibernate. Finally we have used NHibernate to automatically generate the database schema from our Domain (and our mapping files).</p>
+<p>In the spirit of DDD (see e.g. <a href="http://domaindrivendesign.org/books/">Domain Driven Design</a> by Eric Evans) we define a repository for all crud operations (create, read, update and delete). The repository interface is part of the domain where as the implementation is not! The implementation is infrastructure specific. We want to keep our domain persistence ignorant (PI).</p>
+<p>Add a new interface to the domain folder of our FirstSolution project. Call it IProductRepository. Let&#39;s define the following interface</p>
+<div>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:269px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> System;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> System.Collections.Generic;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">namespace</span> FirstSolution.Domain</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">{</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">interface</span> IProductRepository</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">void</span> Add(Product product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">void</span> Update(Product product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">void</span> Remove(Product product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        Product GetById(Guid productId);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        Product GetByName(<span style="color:#0000ff;">string</span> name);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        ICollection&lt;Product&gt; GetByCategory(<span style="color:#0000ff;">string</span> category);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">}</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Add a class ProductRepository_Fixture to the test project of the solution and add the following code</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:270px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">[TestFixture]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ProductRepository_Fixture</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">private</span> ISessionFactory _sessionFactory;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">private</span> Configuration _configuration;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        [TestFixtureSetUp]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> TestFixtureSetUp()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            _configuration = <span style="color:#0000ff;">new</span> Configuration();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            _configuration.Configure();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            _configuration.AddAssembly(<span style="color:#0000ff;">typeof</span> (Product).Assembly);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            _sessionFactory = _configuration.BuildSessionFactory();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    }</pre>
+</div>
+</div>
+</div>
+<p>In the fourth line of the method TestFixtureSetUp we create a session factory. This is an expensive process and should thus be executed only once. That&#39;s the reason why I put it into this method which is only executed once during a test cicle.</p>
+<p>To keep our test methods side effect free we re-create our database schema before the execution of each test method. Thus we add the following method</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">[SetUp]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> SetupContext()
+        {
+            <span style="color:#0000ff;">new</span> SchemaExport(_configuration).Execute(<span style="color:#0000ff;">false</span>, <span style="color:#0000ff;">true</span>, <span style="color:#0000ff;">false</span>, <span style="color:#0000ff;">false</span>);
+        }</pre>
+</div>
+<p>And now we can implement the test method to add a new product instance to the database. Start by adding a new folder called Repositories to your <strong>FirstSolution</strong> project. Add a class <strong>ProductRepository</strong> to this folder. Make the<strong>ProductRepository</strong> inherit from the interface <strong>IProductRepository</strong>.</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:652px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> System;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> System.Collections.Generic;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> FirstSolution.Domain;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">namespace</span> FirstSolution.Repositories</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">{</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> ProductRepository : IProductRepository</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Add(Product product)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Update(Product product)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Remove(Product product)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> Product GetById(Guid productId)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> Product GetByName(<span style="color:#0000ff;">string</span> name)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> ICollection&lt;Product&gt; GetByCategory(<span style="color:#0000ff;">string</span> category)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">throw</span> <span style="color:#0000ff;">new</span> NotImplementedException();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">}</pre>
+</div>
+</div>
+</div>
+<h6><strong>Manipulating Data</strong></h6>
+<p>Now go back to the ProductRepository_Fixture test class and implement the first test method</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">      [Test]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_add_new_product()
+        {
+            var product = <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Apple&quot;</span>, Category = <span style="color:#006080;">&quot;Fruits&quot;</span>};
+            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();
+            repository.Add(product);
+        }</pre>
+</div>
+</div>
+<p>The first run of the test method will fail since we have not yet implemented the <strong>Add</strong> method in the repository class. Let&#39;s do it. <strong>But wait</strong>, we have to define a little helper class first which provides us session objects on demand.</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:523px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> FirstSolution.Domain;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NHibernate;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NHibernate.Cfg;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">namespace</span> FirstSolution.Repositories</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">{</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> NHibernateHelper</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">static</span> ISessionFactory _sessionFactory;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">static</span> ISessionFactory SessionFactory</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            get</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                <span style="color:#0000ff;">if</span>(_sessionFactory == <span style="color:#0000ff;">null</span>)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                    var configuration = <span style="color:#0000ff;">new</span> Configuration();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                    configuration.Configure();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                    configuration.AddAssembly(<span style="color:#0000ff;">typeof</span>(Product).Assembly);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                    _sessionFactory = configuration.BuildSessionFactory();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                <span style="color:#0000ff;">return</span> _sessionFactory;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> ISession OpenSession()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">return</span> SessionFactory.OpenSession();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">}</pre>
+</div>
+</div>
+</div>
+<p>This class creates a session factory only the first time a client needs a new session.</p>
+<p>Now we can define the Add method in the ProductRepository as follows</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Add(Product product)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+                <span style="color:#0000ff;">using</span> (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Save(product);
+                    transaction.Commit();
+                }
+        }</pre>
+</div>
+</div>
+<p>The second run of the test method will again fail with the following message</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/ShouldBeVirtual.png" alt="" /></p>
+<p>That&#39;s because NHibernate is by default configured to use<strong>&nbsp;<a href="http://martinfowler.com/eaaCatalog/lazyLoad.html">lazy load</a></strong> for all entities. That is the recommended approach and I warmly recommend not to change it for a maximum of flexibility.</p>
+<p>How can we solve this issue? It&#39;s easy we have to just make all our properties (and methods) of the domain object(s) virtual. Let&#39;s do this for our Product class</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Product
+    {
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">virtual</span> Guid Id { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">virtual</span> <span style="color:#0000ff;">string</span> Name { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">virtual</span> <span style="color:#0000ff;">string</span> Category { get; set; }
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">virtual</span> <span style="color:#0000ff;">bool</span> Discontinued { get; set; }
+    }</pre>
+</div>
+</div>
+<p>Now run the test again. It should succeed and we get the following output</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestOutput.png" alt="" /></p>
+<p>Note the sql spit out by NHibernate.</p>
+<p>Now we think that we have successfully inserted a new product into the database. But let&#39;s test it whether it is really so. Let&#39;s extend our test method</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:313px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        [Test]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_add_new_product()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            var product = <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Apple&quot;</span>, Category = <span style="color:#006080;">&quot;Fruits&quot;</span>};</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            repository.Add(product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#008000;">// use session to try to load the product</span></pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#0000ff;">using</span>(ISession session = _sessionFactory.OpenSession())</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                var fromDb = session.Get&lt;Product&gt;(product.Id);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                <span style="color:#008000;">// Test that the product was successfully inserted</span></pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                Assert.IsNotNull(fromDb);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                Assert.AreNotSame(product, fromDb);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                Assert.AreEqual(product.Name, fromDb.Name);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                Assert.AreEqual(product.Category, fromDb.Category);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+</div>
+</div>
+</div>
+<p>Run the test again. Hopefully it will succeed...</p>
+<p>Now we are ready to implement also the other methods of the repository. For testing this we would rather have a repository (that is database table) already containing some products. Nothing easier than this. Just add a method CreateInitialData to the test class as follows</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:355px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"><span style="color:#0000ff;">private</span> <span style="color:#0000ff;">readonly</span> Product[] _products = <span style="color:#0000ff;">new</span>[]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                 {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                     <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Melon&quot;</span>, Category = <span style="color:#006080;">&quot;Fruits&quot;</span>},</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                     <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Pear&quot;</span>, Category = <span style="color:#006080;">&quot;Fruits&quot;</span>},</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                     <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Milk&quot;</span>, Category = <span style="color:#006080;">&quot;Beverages&quot;</span>},</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                     <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Coca Cola&quot;</span>, Category = <span style="color:#006080;">&quot;Beverages&quot;</span>},</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                     <span style="color:#0000ff;">new</span> Product {Name = <span style="color:#006080;">&quot;Pepsi Cola&quot;</span>, Category = <span style="color:#006080;">&quot;Beverages&quot;</span>},</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                 };</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">void</span> CreateInitialData()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#0000ff;">using</span>(ISession session = _sessionFactory.OpenSession())</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                <span style="color:#0000ff;">using</span>(ITransaction transaction = session.BeginTransaction())</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                    <span style="color:#0000ff;">foreach</span> (var product <span style="color:#0000ff;">in</span> _products)</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                        session.Save(product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                    transaction.Commit();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        }</pre>
+</div>
+</div>
+</div>
+<p>Call this method from the SetupContext method (after the create schema call) and we are done. Now each time after the database schema is created the database is populated with some products.</p>
+<p>Let&#39;s test the Update method of the repository with the following code</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:269px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<div style="font-size:8pt;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        [Test]</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_update_existing_product()</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            var product = _products[0];</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            product.Name = <span style="color:#006080;">&quot;Yellow Pear&quot;</span>;</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            repository.Update(product);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"> </pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            <span style="color:#008000;">// use session to try to load the product</span></pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            <span style="color:#0000ff;">using</span> (ISession session = _sessionFactory.OpenSession())</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">            {</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">                var fromDb = session.Get&lt;Product&gt;(product.Id);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">                Assert.AreEqual(product.Name, fromDb.Name);</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">            }</pre>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:white;border-style:none;padding:0px;">        }</pre>
+</div>
+</div>
+</div>
+<p>When running for the first time this code will fail since the Update method has not yet been implemented in the repository. <strong>Note</strong>: This is the expected behavior since in TDD the first time you run a test it should always fail!</p>
+<p>Analogous to the Add method we implement the Update method of the repository. The only difference is that we call the update method of the NHibernate session object instead of the save method.</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Update(Product product)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+            <span style="color:#0000ff;">using</span> (ITransaction transaction = session.BeginTransaction())
+            {
+                session.Update(product);
+                transaction.Commit();
+            }
+        }</pre>
+</div>
+</div>
+<p>Run the test again an watch it succeed.</p>
+<p><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/TestSucceed.png" alt="" /></p>
+<p>The delete method is straight forward. When testing whether the record has really been deleted we just assert that the value returned by the session&#39;s get method is equal to null. Here is the test method</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:227px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">       [Test]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_remove_existing_product()
+        {
+            var product = _products[0];
+            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();
+            repository.Remove(product);
+ 
+            <span style="color:#0000ff;">using</span> (ISession session = _sessionFactory.OpenSession())
+            {
+                var fromDb = session.Get&lt;Product&gt;(product.Id);
+                Assert.IsNull(fromDb);
+            }
+        }</pre>
+</div>
+</div>
+<p>and here the implementation of the Remove method in the repository</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Remove(Product product)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+                <span style="color:#0000ff;">using</span> (ITransaction transaction = session.BeginTransaction())
+                {
+                    session.Delete(product);
+                    transaction.Commit();
+                }
+        }</pre>
+</div>
+</div>
+<h6><strong>Querying the Database</strong></h6>
+<p>We still have to implement the three methods which query the database for objects. Let&#39;s start with the most easy one, the GetById. First we write the test</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        [Test]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_get_existing_product_by_id()
+        {
+            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();
+            var fromDb = repository.GetById(_products[1].Id);
+            Assert.IsNotNull(fromDb);
+            Assert.AreNotSame(_products[1], fromDb);
+            Assert.AreEqual(_products[1].Name, fromDb.Name);
+        }</pre>
+</div>
+</div>
+<p>and then the code to fulfill the test</p>
+<div>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> Product GetById(Guid productId)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+                <span style="color:#0000ff;">return</span> session.Get&lt;Product&gt;(productId);
+        }</pre>
+</div>
+</div>
+</div>
+<p>Now that was easy. For the following two methods we use a new method of the session object. Let&#39;s start with the GetByName method. As usual we write the test first</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">       [Test]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_get_existing_product_by_name()
+        {
+            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();
+            var fromDb = repository.GetByName(_products[1].Name);
+ 
+            Assert.IsNotNull(fromDb);
+            Assert.AreNotSame(_products[1], fromDb);
+            Assert.AreEqual(_products[1].Id, fromDb.Id);
+        }</pre>
+</div>
+</div>
+<p>The implementation of the GetByName method can be done by using two different approaches. The first is using HQL (Hibernate Query Language) and the second one HCQ (Hibernate Criteria Query). Let&#39;s start with HQL. HQL is a object oriented query language similar (but not equal to) SQL.</p>
+<div>
+<div>&nbsp;</div>
+</div>
+<p>In the above sample I have introduced a commonly used technique when using NHibernate. It&#39;s called <a href="http://en.wikipedia.org/wiki/Fluent_interface">fluent interfaces</a>. As a result the code is less verbose and easier to understand. You can see that a HQL query is a string which can have embedded (named) parameters. Parameters are prefixed by a &#39;:&#39;. NHibernate defines many helper methods (like SetString used in the example) to assign values of various types to those parameters. Finally by using UniqueResult I tell NHibernate that I expect only one record to return. If more than one record is returned by the HQL query then an exception is raised. To get more information about HQL please read the <a href="http://www.hibernate.org/hib_docs/nhibernate/1.2/reference/en/html/queryhql.html">online documentation</a>.</p>
+<p>The second version uses a criteria query to search the requested product.</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> Product GetByName(<span style="color:#0000ff;">string</span> name)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+            {
+                Product product = session
+                    .CreateCriteria(<span style="color:#0000ff;">typeof</span>(Product))
+                    .Add(Restrictions.Eq(<span style="color:#006080;">&quot;Name&quot;</span>, name))
+                    .UniqueResult&lt;Product&gt;();
+                <span style="color:#0000ff;">return</span> product;
+            }
+        }</pre>
+</div>
+</div>
+<p>Many users of NHibernate think that this approach is more object oriented. On the other hand a complex query written with criteria syntax can quickly become difficult to understand.</p>
+<p>The last method to implement is GetByCategory. This method returns a list of products. The test can be implemented as follows</p>
+<div>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;height:314px;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        [Test]
+        <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Can_get_existing_products_by_category()
+        {
+            IProductRepository repository = <span style="color:#0000ff;">new</span> ProductRepository();
+            var fromDb = repository.GetByCategory(<span style="color:#006080;">&quot;Fruits&quot;</span>);
+ 
+            Assert.AreEqual(2, fromDb.Count);
+            Assert.IsTrue(IsInCollection(_products[0], fromDb));
+            Assert.IsTrue(IsInCollection(_products[1], fromDb));
+        }
+ 
+        <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">bool</span> IsInCollection(Product product, ICollection&lt;Product&gt; fromDb)
+        {
+            <span style="color:#0000ff;">foreach</span> (var item <span style="color:#0000ff;">in</span> fromDb)
+                <span style="color:#0000ff;">if</span> (product.Id == item.Id)
+                    <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">true</span>;
+            <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">false</span>;
+        }</pre>
+</div>
+</div>
+<p>and the method itself might contain the following code</p>
+<div style="font-size:8pt;margin:20px 0px 10px;overflow:auto;width:97.5%;cursor:text;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;max-height:200px;border:gray 1px solid;padding:4px;">
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">        <span style="color:#0000ff;">public</span> ICollection&lt;Product&gt; GetByCategory(<span style="color:#0000ff;">string</span> category)
+        {
+            <span style="color:#0000ff;">using</span> (ISession session = NHibernateHelper.OpenSession())
+            {
+                var products = session
+                    .CreateCriteria(<span style="color:#0000ff;">typeof</span>(Product))
+                    .Add(Restrictions.Eq(<span style="color:#006080;">&quot;Category&quot;</span>, category))
+                    .List&lt;Product&gt;();
+                <span style="color:#0000ff;">return</span> products;
+            }
+        }</pre>
+</div>
+<h4><strong>Summary</strong></h4>
+<p>In this article I have shown you how to implement a basic sample domain, define the mapping to a database and how to configure NHibernate to be able to persist domain objects in the database. I have shown you how to typically write and test CRUD methods for your domain objects. I have taken MS SQL Compact Edition as sample database but any other supported database can be used (you only have to change the hibernate.cfg.xml file accordingly). Ee have no dependencies on external frameworks or tools other than the database and NHibernate itself (.NET of course never counts here).</p></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/your-first-nhibernate-based-application/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/your-first-nhibernate-based-application/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/your-first-nhibernate-based-application/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/your-first-nhibernate-based-application/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

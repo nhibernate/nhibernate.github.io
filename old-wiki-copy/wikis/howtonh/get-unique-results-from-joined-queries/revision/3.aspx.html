@@ -1,0 +1,493 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="Get unique results from joined queries (RSS 2.0)" href="../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="How to (RSS 2.0)" href="http://nhforge.org/wikis/howtonh/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Ken Egozi&#39;s Announcements (RSS 2.0)" href="../../../../members/kenegozi/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Ken Egozi&#39;s Comments (RSS 2.0)" href="../../../../members/kenegozi/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Ken Egozi&#39;s Activities (RSS 2.0)" href="../../../../members/kenegozi/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Ken Egozi&#39;s Friends Activity (RSS 2.0)" href="../../../../members/kenegozi/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Get unique results from joined queries: Revision #3 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="3.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2ODYxODYyODBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRS2dku67jB2SYXikwjMUBFR1YWDw==" />
+</div>
+
+
+<script src="../../../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="http://nhforge.org/login.aspx?ReturnUrl=%2fwikis%2fhowtonh%2fget-unique-results-from-joined-queries%2frevision%2f3.aspx">Sign in </a>
+         | <a href="../../../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_ViewRevision">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../../../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../../../general/default.aspx.html">General</a></li>
+                    
+                        <li><a class="Selected" href="../../default.aspx.html">How to</a></li>
+                        
+                    
+                        
+                        <li><a href="../../../patternsandpractices/default.aspx.html">Patterns&Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../../../index.html">Wikis</a>
+        &raquo;
+        <a href="../../default.aspx.html">How to</a>
+        &raquo;
+        <a href="../../get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a>
+        &raquo;
+        Revision #3
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Get unique results from joined queries: 
+            Revision #3
+        </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="../../default.aspx.html">Home</a></li><li><a href="../rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Attachments</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarList"><li><a href="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/post-and-comment.png">post and comment.png</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="../../lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="../../configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="../../get-unique-results-from-joined-queries.aspx.html" class="Selected">Get unique results from joined queries</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(30, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a></li><li><a href="../../run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="../../pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../using-user-types.aspx.html">Using User Types</a></li><li><a href="../../lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="../../dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="../../contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="../../mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a></li><li><a href="../../creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="../../use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="../../retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="../../tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="../../nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="../../the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="../../simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="../../prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="../../creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="../../currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="../../customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="../../how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="../../localization-techniques.aspx.html">Localization techniques</a></li><li><a href="../../calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="../../how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="../../nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="../../using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="../../keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="../../enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="../../hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="../../nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="../../conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="../../conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="../../view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="../../net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="../../a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="../../checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="../../mapping-tables.aspx.html">Mapping tables</a></li><li><a href="../../wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../mapping-a-view-and-schema-export-workaround.aspx.html">Mapping a view and Schema Export Workaround</a></li><li><a href="../../lazy-loading-eager-loading.aspx.html">Lazy loading - eager loading</a></li><li><a href="../../configure-log4net-for-use-with-nhibernate.aspx.html">Configure Log4Net for use with NHibernate</a></li><li><a href="../../get-unique-results-from-joined-queries.aspx.html" class="Selected">Get unique results from joined queries</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(30, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../your-first-nhibernate-based-application.aspx.html">Your first NHibernate based application</a></li><li><a href="../../run-in-medium-trust.aspx.html">Run in Medium Trust</a></li><li><a href="../../pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(42, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../using-user-types.aspx.html">Using User Types</a></li><li><a href="../../lazy-loaded-one-to-one-with-nhibernate.aspx.html">Lazy Loaded One-To-One With NHibernate </a></li><li><a href="../../dynamically-change-user-info-in-connection-string.aspx.html">Dynamically change user info in connection string</a></li><li><a href="../../contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></li><li><a href="../../mapping-the-same-class-to-a-view-and-a-table-using-entity-name.aspx.html">Mapping the same class to a view and a table using entity-name</a></li><li><a href="../../creating-an-audit-log-using-nhibernate-events.aspx.html">Creating an Audit Log using NHibernate Events</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(51, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></li><li><a href="../../use-postgresql-arrays-with-nhibernate.aspx.html">Use PostgreSQL Arrays with NHibernate</a></li><li><a href="../../retrieve-a-nested-component-with-criteria-api.aspx.html">Retrieve a nested component with Criteria API</a></li><li><a href="../../tuning-queries-with-ms-sqlserver.aspx.html">Tuning queries with MS SQLServer</a></li><li><a href="../../nhibernate-concurrency-with-oracle-s-ora-rowscn.aspx.html">NHibernate concurrency with Oracle&#39;s ORA_ROWSCN</a></li><li><a href="../../the-best-way-to-get-nhibernate-community-support-submit-precise-description-of-the-problem.aspx.html">The best way to get NHibernate community support ? Submit precise description of the problem</a></li><li><a href="../../simple-audit-metadata-and-logical-deletion-of-business-entities.aspx.html">Simple audit metadata and logical deletion of business entities</a></li><li><a href="../../prefent-nhibernate-from-saving-default-relations.aspx.html">Prefent NHibernate from saving default relations</a></li><li><a href="../../creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(66, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../finding-dirty-properties-in-nhibernate.aspx.html">Finding Dirty Properties in NHibernate</a></li><li><a href="../../currentsessioncontext-for-desktop-development.aspx.html">CurrentSessionContext for Desktop development</a></li><li><a href="../../customizing-fluent-nhibernate-s-autopersistencemodel-conventions.aspx.html">Customizing Fluent Nhibernate&#39;s AutoPersistenceModel Conventions</a></li><li><a href="../../how-to-use-db2hbm.aspx.html">How to use Db2hbm</a></li><li><a href="../../localization-techniques.aspx.html">Localization techniques</a></li><li><a href="../../calling-oracle-procedure-inside-package.aspx.html">Calling Oracle Procedure inside package</a></li><li><a href="../../how-to-get-help-with-nhibernate.aspx.html">How To Get Help with NHibernate</a></li><li><a href="../../nhibernate-features.aspx.html">NHibernate Features</a></li><li><a href="../../using-nlog-via-common-logging-with-nhibernate.aspx.html">Using NLog via Common.Logging with NHibernate</a></li><li><a href="../../keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></li><li><a href="../../enumerating-first-level-cache-entities.aspx.html">Enumerating First Level Cache Entities</a></li><li><a href="../../hilo-generator-with-node-suffix.aspx.html">HiLo Generator With Node Suffix</a></li><li><a href="../../nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners.aspx.html">Changing Values in NHibernate Events</a></li><li><a href="../../conventionmodelmapper-amp-net-4-iset-lt-gt.aspx.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></li><li><a href="../../conventionmodelmapper-change-manytoone-column-name.aspx.html">ConventionModelMapper - change ManyToOne column name</a></li><li><a href="../../view-the-xml-generated-when-mapping-by-code.aspx.html">View the xml generated when mapping by code</a></li><li><a href="../../net-type-generation-for-nhibernate-mapping-collections.aspx.html">.NET type generation for NHibernate mapping collections</a></li><li><a href="../../a-fully-working-skeleton-for-sexy-loquacious-nh.aspx.html">A fully working skeleton for sexy Loquacious NH</a></li><li><a href="../../checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></li><li><a href="../../mapping-tables.aspx.html">Mapping tables</a></li><li><a href="../../wcf-nhibernate-entity-serialization.aspx.html">WCF + NHibernate: Entity Serialization</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag2"><a href="../../tags/Architecture/default.aspx.html" rel="tag">Architecture</a></li>
+<li class="CommonTag6"><a href="../../tags/Audit/default.aspx.html" rel="tag">Audit</a></li>
+<li class="CommonTag6"><a href="../../tags/Concurrency/default.aspx.html" rel="tag">Concurrency</a></li>
+<li class="CommonTag6"><a href="../../tags/Configuration/default.aspx.html" rel="tag">Configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/convention+over+configuration/default.aspx.html" rel="tag">convention over configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/Conversation/default.aspx.html" rel="tag">Conversation</a></li>
+<li class="CommonTag6"><a href="../../tags/entity+name/default.aspx.html" rel="tag">entity name</a></li>
+<li class="CommonTag3"><a href="../../tags/events/default.aspx.html" rel="tag">events</a></li>
+<li class="CommonTag6"><a href="../../tags/Filters/default.aspx.html" rel="tag">Filters</a></li>
+<li class="CommonTag2"><a href="../../tags/FluentNH/default.aspx.html" rel="tag">FluentNH</a></li>
+<li class="CommonTag6"><a href="../../tags/IIdentifierGenerator/default.aspx.html" rel="tag">IIdentifierGenerator</a></li>
+<li class="CommonTag6"><a href="../../tags/Interceptor/default.aspx.html" rel="tag">Interceptor</a></li>
+<li class="CommonTag6"><a href="../../tags/IoC+container/default.aspx.html" rel="tag">IoC container</a></li>
+<li class="CommonTag2"><a href="../../tags/IUserType/default.aspx.html" rel="tag">IUserType</a></li>
+<li class="CommonTag3"><a href="../../tags/lazy+loading/default.aspx.html" rel="tag">lazy loading</a></li>
+<li class="CommonTag6"><a href="../../tags/listener/default.aspx.html" rel="tag">listener</a></li>
+<li class="CommonTag6"><a href="../../tags/log/default.aspx.html" rel="tag">log</a></li>
+<li class="CommonTag6"><a href="../../tags/logging/default.aspx.html" rel="tag">logging</a></li>
+<li class="CommonTag1"><a href="../../tags/Mapping/default.aspx.html" rel="tag">Mapping</a></li>
+<li class="CommonTag6"><a href="../../tags/Mapping+by+code/default.aspx.html" rel="tag">Mapping by code</a></li>
+<li class="CommonTag1"><a href="../../tags/Nhibernate/default.aspx.html" rel="tag">Nhibernate</a></li>
+<li class="CommonTag6"><a href="../../tags/Nhibernate+Documentation/default.aspx.html" rel="tag">Nhibernate Documentation</a></li>
+<li class="CommonTag3"><a href="../../tags/property/default.aspx.html" rel="tag">property</a></li>
+<li class="CommonTag2"><a href="../../tags/query/default.aspx.html" rel="tag">query</a></li>
+<li class="CommonTag1"><a href="../../tags/Session/default.aspx.html" rel="tag">Session</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="../../tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../resized-image.ashx/__size/50x50/__key/CommunityServer.Components.Avatars/00.00.00.21.39/4TBN4K18ZWCG.png" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/kenegozi/default.aspx.html">Ken Egozi</a><br/> on 09-12-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/jwdavidson/default.aspx.html">John Davidson</a><br/> on 09-07-2011</div></div><div class="WikiPageDetailsSummaryArea"><strong>9</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden; width: 100%;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../../get-unique-results-from-joined-queries.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /></a>                            
+                                <a href="../../get-unique-results-from-joined-queries.aspx.html">Article</a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                                    <div class="CommonPaneTab">
+                                    
+                                    
+                                    </div>
+                                
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../comments.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../comments.aspx.html">Comments</a> (12)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <a href="../history.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../history.aspx.html">History</a> (6)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">
+                <h2 class="CommonContentBoxHeaderSmall"><span><a href="../../get-unique-results-from-joined-queries.aspx.html">Get unique results from joined queries</a></span></h2>
+                <div><h3>Problem:</h3>
+<p>A recurring issue that new NHibernate users keep asking about, is the fact that they sometimes get duplicate results from their queries</p>
+<p>For example, take a look at the next model:<br /><img src="../../../../cfs-file.ashx/__key/CommunityServer.Wikis.Components.Files/howtonh/post-and-comment.png" alt="" /><br />where Commment.Name refer to the name of the person who wrote the comment.</p>
+<p>If you&#39;d want to issue a query on Post that joins to Comment, say &quot;all of the posts that were commented by &#39;Ken Egozi&#39;&quot;, the next hql query should do the trick:</p>
+<div>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">   <span style="color:#0000ff;">select</span>  p
+   <span style="color:#0000ff;">from</span>    Post p
+   <span style="color:#0000ff;">join</span>    p.Comments c
+   <span style="color:#0000ff;">where</span>   c.Name = <span style="color:#006080;">&#39;Ken Egozi&#39;</span>&quot;;</pre>
+</div>
+<div>&nbsp;</div>
+<div>So, you go ahead and</div>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">   var hql = <span style="color:#006080;">@&quot;
+      select  p
+      from    Post p
+      join    p.Comments c
+      where   c.Name = &#39;Ken Egozi&#39;&quot;</span>;
+   var posts = session.CreateQuery(hql)
+      .List&lt;post&gt;();</pre>
+</div>
+</div>
+<p>Assuming the next data is in the DB:</p>
+<pre>  Post#1<br />
+    Comment by &#39;Ken Egozi&#39;
+    Comment by &#39;Fabio Maulo&#39;
+    Comment by &#39;Ken Egozi&#39;
+
+  Post#2
+    Comment by &#39;Fabio Maulo&#39;
+
+  Post#3
+    Comment by &#39;Fabio Maulo&#39;
+    Comment by &#39;Ken Egozi&#39;</pre>
+<p>you&#39;d expect the list &#39;posts&#39; to include two posts: Post#1 and Post#3.<br />
+However, if you&#39;d look into posts, you&#39;ll see that it has three entries, two entries pointing to Post#1 and one entry pointing to Post#3</p>
+<p>Note that NHibernate is smart enough not to create two separate instances for Post#1, but rather a single instance will be created, and the two entries in the list will point to the same instance in memory.</p>
+<h3>Explanation:</h3>
+<p>The said hql query (or an equivalent Criteria) is translated to the joined SELECT clause</p>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">   <span style="color:#0000ff;">SELECT</span>  {p.*}
+   <span style="color:#0000ff;">FROM</span>    Posts p
+     <span style="color:#0000ff;">JOIN</span>  Comments c <span style="color:#0000ff;">ON</span> c.PostId = p.Id
+   <span style="color:#0000ff;">WHERE</span>   c.[Name] = <span style="color:#006080;">&#39;Ken Egozi&#39;</span></pre>
+</div>
+<pre>&nbsp;</pre>
+<p>where {p.*} is substituted by the list of fields needed to satisfy a Post object. Running this SQL query directly on the data detailed above, will result with three lines in the resultset.</p>
+<h3>Solutions</h3>
+<p>There are three solutions to that in SQL world: </p>
+<ol>
+<li>The DISTINCT keyword, when added on the fields of Posts, will ensure that there will be no duplicate lines. there are a few problems with that. Some RDBMS systems will not allow DISTINCT over certain data types, like the blob types in SQL Server. And if you also need to retrieve the joined data, then the DISTINCT keyword will be useless. 
+</li>
+<li>Using a subselect
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">   <span style="color:#0000ff;">SELECT</span> *
+   <span style="color:#0000ff;">FROM</span>   Posts p
+   <span style="color:#0000ff;">WHERE</span> <span style="color:#0000ff;">EXISTS</span>
+   (
+      <span style="color:#0000ff;">SELECT</span> 1
+      <span style="color:#0000ff;">FROM</span>   Comments c
+      <span style="color:#0000ff;">WHERE</span>  c.PostId = p.Id
+        <span style="color:#0000ff;">AND</span>  c.[Name] = <span style="color:#006080;">&#39;Ken Egozi&#39;</span>
+   )</pre>
+</div>
+</li>
+<li>Remove duplicates in the client code. </li>
+</ol>
+<p>The solutions in NHibernate&#39;s world, in accordance to the SQL solutions:</p>
+<ol>
+<li>Use the &#39;distinct&#39; keyword. <br />The problems that exists in the SQL world still apply, and it can only be used in HQL, not it Criteria API. 
+</li>
+<li>Use subselects.<br />The syntax in HQL:<br />
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">   <span style="color:#0000ff;">from</span>   Post p
+   <span style="color:#0000ff;">where</span> <span style="color:#0000ff;">exists</span>
+   (
+      <span style="color:#0000ff;">from</span> Comment c
+      <span style="color:#0000ff;">where</span> c.Post = p
+      <span style="color:#0000ff;">and</span> c.Name = <span style="color:#006080;">&#39;Ken Egozi&#39;</span>
+   )</pre>
+</div>
+and in Criteria API:<br />
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"> var commentsByKenEgozi = DetachedCriteria.For&lt;comment&gt;()
+     .Add(Restrictions.Eq(<span style="color:#006080;">&quot;Name&quot;</span>, <span style="color:#006080;">&quot;Ken Egozi&quot;</span>))
+     .Add(Restrictions.EqProperty(<span style="color:#006080;">&quot;Post.Id&quot;</span>, <span style="color:#006080;">&quot;p.Id&quot;</span>))
+     .SetProjection(NHibernate.Criterion.Projections.Id());
+ 
+  var posts = session.CreateCriteria(<span style="color:#0000ff;">typeof</span> (Post), <span style="color:#006080;">&quot;p&quot;</span>)
+     .Add(Subqueries.Exists(commentsByKenEgozi))
+     .List&lt;post&gt;();&lt;/comment&gt;</pre>
+</div>
+</li>
+<li>Remove duplicates in client code.<br />That&#39;s actually pretty easy with NHibernate, thanks to the result transformers. all you need to do is add .SetResultTransformer(new DistinctRootEntityResultTransformer()) to either your query, or criteria, and NHibernate will remove duplicate entries from the resulted list.<br />so, using the same hql as in the first example, you can write<br />
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"> var hql = <span style="color:#006080;">@&quot;
+      select  p
+      from    Post p
+      join    p.Comments c
+      where   c.Name = &#39;Ken Egozi&#39;&quot;</span>;
+   var posts = session.CreateQuery(hql)
+      .SetResultTransformer(<span style="color:#0000ff;">new</span> DistinctRootEntityResultTransformer())
+      .List&lt;post&gt;();</pre>
+</div>
+</li>
+</ol></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/get-unique-results-from-joined-queries/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/get-unique-results-from-joined-queries/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/howtonh/get-unique-results-from-joined-queries/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/howtonh/get-unique-results-from-joined-queries/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

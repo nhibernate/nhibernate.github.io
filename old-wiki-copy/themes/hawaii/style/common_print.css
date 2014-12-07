@@ -1,0 +1,58 @@
+
+body, html
+{
+	color: #000;
+	background-color: #fff;
+}
+
+A:LINK, A:VISITED
+{
+    color: #000;
+    text-decoration: underline;
+}
+
+.CommonPrintHidden, #CommonHeaderUserArea, #CommonNavigation, #CommonSearch, #CommonSidebarLeft, #CommonSidebarRight,
+.CommonContentBoxHeaderForm, .CommonBreadCrumbArea
+{
+	display: none;
+}
+
+#CommonHeaderTitleArea
+{
+	padding-left: 0;
+	background-image: none;
+}
+
+/* Comment Styles */
+
+.CommonCommentArrow, .CommonCommentBubbleRoundTop, .CommonCommentBubbleRoundBottom, .CommonCommentUser
+{
+	display: none;
+}
+
+.CommonCommentBubble
+{
+	margin: 0;
+}
+
+.CommonCommentContent, .Owner .CommonCommentContent
+{
+	background-color: #fff;
+	border: solid 1px #999;
+	padding: .5em;
+}
+
+#CommonContent 
+{
+	overflow: visible;
+}
+
+#CommonContentInner
+{
+	overflow: visible;
+}
+
+.CommonContentBoxContent
+{
+    overflow: visible;
+}

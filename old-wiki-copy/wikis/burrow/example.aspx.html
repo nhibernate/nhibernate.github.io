@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="Example (RSS 2.0)" href="example/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Burrow (RSS 2.0)" href="http://nhforge.org/wikis/burrow/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Marc Climent&#39;s Announcements (RSS 2.0)" href="../../members/climens/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Marc Climent&#39;s Comments (RSS 2.0)" href="../../members/climens/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Marc Climent&#39;s Activities (RSS 2.0)" href="../../members/climens/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Marc Climent&#39;s Friends Activity (RSS 2.0)" href="../../members/climens/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Example - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="example.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0MjI1NzA4NTBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRnkoeGkMFUl/GCfp0jWEl0wBWF5g==" />
+</div>
+
+
+<script src="../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=kMYUTUavSIm2PfhqImV65wSrGgvlXLz6y2I9w1Ny3wgQ9Mr8YxqHob4FEFjJCAuSefb7UiiHarHcIuJD4xiKEgAWZ6bkGuLRZKuFDCHjRSswzwvX2HIxCYe1LS8DvrUxi4omY-uxichRl_7QG7gvnymf7ji60ufX0GdWKCPuYuKcXuCoaDwpH8N3g3tlQpPEgpisGg2&amp;t=634395149480000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=ooIwVX8behGAEmhMCiixHbDdkMUOVYaZRdlMT8IcoNg04bCvP2nwsB6TYoQ7d2Jv_3l4oJ1T22OjM-M-2DunSYiieujBrutwDXLnAl2vCYvC2eq5i-t1eW9X33MvMiQlvp4qyu1-rLPWkjuV_LZnUetgmSNTxQbJe-EddFxbtbp-DYr30&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=xXlM6p6Z55_L0aHC_AFQRK0Cjmpbijxk7GNNsmfNwwA1waqkaV-hG1FcycUhTX3miKHBKKxRY86jAc_xya2ioQnh8uEZNMdbhp5EeN7LrycYZRTwA1RkyBpeEDeC_6M7Ye32k1z4nBfateiS4xaRnrrk7zAUyXGK9sqQp9FDULq-nwZx0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../cfs-file.ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Fburrow%252Fexample.aspx.html">Sign in </a>
+         | <a href="../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_View">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../general/default.aspx.html">General</a></li>
+                    
+                        
+                        <li><a href="../howtonh/default.aspx.html">How to</a></li>
+                    
+                        
+                        <li><a href="../patternsandpractices/default.aspx.html">Patterns&Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Wikis</a>
+        &raquo;
+        <a href="default.aspx.html">Burrow</a>
+        &raquo;
+        <a href="example.aspx.html">Example</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Example</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="default.aspx.html">Home</a></li><li><a href="example/rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="home.aspx.html">Home</a></li><li><a href="introduction.aspx.html">Introduction</a></li><li><a href="get-started.aspx.html"> Get Started</a></li><li><a href="conversation-explained.aspx.html">Conversation Explained</a></li><li><a href="stateful-fields.aspx.html">Stateful Fields</a></li><li><a href="faq.aspx.html">FAQ</a></li><li><a href="example.aspx.html" class="Selected">Example</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="home.aspx.html">Home</a></li><li><a href="introduction.aspx.html">Introduction</a></li><li><a href="get-started.aspx.html"> Get Started</a></li><li><a href="conversation-explained.aspx.html">Conversation Explained</a></li><li><a href="stateful-fields.aspx.html">Stateful Fields</a></li><li><a href="faq.aspx.html">FAQ</a></li><li><a href="example.aspx.html" class="Selected">Example</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag6"><a href="tags/equality/default.aspx.html" rel="tag">equality</a></li>
+<li class="CommonTag6"><a href="tags/identity/default.aspx.html" rel="tag">identity</a></li>
+<li class="CommonTag1"><a href="tags/pattern/default.aspx.html" rel="tag">pattern</a></li>
+<li class="CommonTag6"><a href="tags/unit+of+work/default.aspx.html" rel="tag">unit of work</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/kailuowang/default.aspx.html">kailuowang</a><br/> on 09-07-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/climens/default.aspx.html">Marc Climent</a><br/> on 09-11-2008</div></div><div class="WikiPageDetailsSummaryArea"><strong>4</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /> Article
+                            </div>
+                        </td>
+                        
+                                
+                                                            
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="example/comments.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="example/comments.aspx.html">Comments</a> (1)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="example/history.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="example/history.aspx.html">History</a> (4)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">                
+
+                <div id="ctl00_ctl00_bcr_bcr_ctl08" class="WikiRating" title="Rated: 4 Ratings - 4 Yes, 0 No" ><div><img src="../../utility/images/thumbsup.png" id="ctl00_ctl00_bcr_bcr_ctl08_image" alt="" /><span id="ctl00_ctl00_bcr_bcr_ctl08_percent" class="WikiRatingGood">100%</span> <span id="ctl00_ctl00_bcr_bcr_ctl08_percenttext">of people found this useful</span></div></div>
+
+                <h2 class="CommonContentBoxHeaderSmall">
+                        <span><a href="example.aspx.html">Example</a></span>
+                        
+                    </h2>
+                                
+                <div class="CommonDescription" style="font-size: 90%;">
+                    <span id="ctl00_ctl00_bcr_bcr_ctl09_ctl01">Filed under: <a href="tags/Burrow+Example/default.aspx.html" rel="tag">Burrow Example</a></span><input type="hidden" name="ctl00$ctl00$bcr$bcr$ctl09$ctl01" id="ctl00_ctl00_bcr_bcr_ctl09_ctl01_State" value="nochange" /> <a onclick="ctl00_ctl00_bcr_bcr_ctl09_ctl01.Edit(new Function('tags','successFunction','failureFunction','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl09\',\'saveAndFormat:\' + tags,successFunction,tags,failureFunction,false)'));return false;" href="example.aspx.html#">[Edit Tags]</a>
+                </div>
+                <div><p>This example will show how NHibernate.Burrow and NHibernate.Burrow.AppBlock simplifies ASP.NET/NHibernate application development on a day-to-day basis. The full code is available in <a href="http://nhcontrib.svn.sourceforge.net/viewvc/nhcontrib/trunk/src/NHibernate.Burrow/examples/BasicThreeTier/">NHContrib/src/NHibernate.Burrow/examples/BasicThreeTier</a>.<br />This simple example is about managing an entity called &quot;Customer&quot;.</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   1:</span> <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Customer</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   2:</span> {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   3:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> address;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   4:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> companyName;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   5:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> contactName;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   6:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">int</span> id;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   7:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">bool</span> isActivated;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   8:</span>     <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">decimal</span> salesPotential;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   9:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  10:</span>     <span style="color:#0000ff;">private</span> Customer(){}</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  11:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  12:</span>     <span style="color:#0000ff;">public</span> Customer(<span style="color:#0000ff;">string</span> contactName)</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  13:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  14:</span>         ContactName = contactName;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  15:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  16:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  17:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">int</span> Id</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  18:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  19:</span>         get { <span style="color:#0000ff;">return</span> id; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  20:</span>         <span style="color:#0000ff;">private</span> set { id = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  21:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  22:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  23:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Address</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  24:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  25:</span>         get { <span style="color:#0000ff;">return</span> address; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  26:</span>         set { address = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  27:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  28:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  29:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">decimal</span> SalesPotential</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  30:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  31:</span>         get { <span style="color:#0000ff;">return</span> salesPotential; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  32:</span>         set { salesPotential = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  33:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  34:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  35:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> IsActivated</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  36:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  37:</span>         get { <span style="color:#0000ff;">return</span> isActivated; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  38:</span>         set { isActivated = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  39:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  40:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  41:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> CompanyName</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  42:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  43:</span>         get { <span style="color:#0000ff;">return</span> companyName; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  44:</span>         set { companyName = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  45:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  46:</span>&nbsp; </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  47:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> ContactName</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  48:</span>     {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  49:</span>         get { <span style="color:#0000ff;">return</span> contactName; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  50:</span>         set { contactName = <span style="color:#0000ff;">value</span>; }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  51:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  52:</span> }</pre>
+</div>
+</div>
+<p><br />The mapping file as follows</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-mapping</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&quot;urn:nhibernate-mapping-2.2&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">class</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;BasicThreeTier.Core.Domain.Customer, BasicThreeTier.Core&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">         <span style="color:#ff0000;">table</span><span style="color:#0000ff;">=&quot;Customers&quot;</span> <span style="color:#ff0000;">lazy</span><span style="color:#0000ff;">=&quot;false&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">id</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Id&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">      <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">generator</span> <span style="color:#ff0000;">class</span><span style="color:#0000ff;">=&quot;identity&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">id</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;CompanyName&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;ContactName&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Address&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;IsActivated&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;SalesPotential&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">  <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">class</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-mapping</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+</div>
+<p>The first step will be creating a DAO for it. Here we create one by inheriting the DAO base from NHibernate.AppBlock</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> CustomerDAO : NHibernate.Burrow.AppBlock.DAOBases.GenericDAO&lt;Customer&gt;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">{}</pre>
+</div>
+</div>
+<p>The DAO base class provides a lot of functions including CRUD and much more. But this inheritance is by no means mandatory. You can always use your own DAO.<br />Now the domain layer is ready. Let&#39;s create a page that lists all the all the customer entities in a grid view that is sortable and paged (both at DB side).<br /><b>ListCustomer.aspx</b></p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:GridView</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;grdCustomers&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">AutoGenerateColumns</span><span style="color:#0000ff;">=&quot;false&quot;</span> <span style="color:#ff0000;">AllowPaging</span><span style="color:#0000ff;">=&quot;True&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">                <span style="color:#ff0000;">AllowSorting</span><span style="color:#0000ff;">=&quot;True&quot;</span> <span style="color:#ff0000;">PageSize</span><span style="color:#0000ff;">=&quot;5&quot;</span> <span style="color:#ff0000;">DataSourceID</span><span style="color:#0000ff;">=&quot;odsAll&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">Columns</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:TemplateField</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Customer ID&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;Id&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ItemTemplate</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">                <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:LinkButton</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;lbtSelect&quot;</span> <span style="color:#ff0000;">OnCommand</span><span style="color:#0000ff;">=&quot;lbt_SelectCommand&quot;</span> </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">                    <span style="color:#ff0000;">CommandArgument</span><span style="color:#0000ff;">=&#39;&lt;%# Eval(&quot;Id&quot;) %&gt;&#39;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span><span style="color:#0000ff;">&gt;</span><pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">                    <span style="background-color:#ffff00;">&lt;%</span>1:</span> # Eval(<span style="color:#006080;">&quot;Id&quot;</span>) <span style="background-color:#ffff00;">%&gt;</span></pre>
+<span style="color:#0000ff;">                &lt;/</span><span style="color:#800000;">asp:LinkButton</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">            <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">ItemTemplate</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">        <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">asp:TemplateField</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:BoundField</span> <span style="color:#ff0000;">DataField</span><span style="color:#0000ff;">=&quot;CompanyName&quot;</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Company Name&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;CompanyName&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:BoundField</span> <span style="color:#ff0000;">DataField</span><span style="color:#0000ff;">=&quot;ContactName&quot;</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Contact Name&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;ContactName&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:BoundField</span> <span style="color:#ff0000;">DataField</span><span style="color:#0000ff;">=&quot;Address&quot;</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Address&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;Address&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:BoundField</span> <span style="color:#ff0000;">DataField</span><span style="color:#0000ff;">=&quot;SalesPotential&quot;</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Sales Potential&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">             <span style="color:#ff0000;">HtmlEncodeFormatString</span><span style="color:#0000ff;">=&quot;true&quot;</span> <span style="color:#ff0000;">DataFormatString</span><span style="color:#0000ff;">=&quot;{0:C}&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;SalesPotential&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:BoundField</span> <span style="color:#ff0000;">DataField</span><span style="color:#0000ff;">=&quot;IsActivated&quot;</span> <span style="color:#ff0000;">HeaderText</span><span style="color:#0000ff;">=&quot;Activated&quot;</span> <span style="color:#ff0000;">SortExpression</span><span style="color:#0000ff;">=&quot;IsActivated&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">Columns</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">asp:GridView</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:ObjectDataSource</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;odsAll&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">TypeName</span><span style="color:#0000ff;">=&quot;BasicThreeTier.Core.Dao.CustomerDAO&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#ff0000;">EnablePaging</span><span style="color:#0000ff;">=&quot;True&quot;</span> <span style="color:#ff0000;">MaximumRowsParameterName</span><span style="color:#0000ff;">=&quot;pageSize&quot;</span> <span style="color:#ff0000;">StartRowIndexParameterName</span><span style="color:#0000ff;">=&quot;startRow&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#ff0000;">SortParameterName</span><span style="color:#0000ff;">=&quot;sortExpression&quot;</span> <span style="color:#ff0000;">SelectMethod</span><span style="color:#0000ff;">=&quot;FindAll&quot;</span> <span style="color:#ff0000;">SelectCountMethod</span><span style="color:#0000ff;">=&quot;CountAll&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">asp:ObjectDataSource</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">uc1:EditCustomer</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;EditCustomer1&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">Visible</span><span style="color:#0000ff;">=&quot;false&quot;</span> <span style="color:#ff0000;">OnUpdated</span><span style="color:#0000ff;">=&quot;EditCustomer_Updated&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+</div>
+</div>
+<p>The EditCustomer1 is a user control that we created to edit one customer, we&#39;ll talk about it later.<br /><b>ListCustomer.aspx.cs</b></p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> ListCustomers : System.Web.UI.Page</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">{</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">void</span> lbt_SelectCommand(<span style="color:#0000ff;">object</span> sender, CommandEventArgs e) {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        EditCustomer1.Bind(<span style="color:#0000ff;">new</span> CustomerDAO().Get(<span style="color:#0000ff;">int</span>.Parse(e.CommandArgument.ToString())));   <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">void</span> EditCustomer_Updated(<span style="color:#0000ff;">object</span> sender, EventArgs e) {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">        grdCustomers.DataBind();</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">}</pre>
+</div>
+</div>
+<p>The code behind may look like an excerpt, but it&#39;s not. It&#39;s just simple as that, we have a paged and sortable (both at Database side) gridview that lists all customers. The inherited DAO together with the ObjectDataSource take care of all the tedious work of the DB side sorting and paging. In the code behind, we only need two simple methods for binding the selected customer to the EditCustomer control and refresh the gridview when customer is modified in that control.<br />Now let&#39;s look at the EditCustomer user control.<br /><b>EditCustomer.ascx</b></p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">h2</span><span style="color:#0000ff;">&gt;</span>Edit Customer<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">h2</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">Customer ID:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:Label</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;lblCustomerID&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">Company Name:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:TextBox</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;txtCompanyName&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">Contact Name:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:TextBox</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;txtContactName&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">Address:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:TextBox</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;txtAddress&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">Sales Potential:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:TextBox</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;txtSalesPotential&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">Activated:<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:CheckBox</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;cbActivated&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;&lt;</span><span style="color:#800000;">br</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBinder</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;DataBinder&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">DefaultBindingSource</span><span style="color:#0000ff;">=&quot;customer&quot;</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">DataBindingItems</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiId&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">BindingMode</span><span style="color:#0000ff;">=&quot;oneway&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;lblCustomerID&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;Id&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiCompanyName&quot;</span> <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;CompanyName&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;txtCompanyName&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiContactName&quot;</span> <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;ContactName&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;txtContactName&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiAddress&quot;</span> <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;Address&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;txtAddress&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiSP&quot;</span> <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;SalesPotential&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;txtSalesPotential&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">DisplayFormat</span><span style="color:#0000ff;">=&quot;{0:C}&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">ww:wwDataBindingItem</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;dbiIA&quot;</span> <span style="color:#ff0000;">BindingSourceMember</span><span style="color:#0000ff;">=&quot;IsActivated&quot;</span> <span style="color:#ff0000;">ControlId</span><span style="color:#0000ff;">=&quot;cbActivated&quot;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;">            <span style="color:#ff0000;">BindingProperty</span><span style="color:#0000ff;">=&quot;Checked&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">DataBindingItems</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">ww:wwDataBinder</span><span style="color:#0000ff;">&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:Button</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;btnUpdate&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">OnClick</span><span style="color:#0000ff;">=&quot;btnUpdate_OnClick&quot;</span> <span style="color:#ff0000;">Text</span><span style="color:#0000ff;">=&quot;Update&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asp:Button</span> <span style="color:#ff0000;">ID</span><span style="color:#0000ff;">=&quot;btnCancel&quot;</span> <span style="color:#ff0000;">runat</span><span style="color:#0000ff;">=&quot;server&quot;</span> <span style="color:#ff0000;">OnClick</span><span style="color:#0000ff;">=&quot;btnCancel_OnClick&quot;</span> <span style="color:#ff0000;">Text</span><span style="color:#0000ff;">=&quot;Cancel&quot;</span> <span style="color:#0000ff;">/&gt;</span></pre>
+</div>
+</div>
+<p>The wwDataBinder here is an optional 3rd party control that realizes Two-way databinding between UI controls and properties of the code behind class. This wonderful control is created by Rick Strahl. It eliminates the code that transfer values between form control values and entity properties. Detailed information about it can be found <a href="http://msdn.microsoft.com/en-us/magazine/cc163505.aspx">here</a>. Again, this control is not mandatory by NHibernate.Burrow.<br />Now let&#39;s look at the code behind.<br /><b>EditCustomer.aspx.cs</b></p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   1:</span> <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> EditCustomer : UserControl {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   2:</span>     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">event</span> EventHandler Updated;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   3:</span>     [EntityField] <span style="color:#0000ff;">protected</span> Customer customer;   <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Bind(Customer c) {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   4:</span>         customer = c;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   5:</span>         DataBinder.DataBind(<span style="color:#0000ff;">this</span>);</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   6:</span>         Visible = <span style="color:#0000ff;">true</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   7:</span>     }   <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">void</span> btnUpdate_OnClick(<span style="color:#0000ff;">object</span> sender, EventArgs e) {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">   8:</span>         DataBinder.Unbind(<span style="color:#0000ff;">this</span>);</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">   9:</span>         <span style="color:#0000ff;">if</span> (Updated != <span style="color:#0000ff;">null</span>)Updated(<span style="color:#0000ff;">this</span>, <span style="color:#0000ff;">new</span> EventArgs());</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  10:</span>     }   <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">void</span> btnCancel_OnClick(<span style="color:#0000ff;">object</span> sender, EventArgs e) {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  11:</span>         customer = <span style="color:#0000ff;">null</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  12:</span>         Visible = <span style="color:#0000ff;">false</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:white;"><span style="color:#606060;">  13:</span>     }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,&#39;Courier New&#39;,courier,monospace;background-color:#f4f4f4;"><span style="color:#606060;">  14:</span> }</pre>
+</div>
+</div>
+<p>Again, this is the complete code that is necessary to manage all the properties for the customer entity.<br />Now with the code listed here we created a three tier application that can list and manage all the customers in DB. As you can see here, the code is very straightforward and clean. No DB related management code anywhere, not even NHibernate is mentioned.<br /><b>Conclusion</b><br />This example demonstrated that other than the advanced features, such as <a class="ExistingPageLink" href="conversation-explained.aspx.html" title="Click to view the page titled: conversation">conversation</a>, it provides, NHibernate.Burrow also greatly frees the developers from DB/NHibernate related concerns and thus enable them to focus mostly on project vised logic in their day-to-day development.</p></div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="CommonContentBox">
+    <div style="float: right;">
+        
+                <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Fburrow%252Fexample.aspx.html"><img src="../../Themes/hawaii/images/wiki/add-a-new-comment.gif" alt="" style="border-width:0px;" /></a>
+            
+    </div>
+    <h3 class="CommonContentBoxHeader">Recent Comments</h3>
+    <div class="CommonContentBoxContent">
+        
+                <div class="WikiCommentArea">
+                    <div class="WikiCommentBubble">
+                        <div class="WikiCommentBubbleRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                        <div class="WikiCommentContent">
+                            <div class="WikiCommentHeaderIcon"><a href="../../members/quicoli/default.aspx.html">
+                                    <img src="../../resized-image.ashx/__size/32x32/__key/CommunityServer.Components.Avatars/00.00.00.23.50/4TARXSCZ203C.png" alt="" style="border-width:0px;" />
+                                </a></div>
+                            
+                            <div class="WikiCommentHeader">
+                                By: 
+                                <a href="../../members/quicoli/default.aspx.html">Paulo Roberto Quicoli</a>
+                                Posted on 
+                                04-10-2009 0:43
+                                <div id="ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating" class="WikiRatingSmall" title="Rated: 1 Ratings - 1 Yes, 0 No" ><div><img id="ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_image" alt="" style="display:none;" /><span id="ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_percent" class="WikiRatingGoodSmall">100%</span> <span id="ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_percenttext">of people found this useful</span></div></div>
+                            </div>
+                            <div style="clear: both;"></div>
+                            
+                            <div><p>Burrow is fantastic! but i would like to see some demo using winforms for &quot;long conversation&quot; and transaction managment...</p>
+<p>thanks for great work !</p>
+</div>
+
+                            <div style="float: right; font-size: 80%;">
+                                
+                                
+                            </div><div style="clear: both;"></div>
+                        </div>
+                        <div class="WikiCommentBubbleRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    </div>
+                    <div class="WikiCommentArrow"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div><div class="r5"></div><div class="r6"></div><div class="r7"></div><div class="r8"></div><div class="r9"></div><div class="r10"></div></div>
+                </div>     
+            
+                <a href="example/comments.aspx.html">View All</a>
+            
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/burrow/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/burrow/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/burrow/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/burrow/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+var ctl00_ctl00_bcr_bcr_ctl08 = new RateableContentYesNoRating('ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08_image','ctl00_ctl00_bcr_bcr_ctl08_percent','ctl00_ctl00_bcr_bcr_ctl08_percenttext','ctl00_ctl00_bcr_bcr_ctl08_buttons','ctl00_ctl00_bcr_bcr_ctl08_thanks','WikiRating','WikiRatingActive',new Function('r','s','f','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl08\',r,s,r,f,false)'));
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_bcr_bcr_ctl09_ctl01 = new Telligent_InlineEditorPanel('ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01_State','ctl00_ctl00_bcr_bcr_ctl09_ctl00',false,null,null,null);
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+var ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating = new RateableContentYesNoRating('ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_image','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_percent','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_percenttext','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_buttons','ctl00_ctl00_bcr_bcr_ctl13_ctl01_WikiPageCommentRating_thanks','WikiRatingSmall','WikiRatingActiveSmall',new Function('r','s','f','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl13$ctl01$WikiPageCommentRating\',r,s,r,f,false)'));
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

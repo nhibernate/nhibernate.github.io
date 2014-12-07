@@ -1,0 +1,927 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="NHibernate Validator 1.0.0 Documentation  (RSS 2.0)" href="../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Validator (RSS 2.0)" href="../../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Announcements (RSS 2.0)" href="../../../../members/fabiomaulo/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Comments (RSS 2.0)" href="../../../../members/fabiomaulo/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Activities (RSS 2.0)" href="../../../../members/fabiomaulo/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Friends Activity (RSS 2.0)" href="../../../../members/fabiomaulo/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	NHibernate Validator 1.0.0: Revision #5 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="5.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2ODYxODYyODBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRS2dku67jB2SYXikwjMUBFR1YWDw==" />
+</div>
+
+
+<script src="../../../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../../../cfs-file.ashx/__key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="http://nhforge.org/login.aspx?ReturnUrl=%2fwikis%2fvalidator%2fnhibernate-validator-1-0-0-documentation%2frevision%2f5.aspx">Sign in </a>
+         | <a href="../../../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_ViewRevision">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../../../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../../../general/default.aspx.html">General</a></li>
+                    
+                        
+                        <li><a href="../../../howtonh/default.aspx.html">How to</a></li>
+                    
+                        
+                        <li><a href="../../../patternsandpractices/default.aspx.html">Patterns&Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../../../index.html">Wikis</a>
+        &raquo;
+        <a href="../../default.aspx.html">Validator</a>
+        &raquo;
+        <a href="../../nhibernate-validator-1-0-0-documentation.aspx.html">NHibernate Validator 1.0.0 Documentation </a>
+        &raquo;
+        Revision #5
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">NHibernate Validator 1.0.0: 
+            Revision #5
+        </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="../../default.aspx.html">Home</a></li><li><a href="../rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-validator-1-0-0-documentation.aspx.html" class="Selected">NHibernate Validator 1.0.0 Documentation </a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-validator-1-0-0-documentation.aspx.html" class="Selected">NHibernate Validator 1.0.0 Documentation </a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag2"><a href="http://nhforge.org/wikis/validator/tags/Architecture/default.aspx" rel="tag">Architecture</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Audit/default.aspx" rel="tag">Audit</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Concurrency/default.aspx" rel="tag">Concurrency</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Configuration/default.aspx" rel="tag">Configuration</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/convention+over+configuration/default.aspx" rel="tag">convention over configuration</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Conversation/default.aspx" rel="tag">Conversation</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/entity+name/default.aspx" rel="tag">entity name</a></li>
+<li class="CommonTag3"><a href="http://nhforge.org/wikis/validator/tags/events/default.aspx" rel="tag">events</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Filters/default.aspx" rel="tag">Filters</a></li>
+<li class="CommonTag2"><a href="http://nhforge.org/wikis/validator/tags/FluentNH/default.aspx" rel="tag">FluentNH</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/IIdentifierGenerator/default.aspx" rel="tag">IIdentifierGenerator</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Interceptor/default.aspx" rel="tag">Interceptor</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/IoC+container/default.aspx" rel="tag">IoC container</a></li>
+<li class="CommonTag2"><a href="http://nhforge.org/wikis/validator/tags/IUserType/default.aspx" rel="tag">IUserType</a></li>
+<li class="CommonTag3"><a href="http://nhforge.org/wikis/validator/tags/lazy+loading/default.aspx" rel="tag">lazy loading</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/listener/default.aspx" rel="tag">listener</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/log/default.aspx" rel="tag">log</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/logging/default.aspx" rel="tag">logging</a></li>
+<li class="CommonTag1"><a href="http://nhforge.org/wikis/validator/tags/Mapping/default.aspx" rel="tag">Mapping</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Mapping+by+code/default.aspx" rel="tag">Mapping by code</a></li>
+<li class="CommonTag1"><a href="http://nhforge.org/wikis/validator/tags/Nhibernate/default.aspx" rel="tag">Nhibernate</a></li>
+<li class="CommonTag6"><a href="http://nhforge.org/wikis/validator/tags/Nhibernate+Documentation/default.aspx" rel="tag">Nhibernate Documentation</a></li>
+<li class="CommonTag3"><a href="http://nhforge.org/wikis/validator/tags/property/default.aspx" rel="tag">property</a></li>
+<li class="CommonTag2"><a href="http://nhforge.org/wikis/validator/tags/query/default.aspx" rel="tag">query</a></li>
+<li class="CommonTag1"><a href="http://nhforge.org/wikis/validator/tags/Session/default.aspx" rel="tag">Session</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="../../tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../resized-image.ashx/__size/50x50/__key/CommunityServer.Components.Avatars/00.00.00.21.02/4TA8XMWXSUMY.png" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/fabiomaulo/default.aspx.html">Fabio Maulo</a><br/> on 09-13-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../resized-image.ashx/__size/50x50/__key/CommunityServer.Components.Avatars/00.00.00.21.03/4TA8YSYSHRF6.jpg" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/darioquintana/default.aspx.html">Dario Quintana</a><br/> on 03-18-2009</div></div><div class="WikiPageDetailsSummaryArea"><strong>6</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden; width: 100%;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../../nhibernate-validator-1-0-0-documentation.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /></a>                            
+                                <a href="../../nhibernate-validator-1-0-0-documentation.aspx.html">Article</a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                                    <div class="CommonPaneTab">
+                                    
+                                    
+                                    </div>
+                                
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../comments.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../comments.aspx.html">Comments</a> (23)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <a href="../history.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../history.aspx.html">History</a> (11)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">
+                <h2 class="CommonContentBoxHeaderSmall"><span><a href="../../nhibernate-validator-1-0-0-documentation.aspx.html">NHibernate Validator 1.0.0 Documentation </a></span></h2>
+                <div><h1>Preface</h1>
+<div class="preface">
+<p>Attributes are a very convenient and elegant way to specify invariant constraints for a domain model. You can, for example, express that a property should never be null, that the account balance should be strictly positive, etc. These domain model constraints are declared in the class itself by annotating its properties. A validator can then read them and check for constraint violations. The validation mechanism can be executed in different layers in your application without having to duplicate any of these rules (presentation layer, data access layer). Following the DRY principle, NHibernate Validator has been designed for that purpose. NHibernate Validator also lets you declare the same rules in XML files. Both approaches (attributes and XML) give us interesting possibilities for configuring our domain rules. </p>
+<p>NHibernate Validator works on two levels. First, it is able to check in-memory instances of a class for constraint violations. Second, it can apply the constraints to the NHibernate metamodel and incorporate them into the generated database schema.</p>
+<p>Each constraint attribute is associated to a validator implementation responsible for checking the constraint on the entity instance. A validator can also (optionally) apply the constraint to the NHibernate metamodel, allowing NHibernate to generate DDL that expresses the constraint. With the appropriate event listener, you can execute the checking operation on inserts and updates done by NHibernate. NHibernate Validator is not limited to only be used with NHibernate. You can easily use it anywhere in your application as well, indeed, you can use it at UI validation with Winforms or Asp.Net technologies.</p>
+<p>When checking instances at runtime, NHibernate Validator returns information about constraint violations in an array of <em>InvalidValue</em>s. Among other information, the <em>InvalidValue</em> contains an error description message that can embed the parameter values bundle with the annotation (eg. length limit), and message strings that may be externalized to a ResourceManager.</p>
+</div>
+<div class="chapter">
+<h1>About the project</h1>
+<p>NHibernate Validator is a powerful and extensible framework to validate objects using the .Net Platform. Born as a port of <span class="italic">Hibernate Validator 3.0.0</span> project at december of 2007. Later on, many improvements and changes were made to the Core and API, and now we can say that NHibernate Validator is more than just a port. NHibernate Validator is entirely written in C#. The first release of NHibernate Validator was entirely developed by <span class="italic">Dario Quintana</span>, <span class="italic">Gustavo Ringel</span> and <span class="italic">Fabio Maulo</span>. We appreciate the help of <span class="italic">Davy Brion</span> in the revision of this document.</p>
+<p>NHibernate Validator is part of the <a href="http://sourceforge.net/projects/nhcontrib/" target="_top">NHibernate Contrib</a> project and you can download it <a href="http://sourceforge.net/project/showfiles.php?group_id=216446&amp;package_id=275108&amp;release_id=597674" target="_top">here</a>.</p>
+<p>You can ask questions about the development and utilization of NHibernate Validator on the following mailing lists:</p>
+<p>The development mailing list can be found <a href="http://groups.google.com/group/nhcdevs" target="_top">here</a></p>
+<p>The user forum can be found <a href="http://groups.google.com/group/nhusers" target="_top">here</a> </p>
+<p>Bug and issues report should be sent to the development mailing list.</p>
+</div>
+<div class="chapter">
+<h1>Using the Validator framework</h1>
+<p>NHibernate Validator is intended to be used to implement multi-layered data validation, where constraints are expressed in a single place and checked in various different layers of the application.</p>
+<p>This chapter will cover NHibernate Validator usage for different layers</p>
+<div class="section">
+<h2 class="title" style="clear:both;">Database schema-level validation</h2>
+<p>Out of the box, NHibernate Validator will translate the constraints you have defined for your entities into mapping metadata. For example, if a property of your entity has the attribute [NotNull], its columns will be declared as <em>not null</em> in the DDL schema generated by NHibernate.</p>
+<p>Using hbm2ddl, domain model constraints will be expressed into the database schema.</p>
+<p>If, for some reason, the feature needs to be disabled, set <strong><em>apply_to_ddl</em></strong> to false.</p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">ORM integration</h2>
+<p>NHibernate Validator integrates with NHibernate in a native way, and knows how to treat every persistent entity.</p>
+<div class="section">
+<h3 class="title">NHibernate event-based validation</h3>
+<p>NHibernate Validator has two built-in NHibernate event listeners. Whenever a PreInsertEvent or PreUpdateEvent occurs, the listeners will verify all constraints of the entity instance and throw an exception if any of them are violated. Basically, objects will be checked before any insert and before any update triggered by NHibernate. This includes cascading changes! This is the most convenient and easiest way to activate the validation process. If a constraint is violated, the event will raise a runtime InvalidStateException which contains an array of <em>InvalidValue</em>s describing each failure.</p>
+<p>If, for some reason, you want to disable this integration, set <strong>autoregister_listeners</strong>&nbsp;to false</p>
+<blockquote>
+<p><span style="text-decoration:underline;">Note</span>: If the entities are not annotated with validation attributes, there is no runtime performance cost.</p>
+</blockquote>
+<p>In case you wish to set manually the event listeners for NHibernate Core, use the following configuration in <strong>hibernate.cfg.xml</strong>:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-configuration</span><span style="color:#0000ff;">&gt;</span>
+    ...
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">event</span> <span style="color:#ff0000;">type</span><span style="color:#0000ff;">=&quot;pre-update&quot;</span><span style="color:#0000ff;">&gt;</span>
+        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">listener</span> <span style="color:#ff0000;">class</span><span style="color:#0000ff;">=&quot;NHibernate.Validator.Event.ValidatePreUpdateEventListener&quot;</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">event</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">event</span> <span style="color:#ff0000;">type</span><span style="color:#0000ff;">=&quot;pre-insert&quot;</span><span style="color:#0000ff;">&gt;</span>
+        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">listener</span> <span style="color:#ff0000;">class</span><span style="color:#0000ff;">=&quot;NHibernate.Validator.Event.ValidatePreInsertEventListener&quot;</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">event</span><span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-configuration</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+</div>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Application-level validation</h2>
+<p>In order to interact with NHibernate Validator in your application you must use the main class: <em>ValidatorEngine</em>. </p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">ValidatorEngine validator = <span style="color:#0000ff;">new</span> ValidatorEngine();
+<span style="color:#0000ff;">bool</span> isValid = validator.IsValid(customer);</pre>
+</div>
+<p>These two lines are enough to validate an object with its validation rules, which can be configured using Attributes or XML. The first line is the instantiation of the validator engine of NHibernate Validator. The second line is the validation of an object, and the result of the <em>IsValid(...)</em>method indicates if the object is valid or not. In order to get the invalid values of an object, you can do:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">ValidatorEngine validator = <span style="color:#0000ff;">new</span> ValidatorEngine();
+InvalidValue[] validationMessages = validator.GetInvalidValues(customer);</pre>
+</div>
+<p>Now instead of only knowing if the object is valid or not, we get an array of InvalidValues. If this array length is greater than zero then there are validation errors and you can traverse the InvalidValue array to get verbose information about the problems that cause the object to be invalid. </p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Presentation layer validation</h2>
+<p>[<strong><span style="color:#008000;">TODO</span></strong>]</p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Validation informations</h2>
+<p>NHibernate Validator provides an array of InvalidValue. Each <em>InvalidValue</em>&nbsp;has several methods describing the reasons that caused the entity to be invalid.</p>
+<p><strong>BeanClass</strong> retrieves the failing bean type</p>
+<p><strong>Bean&nbsp;</strong>retrieves the failing instance (if any ie not when using <em>GetPotentialInvalidValues()</em>)</p>
+<p><strong>Value</strong>&nbsp;retrieves the failing value</p>
+<p><strong>Message</strong>&nbsp;retrieves the proper internationalized error message</p>
+<p><strong>RootBean</strong>&nbsp;retrieves the root bean instance generating the issue (useful in conjunction with <em>[Valid]</em>), is null if <em>GetPotentialInvalidValues(...)</em> is used.</p>
+<p><strong>PropertyPath</strong>&nbsp;retrieves the dotted path of the failing property starting from the root bean</p>
+</div>
+</div>
+<div class="chapter">
+<h1>Defining constraints</h1>
+<div class="section">
+<h2 class="title" style="clear:both;">What is a constraint?</h2>
+<p>A constraint is a rule that a given element (field, property or type) has to comply to. The rule semantic is expressed by an Attribute or configured in Xml files. A constraint may have some properties to configure the associated validator, for example a Min constraint will have a value property setting the minimum acceptable value for the element to be valid. </p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Built in constraints</h2>
+<p>Hibernate Validator comes with some built-in constraints, which cover most of the basic data checks. As we&#39;ll see later, you&#39;re not limited to them, you can literally in a minute write your own constraints.</p>
+<p><strong>Table Built-in constraints</strong></p>
+<table bgcolor="#ffffc8" cellspacing="1" cellpadding="2">
+&lt;tbody&gt;
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Constraint</strong></span></td>
+<td align="center"><span style="font-size:xx-small;"><strong>Apply on</strong></span></td>
+<td align="center"><span style="font-size:xx-small;"><strong>Runtime checking</strong></span></td>
+<td align="center"><span style="font-size:xx-small;"><strong>NHibernate Metadata impact</strong></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Length(Min=, Max=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (String)</span></td>
+<td><span style="font-size:xx-small;">checks if the string length is between the min-max range</span></td>
+<td align="center"><span style="font-size:xx-small;">Column length will be set to max</span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Max(Value=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (numeric or string representation of a numeric)</span></td>
+<td><span style="font-size:xx-small;">checks if the value is less than or equals to max</span></td>
+<td><span style="font-size:xx-small;">Add a check constraint on the column</span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Min(Value=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (numeric or string representation of a numeric)</span></td>
+<td><span style="font-size:xx-small;">checks if the value is more than or equals to min</span></td>
+<td><span style="font-size:xx-small;">Add a check constraint on the column</span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>NotNull</strong></span></td>
+<td><span style="font-size:xx-small;">property</span></td>
+<td><span style="font-size:xx-small;">checks if the value is not null</span></td>
+<td><span style="font-size:xx-small;">Column(s) are not null</span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>NotEmpty</strong></span></td>
+<td><span style="font-size:xx-small;">property</span></td>
+<td><span style="font-size:xx-small;">checks if the string is not empty.</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>NotEmptyOrNull</strong></span></td>
+<td><span style="font-size:xx-small;">property</span></td>
+<td><span style="font-size:xx-small;">Checks if the string is not null or not empty.</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Past</strong></span></td>
+<td><span style="font-size:xx-small;">property (DateTime)</span></td>
+<td><span style="font-size:xx-small;">check if the date is in the past</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Future</strong></span></td>
+<td><span style="font-size:xx-small;">property (DateTime)</span></td>
+<td><span style="font-size:xx-small;">check if the date is in the future</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Pattern(Regex=&quot;regexp&quot;, Flag=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (string)</span></td>
+<td><span style="font-size:xx-small;">check if the property matches the regular expression given a match flag. The <span style="font-family:&#39;Trebuchet MS&#39;;">&lt;tt&gt;Flag&lt;/tt&gt; parameter is a <em>System.Text.RegularExpressions.RegexOptions</em>&nbsp;enum. You can also declare multiple Pattern attributes on the same member.</span></span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Range(Min=, Max=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (numeric or string representation of a numeric)</span></td>
+<td><span style="font-size:xx-small;">check if the value is between Min and Max (included)</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Size(Min=, Max=)</strong></span></td>
+<td><span style="font-size:xx-small;">property (array, collection, map)</span></td>
+<td><span style="font-size:xx-small;">check if the element size is between Min and Max (included)</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>AssertFalse</strong></span></td>
+<td><span style="font-size:xx-small;">property</span></td>
+<td><span style="font-size:xx-small;">check that the method evaluates to false (useful for constraints expressed in code rather than attributes)</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>AssertTrue</strong></span></td>
+<td><span style="font-size:xx-small;">property</span></td>
+<td><span style="font-size:xx-small;">check that the method evaluates to true (useful for constraints expressed in code rather than attributes)</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Valid</strong></span></td>
+<td><span style="font-size:xx-small;">property (object)</span></td>
+<td><span style="font-size:xx-small;">perform validation recursively on the associated object. If the object is a Collection or an array, the elements are validated recursively. If the object is a Map, the value elements are validated recursively.</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Email</strong></span></td>
+<td><span style="font-size:xx-small;">property (String)</span></td>
+<td><span style="font-size:xx-small;">check whether the string conforms to the email address specification</span></td>
+<td><span style="font-size:xx-small;"></span></td>
+</tr>
+<tr>
+<td align="center"><span style="font-size:xx-small;"><strong>Digits</strong></span></td>
+<td><span style="font-size:xx-small;">property (numeric or string representation of a numeric)</span></td>
+<td><span style="font-size:xx-small;">checks whether the property is a number having up to&nbsp;<span style="font-family:&#39;Trebuchet MS&#39;;"><em>integerDigits</em> integer digits and <em>fractionalDigits</em>&nbsp;fractonal digits</span></span></td>
+<td><span style="font-size:xx-small;">define column precision and scale</span></td>
+</tr>
+&lt;/tbody&gt;
+</table>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Error messages</h2>
+<p>NHibernate Validator comes with a default set of error messages translated in several languages (if yours is not present, please send us a patch). You can add your own additional set of messages while writing your validator Attributes or at XML. If NHibernate Validator cannot resolve a key from your ResourceManager nor from ValidatorMessage, it falls back to the default built-in values.</p>
+<p>Alternatively you can provide a ResourceManager while checking programmatically the validation rules on a bean or if you want a completly different interpolation mechanism, you can provide an implementation of NHibernate.Validator.Engine.IMessageInterpolator.</p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Writing your own constraints</h2>
+<p>Extending the set of built-in constraints is extremely easy. Any constraint consists of two pieces: the constraint <span class="emphasis"><em>descriptor</em></span> (the attribute) and the constraint <span class="emphasis"><em>validator</em></span> (the implementation class). Here is a simple user-defined descriptor:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property)]
+[ValidatorClass(<span style="color:#0000ff;">typeof</span>(PhoneValidator))]
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> PhoneAttribute : Attribute, IRuleArgs
+{
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> message = <span style="color:#0000ff;">string</span>.Empty;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Message
+    {
+        get { <span style="color:#0000ff;">return</span> message; }
+        set { message = <span style="color:#0000ff;">value</span>; }
+    }
+}</pre>
+</div>
+<p>To link a descriptor to its validator implementation, we use the <em>[ValidatorClass]</em>&nbsp;meta-attribute. Here you can see an implementation of a constraint validator:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> PhoneValidator : IValidator
+{
+     <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> IsValid(<span style="color:#0000ff;">object</span> <span style="color:#0000ff;">value</span>)
+     {
+         Regex regex = <span style="color:#0000ff;">new</span> Regex(<span style="color:#006080;">@&quot;^[2-9]\d{2}-\d{3}-\d{4}$&quot;</span>);
+         <span style="color:#0000ff;">if</span> (<span style="color:#0000ff;">value</span> == <span style="color:#0000ff;">null</span>) <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">true</span>;
+         <span style="color:#0000ff;">return</span> regex.IsMatch(<span style="color:#0000ff;">value</span>.ToString());
+     }
+}</pre>
+</div>
+<p>This PhoneValidator class is simple. The method <em>IsValid()</em>&nbsp;receives a string that should be validated with a Regex expression. The <em>IsValid()</em>&nbsp;method should return false if the constraint has been violated.</p>
+<p>If you need to initialize the class validator you can implement the interface <em>IInitializableValidator</em><em>&lt;A&gt;&nbsp;</em>and the class should look like this:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> PhoneValidator : IInitializableValidator&lt;PhoneAttribute&gt;
+{
+    <span style="color:#0000ff;">private</span> Regex regex;
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> IsValid(<span style="color:#0000ff;">object</span> <span style="color:#0000ff;">value</span>)
+    {
+        <span style="color:#0000ff;">if</span> (<span style="color:#0000ff;">value</span> == <span style="color:#0000ff;">null</span>) <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">true</span>;
+        <span style="color:#0000ff;">return</span> regex.IsMatch(<span style="color:#0000ff;">value</span>.ToString());
+    }
+
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">void</span> Initialize(PhoneAttribute parameters)
+    {
+        regex = <span style="color:#0000ff;">new</span> Regex(<span style="color:#006080;">@&quot;^[2-9]\d{2}-\d{3}-\d{4}$&quot;</span>);
+    }
+}</pre>
+</div>
+<p>As you can see, implementing the <em>IInitializableValidator&lt;A&gt;</em>&nbsp;interface we have to implement the method <em>Initialize(...)</em> that initializes the validator, and it&#39;s executed first of all.</p>
+<p>The <em>IsValid()</em>&nbsp;method should return <em>false</em>&nbsp;if the constraint has been violated. For more examples, refer to the built-in validator implementations.</p>
+<p>We now have to implement the validator (ie. the rule checking implementation). A validation implementation can check the value of the a property (by implementing PropertyConstraint ) and/or can modify the NHibernate mapping metadata to express the constraint at the database level (by implementing PersistentClassConstraint)</p>
+<p>We have only seen property level validation, but you can write a class level validation attribute. Instead of receiving the return instance of a property, the bean itself will be passed to the validator. To activate the validation checking, just put the validation attribute to the class itself instead of in a property. A small sample can be found in the unit test suite.</p>
+<p>If your constraint can be applied multiple times (with different parameters) on the same property or type, you can use set the <em>AllowMultiple</em>&nbsp;parameter to <em>true</em>&nbsp;on the <em>AttributeUsage</em>&nbsp;attribute. An example of this it&#39;s the built-in validator Pattern, have a look:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">[Serializable]
+[AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = <span style="color:#0000ff;">true</span>)]
+[ValidatorClass(<span style="color:#0000ff;">typeof</span> (PatternValidator))]
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> PatternAttribute : Attribute, IRuleArgs
+{
+    &hellip;
+}</pre>
+</div>
+<pre class="programlisting">&nbsp;</pre>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Configuring your domain model with .Net Attributes</h2>
+<p>Since you are already familiar with attributes now, the syntax should be very familiar</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Address
+{ 
+    <span style="color:#008000;">// a static non null field  </span>
+    [NotNull]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">static</span> <span style="color:#0000ff;">string</span> blacklistedZipCode;
+    
+    <span style="color:#008000;">// field a not null string of 20 characters maximum</span>
+    [Length(Max = 20), NotNull]    
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> country;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">long</span> id;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">bool</span> internalValid = <span style="color:#0000ff;">true</span>;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> line1;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> line2;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> state;
+    <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">string</span> zip;
+    
+    <span style="color:#008000;">// a numeric between 1 and 2000</span>
+    [Min(1), Range(Max = 2000)]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">long</span> Id
+    {
+        get { <span style="color:#0000ff;">return</span> id; }
+        set { id = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// respond to the constraint in the field: country</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Country
+    {
+        get { <span style="color:#0000ff;">return</span> country; }
+        set { country = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// a non null string</span>
+    [NotNull]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Line1
+    {
+        get { <span style="color:#0000ff;">return</span> line1; }
+        set { line1 = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// a not null string of 3 characters maximum</span>
+    [Length(Max = 3), NotNull]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> State
+    {
+        get { <span style="color:#0000ff;">return</span> state; }
+        set { state = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// a not null numeric string of 5 characters maximum</span>
+    <span style="color:#008000;">// if the string is longer, the message will</span>
+    <span style="color:#008000;">// be searched in the resource bundle at key &#39;long&#39;</span>
+    [Length(Max = 5, Message = <span style="color:#006080;">&quot;{long}&quot;</span>)]
+    [Pattern(Regex = <span style="color:#006080;">&quot;[0-9]+&quot;</span>)]
+    [NotNull]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Zip
+    {
+        get { <span style="color:#0000ff;">return</span> zip; }
+        set { zip = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// no constraint</span>
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Line2
+    {
+        get { <span style="color:#0000ff;">return</span> line2; }
+        set { line2 = <span style="color:#0000ff;">value</span>; }
+    }
+
+    <span style="color:#008000;">// should always be true</span>
+    [AssertTrue]
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">bool</span> InternalValid
+    {
+        get { <span style="color:#0000ff;">return</span> internalValid; }
+        set { internalValid = <span style="color:#0000ff;">value</span>; }
+    }
+} </pre>
+</div>
+<p>While the example only shows public property validation, you can also annotate fields of any kind of visibility. In the example <strong>MyBeanConstraint</strong> is a custom Class Validator, we will talk about this later.</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">[MyBeanConstraint(Max=45)]
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Dog 
+{
+    [AssertTrue] <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">bool</span> IsMale;
+    [NotNull] <span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">string</span> Name { get {...} set{...} }
+    &hellip;
+}     </pre>
+</div>
+<p>You can also annotate interfaces. NHibernate Validator will check all superclasses and interfaces extended or implemented by a given type to read the appropriate validator attributes.</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">interface</span> Named 
+{
+    [NotNull] <span style="color:#0000ff;">string</span> Name {get; set;}
+    ...
+}
+
+<span style="color:#0000ff;">public</span> <span style="color:#0000ff;">class</span> Dog : Named 
+{
+    [AssertTrue] <span style="color:#0000ff;">private</span> <span style="color:#0000ff;">bool</span> isMale;
+    <span style="color:#0000ff;">public</span> <span style="color:#0000ff;">string</span> Name { get {...} set{...} }
+}
+</pre>
+</div>
+<p>The name property will be checked for nullity when the Dog type is validated.</p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Configuring your domain model with XML</h2>
+<p>You also can configurate your domain model with constraints using xml files: the nhv.xml files. We prefer to embed these Xml files into the assemblies, and NHibernate Validator is prepared to inspect them and retrieve the resources with constrains, like NHibernate does with hbm.xml files.</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">nhv-mapping</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&quot;urn:nhibernate-validator-1.0&quot;</span>
+                        <span style="color:#ff0000;">namespace</span><span style="color:#0000ff;">=&quot;NHibernate.Validator.Tests.Base&quot;</span>
+                        <span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=&quot;NHibernate.Validator.Tests&quot;</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">class</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Address&quot;</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;blacklistedZipCode&quot;</span><span style="color:#0000ff;">&gt;</span>
+                  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">not-null</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;country&quot;</span><span style="color:#0000ff;">&gt;</span>
+           <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">length</span> <span style="color:#ff0000;">max</span><span style="color:#0000ff;">=&quot;20&quot;</span><span style="color:#0000ff;">/&gt;</span>
+           <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">not-null</span> <span style="color:#0000ff;">/&gt;</span>    
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;floor&quot;</span><span style="color:#0000ff;">&gt;</span>    
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">range</span> <span style="color:#ff0000;">min</span><span style="color:#0000ff;">=&quot;-2&quot;</span> <span style="color:#ff0000;">max</span><span style="color:#0000ff;">=&quot;50&quot;</span> <span style="color:#ff0000;">message</span><span style="color:#0000ff;">=&quot;{floor.out.of.range} (escaping #{el})&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Id&quot;</span><span style="color:#0000ff;">&gt;</span>    
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">min</span> <span style="color:#ff0000;">value</span><span style="color:#0000ff;">=&quot;1&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">range</span> <span style="color:#ff0000;">max</span><span style="color:#0000ff;">=&quot;2000&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">max</span> <span style="color:#ff0000;">value</span><span style="color:#0000ff;">=&quot;2500&quot;</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Line1&quot;</span> <span style="color:#0000ff;">&gt;</span>    
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">not-null</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;State&quot;</span><span style="color:#0000ff;">&gt;</span>    
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">not-null</span><span style="color:#0000ff;">/&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">length</span> <span style="color:#ff0000;">max</span><span style="color:#0000ff;">=&quot;3&quot;</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;Zip&quot;</span><span style="color:#0000ff;">&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">length</span> <span style="color:#ff0000;">max</span><span style="color:#0000ff;">=&quot;5&quot;</span> <span style="color:#ff0000;">message</span><span style="color:#0000ff;">=&quot;{long}&quot;</span><span style="color:#0000ff;">/&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">pattern</span> <span style="color:#ff0000;">regex</span><span style="color:#0000ff;">=&quot;[0-9]+&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">not-null</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;InternalValid&quot;</span><span style="color:#0000ff;">&gt;</span>    
+          <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">asserttrue</span> <span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">class</span><span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">nhv-mapping</span><span style="color:#0000ff;">&gt;</span>      </pre>
+</div>
+<p><span class="bold"><strong>We strongly recommend</strong></span> to validate every nhv.xml file of your application with the respective XSD file. Every <strong>nhv.xml</strong> file should be validated with the <strong>nhv-mapping.xsd</strong>&nbsp;file included within the NHibernate Validator distribution whether in source or binaries. Indeed, if you are using an IDE like Visual Studio it offers IntelliSense support in the <strong>nhv.xml</strong> file if you add the schema to Visual Studio&#39;s xml schemas folder.</p>
+<p><span class="bold"><strong>Xml beauties:</strong></span> The nicest part of Xml for validation is that you can put xml validators in a different dll so you don&#39;t need to recompile your domain when validation rules change. Only the dll with the Xml files..</p>
+</div>
+</div>
+<div class="chapter">
+<h1>Configuration</h1>
+<p>NHibernate Validator has global parameters that you can configure at the startup. This configuration can be done in differents ways: programmaticaly or using xml files. If you are involved with NHibernate this could be very familiar to you.</p>
+<p>Configuration properties:</p>
+<p><strong>Table Configuration properties</strong></p>
+<div class="table">
+&lt;tbody&gt;
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;/tbody&gt;
+<table>
+&lt;tbody&gt;
+<tr>
+<th align="middle">Property name</th>
+<th>Purpose</th>
+</tr>
+<tr>
+<td align="middle"><strong>apply_to_ddl</strong></td>
+<td>Configure NHibernate to apply the constraints to the DDL.</td>
+</tr>
+<tr>
+<td align="middle"><strong>autoregister_listeners</strong></td>
+<td>Register the Event-Listeners automatically on Inserts and Updates.</td>
+</tr>
+<tr>
+<td align="middle"><strong>default_validator_mode</strong></td>
+<td>Define what are the constraints sources are and how to proceed. There are some built-in configurations:
+<p>&nbsp;</p>
+<div class="itemizedlist">
+<ul>
+<li>
+<p><strong>UseAttribute</strong> (default): Use Attributes to configurate the validators on types and/or members. Xml is ignored.</p>
+</li>
+<li>
+<p><strong>UseXml</strong>: Use Xml to configurate the validators on types and/or members. Attributes are ignored.</p>
+</li>
+<li>
+<p><strong>OverrideAttributeWithXml</strong>: If the same type/member is annotated with an Attribute and has a Xml rule the Attribute annotation will be used.</p>
+</li>
+<li>
+<p><strong>OverrideXmlWithAttribute</strong>: If the same type/member is annotated with an Attribute and has a Xml rule the Attribute annotation will be used.</p>
+</li>
+</ul>
+</div>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td align="middle"><strong>assembly</strong></td>
+<td>Which are the assemblies with contains the nhv.xml files embedded. You can have more than one assembly.</td>
+</tr>
+<tr>
+<td align="middle"><strong>shared_engine_provider</strong></td>
+<td>To inject a custom Shared Engine Provider.</td>
+</tr>
+&lt;/tbody&gt;
+</table>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Programmatic configuration</h2>
+<p>You can use the following code to configure NHibernate.Validator programmatically:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">using</span> NHibernate.Validator.Cfg;
+<span style="color:#0000ff;">using</span> NHibernate.Validator.Engine;
+<span style="color:#0000ff;">using</span> <span style="color:#0000ff;">using</span> Environment=NHibernate.Validator.Cfg.Environment;
+&hellip;
+ValidatorEngine ve = <span style="color:#0000ff;">new</span> ValidatorEngine();
+
+NHVConfiguration nhvc = <span style="color:#0000ff;">new</span> NHVConfiguration();
+nhvc.Properties[Environment.ApplyToDDL] = <span style="color:#006080;">&quot;false&quot;</span>;
+nhvc.Properties[Environment.AutoregisterListeners] = <span style="color:#006080;">&quot;false&quot;</span>;
+nhvc.Properties[Environment.ValidatorMode] = GetMode();
+nhvc.Mappings.Add(<span style="color:#0000ff;">new</span> MappingConfiguration(<span style="color:#006080;">&quot;NHibernate.Validator.Demo.Model&quot;</span>,<span style="color:#0000ff;">null</span>));
+ve.Configure(nhvc);  </pre>
+</div>
+<p>The <em>ValidatorEngine</em>&nbsp;will be set with the configuration. The NHibernate Validator configuration is represented by the <em>NHibernate.Validator.Cfg.NHVConfiguration</em>&nbsp;type. Other class used to configure all the stuff is the <em>NHibernate.Validator.Cfg.Environment</em>&nbsp;type, this class contain the string with the names of the properties of the configuration of NHibernate Validator.</p>
+</div>
+<div class="section">
+<h2 class="title" style="clear:both;">Declarative configuration: using Xml files</h2>
+<p>The declarative configuration keeps configuration out of the code. This means configuring the application using a different file, in this case a XML file. But the options don&#39;t end here: you can choose to configure NHibernate Validator using a simple Xml file or you can put the configuration in the well known App.Config/Web.Config. </p>
+<div class="section">
+<h3 class="title">Simple xml file</h3>
+<p>This is a sample of a simple configuration in a xml file:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">nhv-configuration</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&#39;urn:nhv-configuration-1.0&#39;</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&#39;apply_to_ddl&#39;</span><span style="color:#0000ff;">&gt;</span>true<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&#39;autoregister_listeners&#39;</span><span style="color:#0000ff;">&gt;</span>true<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&#39;default_validator_mode&#39;</span><span style="color:#0000ff;">&gt;</span>UseXml<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span>
+  <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">mapping</span> <span style="color:#ff0000;">assembly</span><span style="color:#0000ff;">=&#39;NHibernate.Validator.Demo.Model&#39;</span><span style="color:#0000ff;">/&gt;</span>
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">nhv-configuration</span><span style="color:#0000ff;">&gt;</span></pre>
+</div>
+<p>We encourage to name the configuration file <strong>nhvalidator.cfg.xml</strong>, because NHibernate Validator will pick up this file from the application directory in order to get the configuration parameters, however you can name this file as you wish.</p>
+<p>In order to configurate NHibernate Validator with the <strong>nhvalidator.cfg.xml</strong>&nbsp;you can use the following codeו:</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">ValidatorEngine engine = <span style="color:#0000ff;">new</span> ValidatorEngine();
+engine.Configure(); <span style="color:#008000;">// by convention reads the nhvalidator.cfg.xml file.</span></pre>
+</div>
+<p>You can choose another name for your configuration file and proceed of this manner: </p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;">ValidatorEngine engine = <span style="color:#0000ff;">new</span> ValidatorEngine();
+engine.Configure(<span style="color:#006080;">&quot;path/to/MyNHVConfigurationFile.xml&quot;</span>); <span style="color:#008000;">// you can use whatever path to point to the configuration file</span></pre>
+</div>
+</div>
+<div class="section">
+<h3 class="title">Configuration Application file: app.config/web.config</h3>
+<p>The configuration can be declared into our configuration application .Net files: app.config or web.config. In the below example you will see how to do it.</p>
+<div>
+<pre style="font-size:8pt;margin:0em;overflow:visible;width:100%;color:black;line-height:12pt;font-family:consolas, &#39;Courier New&#39;, courier, monospace;background-color:#f4f4f4;border-style:none;padding:0px;"><span style="color:#0000ff;">&lt;?</span><span style="color:#800000;">xml</span> <span style="color:#ff0000;">version</span><span style="color:#0000ff;">=&quot;1.0&quot;</span> <span style="color:#ff0000;">encoding</span><span style="color:#0000ff;">=&quot;utf-8&quot;</span> ?<span style="color:#0000ff;">&gt;</span>
+<span style="color:#0000ff;">&lt;</span><span style="color:#800000;">configuration</span><span style="color:#0000ff;">&gt;</span>
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">configSections</span><span style="color:#0000ff;">&gt;</span>
+        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">section</span> <span style="color:#ff0000;">name</span><span style="color:#0000ff;">=&quot;nhv-configuration&quot;</span> 
+                            <span style="color:#ff0000;">type</span><span style="color:#0000ff;">=&quot;NHibernate.Validator.Cfg.ConfigurationSectionHandler, NHibernate.Validator&quot;</span> <span style="color:#0000ff;">/&gt;</span>
+        ...
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">configSections</span><span style="color:#0000ff;">&gt;</span>
+    ...
+    <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">nhv-configuration</span> <span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">=&#39;urn:nhv-configuration-1.0&#39;</span><span style="color:#0000ff;">&gt;</span>
+        <span style="color:#0000ff;">&lt;</span><span style="color:#800000;">shared_engine_provider</span> 
+         <span style="color:#ff0000;">class</span><span style="color:#0000ff;">=&#39;NHibernate.Validator.Event.NHibernateSharedEngineProvider, NHibernate.Validator&#39;</span><span style="color:#0000ff;">/&gt;</span>
+    <span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">nhv-configuration</span><span style="color:#0000ff;">&gt;</span>
+    ...
+<span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">configuration</span><span style="color:#0000ff;">&gt;</span>      </pre>
+</div>
+</div>
+</div>
+</div></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/validator/nhibernate-validator-1-0-0-documentation/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/validator/nhibernate-validator-1-0-0-documentation/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/validator/nhibernate-validator-1-0-0-documentation/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/validator/nhibernate-validator-1-0-0-documentation/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>
