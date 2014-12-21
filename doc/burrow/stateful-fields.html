@@ -1,0 +1,229 @@
+---
+layout: doc
+title: Stateful Fields
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="index.html">Burrow</a>
+        »
+        <a href="stateful-fields.html">Stateful Fields</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Burrow</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Table of Contents</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList">
+<li><a href="index.html">Home</a></li>
+<li><a href="introduction.html">Introduction</a></li>
+<li><a href="get-started.html"> Get Started</a></li>
+<li><a href="conversation-explained.html">Conversation Explained</a></li>
+<li><a href="stateful-fields.html" class="Selected">Stateful Fields</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="example.html">Example</a></li>
+</ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/kailuowang/default.aspx.html">kailuowang</a><br> on 09-07-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/kailuowang/default.aspx.html">kailuowang</a><br> on 04-27-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="stateful-fields.html">Stateful Fields</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h5><b>StatefulField Attributes</b></h5>
+<p><br>We all know that in the stateless ASP.NET framework, persisting page/control's states of entity type could be a cumbersome task - for example a customerEditor.ascx needs to remember which customer it's editing. One of the common solutions is to store the Id of the entity as a value of a hidden field or into the ViewState, then load the entity from the id when needed. The code will be something like
+</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;"><span style="color:#0000ff;">private</span> Customer cust;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">public</span> Customer Cust {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">    get</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">    {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">        <span style="color:#0000ff;">if</span> (ViewState[<span style="color:#006080;">"custID"</span>] == <span style="color:#0000ff;">null</span>) <span style="color:#0000ff;">return</span> <span style="color:#0000ff;">null</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">if</span> (cust == <span style="color:#0000ff;">null</span>)</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">            cust = CustomerDAO.Instance.FindById((<span style="color:#0000ff;">int</span>)ViewState[<span style="color:#006080;">"custID"</span>]);</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">return</span> cust;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">    }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">    set {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">        cust = <span style="color:#0000ff;">value</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">if</span> (<span style="color:#0000ff;">value</span> == <span style="color:#0000ff;">null</span>)</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">            ViewState[<span style="color:#006080;">"custID"</span>] = <span style="color:#0000ff;">null</span>;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">        <span style="color:#0000ff;">else</span></pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">            ViewState[<span style="color:#006080;">"custID"</span>] = <span style="color:#0000ff;">value</span>.Id;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">    }</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">}</pre>
+</div>
+</div>
+<p>This approach has a couple of shortcomings. First, as you can see here, it's cumbersome to do the null judgement and converting type for the Id object. If you have codes all over the application, it's duplicated code. Secondly and more importantly, it requires either ViewState or HiddenField, each has its own problem: ViewState could be disabled; HiddenField does not work well within Ajax.Asp.Net's UpdatePanel as only the HiddenFields in the updating UpdatePanel will reflect the change you made to its value.<br>Now Burrow offers a new approach - StatefulField attributes.<br><b>[StatefulField] attribute</b> is the most basic one. Here is an example:
+</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">[StatefulField]</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;"><span style="color:#0000ff;">protected</span> <span style="color:#0000ff;">int</span> count = 1;</pre>
+</div>
+</div>
+<p>You mark a field of your control/page with the attribute [StatefulField], the value will be persistent over postbacks. [StatefulField] can be used for fields of types that are serializable - preferably primitive fields. Normally for this kind of fields, you can store them in the ViewState. However [StatefulField] attribute make the code cleaner and more importantly it can work when ViewState is disabled ( sure, there is ControlState, but this is a lot easier than ControlState isn't it? )<br><b>[EntityField] and [EntityFieldDeletionSafe</b><b>]</b> are the enhanced versions of [StatefulField]. Both can only be used to persist entity fields in a control/page. Here is an example:
+</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> CustomerEditor : UserControl</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">{</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">   [EntityFieldDeletionSafe]</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">   <span style="color:#0000ff;">protected</span> Customer customerBeingEdited;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;"> </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">   [EntityField]</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">   <span style="color:#0000ff;">protected</span> User editingAdmin;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;"> </pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">}</pre>
+</div>
+</div>
+<p>The CustomerEditor user control is written for administrator to edit a certain customer's profile. The above code uses the field customerBeingEdited to store the customer it's currently working on. The editingAdmin field is used to store the administrator user that is currently working with the system. Please note that [EntityField] and [EntityFieldNullSafe] should and can only be used on fields of entities that are already persisted. You cannot use them on transient entities. The major behavior difference between [EntityField] and [EntityFieldDeletionSafe] is that when you delete the entity without setting the field to null, [EntityField] will cause an Exception next time Burrow load entity value for it while [EntityFieldDeletionSafe] won't. Behind the scene, that's because that [EntityField] is using ISession.Load() to load the entity while [EntityFieldDeletionSafe] is using ISession.Get(). So the other interpretation here is that [EntityField] can return a proxy if your entity is set as LazyLoad=true, which could be a performance gain.<br><b>[ConversationalField]</b> is a special version designed only for long <a href="conversation-explained.html">Burrow Conversation</a>. In long Burrow Conversation, you probably need to store some data that needs to have the same life span as the conversation. [ConversationField] attribute can be used for such fields. Here is an example:
+</p>
+<div style="border:1px solid gray;margin:20px 0px 10px;padding:4px;overflow:auto;font-size:8pt;width:97.5%;cursor:text;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;max-height:200px;">
+<div style="border-style:none;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;"><span style="color:#0000ff;">public</span> <span style="color:#0000ff;">partial</span> <span style="color:#0000ff;">class</span> Checkout: Page {</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">    [ConversationalField]</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:white;">    <span style="color:#0000ff;">protected</span> Order placingOrder;</pre>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">}</pre>
+</div>
+</div>
+<p>A checkout page that uses long Burrow Conversation stores the currently processing order in the placingOrder field. Marked with [ConversationalField] attribute, the value of this field will have the same life span as the conversation as its value is actually stored in the conversation instance. [ConversationalField] can be used on all types - not only entity but also non-entity types.<br><b>Important Notes:</b></p>
+<ul>
+<li>For now, all Burrow field attributes ( [StatefulField], [EntityField], [EntityFieldDeletionSafe] or [ConversationalField] ) can only be used against protected or public fields of UserControls or Pages. Private fields marked with these attribute will be simply ignored. 
+</li>
+<li>The value of these Burrow fields becomes ready at PreLoad, which is about the same as ViewState On the other hand, if you change their value after PreRenderComplete, the change won't persist. </li>
+<li>Burrow inspects the whole control tree at the beginning of every request, you can prevent Burrow from doing this to a particular control with 2 options: 1) add an
+attribute (IgnoreStatefulFields) to the control class or 2) let the control implement an interface - IStatefulFieldsControl .
+<div id="comment-17758-closed" style="display:none;">
+<div style="background:#f0f0f0 none repeat scroll 0% 0%;">
+<div class="action-links subText smallgrey">
+    [ <a href="http://nhjira.koah.net/browse/NHB-24" class="smallgrey">Show »</a> ]
+    </div>
+<div class="action-details" style="overflow:hidden;height:1em;">
+                <a name="action_17758">
+                        
+    
+    
+    
+        </a><a href="http://nhjira.koah.net/secure/ViewProfile.jspa?name=kailuowang">Kailuo Wang</a> - <span class="subText"><span class="date">03/Apr/09 08:46 AM</span></span>
+we are working on a better solution for stateful fields handling. Prior
+to that, here is a couple of alternative solutions:
+you can disable the statefulfield handling for a control using either
+an attribute (IgnoreStatefulFields) or by implementing an interface(
+IStatefulFieldsControl). </div>
+</div>
+</div>
+</li>
+</ul>
+<p><img src="http://nhcontrib.wiki.sourceforge.net/i/bTLin.gif" width="8" height="8" alt=""></p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
