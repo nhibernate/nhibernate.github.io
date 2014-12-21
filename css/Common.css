@@ -8,13 +8,13 @@ body, html
 	padding: 0;
 	color: #333;
 	background-color: #f0f0f0;
-    background-image: none;
-    font-family: Arial, Helvetica;
+	background-image: none;
+	font-family: Arial, Helvetica;
 }
 
 form
 {
-    min-width: 960px;
+	min-width: 960px;
 }
 
 .Common
@@ -509,12 +509,12 @@ Content
 
 .CommonTitle
 {
-    color: #333;
+	color: #333;
 	font-size: 200%;
 	letter-spacing: -1px;
 	font-weight: bold;
 	padding: 0;
-	margin: 0;
+	margin: 0.6em 0 0 0;
 }
 
 .CommonSubTitle
