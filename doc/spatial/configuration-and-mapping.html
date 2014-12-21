@@ -1,0 +1,242 @@
+---
+layout: doc
+title: Spatial: Configuration and mapping
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="introduction.html">Spatial</a>
+        »
+        <a href="configuration-and-mapping.html">Configuration and mapping</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Spatial</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Table of Contents</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList">
+<li><a href="introduction.html">Introduction</a></li>
+<li><a href="configuration-and-mapping.html" class="Selected">Configuration and mapping</a></li>
+<li><a href="sample-usage.html">Sample usage</a></li>
+</ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 09-26-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 07-21-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="configuration-and-mapping.html">Configuration and mapping</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h4 class="wikidoc">Dialect Configuration: </h4>
+<div class="wikidoc">
+<ul>
+<li>In the NHibernate section of your configuration file add the following entry: </li>
+</ul>
+</div>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">&lt;property name="dialect"&gt;NHibernate.Spatial.Dialect.SomeSpatialDialect,SomeSpatialAssembly&lt;/property&gt;</pre>
+</span></span></span></span></pre>
+<ul>
+<li>If you're using <a href="http://www.castleproject.org/activerecord/" class="externalLink"><span style="color:#3e62a6;">Castle ActiveRecord<span class="externalLinkIcon"></span></span></a>, the entry will look like this: </li>
+</ul>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">&lt;add key="dialect" value="NHibernate.Spatial.Dialect.SomeSpatialDialect,SomeSpatialAssembly" /&gt;</pre>
+</span></span></pre>
+<p><br>Replace <span class="codeInline"><span style="font-family:Courier New;">SomeSpatialDialect</span></span> by the spatial dialect to be used (eg. <span style="font-family:'courier new',courier;">MsSql2008Spatial</span><span class="codeInline"><span style="font-family:Courier New;"><span style="font-family:'courier new',courier;">Dialect</span></span></span>.) and <span style="font-family:'courier new',courier;">SomeSpatialAssembly</span> by the assembly name where it is located (eg. <span style="font-family:'courier new',courier;">NHibernate.Spatial.MsSql2008</span>)</p>
+<h4></h4>
+<h4>Schema Generation Configuration: </h4>
+<ul>
+<li>
+<strong>Declarative:</strong> Use of <a href="../../doc/nh/en/index.html#mapping-database-object" class="externalLink"><span style="color:#3e62a6;">&lt;database-object&gt;<span class="externalLinkIcon"></span></span></a> element is not supported. </li>
+<li>
+<strong>Programmatic:</strong> <span style="font-family:courier new,courier;">    <span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;">
+<pre><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">Configuration cfg = new Configuration();<br>    // Your configuration code (eg. cfg.Configure(); )<br>    cfg.AddAuxiliaryDatabaseObject(new SpatialAuxiliaryDatabaseObject(cfg));</pre>
+</pre>
+</span></span></span><span style="font-family:courier new,courier;">
+<pre></pre>
+</span></span>
+</li>
+</ul>
+<pre></pre>
+<p><br>Then you can use a <a href="../../doc/nh/en/index.html#toolsetguide-s1-3" class="externalLink"><span style="color:#3e62a6;">SchemaExport<span class="externalLinkIcon"></span></span></a> object or the <a href="../../doc/nh/en/index.html#configuration-optional" class="externalLink">hibernate.hbm2ddl.auto<span class="externalLinkIcon"></span></a> configuration property for schema generation.</p>
+<p><strong>ActiveRecord Schema Generation Configuration:</strong></p>
+<p>You will need to add the SpatialAuxiliaryDatabaseObject in the Application_OnStart:</p>
+<pre><span><span><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;"> using NHibernate.Cfg;<br> using NHibernate.Spatial.Mapping;<br><br> public void Application_OnStart()<br> {<br>    foreach (Configuration cfg in ActiveRecordMediator.GetSessionFactoryHolder().GetAllConfigurations())<br>    {<br>        cfg.AddAuxiliaryDatabaseObject(new SpatialAuxiliaryDatabaseObject(cfg));<br>        Metadata.AddMapping(cfg, MetadataClass.GeometryColumn);<br>        Metadata.AddMapping(cfg, MetadataClass.SpatialReferenceSystem);<br>    }<br> }</pre>
+</span></span></span></span></pre>
+<p>You can then generate the database schema in the usual way.</p>
+<p> </p>
+<h4>Metadata Mappings Configuration: </h4>
+<p>There are two classes available for metadata mapping in the <span class="codeInline"><span style="font-family:Courier New;">NHibernate.Spatial.Metadata</span></span> namespace: <span class="codeInline"><span style="font-family:Courier New;">GeometryColumn</span></span> and <span class="codeInline"><span style="font-family:Courier New;">SpatialReferenceSystem</span></span>. You can add them selectively:</p>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">Configuration cfg = new Configuration();<br>// Your configuration code (eg. cfg.Configure(); )<br>Metadata.AddMapping(cfg, MetadataClass.GeometryColumn);<br>Metadata.AddMapping(cfg, MetadataClass.SpatialReferenceSystem);</pre>
+</span></span></pre>
+<p><br>Then you can use them as normal mapped classes. For example, you could execute the following HQL query:</p>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">select srs.WellKnownText from SpatialReferenceSystem as srs where srs.SRID=4326</pre>
+</span><br></span></pre>
+<p><br><strong>WARNING:</strong> DO NOT add metadata class mappings when using the <span class="codeInline"><span style="font-family:Courier New;">SchemaExport</span></span> utility. You could lose all contents of metadata tables.</p>
+<h4>NHibernate Mapping: </h4>
+<ul>
+<li>In the XML mappings file, map all properties as usual but for geometry columns use the following entry: </li>
+</ul>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">&lt;property name="Geometry" column="the_geom" type="NHibernate.Spatial.Type.GeometryType, NHibernate.Spatial" /&gt;</pre>
+</span><br></span></pre>
+<p> </p>
+<ul>
+<li>Optionally, for schema generation and default values setting, you can use type parameters. The available parameters are <strong><span class="codeInline"><span style="font-family:Courier New;">srid</span></span></strong> and <strong><span class="codeInline"><span style="font-family:Courier New;">subtype</span></span></strong>. For example: </li>
+</ul>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">&lt;property name="Geometry" column="the_geom"&gt;<br>    &lt;type name="NHibernate.Spatial.Type.GeometryType, NHibernate.Spatial"&gt;<br>        &lt;param name="srid"&gt;4326&lt;/param&gt;<br>        &lt;param name="subtype"&gt;POLYGON&lt;/param&gt;<br>    &lt;/type&gt;<br>&lt;/property&gt;</pre>
+</span></span></pre>
+<p> </p>
+<ul>
+<li>In the mapped class, declare the corresponding property: </li>
+</ul>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">private GeoAPI.Geometries.IGeometry _geometry; <br>public virtual GeoAPI.Geometries.IGeometry Geometry<br>{<br>	get<br>	{<br>		return this._geometry;<br>	}<br>	set<br>	{<br>		this._geometry = value;<br>	}<br>}</pre>
+</span></span></pre>
+<p> </p>
+<h4>ActiveRecord Mapping: </h4>
+<p> </p>
+<pre><span style="font-family:courier new,courier;"><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;"><pre style="border:0.1em dashed #3e62a6;padding:0.5em;margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;">private GeoAPI.Geometries.IGeometry _geometry; <br>         <br>[Property("the_geom", ColumnType = "NHibernate.Spatial.Type.GeometryType, NHibernate.Spatial")]<br>public virtual GeoAPI.Geometries.IGeometry Geometry<br>{<br>	get<br>	{<br>		return this._geometry;<br>	}<br>	set<br>	{<br>		this._geometry = value;<br>	}<br>}</pre>
+</span><br></span></pre>
+<p><br><strong>NOTE:</strong> Type parameters (see <strong>NHibernate mapping</strong> above) are not supported in ActiveRecord.</p>
+<h4>ActiveWriter Mapping: </h4>
+<p><a href="http://www.altinoren.com/activewriter/" class="externalLink"><span style="color:#3e62a6;">ActiveWriter<span class="externalLinkIcon"></span></span></a> is a tool to visually model entities and relationships, and generate ActiveRecord classes or NHibernate mapping files. Since <a href="http://www.altinoren.com/activewriter/downloads.htm" class="externalLink">Preview 3<span class="externalLinkIcon"></span></a>, it supports custom types, so we can use the GeometryType / IGeometry pair..<br><br><strong>Example usage:</strong></p>
+<ul>
+<li>Drag &amp; drop a MsSqlSpatial table from Server Explorer/Data connections. </li>
+<li>In the model, select "the_geom" property. </li>
+<li>In the properties window, enter the following values: </li>
+</ul>
+<p><span style="word-spacing:0px;text-transform:none;text-indent:0px;white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;font-family:'Segoe UI';color:#000000;">
+&lt;tbody&gt; 
+&lt;tbody&gt;
+&lt;/tbody&gt; 
+&lt;/tbody&gt;
+&lt;tbody&gt;
+&lt;/tbody&gt;
+<table style="border-collapse:collapse;border:#bbbbbb 0.1em solid;">
+<tbody>
+<tr style="border:#bbbbbb 0.1em solid;">
+<th style="font-weight:bold;vertical-align:bottom;border:#bbbbbb 0.1em solid;padding:0.25em;">Property</th>
+<th style="font-weight:bold;vertical-align:bottom;border:#bbbbbb 0.1em solid;padding:0.25em;">Value</th>
+</tr>
+<tr style="border:#bbbbbb 0.1em solid;">
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;">Column Type</td>
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;"><span class="codeInline" style="font-family:'Courier New';">Custom</span></td>
+</tr>
+<tr style="border:#bbbbbb 0.1em solid;">
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;">Custom Column Type</td>
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;"><span class="codeInline" style="font-family:'Courier New';">NHibernate.Spatial.Type.GeometryType, NHibernate.Spatial</span></td>
+</tr>
+<tr style="border:#bbbbbb 0.1em solid;">
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;">Custom Member Type</td>
+<td style="border:#bbbbbb 0.1em solid;padding:0.25em;"><span class="codeInline" style="font-family:'Courier New';">GeoAPI.Geometries.IGeometry</span></td>
+</tr>
+</tbody>
+</table>
+</span><br><strong>NOTE:</strong> Type parameters (see <strong>NHibernate mapping</strong> above) are not supported in ActiveRecord, so it is in ActiveWriter.</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

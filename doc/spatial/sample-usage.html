@@ -1,0 +1,222 @@
+---
+layout: doc
+title: Spatial: Sample usage
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="introduction.html">Spatial</a>
+        »
+        <a href="sample-usage.html">Sample usage</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Spatial</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Table of Contents</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList">
+<li><a href="introduction.html">Introduction</a></li>
+<li><a href="configuration-and-mapping.html">Configuration and mapping</a></li>
+<li><a href="sample-usage.html" class="Selected">Sample usage</a></li>
+</ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 09-26-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 10-01-2008</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="sample-usage.html">Sample usage</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h4 class="wikidoc">Find a country by coordinates: </h4>
+<ul>
+<li>Using NHibernate: </li>
+</ul>
+<p><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;">
+<pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">Country country = session.CreateCriteria(typeof(Country))
+    .Add(SpatialExpression.Contains("Boundaries", new Point(-70.40, -33.24)))
+    .UniqueResult() as Country;</pre>
+</span></p>
+<ul>
+<li>Using ActiveRecord: </li>
+</ul>
+<p><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;">
+<pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">Country country = Country.FindOne(
+    SpatialExpression.Contains("Boundaries", new Point(-70.40, -33.24))
+);</pre>
+</span></p>
+<p> </p>
+<h4>Find all the towns in a bounding box, except the one located at some coordinates: </h4>
+<ul>
+<li>Using NHibernate: </li>
+</ul>
+<pre><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;"><pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">IList towns = session.CreateCriteria(typeof(Town))
+    .Add(SpatialExpression.Filter("Boundaries", new Envelope(-70, -68, -32, -34)))
+    .Add(Expression.Not(SpatialExpression.Contains("Boundaries", new Point(-70.40, -33.24))))
+    .List();</pre>
+</span></pre>
+<ul>
+<li>Using ActiveRecord: </li>
+</ul>
+<p><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;">
+<pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">Town[] towns = Town.FindAll(
+    SpatialExpression.Filter("Boundaries", new Envelope(-70, -68, -32, -34)),
+    Expression.Not(SpatialExpression.Contains("Boundaries", new Point(-70.40, -33.24)))
+);</pre>
+</span></p>
+<p><br>The previous example just shows how to combine a spatial criterion (<span class="codeInline"><span style="font-family:Courier New;">Contains</span></span>) with a normal criterion (<span class="codeInline"><span style="font-family:Courier New;">Not</span></span>), but in this case we could use simply <span class="codeInline"><span style="font-family:Courier New;">Disjoint</span></span>.</p>
+<pre> </pre>
+<h4>Get states boundaries grouping counties by state: </h4>
+<ul>
+<li>Using ActiveRecord: </li>
+</ul>
+<pre><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;"><pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">ProjectionQuery&lt;County&gt; query = new ProjectionQuery&lt;County&gt;(
+    Projections.ProjectionList()
+        .Add(Projections.GroupProperty("State"))
+        .Add(SpatialProjections.Union("Boundaries"))
+    );
+IList&lt;object[]&gt; stateBoundaries= query.Execute();</pre>
+</span>
+</pre>
+<p><strong>Note:</strong> For people with a GIS backgroud, the "projection" term could be confusing. In this context, it has nothing to do with cartographic projections. It's rather a term borrowed from <a class="externalLink" href="http://en.wikipedia.org/wiki/Projection_(relational_algebra)"><span style="color:#3e62a6;">relational algebra<span class="externalLinkIcon"></span></span></a>.<br> </p>
+<h4>Create a new vehicle GPS position: </h4>
+<ul>
+<li>Using NHibernate: </li>
+</ul>
+<pre><span style="word-spacing:0px;text-transform:none;color:#000000;text-indent:0px;font-family:'Segoe UI';white-space:normal;letter-spacing:normal;border-collapse:separate;orphans:2;widows:2;-webkit-border-horizontal-spacing:0px;-webkit-border-vertical-spacing:0px;-webkit-text-decorations-in-effect:none;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0;"><pre style="margin-top:0px;overflow-y:hidden;font-size:1em;overflow-x:auto;font-family:'Courier New';height:auto;background-color:#ececec;border:#3e62a6 0.1em dashed;padding:0.5em;">public void TrackVehicule(Vehicle vehicule, double longitude, double latitude, DateTime when)
+{
+    Tracking tracking = new Tracking();
+    tracking.Vehicle = vehicle;
+    tracking.Position = new Point(longitude, latitude);
+    tracking.When = when;
+    session.Save(tracking);
+}</pre>
+</span>
+</pre>
+<p> </p>
+<h4>More, please! </h4>
+<p>You also will find lots of sample usage code in the tests project (<span class="codeInline"><span style="font-family:Courier New;">Tests.NHibernate.Spatial</span></span>). Check out:</p>
+<ul>
+<li>
+<a href="http://nhcontrib.svn.sourceforge.net/viewvc/nhcontrib/trunk/src/NHibernate.Spatial/src/Tests.NHibernate.Spatial/CriteriaFixture.cs?view=markup">CriteriaFixture.cs</a><br>
+</li>
+<li>
+<a href="http://nhcontrib.svn.sourceforge.net/viewvc/nhcontrib/trunk/src/NHibernate.Spatial/src/Tests.NHibernate.Spatial/ProjectionsFixture.cs?view=markup">ProjectionsFixture.cs</a><br>
+</li>
+<li>
+<a href="http://nhcontrib.svn.sourceforge.net/viewvc/nhcontrib/trunk/src/NHibernate.Spatial/src/Tests.NHibernate.Spatial/OgcSfSql11Compliance/ConformanceItemsFixture.cs?view=markup">OgcSfSql11Compliance/ConformanceItemsFixture.cs</a><br>
+</li>
+<li>
+<a href="http://nhcontrib.svn.sourceforge.net/viewvc/nhcontrib/trunk/src/NHibernate.Spatial/src/Tests.NHibernate.Spatial/RandomGeometries/SpatialQueriesFixture.cs?view=markup">RandomGeometries/SpatialQueriesFixture.cs</a><br>
+</li>
+</ul>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

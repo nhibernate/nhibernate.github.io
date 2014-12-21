@@ -1,0 +1,165 @@
+---
+layout: doc
+title: Spatial: Introduction
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="introduction.html">Spatial</a>
+        »
+        <a href="introduction.html">Introduction</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Spatial</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Table of Contents</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList">
+<li><a href="introduction.html" class="Selected">Introduction</a></li>
+<li><a href="configuration-and-mapping.html">Configuration and mapping</a></li>
+<li><a href="sample-usage.html">Sample usage</a></li>
+</ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 09-26-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.22.49/4TAHJT3AV3Z0.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rstuven/default.aspx.html">Ricardo Stuven</a><br> on 10-06-2010</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="introduction.html">Introduction</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p><strong>NHibernate.Spatial</strong>, spatial extensions for NHibernate, allows you to connect NHibernate to a spatially enabled database and manipulate geometries in HQL or in .NET code using <a href="http://code.google.com/p/nettopologysuite/">NetTopologySuite</a>, providing you with a fully integrated GIS programming experience.<br><br>There is also a similar but independent effort for Java: <a class="externalLink" href="http://www.hibernatespatial.org/">Hibernate Spatial<span class="externalLinkIcon"></span></a>.</p>
+<h4>Features: </h4>
+<ul>
+<li>
+<strong>Geometry types:</strong> Geometry columns are mapped to .NET geometry types compliant with <a href="http://www.opengeospatial.org/standards/sfs">OGC specifications</a>.</li>
+<li>
+<strong>Dialects:</strong> <a class="externalLink" href="http://codeplex.com/MsSqlSpatial">MsSqlSpatial,</a> <a class="externalLink" href="http://www.postgis.org/">PostGIS<span class="externalLinkIcon"></span></a>  <a href="http://dev.mysql.com/doc/refman/6.0/en/spatial-extensions.html">MySQL</a> and <a class="externalLink" href="http://www.microsoft.com/sqlserver/2008/en/us/spatial-data.aspx">SQL Server 2008<span class="externalLinkIcon"></span></a> are supported. The most common spatial functions are registered for use within HQL, providing compatible queries among different dialects.</li>
+<li>
+<strong>Criteria:</strong> Spatial relations functions such as <span class="codeInline"><span style="font-family:courier new,courier;">Intersects</span></span>, <span class="codeInline"><span style="font-family:courier new,courier;">Within</span></span>, <span class="codeInline"><span style="font-family:courier new,courier;">Crosses</span></span>, etc.</li>
+<li>
+<strong>Projections:</strong> Spatial aggregate, analysis and tranformation functions.</li>
+<li>
+<strong>Schema generation:</strong> Support for automatic creation and droping of auxiliary data objects (eg. registering of geometry columns in metadata table).</li>
+<li>
+<strong>Metadata mappings:</strong> Built-in mappings to spatial metadata through <span style="font-family:courier new,courier;"><span class="codeInline">GeometryColumns</span> </span>and <span class="codeInline"><span style="font-family:courier new,courier;">SpatialReferenceSystem</span></span> classes. </li>
+</ul>
+<h4>Requirements:</h4>
+<ul>
+<li>.NET 2.0</li>
+<li>NHibernate 2.1.2.GA</li>
+</ul>
+<h4>Installation:</h4>
+<ul>
+<li>Download latest sources and build. Copy the binaries to your project's libraries folder.</li>
+<li>In you project, add references to <span style="font-family:'courier new', courier;">NHibernate.dll</span>, <span style="font-family:'courier new', courier;">NHibernate.Spatial.dll</span>, <span style="font-family:'courier new', courier;">NetTopologySuite.dll</span>, <span style="font-family:'courier new', courier;">GeoAPI.dll</span> and to provider assembly (eg. <span style="font-family:'courier new', courier;">NHibernate.Spatial.PostGis.dll</span>).</li>
+</ul>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
