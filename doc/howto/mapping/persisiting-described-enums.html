@@ -1,0 +1,136 @@
+---
+layout: doc
+title: Persisiting Described Enums
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="persisiting-described-enums.html">Persisiting Described Enums</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.39/4TBN4K18ZWCG.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/kenegozi/default.aspx.html">Ken Egozi</a><br> on 10-13-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.39/4TBN4K18ZWCG.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/kenegozi/default.aspx.html">Ken Egozi</a><br> on 10-13-2008</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="persisiting-described-enums.html">Persisiting Described Enums</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Sometimes you'd want to map an Enum field to the DB. The default behaviour of NHibernate is to persist the Enum value ToString()'s output to the DB. But at times you'd rather persist a custom value for each enum value. Popular example will be:</p>
+<pre style="background-color:black;overflow-x:scroll;"><span style="color:deepskyblue;"></span><span style="color:#e0e0e0;"></span><span style="color:deepskyblue;">namespace</span><span style="color:#e0e0e0;"> </span><span style="color:#c4c4c4;">Model<br></span><span style="color:#e0e0e0;">{<br>    </span><span style="color:deepskyblue;">public</span><span style="color:#e0e0e0;"> </span><span style="color:deepskyblue;">enum</span><span style="color:#e0e0e0;"> SexType</span><span style="color:#00d2d2;"><br></span><span style="color:#e0e0e0;">    {<br></span><span style="color:#e0e0e0;">        </span><span style="color:#c4c4c4;">Male</span><span style="color:#e0e0e0;">,<br><br></span><span style="color:#e0e0e0;"></span><span style="color:#e0e0e0;">        </span><span style="color:#c4c4c4;">Female<br></span><span style="color:#e0e0e0;">    }<br></span><span style="color:#e0e0e0;">}</span></pre>
+<p>The values "Female" or "Male" will be persisted to the DB should you use a property of type SexType, but your DBA wants you to persist "F" for female and "M" for male.</p>
+<p>There's DescriptionAttribute in System.ComponentModel that can be used to describe the enum values:</p>
+<pre style="background-color:black;overflow-x:scroll;"><span style="color:deepskyblue;"></span><span style="color:#e0e0e0;"></span><span style="color:deepskyblue;">using</span><span style="color:#e0e0e0;"> </span><span style="color:#c4c4c4;">System</span><span style="color:silver;">.</span><span style="color:#c4c4c4;">ComponentModel</span><span style="color:#e0e0e0;">;<br></span><br><span style="color:deepskyblue;">namespace</span><span style="color:#e0e0e0;"> </span><span style="color:#c4c4c4;">Model<br></span><span style="color:#e0e0e0;">{<br>    </span><span style="color:deepskyblue;">public</span><span style="color:#e0e0e0;"> </span><span style="color:deepskyblue;">enum</span><span style="color:#e0e0e0;"> SexType</span><span style="color:#00d2d2;"><br></span><span style="color:#e0e0e0;">    {<br></span><span style="color:#e0e0e0;">        [</span><span style="color:#00d2d2;">Description</span><span style="color:#e0e0e0;">(</span><span style="color:salmon;">"M"</span><span style="color:#e0e0e0;">)]<br></span><span style="color:#e0e0e0;">        </span><span style="color:#c4c4c4;">Male</span><span style="color:#e0e0e0;">,<br><br></span><span style="color:#e0e0e0;"></span><span style="color:#e0e0e0;">        [</span><span style="color:#00d2d2;">Description</span><span style="color:#e0e0e0;">(</span><span style="color:salmon;">"F"</span><span style="color:#e0e0e0;">)]<br></span><span style="color:#e0e0e0;">        </span><span style="color:#c4c4c4;">Female<br></span><span style="color:#e0e0e0;">    }<br></span><span style="color:#e0e0e0;">}</span></pre>
+<p> </p>
+<p>What we need now is:</p>
+<ol>
+<li>A way to extract the description for a given value,</li>
+<li>A way to get a value out of a description,</li>
+<li>and a custom IUserType that will know how to apply 1. and 2.</li>
+</ol>
+<p> </p>
+<p>Luckily enough, these things are already implemented in the new <a href="http://code.google.com/p/d-9/">D9 project</a></p>
+<ul>
+<li>Get the D9 project binaries. </li>
+<li>Reference D9.Commons in your application and make sure you initialise the enums. You do that by calling <i><b>Enums.<span class="typ">Initialise</span><span class="pun"></span>(typeof(SexType))</b></i> at application initialisation time.</li>
+<li>Map the enum using the generic IUserType implementation<span class="pln"> D9</span><span class="pun">.</span><span class="typ">NHibernate</span><span class="pun">.</span><span class="typ">UserTypes</span><span class="pln">.</span><span class="pln"></span><span class="typ">DescribedEnumStringType</span>
+</li>
+</ul>
+<p>Example:</p>
+<p> </p>
+<pre style="color:#e0e0e0;background-color:black;overflow-x:scroll;">&lt;<span style="color:deepskyblue;">property</span><br>    <span style="color:#00d2d2;">name    </span>= <span style="color:#c4c4c4;">"Sex"</span><br>    <span style="color:#00d2d2;">column  </span>= <span style="color:#c4c4c4;">"Sex"</span><br>    <span style="color:#00d2d2;">type    </span>= <span style="color:#c4c4c4;">"D9.NHibernate.UserTypes.DescribedEnumStringType`1<a class="NewPageLink" href="add.aspx%3FParentPageID=43&amp;PageKey=Model.SexType_2C00_-Model.html" title="Click to create new page titled: Model.SexType, Model">Model.SexType, Model</a>, <br>              D9.NHibernate"</span> /&gt;</pre>
+<p>or if you use Castle ActiveRecord attributes for mapping:</p>
+<pre style="color:#e0e0e0;background-color:black;overflow-x:scroll;">[<span style="color:#00d2d2;">Property</span>(ColumnType = "D9.NHibernate.UserTypes.DescribedEnumStringType`1<a class="NewPageLink" href="add.aspx%3FParentPageID=43&amp;PageKey=Model.SexType_2C00_-Model.html" title="Click to create new page titled: Model.SexType, Model">Model.SexType, Model</a>, D9.NHibernate")<span style="color:deepskyblue;"></span></pre>
+<p> </p>
+<p>The source code for the Enums and DescribedEnumStringType classes is available under <b>New BSD license</b> in the <a href="http://code.google.com/p/d-9/source/browse/">D9 project source repository</a></p>
+<p>You can read more on D9, at <a href="http://www.kenegozi.com/Blog/Tag/d9.aspx">http://www.kenegozi.com/Blog/Tag/d9.aspx</a></p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
