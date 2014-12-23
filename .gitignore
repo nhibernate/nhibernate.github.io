@@ -1,2 +1,6 @@
 _site
 .sass-cache
+
+# Common backup files on Linux.
+*~
+
