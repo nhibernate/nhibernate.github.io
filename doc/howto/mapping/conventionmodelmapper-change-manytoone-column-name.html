@@ -1,0 +1,121 @@
+---
+layout: doc
+title: ConventionModelMapper - change ManyToOne column name
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="conventionmodelmapper-change-manytoone-column-name.html">ConventionModelMapper - change ManyToOne column name</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/ashern/default.aspx.html">ashern</a><br> on 07-14-2011</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/ashern/default.aspx.html">ashern</a><br> on 07-14-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="conventionmodelmapper-change-manytoone-column-name.html">ConventionModelMapper - change ManyToOne column name</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h4>Creating a convention to override the default column naming for your ManyToOne relationships is simple, as follows:</h4>
+<p><span><span>mapper.BeforeMapManyToOne += (insp, prop, map) =&gt; </span></span></p>
+<p><span><span>       map.Column(prop.LocalMember.GetPropertyOrFieldType().Name + <span>"Id"</span></span><span>);</span></span></p>
+<h4><span><span>But, if any of the above are bi-directional relationships, be sure to equivalently map the inverse side's key as required for your collection types:</span></span></h4>
+<p><span><span><i>for set</i></span></span></p>
+<pre>mapper.BeforeMapSet += (insp, typ, map) =&gt; map.Key(km =&gt; </pre>
+<pre>       km.Column(typ.GetContainerEntity(insp).Name + "Id"))<i>;</i></pre>
+<p><span style="white-space:pre;"><i>for bag</i></span><span></span>
+</p>
+<pre>mapper.BeforeMapBag += (insp, typ, map) =&gt; map.Key(km =&gt; </pre>
+<pre>       km.Column(typ.GetContainerEntity(insp).Name + "Id"))<i>;</i></pre>
+<p><i>etc...</i></p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

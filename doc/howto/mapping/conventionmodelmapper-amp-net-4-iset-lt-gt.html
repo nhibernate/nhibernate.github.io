@@ -1,0 +1,133 @@
+---
+layout: doc
+title: ConventionModelMapper &amp; .net 4 ISet&lt;&gt;
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="conventionmodelmapper-amp-net-4-iset-lt-gt.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/ashern/default.aspx.html">ashern</a><br> on 07-14-2011</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/ashern/default.aspx.html">ashern</a><br> on 07-14-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="conventionmodelmapper-amp-net-4-iset-lt-gt.html">ConventionModelMapper &amp; .net 4 ISet&lt;&gt;</a></span>
+                        
+                    </h2>
+                                
+		<p>Note: This information is mosly obsolete as it applies to NHibernate 3 only. If you run on .Net 4 you should use NHibernate 4, which has built-in support for .Net 4's ISet&lt;&gt;.</p>
+
+                <div>
+<p>For anyone using <span>José's Net4CollectionTypeFactory to enable native ISet&lt;&gt; usage, here's how to get the convention mapper to recognize your ISet&lt;&gt; properties as type Set rather than Bag (code courtesy JFR):</span></p>
+<p><span style="text-decoration:underline;">In your mapping</span></p>
+<p>mapper.IsSet(IsSetFieldType);</p>
+<p><span style="text-decoration:underline;">Function implementation</span></p>
+<p><span></span></p>
+<div>
+<pre><span>private</span> <span>static</span> <span>bool</span> IsSetFieldType(<span>MemberInfo</span> mi, <span>bool</span> declared)
+        {
+            <span>var</span> propertyTypeIsSet = mi.GetPropertyOrFieldType()
+                .GetGenericInterfaceTypeDefinitions()
+                .Contains(<span>typeof</span>(<span>ISet</span>&lt;&gt;));
+ 
+            <span>if</span> (propertyTypeIsSet) <span>return</span> <span>true</span>;
+ 
+            <span>var</span> backFieldInfo = <span>PropertyToField</span>.GetBackFieldInfo((<span>PropertyInfo</span>)mi);
+ 
+            <span>return</span> backFieldInfo != <span>null</span>
+                   &amp;&amp; backFieldInfo
+                          .FieldType.GetGenericInterfaceTypeDefinitions().Contains(<span>typeof</span>(<span>ISet</span>&lt;&gt;));
+        }</pre>
+<pre><span style="text-decoration:underline;">Remember to add the collection type factory to your config..</span></pre>
+</div>
+<p><span></span></p>
+<pre>configuration.CollectionTypeFactory&lt;Net4CollectionTypeFactory&gt;();</pre>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
