@@ -1,0 +1,157 @@
+---
+layout: doc
+title: Checking if an Unloaded Collection Contains Elements
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="checking-if-an-unloaded-collection-contains-elements.html">Checking if an Unloaded Collection Contains Elements</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 11-18-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="checking-if-an-unloaded-collection-contains-elements.aspx.html">Checking if an Unloaded Collection Contains Elements</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>If you want to know if an unloaded collection in an entity contains elements, or count them, without actually loading them, you need to use a custom query; that is because the <strong>Count </strong>property (if the collection is not mapped with <strong>lazy=”extra”</strong>) and the LINQ <strong>Count()</strong> and<strong>Any()</strong> methods force the whole collection to be loaded.</p>
+<p>You can use something like these two methods, one for checking if there are any values, the other for actually counting them:</p>
+<p> </p>
+<pre><span>public</span> <span>static</span> Boolean Exists(<span>this</span> ISession session, IEnumerable collection)</pre>
+<pre>{</pre>
+<pre>     <span>if</span> (collection <span>is</span> IPersistentCollection)</pre>
+<pre>     {</pre>
+<pre>         IPersistentCollection col = collection <span>as</span> IPersistentCollection;</pre>
+<pre>  </pre>
+<pre>         <span>if</span> (col.WasInitialized == <span>false</span>)</pre>
+<pre>         {</pre>
+<pre>                 String[] roleParts = col.Role.Split(<span>'.'</span>);</pre>
+<pre>                 String ownerTypeName = String.Join(<span>"."</span>, roleParts, 0, roleParts.Length - 1);</pre>
+<pre>                 String ownerCollectionName = roleParts.Last();</pre>
+<pre>                 String hql = <span>"select 1 from "</span> + ownerTypeName + <span>" it where it.id = :id and exists elements(it."</span> + ownerCollectionName + <span>")"</span>;</pre>
+<pre>                 Boolean exists = session.CreateQuery(hql).SetParameter(<span>"id"</span>, col.Key).List().Count == 1;</pre>
+<pre>  </pre>
+<pre>                 <span>return</span> (exists);</pre>
+<pre>         }</pre>
+<pre>     }</pre>
+<pre>  </pre>
+<pre>     <span>return</span> ((collection <span>as</span> IEnumerable).OfType&lt;Object&gt;().Any());</pre>
+<pre> }</pre>
+<pre>  </pre>
+<pre><span>public</span> <span>static</span> Int64 Count(<span>this</span> ISession session, IEnumerable collection)</pre>
+<pre>{</pre>
+<pre>    <span>if</span> (collection <span>is</span> IPersistentCollection)</pre>
+<pre>    {</pre>
+<pre>        IPersistentCollection col = collection <span>as</span> IPersistentCollection;</pre>
+<pre> </pre>
+<pre>        <span>if</span> (col.WasInitialized == <span>false</span>)</pre>
+<pre>        {</pre>
+<pre>            String[] roleParts = col.Role.Split(<span>'.'</span>);</pre>
+<pre>            String ownerTypeName = String.Join(<span>"."</span>, roleParts, 0, roleParts.Length - 1);</pre>
+<pre>            String ownerCollectionName = roleParts.Last();</pre>
+<pre>            String hql = <span>"select count(elements(it."</span> + ownerCollectionName + <span>")) from "</span> + ownerTypeName + <span>" it where it.id = :id"</span>;</pre>
+<pre>            Int64 count = session.CreateQuery(hql).SetParameter(<span>"id"</span>, col.Key).UniqueResult&lt;Int64&gt;();</pre>
+<pre> </pre>
+<pre>            <span>return</span> (count);</pre>
+<pre>        }</pre>
+<pre>    }</pre>
+<pre> </pre>
+<pre>    <span>return</span> ((collection <span>as</span> IEnumerable).OfType&lt;Object&gt;().Count());</pre>
+<pre>}</pre>
+<pre></pre>
+<pre>Here's how:</pre>
+<pre></pre>
+<pre>MyEntity entity = session.Load(100);</pre>
+<pre></pre>
+<pre>if (session.Exists(entity.SomeCollection))</pre>
+<pre>{</pre>
+<pre>    Int32 count = session.Count(entity.SomeCollection);</pre>
+<pre>    //...</pre>
+<pre>}</pre>
+<p> </p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

@@ -1,0 +1,154 @@
+---
+layout: doc
+title: Configure Log4Net for use with NHibernate
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="configure-log4net-for-use-with-nhibernate.html">Configure Log4Net for use with NHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.34/4TA9FMIYGIH8.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/gabriel.schenker/default.aspx.html">gabriel.schenker</a><br> on 09-07-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 09-19-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="configure-log4net-for-use-with-nhibernate.html">Configure Log4Net for use with NHibernate</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>The <a href="http://logging.apache.org/log4net/index.html">Log4Net</a> assembly is distributed with NHibernate binaries.</p>
+<p>If you are not sure about details of the configuration shown below please refer to <a href="http://logging.apache.org/log4net/index.html">this</a> documentation. 
+</p>
+<h4>Running without Log4Net</h4>
+<p>If you only want NHibernate to log the queries it sends to the data source when running unit tests you don't have to configure Log4Net at all. It suffices to add the <strong>show_sql</strong> key to the NHibernate configuration. If you are using a separate xml file to configure NHibernate (e.g. the hibernate.cfg.xml) then its content might look similar to the one below</p>
+<div style="padding-right:0px;display:inline;padding-left:0px;float:none;padding-bottom:0px;margin:0px;padding-top:0px;" id="scid:F2210F5F-69EB-4d4c-AFF7-B8A050E9CC72:4d238d7a-da04-4b6f-858d-fc1bfa497df4" class="wlWriterEditableSmartContent">
+<pre style="width:100%;"><div>
+<span style="color:#0000ff;">&lt;?</span><span style="color:#ff00ff;">xml version="1.0" encoding="utf-8" </span><span style="color:#0000ff;">?&gt;</span><span style="color:#000000;"><br></span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">hibernate-configuration </span><span style="color:#ff0000;">xmlns</span><span style="color:#0000ff;">="urn:nhibernate-configuration-2.2"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">session-factory</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="connection.provider"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;">NHibernate.Connection.DriverConnectionProvider</span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="dialect"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;">NHibernate.Dialect.MsSql2005Dialect</span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="connection.driver_class"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;">NHibernate.Driver.SqlClientDriver</span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="connection.connection_string"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    Server=(local);Database=NHibernateFAQ;Integrated Security=SSPI;<br>  </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">property </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="show_sql"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;">true</span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">property</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">session-factory</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br></span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">hibernate-configuration</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br></span>
+</div></pre>
+</div>
+<p>Now when running any unit test that involves NHibernate the queries generated by NHibernate will be logged in the output window (be it the unit test runner of <strong>Resharper</strong> or be it the Output Window of Visual Studio when you use<strong>TestDriven</strong>). 
+</p>
+<h4>Logging with Log4Net</h4>
+<p>If you want to use Log4Net to collect logging information generated by NHibernate you have to add the necessary configuration to the config file of your application. If you want to log to two different targets (e.g. to the console and to a file) the relevant sections in your config file might look like follows:</p>
+<div style="padding-right:0px;display:inline;padding-left:0px;float:none;padding-bottom:0px;margin:0px;padding-top:0px;" id="scid:F2210F5F-69EB-4d4c-AFF7-B8A050E9CC72:4652318c-495c-4713-8a6f-73a04cf8934a" class="wlWriterEditableSmartContent">
+<pre style="width:100%;"><div>
+<span style="color:#0000ff;">&lt;?</span><span style="color:#ff00ff;">xml version="1.0" encoding="utf-8" </span><span style="color:#0000ff;">?&gt;</span><span style="color:#000000;"><br></span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">configuration</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">configSections</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#008000;">&lt;!--</span><span style="color:#008000;"> Others sections </span><span style="color:#008000;">--&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">section </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="log4net"</span><span style="color:#ff0000;"><br>      type</span><span style="color:#0000ff;">="log4net.Config.Log4NetConfigurationSectionHandler,log4net"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">configSections</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>  </span><span style="color:#008000;">&lt;!--</span><span style="color:#008000;"> Some others configurations </span><span style="color:#008000;">--&gt;</span><span style="color:#000000;"><br><br>  </span><span style="color:#008000;">&lt;!--</span><span style="color:#008000;"> This section contains the log4net configuration settings </span><span style="color:#008000;">--&gt;</span><span style="color:#000000;"><br>  </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">log4net </span><span style="color:#ff0000;">debug</span><span style="color:#0000ff;">="false"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>    </span><span style="color:#008000;">&lt;!--</span><span style="color:#008000;"> Define some output appenders </span><span style="color:#008000;">--&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">appender </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="trace"</span><span style="color:#ff0000;"><br>          type</span><span style="color:#0000ff;">="log4net.Appender.TraceAppender, log4net"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">layout </span><span style="color:#ff0000;">type</span><span style="color:#0000ff;">="log4net.Layout.PatternLayout,log4net"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>        </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="ConversionPattern"</span><span style="color:#ff0000;"><br>             value</span><span style="color:#0000ff;">="%d{ABSOLUTE} %-5p %c{1}:%L - %m%n"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">layout</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">appender</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">appender </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="console"</span><span style="color:#ff0000;"><br>          type</span><span style="color:#0000ff;">="log4net.Appender.ConsoleAppender, log4net"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">layout </span><span style="color:#ff0000;">type</span><span style="color:#0000ff;">="log4net.Layout.PatternLayout,log4net"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>        </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="ConversionPattern"</span><span style="color:#ff0000;"><br>             value</span><span style="color:#0000ff;">="%d{ABSOLUTE} %-5p %c{1}:%L - %m%n"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">layout</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">appender</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">appender </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="rollingFile"</span><span style="color:#ff0000;"><br>          type</span><span style="color:#0000ff;">="log4net.Appender.RollingFileAppender,log4net"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="File"</span><span style="color:#ff0000;"> value</span><span style="color:#0000ff;">="log.txt"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="AppendToFile"</span><span style="color:#ff0000;"> value</span><span style="color:#0000ff;">="false"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="RollingStyle"</span><span style="color:#ff0000;"> value</span><span style="color:#0000ff;">="Date"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="DatePattern"</span><span style="color:#ff0000;"> value</span><span style="color:#0000ff;">="yyyy.MM.dd"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="StaticLogFileName"</span><span style="color:#ff0000;"> value</span><span style="color:#0000ff;">="true"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">layout </span><span style="color:#ff0000;">type</span><span style="color:#0000ff;">="log4net.Layout.PatternLayout,log4net"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>        </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">param </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="ConversionPattern"</span><span style="color:#ff0000;"><br>          value</span><span style="color:#0000ff;">="%d [%t] %-5p %c - %m%n"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">layout</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">appender</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>    </span><span style="color:#008000;">&lt;!--</span><span style="color:#008000;"> Setup the root category, add the appenders and set the default priority </span><span style="color:#008000;">--&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">root</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">priority </span><span style="color:#ff0000;">value</span><span style="color:#0000ff;">="DEBUG"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">appender-ref </span><span style="color:#ff0000;">ref</span><span style="color:#0000ff;">="console"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">root</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>  </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">log4net</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br></span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">configuration</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br></span>
+</div></pre>
+</div>
+<p>Here I define that all output with a priority of at least DEBUG goes to the console. 
+</p>
+<p>Now I have to tell my application that I want to use Log4Net. I can do that with an assembly level attribute. That is, you have to put the following code snippet somewhere in your application (e.g. the "<strong>Global. asax"</strong> if you are building a web application) 
+</p>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;"><span style="color:#008000;">// Configure log4net using the .config file</span><br>[assembly: log4net.Config.XmlConfigurator(Watch = <span style="color:#0000ff;">true</span>)]</pre>
+</div>
+<p>having done do we can now run a first unit test that accesses the database via NHibernate. The output generated by Log4Net in the unit test runner is similar to this 
+</p>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">2008-07-02 08:40:07,249 INFO NHibernate 2.0.0.4000 (2.0.0.4000)<br>2008-07-02 08:40:07,251 INFO hibernate-configuration section not found in application configuration file<br>2008-07-02 08:40:07,254 INFO Bytecode provider name : lcg<br>2008-07-02 08:40:07,257 INFO Using reflection optimizer<br>2008-07-02 08:40:08,515 DEBUG connection.provider=NHibernate.Connection.DriverConnectionProvider<br>2008-07-02 08:40:08,516 DEBUG dialect=NHibernate.Dialect.MsSql2005Dialect<br>2008-07-02 08:40:08,517 DEBUG connection.driver_class=NHibernate.Driver.SqlClientDriver<br>2008-07-02 08:40:08,517 DEBUG connection.connection_string=Server=(local);Database=NHibernateFAQ;Integrated Security=SSPI;<br>2008-07-02 08:40:08,518 DEBUG show_sql=false<br>2008-07-02 08:40:08,522 DEBUG properties: System.Collections.Generic.Dictionary`2[System.String,System.String]<br>2008-07-02 08:40:08,526 INFO Mapping resource: LoggingSample.Person.hbm.xml<br>2008-07-02 08:40:08,872 INFO Using dialect: NHibernate.Dialect.MsSql2005Dialect<br>2008-07-02 08:40:11,425 INFO Mapping class: LoggingSample.Person -&gt; Person<br>2008-07-02 08:40:11,537 DEBUG Mapped property: Id -&gt; Id, type: Int32<br>2008-07-02 08:40:11,612 DEBUG Mapped property: LastName -&gt; LastName, type: String<br>2008-07-02 08:40:11,614 DEBUG Mapped property: FirstName -&gt; FirstName, type: String<br>2008-07-02 08:40:11,614 DEBUG Mapped property: Birthdate -&gt; Birthdate, type: DateTime<br>2008-07-02 08:40:11,632 INFO checking mappings queue<br>2008-07-02 08:40:11,634 INFO processing one-to-many association mappings<br>2008-07-02 08:40:11,634 INFO processing one-to-one association property references<br>2008-07-02 08:40:11,634 INFO processing foreign key constraints<br>2008-07-02 08:40:11,712 INFO Using dialect: NHibernate.Dialect.MsSql2005Dialect<br>2008-07-02 08:40:11,716 INFO Using dialect defined converter<br>...<br>2008-07-02 08:40:12,410 DEBUG Static SQL for entity: LoggingSample.Person<br>2008-07-02 08:40:12,411 DEBUG  Version select: SELECT Id FROM Person WHERE Id = ?<br>2008-07-02 08:40:12,412 DEBUG  Snapshot select: SELECT person_.Id, person_.LastName as LastName0_, person_.FirstName as FirstName0_, person_.Birthdate as Birthdate0_ FROM Person person_ WHERE person_.Id=?<br>...</pre>
+</div>
+<p>as you can see LOADS of information. 
+</p>
+<p>To tune the generated logging information a little bit we can filter the output generated by NHibernate by putting the following configuration section into our config file (put them just after the <strong>root</strong> section inside the <strong>log4net</strong> node)</p>
+<div style="padding-right:0px;display:inline;padding-left:0px;float:none;padding-bottom:0px;margin:0px;padding-top:0px;" id="scid:F2210F5F-69EB-4d4c-AFF7-B8A050E9CC72:54ffa529-54b3-414a-8144-22105142bbba" class="wlWriterEditableSmartContent">
+<pre style="width:100%;"><div>
+<span style="color:#000000;">    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">logger </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="NHibernate"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">level </span><span style="color:#ff0000;">value</span><span style="color:#0000ff;">="WARN"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">logger</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br><br>    </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">logger </span><span style="color:#ff0000;">name</span><span style="color:#0000ff;">="NHibernate.SQL"</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br>      </span><span style="color:#0000ff;">&lt;</span><span style="color:#800000;">level </span><span style="color:#ff0000;">value</span><span style="color:#0000ff;">="DEBUG"</span><span style="color:#ff0000;"> </span><span style="color:#0000ff;">/&gt;</span><span style="color:#000000;"><br>    </span><span style="color:#0000ff;">&lt;/</span><span style="color:#800000;">logger</span><span style="color:#0000ff;">&gt;</span><span style="color:#000000;"><br></span>
+</div></pre>
+</div>
+<p>Obviously NHibernate defines two different loggers <strong>NHibernate</strong> and <strong>NHibernate.SQL</strong>. The first one receives all logging output that NHibernate generates where as the second one only receives the sql statements generated by NHibernate. 
+</p>
+<p>With the above settings in place the output generated is reduced to 
+</p>
+<div>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">2008-07-02 08:48:58,636 DEBUG select person0_.Id as Id0_, <br>                        person0_.LastName as LastName0_, <br>                        person0_.FirstName as FirstName0_, <br>                        person0_.Birthdate as Birthdate0_ <br>                        from Person person0_</pre>
+</div>
+<p>That's what we want. Only if we have some weird problems we need to change the priority level of the <strong>NHibernate</strong> filter to say INFO or DEBUG.</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

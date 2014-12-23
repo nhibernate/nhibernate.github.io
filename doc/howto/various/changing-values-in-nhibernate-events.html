@@ -1,0 +1,185 @@
+---
+layout: doc
+title: Changing Values in NHibernate Events
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="changing-values-in-nhibernate-events.html">Changing Values in NHibernate Events</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.01.63.82/4TIFQBET4D75.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/Scott-Findlater/default.aspx.html">Scott Findlater</a><br> on 04-26-2011</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/flcdrg/default.aspx.html">David Gardiner</a><br> on 07-06-2012</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="changing-values-in-nhibernate-events.html">Changing Values in NHibernate Events</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h2>Abstract</h2>
+<p>Audit trails using NHibernate's event model often
+use the OnPreInsert and OnPreUpdate event listeners to change/ modify the state
+of the entity.  Although It may work in some cases and
+is sometimes referred to as a solution, it should be noted the OnPreInsert and
+OnPreUpdate events are not intended to be used to change the values of the
+entity and instead they should be used to check values and for that reason they
+return "veto"</p>
+<p>There is also a bug report about that.</p>
+<h2>Why OnPreUpdate Triggers May Fail<br>
+</h2>
+<p>There is a reason for that. NHibernate does the following:</p>
+<ul>
+<li>When flushing, the <a href="https://github.com/nhibernate/nhibernate-core/blob/master/src/NHibernate/Event/IFlushEntityEventListener.cs">FlushEntityEventListener</a> is called for each entity in the session.</li>
+<li>It determines the dirty properties.</li>
+<li>Based on the dirty properties, it determines if the entity needs updating</li>
+<li>It calls PreUpdate triggers</li>
+<li>Based on the dirty properties it updates the corresponding tables.</li>
+</ul>
+<p>The last point is the critical one. If your PreUpdate trigger changes properties that are not found dirty before and which are not in the same table as the dirty properties, it won't be updated in the database. The same happens when dynamic-update is used.</p>
+<p>Example:</p>
+<pre>&lt;class name="Foo"&gt;<br>  &lt;id ...&gt;<br>  &lt;property name="Name"/&gt;<br>  &lt;join table="AnotherTable&gt;<br>    &lt;key name="id"/&gt;<br>    &lt;property name="Value"/&gt;<br>  &lt;/join&gt;<br>&lt;/class&gt;</pre>
+<p>Now, when you change Name in the session (it gets dirty) and Value in the trigger, the table AnotherTable won't be updated.</p>
+<h2>How To Implement It The Correct Way</h2>
+<p>The correct way is to use the <b>FlushEntityEventListener </b>to implement property changes.The important difference is that you can provide a list of changed properties in this event listener, and therefore tell NHibernate what to store.</p>
+<p>There is an <a href="https://github.com/Buthrakaur/NHListenerTests/blob/master/NHListenerTest/SetModificationTimeFlushEntityEventListener.cs">example by Buthrakaur</a>.</p>
+<h2>History</h2>
+<p>There is a solution to reproduce the code by Scott Findlater<span class="fontsize2 author"><span style="color:#00681C;"></span></span> <a href="http://www.scottfindlater.co.uk/blog/nhibernate-audit-trails-and-onpreinsert-onpreupdate-event-listeners-vs-save-update-event-listeners">here</a>. The <b>tests</b>
+folder in each project highlights successes/ issues (by failing tests) in each
+project.</p>
+<p><b>
+Project - 01OnPreEvents</b>. This project shows a typical, working,
+approach to audit trails using the OnPreInsert and OnPreUpdate to modify the
+entity state. An <b>Entity</b> base class which is inherited by a <b>Category</b> class.  The base <b>Entity</b> provides identification and
+common auditing properties.</p>
+<p><b>
+Project - 02OnPreEventsFailing</b>. This project shows how an inheritance entity
+hierarchy using the OnPreInsert and OnPreUpdate events to modify entity state
+fail to persist the changed entity state. 
+Here, for whatever design decision, the <b>Entity</b> base class which originally provide identification and
+common auditing has been split into <b>Entity</b>
+and <b>AuditableEntity</b>.  Now the <b>Category</b>
+class inherits from <b>AuditableEntity</b>.</p>
+<p><b>Project - 03Save</b>.  Uses the same entity inheritance hierarchy
+from the <b>02OnPreEventsFailing</b> project
+to demonstrate a working version using the Save/ Insert events.</p>
+<h3>References to the problem<br>
+</h3>
+<p>Audit trails using NHibernate's event model are well
+documented;</p>
+<ul class="unIndentedList">
+<li> <a href="http://ayende.com/Blog/archive/2009/04/29/nhibernate-ipreupdateeventlistener-amp-ipreinserteventlistener.aspx">Ayende's
+NHibernate IPreUpdateEventListener &amp; IPreInsertEventListener blog post</a>
+</li>
+<li> <a href="creating-an-audit-log-using-nhibernate-events.aspx.html">Graham
+Bunce's Creating an Audit Log using NHibernate Events on this WIKI</a>
+</li>
+<li> And most recently Jason <a href="http://www.packtpub.com/nhibernate-3-0-cookbook/book">Dentler's
+NHibernate 3.0 cookbook</a>, chapter 7, Creating and
+changing stamping entities recipe. </li>
+</ul>
+<p>There is also <a href="http://216.121.112.228/browse/NH-2596">this
+NHibernate bug report - changes made in IPreInsert/UpdateEventListener are not
+persisted into DB on inherited classes</a> with the resolution of "not an issue" because "<i>pre-insert
+and pre-update listeners are not intended to be used to change the values of
+the entity. Instead they should be used to check-values (for that reason they
+return "veto")."</i> (<a href="http://216.121.112.228/browse/NH-2596?focusedCommentId=20776&amp;page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#action_20776">see
+in context</a>) </p>
+<p>This contradiction of intended usage regarding the
+changing of entity state was further discussed on this <a href="http://groups.google.com/group/nhusers/browse_thread/thread/b6807c2a486073d8">NHUser
+Group thread</a>, with the same answer.</p>
+<p>There are some discussions and blog posts related to this problem:</p>
+<ul>
+<li><a href="https://groups.google.com/forum/#!topic/nhusers/0kugoXFPeGw/discussion">audit listener using IFlushEntityEventListener (continuation of NH-2596)</a></li>
+<li><a href="http://groups.google.com/group/nhusers/browse_thread/thread/10d7c2542e3849af">Bizarre error when using NHibernate, IPreInsertEventListener, Oracle, batching and sequences </a></li>
+<li><a href="http://groups.google.com/group/nhusers/browse_thread/thread/b6807c2a486073d8">Clarification on NH-2596 of PreUpdate vs OnSaveOrUpdate semantics </a></li>
+</ul>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

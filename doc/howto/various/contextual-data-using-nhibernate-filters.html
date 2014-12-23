@@ -1,0 +1,164 @@
+---
+layout: doc
+title: Contextual data using NHibernate filters
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="contextual-data-using-nhibernate-filters.html">Contextual data using NHibernate filters</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/gschuager/default.aspx.html">Germán Schuager</a><br> on 02-12-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/gschuager/default.aspx.html">Germán Schuager</a><br> on 03-30-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="contextual-data-using-nhibernate-filters.aspx.html">Contextual data using NHibernate filters</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>I'm in the middle of the development
+process of an application using NH for data access, and I'm faced
+with a requirement that could be stated as follows:</p>
+<blockquote><i>The application needs to provide support for different
+Contexts of execution, and certain entities must be context-aware,
+which means that at a given time, the application only sees instances
+of these entities that correspond to the current context of
+execution.</i></blockquote>
+<p>Now, just remember that I have several entities defined that are
+used throught the entire application layer stack, so I wanted to
+solve this issue modifying as little as possible.<br><br>I'm very
+proud with the solution that I came up with, and also very amazed by
+the power of NHibernate.<br><br>To simplify a little lets assume that
+I have a static class that defines the current context of execution:</p>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">public enum ContexType<br>{<br>	ContextA,<br>	ContextB,<br>}<br>public static class Context<br>{<br>	public static ContextType Current { get; set; }<br>}</pre>
+<p>
+Then, I create an interface that will be implemented by all the
+entities that need to be contextualized:</p>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">public interface IcontextAware<br>{<br>	ContextType Context { get; set; }<br>}</pre>
+<p>
+Given a Cat class that needs to be contextualized, then I add the
+property to the class and to the mapping:</p>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">public class Cat : Entity, IcontextAware<br>{<br>	...<br>	ContextType Context { get; set; }<br>	...<br>}</pre>
+ 
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">&lt;class name="Cat"&gt;<br>	...<br>	&lt;property name="Context"&gt;<br>	...<br>&lt;/class&gt;</pre>
+<p>
+The idea now, is to use the dynamic filtering capabilities of
+NHibernate to only retrieve the Cats instances corresponding with the
+current context every time that a query against Cat is
+issued.<br>Typically this means that I need to add a filter
+definition to the mappings and the specify the condition for that
+filter in every class mapping that need to be aware of this
+behavior.<br>But there is an easier way to do this automatically:</p>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">var filterParametersType = new Dictionary&lt;string, Itype&gt;(1);<br>filterParametersType.Add("current", NhibernateUtil.Enum(typeof(ContextType)));<br>cfg.AddFilterDefinition(new FilterDefinition("contextFilter", ":current = Context", filterParametersType));<br><br>foreach (var mapping in cfg.ClassMappings)<br>{<br>	if (typeof(IContextAware).IsAssignableFrom(mapping.MappedClass))<br>	{<br>		mapping.AddFilter("contextFilter", ":current = Context");<br>	}<br>}</pre>
+<p>
+Just do this (cfg is the NH Configuration object) before building the
+session factory and it creates the correct filter definition and adds
+the condition to every entity mapped that implements
+IContextAware.<br><br>At this point we just have our filter defined;
+now we need to enable it in order to actually filter something. It
+would be very handy if we can enable filtering at session factory
+scope, but since the session factory is immutable we need to enable
+it for each session that we will be using.<br><br>Wait.... maybe
+something else can do this work for us...<br><br>The following
+interceptor actually takes care of 2 things:<br>1. enables the
+context filter as soon as it is attached to the session, and<br>2.
+assigns the correct value to the Context property of entities
+implementing IContextAware when they are persisted.</p>
+<pre style="border-style:none;margin:0em;padding:0px;overflow:visible;font-size:8pt;width:100%;color:black;line-height:12pt;font-family:consolas,'Courier New',courier,monospace;background-color:#f4f4f4;">public class ContextInterceptor : EmptyInterceptor<br>{<br>	public override void SetSession(ISession session)<br>	{<br>		session.EnableFilter("contextFilter").SetParameter("current", Context.Current);<br>	}<br><br>	public override bool OnSave(object entity, object id, object[] state, string[] propertyNames, IType[] types)<br>	{<br>		var contextAware = entity as IContextAware;<br>		if (contextAware != null)<br>		{<br>			int index = Array.Find(propertyNames, 0, x =&gt; x.Equals("Context"));<br>			state[index] = contextAware.Context = Context.Current;<br>			return true;<br>		}<br>		return false;<br>	}<br>}</pre>
+<p>
+Every session in the application needs to be created specifying this
+interceptor, but this should be an easy change (that depends on your
+architecture) if you are doing things right.<br><br>And thats all,
+the rest of the application is untouched and the requirement is
+fulfilled in a very elegant way. 
+</p>
+<p>(the original article is <a href="http://blog.schuager.com/2009/02/contextual-data-using-nhibernate.html">here</a>)</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

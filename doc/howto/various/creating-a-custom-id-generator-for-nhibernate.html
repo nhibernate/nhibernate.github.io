@@ -1,0 +1,261 @@
+---
+layout: doc
+title: Creating a custom id generator for nHibernate
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="creating-a-custom-id-generator-for-nhibernate.html">Creating a custom id generator for nHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.26.62/4TDB5C9OI7XU.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/chnicola/default.aspx.html">Chris Nicola</a><br> on 09-03-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.24/4TCDVT33FMEU.jpg.html" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/sbohlen/default.aspx.html">Steve Bohlen</a><br> on 11-20-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="creating-a-custom-id-generator-for-nhibernate.aspx.html">Creating a custom id generator for nHibernate</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>I originally blogged about this <a href="http://www.lucisferre.net/post/2009/07/13/Implementing-a-custom-ID-generator-for-nHibernate.aspx">here </a>and <a href="http://www.lucisferre.net/post/2009/08/15/Generate-Custom-DDL-for-your-Custom-Id-Generator-with-nHibernate.aspx">here </a>on my <a href="http://www.lucisferre.net">blog</a> but Fabio suggested I add these posts to the Forge, so here I am.  I have to say I am a little exited to make my first contribution to the Wiki [H].  I will try to add a bit more to them and show some examples that do not use the <code>TableGenerator </code>class but directly implement <code>IIdentifierGenerator </code>.  Please let me know if there are any mistakes or anything else you want to see.</p>
+<p>Before beginning I recommend that you download the NH source code and take a quick look at the <code>TableGenerator </code>, <code>IIdentifierGenerator and </code><code>IPersistentIdentifierGenerator</code> classes as you will be working with these classes and interfaces to implement your custom generator.</p>
+<h2>Part 1: Inheriting from TableGenerator class</h2>
+<p>Currently I am doing some work developing a utility that imports
+securities data into a fairly old legacy database. It is still SQL but
+the database and software havn't been updated in about 15 years (maybe
+more) and never will be again.</p>
+<p>The original application for this database uses a primitive
+hilo-style ID generator mechanism. Tt simply queries an integer value
+from a table in the database and increments it, then it adds a fixed
+value to it and uses that as the next unique ID. It doesn't seem very
+optimal, but that's how it works and there's no changing it. </p>
+<p>It isn't complex, but it also isn't one of the identity strategies available in nHibernate and I fully intend to use nHibernate.</p>
+<p>So what to do?  One option would be to set <code>generator="assigned"</code> and do it all myself, assigning the ID using <code>ADO.Net </code>directly
+or something similar... but what fun would that be? No, I've decided to
+take a peak at the nHibernate code and learn to extend it. Read on to
+find out how to create a custom class that inherits from <code>IIdentifierGenerator </code>to implement your own custom ID generator strategy for nHibernate.</p>
+<p>One of the beautiful things about nHibernate the ability to extend
+it. You can extend its functionality without ever touching their source
+code.</p>
+<p>It was very easy to locate the classes responsible for ID generation in the <code>NHibernate.ID </code>namespace.  It was also clear immediately that most classes inherited from <code>IIdentifierGenerator.</code>   I also knew that my strategy was similar to the procedure that hilo implements so I started with <code>TableHiLoGenerator </code>which inherts from <code>TableGenerator</code>.</p>
+<p>After playing around with this for a while and trying different things, it was clear that <code>TableGenerator</code>, basically takes a <code>tablename </code>and <code>columnname </code>from
+the configuration, reads a value, increments it and passes it on as an
+ID. Voila! That was almost exactly what I needed to do with little else
+to change. I was quickly able to create my own class inheriting from
+TableGenerator</p>
+<div style="margin:5px;padding:5px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color:#2b91af;">FDPSequence</span> : <span style="color:#2b91af;">TableGenerator</span></p>
+<p style="margin:0px;padding:0px;">{</p>
+<p style="margin:0px;padding:0px;">    <span style="color:blue;">private</span> <span style="color:blue;">const</span> <span style="color:#2b91af;">Int32</span> SeedValue = 1048576;</p>
+<p style="margin:0px;padding:0px;"> </p>
+<p style="margin:0px;padding:0px;">    <span style="color:blue;">private</span> <span style="color:blue;">static</span> <span style="color:blue;">readonly</span> <span style="color:#2b91af;">ILog</span> Log = <span style="color:#2b91af;">LogManager</span>.GetLogger(<span style="color:blue;">typeof</span>(<span style="color:#2b91af;">FDPSequence</span>));</p>
+<p style="margin:0px;padding:0px;"> </p>
+<p style="margin:0px;padding:0px;">    <span style="color:blue;">public</span> <span style="color:blue;">override</span> <span style="color:blue;">object</span> Generate(<span style="color:#2b91af;">ISessionImplementor</span> session, <span style="color:blue;">object</span> obj)</p>
+<p style="margin:0px;padding:0px;">    {</p>
+<p style="margin:0px;padding:0px;">        <span style="color:blue;">int</span> counter = <span style="color:#2b91af;">Convert</span>.ToInt32(<span style="color:blue;">base</span>.Generate(session, obj));</p>
+<p style="margin:0px;padding:0px;">        <span style="color:blue;">return</span> counter + SeedValue + 1;</p>
+<p style="margin:0px;padding:0px;">    }</p>
+<p style="margin:0px;padding:0px;">}</p>
+</div>
+<p>Not much to that is there? Now that is a fairly simple case, but
+even getting more complex isn't much harder than that. You can
+implement <code>IIdentifierGenerator </code>directly and create
+something far more customized. TableGenerator actually implements
+<code>IPersistentIdentifierGenerator</code> which is an interface for identifiers
+which need to write and updated value to the database. However, since
+nHibernate provides so many versatile and inheritable base class
+generators that you will likely get by with inheriting one of those and
+extending it as I did.</p>
+<p>In order to use this custom generator class I setup my configuration to use it.  Using Fluent I wrote a mapping like this:</p>
+<div style="margin:5px;padding:5px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">public</span> <span style="color:blue;">class</span> <span style="color:#2b91af;">InvestSpecMap</span> : <span style="color:#2b91af;">FDPEntityBaseMap</span>&lt;<span style="color:#2b91af;">InvestSpec</span>&gt;</p>
+<p style="margin:0px;padding:0px;">{</p>
+<p style="margin:0px;padding:0px;">    <span style="color:blue;">public</span> InvestSpecMap()</p>
+<p style="margin:0px;padding:0px;">    {</p>
+<p style="margin:0px;padding:0px;">        WithTable(<span style="color:#a31515;">"InvestSpec"</span>);</p>
+<p style="margin:0px;padding:0px;">        Id(x =&gt; x.Id).ColumnName(tablename + <span style="color:#a31515;">"ID"</span>)</p>
+<p style="margin:0px;padding:0px;">            .SetGeneratorClass(<span style="color:blue;">typeof</span>(FDPGenerator.<span style="color:#2b91af;">FDPSequence</span>).AssemblyQualifiedName)</p>
+<p style="margin:0px;padding:0px;">            .AddGeneratorParam(<span style="color:#a31515;">"table"</span>, <span style="color:#a31515;">"zSysCounters"</span>) <span style="color:green;">//Name of the ID counter table</span></p>
+<p style="margin:0px;padding:0px;">            .AddGeneratorParam(<span style="color:#a31515;">"column"</span>, <span style="color:#a31515;">"InvestSpec"</span>); <span style="color:green;">//ID counter column for this table</span></p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.AnnualDividend).ColumnName(<span style="color:#a31515;">"AnnlzdDiv"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.AssetClass);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.CurrencyType);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.CusipNumber).ColumnName(<span style="color:#a31515;">"CusipNum"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.DividendFreq).ColumnName(<span style="color:#a31515;">"DivFrequency"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.FullName);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.MaturityDate).ColumnName(<span style="color:#a31515;">"MaturityDt"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.PriceAsOf).ColumnName(<span style="color:#a31515;">"PriceAsOfDt"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.ShortName).ColumnName(<span style="color:#a31515;">"AbbrName"</span>);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.TaxTreatment);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.TickerSymbol);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.Type);</p>
+<p style="margin:0px;padding:0px;">        Map(x =&gt; x.UnitPrice);</p>
+<p style="margin:0px;padding:0px;">    }</p>
+<p style="margin:0px;padding:0px;">}</p>
+</div>
+<p>You can do the same with XML mappings just declare the assembly and
+class as you usually would in XML. This is actually the first time I've
+used FluentNH.</p>
+<p>What is great about this is that even when testing my mappings with SQLLite, <code>SchemaExport </code>is
+actually able to create the identity table based on the tablename and
+columnname properties in the nHibernate configuration. The main benefit
+here however is that identity generation remains transparent to the
+rest of my application. Also doing something cool with nHibernate,
+that's priceless of course</p>
+<h2>Part 2: Stealing from TableGenerator and controlling DDL generation</h2>
+<p>A while ago I <a href="http://www.lucisferre.org/coding/index.php/2009/07/13/implementing-a-custom-id-generator-for-nhibernate-1"></a><a href="http://www.lucisferre.net/post/2009/07/13/Implementing-a-custom-ID-generator-for-nHibernate.aspx">posted</a> about writing a custom id generator using nHibernate and extending one
+of the existing Generator classes nHibernate provides.  This was done
+to support working with a legacy database which uses a custom id
+generation strategy.  One thing I like to do with all my apps is write
+some basic CRUD tests to make sure my mappings and queries are all
+working properly.</p>
+<p>To do this I use Oren's approach of <a href="http://ayende.com/Blog/archive/2009/04/28/nhibernate-unit-testing.aspx">creating a temporary in-memory database </a>using SQLite to work with.  This involves using the  <code>SchemaExport </code>tool
+in nHibernate to generate the DDL to create the database.  If you are
+using a table generator strategy it also needs to create the table and
+columns for the custom id generator.  In some cases you may need to
+customize the DDL for your Id table.</p>
+<p>As I discovered the DDL to generate the table to store the next id value for my custom id is
+only created once and does not check the column name value for each class.  For my id generator there is a separate column used for
+each table in the database, so this was a problem.  For example, the <i>Price </i>table has a column in the <i>Counter </i>table called <i>Price </i>to store it's counter and the <i>Holding </i>table has a column called <i>Holding</i>, but I was only getting one column (this appears to be a <a href="http://stackoverflow.com/questions/1944927/schemaexport-vs-hilo-algorithm">problem with hilo and SchemaExport</a>, you can currently only have one column per database)</p>
+<p>The TableGenerator class supports two parameters which are set in the HBM files (or using fluent) <i>tablename </i>and <i>columnname </i>which
+set the table and column names used for the id counter.  If you have a
+copy of the nHibernate source code you will see that the TableGenerator
+class calls<code> SqlCreateStrings()</code>and <code>SqlDropString()</code>
+to create and drop the table for the id generator.  Unfortunately, as I
+mentioned above this is only called once, and so it only creates one
+table with one column for whichever mapping is handled first.</p>
+<p>In order to fix this I had to copy the <code>TableGenerator </code>class (yes, yes, I know copy-paste is bad form) and modify those functions.  I also added a third parameter <i>allcolumnnames</i> in which I can provide a comma separated list of all the columns the table needs to have (one per table in my database).  The <code>SqlCreateStrings()</code>is simple changed to:</p>
+<div style="margin:16px;padding:8px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;-moz-background-clip:border;-moz-background-origin:padding;-moz-background-inline-policy:continuous;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">public</span> <span style="color:blue;">string</span>[] SqlCreateStrings(<span style="color:#2b91af;">Dialect</span> dialect) {</p>
+<p style="margin:0px;padding:0px;">  <span style="color:blue;">string</span> create = <span style="color:#a31515;">"create table "</span> + tableName + <span style="color:#a31515;">" ("</span>;</p>
+<p style="margin:0px;padding:0px;">  <span style="color:blue;">string</span> insert = <span style="color:#a31515;">"insert into "</span> + tableName + <span style="color:#a31515;">" values ("</span>;</p>
+<p style="margin:0px;padding:0px;">  <span style="color:blue;">foreach</span> (<span style="color:blue;">string</span> s <span style="color:blue;">in</span> allcolumns.Split(<span style="color:#a31515;">','</span>)) {</p>
+<p style="margin:0px;padding:0px;">    create += <span style="color:#a31515;">" "</span> + s + <span style="color:#a31515;">" "</span> + dialect.GetTypeName(columnSqlType) + <span style="color:#a31515;">","</span>;</p>
+<p style="margin:0px;padding:0px;">    insert += <span style="color:#a31515;">" 1,"</span>;</p>
+<p style="margin:0px;padding:0px;">  }</p>
+<p style="margin:0px;padding:0px;">  create = create.Trim(<span style="color:#a31515;">','</span>) + <span style="color:#a31515;">" )"</span>;</p>
+<p style="margin:0px;padding:0px;">  insert = insert.Trim(<span style="color:#a31515;">','</span>) + <span style="color:#a31515;">" )"</span>;</p>
+<p style="margin:0px;padding:0px;">  <span style="color:blue;">return</span> <span style="color:blue;">new</span>[] {create, insert};</p>
+<p style="margin:0px;padding:0px;">}</p>
+</div>
+<p>(Yes, yes, I know I should have learned from my <a href="http://www.lucisferre.org/coding/index.php/2009/08/04/strings-are-immutable-stupid"></a><a href="http://www.lucisferre.net/post/2009/08/05/Strings-are-immutable-stupid!.aspx">last post </a> and used a <code>StringBuilder </code>here as I pointed out in my last post, but seriously, this method will only ever be called once)</p>
+<p>Now when it is called it will create the correct table with all the
+columns I need. A couple of example mappings for the database in
+FluentNH are shown below:</p>
+<div style="margin:16px;padding:8px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;-moz-background-clip:border;-moz-background-origin:padding;-moz-background-inline-policy:continuous;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">public</span> InvestSpecMap() {</p>
+<p style="margin:0px;padding:0px;">  WithTable(<span style="color:#a31515;">"InvestSpec"</span>);</p>
+<p style="margin:0px;padding:0px;">  Id(x =&gt; x.Id).ColumnName(<span style="color:#a31515;">"InvestSpecID"</span>)</p>
+<p style="margin:0px;padding:0px;">    .SetGeneratorClass(<span style="color:blue;">typeof</span> (<span style="color:#2b91af;">FdpSequenceGen</span>).AssemblyQualifiedName)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"allcolumns"</span>, <span style="color:#a31515;">"InvestSpec, InvestPrice"</span>)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"table"</span>, <span style="color:#a31515;">"zSysCounters"</span>) <span style="color:green;">//ID counter table name</span></p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"column"</span>, <span style="color:#a31515;">"InvestSpec"</span>); <span style="color:green;">//ID counter column name</span></p>
+</div>
+<div style="margin:16px;padding:8px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;-moz-background-clip:border;-moz-background-origin:padding;-moz-background-inline-policy:continuous;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">public</span> PriceMap() {</p>
+<p style="margin:0px;padding:0px;">  WithTable(<span style="color:#a31515;">"InvestPrice"</span>);</p>
+<p style="margin:0px;padding:0px;">  Id(x =&gt; x.Id).ColumnName(<span style="color:#a31515;">"InvestPriceID"</span>)</p>
+<p style="margin:0px;padding:0px;">    .SetGeneratorClass(<span style="color:blue;">typeof</span> (<span style="color:#2b91af;">FdpSequenceGen</span>).AssemblyQualifiedName)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"allcolumns"</span>, <span style="color:#a31515;">"InvestSpec, InvestPrice"</span>)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"table"</span>, <span style="color:#a31515;">"zSysCounters"</span>) <span style="color:green;">//ID counter table name</span></p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"column"</span>, <span style="color:#a31515;">"InvestPrice"</span>); <span style="color:green;">//ID counter column name</span></p>
+</div>
+<p>To be completely "clean code" and avoid repeating myself I should probably factor out the <code>Id() </code>code into a method in an inhereted base class so I can call it from each mapping class like this:</p>
+<div style="margin:16px;padding:8px;background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:8pt;color:black;-moz-background-clip:border;-moz-background-origin:padding;-moz-background-inline-policy:continuous;">
+<p style="margin:0px;padding:0px;"><span style="color:blue;">protected</span> <span style="color:blue;">void</span> SetIdGenerator(<span style="color:blue;">string</span> tablename) {</p>
+<p style="margin:0px;padding:0px;">  Id(x =&gt; x.Id).ColumnName(TableName + <span style="color:#a31515;">"Id"</span>)</p>
+<p style="margin:0px;padding:0px;">    .SetGeneratorClass(<span style="color:blue;">typeof</span>(<span style="color:#2b91af;">FdpSequenceGen</span>).AssemblyQualifiedName)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"allcolumns"</span>, AllColumns)</p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"table"</span>, <span style="color:#a31515;">"zSysCounters"</span>) <span style="color:green;">//ID counter table name</span></p>
+<p style="margin:0px;padding:0px;">    .AddGeneratorParam(<span style="color:#a31515;">"column"</span>, TableName); <span style="color:green;">//ID counter column name</span></p>
+<p style="margin:0px;padding:0px;">}</p>
+</div>
+<p>Now I can unit test using a temporary in-memory SQLite database and all my tests are passing.</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

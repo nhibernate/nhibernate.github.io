@@ -1,0 +1,145 @@
+---
+layout: doc
+title: Creating an Audit Log using NHibernate Events
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="creating-an-audit-log-using-nhibernate-events.html">Creating an Audit Log using NHibernate Events</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/bunceg/default.aspx.html">bunceg</a><br> on 02-28-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 09-07-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="creating-an-audit-log-using-nhibernate-events.html">Creating an Audit Log using NHibernate Events</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<h2>Scenario</h2>
+<p>You want to create an audit table so that changes to business entities are tracked with a timestamp. You want this do be done automatically by NHibernate.</p>
+<h2>Options</h2>
+<p>There are a number of ways of doing this, using IInterceptor or the NHibernate 2.0 Event model. As the event model is fairly new, there isn't a lot of information or examples about how to use it therefore most examples deal with IInterceptor.The Audit logging itself can be recorded via multiple tables per class, single table to cover all classes, track all changes, track  latest changes etc.</p>
+<p> </p>
+<h2>Solution</h2>
+<p>This solution uses the Event model, a single table for all classes and track latest change only. It also depends on the database key being a GUID, not an integer. When a class is deleted, the audit information is also removed. This might not be appropriate for your scenario.</p>
+<h3>Background</h3>
+<p>The solution operates within a repository pattern (nielson, Domain Driven Design) design where there is a single repository wrapping the NHibernate Session. This repository exposes an Interface that is defined in the business layer that the NHibernate Repository implements. Therefore the repository depends on the domain, not the domain depends on the repository. An IoC product (Spring.NET, Unity etc.) is used to wire these together.</p>
+<p>The Domain has no reference to anything to do with NHibernate but, to ease development; each business entity inherits from the abstract Entity class and implements the IEntity interface. It is the Entity class that tracks the audit information for the business class that inherits from it.</p>
+<p>Entity Id's are GUID's as opposed to integers. The entity Id maps to the database primary domain.</p>
+<h3>Classes</h3>
+<p>The abstract Entity class is as follows</p>
+<p>[Serializable]<br>public abstract class Entity : IEntity<br>{<br>private const string UnknownUser = "Unknown"; </p>
+<p>private Guid _id;<br>private byte[] _version;<br>private DateTime _createdTimestamp;<br>private string _createdBy;<br>private DateTime _updatedTimestamp;<br>private string _updatedBy; </p>
+<p>[Snip: Property declarations removed for brevity]</p>
+<p>public Entity()<br>{<br>_id = Guid.Empty;<br>_version = new byte[8];<br>_createdBy = string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name) ? UnknownUser : Thread.CurrentPrincipal.Identity.Name;<br>_createdTimestamp = DateTime.Now;<br>_entityName = this.GetType().FullName;<br>}<br>}</p>
+<p>Each business class extends this however is appropriate.</p>
+<h3>Mappings</h3>
+<p>An example mapping file for a class that extends the entity class might be:</p>
+<p>&lt;?xml version="1.0" encoding="utf-8"?&gt;<br>&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="Sample.Domain" assembly="Sample.Domain" default-access="field.camelcase-underscore" default-lazy="true"&gt; <br>&lt;class name="Task" proxy="Sample.Domain.Interfaces.ITask, Sample.Domain.Interfaces" table="Task"&gt;<br>&lt;id name="Id" column="Id" unsaved-value="00000000-0000-0000-0000-000000000000" access="property"&gt;<br>&lt;generator class="guid.comb" /&gt;<br>&lt;/id&gt;<br>&lt;version name="Version" column="Version" type="binary" unsaved-value="null" generated="always"/&gt;</p>
+<p>&lt;property name="Lookup" type="string" length="50" not-null="true" /&gt;<br>&lt;property name="Description" type="string" length="255" not-null="true" /&gt; </p>
+<p>&lt;join table="Audit"&gt;<br>&lt;key column="EntityId" /&gt;<br>&lt;property name="EntityName" /&gt;<br>&lt;property name="CreatedBy" /&gt;<br>&lt;property name="CreatedTimestamp" /&gt;<br>&lt;property name="UpdatedBy" /&gt;<br>&lt;property name="UpdatedTimestamp"/&gt;<br>&lt;/join&gt;<br>&lt;/class&gt;<br>&lt;/hibernate-mapping&gt;</p>
+<h3>Implementation</h3>
+<p>From the mapping we can see that the Task class uses an Interface (ITask) for its proxy generation (though virtual methods are just as acceptable) but more importantly that the Task class is populated from a join between the Audit table and the Task table. The join column is the Entity ID which, like the Id in the task table is a GUID. As GUID's are almost guaranteed to be unique there is very little likelihood of the being a key collision between the Task table and (e.g.) a Group table each storing their ID in the same column. Unfortunatley this is not the case for a HiLo key generation mechanism.</p>
+<p>Therefore this Join element is telling NHibernate to do a SQL join on the Id of the primary table (Task) with the Entity ID of the Audit table. In effect, its the same as multi table inheritence but without the inheritence.</p>
+<p>The power of this is that Nhibernate automatically keeps the two tables in line... an add to Task results in two SQL inserts (Task and Audit), a delete of Task results in two deletes etc. If you wish to retain audit information, but not the business data, in the case of a delete then this solution is not for you, though you could consider the "pre-delete" event to deal with retaining the audit information somehow.</p>
+<h3>Wiring into the NHibernate Event model</h3>
+<p>The NHibernate 2.0 Event model can be implemented a number of ways, inherit from a base class or implement an interface. This solution uses an interface as it allows a single listener class to deal with both updates and inserts.</p>
+<p>The best events to use for Auditing in this scenario are "pre-update" and "pre-insert". First we write a listener class that implements two interfaces IPreUpdateEventListener and IPreInsertEventListener. This class needs to ensure that the "state" of the object to be written is updated prior to NHibernate writing out the class information. Unfortunately this state information is held in a string array and cannot be accessed in a TypeSafe manner.</p>
+<p>internal class AuditEventListener : IPreUpdateEventListener, IPreInsertEventListener<br>{<br>public bool OnPreUpdate(PreUpdateEvent e)<br>{<br>UpdateAuditTrail(e.State, e.Persister.PropertyNames, (IEntity)e.Entity);<br>return false; <br>}<br>public bool OnPreInsert(PreInsertEvent e)<br>{<br>UpdateAuditTrail(e.State, e.Persister.PropertyNames, (IEntity)e.Entity);<br>return false;<br>}<br>private void UpdateAuditTrail(object[] state, string[] names, IEntity entity)<br>{<br>var idx = Array.FindIndex(names, n =&gt; n == "UpdatedBy");<br>state[idx] = string.IsNullOrEmpty(Thread.CurrentPrincipal.Identity.Name) ? "Unknown" : Thread.CurrentPrincipal.Identity.Name;<br>entity.UpdatedBy = state[idx].ToString();<br>idx = Array.FindIndex(names, n =&gt; n == "UpdatedTimestamp");<br>DateTime now = DateTime.Now;<br>state[idx] = now;<br>entity.UpdatedTimestamp = now;<br>}<br>}</p>
+<p>Don't ask me why we return false in the implemented methods.... I'm not sure yet, but it works :)</p>
+<p>So now when an object is written (the presumption is that all objects written implement the business IEntity interface) Nhibernate will run the listener, find the audit properties in the current NHibernate State and update them.To ensure the object itself also has the latest values, we update the entity instance as well.</p>
+<h3>Hooking NHibernate into the Listener</h3>
+<p>This is the easy bit - add the following to the hibernate.cfg.xml file (within the SessionFactory element) and you're done!</p>
+<p>&lt;event type="pre-update"&gt;<br>&lt;listener class="Sample.Repository.NHibernate.AuditEventListener, Sample.Repository.NHibernate" /&gt;<br>&lt;/event&gt; <br>&lt;event type="pre-insert"&gt;<br>&lt;listener class="Sample.Repository.NHibernate.AuditEventListener, Sample.Repository.NHibernate" /&gt;<br>&lt;/event&gt;</p>
+<h3>A Side Note</h3>
+<p>This article works great, thanks Graham.  I just wanted to point out there is an NHibernate gotcha/ feature related to using the OnPre* events with inheritance which is <a href="changing-values-in-nhibernate-events.html">documented further on this WIKI post. </a></p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

@@ -1,0 +1,183 @@
+---
+layout: doc
+title: Create a custom message interpolator for NHibernate Validator
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="create-a-custom-message-interpolator-for-nhibernate-validator.html">Create a custom message interpolator for NHibernate Validator</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/climens/default.aspx.html">Marc Climent</a><br> on 03-04-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/climens/default.aspx.html">Marc Climent</a><br> on 03-10-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="create-a-custom-message-interpolator-for-nhibernate-validator.aspx.html">Create a custom message interpolator for NHibernate Validator</a></span>
+                        
+                    </h2>
+                                
+                
+                <div><div class="pcontent">
+<p>The default interpolator is quite complete and complex but you can use its power while using your own messages. This messages can replace the original messages or can be the localized messages of your own validator.</p>
+<p>The first part is to create your own interpolator:</p>
+<pre class="code"><span style="color:blue;">using </span>System.Globalization;
+<span style="color:blue;">using </span>System.Reflection;
+<span style="color:blue;">using </span>System.Resources;
+<span style="color:blue;">using </span>NHibernate.Validator.Engine;
+
+<span style="color:blue;">public class </span><span style="color:#2b91af;">CustomMessageInterpolator </span>: <span style="color:#2b91af;">IMessageInterpolator
+</span>{
+    <span style="color:blue;">private readonly string </span>ResourceBaseName = <span style="color:#a31515;">"Project.Properties.Validator"</span>;
+
+    <span style="color:blue;">private readonly </span><span style="color:#2b91af;">ResourceManager </span>resMan;
+
+    <span style="color:blue;">public </span>CustomMessageInterpolator()
+    {
+        <span style="color:blue;">this</span>.resMan = <span style="color:blue;">new </span><span style="color:#2b91af;">ResourceManager</span>(<span style="color:blue;">this</span>.ResourceBaseName, <span style="color:#2b91af;">Assembly</span>.GetExecutingAssembly());
+    }
+
+    <span style="color:blue;">public string </span>Interpolate(<span style="color:blue;">string </span>message, <span style="color:#2b91af;">IValidator </span>validator, <span style="color:#2b91af;">IMessageInterpolator </span>defaultInterpolator)
+    {
+        <span style="color:blue;">var </span>s = GetMessage(message);
+
+        <span style="color:blue;">return </span>defaultInterpolator.Interpolate(s, validator, defaultInterpolator);
+    }
+
+    <span style="color:blue;">private string </span>GetMessage(<span style="color:blue;">string </span>message)
+    {
+        <span style="color:green;">// It's a tempate
+        </span><span style="color:blue;">if </span>(!message.StartsWith(<span style="color:#a31515;">"{"</span>) &amp;&amp; !message.EndsWith(<span style="color:#a31515;">"}"</span>))
+        {
+            <span style="color:blue;">return </span>message;
+        }
+
+        <span style="color:blue;">var </span>resource = message.Substring(1, message.Length - 2);
+
+        <span style="color:blue;">var </span>m = <span style="color:blue;">this</span>.resMan.GetString(resource, <span style="color:#2b91af;">CultureInfo</span>.CurrentCulture);
+
+        <span style="color:blue;">if </span>(<span style="color:blue;">string</span>.IsNullOrEmpty(m))
+        {
+            <span style="color:green;">// Returns the original message
+            </span><span style="color:blue;">return </span>message;
+        }
+
+        <span style="color:blue;">return </span>m;
+    }
+}</pre>
+<p>I use the same notation as the original project, putting the
+resource name between { and }. I try to get the string from
+Validator.resx in the Properties folder of the project and if not found
+I return the original message. This way, you can override the default
+messages with your own ones only if you want.</p>
+<p>At the end, all messages are passed to the defaultInterpolator, that
+manages the rest of the substitutions (for example {Max} and {Min} are
+replaced by the attribute values).</p>
+<p>Finally, you have to configure the interpolator in the .config file
+(it only worked for me in App.config, not in nhvalidator.cfg.xml):</p>
+<pre class="code"><span style="color:blue;">&lt;</span><span style="color:#a31515;">configuration</span><span style="color:blue;">&gt;
+  &lt;</span><span style="color:#a31515;">configsections</span><span style="color:blue;">&gt;
+    &lt;</span><span style="color:#a31515;">section </span><span style="color:red;">name</span><span style="color:blue;">=</span>"<span style="color:blue;">nhv-configuration</span>"
+
+        <span style="color:red;">type</span><span style="color:blue;">=</span>"<span style="color:blue;">NHibernate.Validator.Cfg.ConfigurationSectionHandler, NHibernate.Validator</span>"<span style="color:blue;">&gt;
+
+    &lt;/</span><span style="color:#a31515;">section</span><span style="color:blue;">&gt;
+    &lt;</span><span style="color:#a31515;">nhv-configuration</span><span style="color:blue;">&gt;
+      &lt;</span><span style="color:#a31515;">property </span><span style="color:red;">name</span><span style="color:blue;">=</span>"<span style="color:blue;">message_interpolator_class</span>"<span style="color:blue;">&gt;
+
+        </span>Project.Validation.CustomMessageInterpolator, Project.Validation
+
+      <span style="color:blue;">&lt;/</span><span style="color:#a31515;">property</span><span style="color:blue;">&gt;
+      &lt;</span><span style="color:#a31515;">mapping </span><span style="color:red;">assembly</span><span style="color:blue;">=</span>"<span style="color:blue;">Project.Domain</span>"<span style="color:blue;">&gt;
+      &lt;/</span><span style="color:#a31515;">mapping</span><span style="color:blue;">&gt;
+    &lt;/</span><span style="color:#a31515;">nhv-configuration</span><span style="color:blue;">&gt;
+  &lt;/</span><span style="color:#a31515;">configsections</span><span style="color:blue;">&gt;
+&lt;/</span><span style="color:#a31515;">configuration</span><span style="color:blue;">&gt;</span></pre>
+<p>And that's it. I hope it helps.</p>
+</div></div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
