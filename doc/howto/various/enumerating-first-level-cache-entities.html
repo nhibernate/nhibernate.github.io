@@ -1,0 +1,116 @@
+---
+layout: doc
+title: Enumerating First Level Cache Entities
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="enumerating-first-level-cache-entities.html">Enumerating First Level Cache Entities</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 03-01-2011</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 03-04-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="enumerating-first-level-cache-entities.html">Enumerating First Level Cache Entities</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>How to enumerate local (first level cache) session entities:</p>
+<p>
+public static class SessionExtensions<br>
+	{<br>    public static IEnumerable&lt;T&gt; Local&lt;T&gt;(this ISession session)<br>    {<br>        ISessionImplementor impl = session.GetSessionImplementation();<br>        IPersistenceContext pc = impl.PersistenceContext;</p>
+<p>        foreach (Object key in pc.EntityEntries.Keys)<br>        {<br>            if (key is T)<br>            {<br>                yield return ((T) key);<br>            }<br>        }<br>    }<br>
+	}<br>
+	<br>
+	//sample usage:<br>
+	IEnumerable&lt;Post&gt; localPosts = session.Local&lt;Post&gt;();</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

@@ -1,0 +1,190 @@
+---
+layout: doc
+title: Finding Dirty Properties in NHibernate
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="finding-dirty-properties-in-nhibernate.html">Finding Dirty Properties in NHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 10-09-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 06-20-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="finding-dirty-properties-in-nhibernate.html">Finding Dirty Properties in NHibernate</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p><b>UPDATE: now deals properly with proxies.</b></p>
+<p>The following extension methods to ISession allow finding if a property or entity has changed, and the original value of a property.</p>
+<p> </p>
+<p>public static class SessionExtensions</p>
+<p><span>	</span>{</p>
+<p><span></span>    public static Boolean IsDirtyEntity(this ISession session, Object entity)</p>
+<p><span></span>    {</p>
+<p>        ISessionImplementor sessionImpl = session.GetSessionImplementation();<span></span></p>
+<p><span></span>        IPersistenceContext persistenceContext = sessionImpl.PersistenceContext;</p>
+<p><span>        EntityEntry oldEntry = </span>persistenceContext<span>.GetEntry(entity);</span></p>
+<p><span>        String className = oldEntry.EntityName</span><span>;</span></p>
+<p>        IEntityPersister persister = sessionImpl.Factory.GetEntityPersister(className);</p>
+<p> </p>
+<p><span></span>        if ((oldEntry == null) &amp;&amp; (entity is INHibernateProxy))</p>
+<p><span></span>        {</p>
+<p><span></span>            INHibernateProxy proxy = entity as INHibernateProxy;</p>
+<p><span></span>            Object obj = sessionImpl.PersistenceContext.Unproxy(proxy);</p>
+<p><span></span>            oldEntry = sessionImpl.PersistenceContext.GetEntry(obj);</p>
+<p><span></span>        }</p>
+<p> </p>
+<p><span></span>        Object [] oldState = oldEntry.LoadedState;</p>
+<p><span></span>        Object [] currentState = persister.GetPropertyValues(entity, sessionImpl.EntityMode);</p>
+<p><span></span></p>
+<p> </p>
+<pre><span>     Int32</span> [] dirtyProps = oldState.Select((o, i) =&gt; (oldState [ i ] == currentState [ i ]) ? -1 : i).Where(x =&gt; x &gt;= 0).ToArray();
+</pre>
+<p> </p>
+<p><span>			</span></p>
+<p><span></span>        return (dirtyProps != null);</p>
+<p><span></span>    }</p>
+<p> </p>
+<p><span></span>    public static Boolean IsDirtyProperty(this ISession session, Object entity, String propertyName)</p>
+<p><span></span>    {</p>
+<p>        ISessionImplementor sessionImpl = session.GetSessionImplementation();<span></span></p>
+<p>        IPersistenceContext persistenceContext = sessionImpl.PersistenceContext;<span></span></p>
+<p><span>        EntityEntry oldEntry = </span>persistenceContext<span>.GetEntry(entity);</span></p>
+<p><span>        String className = oldEntry.EntityName</span><span>;</span></p>
+<p><span></span>        IEntityPersister persister = sessionImpl.Factory.GetEntityPersister(className);</p>
+<p> </p>
+<p><span></span></p>
+<p><span></span>        if ((oldEntry == null) &amp;&amp; (entity is INHibernateProxy))</p>
+<p><span></span>        {</p>
+<p><span></span>            INHibernateProxy proxy = entity as INHibernateProxy;</p>
+<p><span></span>            Object obj = sessionImpl.PersistenceContext.Unproxy(proxy);</p>
+<p><span></span>            oldEntry = sessionImpl.PersistenceContext.GetEntry(obj);</p>
+<p><span></span>        }</p>
+<p> </p>
+<p><span></span>        Object [] oldState = oldEntry.LoadedState;</p>
+<p><span></span>        Object [] currentState = persister.GetPropertyValues(entity, sessionImpl.EntityMode);</p>
+<p><span></span>        Int32 [] dirtyProps = persister.FindDirty(currentState, oldState, entity, sessionImpl);</p>
+<p><span></span>        Int32 index = Array.IndexOf(persister.PropertyNames, propertyName);</p>
+<p> </p>
+<p><span></span>        Boolean isDirty = (dirtyProps != null) ? (Array.IndexOf(dirtyProps, index) != -1) : false;</p>
+<p> </p>
+<p><span></span>        return (isDirty);</p>
+<p><span></span>    }</p>
+<p> </p>
+<p><span></span>    public static Object GetOriginalEntityProperty(this ISession session, Object entity, String propertyName)</p>
+<p><span></span>    {</p>
+<p>        ISessionImplementor sessionImpl = session.GetSessionImplementation();<span></span></p>
+<p>        IPersistenceContext persistenceContext = sessionImpl.PersistenceContext;</p>
+<p><span>        EntityEntry oldEntry = </span>persistenceContext<span>.GetEntry(entity);</span></p>
+<p><span>        String className = oldEntry.EntityName</span><span>;</span></p>
+<p>        IEntityPersister persister = sessionImpl.Factory.GetEntityPersister(className);<span></span></p>
+<p><br><span></span></p>
+<p><span></span>        if ((oldEntry == null) &amp;&amp; (entity is INHibernateProxy))</p>
+<p><span></span>        {</p>
+<p><span></span>            INHibernateProxy proxy = entity as INHibernateProxy;</p>
+<p><span></span>            Object obj = sessionImpl.PersistenceContext.Unproxy(proxy);</p>
+<p><span></span>            oldEntry = sessionImpl.PersistenceContext.GetEntry(obj);</p>
+<p><span></span>        }</p>
+<p> </p>
+<p><span></span>        Object [] oldState = oldEntry.LoadedState;</p>
+<p><span></span>        Object [] currentState = persister.GetPropertyValues(entity, sessionImpl.EntityMode);</p>
+<p><span></span>        Int32 [] dirtyProps = persister.FindDirty(currentState, oldState, entity, sessionImpl);</p>
+<p><span></span>        Int32 index = Array.IndexOf(persister.PropertyNames, propertyName);</p>
+<p> </p>
+<p><span></span>        Boolean isDirty = (dirtyProps != null) ? (Array.IndexOf(dirtyProps, index) != -1) : false;</p>
+<p> </p>
+<p><span></span>        return ((isDirty == true) ? oldState [ index ] : currentState [ index ]);</p>
+<p><span></span>    }</p>
+<p><span>	</span>}</p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

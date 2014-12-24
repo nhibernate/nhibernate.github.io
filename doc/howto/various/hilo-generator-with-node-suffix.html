@@ -1,0 +1,162 @@
+---
+layout: doc
+title: HiLo Generator With Node Suffix
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="hilo-generator-with-node-suffix.html">HiLo Generator With Node Suffix</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 03-31-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="hilo-generator-with-node-suffix.html">HiLo Generator With Node Suffix</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>I had recently the need for using an id generator with two requirements:</p>
+<p> </p>
+<ul>
+<li>Is DB-independent</li>
+<li>Allows data generated in different DBs to be merged into a centralized DB</li>
+</ul>
+<p> </p>
+<p>I already knew about HiLo generator, and it seemed fine, except that the generated ids, on different sites, would most probably clash, unless I would setup a particular configuration leaving lots of room, and would constantly monitor its usage. So I decided to adapt it: I basically pick the generator produced by the HiLo generator, and add my own suffix to it, where the suffix is different for each site. Very simple, here it is:</p>
+<p> </p>
+<pre>public class CustomIdGenerator : TableHiLoGenerator
+{
+	public const String NodeSuffixAppSettingsKey = "NodeSuffix";
+ 
+	protected static Int32 nodeSuffix  = 0;
+ 
+	static CustomIdGenerator()
+	{
+	 	//try to read the node suffix from the application settings
+		if (Int32.TryParse(ConfigurationManager.AppSettings[NodeSuffixAppSettingsKey],  out nodeSuffix) == false)
+		{
+			//the node suffix key does not exist or is not a number
+			throw new ApplicationException(String.Format("Application settings does not contain key {0} or it is not a number.", NodeSuffixAppSettingsKey));
+		}
+	}
+ 
+	public override Object Generate(ISessionImplementor session, Object obj)
+	{
+		//1 - get id using standard HiLo algorithm
+		Int64 baseId = (Int64) base.Generate(session, obj);
+ 
+		//2 - shift id to the left, leaving room for 3-digit node suffixes
+		baseId *= 1000;
+ 
+		<span>//3 - combine id with the node suffix
+		baseId += nodeSuffix;
+
+		return (baseId);
+	}
+}
+</span></pre>
+<pre>It can be configured fluently:</pre>
+<pre>public class CustomerMap : ClassMap&lt;Customer&gt;
+{
+	public CustomerMap()
+	{
+		this.Id(c =&gt; c.Id).Column("ID").GeneratedBy.Custom&lt;<span>CustomIdGenerator&gt;();
+		this.Map(c =&gt; c.Name).Column("NAME").Not.Nullable();
+		this.Map(c =&gt; c.Address).Column("ADDRESS").Not.Nullable().LazyLoad();
+		this.HasMany&lt;Order&gt;(c =&gt; c.Orders).KeyColumn("CUSTOMERID").Inverse().AsSet().Cascade.All().Fetch.Join();
+	}
+}
+</span></pre>
+<pre>Or through .hbm.xml:</pre>
+<pre><pre><span>  &lt;</span><span>class</span><span> </span><span>name</span><span>=</span>"<span>Customer</span>"<span> </span><span>table</span><span>=</span>"<span>`CUSTOMER`"</span><span>&gt;</span>
+<span>    &lt;</span><span>id</span><span> </span><span>name</span><span>=</span>"I<span>d</span>"<span> </span><span>column</span><span>=</span>"<span>ID</span>"<span> </span><span>type</span><span>=</span>"long"<span>&gt;</span>
+<span>      &lt;</span><span>generator</span><span> </span><span>class</span><span>=</span>"<span>CustomIdGenerator, CustomIdGeneratorAssembly</span>"<span>&gt;</span>
+<span>      &lt;/</span><span>generator</span><span>&gt;</span>
+<span>    &lt;/</span><span>id</span><span>&gt;</span>
+</pre>
+</pre>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

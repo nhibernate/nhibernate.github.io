@@ -1,0 +1,152 @@
+---
+layout: doc
+title: Dynamically change user info in connection string
+---
+
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="dynamically-change-user-info-in-connection-string.html">Dynamically change user info in connection string</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/oorduz/default.aspx.html">oorduz</a><br> on 11-28-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 09-07-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="dynamically-change-user-info-in-connection-string.html">Dynamically change user info in connection string</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>In some cases our clients has to use the same database
+user id in each connection, so they can use audit and security features of
+their database system (and their DBAs will be happy [:)]).</p>
+<p>To do that in Nh We can use the ConnectionProvider
+facility. Just derive a class from the standard DriverConnectionProvider
+class:</p>
+<pre class="code"><span style="color:blue;">public class </span><span style="color:#2b91af;">DynamicConnectionProvider </span>: <span style="color:#2b91af;">DriverConnectionProvider
+</span>{
+    <span style="color:blue;">private string </span>_connectionString;
+    <span style="color:blue;">public override void </span>Configure(<span style="color:#2b91af;">IDictionary</span>&lt;<span style="color:blue;">string</span>, <span style="color:blue;">string</span>&gt; settings)
+    {
+
+        <span style="color:green;">// Connection string in the configuration overrides named connection string
+        </span><span style="color:blue;">if </span>(!settings.TryGetValue(NHibernate.Cfg.<span style="color:#2b91af;">Environment</span>.ConnectionString,<span style="color:blue;">out </span>_connectionString))
+    _connectionString = GetNamedConnectionString(settings);
+
+        <span style="color:blue;">if </span>(_connectionString == <span style="color:blue;">null</span>)
+        {
+            <span style="color:blue;">throw new </span><span style="color:#2b91af;">HibernateException</span>(<span style="color:#a31515;">"Could not find connection string setting (set " 
+                </span>+ NHibernate.Cfg.<span style="color:#2b91af;">Environment</span>.ConnectionString + <span style="color:#a31515;">" or " 
+                </span>+ NHibernate.Cfg.<span style="color:#2b91af;">Environment</span>.ConnectionStringName + <span style="color:#a31515;">" property)"</span>);
+        }
+        ConfigureDriver(settings);
+    }</pre>
+<p>This is necessary because the original connection
+string is private, but just copy the code from base method.</p>
+<p>The real magic is in "ConnectionString"
+property, it is called when nh has to connect in a Session. You have to
+override it so you can make the changes you need.<span style="white-space:pre;"> </span></p>
+<pre class="code"><span style="color:blue;">protected override string </span>ConnectionString
+{
+    <span style="color:blue;">get </span>{ <span style="color:blue;">return </span>FixConnectionString(_connectionString); }
+}
+</pre>
+<p>In this case <i>FixConnectionString</i> read
+the user info from some environment variable and inject it in the connection
+string.</p>
+<p>Finally configure NH to use the
+ConnectionProvider:</p>
+<pre class="code">            <span style="color:blue;">&lt;</span><span style="color:#a31515;">property </span><span style="color:red;">name</span><span style="color:blue;">=</span>"<span style="color:blue;">connection.provider</span>"<span style="color:blue;">&gt;
+                </span>MyAssembly.DynamicConnectionProvider, MyAssembly
+            <span style="color:blue;">&lt;/</span><span style="color:#a31515;">property</span><span style="color:blue;">&gt;
+</span></pre>
+<p>Some useful articles <span style="text-decoration:underline;"><a href="http://japikse.blogspot.com/2008/06/custom-connection-provider-with.html" style="text-decoration:none;">here</a> and <a href="../../blogs/nhibernate/archive/2008/09/18/extending-nhibernate-s-driverconnectionprovider.aspx.html">here</a></span></p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
