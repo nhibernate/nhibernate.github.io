@@ -19,7 +19,7 @@ Now, the difference between easy, non-trivial and complex queries is different f
 </p>
 <p>Suppose we have the following 4 tables:</p>
 <p>
-<a href="http://davybrion.com/blog/wp-content/uploads/2008/10/querying_example_tables.png"><img src="http://davybrion.com/blog/wp-content/uploads/2008/10/querying_example_tables.png" title="querying_example_tables" class="aligncenter size-full wp-image-481" height="371" width="499" /></a>
+<a href="http://davybrion.com/blog/wp-content/uploads/2008/10/querying_example_tables.png"><img src="/images/posts/2008/10/05/querying_example_tables.png" title="querying_example_tables" class="aligncenter size-full wp-image-481" height="371" width="499" /></a>
 </p>
 <p>
 Now, suppose we have the following business requirement: if we discontinue a product, we want to inform all of the customers who've ever bought that product. 

@@ -32,7 +32,7 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 <h3>Scenario 1: Value Objects</h3>
 <p>In <a href="http://en.wikipedia.org/wiki/Domain-driven_design">DDD</a> you have the notion of <b>entities</b> and <b>value objects</b>. The latter are immutable and have no identity. In NHibernate they are mapped as <b>Component</b> and its fields are embedded in the same table as the containing entity.</p>
 <p>A typical value object is <a href="http://martinfowler.com/eaaCatalog/money.html">Money</a> which represents a monetary value. Let's define the following simple domain model</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2.png"><img src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Account.png" /><br /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2.png"><img src="/images/posts/2008/09/06/Account.png" /><br /></a> </p>
 <p>We have an account which is an entity and the account contains a property of type Money (called Balance). Balance is now a value object and contains not only the amount but also the currency in which the value is expressed (Note: 100 US$ is different than e.g. 100 &euro;). The code for the money class</p>
 <div>
 <div style="border-style: none; padding: 0px; overflow: visible; font-size: 8pt; width: 100%; color: black; line-height: 12pt; font-family: consolas,'Courier New',courier,monospace; background-color: #f4f4f4;">
@@ -91,7 +91,7 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 <p>Finally we map the B<b>alance</b> property which is a value object an thus treated by NHibernate as <b>Component</b>. Here I have used the second (optional) parameter of the map function which is the name of the table column to which the respective property should be mapped. When we create the database schema from this mapping it will contain one table called <b>Account</b> which contains the four columns <b>Id, Name, BalanceAmount</b> and <b>BalanceCurrency</b>.</p>
 <h3>Scenario 2: Entity with multiple properties of same value object type</h3>
 <p>How does this fit for a scenario where I have an entity which has more than one property of the same value object type? Let's have a look at the following simple model. An <b>Employee </b>entity has a <b>HomeAddress</b> and a <b>WorkAddress</b> field. Both fields are of type <b>Address</b>. <b>Address </b>is a value object.</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4.png"><img src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Employee.png" /><br /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4.png"><img src="/images/posts/2008/09/06/Employee.png" /><br /></a> </p>
 <p>Again the code for the <b>Address</b> value object (which is immutable!)</p>
 <div>
 <div style="border-style: none; padding: 0px; overflow: visible; font-size: 8pt; width: 100%; color: black; line-height: 12pt; font-family: consolas,'Courier New',courier,monospace; background-color: #f4f4f4;">

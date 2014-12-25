@@ -16,7 +16,7 @@ gravatar: bf8ff77ca000b80a2b19d07dbb257645
 <p>Even if we can use mapping by code to map class by class the entire model, something more interesting can be done by writing some convention-based automatic mapper, that can help us even when we face legacy ( non code first ) databases with some (perverted) naming convention. </p>
 <p>We have to consider first the <b><i>ModelMapper</i></b> class, this class in the NH mapping by code is the one responsible for driving the mapping generator. It provides a suite of events to intercept the actual generation of each elements in the mapping. By listening these event we can decorate the detail of the single element, for example the Id generator class, the SqlType, the <i>column name</i>, and so on. ModelMapper uses a <b><i>ModelInspector </i></b>to<b><i> </i></b>get the way we want to map each portion of the entity ( properties, many-to-one, collections ), or if we have a component, or a subclass and so on. We realize our AutoMapper class by deriving a ModelMapper and internally subscribing some events, and passing to it a custom ModelInspector ( we named it AutoModelInspector ).</p>
 <p>Let&rsquo;s start with a very basic model:</p>
-<p> <img src="http://www.felicepollano.com/public/WindowsLiveWriter/UsingN.2mappingbycodeforAutomaticMapping_D407/ultra%20simple%20model_thumb.png" /></p>
+<p> <img src="/images/posts/2011/09/05/ultra%20simple%20model_thumb.png" /></p>
 <p>&nbsp;</p>
 <p>Basically an entity that unidirectionally associates with a referred one. Let&rsquo;s say we have these example database conventions:</p>
 <ul>
@@ -216,6 +216,6 @@ gravatar: bf8ff77ca000b80a2b19d07dbb257645
 <p>Simple, isn&rsquo;t ?</p>
 <p>The resulting map, as dumped on the console is:</p>
 <p>
-<img src="http://www.felicepollano.com/public/WindowsLiveWriter/UsingN.2mappingbycodeforAutomaticMapping_D407/image_thumb.png" /></p>
+<img src="/images/posts/2011/09/05/image_thumb.png" /></p>
 <p>&nbsp;</p>
 <p>That fulfill the actually simple requirements. So is just a matter of recognize the convention and the exceptions, and let&rsquo;s go auto-mapping!</p>

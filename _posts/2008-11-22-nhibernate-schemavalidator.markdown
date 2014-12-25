@@ -27,6 +27,6 @@ release it) provides a way to verify your mappings against your
 database.</span></p>
 <p><span style="font-size: small;">The usage is similar to <a href="http://blogs.hibernatingrhinos.com/nhibernate/archive/2008/04/28/create-and-update-database-schema.aspx" target="_blank">other tools</a></span></p>
 <p><span style="font-size: small;">I won&rsquo;t write a dedicated code for this but rather I am going to copy the tests from the code itself. </span></p>
-<p><img src="/cfs-file.ashx/__key/CommunityServer.Components.UserFiles/00.00.00.21.06/schemavalidator_5F00_test.jpg" /></p>
+<p><img src="/images/posts/2008/11/22/schemavalidator_5F00_test.jpg" /></p>
 <p>&nbsp;</p>
 <p>SchemaValidator has a single method called <b>Validate</b>. You give it the configuration and it validates the schema.</p>

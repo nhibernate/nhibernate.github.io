@@ -20,7 +20,7 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 </ul>
 <h2>The Domain Model</h2>
 <p>Let's assume a simple order entry system with just two entities <b>Order</b> and <b>OrderLine.</b></p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_8.png"><img src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/OrderEntrySystemDomainModel.png" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_8.png"><img src="/images/posts/2008/09/06/OrderEntrySystemDomainModel.png" /></a> </p>
 <p>Note: the implementation of the <b>IdentityFieldProvider</b> class I have discussed <a href="http://nhforge.org/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx">here</a>.</p>
 <p>The <i>business requirements</i> are such as that you are not allowed to physically delete an order from the system but just mark it as deleted in case where the user cancels an order. That's the reason why we have a property <b>IsDeleted</b> in the two entities. When querying for orders the system will (automatically) filter out orders having IsDeleted=true.</p>
 <p>Let's have a look at the implementation of the <b>Order</b> and <b>OrderLine</b> entities. (Note: I have only implemented the absolute minimum needed for this sample to work. A realistic order entity would be more complex.)</p>

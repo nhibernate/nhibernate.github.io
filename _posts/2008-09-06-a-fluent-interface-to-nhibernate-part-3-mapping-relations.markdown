@@ -25,7 +25,7 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 <h2>Scenario 3</h2>
 <h3>Domain Model</h3>
 <p>Let's have a look at the following simplified model</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2.png"><img src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog.png" /><br /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2.png"><img src="/images/posts/2008/09/06/Blog.png" /><br /></a> </p>
 <p>I have a Blog which has an author of type Person. Each Blog can have many Posts. To each Post readers can give feedback in the form of Comments. Comments are considered value objects in this model, that is they have no identity and are immutable (a reader cannot edit its comment after it has been published...). All other elements are true entities. If I consider the Blog to be the root object then the relation between Blog and Person is of type many-to-one (a person can be the owner of more than one blog). On the other hand the relation between Blog and Post is of type one-to-many. The parent and the children are both entities.</p>
 <p>A special case (as we will see) is the relation between Post and Comment (since Comment is a value object). It is also of type one-to-many but this time the parent is an entity and the children are value objects.</p>
 <h3>Mapping</h3>

@@ -82,10 +82,10 @@ The biggest difference however is in memory usage while the code is running. A r
 <p>
 To give you an idea on the difference in memory usage, here are the memory statistics (captured by Process Explorer) after running the original code (with the ISession instance):
 </p>
-<p><a href="http://davybrion.com/blog/wp-content/uploads/2008/10/isession.png"><img src="http://davybrion.com/blog/wp-content/uploads/2008/10/isession.png" title="isession" class="alignnone size-full wp-image-551" height="385" width="398" /></a></p>
+<p><a href="http://davybrion.com/blog/wp-content/uploads/2008/10/isession.png"><img src="/images/posts/2008/10/30/isession.png" title="isession" class="alignnone size-full wp-image-551" height="385" width="398" /></a></p>
 <p>
 And here are the memory statistics after running the modified code (with the IStatelessSession instance):</p>
 <p>
-<a href="http://davybrion.com/blog/wp-content/uploads/2008/10/istatelesssession.png"><img src="http://davybrion.com/blog/wp-content/uploads/2008/10/istatelesssession.png" title="istatelesssession" class="alignnone size-full wp-image-552" height="386" width="400" /></a></p>
+<a href="http://davybrion.com/blog/wp-content/uploads/2008/10/istatelesssession.png"><img src="/images/posts/2008/10/30/istatelesssession.png" title="istatelesssession" class="alignnone size-full wp-image-552" height="386" width="400" /></a></p>
 <p>Quite a difference for what is essentially the same operation.  We could even improve on this because the code in its current form keeps all of the object instances in its own collection, preventing them from being garbage collected after they have been inserted in the database.  But i think this already demonstrates the value in using the IStatelessSession if you need to perform bulk operations.
 Obviously, this will never perform as well as a bulk data operation that directly uses low-level ADO.NET code.  But if you already have the NHibernate mappings and infrastructure set up, implementing those bulk operations could be cheaper while still being 'fast enough' for most situations.</p>
