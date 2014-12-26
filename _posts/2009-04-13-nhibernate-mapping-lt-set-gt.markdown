@@ -65,9 +65,9 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>This produces the following statements:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_14392DB0.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="195" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_19431D72.png" width="373" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_14392DB0.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="195" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_19431D72.png" width="373" border="0" /></a> </p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_660974B9.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="138" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_37D72B12.png" width="262" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_660974B9.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="138" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_37D72B12.png" width="262" border="0" /></a> </p>
 
 <p>We need two select statements to load the data.</p>
 
@@ -97,7 +97,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>And would result in the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1E058594.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="291" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5F361F9C.png" width="384" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1E058594.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="291" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_5F361F9C.png" width="384" border="0" /></a> </p>
 
 <p>Here we get both the blog and its posts in a single query to the server. </p>
 
@@ -122,7 +122,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>And would produce in the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4734CFE5.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="153" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_465EFAAC.png" width="290" border="0" /></a>&#160;</p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4734CFE5.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="153" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_465EFAAC.png" width="290" border="0" /></a>&#160;</p>
 
 <p>9) where allow us to use some arbitrary SQL expression to limit the values in the collection. Usually this is used to filter out things like logically deleted rows. Here is a silly example:</p>
 
@@ -136,7 +136,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Which would result in:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_7376782B.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="152" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_00DF1BE3.png" width="295" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_7376782B.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="152" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_00DF1BE3.png" width="295" border="0" /></a> </p>
 
 <p>Note that there is important subtlety here, if you intend to use this collection with eager loading, you must make sure that your where clause can handle null values appropriately (in the case of an outer join).</p>
 
@@ -168,15 +168,15 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Will give us:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_723700AE.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="224" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5F1864B3.png" width="378" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_723700AE.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="224" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_5F1864B3.png" width="378" border="0" /></a> </p>
 
 <p>Setting it to subselect will show something quite a bit more interesting:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_64F598FD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="54" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5DD8ED36.png" width="483" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_64F598FD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="54" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_5DD8ED36.png" width="483" border="0" /></a> </p>
 
 <p>We have two queries, the first to load the blogs, and the second one:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4F9D04F7.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="150" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_610FF680.png" width="352" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4F9D04F7.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="150" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_610FF680.png" width="352" border="0" /></a> </p>
 
 <p>In this case, we load all the related posts using a subselect. This is probably one of the more efficient ways of doing this. We load all the posts for all the blogs in a single query. That assumes, of course, that we actually want to use all those posts. In the code seen above, this is actually a waste, since we only ever access the first blog Posts collection.</p>
 
@@ -208,7 +208,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Produces:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_44959551.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="146" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_310D5712.png" width="651" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_44959551.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="146" alt="image" src="/images/posts/2009/04/13/image_5F00_thumb_5F00_310D5712.png" width="651" border="0" /></a> </p>
 
 <p></p>
 

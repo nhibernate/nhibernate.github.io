@@ -51,7 +51,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>NHibernate will <em>not</em> try to update the row:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6AEE3708.png"><img height="87" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_0380650A.png" width="533" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6AEE3708.png"><img height="87" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_0380650A.png" width="533" border="0" /></a> </p>
 
 <p>Note that we have no update here, even though we updated the actual property value, and usually NHibernate will save that value.</p>
 
@@ -82,7 +82,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Produces:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3C2D9FC8.png"><img height="110" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_6DBB9E0E.png" width="588" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3C2D9FC8.png"><img height="110" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_6DBB9E0E.png" width="588" border="0" /></a> </p>
 
 <p>Note that we don't insert the AllowComments column. And if we try to update this entity:</p>
 
@@ -100,7 +100,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>We would get...</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2D1BE250.png"><img height="110" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_49B85E23.png" width="470" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2D1BE250.png"><img height="110" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_49B85E23.png" width="470" border="0" /></a> </p>
 
 <p>An update of AllowComments, but not of Title.</p>
 
@@ -113,7 +113,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>And selecting an entity will now result in:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3E253195.png"><img height="188" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5D6A6919.png" width="373" border="0" /></a></p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3E253195.png"><img height="188" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_5D6A6919.png" width="373" border="0" /></a></p>
 
 <p>Note that the formula was slightly preprocessed in order to make it work as a subquery.</p>
 
@@ -154,7 +154,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>The SQL that is going to be executed is:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_7CAFA09D.png"><img height="138" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_0E229227.png" width="431" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_7CAFA09D.png"><img height="138" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_0E229227.png" width="431" border="0" /></a> </p>
 
 <p>Note that we increment the value of the version column. But, if we specify optimistic-lock=&quot;false&quot;...</p>
 
@@ -165,7 +165,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>We will get:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3FB0906D.png"><img height="139" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_77F19836.png" width="405" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3FB0906D.png"><img height="139" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_77F19836.png" width="405" border="0" /></a> </p>
 
 <p>Note that in this case, we do <em>not</em> increase the value of the version column.</p>
 
@@ -195,11 +195,11 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>We will get an insert followed immediately by a select:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_055A3BEE.png"><img height="39" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_74E1CAF2.png" width="317" border="0" /></a> \</p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_055A3BEE.png"><img height="39" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_74E1CAF2.png" width="317" border="0" /></a> \</p>
 
 <p>And the select is:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_723B9FF2.png"><img height="79" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_0F444EBB.png" width="308" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_723B9FF2.png"><img height="79" alt="image" src="/images/posts/2009/04/08/image_5F00_thumb_5F00_0F444EBB.png" width="308" border="0" /></a> </p>
 
 <p>So we have to get it back from the database before we can actually make any sort of use of it.</p>
 

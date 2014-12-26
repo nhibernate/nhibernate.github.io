@@ -27,7 +27,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>This is a <a href="http://www.ndepend.com/">NDepend</a> extracted graph of the Northwind example that comes with <a href="http://www.sharparchitecture.net/">Sharp Architecture</a>:</p>
 
-<p><img border="0" src="http://content.screencast.com/users/JoseFR/folders/Jing/media/82a585f2-6ae5-4f3b-ba29-fc3f283be6ad/2009-10-26_1333.png" width="585" height="336" /></p>
+<p><img border="0" src="/images/posts/2009/11/07/2009-10-26_1333.png" width="585" height="336" /></p>
 
 <p>&#160;</p>
 
@@ -89,7 +89,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>The guywire project has an special “Output Path”:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_53062B8B.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_6AC28453.png" width="552" height="255" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_53062B8B.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="/images/posts/2009/11/07/image_5F00_thumb_5F00_6AC28453.png" width="552" height="255" /></a> </p>
 
 <p>So, the path is the “Startup” project.</p>
 
@@ -131,7 +131,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>&#160;</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4961041A.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="image" border="0" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_4FAA6B59.png" width="578" height="593" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_4961041A.png"><img style="border-bottom: 0px; border-left: 0px; display: inline; border-top: 0px; border-right: 0px" title="image" border="0" alt="image" src="/images/posts/2009/11/07/image_5F00_thumb_5F00_4FAA6B59.png" width="578" height="593" /></a> </p>
 
 <p>&#160;</p>
 
@@ -143,7 +143,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>I really like the idea of have different parts of the application configuration in separated classes. I used to reuse this configurators alone in my Tests. But, as a I said before, the guywire should not be referenced by any project. So, my trick is add the configurator as a “linked file” to the test project:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6BBD04E1.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_400C3AE5.png" width="243" height="117" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6BBD04E1.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="/images/posts/2009/11/07/image_5F00_thumb_5F00_400C3AE5.png" width="243" height="117" /></a> </p>
 
 <p>And this is a sample:</p>
 

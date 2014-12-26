@@ -26,11 +26,11 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>We have the follow object model:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6CCFFEAD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="167" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_6F9AD502.png" width="451" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6CCFFEAD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="167" alt="image" src="/images/posts/2009/04/19/image_5F00_thumb_5F00_6F9AD502.png" width="451" border="0" /></a> </p>
 
 <p>And the database model:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1CB25282.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="114" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5C7EC9B8.png" width="570" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1CB25282.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="114" alt="image" src="/images/posts/2009/04/19/image_5F00_thumb_5F00_5C7EC9B8.png" width="570" border="0" /></a> </p>
 
 <p></p>
 
@@ -105,7 +105,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>And the SQL that would be generated would be:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3232228E.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="232" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_7F64ACCA.png" width="591" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_3232228E.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="232" alt="image" src="/images/posts/2009/04/19/image_5F00_thumb_5F00_7F64ACCA.png" width="591" border="0" /></a> </p>
 
 <p>This is quite interesting. We can see that we insert the entities as we expect, but when we pull a person out, we do a join to the employee, to get the one-to-one association. For that matter, even in the second scenario, we do a join to get the associated employee.</p>
 
@@ -124,12 +124,12 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>When setting this, we can see that there is a dramatic change in NHibernate’s behavior:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2B3CB2CD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="253" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_637DBA96.png" width="528" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2B3CB2CD.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="253" alt="image" src="/images/posts/2009/04/19/image_5F00_thumb_5F00_637DBA96.png" width="528" border="0" /></a> </p>
 
 <p>Instead of generating joins, NHibernate now uses standard selects to get the data. And we don’t have to pre-populate the information on loading the entity, we can delay that as we usually do with NHibernate.</p>
 
 <p>And the last thing that we will explore for &lt;one-to-one/&gt; is the fetch attribute. It defaults to select, so we have already seen how that works, but when we set fetch=”join”, we get an interesting flashback. Well, almost:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1BBEC260.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="229" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_3B03F9E4.png" width="530" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1BBEC260.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="229" alt="image" src="/images/posts/2009/04/19/image_5F00_thumb_5F00_3B03F9E4.png" width="530" border="0" /></a> </p>
 
 <p>Again, we use a join to get the value upfront, but since we are now using constrained=”true”, we can use an inner join instead of a left outer join, which is more efficient in most cases.</p>

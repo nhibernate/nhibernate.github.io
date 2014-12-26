@@ -101,7 +101,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
              <span style="color: red">foreign-key</span><span style="color: blue">=</span>&quot;<span style="color: blue">none</span>&quot; <span style="color: blue">/&gt;
 &lt;/</span><span style="color: #a31515">class</span><span style="color: blue">&gt;</span></pre>
 
-<p>Note: <strike>I am killing the constraint for this test</strike>&#160; foreign-key=”none” tells the schema export to not create a foreign key, that is how the db must be on real life <img style="border-bottom-style: none; border-right-style: none; border-top-style: none; border-left-style: none" class="wlEmoticon wlEmoticon-winkingsmile" alt="Guiño" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/wlEmoticon_2D00_winkingsmile_5F00_2AC68689.png" />.</p>
+<p>Note: <strike>I am killing the constraint for this test</strike>&#160; foreign-key=”none” tells the schema export to not create a foreign key, that is how the db must be on real life <img style="border-bottom-style: none; border-right-style: none; border-top-style: none; border-left-style: none" class="wlEmoticon wlEmoticon-winkingsmile" alt="Guiño" src="/images/posts/2011/01/28/wlEmoticon_2D00_winkingsmile_5F00_2AC68689.png" />.</p>
 
 <p>The solution is pretty simple:</p>
 

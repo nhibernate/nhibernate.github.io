@@ -51,9 +51,9 @@ s.CreateCriteria&lt;Post&gt;()
 </blockquote>
 <p>Who do you think this will generate?</p>
 <p>Well, the first query is pretty easy to understand:</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_52EF04CB.png"><img border="0" width="373" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_58CEC9C6.png" alt="image" height="136" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_52EF04CB.png"><img border="0" width="373" src="/images/posts/2009/05/04/image_5F00_thumb_5F00_58CEC9C6.png" alt="image" height="136" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
 <p>But the second one is much more interesting:</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_23589852.png"><img border="0" width="447" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_10A62F4C.png" alt="image" height="152" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_23589852.png"><img border="0" width="447" src="/images/posts/2009/05/04/image_5F00_thumb_5F00_10A62F4C.png" alt="image" height="152" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
 <p>We have selectively applied the filter so only posted posted after the 16th can be seen.</p>
 <p>This is a very powerful capability to have, since we can use this globally, to define additional condition. For that matter, we can apply it in multiple places, so comments would also be so limited, etc.</p>
 <p>For that matter, we can also put filters on associations as well:</p>
@@ -67,5 +67,5 @@ s.CreateCriteria&lt;Post&gt;()
 <span style="color: #0000ff">&lt;/</span><span style="color: #800000">set</span><span style="color: #0000ff">&gt;</span></pre>
 </blockquote>
 <p>And trying to access the Comments collection on a Post would generate the following SQL when the filter is active:</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_0FD05A13.png"><img border="0" width="509" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_6349BADD.png" alt="image" height="204" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_0FD05A13.png"><img border="0" width="509" src="/images/posts/2009/05/04/image_5F00_thumb_5F00_6349BADD.png" alt="image" height="204" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" title="image" /></a> </p>
 <p>Nice, isn&rsquo;t it?</p>

@@ -11,7 +11,7 @@ author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
 {% include imported_disclaimer.html %}
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
 <p>This is the third post in a series of articles where I want to analyze and describe the new upcoming mapping interface providing a fluent interface to NHibernate for the mapping of a domain model to the underlying database. </p>
 <ul>
 <li><a href="http://nhforge.org/blogs/nhibernate/archive/2008/09/05/a-fluent-interface-to-nhibernate-part-1.aspx">A fluent interface to NHibernate</a>  </li>
@@ -366,4 +366,4 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 <h2>Summary</h2>
 <p>In this post I have shown you that the mapping framework is indeed ready for mapping more advanced scenarios. I have shown you how to map one-to-many relations where either the children are <b>entities</b> or the children are <b>value objects</b>. I also have shown how to map many-to-one relations.</p>
 <p>Enjoy</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_2.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb.png" width="244" border="0" height="21" /></a></p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_2.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb.png" width="244" border="0" height="21" /></a></p>

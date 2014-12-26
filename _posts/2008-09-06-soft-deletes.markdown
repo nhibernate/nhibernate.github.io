@@ -11,7 +11,7 @@ author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
 {% include imported_disclaimer.html %}
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_6.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_2.png" width="244" border="0" height="21" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_6.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb_5F00_2.png" width="244" border="0" height="21" /></a> </p>
 <p>What can I do if instead of physically delete a record in the database I just want to mark it as deleted?</p>
 <p>There are at least two possibilities to achieve the desired result</p>
 <ul>
@@ -294,4 +294,4 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 <h2>Summary</h2>
 <p>I have show two ways how to fulfill the <i>business requirement</i> not to physically delete an entity from the system but rather mark it as deleted when the application requests deletion of an entity. The first one is done "manually" in the repository for the respective entity or aggregate. The second one is using the concept of event listeners which is new to NHibernate and needs some intimate knowledge on the internal workings of NHibernate.</p>
 <p>The second approach has the advantage that the <i>business requirement</i> of "soft deletes" is treated as a cross cutting concern and the solution presented is a generic one.</p>
-<p>&nbsp;<a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_8.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_3.png" width="244" border="0" height="21" /></a> .</p>
+<p>&nbsp;<a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_8.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb_5F00_3.png" width="244" border="0" height="21" /></a> .</p>

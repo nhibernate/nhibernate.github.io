@@ -18,7 +18,7 @@ gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 </ul>
 <p>Both true ? Can we implements something to prevent Auto-Dirty-Check on flush ?</p>
 <h4>Domain</h4>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Domain_5F00_003F435D.png"><img border="0" width="496" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Domain_5F00_thumb_5F00_28DDAF64.png" alt="Domain" height="466" style="border-top-width: 0px; display: block; border-left-width: 0px; float: none; border-bottom-width: 0px; margin-left: auto; margin-right: auto; border-right-width: 0px" title="Domain" /></a></p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Domain_5F00_003F435D.png"><img border="0" width="496" src="/images/posts/2009/04/03/Domain_5F00_thumb_5F00_28DDAF64.png" alt="Domain" height="466" style="border-top-width: 0px; display: block; border-left-width: 0px; float: none; border-bottom-width: 0px; margin-left: auto; margin-right: auto; border-right-width: 0px" title="Domain" /></a></p>
 <h4>Test</h4>
 <h5>Part of the configuration</h5>
 <pre class="code"><span style="color: blue">&lt;</span><span style="color: #a31515">property </span><span style="color: red">name</span><span style="color: blue">=</span>"<span style="color: blue">generate_statistics</span>"<span style="color: blue">&gt;</span>true<span style="color: blue">&lt;/</span><span style="color: #a31515">property</span><span style="color: blue">&gt;</span></pre>

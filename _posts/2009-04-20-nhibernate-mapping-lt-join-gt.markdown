@@ -28,11 +28,11 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Let us explore this a bit, assuming the we have the following database model:&quot;</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_617B3C4E.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="177" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_4BB67553.png" width="543" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_617B3C4E.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="177" alt="image" src="/images/posts/2009/04/20/image_5F00_thumb_5F00_4BB67553.png" width="543" border="0" /></a> </p>
 
 <p>And what we want is to map this to the following object model:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1D5F8057.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="235" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_3348F2A7.png" width="163" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1D5F8057.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="235" alt="image" src="/images/posts/2009/04/20/image_5F00_thumb_5F00_3348F2A7.png" width="163" border="0" /></a> </p>
 
 <p>We can do this will the following mapping:</p>
 
@@ -58,7 +58,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>And getting a Person will now result in the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_45281725.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="187" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_0011DAA0.png" width="349" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_45281725.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="187" alt="image" src="/images/posts/2009/04/20/image_5F00_thumb_5F00_0011DAA0.png" width="349" border="0" /></a> </p>
 
 <p>NHibernate will now take care of mapping everything to its place, and making sure that everything works just right.</p>
 

@@ -59,7 +59,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>This would result in the following SQL.</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_128440AF.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="109" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_71FF91AD.png" width="281" border="0" /></a>&#160;</p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_128440AF.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="109" alt="image" src="/images/posts/2009/04/09/image_5F00_thumb_5F00_71FF91AD.png" width="281" border="0" /></a>&#160;</p>
 
 <p>But interesting things happen when we start playing with the fetch attribute. Note that by default the fetch attribute is defaulting to “select”, so setting it to that value is merely making things explicit, but setting it to fetch=”join”, like this:</p>
 
@@ -71,7 +71,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Would result in the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_0A91BFAF.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="260" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_4BC259B7.png" width="371" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_0A91BFAF.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="260" alt="image" src="/images/posts/2009/04/09/image_5F00_thumb_5F00_4BC259B7.png" width="371" border="0" /></a> </p>
 
 <p></p>
 

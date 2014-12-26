@@ -33,11 +33,11 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>This code would generate two queries to the database:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_404AC599.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="99" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_4E41B6E9.png" width="798" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_404AC599.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="99" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_4E41B6E9.png" width="798" border="0" /></a> </p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_12187BF2.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="132" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_7193CCF0.png" width="415" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_12187BF2.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="132" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_7193CCF0.png" width="415" border="0" /></a> </p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_70BDF7B7.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="77" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_49863F33.png" width="292" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_70BDF7B7.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="77" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_49863F33.png" width="292" border="0" /></a> </p>
 
 <p>Two queries to the database is a expensive, we can see that it took us 114ms to get the data from the database. We can do better than that, let us tell NHibernate that it is free to do the optimization in any way that it likes, I have marked the changes in red:</p>
 
@@ -64,9 +64,9 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Now, we seem a different result:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_38A19B43.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="96" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_5E99DC4A.png" width="795" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_38A19B43.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="96" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_5E99DC4A.png" width="795" border="0" /></a> </p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_453469C1.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="163" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_445E9488.png" width="394" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_453469C1.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="163" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_445E9488.png" width="394" border="0" /></a> </p>
 
 <p>Instead of going to the database twice, we only go <em>once</em>, with both queries at once. The speed difference is quite dramatic, 80 ms instead of 114 ms, so we saved about 30% of the total data access time and a total of 34 ms.</p>
 
@@ -147,7 +147,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>This generates the following:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_03BED8CA.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="132" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_05258C4D.png" width="789" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_03BED8CA.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="132" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_05258C4D.png" width="789" border="0" /></a> </p>
 
 <p>And the actual SQL that is sent to the database is:</p>
 
@@ -184,7 +184,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>I’ll not show the code, since I think it is pretty obvious how it will look like, but this is the result:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_61F8219A.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="180" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_70C4E823.png" width="795" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_61F8219A.png"><img title="image" style="border-right: 0px; border-top: 0px; display: inline; border-left: 0px; border-bottom: 0px" height="180" alt="image" src="/images/posts/2009/04/27/image_5F00_thumb_5F00_70C4E823.png" width="795" border="0" /></a> </p>
 
 <p>Now it takes 348ms to execute vs. 259ms using the Future pattern.</p>
 

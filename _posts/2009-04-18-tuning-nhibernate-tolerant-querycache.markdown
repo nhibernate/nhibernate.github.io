@@ -20,7 +20,7 @@ gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 <li>Using <strong><span style="color: #2b91af">IQuery</span>.SetCacheMode(<span style="color: #2b91af">CacheMode</span>.Refresh)</strong> you can force the cache refresh (for example if you need to refresh the cache after a Delete/Insert). </li>
 </ul>
 <h4>The Case</h4>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/eBayShot_5F00_5611DE5B.png"><img border="0" width="688" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/eBayShot_5F00_thumb_5F00_73AB6B6D.png" alt="eBayShot" height="505" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" title="eBayShot" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/eBayShot_5F00_5611DE5B.png"><img border="0" width="688" src="/images/posts/2009/04/18/eBayShot_5F00_thumb_5F00_73AB6B6D.png" alt="eBayShot" height="505" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" title="eBayShot" /></a> </p>
 <p>(the picture is a <a href="http://www.ebay.com/">e-Bay</a> snapshot)</p>
 <p>Take a look to the left side. Near each option you can see a number and I&rsquo;m pretty sure that it not reflect exactly the state in the DB. That number is only <em>&ldquo;an orientation&rdquo;</em> for the user probably calculated few minutes before. </p>
 <p>Now, think about the SQLs, behind the scene, and how many and how much heavy they are. A possible example for <em>&ldquo;Album Type&rdquo;, </em>using HQL, could look like:</p>

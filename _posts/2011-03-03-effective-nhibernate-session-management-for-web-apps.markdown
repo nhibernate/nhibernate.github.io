@@ -65,7 +65,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>We have an <a href="http://code.google.com/p/unhaddins/source/browse/uNhAddIns/uNhAddIns.Web/NHSessionWebModule.cs">httpmodule</a> in uNhAddins which add handler for the BeginRequest as follows:</p>
 
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Untitleddrawing_2D00_2_5F00_2DCB97C5.png"><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="Untitleddrawing (2)" border="0" alt="Untitleddrawing (2)" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Untitleddrawing_2D00_2_5F00_thumb_5F00_50CBE368.png" width="433" height="378" /></a></p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Untitleddrawing_2D00_2_5F00_2DCB97C5.png"><img style="background-image: none; border-right-width: 0px; padding-left: 0px; padding-right: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px; padding-top: 0px" title="Untitleddrawing (2)" border="0" alt="Untitleddrawing (2)" src="/images/posts/2011/03/03/Untitleddrawing_2D00_2_5F00_thumb_5F00_50CBE368.png" width="433" height="378" /></a></p>
 
 <h1>The problem</h1>
 

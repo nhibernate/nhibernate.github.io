@@ -31,13 +31,13 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Will result in:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_720B8098.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="95" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_2C1F6EDA.png" width="268" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_720B8098.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="95" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_2C1F6EDA.png" width="268" border="0" /></a> </p>
 
 <p>Note that we have so specify dynamic-update to true. This is required because doing so will generally cause much greater number of query plan to exist in the database cache.</p>
 
 <p>Setting optimistic-lock to all would result in:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_686D5526.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="178" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_718192BA.png" width="336" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_686D5526.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="178" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_718192BA.png" width="336" border="0" /></a> </p>
 
 <p>If the update fails because the row was updated, we will get a StaleObjectException. Like all exceptions, this will make the session ineligible for use, and you would have to create a new session to handle it.</p>
 
@@ -51,7 +51,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p></p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2A56097F.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="107" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_7570B654.png" width="248" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2A56097F.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="107" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_7570B654.png" width="248" border="0" /></a> </p>
 
 <p>As you can probably guess, if the version doesn’t match, we will get StaleObjectException.</p>
 
@@ -63,7 +63,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>In this case, the property type should be DateTime, and the resulting SQL would be:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2C08A45D.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="109" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_1501D534.png" width="390" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2C08A45D.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="109" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_1501D534.png" width="390" border="0" /></a> </p>
 
 <p>This is, of course, a less safe way of doing things, and I recommend that you would use a numeric value instead.</p>
 
@@ -84,7 +84,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>Executing the code listed above will result in:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6DEEC804.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="175" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_037128C2.png" width="342" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6DEEC804.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="175" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_037128C2.png" width="342" border="0" /></a> </p>
 
 <p>We use the value of the timestamp to ensure that we aren’t overwriting the row data after it was changed. The database will ensure that the row timestamp will change whenever the row itself is updated. This plays well with system where you may need to update the underlying tables outside of NHibernate.</p>
 
@@ -102,7 +102,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>This will result in the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1B2D818A.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="176" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_772A419E.png" width="352" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_1B2D818A.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="176" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_772A419E.png" width="352" border="0" /></a> </p>
 
 <p>We can also issue a separate command to the database to obtain a lock on the row representing the entity:</p>
 
@@ -117,7 +117,7 @@ gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 
 <p>The Get() would generate a standard select, without the locks, but the Lock() method would generate the following SQL:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_330E85A7.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="81" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_061E442E.png" width="291" border="0" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_330E85A7.png"><img title="image" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" height="81" alt="image" src="/images/posts/2009/04/14/image_5F00_thumb_5F00_061E442E.png" width="291" border="0" /></a> </p>
 
 <p>The behavior for conflict in this case is very simple, we wait. If we wait for too long, the timeout will expire and we will get a timeout exception, because we could not obtain the lock.</p>
 

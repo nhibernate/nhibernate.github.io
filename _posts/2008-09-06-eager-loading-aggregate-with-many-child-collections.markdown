@@ -11,7 +11,7 @@ author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---
 {% include imported_disclaimer.html %}
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_4.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb_5F00_1.png" width="244" border="0" height="21" /></a> </p>
 <p>In a comment to my post on lazy loading versus eager loading which you can find <a href="http://nhforge.org/blogs/nhibernate/archive/2008/09/06/lazy-loading-eager-loading.aspx">here</a> I have been asked whether NHibernate 2.0 can now eagerly load an aggregate where the root has more than one child collection. The answer is <b>yes but</b>... Let's discuss it with a sample.</p>
 <p>Imagine having the following (academic) domain model.</p>
 <p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_2.png"><img src="/images/posts/2008/09/06/BlogAggregateDomainModel.png" /></a> </p>
@@ -245,4 +245,4 @@ gravatar: c6b14f5727ae60868a29322c6395bd4d
 </div>
 <h2>Summary</h2>
 <p>I have shown you several ways how to eagerly load an aggregate where the root is having more than one child collection. I also have shown the pitfalls of a possible (bad) solution.</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_2.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_thumb.png" width="244" border="0" height="21" /></a> .</p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/Blog-Signature-Gabriel_5F00_2.png"><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="Blog Signature Gabriel" src="/images/posts/2008/09/06/Blog-Signature-Gabriel_5F00_thumb.png" width="244" border="0" height="21" /></a> .</p>

@@ -12,7 +12,7 @@ gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---
 {% include imported_disclaimer.html %}
 <p>There is some interesting progress with my project <a href="http://sourceforge.net/projects/faticalabshqled/" target="_blank">Fatica.Labs.HqlEditor</a>. I just want to share some screenshot:</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s5_5F00_08413719.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s5" alt="s5" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s5_5F00_thumb_5F00_65E8DFF8.png" border="0" height="356" width="490" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s5_5F00_08413719.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s5" alt="s5" src="/images/posts/2010/04/22/s5_5F00_thumb_5F00_65E8DFF8.png" border="0" height="356" width="490" /></a> </p>
 <p>Well, it is growing to be a real tool, and in my idea would became a sort of test bed in which the user can add or modify mapping, try the queries, change the config, export a database script, reverse engineering and so on. Actually all the low level tool to achieve that are available.</p>
 <p>Ok, let&rsquo;s explain the layout:</p>
 <ol>
@@ -27,7 +27,7 @@ gravatar: bf8ff77ca000b80a2b19d07dbb257645
 <li>Testing production assemblies built with legacy nh versions ( well, not so legacy, starting from 2.xxx ) </li>
 </ul>
 <p>Let&rsquo;s have another screenshot, showing a real SQL preview:</p>
-<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s7_5F00_40BB6FBF.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s7" alt="s7" src="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s7_5F00_thumb_5F00_57F64E63.png" border="0" height="322" width="509" /></a> </p>
+<p><a href="/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/s7_5F00_40BB6FBF.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="s7" alt="s7" src="/images/posts/2010/04/22/s7_5F00_thumb_5F00_57F64E63.png" border="0" height="322" width="509" /></a> </p>
 <p>Next step is to produce the query results in some sort of usable representation ( I need to push the data across two app domain ) so I would probably use some JSON serialization and then display the JSON raw data with some readable formatting.</p>
 <p>The project is not yet released, please treat it as a CTP ;) anyway, the svn repository is here:</p>
 <p><code><b><a href="https://faticalabshqled.svn.sourceforge.net/svnroot/faticalabshqled">https://faticalabshqled.svn.sourceforge.net/svnroot/faticalabshqled</a></b></code></p>

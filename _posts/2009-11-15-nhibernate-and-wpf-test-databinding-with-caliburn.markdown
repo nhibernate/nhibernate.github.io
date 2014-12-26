@@ -88,7 +88,7 @@ gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 
 <p>If you have any error in your databinding this test will fail. This test also show you a list of the DataBinding errors in the console, and for each error the full path inside the View:</p>
 
-<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6D1D2B0A.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_thumb_5F00_40968BD5.png" width="885" height="115" /></a> </p>
+<p><a href="http://nhforge.org/cfs-file.ashx/__key/CommunityServer.Blogs.Components.WeblogFiles/nhibernate/image_5F00_6D1D2B0A.png"><img style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" title="image" border="0" alt="image" src="/images/posts/2009/11/15/image_5F00_thumb_5F00_40968BD5.png" width="885" height="115" /></a> </p>
 
 <p>You can see here the “nesting level”, Album is a property of the EditAlbumViewModel, Title is a property in the Album type. Titl<u>o</u> doesn’t exist. EditAlbumView.Grid.TextBox is the full xaml path to the control holding the databinding. It show Grid and TextBox because these elements doesn’t have a name in xaml.</p>
 

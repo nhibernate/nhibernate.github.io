@@ -48,7 +48,7 @@ gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 <ol>
 <li>
 <h4>Create the solution and web project</h4>
-<p>In Visual Studio, start a new ASP.NET MVC Web Application. This template is added to Visual Studio when you install ASP.NET MVC. I&rsquo;ll be calling my solution NStackExample.<a href="http://jasondentler.com/blog/wp-content/uploads/2009/08/image.png"><br /><img title="image" src="http://jasondentler.com/blog/wp-content/uploads/2009/08/image_thumb.png" border="0" alt="image" width="534" height="293" style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" /></a></p>
+<p>In Visual Studio, start a new ASP.NET MVC Web Application. This template is added to Visual Studio when you install ASP.NET MVC. I&rsquo;ll be calling my solution NStackExample.<a href="http://jasondentler.com/blog/wp-content/uploads/2009/08/image.png"><br /><img title="image" src="/images/posts/2009/08/11/image_thumb.png" border="0" alt="image" width="534" height="293" style="border-right-width: 0px; display: inline; border-top-width: 0px; border-bottom-width: 0px; border-left-width: 0px" /></a></p>
 <p>There&rsquo;s a few things to note here. First, we&rsquo;re creating a solution directory. Second, notice how we&rsquo;ve appended .Web to the name of our web project, but not the solution.</p>
 <p>This web project will contain all of the views. Despite the implied direction from Microsoft through the ASP.NET MVC template, it won&rsquo;t contain the model or the controllers.</p>
 </li>
@@ -90,7 +90,7 @@ gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 <p>This is your main project. It will contain your model, as well as interfaces for any services and strategies your application will use. It will not contain the implementation of any of those services. Those go in separate, easily replaceable assemblies.</p>
 <p>Add a new &ldquo;Class Library&rdquo; project to your solution. We&rsquo;ll call this project NStackExample.Core.</p>
 <p>Now, right click on the project and select properties, then click on the Application tab on the side. In the root namespace field, remove .Core.</p>
-<p><img title="image" src="http://jasondentler.com/blog/wp-content/uploads/2009/08/image_thumb2.png" border="0" alt="image" width="554" height="57" /><br />We&rsquo;re doing this so our entities will be named NStackExample.Entity1, NStackExample.Entity2, etc. but the assembly will be NStackExample.Core.dll, which better describes it&rsquo;s purpose.</p>
+<p><img title="image" src="/images/posts/2009/08/11/image_thumb2.png" border="0" alt="image" width="554" height="57" /><br />We&rsquo;re doing this so our entities will be named NStackExample.Entity1, NStackExample.Entity2, etc. but the assembly will be NStackExample.Core.dll, which better describes it&rsquo;s purpose.</p>
 </li>
 <li>
 <h4>Create the controller project</h4>
@@ -111,7 +111,7 @@ gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 </ul>
 </li>
 </ul>
-<p><img title="image" src="http://jasondentler.com/blog/wp-content/uploads/2009/08/image_thumb4.png" border="0" alt="image" width="410" height="771" /></p>
+<p><img title="image" src="/images/posts/2009/08/11/image_thumb4.png" border="0" alt="image" width="410" height="771" /></p>
 </li>
 <li>
 <h4>Set up your references</h4>
