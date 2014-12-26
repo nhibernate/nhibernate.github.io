@@ -323,7 +323,7 @@ A.ForumGroupNameUnRead, .ForumGroupNameUnRead:LINK, .ForumGroupNameUnRead:VISITE
 
 #CommonFooter
 {
-    background-image: url(../../../cfs-filesystemfile.ashx/__key/CommunityServer.Components.SiteFiles/logos/NHibernate_5F00_logo.jpg);
+    background-image: url(/images/NHibernate_5F00_logo.jpg);
     background-color: #F7F7F7;
 }
 
@@ -355,7 +355,7 @@ http://colorschemedesigner.com/#1H11Tm3gXw0w0
 #CommonNavigation
 {
 height: 2.2em;
-background: #87802A url(../../../cfs-filesystemfile.ashx/__key/CommunityServer.Components.SiteFiles/site_5F00_images/header_5F00_fade_5F00_background.png) repeat-x;
+background: #87802A url(/images/header_fade_background.png) repeat-x;
 }
 
 #CommonHeader
@@ -387,7 +387,7 @@ padding: 15px;
 
 #CommonTitle, .CommonContentArea &gt; .CommonTitle
 {
-background: white url(../../../cfs-filesystemfile.ashx/__key/CommunityServer.Components.SiteFiles/site_5F00_images/common_5F00_title_5F00_fade.png) repeat-x  scroll right bottom;
+background: white url(/images/common_title_fade.png) repeat-x  scroll right bottom;
 }
 .CommonContentBox.Highlighted2
 {
@@ -419,7 +419,6 @@ line-height: 1.6em;
 #CommonHeaderUserContent, #CommonHeaderUserContent, #CommonHeaderUserContent a, #CommonHeaderUserArea a:link, #CommonHeaderUserArea a:visited , #CommonHeaderUserArea a:hover,
 #CommonHeaderUserWelcome .sub a:hover
 {
-/* background: #87802A url(http://nhforge.org/cfs-filesystemfile.ashx/__key/CommunityServer.Components.SiteFiles/site_5F00_images/header_5F00_fade_5F00_background.png) repeat-x; */
 background-color: white;
 color: #333333;
 }
