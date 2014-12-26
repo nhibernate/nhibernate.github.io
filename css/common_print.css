@@ -11,8 +11,8 @@ A:LINK, A:VISITED
     text-decoration: underline;
 }
 
-.CommonPrintHidden, #CommonHeaderUserArea, #CommonNavigation, #CommonSearch, #CommonSidebarLeft, #CommonSidebarRight,
-.CommonContentBoxHeaderForm, .CommonBreadCrumbArea
+#CommonNavigation, #CommonSidebarLeft, #CommonSidebarRight,
+.CommonBreadCrumbArea
 {
 	display: none;
 }
@@ -25,22 +25,8 @@ A:LINK, A:VISITED
 
 /* Comment Styles */
 
-.CommonCommentArrow, .CommonCommentBubbleRoundTop, .CommonCommentBubbleRoundBottom, .CommonCommentUser
-{
-	display: none;
-}
 
-.CommonCommentBubble
-{
-	margin: 0;
-}
 
-.CommonCommentContent, .Owner .CommonCommentContent
-{
-	background-color: #fff;
-	border: solid 1px #999;
-	padding: .5em;
-}
 
 #CommonContent 
 {
