@@ -1,5 +1,5 @@
 #!/bin/bash
-for filename in $(find . -type f -iname "*\?*")
+for filename in $(find . -type d -iname "*\\\"*")
 do 
-  mv "$filename" "${filename//\?/%3F}" 
+  rm -rd "$filename" 
 done
