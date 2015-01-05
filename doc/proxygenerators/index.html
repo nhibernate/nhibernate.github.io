@@ -1,0 +1,128 @@
+---
+layout: doc
+title: NHibernate ProxyGenerators Introduction
+---
+                   
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="default.aspx.html">ProxyGenerators</a>
+        »
+        <a href="introduction.html">Introduction</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>ProxyGenerators</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/wcpierce/default.aspx.html">Bill Pierce</a><br> on 09-23-2008</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="introduction.html">Introduction</a></span>
+                        
+                    </h2>
+                                
+                
+                <div><div class="ArwC7c ckChnd" id=":sc">
+<div>
+<p><a href="../../media/g/proxygenerators/default.aspx.html">NHibernate ProxyGenerators</a> (NHPG)  is a simple utility that you can use to pre-generate lazy loading proxies for use with NHibernate.  Why would you want to pre-generate lazy loading proxies you ask?  The prime example is to make use of lazy loading functionality in a Medium Trust environment, like a shared hosting ASP.Net environment.  NHibernate will function in a <a target="_blank" href="../howtonh/run-in-medium-trust.aspx.html">Medium Trust</a> environment but you were previously required to disable lazy loading for all of your entities.  The default behavior of NHibernate is to generate these proxies at runtime during your application's startup, an operation that requires elevated permissions not present under Medium Trust.  NHPG now allows you to generate these proxies in your development or build environment (which should have the required permissions) and deploy them along with the rest of your application's assemblies.</p>
+</div>
+</div></div>
+
+<div><ul>
+<li>
+<b>What is NHibernate ProxyGenerators (NHPG)?</b><b><br></b>Please read the <a href="introduction.aspx.html" title="Click to view the page titled: Introduction">Introduction</a> for complete details.</li>
+<li>
+<b>How can I start using NHPG right now?</b><b><br></b>Learn how to <a href="pre-generate-lazy-loading-proxies.html">Pre-Generate Lazy Loading Proxies</a>
+</li>
+<li>
+<b>Is NHPG compatible with my NHibernate application?</b><b><br></b>NHPG currently requires <a href="https://sourceforge.net/project/showfiles.php?group_id=73818&amp;package_id=73969">NHibernate 2.0.1 GA</a> (2.0.1.4001). <br><br><i>Please note</i>: The version of Castle.Core distributed with NHibernate is not marked with <a href="http://msdn.microsoft.com/en-us/library/ms345097.aspx">Allow Partially Trusted Callers</a> (APTC). This can cause issues when attempting to use it in a Medium Trust environment. NHPG includes a build of Castle.Core with APTC and this will hopefully be resolved with the Castle Project.</li>
+<li>
+<b>Does NHPG depend on Castle ActiveRecord?</b><b><br></b>No. The pre-cursor to NHPG had a dependency on Castle ActiveRecord. This is no longer the case and NHPG will work without ActiveRecord assemblies.</li>
+<li>
+<b>Can NHPG generate proxies for my Castle ActiveRecord assemblies?</b><b><br></b>Yes. Learn how to <a href="pre-generate-lazy-loading-proxies.html">Pre-Generate Lazy Loading Proxies</a> for ActiveRecord.<br><br><i>Please note:</i> The trunk Castle ActiveRecordis not marked with <a href="http://msdn.microsoft.com/en-us/library/ms345097.aspx">Allow Partially Trusted Callers</a> (APTC) it is also built with NHibernate v2.0.0 Beta.NHPG includes a build of Castle ActiveRecord with APTC and NHibernate v2.0.1 GA. This will hopefully be resolved with the Castle Project.</li>
+<li>
+<b>I have NHibernate class mappings in multiple assemblies. Can I still use NHPG?</b><b><br></b>Yes. Learn how to <a href="pre-generate-lazy-loading-proxies.html">Pre-Generate Lazy Loading Proxies</a> with multiple class mapping assemblies.</li>
+<li>
+<b>I have an infrequently asked question, how do I get an answer?<br></b>Please submit your question to the <a href="http://groups.google.com/group/nhusers">NHibernate Users</a> group.</li>
+<li>
+<b>Where do I report bugs and feature requests?<br></b>Please submit your issues to the <a href="http://jira.nhibernate.org/browse/NHPG">NHPG Jira</a>.</li>
+</ul></div>
+
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
