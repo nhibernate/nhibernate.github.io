@@ -130,8 +130,8 @@ title: Customizing Fluent Nhibernate's AutoPersistenceModel Conventions
 </div>
 <p> </p>
 <p>then SchemaExport will generate DDL like this:</p>
-<div id="codeSnippetWrapper">
-<div id="codeSnippet" style="border-style:none;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;">
+<div class="codeSnippetWrapper">
+<div class="codeSnippet" style="border-style:none;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;">
 <pre style="border-style:none;margin:0em;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:white;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;"><span style="color:#0000ff;">create</span> <span style="color:#0000ff;">table</span> Prices (</pre>
 <pre style="border-style:none;margin:0em;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;">    Id <span style="color:#0000ff;">INTEGER</span> <span style="color:#0000ff;">not</span> <span style="color:#0000ff;">null</span>,</pre>
 <pre style="border-style:none;margin:0em;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:white;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;">   PriceDate DATETIME,</pre>
@@ -202,8 +202,8 @@ title: Customizing Fluent Nhibernate's AutoPersistenceModel Conventions
 </div>
 </div>
 <p>Notice the if.else, if we have already defined <i>UniqueKey</i> defining Index would be redundant as unique key's are already indexed.  When defining indexes you will typically see something like like the following DDL output from SchemaExport:</p>
-<div id="codeSnippetWrapper">
-<pre id="codeSnippet" style="border-style:none;margin:0em;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;"><span style="color:#0000ff;">create</span> <span style="color:#0000ff;">index</span> SecurityIndex <span style="color:#0000ff;">on</span> Prices (SecurityFk)</pre>
+<div class="codeSnippetWrapper">
+<pre class="codeSnippet" style="border-style:none;margin:0em;padding:0px;overflow:visible;text-align:left;line-height:12pt;background-color:#f4f4f4;width:100%;font-family:'Courier New',courier,monospace;direction:ltr;color:black;font-size:8pt;"><span style="color:#0000ff;">create</span> <span style="color:#0000ff;">index</span> SecurityIndex <span style="color:#0000ff;">on</span> Prices (SecurityFk)</pre>
 <br>
 </div>
 <p>It is pretty easy to customize the behavior of the fluent nhibernate AutoPersistenceModel using conventions and I find it can be very useful to have this type of fine grained control over your database schema generation.</p>
