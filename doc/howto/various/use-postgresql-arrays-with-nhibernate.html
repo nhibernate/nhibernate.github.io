@@ -1,0 +1,134 @@
+---
+layout: doc
+title: Use PostgreSQL Arrays with NHibernate
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="use-postgresql-arrays-with-nhibernate.html">Use PostgreSQL Arrays with NHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/shauns/default.aspx.html">shauns</a><br> on 03-05-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.03/4TA8YSYSHRF6.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/darioquintana/default.aspx.html">Dario Quintana</a><br> on 03-09-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="use-postgresql-arrays-with-nhibernate.html">Use PostgreSQL Arrays with NHibernate</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Postgresql supports the use of Arrays as a datatype for a column (<a href="http://www.postgresql.org/docs/8.3/interactive/arrays.html">documentation</a>) - if you have a model that can storea List&lt;string&gt; for example, then in some cases its preferable to take advantage of this datatype, rather than requiring a join to a seperate table.</p>
+<p>This How To shows how you would go about implementing an IUserType that does this, and how you would extend the default Postgresql driver supplied with NHibernate to support the specific extensions required by Npgsql (the DB library used to communicate with Postgresql) to use arrays.</p>
+<h2>Extending the Driver</h2>
+<p>As you will be using specific features of Postgresql, you'll need to extend the supplied driver to one that can directly reference Npgsql. Create a new Class Library project, and reference NHibernate and an up to date version of Npgsql.</p>
+<p>You should then create a class that extends NpgsqlDriver like so:</p>
+<p>public class NpgsqlDriverExtended : NpgsqlDriver{<br>        protected override void InitializeParameter(IDbDataParameter dbParam, string name, SqlType sqlType) {<br>            if (sqlType is NpgsqlExtendedSqlType &amp;&amp; dbParam is NpgsqlParameter) {<br>                this.InitializeParameter(dbParam as NpgsqlParameter, name, sqlType as NpgsqlExtendedSqlType);<br>            } else {<br>                base.InitializeParameter(dbParam, name, sqlType);<br>            }<br>        }<br><br>        protected virtual void InitializeParameter(NpgsqlParameter dbParam, string name, NpgsqlExtendedSqlType sqlType) {<br>            if (sqlType == null) {<br>                throw new QueryException(String.Format("No type assigned to parameter '{0}'", name));<br>            }<br><br>            dbParam.ParameterName = FormatNameForParameter(name);<br>            dbParam.DbType = sqlType.DbType;<br>            dbParam.NpgsqlDbType = sqlType.NpgDbType;<br>            <br>        }<br>    }</p>
+<p>Essentially, we just check if we've been given something specific to Postgresql, and if so, setup the parameter slightly differently. You'll notice that we have NpgsqlExtendedSqlType - SqlType is used by NHibernate to flag which type of column an IUserType uses. We create an extended version of this that also has an Npgsql.NpgDbType, and its this we use to create the parameter.</p>
+<p>Here is the code:</p>
+<p>public class NpgsqlExtendedSqlType : SqlType{<br>        <br>        public NpgsqlExtendedSqlType(DbType dbType, NpgsqlDbType npgDbType) : base(dbType) {<br>            this.npgDbType = npgDbType;<br>        }<br><br>        public NpgsqlExtendedSqlType(DbType dbType, NpgsqlDbType npgDbType, int length) : base(dbType, length) {<br>            this.npgDbType = npgDbType;<br>        }<br><br>        public NpgsqlExtendedSqlType(DbType dbType, NpgsqlDbType npgDbType, byte precision, byte scale) : base (dbType, precision, scale) {<br>            this.npgDbType = npgDbType;<br>        }<br><br>        private readonly NpgsqlDbType npgDbType;<br>        public NpgsqlDbType NpgDbType {<br>            get {<br>                return this.npgDbType;<br>            }<br>        }<br>    }</p>
+<p>You can go ahead and use this in your project now (change the driver parameter in your NHibernate config - mine is like cfg.Properties["connection.driver_class"] = "Wordbank.NH.Postgres.NpgsqlDriverExtended, Wordbank.NH.Postgres";) with no ill affects.</p>
+<h2>Use Postgresql Arrays</h2>
+<p>With this alternative driver, and support for Postgresql specific SQL types, then we can create an IUserType that will take List&lt;string&gt; and store it as string array in the database. This part is more straightforward - just create a class that implements IUserType. The key methods are NullSafeGet - this should return a List&lt;string&gt;. Npgsql will return the field as a string[] so we just do a simple conversion.</p>
+<p>public virtual object NullSafeGet(IDataReader resultSet, string[] names, object owner) {<br>            int index = resultSet.GetOrdinal(names[0]);<br>            if (resultSet.IsDBNull(index)) {<br>                return null;<br>            }<br>            string[] res = resultSet.GetValue(index) as string[];<br>            if (res != null) {<br>                return res.ToList();<br>            }<br>            throw new NotImplementedException();<br>        }</p>
+<p> </p>
+<p>NullSafeSet should store a List&lt;string&gt; - thanks to the other classes we have in place, we just need to set the parameter value to a string[]</p>
+<p>public virtual void NullSafeSet(IDbCommand cmd, object value, int index) {<br>            IDbDataParameter parameter = ((IDbDataParameter)cmd.Parameters[index]);<br>            if (value == null) {<br>                parameter.Value = DBNull.Value;<br>            } else {<br>                List&lt;string&gt; list = (List&lt;string&gt;)value;<br>                parameter.Value = list.ToArray();<br>            }<br>        }</p>
+<p>ReturnedType tells NHibernate what this IUserType returns:</p>
+<p>public virtual Type ReturnedType {<br>            get { return typeof(List&lt;string&gt;); }<br>        }</p>
+<p>And then finally, we hook into our new Postgresql aware SqlType via:</p>
+<p>public SqlType[] SqlTypes {<br>            get { return new SqlType[] { new NpgsqlExtendedSqlType(DbType.Object, NpgsqlTypes.NpgsqlDbType.Array | NpgsqlTypes.NpgsqlDbType.Text) }; }<br>        }</p>
+<p>The syntax tells Npgsql to store it as an Array of Text.</p>
+<p>The final step is to tell our mapping file to use this IUserType. I use NHibernate.Mapping.Attributes like so -</p>
+<p>private List&lt;string&gt; values;<br><br>        /// &lt;summary&gt;<br>        /// Values<br>        /// &lt;/summary&gt;<br>        [Property(NotNull = true, Column = "values", Type = "Wordbank.NH.Postgres.StringArrayType, Wordbank.NH.Postgres")]<br>        public virtual List&lt;string&gt; Values {<br>            get { return this.values; }<br>            set {<br>                if (value == this.values) {<br>                    return;<br>                }<br>                this.values = value;<br>            }<br>        }</p>
+<p> </p>
+<p>I hope this will come in use - you can use the same idea to create arrays of ints, doubles etc.</p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

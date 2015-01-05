@@ -1,0 +1,269 @@
+---
+layout: doc
+title: WCF + NHibernate: Entity Serialization
+---
+
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="wcf-nhibernate-entity-serialization.html">WCF + NHibernate: Entity Serialization</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/awgneo/default.aspx.html">awgneo</a><br> on 01-28-2012</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/awgneo/default.aspx.html">awgneo</a><br> on 01-28-2012</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="wcf-nhibernate-entity-serialization.html">WCF + NHibernate: Entity Serialization</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>I found many examples online covering how to serialize NHibernate entities for use over a WCF channel, while still using lazy and eager loading. In my application, my database models and my SOA models needed to be exactly the same; therefore, I wanted to avoid the use of DTOs. However, none of the examples I found quite worked for me.</p>
+<p><span style="text-decoration:underline;">Examples I found included:</span></p>
+<p> </p>
+<ul>
+<li>
+<strong>IDataContractSurrogate (<a href="http://www.timvasil.com/blog14/post/2008/02/WCF-serialization-with-NHibernate.aspx">http://www.timvasil.com/blog14/post/2008/02/WCF-serialization-with-NHibernate.aspx</a>) </strong>that allows WCF to attempt serialization by walking over the object graph (has a bug that does not allow proper XML generation:  <a href="http://connect.microsoft.com/wcf/feedback/details/404241/method-object-getobjecttoserialize-object-obj-type-targettype-of-idatacontractsurrogate-can-not-return-null">http://connect.microsoft.com/wcf/feedback/details/404241/method-object-getobjecttoserialize-object-obj-type-targettype-of-idatacontractsurrogate-can-not-return-null</a>)</li>
+<li>
+<strong>Standard Object Graph Walking</strong> (<a href="http://trentacular.com/2009/08/how-to-use-nhibernate-lazy-initializing-proxies-with-web-services-or-wcf/">http://trentacular.com/2009/08/how-to-use-nhibernate-lazy-initializing-proxies-with-web-services-or-wcf/</a>) this example did not work for me at all, but it was close to my final solution. Additionally, this example does not support collections.</li>
+</ul>
+<p> </p>
+<p><span style="text-decoration:underline;">My custom object graph walker (I hacked this out of some integrated code so it may need some tweaking):</span></p>
+<p> </p>
+<pre>using System;
+using System.Collections.Generic;
+using System.Collections;
+using System.Reflection;
+using System.Data;
+using System.Linq;
+using System.Configuration;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
+using FluentNHibernate.Automapping;
+using Radiant.RQS.Services.Types;
+using Radiant.RQS.Services.Core.Conventions;
+using Radiant.RQS.Superbank;
+using NHibernate.Proxy;
+using NHibernate.Collection;
+using NHibernate.Metadata;
+using NHibernate.Type;
+ 
+namespace Radiant.RQS.Services.Core
+{
+    public static class Resolver
+    {
+        public static List&lt;T&gt; ResolveList&lt;T&gt;(List&lt;T&gt; entityList, ISession session) where T : class
+        {
+            // create a resolved entities list for peace and sharing
+            List&lt;Object&gt; resolvedEntities = new List&lt;Object&gt;();
+            // loop over elements
+            for (int entityListIndex = 0; entityListIndex &lt; entityList.Count; entityListIndex++)
+                entityList[entityListIndex] = Resolve&lt;T&gt;(entityList[entityListIndex], session, resolvedEntities);
+ 
+            // done
+            return entityList;
+        }
+ 
+        public static T[] ResolveArray&lt;T&gt;(T[] entityArray, ISession session) where T : class
+        {
+            // create a resolved entities list for peace and sharing
+            List&lt;Object&gt; resolvedEntities = new List&lt;Object&gt;();
+            // loop over elements
+            for (int entityArrayIndex = 0; entityArrayIndex &lt; entityArray.Length; entityArrayIndex++)
+                entityArray[entityArrayIndex] = Resolve&lt;T&gt;(entityArray[entityArrayIndex], session, resolvedEntities);
+ 
+            // done
+            return entityArray;
+        }
+ 
+        public static T Resolve&lt;T&gt;(T entity, ISession session) where T : class
+        {
+            // forward to resolver
+            return Resolve&lt;T&gt;(entity, session, new List&lt;Object&gt;());
+        }
+ 
+        private static T Resolve&lt;T&gt;(T entity, ISession session, List&lt;Object&gt; resolvedEntities) where T : class</pre>
+<pre>        {
+            // CHECKS //
+ 
+            // if the entity is null, just skip it
+            if (entity == null)
+                return default(T);
+            // if we have already resolved it, return that
+            if (resolvedEntities.Contains(entity))
+                return entity;
+ 
+            // RESOLVE ENTITY //
+ 
+            T resolvedEntity = default(T);
+            // now lets go ahead and make sure everything is unproxied
+            try { resolvedEntity = (T)session.GetSessionImplementation().PersistenceContext.Unproxy(entity); }
+            catch (Exception ex) { return default(T); }
+            // add entity to the list of resolved entities
+            resolvedEntities.Add(resolvedEntity);
+ 
+            // GET TYPE INFO //
+ 
+            IClassMetadata entityMetadata = null;
+            // get the entity type
+            Type entityType = entity.GetType();
+            // get the entity meta data from the type
+            try { entityMetadata = session.SessionFactory.GetClassMetadata(entityType); }
+            catch (Exception ex) { return default(T); }
+ 
+            // PERFORM PROPERTY DIVE //
+ 
+            String propertyName;
+            Object propertyValue;
+            Type propertyListType;
+            IType entityPropertyType = null;
+            Type propertyListInternalType;
+            // get properties for this object
+            PropertyInfo[] propertyInfos = entityType.GetProperties();
+            // loop over source properties &amp; compare
+            foreach (PropertyInfo propertyInfo in propertyInfos)
+            {
+                // get property name
+                propertyName = propertyInfo.Name;
+                // get property type
+                try { entityPropertyType = entityMetadata.GetPropertyType(propertyName); }
+                catch (Exception ex) { continue; }
+                // get property value
+                propertyValue = propertyInfo.GetValue(entity, null);
+                // these are not the good kind of bags :P
+                if (entityPropertyType.IsCollectionType)
+                {
+                    // first get the property list's internal type
+                    propertyListInternalType = propertyInfo.PropertyType.GetGenericArguments()[0];
+                    // create new array type based on the internal type
+                    propertyListType = typeof(List&lt;&gt;).MakeGenericType(propertyListInternalType);
+                    // create a new property list of the internal type
+                    IList propertyList = (IList)Activator.CreateInstance(propertyListType);
+                    // set the property list in the resolved object
+                    propertyInfo.SetValue(resolvedEntity, propertyList, null);
+                    // get the enumerator for this property value
+                    IEnumerator enumerator = ((IEnumerable)propertyValue).GetEnumerator();
+                    // loop over items to also perform resolution
+                    while (enumerator.MoveNext())
+                        propertyList.Add(Resolve(enumerator.Current, session, resolvedEntities));
+                }
+                // destroy hibernate proxies
+                else if (entityPropertyType.IsEntityType)
+                {
+                    // set the property of the resolved entity to the child beneath us
+                    propertyInfo.SetValue(resolvedEntity, Resolve(propertyValue, session, resolvedEntities), null);
+                }
+            }
+ 
+            // return the resolved entity :)
+            return resolvedEntity;
+        }
+    }
+}</pre>
+<p>This works FLAWLESSLY for me. When I lazy load or eager load sub-entities before calling Resolve() it perfectly serializes only what I want and does not attempt to lazy load the entire DB.</p>
+<p><span style="text-decoration:underline;">Example:</span></p>
+<p>
+</p>
+<p>// get the computer query</p>
+<p>var computerQuery =</p>
+<p>from c in context.Session.Query&lt;Types.Computer&gt;()</p>
+<p>where c.ID == computerID</p>
+<p>select c;</p>
+<p> </p>
+<p>// return computer</p>
+<p>return Resolver.Resolve&lt;Types.Computer&gt;(computerQuery.SingleOrDefault(), session);</p>
+
+<p><br>Let me know if this doesn't work for you :).</p>
+<p><br>Thanks,<br>Alex G. (awgneo@xbetanet.com)</p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
