@@ -1,0 +1,132 @@
+---
+layout: doc
+title: NHibernate concurrency with Oracle's ORA_ROWSCN
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="nhibernate-concurrency-with-oracle-s-ora-rowscn.html">NHibernate concurrency with Oracle's ORA_ROWSCN</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.27.22/4TCBDCD9MQ4A.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/JuanCho/default.aspx.html">JuanCho</a><br> on 04-29-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.27.22/4TCBDCD9MQ4A.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/JuanCho/default.aspx.html">JuanCho</a><br> on 06-03-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="nhibernate-concurrency-with-oracle-s-ora-rowscn.html">NHibernate concurrency with Oracle's ORA_ROWSCN</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>I'm just starting to get my feet wet with NHibernate and one of the topics that popup here at the bar (you are thinking about NH when you have a couple of cold ones, aren't you? [B] ) was if we could use something like sql server's timestamp column to handle concurrency with NH and Oracle.</p>
+<p>SQL Server's Timestamp column is not datetime as you might think, but an 8 byte binary that is changed any time that the row is updated.</p>
+<p>Back at the office, I started researching and it figures out that Oracle (v9 or greater) provides its own flavor of this feature: welcome to ORA_ROWSCN.</p>
+<p>Same concept, row gets updated, ORA_ROWSCN gets updated. Just make sure your tables are created with ROWDEPENDENCIES to guarantee a unique value per row, otherwise, it is possible more than one row will have the same ORA_ROWSCN.</p>
+<p>The idea is to leave the handling of this row version column to the DBMS instead of coding around via a trigger, sequences, custom column or having nhibernate resposible for increasing the value once it is done with it. As a bonus, external processes will be able to interact with the data and NH will be aware of any changes.</p>
+<p>This is a lot of prose for such little code, below are the configuration entries that your hbm files should have in order to use the version feature with NH.</p>
+<p>NH 2.0:</p>
+<p>
+<span style="font-size:10.0pt;">&lt;</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:#a31515;">version</span><span style="font-size:10.0pt;"> </span><span style="font-size:10.0pt;">name</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;">=</span><span style="font-size:10.0pt;">"<span style="color:blue;">_version</span>"<span style="color:blue;"> </span><span style="color:red;">type</span><span style="color:blue;">=</span>"<span style="color:blue;">Int64</span>"<span style="color:blue;"> </span><span style="color:red;">generated</span><span style="color:blue;">=</span>"<span style="color:blue;">always</span>"<span style="color:blue;"> </span><span style="color:red;">column</span><span style="color:blue;">=</span>"<span style="color:blue;">ORA_ROWSCN</span>"<span style="color:blue;"> </span><span style="color:red;">access</span><span style="color:blue;">=</span>"<span style="color:blue;">field</span>"<span style="color:blue;"> </span><span style="color:red;">unsaved-value</span><span style="color:blue;">=</span>"<span style="color:blue;">null</span>"<span style="color:blue;">/&gt;</span></span><span style="font-size:10pt;font-family:'Arial','sans-serif';">&lt;o:p&gt;&lt;/o:p&gt;</span></p>
+<p> </p>
+<p>NH 2.1 (above syntax seems to also work with NH 2.1, this is just a variation)</p>
+<p><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;"><span style="mso-spacerun:yes;"></span>&lt;</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:#a31515;">version</span><span style="font-size:10.0pt;"> </span><span style="font-size:10.0pt;">name</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;">=</span><span style="font-size:10.0pt;">"<span style="color:blue;">_version</span>"<span style="color:blue;"> </span><span style="color:red;">type</span><span style="color:blue;">=</span>"<span style="color:blue;">Int64</span>"<span style="color:blue;"> </span><span style="color:red;">generated</span><span style="color:blue;">=</span>"<span style="color:blue;">always</span>"<span style="color:blue;"> </span><span style="color:red;">access</span><span style="color:blue;">=</span>"<span style="color:blue;">field</span>"<span style="color:blue;"> </span><span style="color:red;">unsaved-value</span><span style="color:blue;">=</span>"<span style="color:blue;">null</span>"<span style="color:blue;">&gt;&lt;o:p&gt;&lt;/o:p&gt;</span></span></p>
+<p class="MsoNormal" style="mso-layout-grid-align:none;text-autospace:none;"><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;"><span style="mso-spacerun:yes;">    </span>&lt;</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:#a31515;">column</span><span style="font-size:10.0pt;"> </span><span style="font-size:10.0pt;">name</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;">=</span><span style="font-size:10.0pt;">"<span style="color:blue;">ORA_ROWSCN</span>"<span style="color:blue;"> </span><span style="color:red;">sql-type</span><span style="color:blue;">=</span>"<span style="color:blue;">Int64</span>"<span style="color:blue;"> /&gt;&lt;o:p&gt;&lt;/o:p&gt;</span></span></p>
+<p class="MsoNormal"><span style="font-size:10.0pt;"><span></span></span><span style="font-size:10pt;font-family:'Envy Code R VS';color:blue;">&lt;</span><span style="font-size:10pt;font-family:'Envy Code R VS';color:#a31515;">/version</span><span style="font-size:10.0pt;"><span style="color:blue;">&gt;</span></span><span style="font-size:10.0pt;"><span style="color:blue;"></span></span></p>
+<p class="MsoNormal">I hope this saves someone, a couple hours of googling.</p>
+<p class="MsoNormal"> </p>
+<h4 class="MsoNormal">
+<span style="text-decoration:underline;">NOTE:</span> The usage of ORA_ROWSCN will incur on an extra db call (SELECT ORA_ROWSCN...) during INSERTS/UPDATES since its value is updated on COMMIT. In Nhibernate, this means that after the entity was modified, the version property won't have a valid value until a Flush() has been issued and a Refresh() has been performed.</h4>
+<h4 class="MsoNormal">NH does a Refresh(), but it seems to do it during the Flush()  and before the COMMIT, forcing to explicitly call a Refresh() afterward.</h4>
+<p class="MsoNormal"> </p>
+<p class="MsoNormal">Some references:</p>
+<p class="MsoNormal"><a href="../../blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.aspx.html#286">NHibernate Mapping - Concurrency</a></p>
+<p class="MsoNormal"><a href="http://asktom.oracle.com/pls/asktom/f?p=100:11:0::::P11_QUESTION_ID:517105100346104196">"ORA_ROWSCN strange behavior", version 10.2.0</a></p>
+<p class="MsoNormal"><a href="http://www.rampant-books.com/10g_100.htm">Oracle10g Row Timestamp</a></p>
+<p class="MsoNormal"><a href="http://pbarut.blogspot.com/2006/09/orarowscn-is-pseudo-column-that-gives.html">ORA_ROWSCN behavior: bug or feature?</a></p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

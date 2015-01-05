@@ -1,0 +1,155 @@
+---
+layout: doc
+title: Localization techniques
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="localization-techniques.html">Localization techniques</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/climens/default.aspx.html">Marc Climent</a><br> on 03-16-2010</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/brendan2452/default.aspx.html">brendan2452</a><br> on 10-28-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="localization-techniques.html">Localization techniques</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>This page is a summary of the two main different approaches found all around the web on Property Localization using NHibernate, based on a post in spanish on my own blog.</p>
+<p>There are roughly two main paths</p>
+<p><b>Method 1: Using a custom IUserType</b></p>
+<p>This method is exposed thoroughly in a Fabio Maulo`s post called Localized Property with NHibernate, in which he discusses the use of the LocalizablePropertyType found in uNhAddIns.</p>
+<p>It is based on implementing IUserType, providing methods to serialize and deserialize the property. This way, we make use of NHibernate extensibility to provide a seamless mechanism to store and retrieve the property in a field of the database.</p>
+<p>In the example, the property is a Dictionary (internally) but we choose to expose it as a String developing the getter (in Fabio's post) to make it easier for the user.</p>
+<p>Alternatively, you can create your our own class to contain all the translations and ease the addition and removal of them as well as properties to have quick access to the current localization string based on <i>Thread.CurrentThread.CurrentCulture</i>. In some of the proposals in the second method discussed there are examples of such classes that can be easily adapted to this method. This, as well, can be exposed as a string through the proper getter.</p>
+<p>Pros:</p>
+<ul>
+<li>Simple and easy</li>
+<li>Data stored in the same table as the entity</li>
+<li>Fairly transparent, specially if a custom object is used to simplify the access to the translations</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>The value of the field is not understandable by the DBMS (no indexing, sorting or whatever)</li>
+</ul>
+<p><b>Method 2: Using several tables</b></p>
+<p>This second method has many variants, but all of them use one or more tables to store the translations, making them visible to the DBMS.</p>
+<p><b>Proposal 2.1</b>: Localizing NHibernate: Contextual Parameters by Ayende</p>
+<p>This is an interesting approach, quite simple in explanation but uses a couple of advanced NHibernate features such as formulas and filters. The advantage is that the property of the entity is a simple string and the selection of the language to load is made through the formula based on a session parameter.</p>
+<p><b>Proposal 2.2</b>: Create a multi languaged domain model with NHibernate and C# by Michal @ WebDevBros</p>
+<p>This one uses a nice crafted class to store and retrieve localization information and a couple of tables, one containing the dictionaries that create the relationship between the entity and the translations, that are accessed via a &lt;map&gt; in the mapping. (NOTE: I have not tested it, and he says that you can map several properties in the same entity with this method but not with the provided mapping)</p>
+<p>The class called PhraseDictionary can be easily used through a IUserType with the first method.</p>
+<p><b>Proposal 2.3</b>: Mapping translations in NHibernate by Siim Viikman</p>
+<p>The method proposed here is very similar to the former one, in this case using three tables, but that's up to you. It explains how to do the mapping using an Id different from the PK (which can't be done at this moment using Fluent NHibernate, just in case you want to).</p>
+<p>The PhraseDictionary has been replaced by the Translation class, but essentially are the same, holders of the translation dictionary. Can be adapted as well to use it with method 1.</p>
+<p><b>Proposal 2.4</b>: Localizable entities with Nhibernate part 1 (part 2 and part 3) by Alkampfer</p>
+<p>A very thorough  example. It maps only one property per entity, simplifying the mappings and the table structure and can be more than enough for many solutions. It discusses a lot about a Registry object to hold the current locale, but you can change that to rely in <i>Thread.CurrentThread.CurrentCulture</i> and simplify a little bit.</p>
+<p>Pros:</p>
+<ul>
+<li>DBMS-aware solution</li>
+</ul>
+<p>Cons:</p>
+<ul>
+<li>More complex mappings</li>
+<li>More complex data structure</li>
+</ul>
+<p><b>Conclusions</b></p>
+<p>Localization is painful in most scenarios and some guidelines can be followed:</p>
+<ul>
+<li>If you don't really need that a property is localizable, don't make it localizable. Ok, in most cases is not your decision. If you have choice, think it twice or thrice before making a property localizable.</li>
+<li>If you don't need to use DBMS capabilities on the field (such as sorting), go for the first method, it's easy to to the IUserType and the <a class="NewPageLink" href="add.aspx%3FParentPageID=73&amp;PageKey=stuffynoseremedy.net_2F00_stuffy_2D00_nose_2D00_remedy_2F00_.html" title="Click to create new page titled: stuffynoseremedy.net/stuffy-nose-remedy/">stuffy nose remedy</a> mappings and as well as the serialization is well tested won't give much trouble</li>
+<li>If you need DBMS capabilities, in most cases only some properties will need this, so instead of embracing blindly the second method, think if a mixed solution is not simpler and better for you. (Was in my case)</li>
+</ul>
+<p>As a side note, if you need to index the property, think of using NHibernate.Search and Lucene.NET using method 1 and a custom Bridge implementation to store the localizations in the index.</p>
+<p>Finally, thanks to all that participated in NHUsers discussion on the topic.</p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

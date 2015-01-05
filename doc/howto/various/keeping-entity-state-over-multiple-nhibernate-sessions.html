@@ -1,0 +1,631 @@
+---
+layout: doc
+title: Keeping Entity State Over Multiple NHibernate Sessions
+---
+                   
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="keeping-entity-state-over-multiple-nhibernate-sessions.html">Keeping Entity State Over Multiple NHibernate Sessions</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/nadavsof/default.aspx.html">nadavsof</a><br> on 09-11-2010</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/nadavsof/default.aspx.html">nadavsof</a><br> on 09-11-2010</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="keeping-entity-state-over-multiple-nhibernate-sessions.aspx.html">Keeping Entity State Over Multiple NHibernate Sessions</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p> </p>
+<p class="MsoNormal" align="center" dir="RTL"><strong>   <span style="text-decoration:underline;">Why would you want to use this source?</span></strong> You'll want to use
+this source if your using NHibernate and need your entities to maintain their
+state through long conversations, over multiple NHibernate sessions. You might
+also want to use it if you want built in auditing power and general state
+oriented methods implemented once and kept through the help of nhibernate.</p>
+<p class="MsoNormal" dir="LTR"><strong><span style="text-decoration:underline;">The problem:</span></strong> NHibernate keeps track of entities within an
+NHibernate session (ISession). This means that if you fetch entities within a
+session, change those entities and flush the session, the session would know
+exactly what you changed, which works very well in most cases – when it is
+possible to re-fetch an entity within any new session, but sometimes this isn't
+enough. Example: multiple views that modifying the same entity instance, when
+any one of the views has a <strong>Save</strong> button, which is the time that the
+entity will actually be saved to the DB. In this case, we can't re-fetch the
+entity because it was changed and the DB (or cache) version is irrelevant.
+People will tell you – use a DTO, well, sometimes you gotta use a DTO (when
+serializing for example), but here, if we could just modify our previously
+fetched entity (it was fetched within an already disposed session), each time
+attaching it to the current session (to enable lazy loading), and at the end
+saving the changes with nhibernate knowing exactly what was changed (for
+dynamic-update for example), wouldn't it be great?</p>
+<p class="MsoNormal" dir="LTR"><strong><span style="text-decoration:underline;">The solution - highlevel:</span></strong> Using dynamic proxies that keep
+the state of the entities. This way the entities are ignorant of their state
+being kept, while the proxies are in charge of keeping the entities' state, and
+the NHibernate session interceptor is in charge of using those proxies, to find
+out the previous state of an entity, so it is kept through multiple sessions.
+The only catch – each entity, when being instantiated, must be wrapped with a
+proxy.</p>
+<p class="MsoNormal" dir="LTR"><strong><span style="text-decoration:underline;">The usage:</span></strong> 2 main classes concern the End-Developer:</p>
+<p class="MsoNormal" dir="LTR"><span>1.NHibernateInterceptor</span> – Implementor of the <span>NHibernate.<span>IInterceptor </span></span><span>interface, which </span>intercept certain events of the session (like <strong>FindDirty).</strong></p>
+<p class="MsoNormal" dir="LTR"><strong>How should it be used?</strong></p>
+<p class="MsoNormal" dir="LTR"><strong></strong>When creating a session, the interceptor should be injected into the
+session. The interceptor also gets the session factory as a c'tor argument. The
+following code demonstrates its usage:</p>
+<p class="MsoNormal" dir="LTR"><span>ISession</span><span> session = </span>sessionFactory.OpenSession(<span>new</span><span> <span>NHibernateInterceptor</span>(sessionFactory))</span></p>
+<p class="MsoNormal" dir="LTR"><span>2.StatefullEntityProxyFactory</span> – A factory to be used
+when instantiating an entity. This class is responsible for creating a proxy
+from an existing, or non existing entity instance. The proxy will appear to the
+application as if it is the actual entity, with one exception – the <strong>GetType()</strong>
+method. The proxy, although appears as the actual entity, can also be looked at
+as the statefull entity proxy.</p>
+<p class="MsoNormal" dir="LTR"><strong>How should it be used?</strong></p>
+<p class="MsoNormal" dir="LTR"><strong></strong><i>Instantiating an entity with a default 0-params c'tor:</i></p>
+<p class="MsoNormal" dir="LTR"><i></i><span>Entity</span><span> entity = </span><span>new</span><span> <span>StatefullEntityProxyFactory</span>()</span>.InstantiateEntityProxy&lt;<span>Entity</span>&gt;();</p>
+<p class="MsoNormal" dir="LTR"><i>…</i></p>
+<p class="MsoNormal" dir="LTR"><i></i><i>&lt;Set values, do stuff&gt;</i></p>
+<p class="MsoNormal" dir="LTR"><i></i><i>…</i></p>
+<p class="MsoNormal" dir="LTR"><i></i>session.SaveOrUpdate(entity);</p>
+<p class="MsoNormal" dir="LTR"><i>Instantiating a proxy on an existing entity:</i></p>
+<p class="MsoNormal" dir="LTR"><span>Entity</span><span> entity = new Entity(1,"name");</span></p>
+<p class="MsoNormal" dir="LTR"><span>entity = </span><span>new</span><span> <span>StatefullEntityProxyFactory</span>()</span>.InstantiateEntityProxy(entity)
+as Entity;</p>
+<p class="MsoNormal" dir="LTR">The above two examples are the use cases for instantiating a proxy
+instead of an entity, so that its state will be kept. These examples are shown
+for creating new entities. When an entity is fetched with NHibernate, the
+NHibernateInterceptor will do the same, so that the state will be kept for the
+nhibernate fetched entities. </p>
+<p class="MsoNormal" dir="LTR"><strong><span style="text-decoration:underline;">Ok, but why does it work?</span></strong></p>
+<ol>
+<li class="MsoNormal" dir="LTR">The <span>StatefullEntityProxyInterceptor</span>
+     class is a LinFu dynamic proxies interceptor, which holds a reference to a
+     <strong><i>StateKeeper</i></strong> instance and to an entity. It forwards all the
+     calls (properties and methods) to the underlying entity, except for a call
+     to get the <strong><i>StateKeeper</i></strong>. This call is possible if we do: 
+     
+     </li>
+</ol>
+<p class="MsoNormal" dir="LTR"><span>IStatefullProxy</span><span> proxy = (<span>IStatefullProxy</span>)entity;</span></p>
+<p class="MsoNormal" dir="LTR"><span>StateKeerp </span><span>stateKeeper
+= proxy.StateKeeper;</span></p>
+<ol>
+<li class="MsoNormal" dir="LTR">
+<span>IStatefullProxy</span><span> </span>is
+     an interface we're making the proxy implement (using the LinFu proxies
+     API), and that defines a property of type <strong><i>StateKeeper<br>
+     <br>
+     </i></strong>
+</li>
+<li class="MsoNormal" dir="LTR">The <span>StateKeeper</span> class has
+     a previous state and a current state, and implements a FindDirty method,
+     that finds the dirty properties (by comparing the previous and current
+     states). The nhibernate interceptor, in its <strong>OnLoad</strong> event will set
+     the previous state of the entity, and in the <strong>PostFlush</strong> it will call
+     the <strong>InitState </strong>method of the state keeper. In the <strong>FindDirty</strong>,
+     it will of course use the FindDirty method. Example (from the OnLoad
+     event): <br>
+     <br>
+     <span>IStatefullProxy</span><span> proxy = (<span>IStatefullProxy</span>)entity;<br>
+     proxy.StateKeeper.InitState(propertyNames, state);</span>
+</li>
+</ol>
+<p class="MsoNormal" dir="LTR"> </p>
+<p class="MsoNormal" dir="LTR">To fully understand how it works, it is recommended that you setup a
+small application with a couple of entities, map them with NHibernate,
+Instantiate them with the above described proxy factory, create the session
+injecting the interceptor, put breakpoints in every method of the
+NHibernateInterceptor and watch what's going on when you
+save\update\fetch\attach your entities to a different session.</p>
+<p class="MsoNormal" dir="LTR"> <strong><span style="text-decoration:underline;">What else can be done with this idea?</span></strong></p>
+<p class="MsoNormal" dir="LTR"> Well, lots of stuff. An example of a generic IsModified method is there
+– just get the underlying StateKeeper as shown in the examples above, and call
+IsModified. FindDirty, which returns the dirty property names can be useful for
+auditing as well, and the idea of IsModified can also be extended to implement
+RejectChanges.</p>
+<p class="MsoNormal" dir="LTR"> <strong>Technologies used: </strong>NHibernate 3.0 Alpha2, LinFu dynamic proxies.
+The source what not tested against NHibernate 2.1, but should work as no NH3 specific
+feature is being used.</p>
+<p> </p>
+<p class="MsoNormal" dir="LTR"> </p>
+<h2>The source:</h2>
+<p> </p>
+<p> </p>
+<p>namespace StatefullEntityProxies</p>
+<p>{</p>
+<p>    /// &lt;summary&gt;</p>
+<p>    /// Interface for a statefull proxy - a proxy for some entity that also holds a state keeper</p>
+<p>    /// that manages the state</p>
+<p>    /// &lt;/summary&gt;</p>
+<h4>    public interface IStatefullProxy</h4>
+<p>    {</p>
+<p>        StateKeeper StateKeeper { get; }</p>
+<p>    }</p>
+<p>}</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p>namespace StatefullEntityProxies</p>
+<p>{</p>
+<p>    /// &lt;summary&gt;</p>
+<p>    /// Keeps the state of an entity</p>
+<p>    /// &lt;/summary&gt;</p>
+<h4>    public class StateKeeper</h4>
+<p>    {</p>
+<p>        private object entity;</p>
+<p>        public StateKeeper(object entity)</p>
+<p>        {</p>
+<p>            this.IsNew = true;</p>
+<p>            this.entity = entity;</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// The previous state of the entity</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        private IDictionary&lt;string, object&gt; previousState;</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// The current state of the entity</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        private IDictionary&lt;string, object&gt; currentState;</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Set the current state of the entity</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="properties"&gt;The persisted properties&lt;/param&gt;</p>
+<p>        /// &lt;param name="values"&gt;The corresponding values&lt;/param&gt;</p>
+<p>        /// &lt;param name="state"&gt;The dictionary to populate&lt;/param&gt;</p>
+<p>        private void SetState(string[] properties, object[] values, IDictionary&lt;string, object&gt; state)</p>
+<p>        {</p>
+<p>            for (int i = 0; i &lt; properties.Length; i++)</p>
+<p>                state[properties[i]] = values[i];</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Gets weather the entity is a new one</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        public bool IsNew { get; protected set; }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Init the state of the state keeper</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        public void InitState()</p>
+<p>        {</p>
+<p>            this.previousState = this.currentState;</p>
+<p>            this.currentState = null;</p>
+<p>            this.IsNew = false;</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Init the state of the state keeper with the current state of the entity</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="properties"&gt;The persisted property names&lt;/param&gt;</p>
+<p>        /// &lt;param name="values"&gt;The corresponding values&lt;/param&gt;</p>
+<p>        public void InitState(string[] properties, object[] values)</p>
+<p>        {</p>
+<p>            this.SetCurrentState(properties, values);</p>
+<p>            this.InitState();</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Sets the current state of the entity for the keeper</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="properties"&gt;The persisted property names&lt;/param&gt;</p>
+<p>        /// &lt;param name="values"&gt;The corresponding values&lt;/param&gt;</p>
+<p>        public void SetCurrentState(string[] properties, object[] values)</p>
+<p>        {</p>
+<p>            this.currentState = new Dictionary&lt;string, object&gt;();</p>
+<p>            this.SetState(properties, values, this.currentState);</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Sets the previous state of the entity for the keeper</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="properties"&gt;The persisted property names&lt;/param&gt;</p>
+<p>        /// &lt;param name="values"&gt;The corresponding values&lt;/param&gt;</p>
+<p>        public void SetPreviousState(string[] properties, object[] values)</p>
+<p>        {</p>
+<p>            this.previousState = new Dictionary&lt;string, object&gt;();</p>
+<p>            this.SetState(properties, values, this.previousState);</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Finds the dirty property names</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;returns&gt;Enumeration of the dirty property names&lt;/returns&gt;</p>
+<p>        public IEnumerable&lt;string&gt; FindDirty()</p>
+<p>        {</p>
+<p>            if (this.IsNew)</p>
+<p>            {</p>
+<p>                return new string[0];</p>
+<p>            }</p>
+<p> </p>
+<p>            if (this.currentState == null)</p>
+<p>            {</p>
+<p>                this.ReadStateFromEntity();</p>
+<p>            }</p>
+<p> </p>
+<p>            List&lt;string&gt; dirtyProperties = new List&lt;string&gt;();</p>
+<p>            foreach (KeyValuePair&lt;string, object&gt; property in this.previousState)</p>
+<p>            {</p>
+<p>                object previousValue = this.previousState[property.Key];</p>
+<p>                object newValue = this.currentState[property.Key];</p>
+<p>                if (this.IsChanged(previousValue, newValue))</p>
+<p>                {</p>
+<p>                    dirtyProperties.Add(property.Key);</p>
+<p>                }</p>
+<p>            }</p>
+<p> </p>
+<p>            return dirtyProperties;</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Check weather a specific property value is dirty</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="previousValue"&gt;previous value&lt;/param&gt;</p>
+<p>        /// &lt;param name="newValue"&gt;new value&lt;/param&gt;</p>
+<p>        /// &lt;returns&gt;true if its dirty&lt;/returns&gt;</p>
+<p>        private bool IsChanged(object previousValue, object newValue)</p>
+<p>        {</p>
+<p>            if (!NHibernateUtil.IsInitialized(previousValue) &amp;&amp; !(NHibernateUtil.IsInitialized(newValue)))</p>
+<p>            {</p>
+<p>                return false;</p>
+<p>            }</p>
+<p>            else if (previousValue is AbstractPersistentCollection)</p>
+<p>            {</p>
+<p>                return (previousValue as AbstractPersistentCollection).IsDirty;</p>
+<p>            }</p>
+<p>            else</p>
+<p>            {</p>
+<p>                if (previousValue == null &amp;&amp; newValue == null)</p>
+<p>                    return false;</p>
+<p>                else if (previousValue != null &amp;&amp; newValue != null)</p>
+<p>                    return !previousValue.Equals(newValue);</p>
+<p> </p>
+<p>                // one of them is null and the other isn't</p>
+<p>                return true;</p>
+<p>            }</p>
+<p>        }</p>
+<p> </p>
+<p>        /// &lt;summary&gt;</p>
+<p>        /// Finds the dirty properties corresponding indexes</p>
+<p>        /// &lt;/summary&gt;</p>
+<p>        /// &lt;param name="propertyNames"&gt;The property names&lt;/param&gt;</p>
+<p>        /// &lt;returns&gt;The indexes of the dirty properties&lt;/returns&gt;</p>
+<p>        public int[] FindDirtyIndexes(string[] propertyNames)</p>
+<p>        {</p>
+<p> </p>
+<p>            IEnumerable&lt;string&gt; dirtyProperties = this.FindDirty();</p>
+<p> </p>
+<p>            if (dirtyProperties == null)</p>
+<p>                return null;</p>
+<p> </p>
+<p>            List&lt;int&gt; indexes = new List&lt;int&gt;();</p>
+<p> </p>
+<p>            for (int i = 0; i &lt; propertyNames.Length; i++)</p>
+<p>            {</p>
+<p>                if (dirtyProperties.Contains(propertyNames[i]))</p>
+<p>                {</p>
+<p>                    indexes.Add(i);</p>
+<p>                }</p>
+<p>            }</p>
+<p> </p>
+<p>            return indexes.ToArray();</p>
+<p>        }</p>
+<p> </p>
+<p>        public bool IsModified</p>
+<p>        {</p>
+<p>            get</p>
+<p>            {</p>
+<p>                this.ReadStateFromEntity();</p>
+<p>                if (this.FindDirty().Any())</p>
+<p>                    return true;</p>
+<p>                return false;</p>
+<p>            }</p>
+<p>        }</p>
+<p> </p>
+<p>        private void ReadStateFromEntity()</p>
+<p>        {</p>
+<p>            this.currentState = new Dictionary&lt;string, object&gt;();</p>
+<p>            foreach (string propertyName in this.previousState.Keys)</p>
+<p>            {</p>
+<p>                MemberInfo member =this.entity.GetType().GetMember(</p>
+<p>                    propertyName, </p>
+<p>                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)</p>
+<p>                    .First();</p>
+<p>                if (member is PropertyInfo)</p>
+<p>                {</p>
+<p>                    this.currentState[propertyName] = ((PropertyInfo)member).GetValue(this.entity, null);</p>
+<p>                }</p>
+<p>                else</p>
+<p>                {</p>
+<p>                    this.currentState[propertyName] = ((FieldInfo)member).GetValue(this.entity);</p>
+<p>                }</p>
+<p>            }</p>
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+<div></div>
+<div>
+<div>namespace StatefullEntityProxies</div>
+<div>{</div>
+<div>    /// &lt;summary&gt;</div>
+<div>    /// A Statefull entity proxy that is constructed from an entity, forwarding all the calls to it</div>
+<div>    /// and a statekeeper that can be retrieved by the IStatefullProxy interface</div>
+<div>    /// &lt;/summary&gt;</div>
+<h4>    public class StatefullEntityProxyInterceptor : global::LinFu.DynamicProxy.IInterceptor</h4>
+<div>    {</div>
+<div>        private StateKeeper stateKeeper;</div>
+<div>        private object entity;</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Initiates the proxy with a given entity instance</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;param name="entity"&gt;The entity that its state will be managed by this proxy&lt;/param&gt;</div>
+<div>        public StatefullEntityProxyInterceptor(object entity)</div>
+<div>        {</div>
+<div>            this.stateKeeper = new StateKeeper(entity);</div>
+<div>            this.entity = entity;</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Part of the linfu interceptor interface. This method is called for each virtual property or method call on the entity</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;param name="info"&gt;The invocation info on the current call&lt;/param&gt;</div>
+<div>        /// &lt;returns&gt;Return the return value of the method/property call&lt;/returns&gt;</div>
+<div>        public object Intercept(LinFu.DynamicProxy.InvocationInfo info)</div>
+<div>        {</div>
+<div>            // If its a call to get the state keeper, return the proxy's underlying state keeper</div>
+<div>            if (info.TargetMethod.Name == "get_StateKeeper")</div>
+<div>                return this.stateKeeper;</div>
+<div></div>
+<div>            // else, forward the call to the actual entity</div>
+<div>            return info.TargetMethod.Invoke(this.entity, info.Arguments);</div>
+<div>        }</div>
+<div></div>
+<div></div>
+<div>        public override int GetHashCode()</div>
+<div>        {</div>
+<div>            return this.entity.GetHashCode();</div>
+<div>        }</div>
+<div></div>
+<div>        public override bool Equals(object obj)</div>
+<div>        {</div>
+<div>            return this.entity.Equals(obj);</div>
+<div>        }</div>
+<div>        </div>
+<div>    </div>
+<div>    }</div>
+<div>}</div>
+</div>
+<div>
+<div>namespace StatefullEntityProxies</div>
+<div>{</div>
+<div>    /// &lt;summary&gt;</div>
+<div>    /// Factory for generating entity proxies</div>
+<div>    /// &lt;/summary&gt;</div>
+<h4>    public class StatefullEntityProxyFactory</h4>
+<div>    {</div>
+<div>        private static readonly global::LinFu.DynamicProxy.ProxyFactory factory = </div>
+<div>              new global::LinFu.DynamicProxy.ProxyFactory();</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Creates a proxy from an existing entity instance</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;param name="entity"&gt;The entity to proxy&lt;/param&gt;</div>
+<div>        /// &lt;returns&gt;The proxied entity&lt;/returns&gt;</div>
+<div>        public IStatefullProxy InstantiateEntityProxy(object entity)</div>
+<div>        {</div>
+<div>            // Creates a new proxy interceptor</div>
+<div>            StatefullEntityProxyInterceptor stateKeeperProxy = new StatefullEntityProxyInterceptor(entity);</div>
+<div></div>
+<div>            // Generate a proxy, with the statefull entity interceptor as the interceptor, and the entity type as the derrived type</div>
+<div>            return (IStatefullProxy)factory.CreateProxy(entity.GetType(), stateKeeperProxy, typeof(IStatefullProxy));</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Creates a proxy for the given type using the default empty params c'tor</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;param name="objectType"&gt;Type to create a proxy for&lt;/param&gt;</div>
+<div>        /// &lt;returns&gt;The generated proxy&lt;/returns&gt;</div>
+<div>        public IStatefullProxy InstantiateEntityProxy(Type objectType)</div>
+<div>        {</div>
+<div>            object objectToProxy = objectType.GetConstructor(new Type[0]).Invoke(new object[0]);</div>
+<div>            return this.InstantiateEntityProxy(objectToProxy);</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Creates a proxy for the given type using the default empty params c'tor</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;typeparam name="TEntity"&gt;The type to craete proxy for&lt;/typeparam&gt;</div>
+<div>        /// &lt;returns&gt;The proxy&lt;/returns&gt;</div>
+<div>        public TEntity InstantiateEntityProxy&lt;TEntity&gt;() where TEntity : class</div>
+<div>        {</div>
+<div>            return (TEntity)(this.InstantiateEntityProxy(typeof(TEntity)));</div>
+<div>        }</div>
+<div>    }</div>
+<div>}</div>
+</div>
+<div></div>
+<div></div>
+<div>
+<div>namespace StatefullEntityProxies</div>
+<div>{</div>
+<div>    /// &lt;summary&gt;</div>
+<div>    /// Interceptor that intercept events of the session that it is binds to, and assumes that all entities are actually</div>
+<div>    /// statefull entity proxies, and uses the underlying state keeper to determine the previous state of entities</div>
+<div>    /// so that the state is kepts even through different sessions</div>
+<div>    /// &lt;/summary&gt;</div>
+<h4>    public class NHibernateInterceptor : EmptyInterceptor</h4>
+<div>    {</div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Creates a new interceptor</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;param name="sessionFactory"&gt;The session factory that is used to generate the current session&lt;/param&gt;</div>
+<div>        public NHibernateInterceptor(ISessionFactory sessionFactory)</div>
+<div>        {</div>
+<div>            this.Factory = sessionFactory as ISessionFactoryImplementor;</div>
+<div>        }</div>
+<div></div>
+<div>        private ISessionFactoryImplementor Factory {get;set;}</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Creates a new entity instance using the statefull entity proxy factory</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;remarks&gt;The call to this method is made by nhibernate when loading entities from queries&lt;/remarks&gt;</div>
+<div>        public override object Instantiate(string clazz, EntityMode entityMode, object id)</div>
+<div>        {</div>
+<div>            // Get the type of the entity</div>
+<div>            Type type = Type.GetType(clazz);</div>
+<div></div>
+<div>            // Create a new instance of the entity using the persister of the entity</div>
+<div>            object entity = this.Factory.GetEntityPersister(clazz).Instantiate(id, entityMode);</div>
+<div></div>
+<div>            // Create a proxy from the entity</div>
+<div>            object proxy = new StatefullEntityProxyFactory().InstantiateEntityProxy(entity);</div>
+<div>            return proxy;</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Initiate the state of the proxy when an entity is loaded</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;remarks&gt;This happens after the instantiation of an entity (a proxy)&lt;/remarks&gt;</div>
+<div>        public override bool OnLoad(object entity, object id, object[] state, string[] propertyNames, NHibernate.Type.IType[] types)</div>
+<div>        {</div>
+<div>            IStatefullProxy proxy = (IStatefullProxy)entity;</div>
+<div>            proxy.StateKeeper.InitState(propertyNames, state);</div>
+<div>            return base.OnLoad(entity, id, state, propertyNames, types);</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Finds the dirty properties of the entity. Uses the proxy get the dirty properties</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;remarks&gt;When updating an entity in a different session, the previousState argument would be null!!&lt;/remarks&gt;</div>
+<div>        public override int[] FindDirty(object entity, object id, object[] currentState, object[] previousState, string[] propertyNames, NHibernate.Type.IType[] types)</div>
+<div>        {</div>
+<div>            IStatefullProxy proxy = (IStatefullProxy)entity;</div>
+<div>            proxy.StateKeeper.SetCurrentState(propertyNames, currentState);</div>
+<div>            return proxy.StateKeeper.FindDirtyIndexes(propertyNames);</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Checks weather the given entity is transient using the proxy.</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        public override bool? IsTransient(object entity)</div>
+<div>        {</div>
+<div>            IStatefullProxy proxy = (IStatefullProxy)entity;</div>
+<div>            return proxy.StateKeeper.IsNew;          </div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// After a flush of an entity, the init state must be called, because the current Current value is actually the new previous value</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        public override void PostFlush(System.Collections.ICollection entities)</div>
+<div>        {</div>
+<div>            foreach (IStatefullProxy proxy in entities)</div>
+<div>            {</div>
+<div>                proxy.StateKeeper.InitState();</div>
+<div>            }</div>
+<div>        }</div>
+<div></div>
+<div>        /// &lt;summary&gt;</div>
+<div>        /// Gets the entity name</div>
+<div>        /// &lt;/summary&gt;</div>
+<div>        /// &lt;remarks&gt;Because the entity is actually a proxy, we gotta return the base type of the entity, which is the actual entity type&lt;/remarks&gt;</div>
+<div>        public override string GetEntityName(object entity)</div>
+<div>        {</div>
+<div>            return entity.GetType().BaseType.FullName;</div>
+<div>        }</div>
+<div>    }</div>
+<div>}</div>
+</div>
+<div></div>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
