@@ -53,6 +53,7 @@ form
 	width: 70%;
 	overflow: hidden;
 }
+#CommonHeaderTitleArea img { float: left; }
 
 .CommonHeaderTitle
 {
@@ -61,12 +62,15 @@ form
 	color: #000;
 	letter-spacing: -2px;
 	line-height: 100%;
+	margin: 0 0 0 53px;
+	padding: 0;
 }
 
 .CommonHeaderTitleDescription
 {
 	font-size: 85%;
 	padding-left: 2px;
+	margin: 0 0 0 53px;
 }
 
 #CommonFooter
