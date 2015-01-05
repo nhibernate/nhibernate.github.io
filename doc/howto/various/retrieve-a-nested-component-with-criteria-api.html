@@ -1,0 +1,236 @@
+---
+layout: doc
+title: Retrieve a nested component with Criteria API
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="retrieve-a-nested-component-with-criteria-api.html">Retrieve a nested component with Criteria API</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/TigerShark/default.aspx.html">Kenneth Siewers Møller</a><br> on 03-11-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 08-23-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="retrieve-a-nested-component-with-criteria-api.html">Retrieve a nested component with Criteria API</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Sometimes it may be necessary to retrieve a nested component type of a class. NHibernate does not provide any direct solution for this, and the most obvious aproach using a projection does not work.</p>
+<p>Using regular HQL it is possible to retrieve a component, but in more advanced situations it can be a pain concatenating HQL strings to perform a task.</p>
+<p>What we will be accomplishing is this:</p>
+<p>Let's assume we have an entity called Foo. Foo has a nested component called Bar. Bar is mapped using &lt;component&gt; in the mapping file for Foo.</p>
+<p>To return only Bar from Foo with id 12 we'd write something similar to this using HQL:</p>
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<p style="margin:0px;"><span style="color:blue;">public</span> <span style="color:#2b91af;">Bar</span> GetBarFromFooById(<span style="color:blue;">int</span> id)</p>
+<p style="margin:0px;">{</p>
+<p style="margin:0px;">    <span style="color:blue;">var</span> query = CurrentSession.CreateQuery(<span style="color:#a31515;">"select f.Bar from Foo f where f.Id = :id"</span>);</p>
+<p style="margin:0px;">    query.SetParameter(<span style="color:#a31515;">"id"</span>, id);</p>
+<p style="margin:0px;">    <span style="color:blue;">return</span> query.UniqueResult&lt;<span style="color:#2b91af;">Bar</span>&gt;();</p>
+<p style="margin:0px;">}</p>
+</div>
+<p>The above code is pretty simple, and is pretty useful. However, when things becomes a bit more complex it can be really ugly, like this:</p>
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<p style="margin:0px;"><span style="color:blue;">public</span> <span style="color:#2b91af;">Bar</span> GetBarFromFooBySomeProperties(<span style="color:blue;">string</span> bazValue, <span style="color:blue;">int</span>? fooId, <span style="color:blue;">bool</span>? mustHaveProperty)</p>
+<p style="margin:0px;">{</p>
+<p style="margin:0px;">    <span style="color:blue;">var</span> hql = <span style="color:#a31515;">"select f.Bar from foo"</span>; </p>
+<p style="margin:0px;">    <span style="color:blue;">var</span> parameters = <span style="color:blue;">new</span> <span style="color:#2b91af;">Dictionary</span>&lt;<span style="color:blue;">string</span>, <span style="color:blue;">object</span>&gt;();</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (!<span style="color:blue;">string</span>.IsNullOrEmpty(bazValue))</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        hql += <span style="color:#a31515;">" where f.Baz = :bazValue"</span>;</p>
+<p style="margin:0px;">        parameters.Add(<span style="color:#a31515;">"bazValue"</span>, bazValue);</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (fooId.HasValue)</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        <span style="color:blue;">if</span> (!hql.Contains(<span style="color:#a31515;">"where"</span>))</p>
+<p style="margin:0px;">        {</p>
+<p style="margin:0px;">            hql += <span style="color:#a31515;">" where"</span>;</p>
+<p style="margin:0px;">        }</p>
+<p style="margin:0px;">        <span style="color:blue;">else</span></p>
+<p style="margin:0px;">        {</p>
+<p style="margin:0px;">            hql += <span style="color:#a31515;">" and"</span>;</p>
+<p style="margin:0px;">        }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">        hql += <span style="color:#a31515;">" f.Id = :fooId"</span>;</p>
+<p style="margin:0px;">        parameters.Add(<span style="color:#a31515;">"fooId"</span>, fooId.Value);</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (mustHaveProperty.HasValue)</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        <span style="color:blue;">if</span> (!hql.Contains(<span style="color:#a31515;">"where"</span>))</p>
+<p style="margin:0px;">        {</p>
+<p style="margin:0px;">            hql += <span style="color:#a31515;">" where"</span>;</p>
+<p style="margin:0px;">        }</p>
+<p style="margin:0px;">        <span style="color:blue;">else</span></p>
+<p style="margin:0px;">        {</p>
+<p style="margin:0px;">            hql += <span style="color:#a31515;">" and"</span>;</p>
+<p style="margin:0px;">        }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">        hql += <span style="color:#a31515;">" f.Bar.TheProperty = :mustHaveProperty"</span>;</p>
+<p style="margin:0px;">        parameters.Add(<span style="color:#a31515;">"mustHaveProperty"</span>, mustHaveProperty.Value);</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">var</span> query = CurrentSession.CreateQuery(hql);</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">foreach</span> (<span style="color:blue;">var</span> parameter <span style="color:blue;">in</span> parameters)</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        query.SetParameter(parameter.Key, parameter.Value);</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">return</span> query.UniqueResult&lt;<span style="color:#2b91af;">Bar</span>&gt;();</p>
+<p style="margin:0px;">}</p>
+</div>
+<p>As you can see, the above, not so unrealistic, example makes it pretty difficult to work with HQL in a very dynamic way. Fortunately the Criteria API is very flexible in this regards, but is missing a couple of features only supported in HQL. In the real world you'd probably come up with some smart mutators for the string etc. but this was just to prove a point.</p>
+<p>The example above could be written like the following using the Criteria API (although it won't work, it serves as an example to support the actual solution):</p>
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<p style="margin:0px;"><span style="color:blue;">public</span> <span style="color:#2b91af;">Bar</span> GetBarFromFooBySomeProperties(<span style="color:blue;">string</span> bazValue, <span style="color:blue;">int</span>? fooId, <span style="color:blue;">bool</span>? mustHaveProperty)</p>
+<p style="margin:0px;">{</p>
+<p style="margin:0px;">    <span style="color:blue;">var</span> criteria = CurrentSession.CreateCriteria(<span style="color:blue;">typeof</span>(<span style="color:#2b91af;">Foo</span>), <span style="color:#a31515;">"f"</span>);</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (!<span style="color:blue;">string</span>.IsNullOrEmpty(bazValue))</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        criteria.Add(<span style="color:#2b91af;">Restrictions</span>.Eq(<span style="color:#a31515;">"f.Baz"</span>, bazValue));</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (fooId.HasValue)</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        criteria.Add(<span style="color:#2b91af;">Restrictions</span>.Eq(<span style="color:#a31515;">"f.Id"</span>, fooId.Value));</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">if</span> (mustHaveProperty.HasValue)</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        criteria.Add(<span style="color:#2b91af;">Restrictions</span>.Eq(<span style="color:#a31515;">"f.Bar.TheProperty"</span>, mustHaveProperty.Value));</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    criteria.SetProjection(<span style="color:#2b91af;">Projections</span>.Property(<span style="color:#a31515;">"f.Bar"</span>));</p>
+<p style="margin:0px;">    criteria.SetResultTransformer(<span style="color:#2b91af;">Transformers</span>.AliasToBean(<span style="color:blue;">typeof</span>(<span style="color:#2b91af;">Bar</span>)));</p>
+<p style="margin:0px;"> </p>
+<p style="margin:0px;">    <span style="color:blue;">return</span> criteria.UniqueResult&lt;<span style="color:#2b91af;">Bar</span>&gt;();</p>
+<p style="margin:0px;">}</p>
+</div>
+</div>
+</div>
+<p>The example above will throw a runtime exception because the projection does not map to a single property. Of course this makes sense in the absolute most strict way as Bar is not a simple property. The point, however, is that the Criteria API makes it much easier to work with dynamic queries and it is very powerful.</p>
+<p>Since there is no built-in support (that I know of that is) for this type of projection, the only way is to manually do the mapping using a projectionlist.</p>
+<p>One way to do this would be to create a static class containing the projectionlist like this:</p>
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<p style="margin:0px;"><span style="color:blue;">internal</span> <span style="color:blue;">static</span> <span style="color:blue;">class</span> <span style="color:#2b91af;">MyProjections</span></p>
+<p style="margin:0px;">{</p>
+<p style="margin:0px;">    <span style="color:blue;">public</span> <span style="color:blue;">static</span> <span style="color:#2b91af;">IProjection</span> Bar</p>
+<p style="margin:0px;">    {</p>
+<p style="margin:0px;">        <span style="color:blue;">get</span></p>
+<p style="margin:0px;">        {</p>
+<p style="margin:0px;">            <span style="color:blue;">return</span> <span style="color:#2b91af;">Projections</span>.ProjectionList()</p>
+<p style="margin:0px;">                .Add(<span style="color:#2b91af;">Projections</span>.Property(<span style="color:#a31515;">"Bar.Property1"</span>), <span style="color:#a31515;">"Property1"</span>)</p>
+<p style="margin:0px;">                .Add(<span style="color:#2b91af;">Projections</span>.Property(<span style="color:#a31515;">"Bar.TheProperty"</span>), <span style="color:#a31515;">"TheProperty"</span>)</p>
+<p style="margin:0px;">                .Add(<span style="color:#2b91af;">Projections</span>.Property(<span style="color:#a31515;">"Bar.AnotherProperty"</span>), <span style="color:#a31515;">"AnotherProperty"</span>);</p>
+<p style="margin:0px;">        }</p>
+<p style="margin:0px;">    }</p>
+<p style="margin:0px;">}</p>
+</div>
+</div>
+<p> </p>
+<p>With the projectionlist in place, it's simply a question of using this in the example above like this:</p>
+<p> </p>
+<div style="background:white none repeat scroll 0% 0%;font-family:Courier New;font-size:10pt;color:black;">
+<p style="margin:0px;">criteria.SetProjection(<span style="color:#2b91af;">MyProjections</span>.Bar);</p>
+</div>
+<p>Now we can return the mapped component class. Of course the projection is not safe in a deeper nesting, but this could be solved by making a projection factory or something similar. i recently started automated forex trading and the results so far have 
+been great, i highly recommend it to anyone!</p>
+<p> </p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

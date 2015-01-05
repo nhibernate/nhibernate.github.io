@@ -1,0 +1,133 @@
+---
+layout: doc
+title: Run in Medium Trust
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="run-in-medium-trust.html">Run in Medium Trust</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/wcpierce/default.aspx.html">Bill Pierce</a><br> on 09-22-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 07-08-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="run-in-medium-trust.html">Run in Medium Trust</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Using NHibernate in a <a href="http://msdn2.microsoft.com/en-us/library/ms998341.aspx">Medium Trust</a> web environment requires the following:</p>
+<ul>
+<li>All referenced assembiles must be marked with <a href="http://msdn2.microsoft.com/en-us/library/system.security.allowpartiallytrustedcallersattribute.aspx">AllowPartiallyTrustedCallers</a>
+</li>
+<li>Web.config configSections must be marked with requirePermission="false"<br><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">configSections</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">section</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">name</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="hibernate-configuration"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="text-decoration:underline;"><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">requirePermission</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="false"</span></span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">type</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="NHibernate.Cfg.ConfigurationSectionHandler, NHibernate"/&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">section</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">name</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="log4net"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="text-decoration:underline;"><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">requirePermission</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="false"</span></span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">type</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="log4net.Config.Log4NetConfigurationSectionHandler, log4net"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">/&gt;<br>  </span></span><span style="font-size:x-small;">...<br></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">configSections</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;</span></span>
+</li>
+<li>Reflection optimization must be disabled<br><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">hibernate-configuration</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">xmlns</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="urn:nhibernate-configuration-2.2"&gt;<br>  </span></span><span style="text-decoration:underline;"><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">reflection-optimizer</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">use</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="false"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;"><span style="text-decoration:underline;">/&gt;</span><br>  </span></span><span style="font-size:x-small;">...<br></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">hibernate-configuration</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;</span></span>
+</li>
+<li>Default lazy loading must be disabled on all class mappings<br><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">hibernate-mapping</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">xmlns</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="urn:nhibernate-mapping-2.2"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> <span style="color:#ff0000;"><span style="text-decoration:underline;">default-lazy</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;"><span style="text-decoration:underline;">="false"</span> </span></span></span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">assembly</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="Example.Domain"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">namespace</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="Example.Domain.Models"</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">class</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">name</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="Person"&gt;<br>    </span></span><span style="font-size:x-small;">...<br>  </span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">class</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">hibernate-mapping</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;</span></span><br>Alternativly you could keep lazy loading enabled (the default) and <a class="ExistingPageLink" href="pre-generate-lazy-loading-proxies.aspx.html" title="Click to view the page titled: Pre-Generate Lazy Loading Proxies">Pre-Generate Lazy Loading Proxies</a> </li>
+</ul>
+<p> </p>
+<p>Using ActiveRecord in a <a href="http://msdn2.microsoft.com/en-us/library/ms998341.aspx">Medium Trust</a> web environment requires the following:</p>
+<ul>
+<li>All referenced assembiles must be marked with <a href="http://msdn2.microsoft.com/en-us/library/system.security.allowpartiallytrustedcallersattribute.aspx">AllowPartiallyTrustedCallers</a>
+</li>
+<li>Web.config configSections must be marked with requirePermission="false"<br><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">configSections</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">section</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">name</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="activerecord"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="text-decoration:underline;"><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">requirePermission</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="false"</span></span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">type</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="Castle.ActiveRecord.Framework.Config.ActiveRecordSectionHandler, Castle.ActiveRecord"/&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">section</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">name</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="log4net"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="text-decoration:underline;"><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">requirePermission</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="false"</span></span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">type</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="log4net.Config.Log4NetConfigurationSectionHandler, log4net"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">/&gt;<br>  </span></span><span style="font-size:x-small;">...<br></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">configSections</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;</span></span>
+</li>
+<li>Reflection optimization must be disabled<br><span class="postbody">Place this line after your call to ActiveRecordStarter.Initialize(...):
+<br>
+<span style="text-decoration:underline;">NHibernate.Cfg.Environment.UseReflectionOptimizer = false;</span>
+</span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;"><br></span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;"></span></span>
+</li>
+<li>Default lazy loading must be disabled on all class mappings<br><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">activerecord</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> </span></span><span style="font-size:x-small;color:#ff0000;"><span style="font-size:x-small;color:#ff0000;">isWeb</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">="true"</span></span><span style="font-size:x-small;color:#ff00ff;"><span style="font-size:x-small;color:#ff00ff;"> <span style="color:#ff0000;"><span style="text-decoration:underline;">default-lazy</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;"><span style="text-decoration:underline;">="false"</span></span></span></span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>  </span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">config</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>    </span></span><span style="font-size:x-small;">...<br>  </span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">config</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;<br>&lt;/</span></span><span style="font-size:x-small;color:#800000;"><span style="font-size:x-small;color:#800000;">activerecord</span></span><span style="font-size:x-small;color:#0000ff;"><span style="font-size:x-small;color:#0000ff;">&gt;</span></span><br>Alternativly
+you could keep lazy loading enabled (the default) and <a href="pre-generate-lazy-loading-proxies.aspx.html">Pre-Generate Lazy Loading Proxies</a>
+</li>
+</ul>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
