@@ -1,0 +1,202 @@
+---
+layout: doc
+title: Prevent NHibernate from saving default relations
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="prevent-nhibernate-from-saving-default-relations.html">Prevent NHibernate from saving default relations</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/dnperfors/default.aspx.html">dnperfors</a><br> on 07-01-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/dnperfors/default.aspx.html">dnperfors</a><br> on 03-30-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="prefent-nhibernate-from-saving-default-relations.html">Prevent NHibernate from saving default relations</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Let's take
+a look at the following code:</p>
+<p>public class TaxCalculator</p>
+<p>{</p>
+<p>    public static readonly TaxCalculator
+NoTax = new TaxCalculator("No Tax", 0.0);</p>
+<p>    public TaxCalculator()</p>
+<p>    {</p>
+<p>    }</p>
+<p> </p>
+<p>    public TaxCalculator(String
+name, Double percentage)</p>
+<p>    {</p>
+<p>        this.Name = name;</p>
+<p>        this.Percentage = percentage;</p>
+<p>    }</p>
+<p> </p>
+<p>    public Decimal CalculateTax(Decimal value)</p>
+<p>    {</p>
+<p>        return value * pecentage;</p>
+<p>    }</p>
+<p>    public Guid Name { get; set; }</p>
+<p>    public String Name
+{ get; set; }</p>
+<p>    public Decimal Percentage
+{ get; set; }</p>
+<p>}</p>
+<p>public
+class Invoice <br>
+{</p>
+<p> public Invoice()</p>
+<p>  : base(TaxCalculator.NoTax)</p>
+<p>{<br>
+}</p>
+<p><br>
+ public Invoice(TaxCalculator calculator)<br>
+ {<br>
+     this.calculator
+= calculator;<br>
+ }</p>
+<p> public TaxCalculator Calculator {
+get; set; }<br>
+ public string Description
+{ get; set; }<br>
+ public decimal Total
+{ get; set; }<br>
+<br>
+ public decimal Tax<br>
+ {<br>
+     get {
+return Calculator.CalculateTax(Total); }<br>
+ }<br>
+}</p>
+<p>In this
+example I want to be able to save a reference to the TaxCalculator, using the
+following mapping:</p>
+<pre>&lt;class name="Invoice"&gt;<br> &lt;id type="guid"&gt;<br>     &lt;generator class="guid"/&gt;<br> &lt;/id&gt;<br> &lt;property name="Description"/&gt;<br> &lt;property name="Total"/&gt;<br> &lt;reference name="Calculator" /&gt;<br>&lt;/class&gt;<br>
+<br>
+&lt;class name="TaxCalculator"&gt;<br> &lt;id name="Id" type="guid"&gt;<br>     &lt;generator class="guid"/&gt;<br> &lt;/id&gt;<br> &lt;property name="Name"/&gt;<br> &lt;property name="Percentage"/&gt;<br>&lt;/class&gt;</pre>
+<p> </p>
+<p>I assume
+that TaxCalculators are created before I save the invoice (that is how
+we do it at the moment). The problem we are getting into is that we can't save
+a reference to TaxCalculator.NoTax. This is because the NoTax object will be
+created over and over again and so it will not have any Id. <a href="http://www.reviewonlineuniversity.com/universities/corllins-university.asp"></a></p>
+<p>The
+solution could be to set the Calculator property to null, but then we have to check
+for a null reference. But luckily it is also possible to let NHibernate set
+this property on null when persisting the object and set it to NoTax when
+loading the invoice. This is done by using Events:</p>
+<p>public class FlushEvent :
+DefaultFlushEntityEventListener</p>
+<p>{</p>
+<p>    public override void OnFlushEntity(FlushEntityEvent
+@event)</p>
+<p>    {</p>
+<p>        if (@event.Entity is Invoice &amp;&amp; ((Invoice)@event.Entity).Calculator
+== TaxCalculator.NoTax)</p>
+<p>            ((Invoice)@event.Entity).Calculator = null;</p>
+<p>        base.OnFlushEntity(@event);</p>
+<p>    }</p>
+<p>}</p>
+<p>public class LoadedEvent
+: DefaultPostLoadEventListener, IRepositoryEvent</p>
+<p>{</p>
+<p>    public override void OnPostLoad(PostLoadEvent
+@event)</p>
+<p>    {</p>
+<p>        base.OnPostLoad(@event);</p>
+<p>        if (@event.Entity is Invoice &amp;&amp; ((Invoice)@event.Entity).Calculator
+== null)</p>
+<p>            ((Invoice)@event.Entity).Calculator = TaxCalculator.NoTax;</p>
+<p>    }</p>
+<p>}</p>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
