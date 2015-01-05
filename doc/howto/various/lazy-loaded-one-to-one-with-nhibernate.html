@@ -1,0 +1,148 @@
+---
+layout: doc
+title: Lazy Loaded One-To-One With NHibernate
+---
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="lazy-loaded-one-to-one-with-nhibernate.html">Lazy Loaded One-To-One With NHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/stefan.sedich/default.aspx.html">stefan.sedich</a><br> on 11-13-2008</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jwdavidson/default.aspx.html">John Davidson</a><br> on 09-07-2011</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="lazy-loaded-one-to-one-with-nhibernate.html">Lazy Loaded One-To-One With NHibernate </a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p><strong>UPDATE 20081114<br></strong><br>The one-to-one solution I had posted
+turned out not to work for updates, :(, in the end I had to use a
+many-to-one map with a unique foreign key association to get this to
+work, the updated example is below. Sorry for my EPIC FAIL :)...</p>
+<p> </p>
+<p> </p>
+<p>G'day,</p>
+<p>I
+am working on something at the moment and I am storing BLOB data for
+documents in the database, I am storing things like name and data which
+is a binary field. |<br>Now I wan't to load the binary data as loading
+this all the time is very inneficient. So to get this to work I had to
+split this to two tables, one with my meta data and another one-to-one<br>table to store the BLOB. NOW the fun began I created the two tables:</p>
+<p> <br>Documents<br>-------------------<br>(PK) Id<br>(FK Unique) DocumentFileId<br>Name<br><br>DocumentFiles<br>-------------------<br>(PK) Id<br>Data</p>
+<p><br>From this I created my POCO classes for the Document and DocumentFile map.</p>
+<p>public class Document {<br>    public int Id { get; set; }<br>    public string Name { get; set; }<br>    public DocumentFile DocumentFile { get; set; }   <br>}</p>
+<p> public class DocumentFile {<br>    public virtual int Id { get; set; }<br>    public virtual Document Document { get; set; }<br>    public virtual byte[] Data { get; set; }    <br>}</p>
+<p><br>Now
+on to the mappings, I thought this would be as easy as created a
+one-to-one mapping with lazy="proxy" set on the one-to-one on the
+Document class but this was not the case. <br>You NEED to set constrained="true" on the mapping, basically going from this post I found: <a href="http://www.hibernate.org/162.html#A5">http://www.hibernate.org/162.html#A5</a>. Say we have A-&gt;B where this is a 1-1 relationship,<br>now
+without a constraint from A-B this means A can exist without B, so
+there is a possiblity that B is null, a Proxy to B will be not null and
+won't work here.<br><br>But when we know A and B will always belong together it is ok to create a Proxy for B. Now my final mapping files looks like so:</p>
+<p> </p>
+<p><span style="text-decoration:underline;"><i><strong>BUUUT</strong></i></span><i><strong>  </strong></i>as
+I soon found out if in the A mapping you constrain B it will mean it
+will try to insert B first and fail to generate a primary key with the
+foreign key generator, hence not working as expected, I had to change
+the mappings to use a many-to-one unique foreign key mapping to get
+this to work. I updated the mappings below, the main differences are
+highlighted below:</p>
+<p> <br>&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"&gt;<br>  &lt;class name="NHibernateDocumentTest.Document, NHibernateDocumentTest" table="Documents" lazy="false"&gt;<br>    &lt;id name="Id" column="Id" type="integer"&gt;<br>      &lt;generator class="native" /&gt;<br>    &lt;/id&gt;<br>    &lt;property name="Name" column="Name" type="string" /&gt;<br>  <strong>  &lt;many-to-one name="DocumentFile" cascade="all-delete-orphan" <br>                 lazy="proxy" column="DocumentFileId" unique="true" /&gt;</strong><br>  &lt;/class&gt;<br>&lt;/hibernate-mapping&gt;<br><br>&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"&gt;<br>  &lt;class name="NHibernateDocumentTest.DocumentFile, NHibernateDocumentTest" table="DocumentFiles" lazy="true"&gt;<br>   <strong> &lt;id name="Id" column="Id" type="integer"&gt;<br>      &lt;generator class="native" /&gt;<br>    &lt;/id&gt;   </strong><br>    &lt;property name="Data" column="Data" type="Byte[]" /&gt;<br><strong>    &lt;one-to-one name="Document" constrained="true" property-ref="DocumentFile" /&gt;</strong><br>  &lt;/class&gt;<br>&lt;/hibernate-mapping&gt;</p>
+<p><br><br>And
+then we are done, this works fine. So the trick is for a one-to-one to
+work with Lazy loading you must use a unique foreign key associated
+with a many-to-one mapping to your child.</p>
+<p> </p>
+<p> </p>
+<p>Thanks<br>Stefan</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

@@ -1,0 +1,255 @@
+---
+layout: doc
+title: NHibernate Property Validator for ASP.NET
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="nhibernate-property-validator-for-asp-net.html">NHibernate Property Validator for ASP.NET</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Validator</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/rjperes/default.aspx.html">Ricardo Peres</a><br> on 10-09-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="nhibernate-property-validator-for-asp-net.html">NHibernate Property Validator for ASP.NET</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>
+</p>
+<p>Suppose you want to validate an ASP.NET control based on some validation attributes from a property. You may know that the Enterprise Library Application Block's <strong>PropertyProxyValidator</strong> does just this, the problem is that it uses Enterprise Library's own validation attributes. If you want to use NHibernate Validator's, your on your own.</p>
+<p>I have written a small validator control, based on Enterprise Library's, that may come in handy. Here is the code:</p>
+<span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">public</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">class</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">NHibernatePropertyValidator</span></span><span style="font-size:x-small;">: </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">BaseValidator</span></span></p>
+<span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>{</p>
+</span><span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    private</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;"> displayMode;</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    private</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;"> propertyName;</span></p>
+<span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    private</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;"> sourceTypeName;</span></p>
+<span style="font-size:x-small;"></span><span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    protected</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">override</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">void</span></span><span style="font-size:x-small;"> OnInit(</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">EventArgs</span></span><span style="font-size:x-small;"> e)</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>{</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        if</span></span><span style="font-size:x-small;"> ((</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.Enabled == </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">) &amp;&amp; (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.Visible == </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">))</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">        </span>{</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">            this</span></span><span style="font-size:x-small;">.Page.RegisterRequiresControlState(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">);</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">        </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        base</span></span><span style="font-size:x-small;">.OnInit(e);</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    protected</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">override</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">void</span></span><span style="font-size:x-small;"> LoadControlState(</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Object</span></span><span style="font-size:x-small;"> savedState)</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>{</p>
+</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>Object</span></span><span style="font-size:x-small;"> [] state = savedState </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">as</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Object</span></span><span style="font-size:x-small;"> [];</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        base</span></span><span style="font-size:x-small;">.LoadControlState(state[0]);</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        this</span></span><span style="font-size:x-small;">.displayMode = (</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;">) state [ 1 ];</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        this</span></span><span style="font-size:x-small;">.PropertyName = (</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">) state [ 2 ];</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        this</span></span><span style="font-size:x-small;">.SourceTypeName = (</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">) state [ 3 ];</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    protected</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">override</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Object</span></span><span style="font-size:x-small;"> SaveControlState()</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>{</p>
+</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>Object</span></span><span style="font-size:x-small;"> [] state = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">new</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Object</span></span><span style="font-size:x-small;"> [ 4 ];</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;">        </span>state [ 0 ] = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">base</span></span><span style="font-size:x-small;">.SaveControlState();</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;">        </span>state [ 1 ] = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.DisplayMode;</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;">        </span>state [ 2 ] = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.PropertyName;</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;">        </span>state [ 3 ] = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.SourceTypeName;</span><span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        return</span></span><span style="font-size:x-small;"> (state);</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    protected</span></span><span style="font-size:x-small;"> </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">override</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Boolean</span></span><span style="font-size:x-small;"> EvaluateIsValid()</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>{</p>
+</span>
+<p><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>Type</span></span><span style="font-size:x-small;"> type = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Type</span></span><span style="font-size:x-small;">.GetType(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.SourceTypeName, </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">false</span></span><span style="font-size:x-small;">);</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        if</span></span><span style="font-size:x-small;"> (type != </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">null</span></span><span style="font-size:x-small;">)</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">        </span>{</p>
+</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">            </span>PropertyInfo</span></span><span style="font-size:x-small;"> prop = type.GetProperty(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.PropertyName, </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">BindingFlags</span></span><span style="font-size:x-small;">.Instance |</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">BindingFlags</span></span><span style="font-size:x-small;">.Public | </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">BindingFlags</span></span><span style="font-size:x-small;">.GetProperty);</span><span style="font-size:x-small;">
+<p> </p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">            if</span></span><span style="font-size:x-small;"> (prop != </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">null</span></span><span style="font-size:x-small;">)</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">            </span>{</p>
+</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">                </span>IClassValidator</span></span><span style="font-size:x-small;"> validator = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">new</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ClassValidator</span></span><span style="font-size:x-small;">(type);</span><span style="font-size:x-small;"></span>
+<p><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">                </span>Object</span></span><span style="font-size:x-small;"> obj = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Activator</span></span><span style="font-size:x-small;">.CreateInstance(type);</span></p>
+<span style="font-size:x-small;"></span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">                </span>Object</span></span><span style="font-size:x-small;"> value = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.GetControlValidationValue(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.ControlToValidate);</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;">                </span>prop.SetValue(obj, </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Convert</span></span><span style="font-size:x-small;">.ChangeType(value, prop.PropertyType), </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">null</span></span><span style="font-size:x-small;">);</span></p>
+<span style="font-size:x-small;"></span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">                </span>InvalidValue</span></span><span style="font-size:x-small;"> [] results = validator.GetInvalidValues(obj, </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.PropertyName);</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">                base</span></span><span style="font-size:x-small;">.ErrorMessage = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.formatErrorMessage(results);</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">                return</span></span><span style="font-size:x-small;"> (results.Length == 0);</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">            </span>}</p>
+<p><span style="color:#0000ff;">        </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        base</span></span><span style="font-size:x-small;">.ErrorMessage = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span><span style="font-size:x-small;">
+<p> </p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        return</span></span><span style="font-size:x-small;"> (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">);</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>}</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">    private</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;"> formatErrorMessage(</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">InvalidValue</span></span><span style="font-size:x-small;"> [] results)</span><span style="font-size:x-small;">
+<p><span style="color:#0000ff;">    </span>{</p>
+</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>String</span></span><span style="font-size:x-small;"> str = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span><span style="font-size:x-small;"></span>
+<p><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>String</span></span><span style="font-size:x-small;"> str2 = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span></p>
+<span style="font-size:x-small;"></span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>String</span></span><span style="font-size:x-small;"> str3 = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span><span style="font-size:x-small;"></span>
+<p><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>String</span></span><span style="font-size:x-small;"> str4 = </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span></p>
+<span style="font-size:x-small;"></span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;"><span style="color:#0000ff;">        </span>StringBuilder</span></span><span style="font-size:x-small;"> builder = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">new</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">StringBuilder</span></span><span style="font-size:x-small;">();</span><span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">        switch</span></span><span style="font-size:x-small;"> (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.DisplayMode)</span><span style="font-size:x-small;">
+<p>        {</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        case</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;">.List:</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str3 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;br/&gt;"</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        break</span></span><span style="font-size:x-small;">;</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        case</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;">.SingleParagraph:</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str3 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">" "</span></span><span style="font-size:x-small;">;</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str4 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;br/&gt;"</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;"></span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        break</span></span><span style="font-size:x-small;">;</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        default</span></span><span style="font-size:x-small;">:</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;ul&gt;"</span></span><span style="font-size:x-small;">;</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str2 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;li&gt;"</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str3 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;/li&gt;"</span></span><span style="font-size:x-small;">;</span></p>
+<span style="font-size:x-small;"><span style="color:#0000ff;"><span style="color:#000000;">    </span>        </span>str4 = </span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">"&lt;/ul&gt;"</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>        break</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;">
+<p>        }</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>    if</span></span><span style="font-size:x-small;"> (results.Length != 0)</span><span style="font-size:x-small;">
+<p>        {</p>
+<p>            builder.Append(str);</p>
+<p> </p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>foreach</span></span><span style="font-size:x-small;"> (</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">InvalidValue</span></span><span style="font-size:x-small;"> result </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">in</span></span><span style="font-size:x-small;"> results)</span><span style="font-size:x-small;">
+<p>            {</p>
+<p>                builder.Append(str2);</p>
+<p>                builder.Append(result.Message);</p>
+<p>                builder.Append(str3);</p>
+<p>            }</p>
+<p>            builder.Append(str4);</p>
+<p>        }</p>
+<p> </p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>return</span></span><span style="font-size:x-small;"> (builder.ToString());</span><span style="font-size:x-small;">
+<p>    }</p>
+</span><span style="font-size:x-small;">    [Browsable(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">)]</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;">    [DefaultValue(</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;">.List)]</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>public</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">ValidationSummaryDisplayMode</span></span><span style="font-size:x-small;"> DisplayMode</span><span style="font-size:x-small;">
+<p>    {</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>get</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>return</span></span><span style="font-size:x-small;"> (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.displayMode);</span><span style="font-size:x-small;">
+<p>        }</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>set</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>this</span></span><span style="font-size:x-small;">.displayMode = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">value</span></span><span style="font-size:x-small;">;</span><span style="font-size:x-small;">
+<p>        }</p>
+<p>    }</p>
+    [Browsable(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">)]</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;">    [</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">DefaultValue</span></span><span style="font-size:x-small;">(</span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">""</span></span><span style="font-size:x-small;">)]</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>public</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;"> PropertyName</span><span style="font-size:x-small;">
+<p>    {</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>get</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>return</span></span><span style="font-size:x-small;"> (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.propertyName);</span><span style="font-size:x-small;">
+<p>        }</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>set</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>this</span></span><span style="font-size:x-small;">.propertyName = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">value</span></span><span style="font-size:x-small;"> ?? </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span><span style="font-size:x-small;">
+<p>        }</p>
+<p>    }</p>
+    [</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">Browsable</span></span><span style="font-size:x-small;">(</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">true</span></span><span style="font-size:x-small;">)]</span><span style="font-size:x-small;"></span>
+<p><span style="font-size:x-small;">    [</span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">DefaultValue</span></span><span style="font-size:x-small;">(</span><span style="color:#a31515;font-size:x-small;"><span style="color:#a31515;font-size:x-small;">""</span></span><span style="font-size:x-small;">)]</span></p>
+<span style="font-size:x-small;"></span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">    </span>public</span></span><span style="font-size:x-small;"> </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;"> SourceTypeName</span><span style="font-size:x-small;">
+<p>    {</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>get</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>return</span></span><span style="font-size:x-small;"> (</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">this</span></span><span style="font-size:x-small;">.sourceTypeName);</span><span style="font-size:x-small;">
+<p>        }</p>
+</span>
+<p><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">        </span>set</span></span></p>
+<span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"></span></span><span style="font-size:x-small;">
+<p>        {</p>
+</span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;"><span style="color:#000000;">            </span>this</span></span><span style="font-size:x-small;">.sourceTypeName = </span><span style="color:#0000ff;font-size:x-small;"><span style="color:#0000ff;font-size:x-small;">value</span></span><span style="font-size:x-small;"> ?? </span><span style="color:#2b91af;font-size:x-small;"><span style="color:#2b91af;font-size:x-small;">String</span></span><span style="font-size:x-small;">.Empty;</span><span style="font-size:x-small;">
+<p>        }</p>
+<p>    }</p>
+<p>}</p>
+<p>Basically, it uses the NHibernate Validator's <strong>ClassValidator</strong> to do the actual validation.</p>
+<p>This is how you would use it:</p>
+<p>&lt;asp:TextBox runat="server" ID="email"/&gt;</p>
+<p>&lt;xxx:NHibernatePropertyValidator runat="server" ControlToValidate="email" SourceTypeName="SomeClass, SomeAssembly" PropertyName="Email"/&gt;</p>
+<p>If you combine it with Web Client Software Factory's <strong>ServerSideValidationExtnder</strong>, you can even have client-side (AJAX) validation. Give it a try!</p>
+</span>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

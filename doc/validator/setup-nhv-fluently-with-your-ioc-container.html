@@ -1,0 +1,171 @@
+---
+layout: doc
+title: Setup NHV fluently with your IoC container
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="setup-nhv-fluently-with-your-ioc-container.html">Setup NHV fluently with your IoC container</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>Validator</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.27.20/4TCA5S69S7PM.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jfromainello/default.aspx.html">Jose Romaniello</a><br> on 04-25-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.27.20/4TCA5S69S7PM.jpg" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/jfromainello/default.aspx.html">Jose Romaniello</a><br> on 04-25-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="setup-nhv-fluently-with-your-ioc-container.html">Setup NHV fluently with your IoC container</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p style="margin-bottom:0cm;">The reasons behind why you should
+implement an IsharedEngineProvider are well explained <a href="http://fabiomaulo.blogspot.com/2009/02/diving-in-nhibernatevalidator.html">here</a>.</p>
+<p style="margin-bottom:0cm;">In this howto I will show a easy way to
+achieve that.</p>
+<p>First of all this is my implementation
+of ISharedEngineProvider:</p>
+<pre><span style="color:#000000;">    </span><span style="color:#0000FF;">public</span><span style="color:#000000;"> </span><span style="color:#0000FF;">class</span><span style="color:#000000;"> CastleSharedEngineProvider : ISharedEngineProvider
+    {
+        </span><span style="color:#0000FF;">private</span><span style="color:#000000;"> </span><span style="color:#0000FF;">readonly</span><span style="color:#000000;"> ValidatorEngine _validatorEngine;
+
+        </span><span style="color:#0000FF;">public</span><span style="color:#000000;"> CastleSharedEngineProvider(ValidatorEngine validatorEngine)
+        {
+            _validatorEngine = validatorEngine;
+        }
+        
+        </span><span style="color:#0000FF;">public</span><span style="color:#000000;"> ValidatorEngine GetEngine()
+        {
+            </span><span style="color:#0000FF;">return</span><span style="color:#000000;"> _validatorEngine;
+        }
+    }</span></pre>
+<p style="margin-bottom:0cm;">as you can see is very straightforward.</p>
+<p>Second I will show you how to setup
+your IoC. I use a castle container for this sample:</p>
+<pre><span style="color:#0000FF;">private</span><span style="color:#000000;"> </span><span style="color:#0000FF;">static</span><span style="color:#000000;"> </span><span style="color:#0000FF;">void</span><span style="color:#000000;"> ConfigureValidator()
+{
+
+    </span><span style="color:#008000;">//Create a new ValidatorEngine.</span><span style="color:#000000;">
+    var ve = </span><span style="color:#0000FF;">new</span><span style="color:#000000;"> ValidatorEngine();
+    
+    </span><span style="color:#008000;">//Register the  ValidatorEngine component for singleton.</span><span style="color:#000000;">
+    container.Register(Component.For&lt;ValidatorEngine&gt;()
+                        .Instance(ve).LifeStyle.Singleton);
+
+    </span><span style="color:#008000;">//Register the service for ISharedEngineProvider</span><span style="color:#000000;">
+    container.Register(Component.For&lt;ISharedEngineProvider&gt;()
+                .ImplementedBy&lt;CastleSharedEngineProvider&gt;());
+
+    </span><span style="color:#008000;">//Assign the shared engine provider for NHV.</span><span style="color:#000000;">
+    NHibernate.Validator.Cfg.Environment.SharedEngineProvider =
+                container.Resolve&lt;ISharedEngineProvider&gt;();
+    
+    </span><span style="color:#008000;">//Configure validation framework fluently</span><span style="color:#000000;">
+    var configure = </span><span style="color:#0000FF;">new</span><span style="color:#000000;"> FluentConfiguration();
+    
+    configure.Register(
+        Assembly.Load(</span><span style="color:#800000;">"SGF.Dominio"</span><span style="color:#000000;">)
+                .ValidationDefinitions()
+        )
+        .SetDefaultValidatorMode(ValidatorMode.UseAttribute)
+        .IntegrateWithNHibernate.ApplyingDDLConstraints().And.RegisteringListeners();
+
+    ve.Configure(configure);
+    
+}</span></pre>
+<p style="margin-bottom:0cm;">There are three things that you need remember:</p>
+<p style="margin-bottom:0cm;">	-You can't initialize or configure
+NHV before you have assigned the SharedEngineProvider.</p>
+<p style="margin-bottom:0cm;">	-Never create a new instance of
+ValidatorEngine, pick the singleton from the IoC or the
+SharedEngineprovider</p>
+<p style="margin-bottom:0cm;">	-If you use DDL Constraints or
+Listeners for Nhibernate you need to tell NHV what is the NH config
+that need to be populate with this info.</p>
+<pre>ValidatorInitializer.Initialize(nhConfiguration);</pre>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
