@@ -1,0 +1,126 @@
+---
+layout: doc
+title: Using NLog via Common.Logging with NHibernate
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="using-nlog-via-common-logging-with-nhibernate.html">Using NLog via Common.Logging with NHibernate</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>How to</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.SelectableAvatars/c4680c37.0ac0.4a36.aa83.770a2b2eb7d7/avatar.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/mgernand/default.aspx.html">mgernand</a><br> on 08-16-2010</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.SelectableAvatars/c4680c37.0ac0.4a36.aa83.770a2b2eb7d7/avatar.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/mgernand/default.aspx.html">mgernand</a><br> on 09-27-2010</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="using-nlog-via-common-logging-with-nhibernate.html">Using NLog via Common.Logging with NHibernate</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>The NHibernate 3 Trunk-Version contains a  new Interface "IInternalLogger" which provides<br>interface for custom loggers to be configured with NHibernate. NHibernate provides'<br>a log4net log provider for this interface out of the box. So if you are using NHibernate<br>with log4net just deliver the log4net Assembly as you would with NHibernate 2.x and<br>you are done. [:)]</p>
+<p>But if you need or want to use an other logging framework, like NLog, you can provide<br>an ILogger implementation for your preferred logger. An implementantion can be found<br>on Codeplex: <a href="http://nhlogging.codeplex.com/">NHibernate.Logging</a>. As some of you might know there<br>is the <a href="http://netcommon.sourceforge.net/">Common.Logging</a> logging abstration framework available. Common.Logging<br>supports several other logging frameworks. So you can use each of them with NHibernate <br>via Common.Logging. <br><br>The following logging frameworks are supported by Common.Logging:</p>
+<ul>
+<li>    System.Console</li>
+<li>    System.Diagnostics.Trace</li>
+<li>Log4Net 1.2.9</li>
+<li>Log4Net 1.2.10</li>
+<li>NLog</li>
+<li>Enterprise Library 3.1 Logging</li>
+<li>Enterprise Library 4.1 Logging</li>
+</ul>
+<p>To use the Common.Logging 2.0 logging abstraction framework with NHibernate all you <br>have to do is to copy the following Assemblies to you projects output directory:</p>
+<ul>
+<li>Common.Logging.dll</li>
+<li>NHibernate.Logging.CommonLogging.dll</li>
+</ul>
+<p>Needless to say that you have to copy your loggers Assembly and the <br>corresponding Common.Logging-Provider Assembly too.<br><br>To enable the log provider you have to add the following lines to your App.config:</p>
+<p>&lt;appSettings&gt;<br>    &lt;add key="nhibernate-logger" <br>              value="NHibernate.Logging.CommonLogging.CommonLoggingLoggerFactory, Hibernate.Logging.CommonLogging"/&gt;<br>&lt;/appSettings&gt;</p>
+<p>The Common.Logging providers source code and binaries can be found on Codeplex:<br> <a href="http://nhlogging.codeplex.com/">NHibernate.Logging</a>. You may try out the provider and send me feedback about it. Have fun. [:)]</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
