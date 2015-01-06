@@ -285,18 +285,6 @@ Form Styles
 
 
 
-/*
-Message Styles
-*/
-
-
-
-
-/*
-Content
-*/
-
-
 .CommonTitle
 {
 	color: #333;
@@ -304,55 +292,13 @@ Content
 	letter-spacing: -1px;
 	font-weight: bold;
 	padding: 0;
-	margin: 0.6em 0 0 0;
 }
-
-
-
 
 .CommonGroupedContentArea
 {
 	padding: 0 0 8px 0;
 	margin: 0 0 16px 0;
 }
-
-
-
-/*
-Text Button
-*/
-
-
-
-
-
-
-
-
-
-
-
-/*
-Specific Buttons
-*/
-
-
-/*
-List 
-*/
-
-
-
-
-
-
-
-
-
-
-/*
-Avatar List
-*/
 
 .CommonAvatarListItemsArea
 {
