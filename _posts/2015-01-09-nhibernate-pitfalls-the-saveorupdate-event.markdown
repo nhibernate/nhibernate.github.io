@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "NHibernate Pitfalls: The SaveOrUpdate Event"
 date: 2015-01-09T12:52:03+03:00
 comments: true
