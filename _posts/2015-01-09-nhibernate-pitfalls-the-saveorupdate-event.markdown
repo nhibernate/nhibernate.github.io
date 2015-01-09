@@ -4,8 +4,8 @@ title: "NHibernate Pitfalls: The SaveOrUpdate Event"
 date: 2015-01-09T12:52:03+03:00
 comments: true
 published: true
-categories: ["blogs", "nhibernate", "archive"]
-tags: []
+tags:
+  - NHibernate Pitfalls
 author: "Ricardo Peres"
 gravatar: 6ef6606f1fe23f90bf455e0d006e140f
 ---

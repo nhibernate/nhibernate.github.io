@@ -7,9 +7,13 @@ url: "http://nhibernate.github.io"
 twitter_username: nhibernate
 github_username:  nhibernate
 timezone: 'GMT-03:00'
+permalink: /blog/:year/:month/:day/:title.html
 
 # Build settings
 markdown: kramdown
+
+paginate: 20
+paginate_path: "/blog/page:num/"
 
 gems:
   - jekyll-redirect-from

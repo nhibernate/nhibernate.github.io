@@ -139,9 +139,7 @@ module Jekyll
           timestamp = Time.parse(item.attributes["date-created"])
           puts "timestamp: #{timestamp}"
           
-          # post_file_name = "#{timestamp.strftime("%Y-%m-%d")}-#{name}"
-          #filename = "_posts/#{timestamp.strftime("%Y-%m-%d")}-#{name}.html"
-          filename = "_posts/#{timestamp.strftime("%Y-%m-%d")}-#{name}.markdown"
+          filename = "_posts/#{timestamp.strftime("%Y-%m-%d")}-#{name}.html"
           puts "filename: #{filename}"
         
           ## Keep old URL
@@ -180,7 +178,7 @@ module Jekyll
             #     # "name" => name,
             #     "title" => title,
             #     # "time" => timestamp,
-            #   },
+            #   },)
             f.puts <<-HEADER
 ---
 layout: post
