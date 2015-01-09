@@ -1,6 +1,6 @@
 ---
 title: "NHibernate Pitfalls: The SaveOrUpdate Event"
-date: 2011-05-24 12:00:00 +0000
+date: 2015-01-09T12:52:03+03:00
 comments: true
 published: false
 categories: ["blogs", "nhibernate", "archive"]
