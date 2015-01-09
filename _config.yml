@@ -13,5 +13,5 @@ markdown: kramdown
 
 gems:
   - jekyll-redirect-from
-  - jekyll-archives
   - jekyll-sitemap
+#  - jekyll-archives
