@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "Release", "Validator"]
-redirect_from: ["/blogs/nhibernate/archive/2009/11/26/nhibernate-validator-1-2-cr1-released.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/11/26/nhibernate-validator-1-2-cr1-released.aspx/", "/blogs/nhibernate/archive/2009/11/26/nhibernate-validator-1-2-cr1-released.html"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

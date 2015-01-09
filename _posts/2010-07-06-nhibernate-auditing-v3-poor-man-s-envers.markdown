@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "NHibernate", "schema action", "uNHAddins"]
-redirect_from: ["/blogs/nhibernate/archive/2010/07/05/nhibernate-auditing-v3-poor-man-s-envers.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/07/05/nhibernate-auditing-v3-poor-man-s-envers.aspx/", "/blogs/nhibernate/archive/2010/07/05/nhibernate-auditing-v3-poor-man-s-envers.html"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

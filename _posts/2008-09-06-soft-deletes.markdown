@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["database", "introduction", "event listener"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/soft-deletes.aspx/", "/blogs/nhibernate/archive/2008/09/06/soft-deletes.html"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

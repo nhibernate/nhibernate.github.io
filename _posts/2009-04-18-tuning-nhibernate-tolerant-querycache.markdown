@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/17/tuning-nhibernate-tolerant-querycache.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/17/tuning-nhibernate-tolerant-querycache.aspx/", "/blogs/nhibernate/archive/2009/04/17/tuning-nhibernate-tolerant-querycache.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

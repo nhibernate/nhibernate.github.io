@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.aspx/", "/blogs/nhibernate/archive/2009/08/23/part-5-fixing-the-broken-stuff.html"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["querying"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/30/nhibernate-the-difference-between-get-load-and-querying-by-id.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/30/nhibernate-the-difference-between-get-load-and-querying-by-id.aspx/", "/blogs/nhibernate/archive/2009/04/30/nhibernate-the-difference-between-get-load-and-querying-by-id.html"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

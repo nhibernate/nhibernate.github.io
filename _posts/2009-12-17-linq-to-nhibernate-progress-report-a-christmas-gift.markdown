@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/12/17/linq-to-nhibernate-progress-report-a-christmas-gift.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/17/linq-to-nhibernate-progress-report-a-christmas-gift.aspx/", "/blogs/nhibernate/archive/2009/12/17/linq-to-nhibernate-progress-report-a-christmas-gift.html"]
 author: srstrong
 gravatar: be49dc22186b4215272ffa6a46599424
 ---

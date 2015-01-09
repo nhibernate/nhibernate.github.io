@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/12/17/using-the-new-linq-to-nh-provider-and-migrating-from-the-old-one.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/17/using-the-new-linq-to-nh-provider-and-migrating-from-the-old-one.aspx/", "/blogs/nhibernate/archive/2009/12/17/using-the-new-linq-to-nh-provider-and-migrating-from-the-old-one.html"]
 author: srstrong
 gravatar: be49dc22186b4215272ffa6a46599424
 ---

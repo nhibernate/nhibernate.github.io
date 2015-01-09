@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2010/05/14/two-new-nhibernate-quickstart-tutorials.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/05/14/two-new-nhibernate-quickstart-tutorials.aspx/", "/blogs/nhibernate/archive/2010/05/14/two-new-nhibernate-quickstart-tutorials.html"]
 author: BobPalmer
 gravatar: b57e71c1a3aa72469b644b92fabcaaac
 ---

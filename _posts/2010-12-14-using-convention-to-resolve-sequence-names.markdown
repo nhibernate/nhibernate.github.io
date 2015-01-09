@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identifier"]
-redirect_from: ["/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.aspx/", "/blogs/nhibernate/archive/2010/12/13/using-convention-to-resolve-sequence-names.html"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

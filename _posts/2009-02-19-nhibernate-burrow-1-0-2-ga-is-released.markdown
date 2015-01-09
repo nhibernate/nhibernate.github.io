@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Burrow Release"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/19/nhibernate-burrow-1-0-2-ga-is-released.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/19/nhibernate-burrow-1-0-2-ga-is-released.aspx/", "/blogs/nhibernate/archive/2009/02/19/nhibernate-burrow-1-0-2-ga-is-released.html"]
 author: kailuowang
 gravatar: c573cf31007f29236e1641e492bee036
 ---

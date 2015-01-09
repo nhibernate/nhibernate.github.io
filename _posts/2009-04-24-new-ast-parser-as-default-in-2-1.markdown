@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.aspx/", "/blogs/nhibernate/archive/2009/04/24/new-ast-parser-as-default-in-2-1.html"]
 author: tehlike
 gravatar: c9c2937ea2b0d5472a33a23b5df78814
 ---

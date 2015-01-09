@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.aspx/", "/blogs/nhibernate/archive/2009/12/17/queryover-in-nh-3-0.html"]
 author: FlukeFan
 gravatar: 2075ce3339bd0f16c52adac5b8e4b7b1
 ---

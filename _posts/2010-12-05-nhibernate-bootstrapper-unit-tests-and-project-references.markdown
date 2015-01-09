@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "Criteria", "linq"]
-redirect_from: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.aspx/", "/blogs/nhibernate/archive/2010/12/05/nhibernate-bootstrapper-unit-tests-and-project-references.html"]
 author: jwdavidson
 gravatar: 7b8c11bc19a524da9aac988120936d9a
 ---

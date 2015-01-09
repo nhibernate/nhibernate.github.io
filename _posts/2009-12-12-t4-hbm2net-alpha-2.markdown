@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
-redirect_from: ["/blogs/nhibernate/archive/2009/12/12/t4-hbm2net-alpha-2.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/12/t4-hbm2net-alpha-2.aspx/", "/blogs/nhibernate/archive/2009/12/12/t4-hbm2net-alpha-2.html"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

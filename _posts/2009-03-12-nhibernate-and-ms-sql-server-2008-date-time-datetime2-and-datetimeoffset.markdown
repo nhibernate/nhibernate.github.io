@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server 2008", "NH2.1", "Date", "DateTimeOffset", "DateTime2", "Time"]
-redirect_from: ["/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.aspx/", "/blogs/nhibernate/archive/2009/03/11/nhibernate-and-ms-sql-server-2008-date-time-datetime2-and-datetimeoffset.html"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.aspx/", "/blogs/nhibernate/archive/2010/11/26/nhibernate-code-base-analysis.html"]
 author: Patrick Smacchia
 gravatar: 526161a664210d3946ca432ee787f2af
 ---

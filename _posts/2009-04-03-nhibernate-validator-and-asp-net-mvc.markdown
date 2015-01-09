@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator", "MVC", "Asp.Net"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.aspx/", "/blogs/nhibernate/archive/2009/04/02/nhibernate-validator-and-asp-net-mvc.html"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

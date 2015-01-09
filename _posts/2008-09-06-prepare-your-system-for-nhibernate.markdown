@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["introduction"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.aspx/", "/blogs/nhibernate/archive/2008/09/06/prepare-your-system-for-nhibernate.html"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

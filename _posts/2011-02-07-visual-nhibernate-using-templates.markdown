@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "generators", "visual nhibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.aspx/", "/blogs/nhibernate/archive/2011/02/08/visual-nhibernate-using-templates.html"]
 author: gareth
 gravatar: bf3577d9d1dfe9ef620b5326e5970091
 ---

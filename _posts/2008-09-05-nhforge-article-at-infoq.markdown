@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2008/09/05/nhforge-article-at-infoq.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/05/nhforge-article-at-infoq.aspx/", "/blogs/nhibernate/archive/2008/09/05/nhforge-article-at-infoq.html"]
 author: Gustavo
 gravatar: 934c5a2299da30163f720bcd2ee826f4
 ---

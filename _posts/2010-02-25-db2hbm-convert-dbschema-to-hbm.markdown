@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "generators"]
-redirect_from: ["/blogs/nhibernate/archive/2010/02/25/db2hbm-convert-dbschema-to-hbm.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/02/25/db2hbm-convert-dbschema-to-hbm.aspx/", "/blogs/nhibernate/archive/2010/02/25/db2hbm-convert-dbschema-to-hbm.html"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

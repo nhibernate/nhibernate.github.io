@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["bugs"]
-redirect_from: ["/blogs/nhibernate/archive/2009/03/22/nh_2D00_1711_2D00_ndash_2D00_inappropriate_2D00_error_2D00_handling_2D00_with_2D00_nh_2D00_2.1_2D00_alpha_2D00_1.aspx/", "/blogs/nhibernate/archive/2009/03/22/nh_2d00_1711_2d00_ndash_2d00_inappropriate_2d00_error_2d00_handling_2d00_with_2d00_nh_2d00_2.1_2d00_alpha_2d00_1.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/22/nh_2D00_1711_2D00_ndash_2D00_inappropriate_2D00_error_2D00_handling_2D00_with_2D00_nh_2D00_2.1_2D00_alpha_2D00_1.aspx/", "/blogs/nhibernate/archive/2009/03/22/nh_2d00_1711_2d00_ndash_2d00_inappropriate_2d00_error_2d00_handling_2d00_with_2d00_nh_2d00_2.1_2d00_alpha_2d00_1.aspx/", "/blogs/nhibernate/archive/2009/03/22/nh_2D00_1711_2D00_ndash_2D00_inappropriate_2D00_error_2D00_handling_2D00_with_2D00_nh_2D00_2.1_2D00_alpha_2D00_1.html", "/blogs/nhibernate/archive/2009/03/22/nh_2d00_1711_2d00_ndash_2d00_inappropriate_2d00_error_2d00_handling_2d00_with_2d00_nh_2d00_2.1_2d00_alpha_2d00_1.html"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

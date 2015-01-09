@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NH2.1", "Entity-Name", "auto propeties", "backfield"]
-redirect_from: ["/blogs/nhibernate/archive/2008/10/21/entity-name-in-action-a-strongly-typed-entity.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/21/entity-name-in-action-a-strongly-typed-entity.aspx/", "/blogs/nhibernate/archive/2008/10/21/entity-name-in-action-a-strongly-typed-entity.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

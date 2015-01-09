@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["relation", "Tuplizers", "EntityMode"]
-redirect_from: ["/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.aspx/", "/blogs/nhibernate/archive/2011/01/28/how-to-use-0-instead-of-null-for-foreign-keys.html"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-property-gt.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-property-gt.aspx/", "/blogs/nhibernate/archive/2009/04/08/nhibernate-mapping-lt-property-gt.html"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

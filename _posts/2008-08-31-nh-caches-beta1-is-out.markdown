@@ -6,11 +6,12 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches"]
-redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.aspx/", "/blogs/nhibernate/archive/2008/08/31/nh-caches-beta1-is-out.html"]
 author: diegojancic
 gravatar: d5874a9362fed58bb2df043c20345fa2
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>The&nbsp;first beta&nbsp;version of NHibernate.Caches is ready to be downloaded from SourceForge! (<a target="_blank" href="/media/p/6.aspx" title="Download">Download</a>)</p>
 <p>To be honest, the most used caches haven't major changes, just some&nbsp;bug fixes, and a bit of refactoring. But, there are still some interesting things that make this&nbsp;version "a thing that every developer&nbsp;must-have", let's say:</p>
 <p>- Works with NH 2.0.0 GA! Not yet using it ? Check out what are you missing: <a href="http://www.hibernate.org/357.html#A14">http://www.hibernate.org/357.html#A14</a></p>

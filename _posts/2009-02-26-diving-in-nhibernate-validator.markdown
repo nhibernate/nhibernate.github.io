@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "HowTo", "fluent configuration", "Validator"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.aspx/", "/blogs/nhibernate/archive/2009/02/26/diving-in-nhibernate-validator.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

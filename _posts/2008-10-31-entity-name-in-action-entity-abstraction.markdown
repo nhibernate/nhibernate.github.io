@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Entity-Name", "Inversion of Control"]
-redirect_from: ["/blogs/nhibernate/archive/2008/10/31/entity-name-in-action-entity-abstraction.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/31/entity-name-in-action-entity-abstraction.aspx/", "/blogs/nhibernate/archive/2008/10/31/entity-name-in-action-entity-abstraction.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

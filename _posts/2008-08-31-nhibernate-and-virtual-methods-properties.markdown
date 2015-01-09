@@ -6,11 +6,12 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["postsharp", "virtual", "validation", "proxy"]
-redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-and-virtual-methods-properties.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-and-virtual-methods-properties.aspx/", "/blogs/nhibernate/archive/2008/08/31/nhibernate-and-virtual-methods-properties.html"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>NOTE: This post was originally published on <a href="http://davybrion.com/blog/2008/05/nhibernate-and-virtual-methodsproperties/">July 4, 2008</a>
 </p>
 <p>

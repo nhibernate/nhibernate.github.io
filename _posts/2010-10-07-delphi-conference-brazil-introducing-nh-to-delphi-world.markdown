@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2010/10/07/delphi-conference-brazil-introducing-nh-to-delphi-world.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/10/07/delphi-conference-brazil-introducing-nh-to-delphi-world.aspx/", "/blogs/nhibernate/archive/2010/10/07/delphi-conference-brazil-introducing-nh-to-delphi-world.html"]
 author: quicoli
 gravatar: 497982b14c1c654a225b982fb279f0e9
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SQL Server", "NH2.1", "Dialect", "Function"]
-redirect_from: ["/blogs/nhibernate/archive/2009/03/13/registering-freetext-or-contains-functions-into-a-nhibernate-dialect.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/13/registering-freetext-or-contains-functions-into-a-nhibernate-dialect.aspx/", "/blogs/nhibernate/archive/2009/03/13/registering-freetext-or-contains-functions-into-a-nhibernate-dialect.html"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

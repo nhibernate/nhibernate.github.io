@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["hbm2net", "T4"]
-redirect_from: ["/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.aspx/", "/blogs/nhibernate/archive/2009/11/22/hbm2net-frist-alpha-available.html"]
 author: felicepollano
 gravatar: bf8ff77ca000b80a2b19d07dbb257645
 ---

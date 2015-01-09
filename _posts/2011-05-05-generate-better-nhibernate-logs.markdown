@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["logging"]
-redirect_from: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.aspx/", "/blogs/nhibernate/archive/2011/05/05/generate-better-nhibernate-logs.html"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

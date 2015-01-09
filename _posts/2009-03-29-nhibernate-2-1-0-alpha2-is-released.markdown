@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.aspx/", "/blogs/nhibernate/archive/2009/03/29/nhibernate-2-1-0-alpha2-is-released.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

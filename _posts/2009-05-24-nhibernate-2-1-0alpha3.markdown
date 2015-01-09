@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2009/05/24/nhibernate-2-1-0alpha3.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/24/nhibernate-2-1-0alpha3.aspx/", "/blogs/nhibernate/archive/2009/05/24/nhibernate-2-1-0alpha3.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

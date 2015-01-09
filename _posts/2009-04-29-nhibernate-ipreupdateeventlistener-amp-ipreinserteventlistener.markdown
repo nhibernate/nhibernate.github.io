@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["event listener"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/29/nhibernate-ipreupdateeventlistener-amp-ipreinserteventlistener.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/04/29/nhibernate-ipreupdateeventlistener-amp-ipreinserteventlistener.aspx/", "/blogs/nhibernate/archive/2009/04/29/nhibernate-ipreupdateeventlistener-amp-ipreinserteventlistener.html"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

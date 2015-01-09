@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2008/11/24/populating-entities-with-associations-from-stored-procedures-with-nhibernate.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/11/24/populating-entities-with-associations-from-stored-procedures-with-nhibernate.aspx/", "/blogs/nhibernate/archive/2008/11/24/populating-entities-with-associations-from-stored-procedures-with-nhibernate.html"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

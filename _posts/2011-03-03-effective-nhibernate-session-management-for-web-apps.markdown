@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "Session", "Asp.Net", "ASP.NET MVC"]
-redirect_from: ["/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx/", "/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.html"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

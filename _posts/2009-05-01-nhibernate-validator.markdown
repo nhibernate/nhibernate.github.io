@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["validation", "Validator"]
-redirect_from: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.aspx/", "/blogs/nhibernate/archive/2009/05/01/nhibernate-validator.html"]
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---

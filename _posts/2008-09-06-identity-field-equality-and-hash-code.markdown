@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["identity", "equality"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.aspx/", "/blogs/nhibernate/archive/2008/09/06/identity-field-equality-and-hash-code.html"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

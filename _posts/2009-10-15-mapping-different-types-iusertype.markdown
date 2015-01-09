@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "IUserType"]
-redirect_from: ["/blogs/nhibernate/archive/2009/10/15/mapping-different-types-iusertype.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/10/15/mapping-different-types-iusertype.aspx/", "/blogs/nhibernate/archive/2009/10/15/mapping-different-types-iusertype.html"]
 author: krzysztof.kozmic
 gravatar: fab7062ee87e12adc67846764e6be668
 ---

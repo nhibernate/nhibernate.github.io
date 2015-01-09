@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["Wiki", "HowTo"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.aspx/", "/blogs/nhibernate/archive/2008/09/12/visit-the-quot-how-to-quot-section.html"]
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate Documentation"]
-redirect_from: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.aspx/", "/blogs/nhibernate/archive/2009/06/04/architecture-diagram-rework.html"]
 author: ssteinegger
 gravatar: 5d9c48ac94a9376f1b7bccdd13c4d987
 ---

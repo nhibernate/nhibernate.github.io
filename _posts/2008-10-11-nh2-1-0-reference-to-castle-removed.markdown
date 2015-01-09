@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "lazy loading", "ProxyGenerators", "NHibernate", "Deploy", "Castle", "NH2.1"]
-redirect_from: ["/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.aspx/", "/blogs/nhibernate/archive/2008/10/11/nh2-1-0-reference-to-castle-removed.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

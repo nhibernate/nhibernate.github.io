@@ -6,11 +6,12 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.aspx/", "/blogs/nhibernate/archive/2008/08/31/nhibernate-mapping-examples.html"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>Note: this post was originally posted on <a href="http://davybrion.com/blog/2007/07/nhibernate-mapping-examples/">July 15, 2007</a>
 </p>
 <p>When you're starting out with NHibernate, it's sometimes hard to find good examples. Most examples online are too simple, or are incomplete (just the mappings, but no code for instance).  It's always easier if you have some examples that are large enough, but still small enough to be easy to grasp. So i created mappings and classes for the Northwind tables. I figured this could be useful reference material for anyone new to NHibernate so i'm making the whole thing available for everyone. You'll find examples of one-to-many, many-to-one and many-to-many associations in there.  I used a couple of different cascade options for the associations, depending on the constraints on the tables.  I've also included about 60 unit tests to verify the mappings are working correctly. These tests should also give you a good idea about how NHibernate deals with certain mappings and options.

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "SQL Server 2008", "Date", "DateTimeOffset", "DateTime2"]
-redirect_from: ["/blogs/nhibernate/archive/2011/01/26/date-time-support-in-nhibernate.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/26/date-time-support-in-nhibernate.aspx/", "/blogs/nhibernate/archive/2011/01/26/date-time-support-in-nhibernate.html"]
 author: James Kovacs
 gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---

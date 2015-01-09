@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["&quot;Composite Keys&quot;"]
-redirect_from: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx/", "/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.html"]
 author: ajepst
 gravatar: fad7db02ad0cbbcd20f8bba5fdc1fc81
 ---

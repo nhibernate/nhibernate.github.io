@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NH2.1", "Future"]
-redirect_from: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.aspx/", "/blogs/nhibernate/archive/2009/01/25/nhibernate-and-future-queries.html"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["proxy", "lazy loading", "ProxyGenerators"]
-redirect_from: ["/blogs/nhibernate/archive/2008/09/22/introducing-nhibernate-proxygenerators.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/09/22/introducing-nhibernate-proxygenerators.aspx/", "/blogs/nhibernate/archive/2008/09/22/introducing-nhibernate-proxygenerators.html"]
 author: wcpierce
 gravatar: dcc92e164f39a824d68fd053c950a041
 ---

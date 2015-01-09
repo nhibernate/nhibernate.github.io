@@ -6,7 +6,7 @@ comments: true
 published: false
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.aspx/", "/blogs/nhibernate/archive/2009/12/18/state-or-strategy-pattern-with-nhibernate.html"]
 author: diegose
 gravatar: f00318698e65fce00b7cbd612a466571
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News", "NHibernate"]
-redirect_from: ["/blogs/nhibernate/archive/2010/10/05/nhibernate-3-0-cookbook.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/10/05/nhibernate-3-0-cookbook.aspx/", "/blogs/nhibernate/archive/2010/10/05/nhibernate-3-0-cookbook.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

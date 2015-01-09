@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "NHibernate Documentation"]
-redirect_from: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.aspx/", "/blogs/nhibernate/archive/2011/08/29/nhibernate-3-beginners-guide-published.html"]
 author: gabriel.schenker
 gravatar: c6b14f5727ae60868a29322c6395bd4d
 ---

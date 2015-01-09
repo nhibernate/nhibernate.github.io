@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "fluent configuration"]
-redirect_from: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.aspx/", "/blogs/nhibernate/archive/2011/01/21/loquacious-configuration-in-nhibernate-3.html"]
 author: James Kovacs
 gravatar: 67e778f4df48de5a47de8ee689763eb7
 ---

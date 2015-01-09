@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: []
-redirect_from: ["/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.aspx/", "/blogs/nhibernate/archive/2009/09/07/part-8-daos-repositories-or-query-objects.html"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

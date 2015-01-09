@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping", "linqtoxsdmappings"]
-redirect_from: ["/blogs/nhibernate/archive/2010/07/28/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-1.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2010/07/28/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-1.aspx/", "/blogs/nhibernate/archive/2010/07/28/strongly-typed-convention-based-mappings-using-linq-to-xsd-part-1.html"]
 author: mcintyre321
 gravatar: 4908618aea7c32eb0f94d398b57fa28d
 ---

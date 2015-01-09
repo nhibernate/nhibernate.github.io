@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["News"]
-redirect_from: ["/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.aspx/", "/blogs/nhibernate/archive/2009/02/06/nhibernate-in-action-book-is-out.html"]
 author: tobinharris
 gravatar: e7535eb2c5709c34cfa767c66cd8a0ad
 ---

@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "News", "NH2.1"]
-redirect_from: ["/blogs/nhibernate/archive/2009/07/05/nhibernate-caches-2-1-0cr1.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/05/nhibernate-caches-2-1-0cr1.aspx/", "/blogs/nhibernate/archive/2009/07/05/nhibernate-caches-2-1-0cr1.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---

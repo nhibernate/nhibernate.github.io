@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["NHibernate", "MVCContrib", "ASP.NET MVC", "Fluent NHibernate", "jQuery", "Ninject"]
-redirect_from: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-1.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-1.aspx/", "/blogs/nhibernate/archive/2009/08/11/how-to-using-the-n-stack-part-1.html"]
 author: Jason Dentler
 gravatar: 2aaf05c5e05389c501b4fd7451abecdb
 ---

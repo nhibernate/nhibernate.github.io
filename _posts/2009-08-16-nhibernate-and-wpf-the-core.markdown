@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["AOP", "Session", "WPF"]
-redirect_from: ["/blogs/nhibernate/archive/2009/08/15/nhibernate-and-wpf-the-core.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/08/15/nhibernate-and-wpf-the-core.aspx/", "/blogs/nhibernate/archive/2009/08/15/nhibernate-and-wpf-the-core.html"]
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---

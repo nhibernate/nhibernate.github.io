@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["batch", "DML"]
-redirect_from: ["/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.aspx/", "/blogs/nhibernate/archive/2008/10/27/batching-nhibernate-s-dml-statements.html"]
 author: DavyBrion
 gravatar: bb45e44f9e0c0b50551429d3feb214d1
 ---

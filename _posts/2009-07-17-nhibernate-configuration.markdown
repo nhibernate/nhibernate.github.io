@@ -6,7 +6,7 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["caches", "configuration", "NHibernate", "fluent configuration"]
-redirect_from: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx/"]
+redirect_from: ["/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.aspx/", "/blogs/nhibernate/archive/2009/07/17/nhibernate-configuration.html"]
 author: fabiomaulo
 gravatar: cd6db202ce94ed7e5f1fde30e702dc7f
 ---
