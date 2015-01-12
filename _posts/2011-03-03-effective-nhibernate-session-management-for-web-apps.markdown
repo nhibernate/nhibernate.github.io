@@ -6,11 +6,15 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["SessionFactory", "Session", "Asp.Net", "ASP.NET MVC"]
-redirect_from: ["/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx/", "/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.html"]
+redirect_from: 
+  - "/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.aspx/"
+  - "/blogs/nhibernate/archive/2011/03/03/effective-nhibernate-session-management-for-web-apps.html"
+  - "/blogs/nhibernate/archive/2011/03/02/effective-nhibernate-session-management-for-web-apps.html"
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>In this post I’ll describe a mechanism to manage nhibernate session following the widely known patter “session-per-request”.</p>  <h1>Introduction</h1>  <p>The session-per-request pattern is very well defined and widely used; as follows</p>  <blockquote>   <p>A single <tt>Session</tt> and a single database transaction implement the processing of a particular request event (for example, a Http request in a web application).</p> </blockquote>  <h1>What do we have currently?</h1>  <p>The first thing you will notice when talking about nhibernate session management is a little interface inside NHibernate;</p>  <pre class="csharpcode"><span class="kwrd">public</span> <span class="kwrd">interface</span> ICurrentSessionContext
 {
     ISession CurrentSession();
