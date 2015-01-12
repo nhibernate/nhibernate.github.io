@@ -9,7 +9,6 @@ tags: ["collections"]
 redirect_from:
   - "/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.aspx/"
   - "/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.html"
-  - "/blog/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.html"
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
