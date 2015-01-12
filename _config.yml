@@ -3,7 +3,7 @@ title: "NHibernate"
 email: "" 
 description: "The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation."
 baseurl: "" 
-url: "http://nhibernate.github.io"
+url: "http://nhibernate.info"
 twitter_username: nhibernate
 github_username:  nhibernate
 timezone: 'GMT-03:00'
