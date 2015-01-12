@@ -6,11 +6,15 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["collections"]
-redirect_from: ["/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.aspx/", "/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.html"]
+redirect_from:
+  - "/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.aspx/"
+  - "/blogs/nhibernate/archive/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.html"
+  - "/blog/2011/03/15/using-lt-set-gt-in-mappings-without-iesi-collections-net-4.html"
 author: jfromainello
 gravatar: d1a7e0fbfb2c1d9a8b10fd03648da78f
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>I’ve created a new nuget package; “NHibernate.SetForNet4”. </p>  <p>The package is only one file that will be inserted in your project. This class contains the implementation for the Set&lt;T&gt; and SortedSet&lt;T&gt;.</p>  <p>After you install NHibernate.SetForNet4; the only thing you have to do is to add the collection factory to your configuration as follows:</p>  <pre class="csharpcode">configuration.Properties[Environment.CollectionTypeFactoryClass] 
         = <span class="kwrd">typeof</span>(Net4CollectionTypeFactory).AssemblyQualifiedName; </pre>
 <style type="text/css">
