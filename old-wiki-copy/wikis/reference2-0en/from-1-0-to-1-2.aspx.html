@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="From 1.0 to 1.2 (RSS 2.0)" href="from-1-0-to-1-2/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="NHibernate 2.0  (RSS 2.0)" href="rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Announcements (RSS 2.0)" href="../../members/fabiomaulo/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Comments (RSS 2.0)" href="../../members/fabiomaulo/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Activities (RSS 2.0)" href="../../members/fabiomaulo/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Friends Activity (RSS 2.0)" href="../../members/fabiomaulo/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	From 1.0 to 1.2 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="from-1-0-to-1-2.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE0MjI1NzA4NTBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRnkoeGkMFUl/GCfp0jWEl0wBWF5g==" />
+</div>
+
+
+<script src="../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=kMYUTUavSIm2PfhqImV65wSrGgvlXLz6y2I9w1Ny3wgQ9Mr8YxqHob4FEFjJCAuSefb7UiiHarHcIuJD4xiKEgAWZ6bkGuLRZKuFDCHjRSswzwvX2HIxCYe1LS8DvrUxi4omY-uxichRl_7QG7gvnymf7ji60ufX0GdWKCPuYuKcXuCoaDwpH8N3g3tlQpPEgpisGg2&amp;t=634395149480000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=ooIwVX8behGAEmhMCiixHbDdkMUOVYaZRdlMT8IcoNg04bCvP2nwsB6TYoQ7d2Jv_3l4oJ1T22OjM-M-2DunSYiieujBrutwDXLnAl2vCYvC2eq5i-t1eW9X33MvMiQlvp4qyu1-rLPWkjuV_LZnUetgmSNTxQbJe-EddFxbtbp-DYr30&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../WebResource.axd%3Fd=xXlM6p6Z55_L0aHC_AFQRK0Cjmpbijxk7GNNsmfNwwA1waqkaV-hG1FcycUhTX3miKHBKKxRY86jAc_xya2ioQnh8uEZNMdbhp5EeN7LrycYZRTwA1RkyBpeEDeC_6M7Ye32k1z4nBfateiS4xaRnrrk7zAUyXGK9sqQp9FDULq-nwZx0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../cfs-file_ashx/key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Freference2-0en%252Ffrom-1-0-to-1-2.aspx.html">Sign in </a>
+         | <a href="../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_View">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../general/default.aspx.html">General</a></li>
+                    
+                        
+                        <li><a href="../howtonh/default.aspx.html">How to</a></li>
+                    
+                        
+                        <li><a href="../patternsandpractices/default.aspx.html">Patterns&amp;Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Wikis</a>
+        &raquo;
+        <a href="default.aspx.html">NHibernate 2.0 </a>
+        &raquo;
+        <a href="from-1-0-to-1-2.aspx.html">From 1.0 to 1.2</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">From 1.0 to 1.2</h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="default.aspx.html">Home</a></li><li><a href="from-1-0-to-1-2/rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="architecture.aspx.html">Architecture</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="query-syntax.aspx.html">Query Syntax</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._collapse(58, this); return false;"><img src="../../WebResource.axd%3Fd=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000" alt="-" style="border-width: 0;" /></a><a href="known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a><div><ul class="CommonHierarchicalList"><li><a href="from-1-0-to-1-2.aspx.html" class="Selected">From 1.0 to 1.2</a></li><li><a href="from-nh1-2-1ga-to-nh2-0-0.aspx.html">from NH1.2.1GA to NH2.0.0</a></li></ul></div></li><li><a href="nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="architecture.aspx.html">Architecture</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="query-syntax.aspx.html">Query Syntax</a></li><li><a href="from-1-0-to-1-2.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._collapse(58, this); return false;"><img src="../../WebResource.axd%3Fd=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000" alt="-" style="border-width: 0;" /></a><a href="known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a><div><ul class="CommonHierarchicalList"><li><a href="from-1-0-to-1-2.aspx.html" class="Selected">From 1.0 to 1.2</a></li><li><a href="from-nh1-2-1ga-to-nh2-0-0.aspx.html">from NH1.2.1GA to NH2.0.0</a></li></ul></div></li><li><a href="nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag6"><a href="tags/equality/default.aspx.html" rel="tag">equality</a></li>
+<li class="CommonTag6"><a href="tags/identity/default.aspx.html" rel="tag">identity</a></li>
+<li class="CommonTag1"><a href="tags/pattern/default.aspx.html" rel="tag">pattern</a></li>
+<li class="CommonTag6"><a href="tags/unit+of+work/default.aspx.html" rel="tag">unit of work</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.02/4TA8XMWXSUMY.png" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../members/fabiomaulo/default.aspx.html">Fabio Maulo</a><br/> on 05-11-2009</div></div><div class="WikiPageDetailsSummaryArea"><strong>1</strong> person found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /> Article
+                            </div>
+                        </td>
+                        
+                                
+                                                            
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="from-1-0-to-1-2/comments.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="from-1-0-to-1-2/comments.aspx.html">Comments</a> (0)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="from-1-0-to-1-2/history.aspx.html"><img align="absmiddle" border="0" src="../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="from-1-0-to-1-2/history.aspx.html">History</a> (1)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">                
+
+                <div id="ctl00_ctl00_bcr_bcr_ctl08" class="WikiRating" title="Rated: 1 Ratings - 1 Yes, 0 No" ><div><img src="../../utility/images/thumbsup.png" id="ctl00_ctl00_bcr_bcr_ctl08_image" alt="" /><span id="ctl00_ctl00_bcr_bcr_ctl08_percent" class="WikiRatingGood">100%</span> <span id="ctl00_ctl00_bcr_bcr_ctl08_percenttext">of people found this useful</span></div></div>
+
+                <h2 class="CommonContentBoxHeaderSmall">
+                        <span><a href="from-1-0-to-1-2.aspx.html">From 1.0 to 1.2</a></span>
+                        
+                    </h2>
+                                
+                <div class="CommonDescription" style="font-size: 90%;">
+                    <span id="ctl00_ctl00_bcr_bcr_ctl09_ctl01"></span><input type="hidden" name="ctl00$ctl00$bcr$bcr$ctl09$ctl01" id="ctl00_ctl00_bcr_bcr_ctl09_ctl01_State" value="nochange" /> <a onclick="ctl00_ctl00_bcr_bcr_ctl09_ctl01.Edit(new Function('tags','successFunction','failureFunction','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl09\',\'saveAndFormat:\' + tags,successFunction,tags,failureFunction,false)'));return false;" href="from-1-0-to-1-2.aspx.html#">[Edit Tags]</a>
+                </div>
+                <div><p>
+<h2>NHibernate 1.2</h2>
+<p>NHibernate 1.2 is mostly source-compatible with NHibernate 1.0. However, it is not intended as a drop-in replacement for 1.0.</p>
+<p>This document describes the changes between NHibernate 1.0 and NHibernate 1.2 that will affect existing applications, and mentions certain new features of NHibernate 1.2 that might be useful to existing applications.</p>
+<p>Changes are classified into&nbsp;<em>API changes</em>&nbsp;(affecting source code),&nbsp;<em>metadata changes</em>&nbsp;(affecting the XML O/R mapping metadata),&nbsp;<em>query language changes</em>&nbsp;(affecting HQL queries),&nbsp;<em>runtime behavior changes</em>, and&nbsp;<em>security-related changes</em>.</p>
+<a name="A3"></a>
+<h3>API Changes</h3>
+<a name="A4"></a>
+<h4><tt>ISession</tt>&nbsp;interface</h4>
+<p>Redundant query execution methods were deprecated in&nbsp;<tt>ISession</tt>&nbsp;interface. These methods are:</p>
+<ul>
+<li><tt>Find()</tt>,</li>
+<li><tt>Enumerable()</tt>,</li>
+<li><tt>Filter()</tt></li>
+</ul>
+<p>NHibernate 1.2 applications should use&nbsp;<tt>CreateQuery()</tt>&nbsp;for all query execution. Existing applications may continue to use the deprecated methods.</p>
+<a name="A5"></a>
+<h4><tt>ISession.CreateSQLQuery()</tt></h4>
+<p>The overloaded forms of&nbsp;<tt>CreateSQLQuery()</tt>&nbsp;which took arrays have been deprecated. There is a new&nbsp;<tt>ISQLQuery</tt>&nbsp;interface (returned by&nbsp;<tt>CreateSQLQuery(String)</tt>) which provides equivalent functionality (and more). Existing applications may continue to use the deprecated methods.</p>
+<a name="A6"></a>
+<h4><tt>ILifecycle</tt>&nbsp;and&nbsp;<tt>IValidatable</tt>&nbsp;interfaces</h4>
+<p>The&nbsp;<tt>ILifecycle</tt>&nbsp;and&nbsp;<tt>IValidatable</tt>&nbsp;interfaces were deprecated in NHibernate 1.2 and moved to the&nbsp;<tt>NHibernate.Classic</tt>&nbsp;namespace. The Hibernate team does not consider it good practice to have domain model classes depend upon persistence-specific APIs. NHibernate 1.2 applications should use&nbsp;<tt>IInterceptor</tt>&nbsp;interface. Existing applications may continue to use&nbsp;<tt>ILifecycle</tt>&nbsp;and&nbsp;<tt>IValidatable</tt>.</p>
+<a name="A7"></a>
+<h4><tt>IInterceptor</tt>&nbsp;interface</h4>
+<p>Several new methods were added to the&nbsp;<tt>IInterceptor</tt>&nbsp;interface. Existing interceptors will need to be ugraded to provide empty implementations of the two new methods.</p>
+<p>To avoid issues with interceptor migration (whether 1.0.x -&gt; 1.2.x, or moving forward), just extend the new&nbsp;<tt>EmptyInterceptor</tt>&nbsp;class instead of writing your own empty implementation for all methods you don&#39;t need.</p>
+<a name="A8"></a>
+<h4><tt>IUserType</tt>&nbsp;and&nbsp;<tt>ICompositeUserType</tt>&nbsp;interfaces</h4>
+<p>Both&nbsp;<tt>IUserType</tt>&nbsp;and&nbsp;<tt>ICompositeUserType</tt>&nbsp;had several methods added, to support new functionality of NHibernate 1.2. They were moved to the namespace<tt>NHibernate.UserTypes</tt>. Existing user type classes will need to be upgraded to implement the new methods.</p>
+<p><em>Note:</em>&nbsp;NHibernate 1.2 provides&nbsp;<tt>IParameterizedType</tt>&nbsp;interface to allow better re-useability of user type implementations.</p>
+<a name="A9"></a>
+<h4><tt>FetchMode</tt></h4>
+<p><tt>FetchMode.Lazy</tt>&nbsp;and&nbsp;<tt>FetchMode.Eager</tt>&nbsp;were deprecated. The more accurately named&nbsp;<tt>FetchMode.Select</tt>&nbsp;and&nbsp;<tt>FetchMode.Join</tt>&nbsp;have the same effect.</p>
+<a name="A10"></a>
+<h4>Changes to extension APIs</h4>
+<p>The&nbsp;<tt>NHibernate.Expression</tt>,&nbsp;<tt>NHibernate.Mapping</tt>,&nbsp;<tt>NHibernate.Persister</tt>&nbsp;and&nbsp;<tt>NHibernate.Collection</tt>&nbsp;namespaces feature heavy refactoring. Most NHibernate 1.0 applications do not depend upon these namespaces, and will not be affected. If your application&nbsp;<em>does</em>&nbsp;extend classes in these namespaces, you will need to carefully migrate the affected code.</p>
+<a name="A11"></a>
+<h3>Metadata Changes</h3>
+<a name="A12"></a>
+<h4>Association fetching strategies</h4>
+<p>Since it is best practice to map almost all classes and collections using&nbsp;<tt>lazy=&quot;true&quot;</tt>, that is now the default. Existing applications will need to explicitly specify&nbsp;<tt>lazy=&quot;false&quot;</tt>on all non-lazy class and collection mappings. For the lazy classes to function correctly, all their public and protected members must be virtual (overridable). Since this is a very significant potential source of errors when developing on .NET, NHibernate 1.2 will check at configuration time that all lazy classes fulfill the requirements.</p>
+<p>The&nbsp;<tt>outer-join</tt>&nbsp;attribute is deprecated. Use fetch=&quot;join&quot; and fetch=&quot;select&quot; instead of outer-join=&quot;true&quot; and outer-join=&quot;false&quot;. Existing applications may continue to use the<tt>outer-join</tt>&nbsp;attribute, or may use a text search/replace to migrate to use of the&nbsp;<tt>fetch</tt>&nbsp;attribute.</p>
+<p><strong>Beware, this means you have to put lazy=&quot;false&quot; on all collection mappings and classes which previously did not have a &quot;lazy&quot;-attribute.</strong></p>
+<p>A quick and dirty alternative for migration is also to put default-lazy=&quot;false&quot; on all your hibernate-mapping elements.</p>
+<a name="A13"></a>
+<h4>Schema namespace</h4>
+<p>Update the XML schema reference in your hbm XML files. Change&nbsp;<tt>urn:nhibernate-mapping-2.0</tt>&nbsp;to&nbsp;<tt>urn:nhibernate-mapping-2.2</tt>&nbsp;in the&nbsp;<tt>hibernate-mapping</tt>&nbsp;element. If you get &quot;XML validation error: Could not find schema information for the element &#39;urn:nhibernate-mapping-2.0:hibernate-mapping&#39;&quot;, you forgot to change the namespace.</p>
+<a name="A14"></a>
+<h4>One-to-many association to a subclass requires explicit&nbsp;<tt>where</tt>&nbsp;attribute.</h4>
+<p>If you have a one-to-many association to a class that is part of a&nbsp;<tt>subclass</tt>&nbsp;hierarchy (i.e. using table-per-class-hierarchy strategy), you may need to add a&nbsp;<tt>where</tt>&nbsp;attribute to the collection element since NHibernate no longer adds the discriminator restriction automatically.</p>
+<p>This is probably best explained in code. The mapping below will no longer work as intended:</p>
+<pre class="code">&lt;class name=&quot;Person&quot;&gt;
+   ...
+   &lt;!-- Cat and Dog are subclasses of Animal, mapped using &lt;subclass&gt; --&gt;
+   &lt;bag name=&quot;Cats&quot;&gt;
+      &lt;one-to-many class=&quot;Cat&quot; /&gt;
+   &lt;/bag&gt;
+
+   &lt;bag name=&quot;Dogs&quot;&gt;
+      &lt;one-to-many class=&quot;Dog&quot; /&gt;
+   &lt;/bag&gt;
+&lt;/class&gt;
+</pre>
+<p>To make it work again, add explicit&nbsp;<tt>where</tt>&nbsp;attributes:</p>
+<pre class="code">&lt;class name=&quot;Person&quot;&gt;
+   ...
+   &lt;bag name=&quot;Cats&quot; where=&quot;discriminator = &#39;CAT&#39;&quot;&gt;
+      &lt;one-to-many class=&quot;Cat&quot; /&gt;
+   &lt;/bag&gt;
+
+   &lt;bag name=&quot;Dogs&quot; where=&quot;discriminator = &#39;DOG&#39;&quot;&gt;
+      &lt;one-to-many class=&quot;Dog&quot; /&gt;
+   &lt;/bag&gt;
+&lt;/class&gt;
+</pre>
+<a name="A15"></a>
+<h3>Runtime Changes</h3>
+<a name="A16"></a>
+<h4>Database connection release mode</h4>
+<p>In NHibernate 1.0 a session acquired a database connection when needed and then held onto to it until closed. As of 1.2, however, the session will release the connection after the database transaction completes. If you are not using NHibernate transactions, the session assumes it is in auto-commit mode, and will release the connection after every operation. The session will automatically re-acquire connection the next time it is needed.</p>
+<p>This behavior can be overridden, but typically it is best to not override this default (unless you are using NHibernate with distributed transactions, in which case the default behavior is inappropriate). If your application depends on some quirk of the old behavior (like having the same connection available beyond transaction boundaries, etc) then you may need to tweak this; but you should view this as a problem with your application logic and fix that. Or, if you believe that you can &quot;read data without or outside of a transaction&quot;, you will likely face problems in the future versions of NHibernate. Of course, there can be no data access outside of a transaction, be it read or write access, and NHibernate will make it much more difficult to write bad code that relies on auto-commit side effects. See section &quot;Connection Release Modes&quot; in the documentation for more details.</p>
+<a name="A17"></a>
+<h4>Version numbers start with 1</h4>
+<p>The version property of a transient entity will be set to 1 when the entity is persisted (NHibernate 1.0 set the version number to 0). This was done to allow using a non-nullable type for the version property (such as&nbsp;<tt>Int32</tt>&nbsp;or&nbsp;<tt>Int64</tt>), so that 0 could be used as&nbsp;<tt>unsaved-value</tt>&nbsp;for the property.</p>
+<a name="A18"></a>
+<h4><tt>ISession.Get()</tt>&nbsp;will never return an unitialized proxy</h4>
+<p>Previously, calling&nbsp;<tt>ISession.Get()</tt>&nbsp;could return an uninitialized proxy if the session contained the proxy as a result of some earlier operations. In NHibernate 1.2,&nbsp;<tt>Get()</tt>&nbsp;will initialize the proxy in this case before returning it.</p>
+<a name="A19"></a>
+<h4><tt>ISession.Transaction</tt>&nbsp;is always active</h4>
+<p><tt>ISession.Transaction</tt>&nbsp;property gives access to the current transaction associated with a session. Unlike previous NHibernate versions, as soon as this transaction is committed, a new transaction is associated with the session. Thus,&nbsp;<tt>ISession.Transaction.WasCommitted</tt>&nbsp;and&nbsp;<tt>WasRolledBack</tt>&nbsp;will always return&nbsp;<tt>false</tt>.</p>
+<p>To be able to check the status of a particular transaction, assign it to a local variable:</p>
+<pre class="code">ITransaction myTransaction = ISession.Transaction;
+ISession.Transaction.Commit();
+// ISession.Transaction.WasCommitted is false here,
+// myTransaction.WasCommitted is true.
+</pre>
+<a name="A20"></a>
+<h4>Changes in ADO.NET provider assembly loading</h4>
+<p>NHibernate 1.2 now uses&nbsp;<tt>Assembly.Load()</tt>&nbsp;instead of&nbsp;<tt>Assembly.LoadWithPartialName()</tt>&nbsp;to load driver assemblies. This means that it will no longer look for the highest-versioned assembly in the Global Assembly Cache (GAC), which was sometimes undesirable. Instead, it is now your responsibility to either put the provider assembly into the application directory, or add a&nbsp;<tt>qualifyAssembly</tt>&nbsp;element to the application configuration file, specifying the full name of the assembly.</p>
+<p>For example, if you are using MySQL Connector/.NET, you should either put&nbsp;<tt>MySql.Data.dll</tt>&nbsp;into the application directory (or some other directory from where<tt>Assembly.Load()</tt>&nbsp;can pick it up), or put it in the GAC and add a&nbsp;<tt>qualifyAssembly</tt>&nbsp;element to the configuration file:</p>
+<pre class="code">&lt;qualifyAssembly
+    partialName=&quot;MySql.Data&quot;
+    fullName=&quot;MySql.Data, Version=..., PublicKeyToken=...&quot;/&gt;
+</pre>
+<a name="A21"></a>
+<h3>Query Language Changes</h3>
+<a name="A22"></a>
+<h4>Changed aggregation (count, sum, avg) function return types</h4>
+<p>In alignment with Hibernate, the count, sum and avg functions now default to return types as specified by the JPA specification. This can result in&nbsp;<tt>InvalidCastException</tt>&nbsp;&#39;s at runtime if you used aggregation in HQL queries.</p>
+<p>The new type rules are as follows:</p>
+<ul>
+<li>COUNT returns Int64.</li>
+<li>MAX, MIN return the type of the property to which they are applied.</li>
+<li>AVG returns Double.</li>
+<li>SUM returns Int64 when applied to properties of integral types; Double when applied to properties of floating point types; and Decimal when applied to state-fields of type Decimal.</li>
+</ul>
+<p>If you cannot change to the new type handling the following code can be used to provide &quot;classic&quot; NHibernate behavior for HQL aggregation.</p>
+<pre class="code">  Configuration classicCfg = new Configuration(); 
+  classicCfg.AddSqlFunction( &quot;count&quot;, new ClassicCountFunction()); 
+  classicCfg.AddSqlFunction( &quot;avg&quot;, new ClassicAvgFunction()); 
+  classicCfg.AddSqlFunction( &quot;sum&quot;, new ClassicSumFunction()); 
+  ISessionFactory classicSf = classicCfg.BuildSessionFactory();
+</pre>
+<a name="A23"></a>
+<h4>Empty&nbsp;<tt>Disjunction</tt>&nbsp;evaluates to false</h4>
+<p>A&nbsp;<tt>Disjunction</tt>&nbsp;with no added conditions will always evaluate to false. This is a change from 1.0 and Hibernate, where an empty disjunction evaluates to true, but we feel it is more correct.</p>
+<a name="A24"></a>
+<h3>Security-Related Changes</h3>
+<a name="A25"></a>
+<h4>Strong name key is now public</h4>
+<p>NHibernate now uses a publicly available strong name key pair (<tt>NHibernate.snk</tt>) to strong-name binary .NET assemblies. If you relied on the key being kept private for security, you should switch to other means of assuring assembly integrity, such as using a cryptographic hash.</p>
+<p>The original key pair used to sign NHibernate 1.0.x assemblies is still kept private.</p>
+<a name="A26"></a>
+<h4>Assemblies are marked with AllowPartiallyTrustedCallersAttribute</h4>
+<p>Several assemblies have AllowPartiallyTrustedCallersAttribute (APTCA) applied to them, to make it easier to use NHibernate under Medium Trust Level. This attribute may potentially introduce security issues. To recompile NHibernate without APTCA, use this NAnt command:</p>
+<pre class="code">nant -D:assembly.allow-partially-trusted-callers=false build</pre>
+</p></div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+
+<div class="CommonContentBox">
+    <div style="float: right;">
+        
+                <a href="../../login.aspx%3FReturnUrl=%252Fwikis%252Freference2-0en%252Ffrom-1-0-to-1-2.aspx.html"><img src="../../Themes/hawaii/images/wiki/add-a-new-comment.gif" alt="" style="border-width:0px;" /></a>
+            
+    </div>
+    <h3 class="CommonContentBoxHeader">Recent Comments</h3>
+    <div class="CommonContentBoxContent">
+        
+                <div class="CommonMessageWarning">Leave the first comment for this page.</div>
+            
+                <a href="from-1-0-to-1-2/comments.aspx.html">View All</a>
+            
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+var ctl00_ctl00_bcr_bcr_ctl08 = new RateableContentYesNoRating('ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08','ctl00_ctl00_bcr_bcr_ctl08_image','ctl00_ctl00_bcr_bcr_ctl08_percent','ctl00_ctl00_bcr_bcr_ctl08_percenttext','ctl00_ctl00_bcr_bcr_ctl08_buttons','ctl00_ctl00_bcr_bcr_ctl08_thanks','WikiRating','WikiRatingActive',new Function('r','s','f','WebForm_DoCallback(\'ctl00$ctl00$bcr$bcr$ctl08\',r,s,r,f,false)'));
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_bcr_bcr_ctl09_ctl01 = new Telligent_InlineEditorPanel('ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01','ctl00_ctl00_bcr_bcr_ctl09_ctl01_State','ctl00_ctl00_bcr_bcr_ctl09_ctl00',false,null,null,null);
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

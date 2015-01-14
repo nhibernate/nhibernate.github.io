@@ -1,0 +1,430 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="NHibernate 2.0 Reference Documentation (RSS 2.0)" href="../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="NHibernate 2.0  (RSS 2.0)" href="../../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Announcements (RSS 2.0)" href="../../../../members/fabiomaulo/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Comments (RSS 2.0)" href="../../../../members/fabiomaulo/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Activities (RSS 2.0)" href="../../../../members/fabiomaulo/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Fabio Maulo&#39;s Friends Activity (RSS 2.0)" href="../../../../members/fabiomaulo/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Preface: Revision #3 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="3.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2ODYxODYyODBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRS2dku67jB2SYXikwjMUBFR1YWDw==" />
+</div>
+
+
+<script src="../../../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../../../cfs-file_ashx/key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="http://nhforge.org/login.aspx?ReturnUrl=%2fwikis%2freference2-0en%2fnhibernate-2-0-reference-documentation%2frevision%2f3.aspx">Sign in </a>
+         | <a href="../../../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_ViewRevision">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../../../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../../../general/default.aspx.html">General</a></li>
+                    
+                        
+                        <li><a href="../../../howtonh/default.aspx.html">How to</a></li>
+                    
+                        
+                        <li><a href="../../../patternsandpractices/default.aspx.html">Patterns&amp;Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../../../index.html">Wikis</a>
+        &raquo;
+        <a href="../../default.aspx.html">NHibernate 2.0 </a>
+        &raquo;
+        <a href="../../nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a>
+        &raquo;
+        Revision #3
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Preface: 
+            Revision #3
+        </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="../../default.aspx.html">Home</a></li><li><a href="../rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-2-0-reference-documentation.aspx.html" class="Selected">NHibernate 2.0 Reference Documentation</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../architecture.aspx.html">Architecture</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="../../query-syntax.aspx.html">Query Syntax</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(58, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a></li><li><a href="../../nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-2-0-reference-documentation.aspx.html" class="Selected">NHibernate 2.0 Reference Documentation</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../architecture.aspx.html">Architecture</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="../../query-syntax.aspx.html">Query Syntax</a></li><li><a href="3.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(58, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a></li><li><a href="../../nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag2"><a href="../../tags/Architecture/default.aspx.html" rel="tag">Architecture</a></li>
+<li class="CommonTag6"><a href="../../tags/Audit/default.aspx.html" rel="tag">Audit</a></li>
+<li class="CommonTag6"><a href="../../tags/Concurrency/default.aspx.html" rel="tag">Concurrency</a></li>
+<li class="CommonTag6"><a href="../../tags/Configuration/default.aspx.html" rel="tag">Configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/convention+over+configuration/default.aspx.html" rel="tag">convention over configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/Conversation/default.aspx.html" rel="tag">Conversation</a></li>
+<li class="CommonTag6"><a href="../../tags/entity+name/default.aspx.html" rel="tag">entity name</a></li>
+<li class="CommonTag3"><a href="../../tags/events/default.aspx.html" rel="tag">events</a></li>
+<li class="CommonTag6"><a href="../../tags/Filters/default.aspx.html" rel="tag">Filters</a></li>
+<li class="CommonTag2"><a href="../../tags/FluentNH/default.aspx.html" rel="tag">FluentNH</a></li>
+<li class="CommonTag6"><a href="../../tags/IIdentifierGenerator/default.aspx.html" rel="tag">IIdentifierGenerator</a></li>
+<li class="CommonTag6"><a href="../../tags/Interceptor/default.aspx.html" rel="tag">Interceptor</a></li>
+<li class="CommonTag6"><a href="../../tags/IoC+container/default.aspx.html" rel="tag">IoC container</a></li>
+<li class="CommonTag2"><a href="../../tags/IUserType/default.aspx.html" rel="tag">IUserType</a></li>
+<li class="CommonTag3"><a href="../../tags/lazy+loading/default.aspx.html" rel="tag">lazy loading</a></li>
+<li class="CommonTag6"><a href="../../tags/listener/default.aspx.html" rel="tag">listener</a></li>
+<li class="CommonTag6"><a href="../../tags/log/default.aspx.html" rel="tag">log</a></li>
+<li class="CommonTag6"><a href="../../tags/logging/default.aspx.html" rel="tag">logging</a></li>
+<li class="CommonTag1"><a href="../../tags/Mapping/default.aspx.html" rel="tag">Mapping</a></li>
+<li class="CommonTag6"><a href="../../tags/Mapping+by+code/default.aspx.html" rel="tag">Mapping by code</a></li>
+<li class="CommonTag1"><a href="../../tags/Nhibernate/default.aspx.html" rel="tag">Nhibernate</a></li>
+<li class="CommonTag6"><a href="../../tags/Nhibernate+Documentation/default.aspx.html" rel="tag">Nhibernate Documentation</a></li>
+<li class="CommonTag3"><a href="../../tags/property/default.aspx.html" rel="tag">property</a></li>
+<li class="CommonTag2"><a href="../../tags/query/default.aspx.html" rel="tag">query</a></li>
+<li class="CommonTag1"><a href="../../tags/Session/default.aspx.html" rel="tag">Session</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="../../tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.02/4TA8XMWXSUMY.png" alt="" style="border-width:0px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/fabiomaulo/default.aspx.html">Fabio Maulo</a><br/> on 08-31-2008</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/tobinharris/default.aspx.html">Tobin Harris</a><br/> on 02-07-2009</div></div><div class="WikiPageDetailsSummaryArea"><strong>6</strong> people found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden; width: 100%;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../../nhibernate-2-0-reference-documentation.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /></a>                            
+                                <a href="../../nhibernate-2-0-reference-documentation.aspx.html">Article</a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                                    <div class="CommonPaneTab">
+                                    
+                                    
+                                    </div>
+                                
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../comments.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../comments.aspx.html">Comments</a> (0)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <a href="../history.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../history.aspx.html">History</a> (8)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">
+                <h2 class="CommonContentBoxHeaderSmall"><span><a href="../../nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a></span></h2>
+                <div><p><a href="http://www.nhforge.org/doc/nh/en/index.htm">Staic reference</a></p>
+<p><span style="font-family:arial,sans-serif;">Working with object-oriented software and a relational database can be cumbersome
+		and time consuming in today&#39;s enterprise environments. NHibernate is an object/relational
+		mapping tool for .NET environments. The term object/relational mapping (ORM) refers to
+		the technique of mapping a data representation from an object model to a relational
+		data model with a SQL-based schema.
+	</span></p>
+<p style="font-family:arial,sans-serif;">
+		NHibernate not only takes care of the mapping from .NET classes to
+		database tables (and from .NET data types to SQL data types), but also provides data
+		query and retrieval facilities and can significantly reduce development time otherwise
+		spent with manual data handling in SQL and ADO.NET.
+	</p>
+<p style="font-family:arial,sans-serif;">
+		NHibernate&#39;s goal is to relieve the developer from 95 percent of common data persistence
+		related programming tasks. NHibernate may not be the best solution for data-centric
+		applications that only use stored-procedures to implement the business logic in the
+		database, it is most useful with object-oriented domain models and business logic in
+		the .NET-based middle-tier. However, NHibernate can certainly help you to remove or
+		encapsulate vendor-specific SQL code and will help with the common task of result set
+		translation from a tabular representation to a graph of objects.
+	</p>
+<p style="font-family:arial,sans-serif;">
+		If you are new to NHibernate and Object/Relational Mapping or even .NET Framework,
+		please follow these steps:
+	</p>
+<div style="font-family:arial,sans-serif;">
+<ol>
+<li>
+<p>
+				Read Your first NHibernate based application for a 30 minute tutorial.
+			</p>
+</li>
+<li>
+<p>
+				Read Chapter&nbsp;2, <i>Architecture</i> to understand the environments where
+				NHibernate can be used.
+			</p>
+</li>
+<li>
+<p>
+				FAQs are answered on the NHibernate community blog.
+			</p>
+</li>
+</ol>
+</div>
+<p style="font-family:arial,sans-serif;">
+		If you have questions, use the
+		<a href="http://groups.google.com/group/nhusers">NHibernate group</a>.
+		We also provide a <a href="http://jira.nhibernate.org/">JIRA issue trackings system</a>
+		for bug reports and feature requests.
+		If you are interested in the development of NHibernate, join the <a href="http://sourceforge.net/mail/?group_id=29446">developer mailing list</a>.</p></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/nhibernate-2-0-reference-documentation/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/nhibernate-2-0-reference-documentation/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/nhibernate-2-0-reference-documentation/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/nhibernate-2-0-reference-documentation/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>

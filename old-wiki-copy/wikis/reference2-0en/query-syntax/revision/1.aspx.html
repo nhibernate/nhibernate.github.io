@@ -1,0 +1,1686 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head><meta http-equiv="X-UA-Compatible" content="IE=7" /><meta name="robots" content="index,follow" />
+<meta name="description" content="The official NHibernate community site. Download NHibernate. Read blogs. Contribute to the NHibernate Wiki. Find reference documentation." />
+<meta name="keywords" content="NHibernate, NHibernate Contrib, community, Burrow, Downloads" />
+<meta name="GENERATOR" content="CommunityServer 2008.5 SP1 (Build: 31106.3070)" />
+<link rel="shortcut icon" type="image/ico" href="../../../../favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="Query Syntax (RSS 2.0)" href="../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="NHibernate 2.0  (RSS 2.0)" href="../../rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Diego Jancic&#39;s Announcements (RSS 2.0)" href="../../../../members/diegojancic/announcements/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Diego Jancic&#39;s Comments (RSS 2.0)" href="../../../../members/diegojancic/comments/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Diego Jancic&#39;s Activities (RSS 2.0)" href="../../../../members/diegojancic/activities/rss.aspx"  />
+<link rel="alternate" type="application/rss+xml" title="Diego Jancic&#39;s Friends Activity (RSS 2.0)" href="../../../../members/diegojancic/activities/friendrss.aspx"  />
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <style type="text/css"> body { font-size: 84%; } </style>
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/Common.css" type="text/css" media="screen,print" />
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/common_print.css" type="text/css" media="print" />
+        
+    
+    <link rel="stylesheet" href="../../../../Themes/hawaii/style/wiki.css" type="text/css" media="screen,print" />
+	
+
+        <link rel="stylesheet" href="../../../../themes/hawaii/style/DynamicStyle.aspx.css" type="text/css" media="screen" />
+        <!--[if lte IE 6]>
+            <link rel="stylesheet" href="/themes/hawaii/style/ie6.css" type="text/css" media="screen" />
+        <![endif]-->
+    <meta name="google-site-verification" content="u9qihpHbzSFdf2ypCUvCQrj9IJkANGzorC8zMk0859M" />
+<title>
+	Query Syntax: Revision #1 - NHibernate Forge
+</title></head>
+	<body>
+		<form name="aspnetForm" method="post" action="1.aspx.html" id="aspnetForm">
+<div>
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwULLTE2ODYxODYyODBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYBBTBjdGwwMCRjdGwwMCRzciRzciRjdGwwMCRjdGwwMCRUaXRsZUJhclNlYXJjaFRleHRS2dku67jB2SYXikwjMUBFR1YWDw==" />
+</div>
+
+
+<script src="../../../../WebResource.axd%3Fd=0gbcOAOlbWsHyCtP1tLKZQbpxrEkhg31E8L04T1x-hMLrsMonvmUNQvxBohSywWHueFgWT841lW9e5k7Gp2DbPsOLeN3Sv3SB7czfVSlQGxYOHnJcLlKfh3v9vlcjJ9ggvps0fjahw73J3SVYQmGvS0rXng1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=qXX_qxw7Y60qjc1NsxHnuIWUCy9JxjEUKLrY5KEQyuYhKzv3UmRPH805gTXU5edfSsLl7PHTIDuZbzGOp5UYEWeQ6anyqFa-m5TiNnZiD5MOrgiKWAZBgPyJ267gdCbk0_TpK2BaAhLvEgyM28dt9SYQ2UM1&amp;t=634395149500000000" type="text/javascript"></script>
+<script src="../../../../WebResource.axd%3Fd=c5kkseX-7hUDg441H_iVoy5ws7YKvwS4KliHEKHuRl5UdJkUU5Jbdf2sxzCcbfyn6sqe17DzqhSTfAyV8nyJKMHhScl2IzjSz37RVYryN9Omis3K0NCj_OJ4fHZH3n9_IPBlNLVyYL45kjJL_zhydrkKTi3FfxaImDeS_1JZIO7o9iFs0&amp;t=634395149500000000" type="text/javascript"></script>
+						
+
+			
+
+		    
+		        <div id="CommonHeader">
+		            <div class="Common">
+		                <div id="CommonHeaderTitleArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="middle">
+		                        <td><div style="margin-right: 10px;"><img src="../../../../cfs-file_ashx/key/CommunityServer.Components.SiteFiles/logos/LogoNH.gif" alt="" style="border-width:0px;" /></div></td>
+		                        <td>
+		                            <div class="CommonHeaderTitle">NHibernate Forge</div>
+		                            <div class="CommonHeaderTitleDescription">The official new home for the NHibernate for .NET community</div>
+		                        </td>
+		                    </tr></table>
+		                </div>
+		                <div id="CommonHeaderUserArea">
+		                    <table cellpadding="0" cellspacing="0" border="0"><tr valign="top"><td>
+                                <div id="CommonHeaderUserContent">
+                                    <div id="CommonHeaderUserWelcome">
+                                        
+        <a href="http://nhforge.org/login.aspx?ReturnUrl=%2fwikis%2freference2-0en%2fquery-syntax%2frevision%2f1.aspx">Sign in </a>
+         | <a href="../../../../user/CreateUser.aspx%3FReturnUrl=.html">Join</a>
+        | <a href="http://dev.communityserver.com/r.ashx?K&amp;siteurl=wikis.wiki_Page_ViewRevision">Help</a>
+     
+
+
+                                    </div>
+                                </div>
+                            </td></tr></table>
+                        </div>
+                    </div>
+                </div>
+                <div id="CommonNavigation">
+                    <div class="Common"><div class="Inner">
+                        <ul>
+                                
+                                <li><a href="../../../../index.html">Home</a></li>
+                            
+                                
+                                <li><a href="../../../../blogs/nhibernate.html">Blog</a></li>
+                            
+                                <li><a class="Selected" href="../../../index.html">Wikis</a></li>
+                                
+                            
+                                
+                                <li><a href="../../../../groups/index.html">Groups</a></li>
+                            
+                                
+                                <li><a href="../../../../doc/nh/en/index.html">Reference</a></li>
+                            
+                                
+                                <li><a href="http://nhibernate.jira.com">Issue tracker</a></li>
+                            
+                                
+                                <li><a href="https://github.com/nhibernate/nhibernate-core">Source Code</a></li>
+                            </ul>
+                        <div style="clear: both;"></div>
+                     </div></div>
+                </div>
+                
+                        <div id="CommonNavigation2">
+                            <div class="Common"><div class="Inner">
+                                <ul>
+                    
+                        
+                        <li><a href="../../../general/default.aspx.html">General</a></li>
+                    
+                        
+                        <li><a href="../../../howtonh/default.aspx.html">How to</a></li>
+                    
+                        
+                        <li><a href="../../../patternsandpractices/default.aspx.html">Patterns&amp;Practices</a></li>
+                    
+                                </ul>
+                            </div></div>
+                        </div>
+                    
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../../../index.html">Wikis</a>
+        &raquo;
+        <a href="../../default.aspx.html">NHibernate 2.0 </a>
+        &raquo;
+        <a href="../../query-syntax.aspx.html">Query Syntax</a>
+        &raquo;
+        Revision #1
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                <div id="CommonSearch">
+                    
+    
+        
+                <div class="CommonSearchArea">
+                    <div class="CommonSearchRoundTop"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                    <div class="CommonSearchContent"><div class="CommonSearchContentInner">
+                        <input name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchText" type="text" maxlength="64" size="15" id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchText" onclick="if(this.defaultValue==this.value) this.value='';" onblur="if(this.value=='') this.value=this.defaultValue;" onkeydown="return KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event);" /><input type="submit" name="ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton" value=" " id="ctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton" class="CommonSearchButton" />
+                    </div></div>
+                    <div class="CommonSearchRoundBottom"><div class="r1"></div><div class="r2"></div><div class="r3"></div><div class="r4"></div></div>
+                </div>
+            
+    
+
+                </div>
+                <div id="CommonTitle">
+                    
+    
+    <h1 class="CommonTitle">Query Syntax: 
+            Revision #1
+        </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarRight">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Shortcuts</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class='CommonSidebarList'><li><a href="../../default.aspx.html">Home</a></li><li><a href="../rss.aspx">RSS feed for page</a></li></ul>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Wiki Page Hierarchy</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../architecture.aspx.html">Architecture</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="../../query-syntax.aspx.html" class="Selected">Query Syntax</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01._expand(58, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a></li><li><a href="../../nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Pages</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div><ul class="CommonHierarchicalList"><li><a href="../../nhibernate-2-0-reference-documentation.aspx.html">NHibernate 2.0 Reference Documentation</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(5, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../architecture.aspx.html">Architecture</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(11, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../isessionfactory-configuration.aspx.html">ISessionFactory Configuration</a></li><li><a href="../../query-syntax.aspx.html" class="Selected">Query Syntax</a></li><li><a href="1.aspx.html#" onclick="ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01._expand(58, this); return false;"><img src="../../../../WebResource.axd%3Fd=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000" alt="+" style="border-width: 0;" /></a><a href="../../known-quot-breaking-changes-quot.aspx.html">Known &quot;Breaking Changes&quot;</a></li><li><a href="../../nhibernate-documentation-structure-proposal.aspx.html">NHibernate Documentation Structure Proposal</a></li></ul></div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Tags</h4>
+	                    <div class="CommonContentBoxContent">
+	            <ul class="CommonSidebarTagCloud">
+<li class="CommonTag2"><a href="../../tags/Architecture/default.aspx.html" rel="tag">Architecture</a></li>
+<li class="CommonTag6"><a href="../../tags/Audit/default.aspx.html" rel="tag">Audit</a></li>
+<li class="CommonTag6"><a href="../../tags/Concurrency/default.aspx.html" rel="tag">Concurrency</a></li>
+<li class="CommonTag6"><a href="../../tags/Configuration/default.aspx.html" rel="tag">Configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/convention+over+configuration/default.aspx.html" rel="tag">convention over configuration</a></li>
+<li class="CommonTag6"><a href="../../tags/Conversation/default.aspx.html" rel="tag">Conversation</a></li>
+<li class="CommonTag6"><a href="../../tags/entity+name/default.aspx.html" rel="tag">entity name</a></li>
+<li class="CommonTag3"><a href="../../tags/events/default.aspx.html" rel="tag">events</a></li>
+<li class="CommonTag6"><a href="../../tags/Filters/default.aspx.html" rel="tag">Filters</a></li>
+<li class="CommonTag2"><a href="../../tags/FluentNH/default.aspx.html" rel="tag">FluentNH</a></li>
+<li class="CommonTag6"><a href="../../tags/IIdentifierGenerator/default.aspx.html" rel="tag">IIdentifierGenerator</a></li>
+<li class="CommonTag6"><a href="../../tags/Interceptor/default.aspx.html" rel="tag">Interceptor</a></li>
+<li class="CommonTag6"><a href="../../tags/IoC+container/default.aspx.html" rel="tag">IoC container</a></li>
+<li class="CommonTag2"><a href="../../tags/IUserType/default.aspx.html" rel="tag">IUserType</a></li>
+<li class="CommonTag3"><a href="../../tags/lazy+loading/default.aspx.html" rel="tag">lazy loading</a></li>
+<li class="CommonTag6"><a href="../../tags/listener/default.aspx.html" rel="tag">listener</a></li>
+<li class="CommonTag6"><a href="../../tags/log/default.aspx.html" rel="tag">log</a></li>
+<li class="CommonTag6"><a href="../../tags/logging/default.aspx.html" rel="tag">logging</a></li>
+<li class="CommonTag1"><a href="../../tags/Mapping/default.aspx.html" rel="tag">Mapping</a></li>
+<li class="CommonTag6"><a href="../../tags/Mapping+by+code/default.aspx.html" rel="tag">Mapping by code</a></li>
+<li class="CommonTag1"><a href="../../tags/Nhibernate/default.aspx.html" rel="tag">Nhibernate</a></li>
+<li class="CommonTag6"><a href="../../tags/Nhibernate+Documentation/default.aspx.html" rel="tag">Nhibernate Documentation</a></li>
+<li class="CommonTag3"><a href="../../tags/property/default.aspx.html" rel="tag">property</a></li>
+<li class="CommonTag2"><a href="../../tags/query/default.aspx.html" rel="tag">query</a></li>
+<li class="CommonTag1"><a href="../../tags/Session/default.aspx.html" rel="tag">Session</a></li>
+</ul>
+
+				        </div>
+				        <div class="CommonContentBoxFooter"><a href="../../tags/default.aspx.html">View more</a></div>
+			        </div>
+	            
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">First published by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/diegojancic/default.aspx.html">Diego Jancic</a><br/> on 01-07-2009</div></div><div class="CustomWikiPageDetailsArea"><div class="CustomWikiPageDetailsTitle">Last revision by:</div><div class="CustomWikiPageDetailsAvatar"><img src="../../../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;" /></div><div class="CustomWikiPageDetailsContent"><a href="../../../../members/diegojancic/default.aspx.html">Diego Jancic</a><br/> on 01-07-2009</div></div><div class="WikiPageDetailsSummaryArea"><strong>1</strong> person found this article useful.</div>
+				        </div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                <div id="CommonSidebarLeft">
+				    
+				</div>
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        <div class="CommonPaneTabSet">
+            <div style="overflow: hidden; width: 100%;">
+                <table border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../../query-syntax.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-article-tab.png" alt="" style="border-width:0px;" /></a>                            
+                                <a href="../../query-syntax.aspx.html">Article</a>
+                            </div>
+                        </td>
+                        <td>
+                            
+                                    <div class="CommonPaneTab">
+                                    
+                                    
+                                    </div>
+                                
+                        </td>
+                        <td>
+                            <div class="CommonPaneTab">
+                                <a href="../comments.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-comment-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../comments.aspx.html">Comments</a> (0)
+                            </div>
+                        </td>
+                        <td>
+                            <div class="CommonPaneTabSelected">
+                                <a href="../history.aspx.html"><img align="absmiddle" border="0" src="../../../../Themes/hawaii/images/wiki/wiki-icon-history-tab.png" alt="" style="border-width:0px;" /></a>
+                                <a href="../history.aspx.html">History</a> (3)
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="CommonPane">
+            <div class="CommonGroupedContentArea">
+                <h2 class="CommonContentBoxHeaderSmall"><span><a href="../../query-syntax.aspx.html">Query Syntax</a></span></h2>
+                <div><p>Below is the HQL full sintax, based on the latest Hibernate version, and which is being implemented in NHibernate. However, some&nbsp;statements or expressions&nbsp;might be not yet valid for NHibernate.</p>
+<h2>Syntax</h2>
+<p><br /><a name="query"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#query"><strong><span style="color:#0095b6;">&lt;Query&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#deletestatement"><strong><span style="color:#0095b6;">&lt;DeleteStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#updatestatement"><strong><span style="color:#0095b6;">&lt;UpdateStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#insertstatement"><strong><span style="color:#0095b6;">&lt;InsertStatement&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="deletestatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#deletestatement"><strong><span style="color:#0095b6;">&lt;DeleteStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>DELETE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DELETE</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="updatestatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#updatestatement"><strong><span style="color:#0095b6;">&lt;UpdateStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>VERSIONED</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>VERSIONED</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="assignlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="insertstatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#insertstatement"><strong><span style="color:#0095b6;">&lt;InsertStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>INSERT</strong></span> <span class="ssTerminal"><strong>INTO</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="selectstatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectclause"><strong><span style="color:#0095b6;">&lt;SelectClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="selectclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectclause"><strong><span style="color:#0095b6;">&lt;SelectClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>SELECT</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>SELECT</strong></span> <span class="ssTerminal"><strong>NEW</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="fromclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#groupbyclause"><strong><span style="color:#0095b6;">&lt;GroupByClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#havingclause"><strong><span style="color:#0095b6;">&lt;HavingClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderbyclause"><strong><span style="color:#0095b6;">&lt;OrderByClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="joinclausechain"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="joinclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joindefinition"><strong><span style="color:#0095b6;">&lt;JoinDefinition&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#withclause"><strong><span style="color:#0095b6;">&lt;WithClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="joindefinition"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#joindefinition"><strong><span style="color:#0095b6;">&lt;JoinDefinition&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>RIGHT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>RIGHT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>FULL</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>INNER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>INNER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="withclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#withclause"><strong><span style="color:#0095b6;">&lt;WithClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>WITH</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="whereclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>WHERE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="groupbyclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#groupbyclause"><strong><span style="color:#0095b6;">&lt;GroupByClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>&#39;GROUP BY&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="havingclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#havingclause"><strong><span style="color:#0095b6;">&lt;HavingClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>HAVING</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="orderbyclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderbyclause"><strong><span style="color:#0095b6;">&lt;OrderByClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>&#39;ORDER BY&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="orderlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="orderitem"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#ordertype"><strong><span style="color:#0095b6;">&lt;OrderType&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="ordertype"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#ordertype"><strong><span style="color:#0095b6;">&lt;OrderType&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>ASC</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DESC</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ASCENDING</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DESCENDING</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="restriction"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>ALL</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DISTINCT</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="aggregateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aggregateexpression"><strong><span style="color:#0095b6;">&lt;AggregateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssTerminal"><strong>&#39;*&#39;</strong></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>AVG</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MIN</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MAX</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="functionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#functionexpression"><strong><span style="color:#0095b6;">&lt;FunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>CAST</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimfunctionexpression"><strong><span style="color:#0095b6;">&lt;TrimFunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#extractfunctionexpression"><strong><span style="color:#0095b6;">&lt;ExtractFunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>YEAR</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MONTH</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DAY</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>HOUR</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MINUTE</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>SECOND</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="trimfunctionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimfunctionexpression"><strong><span style="color:#0095b6;">&lt;TrimFunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>TRIM</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>TRIM</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimoperands"><strong><span style="color:#0095b6;">&lt;TrimOperands&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="trimoperands"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimoperands"><strong><span style="color:#0095b6;">&lt;TrimOperands&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="trimspecification"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>LEADING</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>TRAILING</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>BOTH</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="extractfunctionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#extractfunctionexpression"><strong><span style="color:#0095b6;">&lt;ExtractFunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>EXTRACT</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#extractfield"><strong><span style="color:#0095b6;">&lt;ExtractField&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="extractfield"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#extractfield"><strong><span style="color:#0095b6;">&lt;ExtractField&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>YEAR</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MONTH</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>DAY</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>HOUR</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>MINUTE</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>SECOND</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>&#39;TIMEZONE_HOUR&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>&#39;TIMEZONE_MINUTE&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="collectionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>INDICES</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="elementsexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>ELEMENTS</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="entityname"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="entitynamelist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="aliasedentityname"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssTerminal"><strong>CLASS</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="aliasedentitynamelist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="aliasedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="aliasedexpressionlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="expression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orexpression"><strong><span style="color:#0095b6;">&lt;OrExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="orexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#orexpression"><strong><span style="color:#0095b6;">&lt;OrExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>OR</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="andexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="notexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>NOT</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="quantifiedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>SOME</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ALL</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ANY</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>SOME</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ALL</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ANY</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>SOME</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ALL</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>ANY</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="predicateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>BETWEEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>BETWEEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>EMPTY</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>EMPTY</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>LIKE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>LIKE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#memberpredicate"><strong><span style="color:#0095b6;">&lt;MemberPredicate&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#existspredicate"><strong><span style="color:#0095b6;">&lt;ExistsPredicate&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&gt;&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&lt;&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&gt;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&lt;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NotEqualOperator</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&gt;&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&lt;&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&gt;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;&lt;=&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NotEqualOperator</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="likeescape"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>ESCAPE</strong></span> <span class="ssTerminal"><strong>StringLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="existspredicate"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#existspredicate"><strong><span style="color:#0095b6;">&lt;ExistsPredicate&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="memberpredicate"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#memberpredicate"><strong><span style="color:#0095b6;">&lt;MemberPredicate&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>MEMBER</strong></span> <span class="ssTerminal"><strong>OF</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>MEMBER</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="mathaddexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;+&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;-&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="mathmultexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;*&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;/&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="mathnegateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>&#39;-&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="caseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseexpression"><strong><span style="color:#0095b6;">&lt;CaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#simplecaseexpression"><strong><span style="color:#0095b6;">&lt;SimpleCaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#searchedcaseexpression"><strong><span style="color:#0095b6;">&lt;SearchedCaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="simplecaseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#simplecaseexpression"><strong><span style="color:#0095b6;">&lt;SimpleCaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>CASE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>END</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="searchedcaseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#searchedcaseexpression"><strong><span style="color:#0095b6;">&lt;SearchedCaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>CASE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>END</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="simplewhenclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="searchedwhenclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="caseresult"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="elseclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>ELSE</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="indexedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#indexedexpression"><strong><span style="color:#0095b6;">&lt;IndexedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>&#39;[&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;]&#39;</strong></span> <span class="ssTerminal"><strong>&#39;.&#39;</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>&#39;[&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;]&#39;</strong></span> <span class="ssTerminal"><strong>&#39;.&#39;</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>&#39;[&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;]&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="stringvalueexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>StringLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>Parameter</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#indexedexpression"><strong><span style="color:#0095b6;">&lt;IndexedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#functionexpression"><strong><span style="color:#0095b6;">&lt;FunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#caseexpression"><strong><span style="color:#0095b6;">&lt;CaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="concatenationexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;||&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="value"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>IntegerLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>FloatLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>HexLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>BooleanLiteral</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#aggregateexpression"><strong><span style="color:#0095b6;">&lt;AggregateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="tuple"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssTerminal"><strong>&#39;(&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;)&#39;</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br /><a name="expressionlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>&#39;,&#39;</strong></span> <span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td align="center">|</td>
+<td><span class="ssNonTerminal"><a href="http://nhforge.org/wikis/reference2-0en/add.aspx#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+                
+            <div id="CommonFooter">
+                <div class="Common">
+                    
+                        
+                	    
+                        
+
+                        
+                                <a href="http://communityserver.com/" target="_blank"><img src="../../../../utility/PoweredByCS_commercial.gif" alt="Powered by Community Server (Commercial Edition), by Telligent Systems " style="border-width:0px;" /></a>
+		                    
+                		
+                    
+                 </div>
+            </div>
+		
+<script type="text/javascript">
+// <![CDATA[
+Telligent_Modal.Configure('/utility/loading.htm',['CommonModal'],['CommonModalTitle'],['CommonModalClose'],['CommonModalContent'],['CommonModalFooter'],['CommonModalResize'],['CommonModalMask'],100,false,true);
+// ]]>
+</script><script type="text/javascript">
+<!--
+function KeyDownHandlerctl00_ctl00_sr_sr_ctl00_ctl00_TitleBarSearchButton(event)
+{
+	if (event.keyCode == 13)
+	{
+		event.returnValue = false;
+		event.cancel = true;
+     __doPostBack('ctl00$ctl00$sr$sr$ctl00$ctl00$TitleBarSearchButton','')
+   return false;
+	}
+}
+
+//-->
+</script>
+<script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl02_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl02$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/query-syntax/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/query-syntax/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+// <![CDATA[
+window.ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01=new WikiPageHierarchy('ctl00_ctl00_rcr_rcr_ctl00_ctl03_ctl00_ctl01_ctl01',new Function('mode','pageId','callback','WebForm_DoCallback(\'ctl00$ctl00$rcr$rcr$ctl00$ctl03$ctl00$ctl01$ctl01\',mode + \':\' + pageId,callback,\"\",null,false)'),'<img src="http://nhforge.org/wikis/reference2-0en/query-syntax/revision/\&quot;/WebResource.axd?d=sNXLzaCqbYO_a-ZjCZB88HF4WT8YRbuRaD2xfyafsCiRqelSVt4GYH9QzNn_EvXM02V5zpjGwsymzmW30OIrbB4EUeqA1XW4oU6sME2qMEcOgSVpfz1_YK7UdKB8bVtbFiuWJt3UljrDk5OnRzQEWKDyXNGX0R6sJsultQeBjufuUDz-0&amp;t=634395149500000000\&quot;" alt=\"+\" style=\"border-width: 0;\" />','<img src="http://nhforge.org/wikis/reference2-0en/query-syntax/revision/\&quot;/WebResource.axd?d=I7Z2L5Ca7ffItUeObf-LA3ykZ3Mbmr-vwfNJv2PfNk2O4alHWIJbJADyKhl0k71mJCpGTePjifKqZQx_Rs64LrGhlEU25qRjlCh8LoYwo2tck8EIbBdQKg5CISopk9hz_6ZbK_GNtBJljwOq57_FBvxYCTM1&amp;t=634395149500000000\&quot;" alt=\"-\" style=\"border-width: 0;\" />','<div>Loading...</div>');
+// ]]>
+</script><script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-5443308-1");
+pageTracker._trackPageview();
+</script></form>
+		
+	</body>
+</html>
