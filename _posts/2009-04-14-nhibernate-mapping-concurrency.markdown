@@ -6,11 +6,15 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["mapping"]
-redirect_from: ["/blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.aspx/", "/blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.html"]
+redirect_from:
+  - "/blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.aspx/"
+  - "/blogs/nhibernate/archive/2009/04/14/nhibernate-mapping-concurrency.aspx/"
+  - "/blogs/nhibernate/archive/2009/04/15/nhibernate-mapping-concurrency.html"
 author: Ayende
 gravatar: 730a9f9186e14b8da5a4e453aca2adfe
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>NHibernate has several concurrency models that you can use:</p>  <ul>   <li>None </li>    <li>Optimistic      <ul>       <li>Dirty </li>        <li>All </li>     </ul>   </li>    <li>Versioned      <ul>       <li>Numeric </li>        <li>Timestamp </li>        <li>DB timestamp </li>     </ul>   </li>    <li>Pessimistic </li> </ul>  <p>We will explore each of those in turn.</p>  <p>None basically means that we fall back to the transaction semantics that we use in the database. The database may throw us out, but aside from that, we don’t really care much about things.</p>  <p>Optimistic is more interesting. It basically states that if we detect a change in the entity, we cannot update it. Let us see a simple example of using optimistic dirty checking for changed fields only:</p>  <blockquote>   <pre><span style="color: #0000ff">&lt;</span><span style="color: #800000">class</span> <span style="color: #ff0000">name</span>=<span style="color: #0000ff">&quot;Person&quot;</span>
 			 <span style="color: #ff0000">optimistic</span>-<span style="color: #ff0000">lock</span>=<span style="color: #0000ff">&quot;dirty&quot;</span>
 			 <span style="color: #ff0000">dynamic</span>-<span style="color: #ff0000">update</span>=<span style="color: #0000ff">&quot;true&quot;</span>
