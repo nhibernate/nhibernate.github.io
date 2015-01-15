@@ -1,0 +1,1607 @@
+---
+layout: doc
+title: HQL Query Syntax
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="query-syntax.html">Query Syntax</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>NHibernate 2.0 </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	    
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/diegojancic/default.aspx.html">Diego Jancic</a><br> on 01-07-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/diegojancic/default.aspx.html">Diego Jancic</a><br> on 01-07-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="query-syntax.html">Query Syntax</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>Below is the HQL full sintax, based on the latest Hibernate version, and which is being implemented in NHibernate. However, <b>some statements or expressions might be not yet valid</b> for NHibernate.</p>
+<h2>Syntax</h2>
+<p><br><a name="query"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#query"><strong><span style="color:#0095b6;">&lt;Query&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#deletestatement"><strong><span style="color:#0095b6;">&lt;DeleteStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#updatestatement"><strong><span style="color:#0095b6;">&lt;UpdateStatement&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#insertstatement"><strong><span style="color:#0095b6;">&lt;InsertStatement&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="deletestatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#deletestatement"><strong><span style="color:#0095b6;">&lt;DeleteStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>DELETE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DELETE</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="updatestatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#updatestatement"><strong><span style="color:#0095b6;">&lt;UpdateStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>VERSIONED</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>UPDATE</strong></span> <span class="ssTerminal"><strong>VERSIONED</strong></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>SET</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="assignlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#assignlist"><strong><span style="color:#0095b6;">&lt;AssignList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="insertstatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#insertstatement"><strong><span style="color:#0095b6;">&lt;InsertStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>INSERT</strong></span> <span class="ssTerminal"><strong>INTO</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="selectstatement"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectclause"><strong><span style="color:#0095b6;">&lt;SelectClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="selectclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectclause"><strong><span style="color:#0095b6;">&lt;SelectClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>SELECT</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>SELECT</strong></span> <span class="ssTerminal"><strong>NEW</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="fromclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#fromclause"><strong><span style="color:#0095b6;">&lt;FromClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#groupbyclause"><strong><span style="color:#0095b6;">&lt;GroupByClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#havingclause"><strong><span style="color:#0095b6;">&lt;HavingClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderbyclause"><strong><span style="color:#0095b6;">&lt;OrderByClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="joinclausechain"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclausechain"><strong><span style="color:#0095b6;">&lt;JoinClauseChain&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="joinclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#joinclause"><strong><span style="color:#0095b6;">&lt;JoinClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#joindefinition"><strong><span style="color:#0095b6;">&lt;JoinDefinition&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#withclause"><strong><span style="color:#0095b6;">&lt;WithClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="joindefinition"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#joindefinition"><strong><span style="color:#0095b6;">&lt;JoinDefinition&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>RIGHT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>RIGHT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>FULL</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>INNER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>LEFT</strong></span> <span class="ssTerminal"><strong>OUTER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>INNER</strong></span> <span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>JOIN</strong></span> <span class="ssTerminal"><strong>FETCH</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="withclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#withclause"><strong><span style="color:#0095b6;">&lt;WithClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>WITH</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="whereclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#whereclause"><strong><span style="color:#0095b6;">&lt;WhereClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>WHERE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="groupbyclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#groupbyclause"><strong><span style="color:#0095b6;">&lt;GroupByClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>'GROUP BY'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="havingclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#havingclause"><strong><span style="color:#0095b6;">&lt;HavingClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>HAVING</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="orderbyclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderbyclause"><strong><span style="color:#0095b6;">&lt;OrderByClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>'ORDER BY'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="orderlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderlist"><strong><span style="color:#0095b6;">&lt;OrderList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="orderitem"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#orderitem"><strong><span style="color:#0095b6;">&lt;OrderItem&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#ordertype"><strong><span style="color:#0095b6;">&lt;OrderType&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="ordertype"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#ordertype"><strong><span style="color:#0095b6;">&lt;OrderType&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>ASC</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DESC</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ASCENDING</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DESCENDING</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="restriction"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>ALL</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DISTINCT</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="aggregateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#aggregateexpression"><strong><span style="color:#0095b6;">&lt;AggregateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssTerminal"><strong>'*'</strong></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>COUNT</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#restriction"><strong><span style="color:#0095b6;">&lt;Restriction&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>AVG</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MIN</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MAX</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="functionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#functionexpression"><strong><span style="color:#0095b6;">&lt;FunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>CAST</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimfunctionexpression"><strong><span style="color:#0095b6;">&lt;TrimFunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#extractfunctionexpression"><strong><span style="color:#0095b6;">&lt;ExtractFunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>YEAR</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MONTH</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DAY</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>HOUR</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MINUTE</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>SECOND</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="trimfunctionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimfunctionexpression"><strong><span style="color:#0095b6;">&lt;TrimFunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>TRIM</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>TRIM</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimoperands"><strong><span style="color:#0095b6;">&lt;TrimOperands&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="trimoperands"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimoperands"><strong><span style="color:#0095b6;">&lt;TrimOperands&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>FROM</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="trimspecification"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#trimspecification"><strong><span style="color:#0095b6;">&lt;TrimSpecification&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>LEADING</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>TRAILING</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>BOTH</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="extractfunctionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#extractfunctionexpression"><strong><span style="color:#0095b6;">&lt;ExtractFunctionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>EXTRACT</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#extractfield"><strong><span style="color:#0095b6;">&lt;ExtractField&gt;</span></strong></a></span> <span class="ssTerminal"><strong>FROM</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="extractfield"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#extractfield"><strong><span style="color:#0095b6;">&lt;ExtractField&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>YEAR</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MONTH</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>DAY</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>HOUR</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>MINUTE</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>SECOND</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>'TIMEZONE_HOUR'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>'TIMEZONE_MINUTE'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="collectionexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>INDICES</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="elementsexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>ELEMENTS</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="entityname"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="entitynamelist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entitynamelist"><strong><span style="color:#0095b6;">&lt;EntityNameList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="aliasedentityname"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssTerminal"><strong>CLASS</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#elementsexpression"><strong><span style="color:#0095b6;">&lt;ElementsExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#entityname"><strong><span style="color:#0095b6;">&lt;EntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="aliasedentitynamelist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentitynamelist"><strong><span style="color:#0095b6;">&lt;AliasedEntityNameList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedentityname"><strong><span style="color:#0095b6;">&lt;AliasedEntityName&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="aliasedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AS</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="aliasedexpressionlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpressionlist"><strong><span style="color:#0095b6;">&lt;AliasedExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#aliasedexpression"><strong><span style="color:#0095b6;">&lt;AliasedExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="expression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#orexpression"><strong><span style="color:#0095b6;">&lt;OrExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="orexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#orexpression"><strong><span style="color:#0095b6;">&lt;OrExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>OR</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="andexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#andexpression"><strong><span style="color:#0095b6;">&lt;AndExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="notexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#notexpression"><strong><span style="color:#0095b6;">&lt;NotExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>NOT</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="quantifiedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>SOME</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ALL</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ANY</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>SOME</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ALL</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ANY</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>SOME</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ALL</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>ANY</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="predicateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#predicateexpression"><strong><span style="color:#0095b6;">&lt;PredicateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>BETWEEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>BETWEEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>AND</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>EMPTY</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IS</strong></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>EMPTY</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>LIKE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>LIKE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NOT</strong></span> <span class="ssTerminal"><strong>IN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#memberpredicate"><strong><span style="color:#0095b6;">&lt;MemberPredicate&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#existspredicate"><strong><span style="color:#0095b6;">&lt;ExistsPredicate&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&gt;'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&lt;'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&gt;='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&lt;='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NotEqualOperator</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&gt;'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&lt;'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&gt;='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'&lt;='</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>NotEqualOperator</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#quantifiedexpression"><strong><span style="color:#0095b6;">&lt;QuantifiedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="likeescape"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#likeescape"><strong><span style="color:#0095b6;">&lt;LikeEscape&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>ESCAPE</strong></span> <span class="ssTerminal"><strong>StringLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="existspredicate"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#existspredicate"><strong><span style="color:#0095b6;">&lt;ExistsPredicate&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>EXISTS</strong></span> <span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="memberpredicate"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#memberpredicate"><strong><span style="color:#0095b6;">&lt;MemberPredicate&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>MEMBER</strong></span> <span class="ssTerminal"><strong>OF</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>MEMBER</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="mathaddexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'+'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'-'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="mathmultexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'*'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathmultexpression"><strong><span style="color:#0095b6;">&lt;MathMultExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'/'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="mathnegateexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathnegateexpression"><strong><span style="color:#0095b6;">&lt;MathNegateExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>'-'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="caseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseexpression"><strong><span style="color:#0095b6;">&lt;CaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#simplecaseexpression"><strong><span style="color:#0095b6;">&lt;SimpleCaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#searchedcaseexpression"><strong><span style="color:#0095b6;">&lt;SearchedCaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="simplecaseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#simplecaseexpression"><strong><span style="color:#0095b6;">&lt;SimpleCaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>CASE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>END</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="searchedcaseexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#searchedcaseexpression"><strong><span style="color:#0095b6;">&lt;SearchedCaseExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>CASE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span> <span class="ssTerminal"><strong>END</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="simplewhenclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#simplewhenclause"><strong><span style="color:#0095b6;">&lt;SimpleWhenClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="searchedwhenclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>WHEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>THEN</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#searchedwhenclause"><strong><span style="color:#0095b6;">&lt;SearchedWhenClause&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="caseresult"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#mathaddexpression"><strong><span style="color:#0095b6;">&lt;MathAddExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="elseclause"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#elseclause"><strong><span style="color:#0095b6;">&lt;ElseClause&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>ELSE</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseresult"><strong><span style="color:#0095b6;">&lt;CaseResult&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="indexedexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#indexedexpression"><strong><span style="color:#0095b6;">&lt;IndexedExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>'['</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>']'</strong></span> <span class="ssTerminal"><strong>'.'</strong></span> <span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>'['</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>']'</strong></span> <span class="ssTerminal"><strong>'.'</strong></span> <span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> <span class="ssTerminal"><strong>'['</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>']'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="stringvalueexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>Identifier</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Path</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>StringLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>Parameter</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#indexedexpression"><strong><span style="color:#0095b6;">&lt;IndexedExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#functionexpression"><strong><span style="color:#0095b6;">&lt;FunctionExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#caseexpression"><strong><span style="color:#0095b6;">&lt;CaseExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="concatenationexpression"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>'||'</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#stringvalueexpression"><strong><span style="color:#0095b6;">&lt;StringValueExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="value"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#value"><strong><span style="color:#0095b6;">&lt;Value&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#concatenationexpression"><strong><span style="color:#0095b6;">&lt;ConcatenationExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>IntegerLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>FloatLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>HexLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>NULL</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>BooleanLiteral</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#aggregateexpression"><strong><span style="color:#0095b6;">&lt;AggregateExpression&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#collectionexpression"><strong><span style="color:#0095b6;">&lt;CollectionExpression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="tuple"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#tuple"><strong><span style="color:#0095b6;">&lt;Tuple&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#selectstatement"><strong><span style="color:#0095b6;">&lt;SelectStatement&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssTerminal"><strong>'('</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> <span class="ssTerminal"><strong>')'</strong></span> </td>
+</tr>
+</tbody>
+</table>
+<p><br><a name="expressionlist"></a></p>
+<table class="ssSyntaxTable">
+<tbody>
+<tr>
+<td><span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span></td>
+<td align="center">::=</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> <span class="ssTerminal"><strong>','</strong></span> <span class="ssNonTerminal"><a href="query-syntax.aspx.html#expressionlist"><strong><span style="color:#0095b6;">&lt;ExpressionList&gt;</span></strong></a></span> </td>
+</tr>
+<tr>
+<td> </td>
+<td align="center">|</td>
+<td>
+<span class="ssNonTerminal"><a href="query-syntax.aspx.html#expression"><strong><span style="color:#0095b6;">&lt;Expression&gt;</span></strong></a></span> </td>
+</tr>
+</tbody>
+</table>
+<p> </p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+

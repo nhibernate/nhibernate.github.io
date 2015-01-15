@@ -1,0 +1,246 @@
+---
+layout: doc
+title: From 1.0 to 1.2
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="from-1-0-to-1-2.html">From 1.0 to 1.2</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>NHibernate 2.0 </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	        
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../resized-image.ashx/__size/50x50/key/CommunityServer.Components.Avatars/00.00.00.21.02/4TA8XMWXSUMY.png" alt="" style="border-width:0px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/fabiomaulo/default.aspx.html">Fabio Maulo</a><br> on 05-11-2009</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="from-1-0-to-1-2.html">From 1.0 to 1.2</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>
+</p>
+<h2>NHibernate 1.2</h2>
+<p>NHibernate 1.2 is mostly source-compatible with NHibernate 1.0. However, it is not intended as a drop-in replacement for 1.0.</p>
+<p>This document describes the changes between NHibernate 1.0 and NHibernate 1.2 that will affect existing applications, and mentions certain new features of NHibernate 1.2 that might be useful to existing applications.</p>
+<p>Changes are classified into <em>API changes</em> (affecting source code), <em>metadata changes</em> (affecting the XML O/R mapping metadata), <em>query language changes</em> (affecting HQL queries), <em>runtime behavior changes</em>, and <em>security-related changes</em>.</p>
+<a name="A3"></a>
+<h3>API Changes</h3>
+<a name="A4"></a>
+<h4>
+<tt>ISession</tt> interface</h4>
+<p>Redundant query execution methods were deprecated in <tt>ISession</tt> interface. These methods are:</p>
+<ul>
+<li>
+<tt>Find()</tt>,</li>
+<li>
+<tt>Enumerable()</tt>,</li>
+<li><tt>Filter()</tt></li>
+</ul>
+<p>NHibernate 1.2 applications should use <tt>CreateQuery()</tt> for all query execution. Existing applications may continue to use the deprecated methods.</p>
+<a name="A5"></a>
+<h4><tt>ISession.CreateSQLQuery()</tt></h4>
+<p>The overloaded forms of <tt>CreateSQLQuery()</tt> which took arrays have been deprecated. There is a new <tt>ISQLQuery</tt> interface (returned by <tt>CreateSQLQuery(String)</tt>) which provides equivalent functionality (and more). Existing applications may continue to use the deprecated methods.</p>
+<a name="A6"></a>
+<h4>
+<tt>ILifecycle</tt> and <tt>IValidatable</tt> interfaces</h4>
+<p>The <tt>ILifecycle</tt> and <tt>IValidatable</tt> interfaces were deprecated in NHibernate 1.2 and moved to the <tt>NHibernate.Classic</tt> namespace. The Hibernate team does not consider it good practice to have domain model classes depend upon persistence-specific APIs. NHibernate 1.2 applications should use <tt>IInterceptor</tt> interface. Existing applications may continue to use <tt>ILifecycle</tt> and <tt>IValidatable</tt>.</p>
+<a name="A7"></a>
+<h4>
+<tt>IInterceptor</tt> interface</h4>
+<p>Several new methods were added to the <tt>IInterceptor</tt> interface. Existing interceptors will need to be ugraded to provide empty implementations of the two new methods.</p>
+<p>To avoid issues with interceptor migration (whether 1.0.x -&gt; 1.2.x, or moving forward), just extend the new <tt>EmptyInterceptor</tt> class instead of writing your own empty implementation for all methods you don't need.</p>
+<a name="A8"></a>
+<h4>
+<tt>IUserType</tt> and <tt>ICompositeUserType</tt> interfaces</h4>
+<p>Both <tt>IUserType</tt> and <tt>ICompositeUserType</tt> had several methods added, to support new functionality of NHibernate 1.2. They were moved to the namespace<tt>NHibernate.UserTypes</tt>. Existing user type classes will need to be upgraded to implement the new methods.</p>
+<p><em>Note:</em> NHibernate 1.2 provides <tt>IParameterizedType</tt> interface to allow better re-useability of user type implementations.</p>
+<a name="A9"></a>
+<h4><tt>FetchMode</tt></h4>
+<p><tt>FetchMode.Lazy</tt> and <tt>FetchMode.Eager</tt> were deprecated. The more accurately named <tt>FetchMode.Select</tt> and <tt>FetchMode.Join</tt> have the same effect.</p>
+<a name="A10"></a>
+<h4>Changes to extension APIs</h4>
+<p>The <tt>NHibernate.Expression</tt>, <tt>NHibernate.Mapping</tt>, <tt>NHibernate.Persister</tt> and <tt>NHibernate.Collection</tt> namespaces feature heavy refactoring. Most NHibernate 1.0 applications do not depend upon these namespaces, and will not be affected. If your application <em>does</em> extend classes in these namespaces, you will need to carefully migrate the affected code.</p>
+<a name="A11"></a>
+<h3>Metadata Changes</h3>
+<a name="A12"></a>
+<h4>Association fetching strategies</h4>
+<p>Since it is best practice to map almost all classes and collections using <tt>lazy="true"</tt>, that is now the default. Existing applications will need to explicitly specify <tt>lazy="false"</tt>on all non-lazy class and collection mappings. For the lazy classes to function correctly, all their public and protected members must be virtual (overridable). Since this is a very significant potential source of errors when developing on .NET, NHibernate 1.2 will check at configuration time that all lazy classes fulfill the requirements.</p>
+<p>The <tt>outer-join</tt> attribute is deprecated. Use fetch="join" and fetch="select" instead of outer-join="true" and outer-join="false". Existing applications may continue to use the<tt>outer-join</tt> attribute, or may use a text search/replace to migrate to use of the <tt>fetch</tt> attribute.</p>
+<p><strong>Beware, this means you have to put lazy="false" on all collection mappings and classes which previously did not have a "lazy"-attribute.</strong></p>
+<p>A quick and dirty alternative for migration is also to put default-lazy="false" on all your hibernate-mapping elements.</p>
+<a name="A13"></a>
+<h4>Schema namespace</h4>
+<p>Update the XML schema reference in your hbm XML files. Change <tt>urn:nhibernate-mapping-2.0</tt> to <tt>urn:nhibernate-mapping-2.2</tt> in the <tt>hibernate-mapping</tt> element. If you get "XML validation error: Could not find schema information for the element 'urn:nhibernate-mapping-2.0:hibernate-mapping'", you forgot to change the namespace.</p>
+<a name="A14"></a>
+<h4>One-to-many association to a subclass requires explicit <tt>where</tt> attribute.</h4>
+<p>If you have a one-to-many association to a class that is part of a <tt>subclass</tt> hierarchy (i.e. using table-per-class-hierarchy strategy), you may need to add a <tt>where</tt> attribute to the collection element since NHibernate no longer adds the discriminator restriction automatically.</p>
+<p>This is probably best explained in code. The mapping below will no longer work as intended:</p>
+<pre class="code">&lt;class name="Person"&gt;
+   ...
+   &lt;!-- Cat and Dog are subclasses of Animal, mapped using &lt;subclass&gt; --&gt;
+   &lt;bag name="Cats"&gt;
+      &lt;one-to-many class="Cat" /&gt;
+   &lt;/bag&gt;
+
+   &lt;bag name="Dogs"&gt;
+      &lt;one-to-many class="Dog" /&gt;
+   &lt;/bag&gt;
+&lt;/class&gt;
+</pre>
+<p>To make it work again, add explicit <tt>where</tt> attributes:</p>
+<pre class="code">&lt;class name="Person"&gt;
+   ...
+   &lt;bag name="Cats" where="discriminator = 'CAT'"&gt;
+      &lt;one-to-many class="Cat" /&gt;
+   &lt;/bag&gt;
+
+   &lt;bag name="Dogs" where="discriminator = 'DOG'"&gt;
+      &lt;one-to-many class="Dog" /&gt;
+   &lt;/bag&gt;
+&lt;/class&gt;
+</pre>
+<a name="A15"></a>
+<h3>Runtime Changes</h3>
+<a name="A16"></a>
+<h4>Database connection release mode</h4>
+<p>In NHibernate 1.0 a session acquired a database connection when needed and then held onto to it until closed. As of 1.2, however, the session will release the connection after the database transaction completes. If you are not using NHibernate transactions, the session assumes it is in auto-commit mode, and will release the connection after every operation. The session will automatically re-acquire connection the next time it is needed.</p>
+<p>This behavior can be overridden, but typically it is best to not override this default (unless you are using NHibernate with distributed transactions, in which case the default behavior is inappropriate). If your application depends on some quirk of the old behavior (like having the same connection available beyond transaction boundaries, etc) then you may need to tweak this; but you should view this as a problem with your application logic and fix that. Or, if you believe that you can "read data without or outside of a transaction", you will likely face problems in the future versions of NHibernate. Of course, there can be no data access outside of a transaction, be it read or write access, and NHibernate will make it much more difficult to write bad code that relies on auto-commit side effects. See section "Connection Release Modes" in the documentation for more details.</p>
+<a name="A17"></a>
+<h4>Version numbers start with 1</h4>
+<p>The version property of a transient entity will be set to 1 when the entity is persisted (NHibernate 1.0 set the version number to 0). This was done to allow using a non-nullable type for the version property (such as <tt>Int32</tt> or <tt>Int64</tt>), so that 0 could be used as <tt>unsaved-value</tt> for the property.</p>
+<a name="A18"></a>
+<h4>
+<tt>ISession.Get()</tt> will never return an unitialized proxy</h4>
+<p>Previously, calling <tt>ISession.Get()</tt> could return an uninitialized proxy if the session contained the proxy as a result of some earlier operations. In NHibernate 1.2, <tt>Get()</tt> will initialize the proxy in this case before returning it.</p>
+<a name="A19"></a>
+<h4>
+<tt>ISession.Transaction</tt> is always active</h4>
+<p><tt>ISession.Transaction</tt> property gives access to the current transaction associated with a session. Unlike previous NHibernate versions, as soon as this transaction is committed, a new transaction is associated with the session. Thus, <tt>ISession.Transaction.WasCommitted</tt> and <tt>WasRolledBack</tt> will always return <tt>false</tt>.</p>
+<p>To be able to check the status of a particular transaction, assign it to a local variable:</p>
+<pre class="code">ITransaction myTransaction = ISession.Transaction;
+ISession.Transaction.Commit();
+// ISession.Transaction.WasCommitted is false here,
+// myTransaction.WasCommitted is true.
+</pre>
+<a name="A20"></a>
+<h4>Changes in ADO.NET provider assembly loading</h4>
+<p>NHibernate 1.2 now uses <tt>Assembly.Load()</tt> instead of <tt>Assembly.LoadWithPartialName()</tt> to load driver assemblies. This means that it will no longer look for the highest-versioned assembly in the Global Assembly Cache (GAC), which was sometimes undesirable. Instead, it is now your responsibility to either put the provider assembly into the application directory, or add a <tt>qualifyAssembly</tt> element to the application configuration file, specifying the full name of the assembly.</p>
+<p>For example, if you are using MySQL Connector/.NET, you should either put <tt>MySql.Data.dll</tt> into the application directory (or some other directory from where<tt>Assembly.Load()</tt> can pick it up), or put it in the GAC and add a <tt>qualifyAssembly</tt> element to the configuration file:</p>
+<pre class="code">&lt;qualifyAssembly
+    partialName="MySql.Data"
+    fullName="MySql.Data, Version=..., PublicKeyToken=..."/&gt;
+</pre>
+<a name="A21"></a>
+<h3>Query Language Changes</h3>
+<a name="A22"></a>
+<h4>Changed aggregation (count, sum, avg) function return types</h4>
+<p>In alignment with Hibernate, the count, sum and avg functions now default to return types as specified by the JPA specification. This can result in <tt>InvalidCastException</tt> 's at runtime if you used aggregation in HQL queries.</p>
+<p>The new type rules are as follows:</p>
+<ul>
+<li>COUNT returns Int64.</li>
+<li>MAX, MIN return the type of the property to which they are applied.</li>
+<li>AVG returns Double.</li>
+<li>SUM returns Int64 when applied to properties of integral types; Double when applied to properties of floating point types; and Decimal when applied to state-fields of type Decimal.</li>
+</ul>
+<p>If you cannot change to the new type handling the following code can be used to provide "classic" NHibernate behavior for HQL aggregation.</p>
+<pre class="code">  Configuration classicCfg = new Configuration(); 
+  classicCfg.AddSqlFunction( "count", new ClassicCountFunction()); 
+  classicCfg.AddSqlFunction( "avg", new ClassicAvgFunction()); 
+  classicCfg.AddSqlFunction( "sum", new ClassicSumFunction()); 
+  ISessionFactory classicSf = classicCfg.BuildSessionFactory();
+</pre>
+<a name="A23"></a>
+<h4>Empty <tt>Disjunction</tt> evaluates to false</h4>
+<p>A <tt>Disjunction</tt> with no added conditions will always evaluate to false. This is a change from 1.0 and Hibernate, where an empty disjunction evaluates to true, but we feel it is more correct.</p>
+<a name="A24"></a>
+<h3>Security-Related Changes</h3>
+<a name="A25"></a>
+<h4>Strong name key is now public</h4>
+<p>NHibernate now uses a publicly available strong name key pair (<tt>NHibernate.snk</tt>) to strong-name binary .NET assemblies. If you relied on the key being kept private for security, you should switch to other means of assuring assembly integrity, such as using a cryptographic hash.</p>
+<p>The original key pair used to sign NHibernate 1.0.x assemblies is still kept private.</p>
+<a name="A26"></a>
+<h4>Assemblies are marked with AllowPartiallyTrustedCallersAttribute</h4>
+<p>Several assemblies have AllowPartiallyTrustedCallersAttribute (APTCA) applied to them, to make it easier to use NHibernate under Medium Trust Level. This attribute may potentially introduce security issues. To recompile NHibernate without APTCA, use this NAnt command:</p>
+<pre class="code">nant -D:assembly.allow-partially-trusted-callers=false build</pre>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
