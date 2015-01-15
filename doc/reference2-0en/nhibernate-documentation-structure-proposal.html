@@ -1,0 +1,341 @@
+---
+layout: doc
+title: NHibernate Documentation Structure Proposal
+---
+                <div id="CommonNavigationShadow">
+                    
+    
+    <div class="CommonBreadCrumbArea"><div class="Common">
+        <a href="../index.html">Documentation</a>
+        »
+        <a href="nhibernate-documentation-structure-proposal.html">NHibernate Documentation Structure Proposal</a>
+    </div></div>
+
+
+                </div>
+		    
+                        
+            <div class="Common">
+            
+                
+            
+                
+                <div id="CommonTitle">
+                    
+    
+    <h1>NHibernate 2.0 </h1>
+
+
+                </div>
+                <div style="clear: both;"></div>
+			    <div id="CommonSidebarLeft">
+			        
+    
+	<div class="CommonSidebar">
+	                <div class="CommonContentBox">
+                        <h4 class="CommonContentBoxHeader">Page Details</h4>
+	                    <div class="CommonContentBoxContent">
+	            <div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">First published by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/ssteinegger/default.aspx.html">Stefan Steinegger</a><br> on 05-28-2009</div>
+</div>
+<div class="CustomWikiPageDetailsArea">
+<div class="CustomWikiPageDetailsTitle">Last revision by:</div>
+<div class="CustomWikiPageDetailsAvatar"><img src="../../utility/anonymous.gif" alt="" style="border-width:0px;max-height:50px;max-width:50px;"></div>
+<div class="CustomWikiPageDetailsContent">
+<a href="../../members/abhishek644/default.aspx.html">abhishek644</a><br> on 02-08-2012</div>
+</div>
+				        </div>
+<div>
+			This page is converted from the old nhforge.org Wiki.
+		</div>
+				        
+			        </div>
+	            
+	    
+	    
+	    
+    </div>
+    
+
+			    </div>
+                
+			    <div id="CommonContent"><div id="CommonContentInner">
+    
+
+
+
+<div class="CommonContentBox">
+    <div class="CommonContentBoxContent">
+        <div style="float: right">
+            
+        </div>
+        
+        
+
+        
+            <div class="CommonGroupedContentArea">                
+
+                
+
+                <h2 class="">
+                        <span><a href="nhibernate-documentation-structure-proposal.html">NHibernate Documentation Structure Proposal</a></span>
+                        
+                    </h2>
+                                
+                
+                <div>
+<p>This is a proposal for a new structure of the NHibernate reference documentation. The goal is to discuss it and get some feedback from the community.</p>
+<h2>Goals</h2>
+<p>The goals of the restructuring of the documentation are:</p>
+<ul>
+<li>move from "feature oriented" to "solution oriented". For instance, instead of having a chapter about the "version" xml element, there is a chapter about "concurrency". So the reader has a problem to solve, and he finds a chapter that explains, how NH solves it. The reader can't know that he needs a version element. Such a chapter should cover all elements of a certain problem, in the given example this are the version xml-element, the optimistic-lock xml-attribute of classes and properties, explicit version increment, locking and so on.</li>
+<li>Additionally, there shall be a complete reference of the mappings, configurations and others in an appendix that links to the chapters.</li>
+<li>More diagrams for mapping strategies</li>
+<li>More best practices and patterns</li>
+<li>Fill gaps where the documentation is not complete (enough), for instance special HQL features, user types, interceptors and events, connection factories and other extensions, (new) proxy factories etc.</li>
+</ul>
+<h2>Structure</h2>
+<h3>Part 1: First Steps</h3>
+<p><i>In this part: a high-level overview of the whole picture.</i></p>
+<p>Quick start</p>
+<ul>
+<li>simple program that runs "out of the box"</li>
+<li>not too much code, not too much explanation (but links to chapters)</li>
+<li>includes inheritance, reference, list</li>
+<li>includes schema generation</li>
+<li>includes some simple hql</li>
+<li>includes configuration for sqlserver, oracle, mysql</li>
+</ul>
+<p>Architecture and basic concepts</p>
+<ul>
+<li> Architecture (diagrams)</li>
+<li> "Factory-Chain" Configuration =&gt; SessionFactory =&gt; Session =&gt; Transaction / Query </li>
+<li> Instance States</li>
+<li> Session Cache (see also "Working with persistent objects")</li>
+<li> Application Architectures (referenced assemblies from application layers)</li>
+</ul>
+<p>Setting Up</p>
+<ul>
+<li>Three ways: nhibernate.cfg.xml, app.config, programmatic</li>
+<li>Dialects and Drivers (See also Appendix "full list of Drivers / Dialects")</li>
+<li>ProxyFactory configuration (see "lazy loading")</li>
+<li>SessionProvider, contextual sessions</li>
+<li>Getting a connection (connection provider, user provided, connection release mode)</li>
+<li>How to set up a Project, minimal program
+<ul>
+<li>configuration file</li>
+<li>mapping files (see "OR Mapping Basics")</li>
+</ul>
+</li>
+</ul>
+<h3>Part 2: Writing and Mapping Classes</h3>
+<p><i>In this part: Static view, classes, mappings, db schema</i></p>
+<p>Persistent classes</p>
+<ul>
+<li>Example poco, basic rules</li>
+<li>Object Identity
+<ul>
+<li>id generators</li>
+<li>best practices</li>
+<li>composite keys (see also "Working with legacy databases")</li>
+<li>component keys (see also "Working with legacy databases")</li>
+</ul>
+</li>
+<li>Overriding Equals and GetHashCode</li>
+<li>Optional: Version (see optimistic locking)</li>
+<li>lifecycle callbacks</li>
+<li>validation</li>
+<li>see also: lazy loading (because of virtual)</li>
+</ul>
+<p>OR Mapping Basics</p>
+<ul>
+<li>Manage mapping files
+<ul>
+<li>as xml files</li>
+<li>as embedded resources</li>
+<li>modular mapping files</li>
+<li>alternatives (attributes, FNH)</li>
+</ul>
+</li>
+<li>Using quoted identifiers
+<ul>
+<li>NH Types (see also: "Extend NH behaviour - user types", Appendix "Full List of Types")</li>
+</ul>
+</li>
+<li>Naming conventions</li>
+<li>Property / field (access strategy)</li>
+</ul>
+<p>Mapping primitive values and single ended references</p>
+<ul>
+<li>properties</li>
+<li>references many-to-one</li>
+<li>references one-to-one</li>
+<li>map several classes to one table: components</li>
+<li>dynamic components</li>
+<li>map a class to several tables: join</li>
+<li>any types</li>
+</ul>
+<p>Mapping Collections</p>
+<ul>
+<li>persistent collections</li>
+<li>set, list, map, bag, array, primitive-array</li>
+<li>one-to-many relations</li>
+<li>many-to-many relations</li>
+<li>composite-elemements</li>
+<li>collection performance</li>
+<li>Sorted collections</li>
+</ul>
+<p>Mapping Inheritance</p>
+<ul>
+<li>Table per Hierarchy</li>
+<li>Table per Concrete Class</li>
+<li>Table per Class</li>
+<li>Mixing strategies</li>
+</ul>
+<p>Mapping to legacy databases</p>
+<ul>
+<li>composite keys </li>
+<li>component keys</li>
+<li>property-ref</li>
+</ul>
+<p>Generating The Database </p>
+<ul>
+<li>The schema export tool</li>
+<li>not null</li>
+<li>foreign keys</li>
+<li>indexes</li>
+<li>unique keys</li>
+<li>Auxiliary Database Objects</li>
+</ul>
+<p>mapping file generation from entity</p>
+<h3>Part 3: Working with Persistent Objects</h3>
+<p><i>In this part: Dynamic view, sessions, queries, modifications, transactions etc.</i></p>
+<p>Working with sessions</p>
+<ul>
+<li>sessions, session cache, flushing
+</li>
+<li>cascading</li>
+<li>detached objects, reattaching</li>
+</ul>
+<p>Querying</p>
+<ul>
+<li>Introduction, when to use which kind of query</li>
+</ul>
+<p>HQL Queries</p>
+<ul>
+<li>Syntax</li>
+<li>Multi Query</li>
+</ul>
+<p>Criteria Queries</p>
+<ul>
+<li>API</li>
+<li>Multi Criteria</li>
+</ul>
+<p>Using NH filters
+</p>
+<ul>
+</ul>
+<p>Lazy loading and fetching strategies</p>
+<ul>
+<li>fetching strategies</li>
+<li>collections</li>
+<li>references (proxies)</li>
+<li>load</li>
+<li>Utility.Initialize</li>
+<li>batch fetching</li>
+</ul>
+<p>Updating and deleting</p>
+<ul>
+<li>updating, batch-updates, HQL updates</li>
+<li>deleting, one-shot-delete, HQL delete</li>
+</ul>
+<p>Transactions And Concurrency</p>
+<ul>
+<li>Transaction factory (see also: setting up)</li>
+<li>Concurrency
+<ul>
+<li>Optimistic Locking
+<ul>
+<li>Version columns</li>
+<li>Property level</li>
+<li>Force version increment</li>
+<li>application version check</li>
+</ul>
+</li>
+<li>Pessimistic Locking</li>
+</ul>
+</li>
+</ul>
+<h3>Part 4: Enhanced Features</h3>
+<p><i>In this part: Features that are not used by everyone. They are not important to understand to work with NH.</i></p>
+<p>Using Native SQL</p>
+<ul>
+<li>Sql queries</li>
+<li>custom SQL for query/update/insert/delete </li>
+<li>precompiled queries</li>
+<li>Using SP's, db functions and triggers
+<ul>
+<li>property update/insert</li>
+<li>property generated</li>
+<li>property formula</li>
+<li>see also: "Generating The Database - Auxiliary Database Objects"
+</li>
+</ul>
+</li>
+<li>Using Database Views</li>
+</ul>
+<p>Caches</p>
+<ul>
+<li>second level cache</li>
+<li>query cache</li>
+</ul>
+<p>Meta API<br><br>Extend NH behaviour</p>
+<ul>
+<li>user types</li>
+<li>Interceptors</li>
+<li>events</li>
+<li>connection provider</li>
+<li>transaction factory</li>
+<li>session provider</li>
+</ul>
+<h3>Part 5: Examples</h3>
+<p><i>In this part: examples</i></p>
+<h3>Appendix<strong><br></strong>
+</h3>
+<p><i>In this part: lists and references. The references (eg. mapping xml elements, dialects etc are important to find the documentation. So there are basically only links to chapters)</i></p>
+<p>Trouble shooting</p>
+<p>Configuration Reference</p>
+<ul>
+<li>Getting a connection (connection provider, user provided) (setting up)</li>
+<li>proxy generator (lazy loading)</li>
+<li>cache configuration (optimizing)</li>
+<li>Transaction factory (setting up)</li>
+<li>Dialects (setting up)</li>
+<li>Outer join fetching (lazy loading?)</li>
+<li>logging (trouble shooting)</li>
+<li>naming strategy (mapping)</li>
+</ul>
+<p>Full List of Dialiects</p>
+<p><br>Full List of Drivers<br><br>XML-Mapping full reference</p>
+<p>Full List of Type</p>
+<p>On the other hand if you intend to produce a large amount of <strong><a href="http://ghrindustries.net/">Screen Printing Machine</a></strong> items, you will have to invest in the industry.</p>
+</div>
+            </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div></div>
+			    <div style="clear: both;"></div>
+			    
+			    
+            </div>
+
