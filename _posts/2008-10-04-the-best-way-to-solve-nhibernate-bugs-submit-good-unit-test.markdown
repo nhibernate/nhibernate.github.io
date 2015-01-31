@@ -9,11 +9,12 @@ tags: ["HowTo"]
 redirect_from:
   - "/blogs/nhibernate/archive/2008/10/04/the-best-way-to-solve-nhibernate-bugs-submit-good-unit-test.aspx/"
   - "/blogs/nhibernate/archive/2008/10/04/the-best-way-to-solve-nhibernate-bugs-submit-good-unit-test.html"
-  - "/blog/2008/10/03/the-best-way-to-solve-nhibernate-bugs-submit-good-unit-test.html"
+  - "/blog/2008/10/04/the-best-way-to-solve-nhibernate-bugs-submit-good-unit-test.html"
 author: Crad
 gravatar: 16b044c4f4f55da7e9b9791da4b3e35c
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>There's no better way to explain some code-related issue than providing a test for them, and that is what any NH team member is going to ask you no matter how clearly you described it; that said.. why not being smart enough to provide it since the beginning? </p>
 <p>For those who doesn't know what a unit test is, or why could possibly be useful, a unit test is nothing more than a method with some code in it to test if a feature works as expected or, in your case, to reproduce a bug. What makes them so useful is the ability to automatically execute them all; if you hypothetically had a set of test for every feature you coded into the software you're designing, after every change you could test if everything is still working or something got broken. If that triggered your attention, you can read further information on Unit Tests and Test Driven Development <a href="http://en.wikipedia.org/wiki/Unit_testing">here</a> and <a href="http://en.wikipedia.org/wiki/Test-driven_development">here</a>, while <a href="http://www.nunit.org/index.php">here</a> you can download and get some info on NUnit, which is the testing framework NHibernate team is currently using; obviously you can google around a bit for more info on this topic, as I'm going to focus on how testing applies to NHibernate bug fixing process. </p>
 <p>Ok, back on topic then. If you dared to download NHibernate sources from SourceForge, or perhaps the trunk itself using a SVN client, you'd find a well established test project with some base classes you should use to implement the test. BTW, for the sake of simplicity, I created a C# project extracting only the few classes you need to build a test, so you don't need to use the actual NH sources anymore. <a href="/media/p/70.aspx">You can download it </a><a href="/media/p/70.aspx">here</a>.</p>
