@@ -394,7 +394,7 @@ foreach (Cat cat in query.List&lt;Cat&gt;())
 
 tx.Commit();</pre><p>
             NHibernate also offers an object-oriented <span class="emphasis"><em>query by criteria</em></span> API
-            that can be used to formulate type-safe queries. NHibernate of course uses
+            that can be used to formulate type-safe queries as well as a strongly-typed LINQ API, which translates internally to HQL. NHibernate of course uses
             <tt class="literal">IDbCommand</tt>s and parameter binding for all SQL communication
             with the database. You may also use NHibernate's direct SQL query feature or
             get a plain ADO.NET connection from an <tt class="literal">ISession</tt> in rare cases.
@@ -1612,8 +1612,6 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                 versions. This was done to allow using 0 as <tt class="literal">unsaved-value</tt> for the
                 version property.
             </p></div>
-
-<!-- begin subselect -->
 <div class="sect2" lang="en">
 	<div class="titlepage">
 		<div>
@@ -1648,9 +1646,6 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
 &lt;syncronize table="cat"/&gt;
 </pre>
 </div>
-
-
-<!-- end subselect -->
 
 <div class="sect2" lang="en">
 	<div class="titlepage">
@@ -4331,7 +4326,7 @@ IList problems = sess.Find(
             on demand, using the identifiers returned by an initial SQL query (n+1 selects
             total).
         </p><pre class="programlisting">// fetch ids
-IEnumerable<Qux> en = sess.CreateQuery("from eg.Qux q order by q.Likeliness").List<Qux>(); 
+IEnumerable en = sess.Enumerable("from eg.Qux q order by q.Likeliness"); 
 foreach ( Qux qux in en )
 {
     // something we couldnt express in the query
@@ -4347,13 +4342,13 @@ foreach ( Qux qux in en )
             is almost always faster.) Heres an example of a query that should be
             called using <tt class="literal">Enumerable()</tt>:
         </p><pre class="programlisting">
-IEnumerable en = sess.CreateQuery(
+IEnumerable en = sess.Enumerable(
     "select customer, product " + 
     "from Customer customer, " +
     "Product product " +
     "join customer.Purchases purchase " +
     "where product = purchase.Product"
-).List();</pre><p>
+);</pre><p>
             Calling the previous query using <tt class="literal">Find()</tt> would return a very
             large ADO.NET result set containing the same data many times.
         </p><p>
@@ -4361,8 +4356,7 @@ IEnumerable en = sess.CreateQuery(
             is returned as an array:
         </p><pre class="programlisting">IEnumerable foosAndBars = sess.CreateQuery(
     "select foo, bar from Foo foo, Bar bar " +
-    "where bar.Date = foo.Date"
-).List();
+    "where bar.Date = foo.Date").List();
 foreach (object[] tuple in foosAndBars)
 {
     Foo foo = tuple[0]; Bar bar = tuple[1];
@@ -4382,10 +4376,8 @@ foreach ( object[] row in results )
     int count = (int) row[2];
     .....
 }</pre><pre class="programlisting">IEnumerable en = sess.CreateQuery(
-    "select cat.Type, cat.Birthdate, cat.Name from DomesticCat cat"
-).List();</pre><pre class="programlisting">IList list = sess.Find(
-    "select cat, cat.Mate.Name from DomesticCat cat"
-);</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-queryinterface"></a>9.3.2.&nbsp;The IQuery interface</h3></div></div><div></div></div><p>
+    "select cat.Type, cat.Birthdate, cat.Name from DomesticCat cat").List();</pre><pre class="programlisting">IList list = sess.Find(
+    "select cat, cat.Mate.Name from DomesticCat cat");</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-queryinterface"></a>9.3.2.&nbsp;The IQuery interface</h3></div></div><div></div></div><p>
                 If you need to specify bounds upon your result set (the maximum number of rows
                 you want to retrieve and / or the first row you want to retrieve) you should
                 obtain an instance of <tt class="literal">NHibernate.IQuery</tt>:
@@ -4488,7 +4480,7 @@ sess.Flush();  // changes to cat are automatically detected and persisted</pre><
                 usually use versioned  data to ensure transaction isolation.) This approach
                 requires a slightly different  programming model to the one described in the
                 last section. NHibernate supports this model by providing the
-                method <tt class="literal">Session.Update()</tt>.
+                method <tt class="literal">ISession.Update()</tt>.
             </p><pre class="programlisting">// in the first session
 Cat cat = firstSession.Load&lt;Cat&gt;(catId);
 Cat potentialMate = new Cat();
@@ -4607,7 +4599,9 @@ sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><
             of <tt class="literal">Delete()</tt> as making a persistent instance transient.
         </p><pre class="programlisting">sess.Delete(cat);</pre><p>
             You may also delete many objects at once by passing a NHibernate query string to
-            <tt class="literal">Delete()</tt>.
+            <tt class="literal">Delete()</tt>:
+<pre class="programlisting">sess.Delete("from Cat");</pre>
+
         </p><p>
             You may now delete objects in any order you like, without risk of foreign key
             constraint violations. Of course, it is still possible to violate a <tt class="literal">NOT
@@ -4619,7 +4613,7 @@ sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><
             memory. This process, <span class="emphasis"><em>flush</em></span>, occurs by default at the following 
             points
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
-                    from some invocations of <tt class="literal">Find()</tt> or <tt class="literal">Enumerable()</tt>
+                    from some invocations of <tt class="literal">Get</tt>, <tt class="literal">CreateQuery</tt>/<tt class="literal">List</tt>, <tt class="literal">Find()</tt> or <tt class="literal">Enumerable()</tt>
                 </p></li><li><p>
                     from <tt class="literal">NHibernate.ITransaction.Commit()</tt>
                 </p></li><li><p>
@@ -7066,7 +7060,7 @@ IList&lt;Cat&gt; oldestCats =
  .AddScalar("ID", NHibernateUtil.Int64)
  .AddScalar("NAME", NHibernateUtil.String)
  .AddScalar("BIRTHDATE", NHibernateUtil.Date)
-</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>the columns and types to return</p></li></ul></div><p>This will return an IList of Object arrays (object[]) with
+</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>the columns and types to return</p></li></ul></div><p>This will return an <tt class="literal">IList</tt> of <tt class="literal">Object</tt> arrays (<tt class="literal">object[]</tt>) with
       scalar values for each column in the CATS table. Only these three
       columns will be returned, even though the query is using
       <tt class="literal">*</tt> and could return more than the three listed
