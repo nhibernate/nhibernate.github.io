@@ -56,18 +56,18 @@
 		 If you are interested in translating this documentation into your language, contact us
 		 on the <a href="http://groups.google.com/group/nhibernate-development" target="_top">developer mailing list</a>.
 	 </p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="quickstart"></a>Chapter&nbsp;1.&nbsp;Quickstart with IIS and Microsoft SQL Server</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-intro"></a>1.1.&nbsp;Getting started with NHibernate</h2></div></div><div></div></div><p>
-            This tutorial explains a setup of NHibernate 2.1.0 within a Microsoft
+            This tutorial explains a setup of NHibernate 4.0 within a Microsoft
             environment. The tools used in this tutorial are:
         </p><div class="orderedlist"><ol type="1"><li>
                 Microsoft Internet Information Services (IIS) - web server supporting
                 ASP.NET.
             </li><li>
-                Microsoft SQL Server 2005 - the database server. This tutorial uses
-                the desktop edition (SQL-EXPRESS), a free download from Microsoft. Support
+                Microsoft SQL Server (at least, 2005, but can be 2008, 2008 R2, 2012 or 2014) - the database server. This tutorial uses
+                the desktop edition (SQL Express), a free download from Microsoft. Support
                 for other databases is only a matter of changing the NHibernate SQL
                 dialect and driver configuration.
             </li><li>
-                Microsoft Visual Studio .NET (at leats 2005) - the development environment.
+                Microsoft Visual Studio .NET (at least 2005, but can be 2008, 2010, 2012 or 2013, including the Express and Community editions) - the development environment.
             </li></ol></div><p>
             First, we have to create a new Web project. We use the name <tt class="literal">QuickStart</tt>,
             the project web virtual directory will <tt class="literal">http://localhost/QuickStart</tt>.
@@ -96,8 +96,6 @@
             &lt;property name="dialect"&gt;NHibernate.Dialect.MsSql2005Dialect&lt;/property&gt;
             &lt;property name="connection.provider"&gt;NHibernate.Connection.DriverConnectionProvider&lt;/property&gt;
             &lt;property name="connection.connection_string"&gt;Server=localhost\SQLEXPRESS;initial catalog=quickstart;Integrated Security=True&lt;/property&gt;
-            &lt;property name="proxyfactory.factory_class"&gt;NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu&lt;/property&gt;
-
             &lt;mapping assembly="QuickStart" /&gt;
         &lt;/session-factory&gt;
     &lt;/hibernate-configuration&gt;
@@ -111,7 +109,7 @@
             sections that follow and handlers to use to process their content. We declare
             the handler for the configuration section here. The <tt class="literal">
             &lt;hibernate-configuration&gt;</tt> section contains the configuration
-            itself, telling NHibernate that we will use a Microsoft SQL Server 2000
+            itself, telling NHibernate that we will use a Microsoft SQL Server 2005
             database and connect to it through the specified connection string.
             The dialect is a required setting, databases differ in their interpretation
             of the SQL "standard". NHibernate will take care of the differences and comes
@@ -379,7 +377,7 @@ NHibernateHelper.CloseSession();</pre><p>
 
 IQuery query = session.CreateQuery("select c from Cat as c where c.Sex = :sex");
 query.SetCharacter("sex", 'F');
-foreach (Cat cat in query.Enumerable())
+foreach (Cat cat in query.List&lt;Cat&gt;())
 {
     Console.Out.WriteLine("Female Cat: " + cat.Name);
 }
@@ -705,10 +703,7 @@ ISession session = sessions.OpenSession(conn);
 				Server=(local);initial catalog=theDb;Integrated Security=SSPI
 			&lt;/property&gt;
 			&lt;property name="connection.isolation"&gt;ReadCommitted&lt;/property&gt;
-
-			&lt;property name="proxyfactory.factory_class"&gt;
-				NHibernate.ByteCode.LinFu.ProxyFactoryFactory, NHibernate.ByteCode.LinFu
-			&lt;/property&gt;
+			
 		&lt;/session-factory&gt;
 	&lt;/hibernate-configuration&gt;
 
@@ -800,7 +795,9 @@ ISession session = sessions.OpenSession(conn);
                             <p>
                                 <span class="strong">eg.</span> 
                                 <tt class="literal">hqlLiteral=SQL_LITERAL, hqlFunction=SQLFUNC</tt>
-                            </p></td></tr><tr><td><tt class="literal">show_sql</tt></td><td>
+                            </p></td></tr>
+<tr><td><tt class="literal">query.linq_provider_class</tt></td><td>
+                            The classname of a custom LINQ provider class, one that implements <tt class="literal">INhQueryProvider</tt>. The default is <tt class="literal">DefaultQueryProvider</tt>.</td></tr><tr><td><tt class="literal">show_sql</tt></td><td>
                             Write all SQL statements to console.
                             <p>
                                 <span class="strong">eg.</span> 
@@ -841,7 +838,14 @@ ISession session = sessions.OpenSession(conn);
                             <p>
                                 <span class="strong">eg.</span> 
                                 <tt class="literal">classname.of.TransactionFactory, assembly</tt>
-                            </p></td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-dialects"></a>3.5.1.&nbsp;SQL Dialects</h3></div></div><div></div></div><p>
+                            </p></td></tr><tr><td><tt class="literal">default_flush_mode</tt></td><td>
+                            The default <tt class="literal">FlushMode</tt>,
+                            defaults to <tt class="literal">Auto</tt>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">classname.of.TransactionFactory, assembly</tt>
+                            </p></td></tr>
+</tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-dialects"></a>3.5.1.&nbsp;SQL Dialects</h3></div></div><div></div></div><p>
                 You should always set the <tt class="literal">dialect</tt> property to the correct
                 <tt class="literal">NHibernate.Dialect.Dialect</tt> subclass for your database. This is not
                 strictly essential unless you wish to use <tt class="literal">native</tt> or
@@ -856,7 +860,13 @@ ISession session = sessions.OpenSession(conn);
                                 This dialect supports <tt class="literal">IF EXISTS</tt> keyword in
                                 <tt class="literal">DROP TABLE</tt> and <tt class="literal">DROP SEQUENCE</tt>
                                 available in PostgreSQL 8.2.
-                            </td></tr><tr><td>MySQL 3 or 4</td><td><tt class="literal">NHibernate.Dialect.MySQLDialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5</td><td><tt class="literal">NHibernate.Dialect.MySQL5Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle</td><td><tt class="literal">NHibernate.Dialect.Oracle8iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 9</td><td><tt class="literal">NHibernate.Dialect.Oracle9iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 10g</td><td><tt class="literal">NHibernate.Dialect.Oracle10gDialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 15</td><td><tt class="literal">NHibernate.Dialect.SybaseASE15Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Anywhere 9</td><td><tt class="literal">NHibernate.Dialect.SybaseASA9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 10</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere10Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 11</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere11Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 7</td><td><tt class="literal">NHibernate.Dialect.MsSql7Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2000</td><td><tt class="literal">NHibernate.Dialect.MsSql2000Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2005</td><td><tt class="literal">NHibernate.Dialect.MsSql2005Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2008</td><td><tt class="literal">NHibernate.Dialect.MsSql2008Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server Compact Edition</td><td><tt class="literal">NHibernate.Dialect.MsSqlCeDialect</tt></td><td class="auto-generated">&nbsp;</td></tr><tr><td>Firebird</td><td><tt class="literal">NHibernate.Dialect.FirebirdDialect</tt></td><td>
+                            </td></tr><tr><td>MySQL 3 or 4</td><td><tt class="literal">NHibernate.Dialect.MySQLDialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5</td><td><tt class="literal">NHibernate.Dialect.MySQL5Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle</td><td><tt class="literal">NHibernate.Dialect.Oracle8iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 9</td><td><tt class="literal">NHibernate.Dialect.Oracle9iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 10g</td><td><tt class="literal">NHibernate.Dialect.Oracle10gDialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 15</td><td><tt class="literal">NHibernate.Dialect.SybaseASE15Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Anywhere 9</td><td><tt class="literal">NHibernate.Dialect.SybaseASA9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 10</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere10Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 11</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere11Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 7</td><td><tt class="literal">NHibernate.Dialect.MsSql7Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2000</td><td><tt class="literal">NHibernate.Dialect.MsSql2000Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2005</td><td><tt class="literal">NHibernate.Dialect.MsSql2005Dialect</tt></td><td>&nbsp;</td></tr>
+<tr><td>Microsoft SQL Server 2008</td><td><tt class="literal">NHibernate.Dialect.MsSql2008Dialect</tt></td><td>&nbsp;</td></tr>
+<tr><td>Microsoft SQL Server 2012</td><td><tt class="literal">NHibernate.Dialect.MsSql2012Dialect</tt></td><td>&nbsp;</td></tr>
+<tr><td>Microsoft SQL Azure</td><td><tt class="literal">NHibernate.Dialect.MsSqlAzure2008Dialect</tt></td><td>&nbsp;</td></tr>
+<tr><td>Microsoft SQL Server Compact Edition</td><td><tt class="literal">NHibernate.Dialect.MsSqlCeDialect</tt></td><td class="auto-generated">&nbsp;</td></tr>
+<tr><td>Microsoft SQL Server Compact Edition 4</td><td><tt class="literal">NHibernate.Dialect.MsSqlCe40Dialect</tt></td><td class="auto-generated">&nbsp;</td></tr>
+<tr><td>Firebird</td><td><tt class="literal">NHibernate.Dialect.FirebirdDialect</tt></td><td>
                                 Set <tt class="literal">driver_class</tt> to
                                 <tt class="literal">NHibernate.Driver.FirebirdClientDriver</tt>
                                 for Firebird ADO.NET provider 2.0.
@@ -983,7 +993,7 @@ ISession session = sessions.OpenSession(conn);
     </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-poco"></a>4.1.&nbsp;A simple POCO example</h2></div></div><div></div></div><p>
             Most .NET applications require a persistent class representing felines.
         </p><pre class="programlisting">using System;
-using Iesi.Collections;
+using System.Collections.Generic;
 
 namespace Eg
 {
@@ -1002,7 +1012,7 @@ namespace Eg
         public virtual DateTime Birthdate { get; set; } 
         public virtual float Weight { get; set; } 
         public virtual Color Color { get; set; } 
-        public virtual ISet Kittens { get; set; } 
+        public virtual ISet&lt;Cat&gt; Kittens { get; set; } 
         public virtual char Sex { get; set; } 
 
         // AddKitten not needed by NHibernate
@@ -1071,7 +1081,7 @@ namespace Eg
     }
 }</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-equalshashcode"></a>4.3.&nbsp;Implementing <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt></h2></div></div><div></div></div><p>
             You have to override the <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt>
-            methods if you intend to mix objects of persistent classes (e.g. in an <tt class="literal">ISet</tt>).
+            methods if you intend to mix objects of persistent classes (e.g. in an <tt class="literal">ISet&lt;Cat&gt;</tt>).
         </p><p>
             <span class="emphasis"><em>This only applies if these objects are loaded in two different
             <tt class="literal">ISession</tt>s, as NHibernate only guarantees identity (<tt class="literal"> a == b </tt>,
@@ -1084,8 +1094,8 @@ namespace Eg
         </p><p>
             The most obvious way is to implement <tt class="literal">Equals()</tt>/<tt class="literal">GetHashCode()</tt>
             by comparing the identifier value of both objects. If the value is the same, both must
-            be the same database row, they are therefore equal (if both are added to an <tt class="literal">ISet</tt>,
-            we will only have one element in the <tt class="literal">ISet</tt>). Unfortunately, we can't use that
+            be the same database row, they are therefore equal (if both are added to an <tt class="literal">ISet&lt;T&gt;</tt>,
+            we will only have one element in the <tt class="literal">ISet&lt;T&gt;</tt>). Unfortunately, we can't use that
             approach. NHibernate will only assign identifier values to objects that are persistent,
             a newly created instance will not have any identifier value! We recommend implementing
             <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt> using
@@ -2903,13 +2913,13 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
     &lt;/database-object&gt;
 &lt;/hibernate-mapping&gt;</pre></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="collections"></a>Chapter&nbsp;6.&nbsp;Collection Mapping</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-persistent"></a>6.1.&nbsp;Persistent Collections</h2></div></div><div></div></div><p>
             NHibernate requires that persistent collection-valued fields be declared
-            as an interface type, for example:
+            as a generic interface type, for example:
         </p><pre class="programlisting">public class Product
 {
     private string serialNumber;
-    private ISet parts = new HashedSet();
+    private ISet&lt;Part&gt; parts = new HashSet&lt;Part&gt;();
     
-    public ISet Parts
+    public ISet&lt;Part&gt; Parts
     {
         get { return parts; }
         set { parts = value; }
@@ -2921,33 +2931,32 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
         set { serialNumber = value; }
     }
 }</pre><p>
-            The actual interface might be <tt class="literal">Iesi.Collections.ISet</tt>,
-            <tt class="literal">System.Collections.ICollection</tt>,
-            <tt class="literal">System.Collections.IList</tt>,
-            <tt class="literal">System.Collections.IDictionary</tt>,
-            <tt class="literal">System.Collections.Generic.ICollection&lt;T&gt;</tt>,
+            The actual interface might be
+<tt class="literal">System.Collections.IEnumerable</tt>, <tt class="literal">System.Collections.ICollection</tt>, <tt class="literal">System.Collections.IList</tt>, <tt class="literal">System.Collections.IDictionary</tt>, 
+ <tt class="literal">System.Collections.Generic.IEnumerable&lt;T&gt;</tt>,
+<tt class="literal">System.Collections.Generic.ICollection&lt;T&gt;</tt>,
             <tt class="literal">System.Collections.Generic.IList&lt;T&gt;</tt>,
             <tt class="literal">System.Collections.Generic.IDictionary&lt;K, V&gt;</tt>,
-            <tt class="literal">Iesi.Collections.Generic.ISet&lt;T&gt;</tt>
+            <tt class="literal">System.Collections.Generic.ISet&lt;T&gt;</tt>
             or ... anything you like! (Where "anything you like" means you will
             have to write an implementation of <tt class="literal">NHibernate.UserType.IUserCollectionType</tt>.)
         </p><p>
             Notice how we initialized the instance variable with an instance of
-            <tt class="literal">HashedSet</tt>. This is the best way to initialize collection
+            <tt class="literal">HashSet&lt;T&gt;</tt>. This is the best way to initialize collection
             valued properties of newly instantiated (non-persistent) instances. When
             you make the instance persistent - by calling <tt class="literal">Save()</tt>,
-            for example - NHibernate will actually replace the <tt class="literal">HashedSet</tt>
-            with an instance of NHibernate's own implementation of <tt class="literal">ISet</tt>.
+            for example - NHibernate will actually replace the <tt class="literal">HashSet&lt;T&gt;</tt>
+            with an instance of NHibernate's own implementation of <tt class="literal">ISet&lt;T&gt;</tt>.
             Watch out for errors like this:
         </p><pre class="programlisting">Cat cat = new DomesticCat();
 Cat kitten = new DomesticCat();
 ....
-ISet kittens = new HashedSet();
+ISet&lt;Cat&gt; kittens = new HashSet&lt;Cat&gt;();
 kittens.Add(kitten);
 cat.Kittens = kittens;
 session.Save(cat);
-kittens = cat.Kittens; //Okay, kittens collection is an ISet
-HashedSet hs = (HashedSet) cat.Kittens; //Error!</pre><p>
+kittens = cat.Kittens; //Okay, kittens collection is an ISet&lt;Cat&gt;
+HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
             Collection instances have the usual behavior of value types. They are automatically
             persisted when referenced by a persistent object and automatically deleted when
             unreferenced. If a collection is passed from one persistent object to another,
@@ -2976,8 +2985,8 @@ HashedSet hs = (HashedSet) cat.Kittens; //Error!</pre><p>
             <tt class="literal">&lt;many-to-any&gt;</tt>. The first two map elements with value semantics,
             the other three are used to map entity associations.
         </p><p>
-            All collection types except <tt class="literal">ISet</tt> and bag have an <span class="emphasis"><em>index
-            </em></span> column - a column that maps to an array or <tt class="literal">IList</tt> index or
+            All collection types except set and bag have an <span class="emphasis"><em>index
+            </em></span> column - a column that maps to an array or <tt class="literal">IList&lt;T&gt;</tt> index or
             <tt class="literal">IDictionary</tt> key. The index of an <tt class="literal">IDictionary</tt> may be of any
             basic type, an entity type or even a composite type (it may not be a collection). The
             index of an array or list is always of type <tt class="literal">Int32</tt>. Indexes are
@@ -3041,7 +3050,7 @@ HashedSet hs = (HashedSet) cat.Kittens; //Error!</pre><p>
                         <tt class="literal">natural</tt> sort order, or a given comparator class
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
                         <tt class="literal">order-by</tt> (optional) specify a table column (or columns)
-                        that define the iteration order of the <tt class="literal">IDictionary</tt>, <tt class="literal">ISet</tt>
+                        that define the iteration order of the <tt class="literal">IDictionary</tt>, <tt class="literal">ISet&lt;T&gt;</tt>
                         or bag, together with an optional <tt class="literal">asc</tt> or <tt class="literal">desc</tt>
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
                         <tt class="literal">where</tt> (optional) specify an arbitrary SQL <tt class="literal">WHERE</tt>
@@ -3066,22 +3075,22 @@ HashedSet hs = (HashedSet) cat.Kittens; //Error!</pre><p>
                         interface. If this option is not specified, NHibernate will use reflection to choose
                         the interface.
                     </p></td></tr></table></div></div><p>
-            The mapping of an <tt class="literal">IList</tt> or array requires a seperate table column holding the array
+            The mapping of an <tt class="literal">IList&lt;T&gt;</tt> or array requires a seperate table column holding the array
             or list index (the <tt class="literal">i</tt> in <tt class="literal">foo[i]</tt>). If your relational model doesn't
-            have an index column, e.g. if you're working with legacy data, use an unordered <tt class="literal">ISet</tt>
-            instead. This seems to put people off who assume that <tt class="literal">IList</tt> should just be a more
+            have an index column, e.g. if you're working with legacy data, use an unordered <tt class="literal">ISet&lt;T&gt;</tt>
+            instead. This seems to put people off who assume that <tt class="literal">IList&lt;T&gt;</tt> should just be a more
             convenient way of accessing an unordered collection. NHibernate collections strictly obey the actual
-            semantics attached to the <tt class="literal">ISet</tt>, <tt class="literal">IList</tt> and <tt class="literal">IDictionary</tt>
-            interfaces. <tt class="literal">IList</tt> elements don't just spontaneously rearrange themselves!
+            semantics attached to the <tt class="literal">ISet&lt;T&gt;</tt>, <tt class="literal">IList&lt;T&gt;</tt> and <tt class="literal">IDictionary</tt>
+            interfaces. <tt class="literal">IList&lt;T&gt;</tt> elements don't just spontaneously rearrange themselves!
         </p><p>
-            On the other hand, people who planned to use the <tt class="literal">IList</tt> to emulate
+            On the other hand, people who planned to use the <tt class="literal">IList&lt;T&gt;</tt> to emulate
             <span class="emphasis"><em>bag</em></span> semantics have a legitimate grievance here.
             A bag is an unordered, unindexed collection which may contain the same element multiple times.
             The .NET collections framework lacks an <tt class="literal">IBag</tt> interface, hence you have to emulate
-            it with an <tt class="literal">IList</tt>. NHibernate lets you map properties of type <tt class="literal">IList</tt>
+            it with an <tt class="literal">IList&lt;T&gt;</tt>. NHibernate lets you map properties of type <tt class="literal">IList&lt;T&gt;</tt>
             or <tt class="literal">ICollection</tt> with the <tt class="literal">&lt;bag&gt;</tt> element. Note that bag
             semantics are not really part of the <tt class="literal">ICollection</tt> contract and they actually
-            conflict with the semantics of the <tt class="literal">IList</tt> contract (however, you can sort
+            conflict with the semantics of the <tt class="literal">IList&lt;T&gt;</tt> contract (however, you can sort
             the bag arbitrarily, discussed later in this chapter).
         </p><p>
             Note: Large NHibernate bags mapped with <tt class="literal">inverse="false"</tt> are inefficient and
@@ -3315,7 +3324,7 @@ int count = (int) countEn.Current;</pre><p>
             collection.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-sorted"></a>6.6.&nbsp;Sorted Collections</h2></div></div><div></div></div><p>
             NHibernate supports collections implemented by <tt class="literal">System.Collections.SortedList</tt> and
-            <tt class="literal">Iesi.Collections.SortedSet</tt>. You must specify a comparer in the mapping file:
+            <tt class="literal">Iesi.Collections.SortedSet&lt;T&gt;</tt>. You must specify a comparer in the mapping file:
         </p><pre class="programlisting">&lt;set name="Aliases" table="person_aliases" sort="natural"&gt;
     &lt;key column="person"/&gt;
     &lt;element column="name" type="String"/&gt;
@@ -3489,7 +3498,7 @@ namespace Eg
     public class Parent
     {
         private long id;
-        private ISet children;
+        private ISet&lt;Child&gt; children;
     
         public long Id
         {
@@ -3497,7 +3506,7 @@ namespace Eg
             set { id = value; }
         }
         
-        private ISet Children
+        private ISet&lt;Child&gt; Children
         {
             get { return children; }
             set { children = value; }
@@ -3712,7 +3721,7 @@ alter table childset add constraint childsetfk1 (child_id) references child</pre
         &lt;property name="Last"/&gt;
     &lt;/composite-element&gt;
 &lt;/set&gt;</pre><p>
-            Note: if you define an <tt class="literal">ISet</tt> of composite elements, it is 
+            Note: if you define an <tt class="literal">ISet&lt;T&gt;</tt> of composite elements, it is 
             very important to implement <tt class="literal">Equals()</tt> and 
             <tt class="literal">GetHashCode()</tt> correctly.
         </p><p>
@@ -4149,7 +4158,7 @@ long generatedId = (long) sess.Save(fritz);</pre><pre class="programlisting">Dom
 pk.Color = Color.Tabby;
 pk.Sex = 'F';
 pk.Name = "PK";
-pk.Kittens = new HashSet();
+pk.Kittens = new HashSet&lt;Cat&gt;();
 pk.AddKitten(fritz);
 sess.Save( pk, 1234L );</pre><p>
             The single-argument <tt class="literal">Save()</tt> generates and assigns a unique
@@ -4173,7 +4182,7 @@ sess.Save( pk, 1234L );</pre><p>
 DomesticCat pk = (DomesticCat) sess.Load( typeof(Cat), pkId );</pre><pre class="programlisting">Cat cat = new DomesticCat();
 // load pk's state into cat
 sess.Load( cat, pkId );
-ISet kittens = cat.Kittens;</pre><p>
+ISet&lt;Cat&gt; kittens = cat.Kittens;</pre><p>
             Note that <tt class="literal">Load()</tt> will throw an unrecoverable exception if there is no matching 
             database row. If the class is mapped with a proxy, <tt class="literal">Load()</tt> returns an object
             that is an uninitialized proxy and does not actually hit the database until you invoke a method of 
@@ -4259,7 +4268,7 @@ IList problems = sess.Find(
             on demand, using the identifiers returned by an initial SQL query (n+1 selects
             total).
         </p><pre class="programlisting">// fetch ids
-IEnumerable en = sess.Enumerable("from eg.Qux q order by q.Likeliness"); 
+IEnumerable<Qux> en = sess.CreateQuery("from eg.Qux q order by q.Likeliness").List<Qux>(); 
 foreach ( Qux qux in en )
 {
     // something we couldnt express in the query
@@ -4275,22 +4284,22 @@ foreach ( Qux qux in en )
             is almost always faster.) Heres an example of a query that should be
             called using <tt class="literal">Enumerable()</tt>:
         </p><pre class="programlisting">
-IEnumerable en = sess.Enumerable(
+IEnumerable en = sess.CreateQuery(
     "select customer, product " + 
     "from Customer customer, " +
     "Product product " +
     "join customer.Purchases purchase " +
     "where product = purchase.Product"
-);</pre><p>
+).List();</pre><p>
             Calling the previous query using <tt class="literal">Find()</tt> would return a very
             large ADO.NET result set containing the same data many times.
         </p><p>
             NHibernate queries sometimes return tuples of objects, in which case each tuple
             is returned as an array:
-        </p><pre class="programlisting">IEnumerable foosAndBars = sess.Enumerable(
+        </p><pre class="programlisting">IEnumerable foosAndBars = sess.CreateQuery(
     "select foo, bar from Foo foo, Bar bar " +
     "where bar.Date = foo.Date"
-);
+).List();
 foreach (object[] tuple in foosAndBars)
 {
     Foo foo = tuple[0]; Bar bar = tuple[1];
@@ -4299,19 +4308,19 @@ foreach (object[] tuple in foosAndBars)
                 Queries may specify a property of a class in the <tt class="literal">select</tt> clause.
                 They may even call SQL aggregate functions. Properties or aggregates are considered
                 "scalar" results.
-            </p><pre class="programlisting">IEnumerable results = sess.Enumerable(
+            </p><pre class="programlisting">IEnumerable results = sess.CreateQuery(
         "select cat.Color, min(cat.Birthdate), count(cat) from Cat cat " +
         "group by cat.Color"
-);
+).List();
 foreach ( object[] row in results )
 {
     Color type = (Color) row[0];
     DateTime oldest = (DateTime) row[1];
     int count = (int) row[2];
     .....
-}</pre><pre class="programlisting">IEnumerable en = sess.Enumerable(
+}</pre><pre class="programlisting">IEnumerable en = sess.CreateQuery(
     "select cat.Type, cat.Birthdate, cat.Name from DomesticCat cat"
-);</pre><pre class="programlisting">IList list = sess.Find(
+).List();</pre><pre class="programlisting">IList list = sess.Find(
     "select cat, cat.Mate.Name from DomesticCat cat"
 );</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-queryinterface"></a>9.3.2.&nbsp;The IQuery interface</h3></div></div><div></div></div><p>
                 If you need to specify bounds upon your result set (the maximum number of rows
@@ -4347,16 +4356,16 @@ IList cats = q.List();</pre><p>
                     </p></li></ul></div><pre class="programlisting">//named parameter (preferred)
 IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name = :name");
 q.SetString("name", "Fritz");
-IEnumerable cats = q.Enumerable();</pre><pre class="programlisting">//positional parameter
+IEnumerable&lt;Cat&gt; cats = q.List&lt;Cat&gt;();</pre><pre class="programlisting">//positional parameter
 IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name = ?");
 q.SetString(0, "Izi");
-IEnumerable cats = q.Enumerable();</pre><pre class="programlisting">//named parameter list
+IEnumerable&lt;Cat&gt; cats = q.List&lt;Cat&gt;();</pre><pre class="programlisting">//named parameter list
 IList names = new ArrayList();
 names.Add("Izi");
 names.Add("Fritz");
 IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name in (:namesList)");
 q.SetParameterList("namesList", names);
-IList cats = q.List();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-filtering"></a>9.3.3.&nbsp;Filtering collections</h3></div></div><div></div></div><p>
+IList&lt;Cat&gt; cats = q.List&lt;Cat&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-filtering"></a>9.3.3.&nbsp;Filtering collections</h3></div></div><div></div></div><p>
                 A collection <span class="emphasis"><em>filter</em></span> is a special type of query that may be applied to
                 a persistent collection or array. The query string may refer to <tt class="literal">this</tt>,
                 meaning the current collection element.
@@ -4418,7 +4427,7 @@ sess.Flush();  // changes to cat are automatically detected and persisted</pre><
                 last section. NHibernate supports this model by providing the
                 method <tt class="literal">Session.Update()</tt>.
             </p><pre class="programlisting">// in the first session
-Cat cat = (Cat) firstSession.Load(typeof(Cat), catId);
+Cat cat = firstSession.Load&lt;Cat&gt;(catId);
 Cat potentialMate = new Cat();
 firstSession.Save(potentialMate);
 
@@ -4467,7 +4476,7 @@ secondSession.Update(mate); // update mate</pre><p>
                 will attempt to guess it by creating an instance of the class using the no-argument
                 constructor and reading the property value from the instance.
             </p><pre class="programlisting">// in the first session
-Cat cat = (Cat) firstSession.Load(typeof(Cat), catID);
+Cat cat = firstSession.Load&lt;Cat&gt;(catID);
 
 // in a higher tier of the application
 Cat mate = new Cat();
@@ -4578,7 +4587,7 @@ sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><
             However, NHibernate does guarantee that the <tt class="literal">ISession.Find(..)</tt> 
             methods will never return stale data; nor will they return the wrong data.
         </p><p>
-            It is possible to change the default behavior so that flush occurs less frequently.
+            It is possible to change the default behavior so that flush occurs less frequently, either by code or by configuration.
             The <tt class="literal">FlushMode</tt> class defines three different modes:
             only flush at commit time (and only when the NHibernate <tt class="literal">ITransaction</tt>
           API is used), flush automatically using the explained routine (will only work inside an explicit NHibernate <tt class="literal">ITransaction</tt>), 
@@ -5870,7 +5879,7 @@ session.Close();</pre></div><div class="sect1" lang="en"><div class="titlepage">
 ITransaction tx = session.BeginTransaction();
    
 var customers = session.GetNamedQuery("GetCustomers")
-    .Enumerable&lt;Customer&gt;();
+    .List&lt;Customer&gt;();
 while ( customers.MoveNext() ) {
     Customer customer = customers.Current;
     customer.updateStuff(...);
@@ -7543,16 +7552,16 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                 Firstly, instances of <tt class="literal">Cat</tt> will never be castable to
                 <tt class="literal">DomesticCat</tt>, even if the underlying instance is an
                 instance of <tt class="literal">DomesticCat</tt>:
-            </p><pre class="programlisting">Cat cat = (Cat) session.Load(typeof(Cat), id);  // instantiate a proxy (does not hit the db)
+            </p><pre class="programlisting">Cat cat = session.Load&lt;Cat&gt;(id);  // instantiate a proxy (does not hit the db)
 if ( cat.IsDomesticCat ) {                  // hit the db to initialize the proxy
     DomesticCat dc = (DomesticCat) cat;       // Error!
     ....
 }</pre><p>
                 Secondly, it is possible to break proxy <tt class="literal">==</tt>.
-            </p><pre class="programlisting">Cat cat = (Cat) session.Load(typeof(Cat), id);            // instantiate a Cat proxy
+            </p><pre class="programlisting">Cat cat = session.Load&lt;Cat&gt;(id);            // instantiate a Cat proxy
 DomesticCat dc = 
-        (DomesticCat) session.Load(typeof(DomesticCat), id);  // acquire new DomesticCat proxy!
-System.out.println(cat==dc);                            // false</pre><p>
+        session.Load<DomesticCat>(id);  // acquire new DomesticCat proxy!
+System.Console.WriteLine(cat==dc);                            // false</pre><p>
                 However, the situation is not quite as bad as it looks. Even though we now have two references
                 to different proxy objects, the underlying instance will still be the same object:
             </p><pre class="programlisting">cat.Weight = 11.0;  // hit the db to initialize the proxy
@@ -7578,7 +7587,7 @@ Console.WriteLine( dc.Weight );  // 11.0</pre><p>
                 proxies for instances of <tt class="literal">ICat</tt> and <tt class="literal">IDomesticCat</tt> may be returned
                 by <tt class="literal">Load()</tt> or <tt class="literal">Enumerable()</tt>. (Note that <tt class="literal">List()</tt>
                 does not usually return proxies.)
-            </p><pre class="programlisting">ICat cat = (ICat) session.Load(typeof(CatImpl), catid);
+            </p><pre class="programlisting">ICat cat = (ICat) session.Load<CatImpl>(catid);
 IEnumerator iter = session.Enumerable("from CatImpl as cat where cat.Name='fritz'").GetEnumerator();
 iter.MoveNext();
 ICat fritz = (ICat) iter.Current;</pre><p>
@@ -7769,7 +7778,7 @@ ICat fritz = (ICat) iter.Current;</pre><p>
             if you are processing a huge number of objects and need to manage memory efficiently,
             the <tt class="literal">Evict()</tt> method may be used to remove the object and its collections
             from the first-level cache.
-        </p><pre class="programlisting">IEnumerable cats = sess.Enumerable("from Eg.Cat as cat"); //a huge result set
+        </p><pre class="programlisting">IEnumerable cats = sess.CreateQuery("from Eg.Cat as cat").List&lt;Cat&gt;(); //a huge result set
 foreach( Cat cat in cats )
 {
     DoSomethingWithACat(cat);
@@ -7869,8 +7878,8 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
             </p><p>
                 There is, arguably, one more advantage that indexed collections have over sets for
                 many to many associations or collections of values. Because of the structure of an
-                <tt class="literal">ISet</tt>, NHibernate doesn't ever <tt class="literal">UPDATE</tt> a row when
-                an element is "changed". Changes to an <tt class="literal">ISet</tt> always work via
+                <tt class="literal">ISet&lt;T&gt;</tt>, NHibernate doesn't ever <tt class="literal">UPDATE</tt> a row when
+                an element is "changed". Changes to an <tt class="literal">ISet&lt;T&gt;</tt> always work via
                 <tt class="literal">INSERT</tt> and <tt class="literal">DELETE</tt> (of individual rows). Once
                 again, this consideration does not apply to one to many associations.
             </p><p>
@@ -7889,9 +7898,9 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 are much more performant than sets. For a collection with <tt class="literal">inverse="true"</tt>
                 (the standard bidirectional one-to-many relationship idiom, for example) we can add elements
                 to a bag or list without needing to initialize (fetch) the bag elements! This is because
-                <tt class="literal">IList.Add()</tt> must always succeed for a bag or <tt class="literal">IList</tt>
-                (unlike an <tt class="literal">ISet</tt>). This can make the following common code much faster.
-            </p><pre class="programlisting">Parent p = (Parent) sess.Load(typeof(Parent), id);
+                <tt class="literal">IList.Add()</tt> must always succeed for a bag or <tt class="literal">IList&lt;T&gt;</tt>
+                (unlike an <tt class="literal">ISet&lt;T&gt;</tt>). This can make the following common code much faster.
+            </p><pre class="programlisting">Parent p = sess.Load<Parent>(id);
     Child c = new Child();
     c.Parent = p;
     p.Children.Add(c);  //no need to fetch the collection!
@@ -8220,7 +8229,7 @@ session.Flush();</pre><p>
     &lt;one-to-many class="Child"/&gt;
 &lt;/set&gt;</pre><p>
             The following code would be used to add a new <tt class="literal">Child</tt>.
-        </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+        </p><pre class="programlisting">Parent p =  session.Load<Parent>(pid);
 Child c = new Child();
 c.Parent = p;
 p.Children.Add(c);
@@ -8236,7 +8245,7 @@ session.Flush();</pre><p>
     children.Add(c);
 }</pre><p>
             Now, the code to add a <tt class="literal">Child</tt> looks like
-        </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+        </p><pre class="programlisting">Parent p = session.Load<Parent>(pid);
 Child c = new Child();
 p.AddChild(c);
 session.Save(c);
@@ -8248,17 +8257,17 @@ session.Flush();</pre></div><div class="sect1" lang="en"><div class="titlepage">
     &lt;one-to-many class="Child"/&gt;
 &lt;/set&gt;</pre><p>
              This simplifies the code above to
-         </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+         </p><pre class="programlisting">Parent p =  session.Load<Parent>(pid);
 Child c = new Child();
 p.AddChild(c);
 session.Flush();</pre><p>
              Similarly, we don't need to iterate over the children when saving or deleting a <tt class="literal">Parent</tt>.
              The following removes <tt class="literal">p</tt> and all its children from the database.
-         </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+         </p><pre class="programlisting">Parent p =  session.Load<Parent>(pid);
 session.Delete(p);
 session.Flush();</pre><p>
              However, this code
-         </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+         </p><pre class="programlisting">Parent p =  session.Load<Parent>(pid);
 // Get one child out of the set
 IEnumerator childEnumerator = p.Children.GetEnumerator();
 childEnumerator.MoveNext();
@@ -8270,7 +8279,7 @@ session.Flush();</pre><p>
              will not remove <tt class="literal">c</tt> from the database; it will only remove the link to <tt class="literal">p</tt>
              (and cause a <tt class="literal">NOT NULL</tt> constraint violation, in this case). You need to explicitly
              <tt class="literal">Delete()</tt> the <tt class="literal">Child</tt>.
-         </p><pre class="programlisting">Parent p = (Parent) session.Load(typeof(Parent), pid);
+         </p><pre class="programlisting">Parent p = session.Load<Parent>(pid);
 // Get one child out of the set
 IEnumerator childEnumerator = p.Children.GetEnumerator();
 childEnumerator.MoveNext();
@@ -8624,7 +8633,7 @@ namespace Eg
             using (ISession session = _sessions.OpenSession())
             using (ITransaction tx = session.BeginTransaction())
             {
-                Blog blog = (Blog) session.Load(typeof(Blog), blogId);
+                Blog blog = session.Load<Blog>(blogId);
                 item.Blog = blog;
                 blog.Items.Add(item);
                 tx.Commit();
@@ -8650,7 +8659,7 @@ namespace Eg
             using (ISession session = _sessions.OpenSession())
             using (ITransaction tx = session.BeginTransaction())
             {
-                BlogItem item = (BlogItem) session.Load(typeof(BlogItem), itemId);
+                BlogItem item = session.Load<BlogItem>(itemId);
                 item.Text = text;
                 tx.Commit();
             }
@@ -9077,7 +9086,7 @@ alter table line_items
                     and <tt class="literal">GetHashCode()</tt>. Inside the ISession scope, object identity is guaranteed. If
                     you implement these methods, never ever use the database identifier! A transient object doesn't have
                     an identifier value and NHibernate would assign a value when the object is saved. If the object
-                    is in an ISet while being saved, the hash code changes, breaking the contract. To implement
+                    is in an ISet&lt;T&gt; while being saved, the hash code changes, breaking the contract. To implement
                     <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt>, use a unique business key, that is,
                     compare a unique combination of class properties. Remember that this key has to be stable and unique
                     only while the object is in an ISet, not for the whole lifetime (not as stable as a database primary
@@ -9204,7 +9213,7 @@ alter table line_items
 	&lt;section name="syscache2" type="NHibernate.Caches.SysCache2.SysCacheSection, NHibernate.Caches.SysCache2"/&gt;
 &lt;/configSections&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e14239"></a>25.4.1.&nbsp;Table-based Dependency</h3></div></div><div></div></div><p>
 				A table-based dependency will monitor the data in a database table for changes. Table-based
-				dependencies are generally used for a SQL Server 2000 database but will work with SQL Server 2005 as
+				dependencies are generally used for a SQL Server 2000 database but will work with SQL Server 2005 or superior as
 				well. Before you can use SQL Server cache invalidation with table based dependencies, you need to
 				enable notifications for the database. This task is performed with the <span><b class="command">aspnet_regsql</b></span>
 				command. With table-based notifications, the application will poll the database for changes at a
@@ -9392,4 +9401,4 @@ Illustration:</p><pre class="programlisting">
         [Attributes.X(3)]
     public MyType MyProperty;</pre><p>
 		X(3) will always belong to C(1) ! (as X(2)).
-		</p><p>It is the case for <tt class="literal">&lt;dynamic-component&gt;</tt> and <tt class="literal">&lt;nested-composite-element&gt;</tt>.</p><p>Another bad news is that, currently, XML elements coming after this elements can not be included in them. Eg: There is no way put a collection in <tt class="literal">&lt;dynamic-component&gt;</tt>. The reason is that the file <tt class="filename">nhibernate-mapping.xsd</tt> tells how elements are built and in which order, and NHibernate.Mapping.Attributes use this order.</p><p>Anyway, the solution would be to add a <tt class="methodname">int ParentNode</tt> property to BaseAttribute so that you can create a real graph...</p><p>For now, you can fallback on <tt class="classname">[RawXml]</tt>.</p><p>Actually, there is no other know issue nor planned modification. This library should be stable and complete; but if you find a bug or think of an useful improvement, contact us!</p><p>On side note, it would be nice to write a better TestFixture than <span class="emphasis"><em>NHibernate.Mapping.Attributes.Test</em></span> :D</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-attributes-devnotes"></a>26.5.&nbsp;Developer Notes</h2></div></div><div></div></div><p>Any change to the schema (<tt class="filename">nhibernate-mapping.xsd</tt>) implies:</p><div class="orderedlist"><ol type="1"><li><p>Checking if there is any change to do in the Generator (like updating KnowEnums / AllowMultipleValue / IsRoot / IsSystemType / IsSystemEnum / CanContainItself)</p></li><li><p>Updating <tt class="filename">/src/NHibernate.Mapping.Attributes/nhibernate-mapping.xsd</tt> (copy/paste) and running the Generator again (even if it wasn't modified)</p></li><li><p>Running the Test project and make sure that no exception is thrown. A class/property should be modified/added in this project to be sure that any new breaking change will be caught (=&gt; update the reference hbm.xml files and/or the project <tt class="filename">NHibernate.Mapping.Attributes-2.0.csproj</tt>)</p></li></ol></div><p>This implementation is based on NHibernate mapping schema; so there is probably lot of "standard schema features" that are not supported...</p><p>The version of NHibernate.Mapping.Attributes should be the version of the NHibernate schema used to generate it (=&gt; the version of NHibernate library).</p><p>In the design of this project, performance is a (<span class="emphasis"><em>very</em></span>) minor goal :) Easier implementation and maintenance are far more important because you can (and should) avoid to use this library in production (Cf. the first tip in <a href="#mapping-attributes-tips" title="26.3.&nbsp;Tips">Section&nbsp;26.3, &#8220;Tips&#8221;</a>).</p></div></div></div></div></body></html>
+		</p><p>It is the case for <tt class="literal">&lt;dynamic-component&gt;</tt> and <tt class="literal">&lt;nested-composite-element&gt;</tt>.</p><p>Another bad news is that, currently, XML elements coming after this elements can not be included in them. Eg: There is no way put a collection in <tt class="literal">&lt;dynamic-component&gt;</tt>. The reason is that the file <tt class="filename">nhibernate-mapping.xsd</tt> tells how elements are built and in which order, and NHibernate.Mapping.Attributes use this order.</p><p>Anyway, the solution would be to add a <tt class="methodname">int ParentNode</tt> property to BaseAttribute so that you can create a real graph...</p><p>For now, you can fallback on <tt class="classname">[RawXml]</tt>.</p><p>Actually, there is no other know issue nor planned modification. This library should be stable and complete; but if you find a bug or think of an useful improvement, contact us!</p><p>On side note, it would be nice to write a better TestFixture than <span class="emphasis"><em>NHibernate.Mapping.Attributes.Test</em></span> :D</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-attributes-devnotes"></a>26.5.&nbsp;Developer Notes</h2></div></div><div></div></div><p>Any change to the schema (<tt class="filename">nhibernate-mapping.xsd</tt>) implies:</p><div class="orderedlist"><ol type="1"><li><p>Checking if there is any change to do in the Generator (like updating KnowEnums / AllowMultipleValue / IsRoot / IsSystemType / IsSystemEnum / CanContainItself)</p></li><li><p>Updating <tt class="filename">/src/NHibernate.Mapping.Attributes/nhibernate-mapping.xsd</tt> (copy/paste) and running the Generator again (even if it wasn't modified)</p></li><li><p>Running the Test project and make sure that no exception is thrown. A class/property should be modified/added in this project to be sure that any new breaking change will be caught (=&gt; update the reference hbm.xml files and/or the project <tt class="filename">NHibernate.Mapping.Attributes.csproj</tt>)</p></li></ol></div><p>This implementation is based on NHibernate mapping schema; so there is probably lot of "standard schema features" that are not supported...</p><p>The version of NHibernate.Mapping.Attributes should be the version of the NHibernate schema used to generate it (=&gt; the version of NHibernate library).</p><p>In the design of this project, performance is a (<span class="emphasis"><em>very</em></span>) minor goal :) Easier implementation and maintenance are far more important because you can (and should) avoid to use this library in production (Cf. the first tip in <a href="#mapping-attributes-tips" title="26.3.&nbsp;Tips">Section&nbsp;26.3, &#8220;Tips&#8221;</a>).</p></div></div></div></div></body></html>
