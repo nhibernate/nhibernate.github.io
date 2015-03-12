@@ -23,10 +23,7 @@ input,
 button {
     font-family: Tahoma, Arial, Helvetica;
 }
-.Common {
-    width: 960px;
-}
-A.NewPageLink {
+a.NewPageLink {
     color: #FA5454;
 }
 #CommonHeader {
@@ -121,4 +118,30 @@ CommonContent {
 }
 a:visited {
     color: #3366CC;
+}
+
+@media only screen and (min-width:960px){
+  .Common {
+    width: 960px;
+  }
+}
+@media only screen and (max-width:768px){
+  #CommonSidebarRight .CommonSidebar {
+    padding: 0;
+    width: initial;
+    height: 100px;
+    float: none;
+  }
+  .CommonContentBox {
+    height: 100%;
+  }
+}
+@media only screen and (max-width:720px) {
+  #CommonNavigation {
+    height: initial;
+    background-image: none;
+  }
+  #CommonNavigation ul li {
+    float: none;
+  }
 }
