@@ -1,247 +1,139 @@
-
-
-/* General Styles */
-
-body, html
-{
+body,
+html {
     font-family: Tahoma, Arial, Helvetica;
     color: #333333;
     background-color: #F0F0F0;
     background-image: none;
 }
-
-form
-{
+form {
     min-width: 960px;
 }
-
-A:LINK
-{
+A:LINK {
     color: #3366CC;
 }
-
-A:ACTIVE
-{
+A:ACTIVE {
     color: #3366CC;
 }
-
-A:VISITED
-{
+A:VISITED {
     color: #888888;
 }
-
-SELECT, TEXTAREA, INPUT, BUTTON
-{
+SELECT,
+TEXTAREA,
+INPUT,
+BUTTON {
     font-family: Tahoma, Arial, Helvetica;
 }
-
-.Common
-{
+.Common {
     width: 960px;
 }
-
-A.NewPageLink
-{
+A.NewPageLink {
     color: #FA5454;
 }
-
-/* Header Styles */
-
-#CommonHeader
-{
+#CommonHeader {
     background-image: none;
     background-color: #FFFFFF;
     height: 70px;
 }
-
-.CommonHeaderTitle
-{
+.CommonHeaderTitle {
     color: #87802A;
     font-family: Tahoma, Arial, Helvetica;
     font-size: 325%;
 }
-
-
-
-/* Navigation Styles */
-
-#CommonNavigation
-{
+#CommonNavigation {
     background-color: #87802A;
 }
-
-#CommonNavigation .Common .Inner, #CommonNavigation ul li
-{
+#CommonNavigation .Common .Inner,
+#CommonNavigation ul li {
     border-color: #C7AB4E;
 }
-
-#CommonNavigation .Common, #CommonNavigation a:link, #CommonNavigation a:active, #CommonNavigation a:visited, #CommonNavigation a:link, #CommonNavigation a:active, #CommonNavigation a:hover
-{
+#CommonNavigation .Common,
+#CommonNavigation a:link,
+#CommonNavigation a:active,
+#CommonNavigation a:visited,
+#CommonNavigation a:link,
+#CommonNavigation a:active,
+#CommonNavigation a:hover {
     border-color: #475506;
 }
-
-#CommonNavigation a:link, #CommonNavigation a:active, #CommonNavigation a:visited
-{
+#CommonNavigation a:link,
+#CommonNavigation a:active,
+#CommonNavigation a:visited {
     color: #FFFFFF;
 }
-
-#CommonNavigation a:hover
-{
+#CommonNavigation a:hover {
     color: #AEA9A9;
 }
-
-#CommonNavigation a.Selected:link, #CommonNavigation a.Selected:active, #CommonNavigation a.Selected:visited
-{
+#CommonNavigation a.Selected:link,
+#CommonNavigation a.Selected:active,
+#CommonNavigation a.Selected:visited {
     color: #FFFFFF;
     background-color: #C8AA4E;
 }
-
-
-
-.CommonBreadCrumbArea
-{
+.CommonBreadCrumbArea {
     background-color: #F7F7F7;
     color: #000000;
 }
-
-/* Body Styles */
-
-.CommonTitle
-{
+.CommonTitle {
     font-family: Tahoma, Arial, Helvetica;
     color: #333333;
     font-size: 200%;
 }
-
-
-
-
-
-
-
-
-
-
-/* Content Box */
-
-.CommonContentBox
-{
+.CommonContentBox {
     background-color: #FFFFFF;
     border-top-color: #CCCCCC;
 }
-
-.CommonContentBox .CommonContentBoxHeader
-{
+.CommonContentBox .CommonContentBoxHeader {
     border-bottom-color: #CCCCCC;
     font-family: Tahoma, Arial, Helvetica;
     color: #333333;
 }
-
-
-
-/* Announcement Content Box */
-
-
-
-/* Activity Content Box */
-
-
-
-/* Highlighted Content Box */
-
-
-
-/* Message Box */
-
-
-
-/* File Box */
-
-
-
-/* List Styles */
-
-
-
-
-.CommonAvatarListItemArea
-{
+.CommonAvatarListItemArea {
     background-color: #EEEEEE;
 }
-
-
-/* Footer Styles */
-
-#CommonFooter
-{
+#CommonFooter {
     background-image: url(/images/NHibernate_5F00_logo.jpg);
     background-color: #F7F7F7;
 }
-
-/* Sidebar Styles */
-
-#CommonSidebarLeft .CommonSidebar, #CommonSidebarRight .CommonSidebar
-{
+#CommonSidebarLeft .CommonSidebar,
+#CommonSidebarRight .CommonSidebar {
     width: 200px;
 }
-
-/* Modal Styles */
-
-
-
 /* Colors here 
 http://colorschemedesigner.com/#1H11Tm3gXw0w0
 */
-
-
-#CommonNavigation
-{
-height: 2.2em;
-background: #87802A url(/images/header_fade_background.png) repeat-x;
+#CommonNavigation {
+    height: 2.2em;
+    background: #87802A url(/images/header_fade_background.png) repeat-x;
 }
-
-#CommonHeader
-{
-padding-bottom: 10px;
+#CommonHeader {
+    padding-bottom: 10px;
 }
-
-
-body &gt; form &gt; .Common
-{
-background-color: white;
+body &gt;
+form &gt;
+.Common {
+    background-color: white;
 }
-
-
-
-
-#CommonTitle .CommonTitle, .CommonContentArea &gt; .CommonTitle
-{
-padding: 15px;
+#CommonTitle .CommonTitle,
+.CommonContentArea &gt;
+.CommonTitle {
+    padding: 15px;
 }
-
-#CommonTitle, .CommonContentArea &gt; .CommonTitle
-{
-background: white url(/images/common_title_fade.png) repeat-x  scroll right bottom;
+#CommonTitle,
+.CommonContentArea &gt;
+.CommonTitle {
+    background: white url(/images/common_title_fade.png) repeat-x scroll right bottom;
 }
-
-
-.CommonContentBox, CommonContent
-{
- border-top: none;
- line-height: 1.4em;
+.CommonContentBox,
+CommonContent {
+    border-top: none;
+    line-height: 1.4em;
 }
-
-
-
-#CommonNavigation a.Selected:link, 
-#CommonNavigation a.Selected:active, 
+#CommonNavigation a.Selected:link,
+#CommonNavigation a.Selected:active,
 #CommonNavigation a.Selected:visited {
-background-color:white;
-color:#333333;
+    background-color: white;
+    color: #333333;
 }
-
-
-
-a:visited{
-color: #3366CC;
+a:visited {
+    color: #3366CC;
 }

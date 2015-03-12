@@ -1,556 +1,292 @@
-/*
-Generics
-*/
-
-body, html
-{
-	margin: 0;
-	padding: 0;
-	color: #333;
-	background-color: #f0f0f0;
-	background-image: none;
-	font-family: Arial, Helvetica;
+body,
+html {
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f0f0f0;
+    background-image: none;
+    font-family: Arial, Helvetica;
 }
-
-form
-{
-	min-width: 960px;
+form {
+    min-width: 960px;
 }
-
-.Common
-{
-	margin: 0 auto;
-	padding: 0;
-	width: 960px;
+.Common {
+    margin: 0 auto;
+    padding: 0;
+    width: 960px;
 }
-
-#CommonHeader
-{
-	padding: 0;
-	margin: 0;
-	width: 100%;
-	overflow: hidden;
-	height: 115px;
-	background-color: #fff;
+#CommonHeader {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    height: 115px;
+    background-color: #fff;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-#CommonHeaderTitleArea
-{
-	float: left;
-	padding-top: 14px;
-	width: 70%;
-	overflow: hidden;
+#CommonHeaderTitleArea {
+    float: left;
+    padding-top: 14px;
+    width: 70%;
+    overflow: hidden;
 }
-#CommonHeaderTitleArea img { float: left; }
-
-.CommonHeaderTitle
-{
-	font-size: 325%;
-	font-weight: bold;
-	color: #000;
-	letter-spacing: -2px;
-	line-height: 100%;
-	margin: 0 0 0 53px;
-	padding: 0;
+#CommonHeaderTitleArea img {
+    float: left;
 }
-
-.CommonHeaderTitleDescription
-{
-	font-size: 85%;
-	padding-left: 2px;
-	margin: 0 0 0 53px;
+.CommonHeaderTitle {
+    font-size: 325%;
+    font-weight: bold;
+    color: #000;
+    letter-spacing: -2px;
+    line-height: 100%;
+    margin: 0 0 0 53px;
+    padding: 0;
 }
-
-#CommonFooter
-{
-	clear: both;
-	margin-top: 16px;
-	background-color: #f7f7f7;
-	border-top: solid 1px #bbb;
-	border-bottom: solid 1px #bbb;
+.CommonHeaderTitleDescription {
+    font-size: 85%;
+    padding-left: 2px;
+    margin: 0 0 0 53px;
 }
-
-#CommonFooter .Common
-{
-	padding: 12px 0;
-	text-align: center;
-	font-size: 85%;
-	font-weight: bold;
+#CommonFooter {
+    clear: both;
+    margin-top: 16px;
+    background-color: #f7f7f7;
+    border-top: solid 1px #bbb;
+    border-bottom: solid 1px #bbb;
 }
-
-#CommonNavigation
-{
+#CommonFooter .Common {
+    padding: 12px 0;
+    text-align: center;
+    font-size: 85%;
+    font-weight: bold;
+}
+#CommonNavigation {
     clear: both;
     margin: 0;
-	width: 100%;
-	height: 27px;
-	background-color: #95B6C3;
-	border-top: solid 1px #666;
-	border-bottom: solid 1px #666;
-	padding: 0;	
-	font-size: 14px;
+    width: 100%;
+    height: 27px;
+    background-color: #95B6C3;
+    border-top: solid 1px #666;
+    border-bottom: solid 1px #666;
+    padding: 0;
+    font-size: 14px;
 }
-
-
-
-#CommonNavigation .Common
-{
+#CommonNavigation .Common {
     border-left: solid 1px #558B9F;
 }
-
-#CommonNavigation .Common .Inner
-{
-	border-left: solid 1px #D5E1E7;
-	height: 1%;
+#CommonNavigation .Common .Inner {
+    border-left: solid 1px #D5E1E7;
+    height: 1%;
 }
-
-
-#CommonNavigationShadow
-{
-	clear: both;
-	margin-bottom: 12px;
+#CommonNavigationShadow {
+    clear: both;
+    margin-bottom: 12px;
 }
-
-#CommonNavigation ul
-{
-	list-style-type: none;
-	padding: 0;
-	display: block;
-	margin: 0;
+#CommonNavigation ul {
+    list-style-type: none;
+    padding: 0;
+    display: block;
+    margin: 0;
 }
-
-#CommonNavigation ul li
-{
-	display: block;
-	float: left;
-	padding: 0;
-	border-right: solid 1px #D5E1E7;
-	font-weight: bold;
-	color: #000;
+#CommonNavigation ul li {
+    display: block;
+    float: left;
+    padding: 0;
+    border-right: solid 1px #D5E1E7;
+    font-weight: bold;
+    color: #000;
 }
-
-
-#CommonNavigation a:link, #CommonNavigation a:active, #CommonNavigation a:visited
-{
+#CommonNavigation a:link,
+#CommonNavigation a:active,
+#CommonNavigation a:visited {
     color: #191919;
     text-decoration: none;
     display: block;
     padding: 6px 12px;
     border-right: solid 1px #558B9F;
 }
-
-
-#CommonNavigation a:hover
-{
+#CommonNavigation a:hover {
     color: #fff;
     text-decoration: none;
     display: block;
     padding: 6px 12px;
     border-right: solid 1px #558B9F;
 }
-
-
-#CommonNavigation a.Selected:link, #CommonNavigation a.Selected:active, #CommonNavigation a.Selected:visited
-{
+#CommonNavigation a.Selected:link,
+#CommonNavigation a.Selected:active,
+#CommonNavigation a.Selected:visited {
     color: #191919;
     background-color: #d6e1e7;
     border-color: #d6e1e7;
     border-bottom-width: 0;
-	padding-bottom: 7px;
-	margin-bottom: -1px;
+    padding-bottom: 7px;
+    margin-bottom: -1px;
 }
-
-
-#CommonNavigation a.Selected:hover
-{
+#CommonNavigation a.Selected:hover {
     color: #191919;
 }
-
-#CommonNavigation a.Selected:hover
-{
+#CommonNavigation a.Selected:hover {
     color: #333;
 }
-
 #CommonContent {
-	margin: 0;
-	padding: 0;
-	height: 1%; /* IE6 hack... it's very minor, though */
-	overflow: hidden;
+    margin: 0;
+    padding: 0;
+    height: 1%;
+    /* IE6 hack... it's very minor, though */
+    
+    overflow: hidden;
 }
-
-#CommonContentInner
-{
-	width: 100%;
-	overflow: hidden;
+#CommonContentInner {
+    width: 100%;
+    overflow: hidden;
 }
-
-#CommonSidebarLeft
-{
-}
-
-#CommonSidebarLeft .CommonSidebar
-{
+#CommonSidebarLeft {} #CommonSidebarLeft .CommonSidebar {
     float: left;
-	padding-right: 12px;
-	overflow: hidden;
-	width: 240px;
+    padding-right: 12px;
+    overflow: hidden;
+    width: 240px;
 }
-
-#CommonSidebarRight
-{
-}
-
-#CommonSidebarRight .CommonSidebar
-{
+#CommonSidebarRight {} #CommonSidebarRight .CommonSidebar {
     float: right;
-	padding-left: 12px;
-	overflow: hidden;
-	width: 240px;
+    padding-left: 12px;
+    overflow: hidden;
+    width: 240px;
 }
-
-A:LINK, A:ACTIVE
-{
+A:LINK,
+A:ACTIVE {
     color: #36c;
     text-decoration: none;
 }
-
-A:VISITED
-{
+A:VISITED {
     color: #039;
     text-decoration: none;
 }
-
-A:HOVER
-{
-	text-decoration: underline;
+A:HOVER {
+    text-decoration: underline;
 }
-
-SELECT, TEXTAREA, INPUT, BUTTON
-{
+SELECT,
+TEXTAREA,
+INPUT,
+BUTTON {
     font-family: Arial, Helvetica;
     font-size: 90%;
 }
-
-TABLE
-{
+TABLE {
     empty-cells: show;
 }
-
-HR
-{
-	border-style: dotted;
-	border-width: 0 0 1px 0;
-	border-color: #ccc;
-	background-color: transparent;
-	height: 0;
+HR {
+    border-style: dotted;
+    border-width: 0 0 1px 0;
+    border-color: #ccc;
+    background-color: transparent;
+    height: 0;
 }
-
-/*
-Common Styles
-*/
-
-.CommonBreadCrumbArea
-{
-	margin: 0;
-	padding: 4px 0;
-	font-size: 85%;
-	color: #000;
-	background-color: #f7f7f7;
-	border-bottom: solid 1px #bbb;
+.CommonBreadCrumbArea {
+    margin: 0;
+    padding: 4px 0;
+    font-size: 85%;
+    color: #000;
+    background-color: #f7f7f7;
+    border-bottom: solid 1px #bbb;
 }
-
-/*
-Form Styles
-*/
-
-
-
-
-
-
-
-
-
-
-
-.CommonTitle
-{
-	color: #333;
-	font-size: 200%;
-	letter-spacing: -1px;
-	font-weight: bold;
-	padding: 0;
+.CommonTitle {
+    color: #333;
+    font-size: 200%;
+    letter-spacing: -1px;
+    font-weight: bold;
+    padding: 0;
 }
-
-.CommonGroupedContentArea
-{
-	padding: 0 0 8px 0;
-	margin: 0 0 16px 0;
+.CommonGroupedContentArea {
+    padding: 0 0 8px 0;
+    margin: 0 0 16px 0;
 }
-
-.CommonAvatarListItemsArea
-{
-	margin: 0;
+.CommonAvatarListItemsArea {
+    margin: 0;
 }
-
-.CommonAvatarListItemArea
-{
-	margin: 10px 0;
-	background-repeat: no-repeat;
-	background-position: 10px 10px;
-	padding: 10px 10px 10px 70px;
-	min-height: 46px;
-	background-color: #eee;
+.CommonAvatarListItemArea {
+    margin: 10px 0;
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding: 10px 10px 10px 70px;
+    min-height: 46px;
+    background-color: #eee;
 }
-
-
-
-
-
-
-
-
-.CommonAvatarListItemArea.Custom
-{
-	padding-left: 0px;
+.CommonAvatarListItemArea.Custom {
+    padding-left: 0px;
 }
-
-.CustomAvatarListItemCustomAvatar
-{
-	float: left;
-	padding-left: 10px;
-	width: 60px;
-	height: 60px;
-	overflow: hidden;
+.CustomAvatarListItemCustomAvatar {
+    float: left;
+    padding-left: 10px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
 }
-
-.CustomAvatarListCustomContent
-{
-	margin-left: 80px;
+.CustomAvatarListCustomContent {
+    margin-left: 80px;
 }
-
-.CommonAvatarListItem
-{
-	font-size: 100%;
+.CommonAvatarListItem {
+    font-size: 100%;
 }
-
-.CommonAvatarListItemName
-{
-	font-size: 150%;
-	font-weight: normal;
-	padding: 0;
-	margin: 0 0 4px 0;
+.CommonAvatarListItemName {
+    font-size: 150%;
+    font-weight: normal;
+    padding: 0;
+    margin: 0 0 4px 0;
 }
-
-.CommonAvatarListItemDetails
-{
-	margin: 4px 0 0 0;
-	color: #000;
-	font-size: 80%;
+.CommonAvatarListItemDetails {
+    margin: 4px 0 0 0;
+    color: #000;
+    font-size: 80%;
 }
-
-UL.CommonAvatarListItemList
-{
-	margin: 0;
-	padding: 0;
-	list-style-type: none;
+UL.CommonAvatarListItemList {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
 }
-
-.CustomWikiPageDetailsAvatar
-{
-	float: left;
-	padding-left: 4px;
-	width: 60px;
-	height: 60px;
-	overflow: hidden;
+.CustomWikiPageDetailsAvatar {
+    float: left;
+    padding-left: 4px;
+    width: 60px;
+    height: 60px;
+    overflow: hidden;
 }
-
-.CustomWikiPageDetailsContent
-{
-	margin-left: 60px;
+.CustomWikiPageDetailsContent {
+    margin-left: 60px;
 }
-
-.CustomWikiPageDetailsTitle
-{
-	margin-left: 4px;
-	margin-bottom: 2px;
-	margin-top: 8px;
+.CustomWikiPageDetailsTitle {
+    margin-left: 4px;
+    margin-bottom: 2px;
+    margin-top: 8px;
 }
-
-.CustomWikiPageDetailsArea
-{
-	border-bottom: 1px dotted #ddd;
-	height: 75px;
+.CustomWikiPageDetailsArea {
+    border-bottom: 1px dotted #ddd;
+    height: 75px;
 }
-
-
-/*
-Validation Styles
-*/
-
-
-/*
-ContentParts
-*/
-
-
-
-/*
-Context Menu Styles
-*/
-
-
-
-
-
-/* Modal Styles */
-
-
-
-
-
-
-
-
-/*
-Rating Styles
-*/
-
-
-
-
-/*
-Content Selector Styles 
-*/
-
-
-
-
-
-
-
-
-
-
-
-/* Poll Styles */
-
-
-.CommonPollMoveUpButton:LINK, .CommonPollMoveUpButton:VISTED, .CommonPollMoveUpButton:ACTIVE
-{
-	text-decoration: none;
-	color: #333;
+.CommonPollMoveUpButton:LINK,
+.CommonPollMoveUpButton:VISTED,
+.CommonPollMoveUpButton:ACTIVE {
+    text-decoration: none;
+    color: #333;
 }
-
-
-
-.CommonPollMoveDownButton:LINK, .CommonPollMoveDownButton:VISTED, .CommonPollMoveDownButton:ACTIVE
-{
-	text-decoration: none;
-	color: #333;
+.CommonPollMoveDownButton:LINK,
+.CommonPollMoveDownButton:VISTED,
+.CommonPollMoveDownButton:ACTIVE {
+    text-decoration: none;
+    color: #333;
 }
-
-
-
-.CommonPollDeleteButton:LINK, .CommonPollDeleteButton:VISTED, .CommonPollDeleteButton:ACTIVE
-{
-	text-decoration: none;
-	color: #333;
+.CommonPollDeleteButton:LINK,
+.CommonPollDeleteButton:VISTED,
+.CommonPollDeleteButton:ACTIVE {
+    text-decoration: none;
+    color: #333;
 }
-
-
-
-
-/* rendered poll styles */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* End Poll Styles */
-
-/* Tag Styles */
-
-
-
-
-
-
-
-
-
-
-
-/* End Tag Styles */
-
-/*
-TabPane Styles
-*/
-
-
-
-
-
-
-
-/* Inline tag editor */
-
-
-
-
-
-/* 
-Theme Styles
-*/
-
-
-
-
-
-
- 
-
- 
-
-
-
-/* Content Boxes */
-
-.CommonContentBox
-{
+.CommonContentBox {
     border-top: solid 3px #ccc;
     background-color: #fff;
     padding: 12px;
     margin: 0 0 12px 0;
     height: 1%;
 }
-
-.CommonContentBoxHeader
-{
+.CommonContentBoxHeader {
     padding: 0 0 6px 0;
     border-bottom: solid 1px #ccc;
     margin: 0 0 8px 0;
@@ -558,147 +294,31 @@ Theme Styles
     font-size: 120%;
     color: #333;
 }
-
-
-
-.CommonContentBoxContent
-{
+.CommonContentBoxContent {
     padding: 0 3px 15px 3px;
     font-size: 90%;
     overflow: hidden;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Comment Bubbles */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* File Lists */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Side List */
-
-
-
-
-/*
-Hierarchal List
-*/
-
-
-
-/* Search Styles */
-
-
-
-
-
-
-
-
-
-
-
-/* Post Popup Menu */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Hierarchical List */
-
-.CommonHierarchicalList
-{
-	list-style-type: none;
-	margin: 1px 0;
-	padding: 0;
+.CommonHierarchicalList {
+    list-style-type: none;
+    margin: 1px 0;
+    padding: 0;
 }
-
-
-.CommonHierarchicalList li
-{
-	padding: 2px 0;
+.CommonHierarchicalList li {
+    padding: 2px 0;
 }
-
-.CommonHierarchicalList a:link, .CommonHierarchicalList a:visited, .CommonHierarchicalList a:active, .CommonHierarchicalList a:hover
-{
-	color: #06c;
+.CommonHierarchicalList a:link,
+.CommonHierarchicalList a:visited,
+.CommonHierarchicalList a:active,
+.CommonHierarchicalList a:hover {
+    color: #06c;
 }
-
-.CommonHierarchicalList img
-{
-	margin-right: 4px;
+.CommonHierarchicalList img {
+    margin-right: 4px;
 }
-
-.CommonHierarchicalList a.Selected
-{
-	background-color: #06c;
-	color: #fff;
-	font-weight: bold;
-	padding: 2px;
+.CommonHierarchicalList a.Selected {
+    background-color: #06c;
+    color: #fff;
+    font-weight: bold;
+    padding: 2px;
 }
