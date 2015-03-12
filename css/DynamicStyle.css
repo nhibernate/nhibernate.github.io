@@ -8,19 +8,19 @@ html {
 form {
     min-width: 960px;
 }
-A:LINK {
+a:link {
     color: #3366CC;
 }
-A:ACTIVE {
+a:active {
     color: #3366CC;
 }
-A:VISITED {
+a:visited {
     color: #888888;
 }
-SELECT,
-TEXTAREA,
-INPUT,
-BUTTON {
+select,
+textarea,
+input,
+button {
     font-family: Tahoma, Arial, Helvetica;
 }
 .Common {
@@ -107,21 +107,6 @@ http://colorschemedesigner.com/#1H11Tm3gXw0w0
 }
 #CommonHeader {
     padding-bottom: 10px;
-}
-body &gt;
-form &gt;
-.Common {
-    background-color: white;
-}
-#CommonTitle .CommonTitle,
-.CommonContentArea &gt;
-.CommonTitle {
-    padding: 15px;
-}
-#CommonTitle,
-.CommonContentArea &gt;
-.CommonTitle {
-    background: white url(/images/common_title_fade.png) repeat-x scroll right bottom;
 }
 .CommonContentBox,
 CommonContent {

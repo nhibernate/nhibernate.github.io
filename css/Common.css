@@ -151,29 +151,29 @@ form {
     overflow: hidden;
     width: 240px;
 }
-A:LINK,
-A:ACTIVE {
+a:link,
+a:active {
     color: #36c;
     text-decoration: none;
 }
-A:VISITED {
+a:visited {
     color: #039;
     text-decoration: none;
 }
-A:HOVER {
+a:hover {
     text-decoration: underline;
 }
-SELECT,
-TEXTAREA,
-INPUT,
-BUTTON {
+select,
+textarea,
+input,
+button {
     font-family: Arial, Helvetica;
     font-size: 90%;
 }
-TABLE {
+table {
     empty-cells: show;
 }
-HR {
+hr {
     border-style: dotted;
     border-width: 0 0 1px 0;
     border-color: #ccc;
@@ -261,21 +261,21 @@ UL.CommonAvatarListItemList {
     border-bottom: 1px dotted #ddd;
     height: 75px;
 }
-.CommonPollMoveUpButton:LINK,
-.CommonPollMoveUpButton:VISTED,
-.CommonPollMoveUpButton:ACTIVE {
+.CommonPollMoveUpButton:link,
+.CommonPollMoveUpButton:visited,
+.CommonPollMoveUpButton:active {
     text-decoration: none;
     color: #333;
 }
-.CommonPollMoveDownButton:LINK,
-.CommonPollMoveDownButton:VISTED,
-.CommonPollMoveDownButton:ACTIVE {
+.CommonPollMoveDownButton:link,
+.CommonPollMoveDownButton:visited,
+.CommonPollMoveDownButton:active {
     text-decoration: none;
     color: #333;
 }
-.CommonPollDeleteButton:LINK,
-.CommonPollDeleteButton:VISTED,
-.CommonPollDeleteButton:ACTIVE {
+.CommonPollDeleteButton:link,
+.CommonPollDeleteButton:visited,
+.CommonPollDeleteButton:active {
     text-decoration: none;
     color: #333;
 }

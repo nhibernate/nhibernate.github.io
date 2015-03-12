@@ -3,8 +3,8 @@ html {
     color: #000;
     background-color: #fff;
 }
-A:LINK,
-A:VISITED {
+a:link,
+a:visited {
     color: #000;
     text-decoration: underline;
 }
