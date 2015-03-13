@@ -30,7 +30,7 @@ gravatar: 16b044c4f4f55da7e9b9791da4b3e35c
 </ul>
 <p>Please note that all the code should be located in a NHSpecificTest folder's subfolder named like the Jira entry you submitted (for example, NH1234). So, once you've created the issue, you should do a little refactoring work to modify your test's folder and namespaces.</p>
 <h3>Domain Model and mappings</h3>
-<p>It would be hard to test an ORM without a domain model, so a simple one is mandatory, along with its mappings. My advice here is to keep things as simple as possible: your main aim should be trying to isolate the bug without introducing unnecessary complexity.</p>
+<p>It would be hard to test an <em>ORM</em> without a domain model, so a simple one is mandatory, along with its mappings. My advice here is to keep things as simple as possible: your main aim should be trying to isolate the bug without introducing unnecessary complexity.</p>
 <p>For example, if you find out that NHibernate isn't working fine retrieving a byte[] property when using a Sql Server 2005 RDBMS (it isn't true, NHibernate can deal quite well with such kind of data), you should create a domain entity not so different from the following:</p>
 <div style="border: 1px solid gray; margin: 20px 0px 10px; padding: 4px; overflow: auto; font-size: 8pt; width: 97.5%; cursor: text; max-height: 200px; line-height: 12pt; font-family: consolas,'Courier New',courier,monospace; background-color: #f4f4f4;">
 <div style="border-style: none; padding: 0px; overflow: visible; font-size: 8pt; width: 100%; color: black; line-height: 12pt; font-family: consolas,'Courier New',courier,monospace; background-color: #f4f4f4;">

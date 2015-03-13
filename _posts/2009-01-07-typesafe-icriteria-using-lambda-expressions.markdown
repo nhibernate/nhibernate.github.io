@@ -22,7 +22,7 @@ gravatar: 2075ce3339bd0f16c52adac5b8e4b7b1
 <p><code>&nbsp;&nbsp;&nbsp; session.CreateCriteria(typeof(Person), "personAlias")<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .SetFetchMode("personAlias.PersonDetail", FetchMode.Eager)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>// to prevent select n+1</i><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .SetLockMode("personAlias", LockMode.Upgrade)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>// to read-lock the data until commit</i><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; .Add(Expression.Like("Name", "%anna%"))<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>// includes the name 'Polyanna', 'Annabella', ...</i><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ...<br /></code></p>
 <p>LINQ provides a high-level abstraction of a query that can potentially be run against any datasource. However, this abstraction comes at a cost (try writing the above query in LINQ). LINQ (out of the box) has no concept of: 
 <ul>
-<li>Fetch modes (an ORM concept);</li>
+<li>Fetch modes (an <em>ORM</em> concept);</li>
 <li>Locking (a database/transaction concept);</li>
 <li>SQL specific functions (there is not always an equivalent C# function).</li>
 </ul>
