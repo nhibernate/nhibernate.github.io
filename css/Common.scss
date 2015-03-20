@@ -1,5 +1,5 @@
 ---
-# Hello, jekyll!
+# Hello, Jekyll!
 ---
 body, html {
   margin: 0;
@@ -512,19 +512,6 @@ UL.CommonAvatarListItemList {
   .CommonContentBox {
     height: 100%;
   }
-  #CommonNavigation {
-    ul li {
-      border-top: solid 1px #D5E1E7;
-    }
-    a {
-      &:link, &:active, &:visited, &:hover {
-        border-top: solid 1px #558B9F;
-      }
-      &.Selected {
-        &:link, &:active, &:visited {}
-      }
-    }
-  }
 }
 
 @media only screen and (max-width: 720px) {
@@ -533,6 +520,17 @@ UL.CommonAvatarListItemList {
     background-image: none;
     ul li {
       float: none;
+      border-bottom: 1px solid #C7AB4E;
+    }
+    a {
+      &:link, &:active, &:visited, &:hover {
+        border-bottom: 1px solid #475506;
+      }
+      &.Selected {
+        &:link, &:active, &:visited {
+          border-bottom: 1px solid #D6E1E7;
+        }
+      }
     }
   }
 }
