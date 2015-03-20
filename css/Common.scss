@@ -188,9 +188,9 @@ table {
 }
 
 hr {
-  border: 0 0 1px 0 dotted #ccc;
+  border: none;
+  border-bottom: 1px dotted #ccc;
   background: transparent;
-  height: 0;
 }
 
 .CommonBreadCrumbArea {
