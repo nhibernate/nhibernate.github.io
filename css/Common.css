@@ -321,3 +321,182 @@ UL.CommonAvatarListItemList {
     font-weight: bold;
     padding: 2px;
 }
+@media print {
+    body,
+    html {
+        color: #000;
+        background-color: #fff;
+    }
+    a:link,
+    a:visited {
+        color: #000;
+        text-decoration: underline;
+    }
+    #CommonNavigation,
+    #CommonSidebarLeft,
+    #CommonSidebarRight,
+    .CommonBreadCrumbArea {
+        display: none;
+    }
+    #CommonHeaderTitleArea {
+        padding-left: 0;
+        background-image: none;
+    }
+    #CommonContent {
+        overflow: visible;
+    }
+    #CommonContentInner {
+        overflow: visible;
+    }
+    .CommonContentBoxContent {
+        overflow: visible;
+    }
+}
+@media screen {
+  body,
+  html {
+      font-family: Tahoma, Arial, Helvetica;
+      color: #333333;
+      background-color: #F0F0F0;
+      background-image: none;
+  }
+  form {
+      min-width: 960px;
+  }
+  a:link {
+      color: #3366CC;
+  }
+  a:active {
+      color: #3366CC;
+  }
+  a:visited {
+      color: #888888;
+  }
+  select,
+  textarea,
+  input,
+  button {
+      font-family: Tahoma, Arial, Helvetica;
+  }
+  a.NewPageLink {
+      color: #FA5454;
+  }
+  #CommonHeader {
+      background-image: none;
+      background-color: #FFFFFF;
+      height: 70px;
+  }
+  .CommonHeaderTitle {
+      color: #87802A;
+      font-family: Tahoma, Arial, Helvetica;
+      font-size: 325%;
+  }
+  #CommonNavigation {
+      background-color: #87802A;
+  }
+  #CommonNavigation .Common .Inner,
+  #CommonNavigation ul li {
+      border-color: #C7AB4E;
+  }
+  #CommonNavigation .Common,
+  #CommonNavigation a:link,
+  #CommonNavigation a:active,
+  #CommonNavigation a:visited,
+  #CommonNavigation a:link,
+  #CommonNavigation a:active,
+  #CommonNavigation a:hover {
+      border-color: #475506;
+  }
+  #CommonNavigation a:link,
+  #CommonNavigation a:active,
+  #CommonNavigation a:visited {
+      color: #FFFFFF;
+  }
+  #CommonNavigation a:hover {
+      color: #AEA9A9;
+  }
+  #CommonNavigation a.Selected:link,
+  #CommonNavigation a.Selected:active,
+  #CommonNavigation a.Selected:visited {
+      color: #FFFFFF;
+      background-color: #C8AA4E;
+  }
+  .CommonBreadCrumbArea {
+      background-color: #F7F7F7;
+      color: #000000;
+  }
+  .CommonTitle {
+      font-family: Tahoma, Arial, Helvetica;
+      color: #333333;
+      font-size: 200%;
+  }
+  .CommonContentBox {
+      background-color: #FFFFFF;
+      border-top-color: #CCCCCC;
+  }
+  .CommonContentBox .CommonContentBoxHeader {
+      border-bottom-color: #CCCCCC;
+      font-family: Tahoma, Arial, Helvetica;
+      color: #333333;
+  }
+  .CommonAvatarListItemArea {
+      background-color: #EEEEEE;
+  }
+  #CommonFooter {
+      background-image: url(/images/NHibernate_5F00_logo.jpg);
+      background-color: #F7F7F7;
+  }
+  #CommonSidebarLeft .CommonSidebar,
+  #CommonSidebarRight .CommonSidebar {
+      width: 200px;
+  }
+  /* Colors here 
+  http://colorschemedesigner.com/#1H11Tm3gXw0w0
+  */
+  #CommonNavigation {
+      height: 2.2em;
+      background: #87802A url(/images/header_fade_background.png) repeat-x;
+  }
+  #CommonHeader {
+      padding-bottom: 10px;
+  }
+  .CommonContentBox,
+  CommonContent {
+      border-top: none;
+      line-height: 1.4em;
+  }
+  #CommonNavigation a.Selected:link,
+  #CommonNavigation a.Selected:active,
+  #CommonNavigation a.Selected:visited {
+      background-color: white;
+      color: #333333;
+  }
+  a:visited {
+      color: #3366CC;
+  }
+}
+@media only screen and (min-width:960px){
+  .Common {
+    width: 960px;
+  }
+}
+@media only screen and (max-width:768px){
+  #CommonSidebarRight .CommonSidebar {
+    padding: 0;
+    width: initial;
+    height: 100px;
+    float: none;
+  }
+  .CommonContentBox {
+    height: 100%;
+  }
+}
+@media only screen and (max-width:720px) {
+  #CommonNavigation {
+    height: initial;
+    background-image: none;
+  }
+  #CommonNavigation ul li {
+    float: none;
+  }
+}
