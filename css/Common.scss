@@ -2,11 +2,10 @@
 # Hello, Jekyll!
 ---
 body, html {
+  background: #f0f0f0 none;
   margin: 0;
   padding: 0;
   color: #333;
-  background-color: #f0f0f0;
-  background-image: none;
   font-family: Arial, Helvetica;
 }
 
@@ -20,12 +19,12 @@ form {
 }
 
 #CommonHeader {
+  background: #fff;
   padding: 0;
   margin: 0;
   width: 100%;
   overflow: hidden;
   height: 115px;
-  background-color: #fff;
 }
 
 #CommonHeaderTitleArea {
@@ -55,9 +54,9 @@ form {
 }
 
 #CommonFooter {
+  background: #f7f7f7;
   clear: both;
   margin-top: 16px;
-  background-color: #f7f7f7;
   border-top: solid 1px #bbb;
   border-bottom: solid 1px #bbb;
   .Common {
@@ -69,11 +68,11 @@ form {
 }
 
 #CommonNavigation {
+  background: #95B6C3;
   clear: both;
   margin: 0;
   width: 100%;
   height: 27px;
-  background-color: #95B6C3;
   border-top: solid 1px #666;
   border-bottom: solid 1px #666;
   padding: 0;
@@ -94,7 +93,7 @@ form {
 
 #CommonNavigation {
   ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
     display: block;
     margin: 0;
@@ -124,9 +123,9 @@ form {
     }
     &.Selected {
       &:link, &:active, &:visited {
+        border: #d6e1e7;
+        background: #d6e1e7;
         color: #191919;
-        background-color: #d6e1e7;
-        border-color: #d6e1e7;
         border-bottom-width: 0;
         padding-bottom: 7px;
         margin-bottom: -1px;
@@ -181,8 +180,7 @@ a {
 }
 
 select, textarea, input, button {
-  font-family: Arial, Helvetica;
-  font-size: 90%;
+  font: 90% Arial, Helvetica;
 }
 
 table {
@@ -190,19 +188,17 @@ table {
 }
 
 hr {
-  border-style: dotted;
-  border-width: 0 0 1px 0;
-  border-color: #ccc;
-  background-color: transparent;
+  border: 0 0 1px 0 dotted #ccc;
+  background: transparent;
   height: 0;
 }
 
 .CommonBreadCrumbArea {
+  background: #f7f7f7;
   margin: 0;
   padding: 4px 0;
   font-size: 85%;
   color: #000;
-  background-color: #f7f7f7;
   border-bottom: solid 1px #bbb;
 }
 
@@ -224,12 +220,10 @@ hr {
 }
 
 .CommonAvatarListItemArea {
+  background: #eee no-repeat 10px 10px;
   margin: 10px 0;
-  background-repeat: no-repeat;
-  background-position: 10px 10px;
   padding: 10px 10px 10px 70px;
   min-height: 46px;
-  background-color: #eee;
   &.Custom {
     padding-left: 0px;
   }
@@ -265,9 +259,9 @@ hr {
 }
 
 UL.CommonAvatarListItemList {
+  list-style: none;
   margin: 0;
   padding: 0;
-  list-style-type: none;
 }
 
 .CustomWikiPageDetailsAvatar {
@@ -315,8 +309,8 @@ UL.CommonAvatarListItemList {
 }
 
 .CommonContentBox {
+  background: #fff;
   border-top: solid 3px #ccc;
-  background-color: #fff;
   padding: 12px;
   margin: 0 0 12px 0;
   height: 1%;
@@ -338,7 +332,7 @@ UL.CommonAvatarListItemList {
 }
 
 .CommonHierarchicalList {
-  list-style-type: none;
+  list-style: none;
   margin: 1px 0;
   padding: 0;
   li {
@@ -353,7 +347,7 @@ UL.CommonAvatarListItemList {
     margin-right: 4px;
   }
   a.Selected {
-    background-color: #06c;
+    background: #06c;
     color: #fff;
     font-weight: bold;
     padding: 2px;
@@ -534,7 +528,11 @@ UL.CommonAvatarListItemList {
     }
   }
 }
+
 .gravatar {
-    border: none;
+  border: none;
 }
-body { font-size: 84%; }
+
+body {
+  font-size: 84%;
+}
