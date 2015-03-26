@@ -6,11 +6,13 @@ comments: true
 published: true
 categories: ["blogs", "nhibernate", "archive"]
 tags: ["&quot;Composite Keys&quot;"]
-redirect_from: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx/", "/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.html"]
+redirect_from: ["/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.aspx/","/blogs/nhibernate/archive/2010/07/01/nhibernate-and-composite-keys.aspx/",
+"/blogs/nhibernate/archive/2010/06/30/nhibernate-and-composite-keys.html"]
 author: ajepst
 gravatar: fad7db02ad0cbbcd20f8bba5fdc1fc81
 ---
-{% include imported_disclaimer.html %}
+{% include imported_disclaimer.html %}
+
 <p>(If this post looks familiar, it&rsquo;s because I originally posted this over on <a href="http://devlicio.us/">http://devlicio.us/</a> and I have given myself full permission to repost it here, with minor edits)</p>
 <p>Composite IDs are a common pain point a beginning NHibernate user runs into.&nbsp; Here's everything you need to get them up and running. </p>
 <p>First, a caveat: composite keys are certainly mappable in NHibernate, but it's a little trickier than a typical single identity key would be.&nbsp; Compared to a normal key, there's some extra setup work, queries are more painful, and they tend to be less optimized in terms of lazy loading. Because of these things, experienced NHibernate users often avoid composite keys entirely when possible.&nbsp; However, there are many legacy situations where multiple existing apps all hit the same db-a situation in which, if a composite key is already in place, it&rsquo;s may be really difficult to change.&nbsp; As this kind of legacy situation is the most common use case for mapping composite keys with NHibernate, I'll start from the assumption that you've got an existing database that you can't alter. (this is a *bad thing* - see <a href="/blogs/nhibernate/archive/2009/06/26/database-the-eliot-ness-of-it.aspx">THIS POST</a> for why, but as developers, those kinds of decisions aren't always under our control-but if you <i>can</i> change the structure to avoid composite keys, you should really, really consider it)</p>
