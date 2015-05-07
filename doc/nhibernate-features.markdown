@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: NHibernate Features
 ---
 Nearly all of the features listed here are described more fully in the document: 
