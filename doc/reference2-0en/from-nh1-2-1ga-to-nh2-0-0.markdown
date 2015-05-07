@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Update From NH 1.2.1GA to NH 2.0.0
+title: Changes From NH 1.2.1GA to NH 2.0.0
 ---
 ### Infrastructure
 
