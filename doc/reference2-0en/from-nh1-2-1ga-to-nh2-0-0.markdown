@@ -1,15 +1,11 @@
 ---
 layout: page
-title: From NH1.2.1GA to NH2.0.0
+title: Update From NH 1.2.1GA to NH 2.0.0
 ---
-## From NH 1.2.1GA to NH 2.0.0
-
 ### Infrastructure
 
 * .NET 1.1 is no longer supported
-
 * Nullables.NHibernate is no longer supported (use nullable types of .NET 2.0)
-
 * Contrib projects moved to http://sourceforge.net/projects/nhcontrib
 
 ### Compile time
@@ -52,9 +48,9 @@ title: From NH1.2.1GA to NH2.0.0
 
 ### Initialization time
 
-* <nhibernate> section, in App.config, is no longer supported and will be ignored. Configuration schema for configuration file and App.config is now identical, and the App.config section name is: <hibernate-configuration>
+* `<nhibernate>` section, in App.config, is no longer supported and will be ignored. Configuration schema for configuration file and App.config is now identical, and the App.config section name is: <hibernate-configuration>
 
-* <hibernate-configuration> have a different schema and all properties names are cheked
+* `<hibernate-configuration>` have a different schema and all properties names are cheked
 
 * configuration properties are no longer prefixed by "hibernate.", if before you would specify "hibernate.dialect", now you specify just "dialect"
 
@@ -70,12 +66,12 @@ title: From NH1.2.1GA to NH2.0.0
 
 * NHibernate will return long for count(*) queries on SQL Server
 
-* <formula> must contain parenthesis when needed
+* `<formula>` must contain parenthesis when needed
 
-* The HQL functions names may cause conflic in your HQL (reserved names are: substring,locate,trim,length,bit_length,coalesce,nullif,abs,mod,sqrt,upper,lower,cast,extract,concat,current_timestamp,sysdate,second,minute,hour,day,month,year,str)
+* The HQL functions names may cause conflic in your HQL (reserved names are: substring, locate, trim, length, bit_length, coalesce, nullif, abs, mod, sqrt, upper, lower, cast, extract, concat, current_timestamp, sysdate, second, minute, hour, day, month, year, str)
 
-* <any> when meta-type="class" the persistent type is a string containing the Class.FullName (In order to set a parameter in a query you must use SetParameter("paraName", typeof(YourClass).FullName, NHibernateUtil.ClassMetaType) )
-
+* `<any>` when meta-type="class" the persistent type is a string containing the Class.FullName (In order to set a parameter in a query you must use SetParameter("paraName", typeof(YourClass).FullName, NHibernateUtil.ClassMetaType) )
+ 
 ### Mapping
 
-* <any> : default meta-type is "string" (was "class") 
+* `<any>` : default meta-type is "string" (was "class") 
