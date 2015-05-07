@@ -1,5 +1,5 @@
 ---
-layout: doc
+layout: page
 title: From NH1.2.1GA to NH2.0.0
 ---
 ## From NH 1.2.1GA to NH 2.0.0
