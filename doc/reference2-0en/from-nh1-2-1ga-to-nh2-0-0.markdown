@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: Changes From NH 1.2.1GA to NH 2.0.0
 ---
 ### Infrastructure
