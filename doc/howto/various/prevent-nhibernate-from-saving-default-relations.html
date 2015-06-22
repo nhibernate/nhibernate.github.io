@@ -135,7 +135,7 @@ following mapping:</p>
 that TaxCalculators are created before I save the invoice (that is how
 we do it at the moment). The problem we are getting into is that we can't save
 a reference to TaxCalculator.NoTax. This is because the NoTax object will be
-created over and over again and so it will not have any Id. <a href="http://www.reviewonlineuniversity.com/universities/corllins-university.asp"></a></p>
+created over and over again and so it will not have any Id.</p>
 <p>The
 solution could be to set the Calculator property to null, but then we have to check
 for a null reference. But luckily it is also possible to let NHibernate set
