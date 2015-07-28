@@ -9,7 +9,7 @@
                     trackLinks:true,
                     accurateTrackBounce:true});
             {% if page.url == '/404.html' %}
-                w.yaCounter27829431.reachGoal('404');    
+                w.yaCounter27829431.reachGoal('404', { url: location.href });    
             {% endif %}
         } catch(e) { }
     });
