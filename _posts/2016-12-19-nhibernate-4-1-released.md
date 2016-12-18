@@ -9,14 +9,12 @@ tags:
 ---
 NHibernate 4.1.0 is now released with 105 issues resolved.
 
-For a list of resolved issues, see the release notes:
-https://github.com/nhibernate/nhibernate-core/blob/4.1.0.GA/releasenotes.txt
+For a list of resolved issues, see the [release notes](https://github.com/nhibernate/nhibernate-core/blob/4.1.0.GA/releasenotes.txt).
 
-Binaries are available on NuGet and SourceForge:
-- https://sourceforge.net/projects/nhibernate/files/NHibernate/4.1.0.GA/
-- https://www.nuget.org/packages/NHibernate/4.1.0.4000
+Binaries are available on [NuGet](https://www.nuget.org/packages/NHibernate/4.1.0.4000) and [SourceForge](https://sourceforge.net/projects/nhibernate/files/NHibernate/4.1.0.GA/).
 
-##### Possible Breaking Changes Since 4.0 #####
+## Possible Breaking Changes Since 4.0
+
 Proxies for classes that used lazy fields (not collections)
 would have any exceptions from the entity wrapped in TargetInvocationException. This
 wrapping exception have now been removed. Where relevant, you should instead catch
