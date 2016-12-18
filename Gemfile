@@ -1,3 +1,5 @@
+source 'http://rubygems.org'
+
 gem 'github-pages'
 require 'rbconfig'
 if RbConfig::CONFIG['target_os'] =~ /mswin|mingw|cygwin/i
