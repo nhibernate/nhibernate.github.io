@@ -535,3 +535,25 @@ UL.CommonAvatarListItemList {
 body {
   font-size: 84%;
 }
+
+.jcarousel {
+  position: relative;
+  overflow: hidden;
+
+  ul {
+    width: 20000em;
+    position: relative;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  li {
+    float: left;
+  }
+}
+.books-jcarousel {
+  width: 100%;
+  li {
+    text-align: center;
+  }
+}
