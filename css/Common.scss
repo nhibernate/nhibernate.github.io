@@ -536,6 +536,13 @@ body {
   font-size: 84%;
 }
 
+.jcarousel-wrapper {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
 .jcarousel {
   position: relative;
   overflow: hidden;
@@ -551,6 +558,38 @@ body {
     float: left;
   }
 }
+
+a.jcarousel-control-prev,
+a.jcarousel-control-next {
+    position: absolute;
+    top: 120px;
+    width: 15px;
+    height: 15px;
+    text-align: center;
+    background: #4E443C;
+    color: #fff !important;
+    text-decoration: none;
+    text-shadow: 0 0 1px #000;
+    font: 18px/14px Arial, sans-serif;
+    -webkit-border-radius: 15px;
+       -moz-border-radius: 15px;
+            border-radius: 15px;
+    -webkit-box-shadow: 0 0 2px #999;
+       -moz-box-shadow: 0 0 2px #999;
+            box-shadow: 0 0 2px #999;
+    &:hover span {
+        display: block;
+    }
+}
+
+.jcarousel-control-prev {
+    left: 0px;
+}
+
+.jcarousel-control-next {
+    right: 0px;
+}
+
 .books-jcarousel {
   width: 100%;
   li {
