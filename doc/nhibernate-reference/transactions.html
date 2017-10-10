@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;11.&nbsp;Transactions And Concurrency</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="readonly.html" title="Chapter&nbsp;10.&nbsp;Read-only entities"><link rel="next" href="events.html" title="Chapter&nbsp;12.&nbsp;Interceptors and events"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Transactions And Concurrency</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="readonly.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="events.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="transactions"></a>Chapter&nbsp;11.&nbsp;Transactions And Concurrency</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;11.&nbsp;Transactions And Concurrency</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="readonly.html" title="Chapter&nbsp;10.&nbsp;Read-only entities"><link rel="next" href="events.html" title="Chapter&nbsp;12.&nbsp;Interceptors and events"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Transactions And Concurrency</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="readonly.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="events.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="transactions"></a>Chapter&nbsp;11.&nbsp;Transactions And Concurrency</h2></div></div><div></div></div><p>
         NHibernate is not itself a database. It is a lightweight object-relational
         mapping tool. Transaction management is delegated to the underlying database
         connection. If the connection is enlisted with a distributed transaction,
@@ -24,12 +18,22 @@ layout:
             Each call to a service method could create a new <tt class="literal">ISession</tt>,
             <tt class="literal">Flush()</tt> it, <tt class="literal">Commit()</tt> its transaction,
             <tt class="literal">Close()</tt> it and finally discard it. (The <tt class="literal">ISessionFactory</tt>
-            may also be kept in  a static <span class="emphasis"><em>Singleton</em></span> helper variable.)
+            may also be kept in a static <span class="emphasis"><em>Singleton</em></span> helper variable.)
         </p><p>
             We use the NHibernate <tt class="literal">ITransaction</tt> API as discussed previously,
             a single <tt class="literal">Commit()</tt> of a NHibernate <tt class="literal">ITransaction</tt>
-            flushes the state and commits any underlying database connection (with special
-            handling of distributed transactions).
+            flushes the state and commits any underlying database connection. Transaction scopes
+            can be used instead, which allows the transaction to be distributed. See
+            <a href="transactions.html#transactions-scopes" title="11.8.&nbsp;Transaction scopes (System.Transactions)">Section&nbsp;11.8, &#8220;Transaction scopes (System.Transactions)&#8221;</a>.
+        </p><p>
+            NHibernate may be used without managing transactions neither with the
+            <tt class="literal">ITransaction</tt> API nor with transaction scopes. We advise against
+            such a pattern, because this causes each single interaction of the session with the
+            database to be a transaction on its own. This causes overhead, breaks the unit of
+            work in case of errors during flushing, and causes some features to be disabled like
+            auto-flush and second level cache. If the application encounters locks contention or
+            deadlocks, investigate lowering the isolation level (like enabling read committed
+            snapshot with SQL Server) or shortening your transactions rather than removing them.
         </p><p>
             Ensure you understand the semantics of <tt class="literal">Flush()</tt>.
             Flushing synchronizes the persistent store with in-memory changes but
@@ -54,6 +58,10 @@ layout:
                     The <tt class="literal">ISession</tt> is <span class="emphasis"><em>not</em></span> threadsafe!
                     Never access the same <tt class="literal">ISession</tt> in two concurrent threads.
                     An <tt class="literal">ISession</tt> is usually only a single unit-of-work!
+                </p><p>
+                    Since NHibernate 5.0, the session and its queries IO bound methods have async counterparts.
+                    Each call to an async method must be awaited before further interacting with the session or
+                    its queries.
                 </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="transactions-identity"></a>11.3.&nbsp;Considering object identity</h2></div></div><div></div></div><p>
             The application may concurrently access the same persistent state in two
             different units-of-work. However, an instance of a persistent class is never shared
@@ -103,10 +111,12 @@ layout:
                 instances.
             </p><pre class="programlisting">// foo is an instance loaded earlier by the Session
 session.Reconnect();
-transaction = session.BeginTransaction();
-foo.Property = "bar";
-session.Flush();
-transaction.Commit();
+using (var transaction = session.BeginTransaction())
+{
+    foo.Property = "bar";
+    session.Flush();
+    transaction.Commit();
+}
 session.Disconnect();</pre><p>
                 The <tt class="literal">foo</tt> object still knows which <tt class="literal">ISession</tt>
                 it was loaded it. As soon as the <tt class="literal">ISession</tt> has an ADO.NET connection,
@@ -115,23 +125,24 @@ session.Disconnect();</pre><p>
                 This pattern is problematic if our <tt class="literal">ISession</tt> is too big to
                 be stored during user think time, e.g. an <tt class="literal">HttpSession</tt> should
                 be kept as small as possible. As the <tt class="literal">ISession</tt> is also the
-                (mandatory) first-level cache and contains all loaded objects, we can propably
+                (mandatory) first-level cache and contains all loaded objects, we can probably
                 use this strategy only for a few request/response cycles. This is indeed
                 recommended, as the <tt class="literal">ISession</tt> will soon also have stale data.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="transactions-optimistic-detached"></a>11.4.2.&nbsp;Many sessions with automatic versioning</h3></div></div><div></div></div><p>
                 Each interaction with the persistent store occurs in a new <tt class="literal">ISession</tt>. 
                 However, the same persistent instances are reused for each interaction with the database.
                 The application manipulates the state of detached instances originally loaded in another
-                <tt class="literal">ISession</tt> and then "reassociates" them using 
+                <tt class="literal">ISession</tt> and then "re-associates" them using 
                 <tt class="literal">ISession.Update()</tt> or <tt class="literal">ISession.SaveOrUpdate()</tt>.
             </p><pre class="programlisting">// foo is an instance loaded by a previous Session
 foo.Property = "bar";
-session = factory.OpenSession();
-transaction = session.BeginTransaction();
-session.SaveOrUpdate(foo);
-session.Flush();
-transaction.Commit();
-session.Close();</pre><p>
+using (var session = factory.OpenSession())
+using (var transaction = session.BeginTransaction())
+{
+    session.SaveOrUpdate(foo);
+    session.Flush();
+    transaction.Commit();
+}</pre><p>
                 You may also call <tt class="literal">Lock()</tt> instead of <tt class="literal">Update()</tt>
                 and use <tt class="literal">LockMode.Read</tt> (performing a version check, bypassing all
                 caches) if you are sure that the object has not been modified.
@@ -146,7 +157,7 @@ session.Close();</pre><p>
                 even timestamps. In both cases, versioning can't rely on a particular column in a table.
                 To force a version check without a version or timestamp property mapping, with a
                 comparison of the state of all fields in a row, turn on <tt class="literal">optimistic-lock="all"</tt>
-                in the <tt class="literal">&lt;class&gt;</tt> mapping. Note that this concepetually only works
+                in the <tt class="literal">&lt;class&gt;</tt> mapping. Note that this conceptually only works
                 if NHibernate can compare the old and new state, i.e. if you use a single long
                 <tt class="literal">ISession</tt> and not session-per-request-with-detached-objects.
             </p><p>
@@ -158,7 +169,7 @@ session.Close();</pre><p>
                 comparison, NHibernate uses a single <tt class="literal">UPDATE</tt> statement (with an
                 appropriate <tt class="literal">WHERE</tt> clause) per entity to execute the version check
                 and update the information. If you use transitive persistence to cascade reattachment
-                to associated entities, NHibernate might execute uneccessary updates. This is usually
+                to associated entities, NHibernate might execute unnecessary updates. This is usually
                 not a problem, but <span class="emphasis"><em>on update</em></span> triggers in the database might be
                 executed even when no changes have been made to detached instances. You can customize
                 this behavior by setting  <tt class="literal">select-before-update="true"</tt> in the
@@ -171,21 +182,22 @@ session.Close();</pre><p>
                 application transaction isolation. (Of course, NHibernate will still <span class="emphasis"><em>update</em></span>
                 version numbers for you.) This approach is the least efficient in terms of database access.
             </p><pre class="programlisting">// foo is an instance loaded by a previous Session
-session = factory.OpenSession();
-transaction = session.BeginTransaction();
-int oldVersion = foo.Version;
-session.Load( foo, foo.Key );
-if ( oldVersion != foo.Version ) throw new StaleObjectStateException();
-foo.Property = "bar";
-session.Flush();
-transaction.Commit();
-session.close();</pre><p>
+using (var session = factory.OpenSession())
+using (var transaction = session.BeginTransaction())
+{
+    int oldVersion = foo.Version;
+    session.Load( foo, foo.Key );
+    if ( oldVersion != foo.Version ) throw new StaleObjectStateException();
+    foo.Property = "bar";
+    session.Flush();
+    transaction.Commit();
+}</pre><p>
                 Of course, if you are operating in a low-data-concurrency environment and don't
                 require version checking, you may use this approach and just skip the version
                 check.
             </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="transactions-disconnection"></a>11.5.&nbsp;Session disconnection</h2></div></div><div></div></div><p>
             The first approach described above is to maintain a single <tt class="literal">ISession</tt> 
-            for a whole business process thats spans user think time. (For example, a servlet might 
+            for a whole business process that spans user think time. (For example, a servlet might 
             keep an <tt class="literal">ISession</tt> in the user's <tt class="literal">HttpSession</tt>.) For 
             performance reasons you should
         </p><div class="orderedlist"><ol type="1" compact><li><p>
@@ -203,7 +215,7 @@ session.close();</pre><p>
             been updated by another transaction. You don't need to lock any data that you
             <span class="emphasis"><em>are</em></span> updating.
         </p><p>
-            Heres an example:
+            Here is an example:
         </p><pre class="programlisting">ISessionFactory sessions;
 IList&lt;Foo&gt; fooList;
 Bar bar;
@@ -215,10 +227,11 @@ try
 {
     tx = s.BeginTransaction())
 
-    fooList = s.CreateQuery(
-    	"select foo from Eg.Foo foo where foo.Date = current date"
-        // uses db2 date function
-    ).List&lt;Foo&gt;();
+    fooList = s
+        .CreateQuery(
+            "select foo from Eg.Foo foo where foo.Date = current date"
+            // uses db2 date function
+        ).List&lt;Foo&gt;();
 
     bar = new Bar();
     s.Save(bar);
@@ -263,7 +276,7 @@ finally
             <tt class="literal">ITransaction</tt> breaks that conversation up into atomic units of work
             at the database level.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="transactions-locking"></a>11.6.&nbsp;Pessimistic Locking</h2></div></div><div></div></div><p>
-            It is not intended that users spend much time worring about locking strategies. It's usually
+            It is not intended that users spend much time worrying about locking strategies. It's usually
             enough to specify an isolation level for the ADO.NET connections and then simply let the
             database do all the work. However, advanced users may sometimes wish to obtain
             exclusive pessimistic locks, or re-obtain locks at the start of a new transaction.
@@ -333,7 +346,7 @@ finally
                     <tt class="literal">AfterTransaction</tt> - says to release connections after a
                     <tt class="literal">NHibernate.ITransaction</tt> has completed.
                 </p></li></ul></div><p>
-            The configuration parameter <tt class="literal">hibernate.connection.release_mode</tt> is used
+            The configuration parameter <tt class="literal">connection.release_mode</tt> is used
             to specify which release mode to use.  The possible values:
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
                     <tt class="literal">auto</tt> (the default) - equivalent to <tt class="literal">after_transaction</tt>
@@ -347,9 +360,68 @@ finally
                     Note that with <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt>, if a session is considered to be in
                     auto-commit mode (i.e. no transaction was started) connections will be released after every operation.
                 </p></li></ul></div><p>
-            As of NHibernate, if your application manages transactions through .NET APIs such as <tt class="literal">
-            System.Transactions</tt> library, <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt> may cause
+            If your application manages transactions through .NET APIs such as <tt class="literal">System.Transactions</tt> library
+            while not using a compatible transaction factory (see <tt class="literal">transaction.factory_class</tt>
+            in <a href="session-configuration.html#configuration-optional" title="3.5.&nbsp;Optional configuration properties">Section&nbsp;3.5, &#8220;Optional configuration properties&#8221;</a>), <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt> may cause
             NHibernate to open and close several connections during one transaction, leading to unnecessary overhead and
             transaction promotion from local to distributed. Specifying <tt class="literal">ConnectionReleaseMode.OnClose</tt>
-            will revert to the legacy behavior and prevent this problem from occuring.
-        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="readonly.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="events.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Read-only entities&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Interceptors and events</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+            will revert to the legacy behavior and prevent this problem from occurring.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="transactions-scopes"></a>11.8.&nbsp;Transaction scopes (System.Transactions)</h2></div></div><div></div></div><p>
+            Instead of using NHibernate <tt class="literal">ITransaction</tt>, <tt class="literal">TransactionScope</tt>
+            can be used. Please do not use both simultaneously. Using <tt class="literal">TransactionScope</tt>
+            requires using a compatible transaction factory (see <tt class="literal">transaction.factory_class</tt>
+            in <a href="session-configuration.html#configuration-optional" title="3.5.&nbsp;Optional configuration properties">Section&nbsp;3.5, &#8220;Optional configuration properties&#8221;</a>). The default transaction factory supports scopes.
+        </p><p>
+            When using <tt class="literal">TransactionScope</tt> with NHibernate, you need to be aware of following
+            points:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    The session will enlist with the first scope in which the session is used (or opened).
+                    As of NHibernate v5.0, it will enlist its connection in the transaction regardless of
+                    connection string <tt class="literal">Enlist</tt> setting. Prior to v5.0, it was relying on
+                    that setting being considered <tt class="literal">true</tt>, and on acquiring the connection
+                    within the scope.
+                </p><p>
+                    Sub-scopes are not supported. The session will be enlisted in the first scope within
+                    which it was used, until this scope is committed or rollback. If auto-enlistment is
+                    enabled on the connection and the session used on others scopes than the one in which
+                    it is currently enlisted, the connection may enlist in another scope, and the session
+                    will then fail to use it.
+                </p><p>
+                    As of NHibernate v5.0, session auto-enlistment can be disabled from the session builder
+                    obtained with <tt class="literal">ISessionFactory.WithOptions()</tt>, using the
+                    <tt class="literal">AutoJoinTransaction</tt> option. The connection may still enlist itself
+                    if connection string <tt class="literal">Enlist</tt> setting is not <tt class="literal">false</tt>.
+                    A session can explicitly join the current system transaction by calling
+                    <tt class="literal">ISession.JoinTransaction()</tt>.
+                </p></li><li><p>
+                    As of NHibernate v5.0, <tt class="literal">FlushMode.Commit</tt> requires the configuration setting
+                    <tt class="literal">transaction.use_connection_on_system_events</tt> to be true for flushing
+                    from transaction scope commit. Otherwise, it will be your responsibility to flush the session
+                    before completing the scope.
+                </p><p>
+                    Using <tt class="literal">transaction.use_connection_on_system_events</tt> can cause undesired
+                    transaction promotions to distributed: it requires using a dedicated connection for flushing,
+                    and it delays session disposal (if done inside the scope) to the scope disposal. If you want
+                    to avoid this, set this setting to <tt class="literal">false</tt> and manually flush your sessions.
+                </p></li><li><p>
+                    As of NHibernate v5.0, <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt> has no more
+                    by default an "immediate" effect with transaction scopes. Previously, it was releasing the
+                    connection from transaction completion events. But this is not officially supported by
+                    Microsoft and this can cause issues especially with distributed transactions.
+                </p><p>
+                    Since v5.0, by default, the connection will be actually released after the scope disposal at the
+                    first session usage involving a connection, or at the session closing, whichever come first.
+                    Alternatively, you may <tt class="literal">Disconnect()</tt> the session. (Requires
+                    <tt class="literal">Reconnect()</tt> before re-using the session.)
+                </p><p>
+                    When using <tt class="literal">transaction.use_connection_on_system_events</tt>, if the session is
+                    disposed within the scope, the connection releasing will still occurs from transaction
+                    completion event.
+                </p></li><li><p>
+                    As of NHibernate v5.0, using transaction scope and trying to use the session connection within
+                    <tt class="literal">AfterTransactionCompletion</tt> is forbidden and will raise an exception.
+                    If the setting <tt class="literal">transaction.use_connection_on_system_events</tt>
+                    is <tt class="literal">false</tt>, it will forbid any connection usage from
+                    <tt class="literal">BeforeTransactionCompletion</tt> event too, when this event is triggered by
+                    a transaction scope commit or rollback.
+                </p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="readonly.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="events.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Read-only entities&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Interceptors and events</td></tr></table></div></body></html>

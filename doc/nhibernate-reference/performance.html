@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;19.&nbsp;Improving performance</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="filters.html" title="Chapter&nbsp;18.&nbsp;Filtering data"><link rel="next" href="toolsetguide.html" title="Chapter&nbsp;20.&nbsp;Toolset Guide"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Improving performance</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="filters.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="toolsetguide.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="performance"></a>Chapter&nbsp;19.&nbsp;Improving performance</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-fetching"></a>19.1.&nbsp;Fetching strategies</h2></div></div><div></div></div><p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;20.&nbsp;Improving performance</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="filters.html" title="Chapter&nbsp;19.&nbsp;Filtering data"><link rel="next" href="toolsetguide.html" title="Chapter&nbsp;21.&nbsp;Toolset Guide"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Improving performance</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="filters.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="toolsetguide.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="performance"></a>Chapter&nbsp;20.&nbsp;Improving performance</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-fetching"></a>20.1.&nbsp;Fetching strategies</h2></div></div><div></div></div><p>
             A <span class="emphasis"><em>fetching strategy</em></span> is the strategy NHibernate will use for 
             retrieving associated objects if the application needs to navigate the association. 
             Fetch strategies may be declared in the O/R mapping metadata, or overridden by a 
@@ -58,7 +52,7 @@ layout:
             confuse them! We use <tt class="literal">fetch</tt> to tune performance. We may use 
             <tt class="literal">lazy</tt> to define a contract for what data is always available 
             in any detached instance of a particular class.
-        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-lazy"></a>19.1.1.&nbsp;Working with lazy associations</h3></div></div><div></div></div><p>
+        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-lazy"></a>20.1.1.&nbsp;Working with lazy associations</h3></div></div><div></div></div><p>
                 By default, NHibernate uses lazy select fetching for collections and lazy proxy
                 fetching for single-valued associations. These defaults make sense for almost
                 all associations in almost all applications. 
@@ -66,17 +60,18 @@ layout:
                 However, lazy fetching poses one problem that you must be aware of. Access to a 
                 lazy association outside of the context of an open NHibernate session will result 
                 in an exception. For example:
-            </p><pre class="programlisting">s = sessions.OpenSession();
-Transaction tx = s.BeginTransaction();
-            
-User u = s.CreateQuery("from User u where u.Name=:userName")
-    .SetString("userName", userName).UniqueResult&lt;User&gt;();
-IDictionary permissions = u.Permissions;
+            </p><pre class="programlisting">IDictionary&lt;string, int&gt; permissions;
+using (var s = sessions.OpenSession())
+using (Transaction tx = s.BeginTransaction())
+{
+    User u = s.CreateQuery("from User u where u.Name=:userName")
+        .SetString("userName", userName).UniqueResult&lt;User&gt;();
+    permissions = u.Permissions;
 
-tx.Commit();
-s.Close();
+    tx.Commit();
+}
 
-int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
+int accessLevel = permissions["accounts"];  // Error!</pre><p>
                 Since the <tt class="literal">permissions</tt> collection was not initialized
                 when the <tt class="literal">ISession</tt> was closed, the collection will not
                 be able to load its state. <span class="emphasis"><em>NHibernate does not support lazy
@@ -96,7 +91,7 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                 how to customize the fetching strategy. In NHibernate, the mechanisms for
                 choosing a fetch strategy are identical for single-valued associations and
                 collections.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-custom"></a>19.1.2.&nbsp;Tuning fetch strategies</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-custom"></a>20.1.2.&nbsp;Tuning fetch strategies</h3></div></div><div></div></div><p>
                 Select fetching (the default) is extremely vulnerable to N+1 selects problems, 
                 so we might want to enable join fetching in the mapping document:
             </p><pre class="programlisting">&lt;set name="Permissions" 
@@ -128,15 +123,16 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                 If you ever feel like you wish you could change the fetching strategy used by
                 <tt class="literal">Get()</tt> or <tt class="literal">Load()</tt>, simply use a 
                 <tt class="literal">ICriteria</tt> query, for example:
-            </p><pre class="programlisting">User user = (User) session.CreateCriteria&lt;User&gt;()
-                .SetFetchMode("Permissions", FetchMode.Join)
-                .Add( Expression.Eq("Id", userId) )
-                .UniqueResult();</pre><p>
-                (This is NHibernate's equivalent of what some ORM solutions call a "fetch plan".)
+            </p><pre class="programlisting">User user = session.CreateCriteria(typeof(User))
+    .SetFetchMode("Permissions", FetchMode.Join)
+    .Add( Expression.Eq("Id", userId) )
+    .UniqueResult&lt;User&gt;();</pre><p>
+                (This is NHibernate's equivalent of what some <span class="emphasis"><em>ORM</em></span> solutions call a "fetch plan".)
             </p><p>
-                A completely different way to avoid problems with N+1 selects is to use the 
-                second-level cache.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-proxies"></a>19.1.3.&nbsp;Single-ended association proxies</h3></div></div><div></div></div><p>
+                A completely different way to avoid problems with N+1 selects is to use the
+                <a href="performance.html#performance-cache" title="20.2.&nbsp;The Second Level Cache">second-level cache</a>, or to enable
+                <a href="performance.html#performance-fetching-batch" title="20.1.5.&nbsp;Using batch fetching">batch fetching</a>.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-proxies"></a>20.1.3.&nbsp;Single-ended association proxies</h3></div></div><div></div></div><p>
                 Lazy fetching for collections is implemented using NHibernate's own implementation
                 of persistent collections. However, a different mechanism is needed for lazy
                 behavior in single-ended associations. The target entity of the association must
@@ -163,16 +159,20 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                 Firstly, instances of <tt class="literal">Cat</tt> will never be castable to
                 <tt class="literal">DomesticCat</tt>, even if the underlying instance is an
                 instance of <tt class="literal">DomesticCat</tt>:
-            </p><pre class="programlisting">Cat cat = session.Load&lt;Cat&gt;(id);  // instantiate a proxy (does not hit the db)
-if ( cat.IsDomesticCat ) {                  // hit the db to initialize the proxy
-    DomesticCat dc = (DomesticCat) cat;       // Error!
+            </p><pre class="programlisting">// instantiate a proxy (does not hit the db)
+Cat cat = session.Load&lt;Cat&gt;(id);
+// hit the db to initialize the proxy
+if ( cat.IsDomesticCat ) {
+    DomesticCat dc = (DomesticCat) cat; // Error!
     ....
 }</pre><p>
                 Secondly, it is possible to break proxy <tt class="literal">==</tt>.
-            </p><pre class="programlisting">Cat cat = session.Load&lt;Cat&gt;(id);            // instantiate a Cat proxy
-DomesticCat dc = 
-        session.Load&lt;DomesticCat&gt;(id);  // acquire new DomesticCat proxy!
-System.out.println(cat==dc);                            // false</pre><p>
+            </p><pre class="programlisting">// instantiate a Cat proxy
+Cat cat = session.Load&lt;Cat&gt;(id);
+DomesticCat dc =
+        // acquire new DomesticCat proxy!
+        session.Load&lt;DomesticCat&gt;(id);
+Console.WriteLine(cat == dc); // false</pre><p>
                 However, the situation is not quite as bad as it looks. Even though we now have two references
                 to different proxy objects, the underlying instance will still be the same object:
             </p><pre class="programlisting">cat.Weight = 11.0;  // hit the db to initialize the proxy
@@ -199,9 +199,14 @@ Console.WriteLine( dc.Weight );  // 11.0</pre><p>
                 by <tt class="literal">Load()</tt> or <tt class="literal">Enumerable()</tt>. (Note that <tt class="literal">List()</tt>
                 does not usually return proxies.)
             </p><pre class="programlisting">ICat cat = session.Load&lt;CatImpl&gt;(catid);
-IEnumerator iter = session.CreateQuery("from CatImpl as cat where cat.Name='fritz'").Enumerable().GetEnumerator();
-iter.MoveNext();
-ICat fritz = (ICat) iter.Current;</pre><p>
+using(var iter = session
+    .CreateQuery("from CatImpl as cat where cat.Name='fritz'")
+    .Enumerable&lt;CatImpl&gt;()
+    .GetEnumerator())
+{
+    iter.MoveNext();
+    ICat fritz = iter.Current;
+}</pre><p>
                 Relationships are also lazily initialized. This means you must declare any properties to be of
                 type <tt class="literal">ICat</tt>, not <tt class="literal">CatImpl</tt>.
             </p><p>
@@ -217,7 +222,7 @@ ICat fritz = (ICat) iter.Current;</pre><p>
                     </p></li></ul></div><p>
                 NHibernate will detect persistent classes that override <tt class="literal">Equals()</tt> or
                 <tt class="literal">GetHashCode()</tt>.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-initialization"></a>19.1.4.&nbsp;Initializing collections and proxies</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-initialization"></a>20.1.4.&nbsp;Initializing collections and proxies</h3></div></div><div></div></div><p>
                 A <tt class="literal">LazyInitializationException</tt> will be thrown by NHibernate if an uninitialized 
                 collection or proxy is accessed outside of the scope of the <tt class="literal">ISession</tt>, ie. when 
                 the entity owning the collection or having the reference to the proxy is in the detached state.
@@ -273,12 +278,12 @@ ICat fritz = (ICat) iter.Current;</pre><p>
                 information about it (like its size) or a subset of the data.
             </p><p>
                 You can use a collection filter to get the size of a collection without initializing it:
-            </p><pre class="programlisting">(int) s.CreateFilter( collection, "select count(*)" ).List()[0]</pre><p>
+            </p><pre class="programlisting">s.CreateFilter(collection, "select count(*)").UniqueResult&lt;long&gt;()</pre><p>
                 The <tt class="literal">CreateFilter()</tt> method is also used to efficiently retrieve subsets
                 of a collection without needing to initialize the whole collection:
-            </p><pre class="programlisting">s.CreateFilter( lazyCollection, "").SetFirstResult(0).SetMaxResults(10).List();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-batch"></a>19.1.5.&nbsp;Using batch fetching</h3></div></div><div></div></div><p>
+            </p><pre class="programlisting">s.CreateFilter(lazyCollection, "").SetFirstResult(0).SetMaxResults(10).List&lt;Entity&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-batch"></a>20.1.5.&nbsp;Using batch fetching</h3></div></div><div></div></div><p>
                 NHibernate can make efficient use of batch fetching, that is, NHibernate can load several uninitialized
-                proxies if one proxy is accessed (or collections. Batch fetching is an optimization of the lazy select
+                proxies if one proxy is accessed (or collections). Batch fetching is an optimization of the lazy select
                 fetching strategy. There are two ways you can tune batch fetching: on the class and the collection level.
             </p><p>
                 Batch fetching for classes/entities is easier to understand. Imagine you have the following situation
@@ -309,11 +314,15 @@ ICat fritz = (ICat) iter.Current;</pre><p>
                 Batch fetching of collections is particularly useful if you have a nested tree of items, ie.
                 the typical bill-of-materials pattern. (Although a <span class="emphasis"><em>nested set</em></span> or a
                 <span class="emphasis"><em>materialized path</em></span> might be a better option for read-mostly trees.)
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-subselect"></a>19.1.6.&nbsp;Using subselect fetching</h3></div></div><div></div></div><p>
+            </p><p>
+              <span class="emphasis"><em>Note:</em></span> if you set <tt class="literal">default_batch_fetch_size</tt>
+              in configuration, NHibernate will configure the batch fetch optimization for lazy fetching
+              globally. Batch sizes specified at more granular level take precedence.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-fetching-subselect"></a>20.1.6.&nbsp;Using subselect fetching</h3></div></div><div></div></div><p>
                 If one lazy collection or single-valued proxy has to be fetched, NHibernate loads all of
                 them, re-running the original query in a subselect. This works in the same way as
                 batch-fetching, without the piecemeal loading.
-            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-cache"></a>19.2.&nbsp;The Second Level Cache</h2></div></div><div></div></div><p>
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-cache"></a>20.2.&nbsp;The Second Level Cache</h2></div></div><div></div></div><p>
             A NHibernate <tt class="literal">ISession</tt> is a transaction-level cache of persistent data. It is
             possible to configure a cluster or process-level (<tt class="literal">ISessionFactory</tt>-level) cache on 
             a class-by-class and collection-by-collection basis. You may even plug in a clustered cache. Be 
@@ -322,10 +331,14 @@ ICat fritz = (ICat) iter.Current;</pre><p>
             <span class="emphasis"><em>In NHibernate 1.x the second level cache does not work correctly in combination with
             distributed transactions.</em></span>
         </p><p>
+          The second level cache requires the use of transactions, be it through transaction scopes or NHibernate
+          transactions. Interacting with the data store without an explicit transaction is discouraged, and will
+          not allow the second level cache to work as intended.
+        </p><p>
             By default, NHibernate uses HashtableCache for process-level caching. You may choose a different
             implementation by specifying the name of a class that implements <tt class="literal">NHibernate.Cache.ICacheProvider</tt> 
-            using the property <tt class="literal">hibernate.cache.provider_class</tt>.
-        </p><div class="table"><a name="cacheproviders"></a><p class="title"><b>Table&nbsp;19.1.&nbsp;Cache Providers</b></p><table summary="Cache Providers" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">Provider class</th><th align="left">Type</th><th align="left">Cluster Safe</th><th align="left">Query Cache Supported</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left"><tt class="literal">NHibernate.Cache.HashtableCacheProvider</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">ASP.NET Cache (System.Web.Cache)</td><td align="left"><tt class="literal">NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">Prevalence Cache</td><td align="left"><tt class="literal">NHibernate.Caches.Prevalence.PrevalenceCacheProvider, NHibernate.Caches.Prevalence</tt></td><td align="left">memory, disk</td><td align="left">&nbsp;</td><td align="left">yes</td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-mapping"></a>19.2.1.&nbsp;Cache mappings</h3></div></div><div></div></div><p>
+            using the property <tt class="literal">cache.provider_class</tt>.
+        </p><div class="table"><a name="cacheproviders"></a><p class="title"><b>Table&nbsp;20.1.&nbsp;Cache Providers</b></p><table summary="Cache Providers" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">Provider class</th><th align="left">Type</th><th align="left">Cluster Safe</th><th align="left">Query Cache Supported</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left"><tt class="literal">NHibernate.Cache.HashtableCacheProvider</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">ASP.NET Cache (System.Web.Cache)</td><td align="left"><tt class="literal">NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">Prevalence Cache</td><td align="left"><tt class="literal">NHibernate.Caches.Prevalence.PrevalenceCacheProvider, NHibernate.Caches.Prevalence</tt></td><td align="left">memory, disk</td><td align="left">&nbsp;</td><td align="left">yes</td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-mapping"></a>20.2.1.&nbsp;Cache mappings</h3></div></div><div></div></div><p>
                 The <tt class="literal">&lt;cache&gt;</tt> element of a class or collection mapping has the
                 following form:
             </p><div class="programlistingco"><pre class="programlisting">&lt;cache 
@@ -341,18 +354,18 @@ ICat fritz = (ICat) iter.Current;</pre><p>
                             collection role name) specifies the name of the second level cache 
                             region
                         </p></td></tr></table></div></div><p>
-                Alternatively (preferrably?), you may specify <tt class="literal">&lt;class-cache&gt;</tt> and 
+                Alternatively (preferably?), you may specify <tt class="literal">&lt;class-cache&gt;</tt> and 
                 <tt class="literal">&lt;collection-cache&gt;</tt> elements in <tt class="literal">hibernate.cfg.xml</tt>.
             </p><p>
                 The <tt class="literal">usage</tt> attribute specifies a <span class="emphasis"><em>cache concurrency strategy</em></span>.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-readonly"></a>19.2.2.&nbsp;Strategy: read only</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-readonly"></a>20.2.2.&nbsp;Strategy: read only</h3></div></div><div></div></div><p>
                 If your application needs to read but never modify instances of a persistent class, a 
                 <tt class="literal">read-only</tt> cache may be used. This is the simplest and best performing
                 strategy. Its even perfectly safe for use in a cluster.
             </p><pre class="programlisting">&lt;class name="Eg.Immutable" mutable="false"&gt;
     &lt;cache usage="read-only"/&gt;
     ....
-&lt;/class&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-readwrite"></a>19.2.3.&nbsp;Strategy: read/write</h3></div></div><div></div></div><p>
+&lt;/class&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-readwrite"></a>20.2.3.&nbsp;Strategy: read/write</h3></div></div><div></div></div><p>
                 If the application needs to update data, a <tt class="literal">read-write</tt> cache might be appropriate. 
                 This cache strategy should never be used if serializable transaction isolation level is required.
                 You should ensure that the transaction is completed when <tt class="literal">ISession.Close()</tt> or
@@ -366,7 +379,7 @@ ICat fritz = (ICat) iter.Current;</pre><p>
         &lt;cache usage="read-write"/&gt;
         ....
     &lt;/set&gt;
-&lt;/class&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-nonstrict"></a>19.2.4.&nbsp;Strategy: nonstrict read/write</h3></div></div><div></div></div><p>
+&lt;/class&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-nonstrict"></a>20.2.4.&nbsp;Strategy: nonstrict read/write</h3></div></div><div></div></div><p>
                 If the application only occasionally needs to update data (ie. if it is extremely unlikely that two 
                 transactions would try to update the same item simultaneously) and strict transaction isolation is
                 not required, a <tt class="literal">nonstrict-read-write</tt> cache might be appropriate.
@@ -375,9 +388,9 @@ ICat fritz = (ICat) iter.Current;</pre><p>
                 
             </p></div><p>
             The following table shows which providers are compatible with which concurrency strategies.
-        </p><div class="table"><a name="d0e12602"></a><p class="title"><b>Table&nbsp;19.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
-            Refer to <a href="caches.html" title="Chapter&nbsp;25.&nbsp;NHibernate.Caches">Chapter&nbsp;25, <i>NHibernate.Caches</i></a> for more details.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-sessioncache"></a>19.3.&nbsp;Managing the caches</h2></div></div><div></div></div><p>
+        </p><div class="table"><a name="d0e14799"></a><p class="title"><b>Table&nbsp;20.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
+            Refer to <a href="caches.html" title="Chapter&nbsp;26.&nbsp;NHibernate.Caches">Chapter&nbsp;26, <i>NHibernate.Caches</i></a> for more details.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-sessioncache"></a>20.3.&nbsp;Managing the caches</h2></div></div><div></div></div><p>
             Whenever you pass an object to <tt class="literal">Save()</tt>, <tt class="literal">Update()</tt>
             or <tt class="literal">SaveOrUpdate()</tt> and whenever you retrieve an object using 
             <tt class="literal">Load()</tt>, <tt class="literal">Get()</tt>, <tt class="literal">List()</tt>,
@@ -389,8 +402,10 @@ ICat fritz = (ICat) iter.Current;</pre><p>
             if you are processing a huge number of objects and need to manage memory efficiently,
             the <tt class="literal">Evict()</tt> method may be used to remove the object and its collections
             from the first-level cache.
-        </p><pre class="programlisting">IEnumerable&lt;Cat&gt; cats = sess.CreateQuery("from Eg.Cat as cat").Enumerable&lt;Cat&gt;(); //a huge result set
-foreach( Cat cat in cats )
+        </p><pre class="programlisting">IEnumerable&lt;Cat&gt; cats = sess
+    .CreateQuery("from Eg.Cat as cat")
+    .List&lt;Cat&gt;(); //a huge result set
+foreach (Cat cat in cats)
 {
     DoSomethingWithACat(cat);
     sess.Evict(cat);
@@ -406,13 +421,17 @@ foreach( Cat cat in cats )
             For the second-level cache, there are methods defined on <tt class="literal">ISessionFactory</tt> for 
             evicting the cached state of an instance, entire class, collection instance or entire collection 
             role.
-        </p><pre class="programlisting">sessionFactory.Evict&lt;Cat&gt;(catId); //evict a particular Cat
-sessionFactory.Evict&lt;Cat&gt;();  //evict all Cats
-sessionFactory.EvictCollection("Eg.Cat.Kittens", catId); //evict a particular collection of kittens
-sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-querycache"></a>19.4.&nbsp;The Query Cache</h2></div></div><div></div></div><p>
+        </p><pre class="programlisting">//evict a particular Cat
+sessionFactory.Evict(typeof(Cat), catId);
+//evict all Cats
+sessionFactory.Evict(typeof(Cat));
+//evict a particular collection of kittens
+sessionFactory.EvictCollection("Eg.Cat.Kittens", catId);
+//evict all kitten collections
+sessionFactory.EvictCollection("Eg.Cat.Kittens");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-querycache"></a>20.4.&nbsp;The Query Cache</h2></div></div><div></div></div><p>
             Query result sets may also be cached. This is only useful for queries that are run
             frequently with the same parameters. To use the query cache you must first enable it:
-        </p><pre class="programlisting">&lt;add key="hibernate.cache.use_query_cache" value="true" /&gt;</pre><p>
+        </p><pre class="programlisting">&lt;property name="cache.use_query_cache"&gt;true&lt;/property&gt;&gt;</pre><p>
             This setting causes the creation of two new cache regions - one holding cached query
             result sets (<tt class="literal">NHibernate.Cache.StandardQueryCache</tt>), the other
             holding timestamps of the most recent updates to queryable tables 
@@ -429,7 +448,7 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
             If you require fine-grained control over query cache expiration policies, you may
             specify a named cache region for a particular query by calling 
             <tt class="literal">IQuery.SetCacheRegion()</tt>.
-        </p><pre class="programlisting">IList&lt;Blog&gt; blogs = sess.CreateQuery("from Blog blog where blog.Blogger = :blogger")
+        </p><pre class="programlisting">var blogs = sess.CreateQuery("from Blog blog where blog.Blogger = :blogger")
     .SetEntity("blogger", blogger)
     .SetMaxResults(15)
     .SetCacheable(true)
@@ -438,15 +457,15 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
             If the query should force a refresh of its query cache region, you may call
             <tt class="literal">IQuery.SetForceCacheRefresh()</tt> to <tt class="literal">true</tt>.
             This is particularly useful in cases where underlying data may have been updated
-            via a saparate process (i.e., not modified through NHibernate) and allows the
+            via a separate process (i.e., not modified through NHibernate) and allows the
             application to selectively refresh the query cache regions based on its
             knowledge of those events. This is a more efficient alternative to eviction of 
             a query cache region via <tt class="literal">ISessionFactory.EvictQueries()</tt>.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-collections"></a>19.5.&nbsp;Understanding Collection performance</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-collections"></a>20.5.&nbsp;Understanding Collection performance</h2></div></div><div></div></div><p>
             We've already spent quite some time talking about collections.
             In this section we will highlight a couple more issues about
             how collections behave at runtime.
-        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-taxonomy"></a>19.5.1.&nbsp;Taxonomy</h3></div></div><div></div></div><p>NHibernate defines three basic kinds of collections:</p><div class="itemizedlist"><ul type="disc"><li><p>collections of values</p></li><li><p>one to many associations</p></li><li><p>many to many associations</p></li></ul></div><p>
+        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-taxonomy"></a>20.5.1.&nbsp;Taxonomy</h3></div></div><div></div></div><p>NHibernate defines three basic kinds of collections:</p><div class="itemizedlist"><ul type="disc"><li><p>collections of values</p></li><li><p>one to many associations</p></li><li><p>many to many associations</p></li></ul></div><p>
                 This classification distinguishes the various table and foreign key
                 relationships but does not tell us quite everything we need to know
                 about the relational model. To fully understand the relational structure
@@ -463,7 +482,7 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 Sets have a primary key consisting of <tt class="literal">&lt;key&gt;</tt> and element
                 columns. This may be less efficient for some types of collection element, particularly
                 composite elements or large text or binary fields; the database may not be able to index
-                a complex primary key as efficently.  On the other hand, for one to many or many to many
+                a complex primary key as efficiently.  On the other hand, for one to many or many to many
                 associations, particularly in the case of synthetic identifiers, it is likely to be just
                 as efficient. (Side-note: if you want <tt class="literal">SchemaExport</tt> to actually create
                 the primary key of a <tt class="literal">&lt;set&gt;</tt> for you, you must declare all columns
@@ -482,15 +501,15 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 primary key of the database table - but even in this case, the above classification
                 is still useful. (It still reflects how NHibernate "locates" individual rows of the
                 collection.)
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-mostefficientupdate"></a>19.5.2.&nbsp;Lists, maps, idbags and sets are the most efficient collections to update</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-mostefficientupdate"></a>20.5.2.&nbsp;Lists, maps, idbags and sets are the most efficient collections to update</h3></div></div><div></div></div><p>
                 From the discussion above, it should be clear that indexed collections
                 and (usually) sets allow the most efficient operation in terms of adding,
                 removing and updating elements.
             </p><p>
                 There is, arguably, one more advantage that indexed collections have over sets for
                 many to many associations or collections of values. Because of the structure of an
-                <tt class="literal">ISet&lt;T&gt;</tt>, NHibernate doesn't ever <tt class="literal">UPDATE</tt> a row when
-                an element is "changed". Changes to an <tt class="literal">ISet&lt;T&gt;</tt> always work via
+                <tt class="literal">ISet</tt>, NHibernate doesn't ever <tt class="literal">UPDATE</tt> a row when
+                an element is "changed". Changes to an <tt class="literal">ISet</tt> always work via
                 <tt class="literal">INSERT</tt> and <tt class="literal">DELETE</tt> (of individual rows). Once
                 again, this consideration does not apply to one to many associations.
             </p><p>
@@ -504,18 +523,18 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 are in fact one-to-many associations with <tt class="literal">inverse="true"</tt>. For these
                 associations, the update is handled by the many-to-one end of the association, and so
                 considerations of collection update performance simply do not apply.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-mostefficentinverse"></a>19.5.3.&nbsp;Bags and lists are the most efficient inverse collections</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-mostefficentinverse"></a>20.5.3.&nbsp;Bags and lists are the most efficient inverse collections</h3></div></div><div></div></div><p>
                 Just before you ditch bags forever, there is a particular case in which bags (and also lists)
                 are much more performant than sets. For a collection with <tt class="literal">inverse="true"</tt>
                 (the standard bidirectional one-to-many relationship idiom, for example) we can add elements
                 to a bag or list without needing to initialize (fetch) the bag elements! This is because
                 <tt class="literal">IList.Add()</tt> must always succeed for a bag or <tt class="literal">IList</tt>
-                (unlike an <tt class="literal">ISet&lt;T&gt;</tt>). This can make the following common code much faster.
+                (unlike an <tt class="literal">ISet</tt>). This can make the following common code much faster.
             </p><pre class="programlisting">Parent p = sess.Load&lt;Parent&gt;(id);
     Child c = new Child();
     c.Parent = p;
     p.Children.Add(c);  //no need to fetch the collection!
-    sess.Flush();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-oneshotdelete"></a>19.5.4.&nbsp;One shot delete</h3></div></div><div></div></div><p>
+    sess.Flush();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-collections-oneshotdelete"></a>20.5.4.&nbsp;One shot delete</h3></div></div><div></div></div><p>
                 Occasionally, deleting collection elements one by one can be extremely inefficient. NHibernate
                 isn't completely stupid, so it knows not to do that in the case of an newly-empty collection
                 (if you called <tt class="literal">list.Clear()</tt>, for example). In this case, NHibernate will
@@ -538,26 +557,26 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens"); //evict all kitten collections
                 all the current elements. This can be very useful and powerful from time to time.
             </p><p>
                 Of course, one-shot-delete does not apply to collections mapped <tt class="literal">inverse="true"</tt>.
-            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-batch-updates"></a>19.6.&nbsp;Batch updates</h2></div></div><div></div></div><p>
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-batch-updates"></a>20.6.&nbsp;Batch updates</h2></div></div><div></div></div><p>
             NHibernate supports batching SQL update commands (<tt class="literal">INSERT</tt>,
             <tt class="literal">UPDATE</tt>, <tt class="literal">DELETE</tt>) with the following limitations:
-        </p><div class="itemizedlist"><ul type="disc"><li><p>the Nhibernate's drive used for your RDBMS may not supports batching,</p></li><li><p>since the implementation uses reflection to access members and types
+        </p><div class="itemizedlist"><ul type="disc"><li><p>the NHibernate's drive used for your RDBMS may not supports batching,</p></li><li><p>since the implementation uses reflection to access members and types
                 in System.Data assembly which are not normally visible, it may not function
                 in environments where necessary permissions are not granted,</p></li><li><p>optimistic concurrency checking may be impaired since ADO.NET 2.0 does not
                 return the number of rows affected by each statement in the batch, only
                 the total number of rows affected by the batch.</p></li></ul></div><p>
             Update batching is enabled by setting <tt class="literal">adonet.batch_size</tt>
             to a non-zero value.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-multi-query"></a>19.7.&nbsp;Multi Query</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-multi-query"></a>20.7.&nbsp;Multi Query</h2></div></div><div></div></div><p>
             This functionality allows you to execute several HQL queries in one round-trip
             against the database server. A simple use case is executing a paged query while
             also getting the total count of results, in a single round-trip. Here is a simple
             example:
         </p><pre class="programlisting">IMultiQuery multiQuery = s.CreateMultiQuery()
     .Add(s.CreateQuery("from Item i where i.Id &gt; ?")
-            .SetInt32(0, 50).SetFirstResult(10))
+          .SetInt32(0, 50).SetFirstResult(10))
     .Add(s.CreateQuery("select count(*) from Item i where i.Id &gt; ?")
-            .SetInt32(0, 50));
+          .SetInt32(0, 50));
 IList results = multiQuery.List();
 IList items = (IList)results[0];
 long count = (long)((IList)results[1])[0];</pre><p>
@@ -566,7 +585,7 @@ long count = (long)((IList)results[1])[0];</pre><p>
             shared among all the queries contained in the multi query, like this:
         </p><pre class="programlisting">IList results = s.CreateMultiQuery()
     .Add(s.CreateQuery("from Item i where i.Id &gt; :id")
-        .SetFirstResult(10) )
+          .SetFirstResult(10))
     .Add("select count(*) from Item i where i.Id &gt; :id")
     .SetInt32("id", 50)
     .List();
@@ -589,49 +608,49 @@ long count = (long)((IList)results[1])[0];</pre><p>
             throw an exception executing this query:
         </p><pre class="programlisting">IList allEmployeesId  = ...; //1,500 items
 IMultiQuery multiQuery = s.CreateMultiQuery()
-	.Add(s.CreateQuery("from Employee e where e.Id in :empIds")
-		.SetParameter("empIds", allEmployeesId).SetFirstResult(10))
-	.Add(s.CreateQuery("select count(*) from Employee e where e.Id in :empIds")
-		.SetParameter("empIds", allEmployeesId));
-	IList results = multiQuery.List(); // will throw an exception from SQL Server
-	</pre><p>
+    .Add(s.CreateQuery("from Employee e where e.Id in :empIds")
+          .SetParameter("empIds", allEmployeesId).SetFirstResult(10))
+    .Add(s.CreateQuery("select count(*) from Employee e where e.Id in :empIds")
+          .SetParameter("empIds", allEmployeesId));
+IList results = multiQuery.List(); // will throw an exception from SQL Server</pre><p>
             An interesting usage of this feature is to load several collections of an object in one
             round-trip, without an expensive cartesian product (blog * users * posts).
         </p><pre class="programlisting">Blog blog = s.CreateMultiQuery()
     .Add("select b from Blog b left join fetch b.Users where b.Id = :id")
     .Add("select b from Blog b left join fetch b.Posts where b.Id = :id")
     .SetInt32("id", 123)
-    .UniqueResult&lt;Blog&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-multi-criteria"></a>19.8.&nbsp;Multi Criteria</h2></div></div><div></div></div><p>
-			This is the counter-part to Multi Query, and allows you to perform several criteria queries
-			in a single round trip. A simple use case is executing a paged query while
+    .UniqueResult&lt;Blog&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-multi-criteria"></a>20.8.&nbsp;Multi Criteria</h2></div></div><div></div></div><p>
+            This is the counter-part to Multi Query, and allows you to perform several criteria queries
+            in a single round trip. A simple use case is executing a paged query while
             also getting the total count of results, in a single round-trip. Here is a simple
             example:
         </p><pre class="programlisting">IMultiCriteria multiCrit = s.CreateMultiCriteria()
-    .Add(s.CreateCriteria&lt;Item&gt;()
-            .Add(Expression.Gt("Id", 50))
-            .SetFirstResult(10))
-    .Add(s.CreateCriteria&lt;Item&gt;()
-            .Add(Expression.Gt("Id", 50))
-            .SetProject(Projections.RowCount()));
+    .Add(s.CreateCriteria(typeof(Item))
+          .Add(Expression.Gt("Id", 50))
+          .SetFirstResult(10))
+    .Add(s.CreateCriteria(typeof(Item))
+          .Add(Expression.Gt("Id", 50))
+          .SetProject(Projections.RowCount()));
 IList results = multiCrit.List();
 IList items = (IList)results[0];
 long count = (long)((IList)results[1])[0];</pre><p>
             The result is a list of query results, ordered according to the order of queries
             added to the multi criteria. 
-		</p><p>
+        </p><p>
             You can add <tt class="literal">ICriteria</tt> or <tt class="literal">DetachedCriteria</tt> to the Multi Criteria query.
             In fact, using DetachedCriteria in this fashion has some interesting implications. 
         </p><pre class="programlisting">DetachedCriteria customersCriteria = AuthorizationService.GetAssociatedCustomersQuery();
 IList results = session.CreateMultiCriteria()
-	.Add(customersCriteria)
-	.Add(DetachedCriteria.For&lt;Policy&gt;()
-		.Add( Subqueries.PropertyIn("id", CriteriaTransformer.Clone(customersCriteria)
-                                                    .SetProjection(Projections.Id())
-                      ) )
-	).List();
+    .Add(customersCriteria)
+    .Add(DetachedCriteria.For&lt;Policy&gt;()
+        .Add(Subqueries.PropertyIn("id",
+            CriteriaTransformer.Clone(customersCriteria)
+                .SetProjection(Projections.Id())
+            )))
+    .List();
 
 ICollection&lt;Customer&gt; customers = CollectionHelper.ToArray&lt;Customer&gt;(results[0]);
 ICollection&lt;Policy&gt; policies = CollectionHelper.ToArray&lt;Policy&gt;(results[1]);</pre><p>
-			As you see, we get a query that represnt the customers we can access, and then we can utlize this query further in order to 
-			perform additional logic (getting the policies of the customers we are associated with), all in a single database roundtrip.
-		</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="filters.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="toolsetguide.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Filtering data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Toolset Guide</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+          As you see, we get a query that represents the customers we can access, and then we can utilize this query further in order to 
+          perform additional logic (getting the policies of the customers we are associated with), all in a single database round-trip.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="filters.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="toolsetguide.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Filtering data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Toolset Guide</td></tr></table></div></body></html>

@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;2.&nbsp;Architecture</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="quickstart.html" title="Chapter&nbsp;1.&nbsp;Quickstart with IIS and Microsoft SQL Server"><link rel="next" href="session-configuration.html" title="Chapter&nbsp;3.&nbsp;ISessionFactory Configuration"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Architecture</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="quickstart.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="session-configuration.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="architecture"></a>Chapter&nbsp;2.&nbsp;Architecture</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="architecture-overview"></a>2.1.&nbsp;Overview</h2></div></div><div></div></div><p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;2.&nbsp;Architecture</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="quickstart.html" title="Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server"><link rel="next" href="session-configuration.html" title="Chapter&nbsp;3.&nbsp;ISessionFactory Configuration"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Architecture</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="quickstart.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="session-configuration.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="architecture"></a>Chapter&nbsp;2.&nbsp;Architecture</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="architecture-overview"></a>2.1.&nbsp;Overview</h2></div></div><div></div></div><p>
             A (very) high-level view of the NHibernate architecture:
         </p><div class="mediaobject" align="center"><img src="../shared/images/overview.png" align="middle"></div><p>
             This diagram shows NHibernate using the database and configuration data to
@@ -21,7 +15,7 @@ layout:
             The "full cream" architecture abstracts the application away from the
             underlying ADO.NET APIs and lets NHibernate take care of the details.
         </p><div class="mediaobject" align="center"><img src="../shared/images/fullcream.png" align="middle"></div><p>
-            Heres some definitions of the objects in the diagrams:
+            Here are some definitions of the objects in the diagrams:
 
             </p><div class="variablelist"><dl><dt><span class="term">ISessionFactory (<tt class="literal">NHibernate.ISessionFactory</tt>)</span></dt><dd><p>
                             A threadsafe (immutable) cache of compiled mappings for a single database.
@@ -51,11 +45,12 @@ layout:
                             (Optional) A single-threaded, short-lived object used by the application to
                             specify atomic units of work. Abstracts application from underlying ADO.NET
                             transaction. An <tt class="literal">ISession</tt> might span several
-                            <tt class="literal">ITransaction</tt>s in some cases.
+                            <tt class="literal">ITransaction</tt>s in some cases. Transaction scopes may be used
+                            instead.
                         </p></dd><dt><span class="term">IConnectionProvider (<tt class="literal">NHibernate.Connection.IConnectionProvider</tt>)</span></dt><dd><p>
                             (Optional) A factory for ADO.NET connections and commands. Abstracts application
-                            from the concrete vendor-specific implementations of <tt class="literal">IDbConnection</tt>
-                            and <tt class="literal">IDbCommand</tt>. Not exposed to application, but can be
+                            from the concrete vendor-specific implementations of <tt class="literal">DbConnection</tt>
+                            and <tt class="literal">DbCommand</tt>. Not exposed to application, but can be
                             extended/implemented by the developer.
                         </p></dd><dt><span class="term">IDriver (<tt class="literal">NHibernate.Driver.IDriver</tt>)</span></dt><dd><p>
                             (Optional) An interface encapsulating differences between ADO.NET providers, such
@@ -88,7 +83,7 @@ layout:
                         The instance was once associated with a persistence
                         context, but that context was closed, or the instance
                         was serialized to another process. It has a persistent 
-                        identity and, perhaps, a corrsponding row in the database.
+                        identity and, perhaps, a corresponding row in the database.
                         For detached instances, NHibernate makes no guarantees 
                         about the relationship between persistent identity and
                         CLR identity.
@@ -101,7 +96,7 @@ layout:
             Starting with version 1.2, NHibernate added the <tt class="literal">ISessionFactory.GetCurrentSession()</tt>
             method. The processing behind <tt class="literal">ISessionFactory.GetCurrentSession()</tt> is pluggable.
             An extension interface (<tt class="literal">NHibernate.Context.ICurrentSessionContext</tt>) and a new
-            configuration parameter (<tt class="literal">hibernate.current_session_context_class</tt>) have been added
+            configuration parameter (<tt class="literal">current_session_context_class</tt>) have been added
             to allow pluggability of the scope and context of defining current sessions.
         </p><p>
             See the API documentation for the <tt class="literal">NHibernate.Context.ICurrentSessionContext</tt>
@@ -110,36 +105,44 @@ layout:
             tracking the current contextual session.  Out-of-the-box, NHibernate comes with several
             implementations of this interface:
         </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    <tt class="literal">NHibernate.Context.AsyncLocalSessionContext</tt> - current sessions are tracked
+                    by current asynchronous flow. You are responsible to bind and unbind an
+                    <tt class="literal">ISession</tt> instance with static methods of class
+                    <tt class="literal">CurrentSessionContext</tt>. Binding operations from inner flows will not be
+                    propagated to outer or siblings flows. Added in NHibernate 5.0.
+                </p></li><li><p>
                     <tt class="literal">NHibernate.Context.CallSessionContext</tt> - current sessions are tracked
-                    by <tt class="literal">CallContext</tt>. You are responsible to bind and unbind an <tt class="literal">
-                    ISession</tt> instance with static methods of class <tt class="literal">CurrentSessionContext
-                    </tt>.
+                    by <tt class="literal">CallContext</tt>. You are responsible to bind and unbind an
+                    <tt class="literal">ISession</tt> instance with static methods of class
+                    <tt class="literal">CurrentSessionContext</tt>.
                 </p></li><li><p>
                     <tt class="literal">NHibernate.Context.ThreadStaticSessionContext</tt> - current session is
-                    stored in a thread-static variable. This context only supports one session factory.
+                    stored in a thread-static variable. This context supports multiple session factory only
+                    since NHibernate v5.
                     You are responsible to bind and unbind an <tt class="literal">ISession</tt> instance with
                     static methods of class <tt class="literal">CurrentSessionContext</tt>.
                 </p></li><li><p>
-                    <tt class="literal">NHibernate.Context.WebSessionContext</tt> - 
-					stores the current session in <tt class="literal">HttpContext</tt>. 
-					You are responsible to bind and unbind an <tt class="literal">ISession</tt> 
-					instance with static methods of class <tt class="literal">CurrentSessionContext</tt>.
+                    <tt class="literal">NHibernate.Context.WebSessionContext</tt> -
+                    stores the current session in <tt class="literal">HttpContext</tt>.
+                    You are responsible to bind and unbind an <tt class="literal">ISession</tt>
+                    instance with static methods of class <tt class="literal">CurrentSessionContext</tt>.
                 </p></li><li><p>
                     <tt class="literal">NHibernate.Context.WcfOperationSessionContext</tt> - current sessions are tracked
                     by WCF <tt class="literal">OperationContext</tt>. You need to register the <tt class="literal">WcfStateExtension</tt>
-                    extension in WCF. You are responsible to bind and unbind an <tt class="literal">ISession
-                    </tt> instance with static methods of class <tt class="literal">CurrentSessionContext</tt>.
+                    extension in WCF. You are responsible to bind and unbind an <tt class="literal">ISession</tt>
+                    instance with static methods of class <tt class="literal">CurrentSessionContext</tt>.
                 </p></li><li><p>
                     <tt class="literal">NHibernate.Context.ManagedWebSessionContext</tt> - current
-                    sessions are tracked by <tt class="literal">HttpContext</tt>. Removed in NHibernate 4.0 
-					- <tt class="literal">NHibernate.Context.WebSessionContext</tt> should be used instead.
-					You are responsible to bind and unbind an <tt class="literal">ISession</tt> instance with static methods
+                    sessions are tracked by <tt class="literal">HttpContext</tt>. Removed in NHibernate 4.0
+                    - <tt class="literal">NHibernate.Context.WebSessionContext</tt> should be used instead.
+                    You are responsible to bind and unbind an <tt class="literal">ISession</tt> instance with static methods
                     on this class, it never opens, flushes, or closes an <tt class="literal">ISession</tt> itself.
                 </p></li></ul></div><p>
-            The <tt class="literal">hibernate.current_session_context_class</tt> configuration parameter
+            The <tt class="literal">current_session_context_class</tt> configuration parameter
             defines which <tt class="literal">NHibernate.Context.ICurrentSessionContext</tt> implementation
             should be used. Typically, the value of this parameter would just name the implementation
             class to use (including the assembly name); for the out-of-the-box implementations, however,
-            there are corresponding short names: "call", "thread_static", "web" and "wcf_operation",
+            there are corresponding short names: <tt class="literal">async_local</tt>, <tt class="literal">call</tt>,
+            <tt class="literal">thread_static</tt>, <tt class="literal">web</tt> and <tt class="literal">wcf_operation</tt>,
             respectively.
-        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="quickstart.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="session-configuration.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Quickstart with IIS and Microsoft SQL Server&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="quickstart.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="session-configuration.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</td></tr></table></div></body></html>

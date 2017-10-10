@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;21.&nbsp;Example: Parent/Child</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="toolsetguide.html" title="Chapter&nbsp;20.&nbsp;Toolset Guide"><link rel="next" href="example-weblog.html" title="Chapter&nbsp;22.&nbsp;Example: Weblog Application"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;21.&nbsp;Example: Parent/Child</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="example-parentchild"></a>Chapter&nbsp;21.&nbsp;Example: Parent/Child</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;22.&nbsp;Example: Parent/Child</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="toolsetguide.html" title="Chapter&nbsp;21.&nbsp;Toolset Guide"><link rel="next" href="example-weblog.html" title="Chapter&nbsp;23.&nbsp;Example: Weblog Application"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;22.&nbsp;Example: Parent/Child</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="example-parentchild"></a>Chapter&nbsp;22.&nbsp;Example: Parent/Child</h2></div></div><div></div></div><p>
         One of the very first things that new users try to do with NHibernate is to model a parent / child type 
         relationship. There are two different approaches to this. For various reasons the most convenient 
         approach, especially for new users, is to model both <tt class="literal">Parent</tt> and <tt class="literal">Child</tt> 
@@ -17,7 +11,7 @@ layout:
         those of a composite element mapping. We will explain how to use a <span class="emphasis"><em>bidirectional one to many 
         association with cascades</em></span> to model a parent / child relationship efficiently and elegantly. It's 
         not at all difficult!
-    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-collections"></a>21.1.&nbsp;A note about collections</h2></div></div><div></div></div><p>
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-collections"></a>22.1.&nbsp;A note about collections</h2></div></div><div></div></div><p>
             NHibernate collections are considered to be a logical part of their owning entity; never of the
             contained entities. This is a crucial distinction! It has the following consequences:
         </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -39,7 +33,7 @@ layout:
             the two entities, while removing it removes the link. This is very appropriate for all sorts of cases.
             Where it is not appropriate at all is the case of a parent / child relationship, where the life of the
             child is bound to the lifecycle of the parent.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-bidir"></a>21.2.&nbsp;Bidirectional one-to-many</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-bidir"></a>22.2.&nbsp;Bidirectional one-to-many</h2></div></div><div></div></div><p>
             Suppose we start with a simple <tt class="literal">&lt;one-to-many&gt;</tt> association from
             <tt class="literal">Parent</tt> to <tt class="literal">Child</tt>.
         </p><pre class="programlisting">&lt;set name="Children"&gt;
@@ -94,7 +88,7 @@ session.Flush();</pre><p>
 Child c = new Child();
 p.AddChild(c);
 session.Save(c);
-session.Flush();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-cascades"></a>21.3.&nbsp;Cascading lifecycle</h2></div></div><div></div></div><p>
+session.Flush();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-cascades"></a>22.3.&nbsp;Cascading lifecycle</h2></div></div><div></div></div><p>
              The explicit call to <tt class="literal">Save()</tt> is still annoying. We will address this by
              using cascades.
          </p><pre class="programlisting">&lt;set name="Children" inverse="true" cascade="all"&gt;
@@ -143,7 +137,7 @@ session.Flush();</pre><p>
              Note: even though the collection mapping specifies <tt class="literal">inverse="true"</tt>, cascades are still
              processed by iterating the collection elements. So if you require that an object be saved, deleted or
              updated by cascade, you must add it to the collection. It is not enough to simply set its parent.
-         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-update"></a>21.4.&nbsp;Using cascading <tt class="literal">Update()</tt></h2></div></div><div></div></div><p>
+         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-update"></a>22.4.&nbsp;Using cascading <tt class="literal">Update()</tt></h2></div></div><div></div></div><p>
              Suppose we loaded up a <tt class="literal">Parent</tt> in one <tt class="literal">ISession</tt>, made some changes in a UI
              action and wish to persist these changes in a new ISession (by calling <tt class="literal">Update()</tt>). The
              <tt class="literal">Parent</tt> will contain a collection of children and, since cascading update is enabled, NHibernate
@@ -165,7 +159,7 @@ Child newChild = new Child();
 parent.AddChild(newChild);
 session.Update(parent);
 session.Flush();</pre><p>
-             Well, thats all very well for the case of a generated identifier, but what about assigned identifiers
+             Well, that is all very well for the case of a generated identifier, but what about assigned identifiers
              and composite identifiers? This is more difficult, since <tt class="literal">unsaved-value</tt> can't
              distinguish between a newly instantiated object (with an identifier assigned by the user) and an object
              loaded in a previous session. In these cases, you will probably need to give NHibernate a hint; either
@@ -189,29 +183,33 @@ session.Flush();</pre><p>
          </p><pre class="programlisting">public class Persistent
 {
     private bool _saved = false;
-    
+
     public void OnSave()
     {
-        _saved=true;
+        _saved = true;
     }
-    
+
     public void OnLoad()
     {
-        _saved=true;
+        _saved = true;
     }
-    
+
+    public void OnDelete()
+    {
+        _saved = false;
+    }
+
     ......
-    
+
     public bool IsSaved
     {
         get { return _saved; }
     }
 }</pre><p>
              (The <tt class="literal">saved</tt> property is non-persistent.)
-             Now implement <tt class="literal">IsTransient()</tt>, along with <tt class="literal">OnLoad()</tt>
-             and <tt class="literal">OnSave()</tt> as follows.
-         </p><pre class="programlisting">
-	public object IsTransient(object entity)
+             Now implement <tt class="literal">IsTransient()</tt>, along with <tt class="literal">OnLoad()</tt>,
+             <tt class="literal">OnSave()</tt> and <tt class="literal">OnDelete()</tt> as follows.
+         </p><pre class="programlisting">public object IsTransient(object entity)
 {
     if (entity is Persistent)
     {
@@ -223,7 +221,7 @@ session.Flush();</pre><p>
     }
 }
 
-public bool OnLoad(object entity, 
+public bool OnLoad(object entity,
     object id,
     object[] state,
     string[] propertyNames,
@@ -241,7 +239,16 @@ public boolean OnSave(object entity,
 {
     if (entity is Persistent) ( (Persistent) entity ).OnSave();
     return false;
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-conclusion"></a>21.5.&nbsp;Conclusion</h2></div></div><div></div></div><p>
+}
+
+public virtual void OnDelete(object entity,
+    object id,
+    object[] state,
+    string[] propertyNames,
+    IType[] types)
+{
+    if (entity is Persistent) ( (Persistent) entity ).OnDelete();
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-conclusion"></a>22.5.&nbsp;Conclusion</h2></div></div><div></div></div><p>
              There is quite a bit to digest here and it might look confusing first time around. However, in practice, it
              all works out quite nicely. Most NHibernate applications use the parent / child pattern in many places.
          </p><p>
@@ -250,4 +257,4 @@ public boolean OnSave(object entity,
              relationship. Unfortunately, there are two big limitations to composite element classes: composite elements may
              not own collections, and they should not be the child of any entity other than the unique parent. (However,
              they <span class="emphasis"><em>may</em></span> have a surrogate primary key, using an <tt class="literal">&lt;idbag&gt;</tt> mapping.)
-         </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;20.&nbsp;Toolset Guide&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;22.&nbsp;Example: Weblog Application</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+         </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;21.&nbsp;Toolset Guide&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;23.&nbsp;Example: Weblog Application</td></tr></table></div></body></html>

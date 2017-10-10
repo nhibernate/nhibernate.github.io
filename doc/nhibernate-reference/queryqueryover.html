@@ -1,19 +1,13 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;16.&nbsp;QueryOver Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querycriteria.html" title="Chapter&nbsp;15.&nbsp;Criteria Queries"><link rel="next" href="querysql.html" title="Chapter&nbsp;17.&nbsp;Native SQL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;16.&nbsp;QueryOver Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="queryqueryover"></a>Chapter&nbsp;16.&nbsp;QueryOver Queries</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;16.&nbsp;QueryOver Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querycriteria.html" title="Chapter&nbsp;15.&nbsp;Criteria Queries"><link rel="next" href="querylinq.html" title="Chapter&nbsp;17.&nbsp;Linq Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;16.&nbsp;QueryOver Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querylinq.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="queryqueryover"></a>Chapter&nbsp;16.&nbsp;QueryOver Queries</h2></div></div><div></div></div><p>
         The ICriteria API
         is NHibernate's implementation of Query Object.
-        NHibernate 3.0 introduces the QueryOver api, which combines the use of
+        NHibernate 3.0 introduces the QueryOver API, which combines the use of
         Extension Methods
         and
         Lambda Expressions
-        (both new in .Net 3.5) to provide a statically typesafe wrapper round the ICriteria API.
+        (both new in .Net 3.5) to provide a statically type-safe wrapper round the ICriteria API.
     </p><p>
         QueryOver uses Lambda Expressions to provide some extra
         syntax to remove the 'magic strings' from your ICriteria queries.
@@ -25,14 +19,14 @@ layout:
     </p><p>
         Note: QueryOver is intended to remove the references to 'magic strings'
         from the ICriteria API while maintaining it's opaqueness.  It is <span class="underline">not</span> a LINQ provider;
-        NHibernate has a built-in Linq provider for this.
+        NHibernate has a built-in <a href="querylinq.html" title="Chapter&nbsp;17.&nbsp;Linq Queries">Linq provider</a> for this.
     </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-querystructure"></a>16.1.&nbsp;Structure of a Query</h2></div></div><div></div></div><p>
             Queries are created from an ISession using the syntax:
         </p><pre class="programlisting">IList&lt;Cat&gt; cats =
     session.QueryOver&lt;Cat&gt;()
         .Where(c =&gt; c.Name == "Max")
         .List();</pre><p>&nbsp;</p><p>
-            Detached QueryOver (analagous to DetachedCriteria) can be created, and then used with an ISession using:
+            Detached QueryOver (analogous to DetachedCriteria) can be created, and then used with an ISession using:
         </p><pre class="programlisting">QueryOver&lt;Cat&gt; query =
     QueryOver.Of&lt;Cat&gt;()
         .Where(c =&gt; c.Name == "Paddy");
@@ -103,14 +97,14 @@ IList&lt;Cat&gt; cats =
         </p><pre class="programlisting">        .WhereRestrictionOn(c =&gt; c.Name).IsLike("%anna%")</pre><p>
             May also be written as:
         </p><pre class="programlisting">        .Where(c =&gt; c..Name.IsLike("%anna%"))</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-associations"></a>16.4.&nbsp;Associations</h2></div></div><div></div></div><p>
-            QueryOver can navigate association paths using JoinQueryOver() (analagous to ICriteria.CreateCriteria() to create sub-criteria).
+            QueryOver can navigate association paths using JoinQueryOver() (analogous to ICriteria.CreateCriteria() to create sub-criteria).
         </p><p>
             The factory method QuerOver&lt;T&gt;() on ISession returns an IQueryOver&lt;T&gt;.
             More accurately, it returns an IQueryOver&lt;T,T&gt; (which inherits from IQueryOver&lt;T&gt;).
         </p><p>
             An IQueryOver has two types of interest; the root type (the type of entity that the query returns),
             and the type of the 'current' entity being queried.  For example, the following query uses
-            a join to create a sub-QueryOver (analagous to creating sub-criteria in the ICriteria API):
+            a join to create a sub-QueryOver (analogous to creating sub-criteria in the ICriteria API):
         </p><pre class="programlisting">IQueryOver&lt;Cat,Kitten&gt; catQuery =
     session.QueryOver&lt;Cat&gt;()
         .JoinQueryOver(c =&gt; c.Kittens)
@@ -155,7 +149,7 @@ IQueryOver&lt;Cat,Cat&gt; catQuery =
         .And(() =&gt; kittenAlias.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projections"></a>16.6.&nbsp;Projections</h2></div></div><div></div></div><p>
             Simple projections of the properties of the root type can be added using the <tt class="code">.Select</tt> method
             which can take multiple Lambda Expression arguments:
-        </p><pre class="programlisting">IList selection =
+        </p><pre class="programlisting">var selection =
     session.QueryOver&lt;Cat&gt;()
         .Select(
             c =&gt; c.Name,
@@ -188,14 +182,14 @@ Console.WriteLine(catDetails[0].CatAge);</pre><p>
         </p><p>&nbsp;</p><p>
             QueryOver allows arbitrary IProjection to be added (allowing private properties to be projected).  The Projections factory
             class also has overloads to allow Lambda Expressions to be used:
-        </p><pre class="programlisting">IList selection =
+        </p><pre class="programlisting">var selection =
     session.QueryOver&lt;Cat&gt;()
         .Select(Projections.ProjectionList()
             .Add(Projections.Property&lt;Cat&gt;(c =&gt; c.Name))
             .Add(Projections.Avg&lt;Cat&gt;(c =&gt; c.Age)))
         .List&lt;object[]&gt;();</pre><p>&nbsp;</p><p>
             In addition there is an inline syntax for creating projection lists that does not require the explicit class qualification:
-        </p><pre class="programlisting">IList selection =
+        </p><pre class="programlisting">var selection =
     session.QueryOver&lt;Cat&gt;()
         .SelectList(list =&gt; list
             .Select(c =&gt; c.Name)
@@ -218,13 +212,13 @@ IList&lt;CatSummary&gt; catReport =
         .TransformUsing(Transformers.AliasToBean&lt;CatSummary&gt;())
         .List&lt;CatSummary&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionfunctions"></a>16.7.&nbsp;Projection Functions</h2></div></div><div></div></div><p>
             In addition to projecting properties, there are extension methods to allow certain common dialect-registered
-            functions to be applied.  For example you can write the following to extract just the year part of a date:
-        </p><pre class="programlisting">        .Where(p =&gt; p.BirthDate.YearPart() == 1971)</pre><p>
+            functions to be applied.  For example you can write the following to get 3 letters named people.
+        </p><pre class="programlisting">        .Where(p =&gt; p.FirstName.StrLength() == 3)</pre><p>
             The functions can also be used inside projections:
         </p><pre class="programlisting">        .Select(
             p =&gt; Projections.Concat(p.LastName, ", ", p.FirstName),
-            p =&gt; p.Height.Abs())</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-subqueries"></a>16.8.&nbsp;Subqueries</h2></div></div><div></div></div><p>
-            The Subqueries factory class has overloads to allow Lambda Expressions to express sub-query
+            p =&gt; p.Height.Abs())</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-subqueries"></a>16.8.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
+            The Sub-queries factory class has overloads to allow Lambda Expressions to express sub-query
             restrictions.  For example:
         </p><pre class="programlisting">QueryOver&lt;Cat&gt; maximumAge =
     QueryOver.Of&lt;Cat&gt;()
@@ -234,7 +228,7 @@ IList&lt;Cat&gt; oldestCats =
     session.QueryOver&lt;Cat&gt;()
         .Where(Subqueries.WhereProperty&lt;Cat&gt;(c =&gt; c.Age).Eq(maximumAge))
         .List();</pre><p>&nbsp;</p><p>
-            The inline syntax allows you to use subqueries without requalifying the type:
+            The inline syntax allows you to use sub-queries without re-qualifying the type:
         </p><pre class="programlisting">IList&lt;Cat&gt; oldestCats =
     session.QueryOver&lt;Cat&gt;()
         .WithSubquery.WhereProperty(c =&gt; c.Age).Eq(maximumAge)
@@ -245,4 +239,4 @@ IList&lt;Cat&gt; oldestCats =
         </p><pre class="programlisting">IList&lt;Cat&gt; oldestCats =
     session.QueryOver&lt;Cat&gt;()
         .WithSubquery.Where(c =&gt; c.Age == maximumAge.As&lt;int&gt;())
-        .List();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Criteria Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Native SQL</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+        .List();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querylinq.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Criteria Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Linq Queries</td></tr></table></div></body></html>

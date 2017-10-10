@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;10.&nbsp;Read-only entities</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="manipulatingdata.html" title="Chapter&nbsp;9.&nbsp;Manipulating Persistent Data"><link rel="next" href="transactions.html" title="Chapter&nbsp;11.&nbsp;Transactions And Concurrency"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Read-only entities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="readonly"></a>Chapter&nbsp;10.&nbsp;Read-only entities</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;10.&nbsp;Read-only entities</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="manipulatingdata.html" title="Chapter&nbsp;9.&nbsp;Manipulating Persistent Data"><link rel="next" href="transactions.html" title="Chapter&nbsp;11.&nbsp;Transactions And Concurrency"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Read-only entities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="readonly"></a>Chapter&nbsp;10.&nbsp;Read-only entities</h2></div></div><div></div></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
             NHibernate's treatment of <span class="emphasis"><em>read-only</em></span> entities may 
             differ from what you may have encountered elsewhere. Incorrect usage 
             may cause unexpected results.
@@ -103,14 +97,14 @@ layout:
             </p><pre class="programlisting">Session.DefaultReadOnly = false;</pre><p>
                 You can determine the current setting by using the property:
             </p><pre class="programlisting">Session.DefaultReadOnly;</pre><p> 
-                If <tt class="literal">Session.DefaultReadOnly</tt> property returns true, entities loaded by 
+                If <tt class="literal">Session.DefaultReadOnly</tt> property returns true, entities loaded by
                 the following are automatically made read-only:
             </p><div class="itemizedlist"><ul type="disc"><li><p>
-                        <tt class="literal">Session.Load()</tt> and <tt class="literal">Session.Load&lt;T&gt;</tt>
+                        Session.Load() and Session.Load&lt;T&gt;
                     </p></li><li><p>
-                        <tt class="literal">Session.Get()</tt> and <tt class="literal">Session.Get&lt;T&gt;</tt>
+                        Session.Get() and Session.Get&lt;T&gt;
                     </p></li><li><p>
-                        <tt class="literal">Session.Merge()</tt>
+                        Session.Merge()
                     </p></li><li><p>
                         executing, or iterating HQL queries and 
                         criteria; to override this setting for a particular
@@ -123,18 +117,18 @@ layout:
                         default was changed
                     </p></li><li><p>
                         persistent entities that are refreshed via
-                        <tt class="literal">Session.Refresh()</tt>; a refreshed persistent 
+                        <tt class="literal">Session.Refresh()</tt>; a refreshed persistent
                         entity will only be read-only if it was 
                         read-only before refreshing
                     </p></li><li><p>
-                        persistent entities added by the application via 
-                        <tt class="literal">Session.Persist()</tt>, <tt class="literal">Session.Save()</tt>, and <tt class="literal">Session.Update()</tt>
-                        <tt class="literal">Session.SaveOrUpdate()</tt>
+                        persistent entities added by the application via
+                        <tt class="literal">Session.Persist()</tt>, <tt class="literal">Session.Save()</tt>,
+                        <tt class="literal">Session.Update()</tt> and <tt class="literal">Session.SaveOrUpdate()</tt>
                     </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-querycriteria"></a>10.1.3.&nbsp;Loading read-only entities from an HQL query/criteria</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
                     Entities of immutable classes are automatically loaded
                     as read-only.
                 </p></div><p>
-                If Session.DefaultReadOnly returns false (the default) 
+                If <tt class="literal">Session.DefaultReadOnly</tt> returns false (the default)
                 when an HQL query or criteria executes, then entities 
                 and proxies of mutable classes loaded by the query will 
                 not be read-only.
@@ -145,7 +139,7 @@ layout:
                 For an HQL query, call:
             </p><pre class="programlisting">Query.SetReadOnly(true);</pre><p>
                 <tt class="literal">Query.SetReadOnly(true)</tt> must be called before
-                <tt class="literal">Query.List()</tt>, <tt class="literal">Query.UniqueResult()</tt>, or <tt class="literal">Query.Iterate()</tt>
+                <tt class="literal">Query.List()</tt>, <tt class="literal">Query.UniqueResult()</tt>, or <tt class="literal">Query.Enumerable()</tt>
             </p><p>
                 For an HQL criteria, call:
             </p><pre class="programlisting">Criteria.SetReadOnly(true);</pre><p>
@@ -158,12 +152,12 @@ layout:
                 Uninitialized persistent collections returned by the query are 
                 not affected. Later, when the collection is initialized,
                 entities loaded into the session will be read-only if 
-                Session.DefaultReadOnly returns true.   
+                <tt class="literal">Session.DefaultReadOnly</tt> returns true.
             </p><p>
                 Using <tt class="literal">Query.SetReadOnly(true)</tt> or
                 <tt class="literal">Criteria.SetReadOnly(true)</tt> works well
                 when a single HQL query or criteria loads all the entities and 
-                intializes all the proxies and collections that the application
+                initializes all the proxies and collections that the application
                 needs to be read-only.
             </p><p>
                 When it is not possible to load and initialize all 
@@ -172,22 +166,21 @@ layout:
                 entities as read-only before the query is executed.
                 Then you can explicitly initialize proxies and collections 
                 before restoring the session default.
-            </p><pre class="programlisting">
-ISession session = factory.OpenSession();
-ITransaction tx = session.BeginTransaction();
- 
-session.DefaultReadOnly = true;
-Contract contract = session.CreateQuery("from Contract where CustomerName = 'Sherman'").UniqueResult&lt;Contract&gt;();
-NHibernate.Initialize(contract.Plan);
-NHibernate.Initialize(contract.Variations);
-NHibernate.Initialize(contract.Notes);
-session.DefaultReadOnly = false;
-...
-tx.Commit();
-session.Close();
-
-</pre><p>
-                If Session.DefaultReadOnly returns true, then you can
+            </p><pre class="programlisting">using (ISession session = factory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    session.DefaultReadOnly = true;
+    Contract contract = session
+        .CreateQuery("from Contract where CustomerName = 'Sherman'")
+        .UniqueResult&lt;Contract&gt;();
+    NHibernate.Initialize(contract.Plan);
+    NHibernate.Initialize(contract.Variations);
+    NHibernate.Initialize(contract.Notes);
+    session.DefaultReadOnly = false;
+    ...
+    tx.Commit();
+}</pre><p>
+                If <tt class="literal">Session.DefaultReadOnly</tt> returns true, then you can
                 use Query.SetReadOnly(false) and Criteria.SetReadOnly(false)
                 to override this session setting and load entities that are 
                 not read-only.
@@ -208,21 +201,19 @@ session.Close();
                 </p></div><p>        
                 To throw away non-flushed changes and make the persistent entity 
                 consistent with its database representation, call:
-			</p><pre class="programlisting">Session.Refresh(entity);</pre><p>
+            </p><pre class="programlisting">Session.Refresh(entity);</pre><p>
                 To flush changes made before or while the entity
                 was read-only and make the database representation 
                 consistent with the current state of the persistent
                 entity:
-            </p><pre class="programlisting">
-// evict the read-only entity so it is detached
+            </p><pre class="programlisting">// evict the read-only entity so it is detached
 session.Evict(entity);
 
 // make the detached entity (with the non-flushed changes) persistent
 session.Update(entity);
 
 // now entity is no longer read-only and its changes can be flushed
-s.Flush();
-</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-proptypes"></a>10.2.&nbsp;Read-only affect on property type</h2></div></div><div></div></div><p>
+s.Flush();</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-proptypes"></a>10.2.&nbsp;Read-only affect on property type</h2></div></div><div></div></div><p>
             The following table summarizes how different property types are 
             affected by making an entity read-only.
         </p><div class="table"><a name="readonly-proptype-summary"></a><p class="title"><b>Table&nbsp;10.1.&nbsp;Affect of read-only entity on property types</b></p><table summary="Affect of read-only entity on property types" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property/Association Type</th><th>Changes flushed to DB?</th></tr></thead><tbody><tr><td>
@@ -249,26 +240,24 @@ s.Flush();
                 NHibernate will not synchronize simple property state changes 
                 to the database. If you have automatic versioning, NHibernate 
                 will not increment the version if any simple properties change.
-            </p><pre class="programlisting">
-ISession session = factory.OpenSession();
-ITransaction tx = session.BeginTransaction();
+            </p><pre class="programlisting">using (ISession session = factory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    // get a contract and make it read-only
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
 
-// get a contract and make it read-only
-Contract contract = session.Get&lt;Contract&gt;(contractId);
-session.SetReadOnly(contract, true);
+    // contract.CustomerName is "Sherman"
+    contract.CustomerName = "Yogi";
+    tx.Commit();
 
-// contract.CustomerName is "Sherman"
-contract.CustomerName = "Yogi";
-tx.Commit();
+    tx = session.BeginTransaction();
 
-tx = session.BeginTransaction();
-
-contract = session.Get&lt;Contract&gt;(contractId);
-// contract.CustomerName is still "Sherman"
-...
-tx.Commit();
-session.Close();
-            </pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-prop-types-unidir"></a>10.2.2.&nbsp;Unidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-singleended-unidir"></a>10.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one</h4></div></div><div></div></div><p>
+    contract = session.Get&lt;Contract&gt;(contractId);
+    // contract.CustomerName is still "Sherman"
+    ...
+    tx.Commit();
+}</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-prop-types-unidir"></a>10.2.2.&nbsp;Unidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-singleended-unidir"></a>10.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one</h4></div></div><div></div></div><p>
                     NHibernate treats unidirectional one-to-one and many-to-one
                     associations in the same way when the owning entity is 
                     read-only. 
@@ -305,20 +294,24 @@ session.Close();
                     many-to-one association reference to null has no effect
                     on the entity's database representation.
                 </p><pre class="programlisting">// get a contract with an existing plan;
-// make the contract read-only and set its plan to null 
-tx = session.BeginTransaction();
-Contract contract = session.Get&lt;Contract&gt;(contractId);
-session.SetReadOnly(contract, true);
-contract.Plan = null;
-tx.Commit();
+// make the contract read-only and set its plan to null
+using (var tx = session.BeginTransaction())
+{
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
+    contract.Plan = null;
+    tx.Commit();
+}
 
 // get the same contract
-tx = session.BeginTransaction();
-Contract contract = session.Get&lt;Contract&gt;(contractId);
+using (var tx = session.BeginTransaction())
+{
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
 
-// contract.Plan still refers to the original plan;
+    // contract.Plan still refers to the original plan;
 
-tx.Commit();
+    tx.Commit();
+}
 session.Close();</pre><p>
                     The following shows that, even though
                     an update to a read-only entity's many-to-one 
@@ -328,23 +321,29 @@ session.Close();</pre><p>
                     changed association.
                 </p><pre class="programlisting">// get a contract with an existing plan;
 // make the contract read-only and change to a new plan
-tx = session.BeginTransaction();
-Contract contract = session.Get&lt;Contract&gt;(contractId);
-session.SetReadOnly(contract, true);
-Plan newPlan = new Plan("new plan");
-contract.Plan = newPlan;
-tx.Commit();
+Contract contract;
+Plan newPlan;
+using (var tx = session.BeginTransaction())
+{
+    contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
+    newPlan = new Plan("new plan");
+    contract.Plan = newPlan;
+    tx.Commit();
+}
 
 // get the same contract
-tx = session.BeginTransaction();
-contract = session.Get&lt;Contract&gt;(contractId);
-newPlan = session.Get&lt;Plan&gt;(newPlan.Id);
+using (var tx = session.BeginTransaction())
+{
+    contract = session.Get&lt;Contract&gt;(contractId);
+    newPlan = session.Get&lt;Plan&gt;(newPlan.Id);
 
-// contract.Plan still refers to the original plan;
-// newPlan is non-null because it was persisted when 
-// the previous transaction was committed; 
+    // contract.Plan still refers to the original plan;
+    // newPlan is non-null because it was persisted when
+    // the previous transaction was committed;
 
-tx.Commit();
+    tx.Commit();
+}
 session.Close();</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manyended-unidir"></a>10.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many</h4></div></div><div></div></div><p>
                     NHibernate treats unidirectional one-to-many 
                     and many-to-many associations owned by a read-only
@@ -431,4 +430,4 @@ session.Close();</pre></div><div class="section" lang="en"><div class="titlepage
                     update the version due to changes in both sides of
                     the collection if they dirty the entity owning the
                     respective collections.
-                </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Manipulating Persistent Data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Transactions And Concurrency</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+                </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Manipulating Persistent Data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Transactions And Concurrency</td></tr></table></div></body></html>

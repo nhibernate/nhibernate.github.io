@@ -1,12 +1,6 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;5.&nbsp;Basic O/R Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="persistent-classes.html" title="Chapter&nbsp;4.&nbsp;Persistent Classes"><link rel="next" href="collections.html" title="Chapter&nbsp;6.&nbsp;Collection Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;5.&nbsp;Basic O/R Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="persistent-classes.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="collections.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mapping"></a>Chapter&nbsp;5.&nbsp;Basic O/R Mapping</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-declaration"></a>5.1.&nbsp;Mapping declaration</h2></div></div><div></div></div><p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;5.&nbsp;Basic O/R Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="persistent-classes.html" title="Chapter&nbsp;4.&nbsp;Persistent Classes"><link rel="next" href="collections.html" title="Chapter&nbsp;6.&nbsp;Collection Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;5.&nbsp;Basic O/R Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="persistent-classes.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="collections.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="mapping"></a>Chapter&nbsp;5.&nbsp;Basic O/R Mapping</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-declaration"></a>5.1.&nbsp;Mapping declaration</h2></div></div><div></div></div><p>
             Object/relational mappings are defined in an XML document. The mapping document
             is designed to be readable and hand-editable. The mapping language is object-centric,
             meaning that mappings are constructed around persistent class declarations, not
@@ -15,7 +9,9 @@ layout:
             Note that, even though many NHibernate users choose to define XML mappings by hand,
             a number of tools exist to generate the mapping document, including
             NHibernate.Mapping.Attributes library and various template-based code
-            generators (CodeSmith, MyGeneration).
+            generators (CodeSmith, MyGeneration). You may also use
+            <tt class="literal">NHibernate.Mapping.ByCode</tt> available since NHibernate 3.2, or
+            <a href="https://github.com/jagregory/fluent-nhibernate" target="_top">Fluent NHibernate</a>.
         </p><p>
             Let's kick off with an example mapping:
         </p><pre class="programlisting">&lt;?xml version="1.0"?&gt;
@@ -46,9 +42,9 @@ layout:
         &lt;/class&gt;
 
 &lt;/hibernate-mapping&gt;</pre><p>
-             We will now discuss the content of the mapping document. We will only describe the 
-             document elements and attributes that are used by NHibernate at runtime. The mapping 
-             document also contains some extra optional attributes and elements that affect the 
+             We will now discuss the content of the mapping document. We will only describe the
+             document elements and attributes that are used by NHibernate at runtime. The mapping
+             document also contains some extra optional attributes and elements that affect the
              database schemas exported by the schema export tool. (For example the <tt class="literal">
              not-null</tt> attribute.)
         </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-xmlns"></a>5.1.1.&nbsp;XML Namespace</h3></div></div><div></div></div><p>
@@ -66,26 +62,25 @@ layout:
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-mapping"></a>5.1.2.&nbsp;hibernate-mapping</h3></div></div><div></div></div><p>
                 This element has several optional attributes. The <tt class="literal">schema</tt> attribute
                 specifies that tables referred to by this mapping belong to the named schema. If specified, 
-                tablenames will be qualified by the given schema name. If missing, tablenames will be 
+                table names will be qualified by the given schema name. If missing, table names will be 
                 unqualified. The <tt class="literal">default-cascade</tt> attribute specifies what cascade style
-                should be assumed for properties and collections which do not specify a 
+                should be assumed for properties and collections which do not specify a
                 <tt class="literal">cascade</tt> attribute. The <tt class="literal">auto-import</tt> attribute lets us
                 use unqualified class names in the query language, by default. The <tt class="literal">assembly</tt>
                 and <tt class="literal">namespace</tt> attributes specify the assembly where persistent classes
                 are located and the namespace they are declared in.
-            </p><div class="programlistingco"><pre class="programlisting">
-           &lt;hibernate-mapping                         <span class="co">(1)</span>
-         schema="schemaName"                          <span class="co">(2)</span>
-         default-cascade="none|save-update"           <span class="co">(3)</span>
-         auto-import="true|false"                     <span class="co">(4)</span>
-         assembly="Eg"                                <span class="co">(5)</span>
-         namespace="Eg"                               <span class="co">(6)</span>
-         default-access="field|property|field.camecase<span class="co">(7)</span>..."
-         default-lazy="true|false"
+            </p><div class="programlistingco"><pre class="programlisting">&lt;hibernate-mapping
+         schema="schemaName"                          <span class="co">(1)</span>
+         default-cascade="none|save-update"           <span class="co">(2)</span>
+         auto-import="true|false"                     <span class="co">(3)</span>
+         assembly="Eg"                                <span class="co">(4)</span>
+         namespace="Eg"                               <span class="co">(5)</span>
+         default-access="field|property|field.camecase<span class="co">(6)</span>..."
+         default-lazy="true|false"                    <span class="co">(7)</span>
  /&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
                              <tt class="literal">schema</tt> (optional): The name of a database schema.
                          </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
-                             <tt class="literal">default-cascade</tt> (optional - defaults to <tt class="literal">none</tt>): 
+                             <tt class="literal">default-cascade</tt> (optional - defaults to <tt class="literal">none</tt>):
                              A default cascade style.
                          </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
                              <tt class="literal">auto-import</tt> (optional - defaults to <tt class="literal">true</tt>):
@@ -96,7 +91,7 @@ layout:
                              assembly and namespace to assume for unqualified class names in the mapping
                              document.
                          </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
-                       <tt class="literal">default-access</tt> (optional - defaults to property): 
+                       <tt class="literal">default-access</tt> (optional - defaults to property):
                        The strategy NHibernate should use for accessing a property value
                      </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
                        <tt class="literal">default-lazy</tt> (optional - defaults to <tt class="literal">true</tt>):
@@ -106,7 +101,7 @@ layout:
                  attributes, you have to specify fully-qualified class names, including the name
                  of the assembly that classes are declared in.
              </p><p>
-                 If you have two persistent classes with the same (unqualified) name, you should set 
+                 If you have two persistent classes with the same (unqualified) name, you should set
                  <tt class="literal">auto-import="false"</tt>. NHibernate will throw an exception if you attempt
                  to assign two classes to the same "imported" name.
              </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-class"></a>5.1.3.&nbsp;class</h3></div></div><div></div></div><p>
@@ -129,16 +124,16 @@ layout:
         lazy="true|false"                             <span class="co">(15)</span>
         abstract="true|false"                         <span class="co">(16)</span>
 /&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
-                            <tt class="literal">name</tt>: The fully qualified .NET class name of the persistent class 
+                            <tt class="literal">name</tt>: The fully qualified .NET class name of the persistent class
                             (or interface), including its assembly name.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
                             <tt class="literal">table</tt>(optional - defaults to the unqualified class name): The name of its database table.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
                             <tt class="literal">discriminator-value</tt> (optional - defaults to the class name): A value
-                            that distiguishes individual subclasses, used for polymorphic behaviour. Acceptable
+                            that distinguishes individual subclasses, used for polymorphic behaviour. Acceptable
                             values include <tt class="literal">null</tt> and <tt class="literal">not null</tt>.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
-                            <tt class="literal">mutable</tt> (optional, defaults to <tt class="literal">true</tt>): Specifies 
+                            <tt class="literal">mutable</tt> (optional, defaults to <tt class="literal">true</tt>): Specifies
                             that instances of the class are (not) mutable.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
                             <tt class="literal">schema</tt> (optional): Override the schema name specified by
@@ -147,33 +142,33 @@ layout:
                             <tt class="literal">proxy</tt> (optional): Specifies an interface to use for lazy
                             initializing proxies. You may specify the name of the class itself.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
-                            <tt class="literal">dynamic-update</tt> (optional, defaults to <tt class="literal">false</tt>): 
+                            <tt class="literal">dynamic-update</tt> (optional, defaults to <tt class="literal">false</tt>):
                             Specifies that <tt class="literal">UPDATE</tt> SQL should be generated at runtime and 
                             contain only those columns whose values have changed.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
-                            <tt class="literal">dynamic-insert</tt> (optional, defaults to <tt class="literal">false</tt>): 
+                            <tt class="literal">dynamic-insert</tt> (optional, defaults to <tt class="literal">false</tt>):
                             Specifies that <tt class="literal">INSERT</tt> SQL should be generated at runtime and 
                             contain only the columns whose values are not null.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
-                            <tt class="literal">select-before-update</tt> (optional, defaults to <tt class="literal">false</tt>): 
-                            Specifies that NHibernate should <span class="emphasis"><em>never</em></span> perform an SQL <tt class="literal">UPDATE</tt> 
+                            <tt class="literal">select-before-update</tt> (optional, defaults to <tt class="literal">false</tt>):
+                            Specifies that NHibernate should <span class="emphasis"><em>never</em></span> perform an SQL <tt class="literal">UPDATE</tt>
                             unless it is certain that an object is actually modified. In certain cases (actually, only
                             when a transient object has been associated with a new session using <tt class="literal">update()</tt>),
                             this means that NHibernate will perform an extra SQL <tt class="literal">SELECT</tt> to determine
                             if an <tt class="literal">UPDATE</tt> is actually required.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
-                            <tt class="literal">polymorphism</tt> (optional, defaults to <tt class="literal">implicit</tt>): 
+                            <tt class="literal">polymorphism</tt> (optional, defaults to <tt class="literal">implicit</tt>):
                             Determines whether implicit or explicit query polymorphism is used.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(11)</td><td valign="top" align="left"><p>
-                            <tt class="literal">where</tt> (optional) specify an arbitrary SQL <tt class="literal">WHERE</tt> 
+                            <tt class="literal">where</tt> (optional) specify an arbitrary SQL <tt class="literal">WHERE</tt>
                             condition to be used when retrieving objects of this class
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(12)</td><td valign="top" align="left"><p>
                             <tt class="literal">persister</tt> (optional): Specifies a custom <tt class="literal">IClassPersister</tt>.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(13)</td><td valign="top" align="left"><p>
-                            <tt class="literal">batch-size</tt> (optional, defaults to <tt class="literal">1</tt>) specify a "batch size" 
+                            <tt class="literal">batch-size</tt> (optional, defaults to <tt class="literal">1</tt>) specify a "batch size"
                             for fetching instances of this class by identifier.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(14)</td><td valign="top" align="left"><p>
-                            <tt class="literal">optimistic-lock</tt> (optional, defaults to <tt class="literal">version</tt>): 
+                            <tt class="literal">optimistic-lock</tt> (optional, defaults to <tt class="literal">version</tt>):
                             Determines the optimistic locking strategy.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(15)</td><td valign="top" align="left"><p>
                             <tt class="literal">lazy</tt> (optional): Lazy fetching may be completely disabled by setting
@@ -192,12 +187,12 @@ layout:
                 persisted. This allows NHibernate to make some minor performance optimizations.
             </p><p>
                 The optional <tt class="literal">proxy</tt> attribute enables lazy initialization of persistent
-                instances of the class. NHibernate will initially return proxies which implement 
-                the named interface. The actual persistent object will be loaded when a method of the 
+                instances of the class. NHibernate will initially return proxies which implement
+                the named interface. The actual persistent object will be loaded when a method of the
                 proxy is invoked. See "Proxies for Lazy Initialization" below.
             </p><p><span class="emphasis"><em>Implicit</em></span> polymorphism means that instances of the class will be returned
                 by a query that names any superclass or implemented interface or the class and that instances
-                of any subclass of the class will be returned by a query that names the class itself. 
+                of any subclass of the class will be returned by a query that names the class itself.
                 <span class="emphasis"><em>Explicit</em></span> polymorphism means that class instances will be returned only
                 be queries that explicitly name that class and that queries that name the class will return
                 only instances of subclasses mapped inside this <tt class="literal">&lt;class&gt;</tt> declaration
@@ -207,9 +202,9 @@ layout:
                 (this allows a "lightweight" class that contains a subset of the table columns).
             </p><p>
                 The <tt class="literal">persister</tt> attribute lets you customize the persistence strategy used for
-                the class. You may, for example, specify your own subclass of 
+                the class. You may, for example, specify your own subclass of
                 <tt class="literal">NHibernate.Persister.EntityPersister</tt> or you might even provide a
-                completely new implementation of the interface 
+                completely new implementation of the interface
                 <tt class="literal">NHibernate.Persister.IClassPersister</tt> that implements persistence via,
                 for example, stored procedure calls, serialization to flat files or LDAP. See
                 <tt class="literal">NHibernate.DomainModel.CustomPersister</tt> for a simple example (of "persistence"
@@ -217,8 +212,8 @@ layout:
             </p><p>
                 Note that the <tt class="literal">dynamic-update</tt> and <tt class="literal">dynamic-insert</tt>
                 settings are not inherited by subclasses and so may also be specified on the
-                <tt class="literal">&lt;subclass&gt;</tt> or <tt class="literal">&lt;joined-subclass&gt;</tt> elements. 
-                These settings may increase performance in some cases, but might actually decrease 
+                <tt class="literal">&lt;subclass&gt;</tt> or <tt class="literal">&lt;joined-subclass&gt;</tt> elements.
+                These settings may increase performance in some cases, but might actually decrease
                 performance in others. Use judiciously.
             </p><p>
                 Use of <tt class="literal">select-before-update</tt> will usually decrease performance. It is very
@@ -247,25 +242,32 @@ layout:
                 versions. This was done to allow using 0 as <tt class="literal">unsaved-value</tt> for the
                 version property.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-subselect"></a>5.1.4.&nbsp;subselect</h3></div></div><div></div></div><p>
-                An alternative to mapping a class is to map a <span class="emphasis"><em>query</em></span>. For that, we use the 
-                <tt class="literal">&lt;subselect&gt;</tt> element, which is mutually exclusive with <tt class="literal">&lt;class&gt;</tt>, 
-                <tt class="literal">&lt;subclass&gt;</tt>, <tt class="literal">&lt;joined-subclass&gt;</tt> and <tt class="literal">&lt;union-subclass&gt;</tt>. 
+                An alternative to mapping a class to table or view columns is to map a <span class="emphasis"><em>query</em></span>.
+                For that, we use the <tt class="literal">&lt;subselect&gt;</tt> element, which is mutually
+                exclusive with <tt class="literal">&lt;subclass&gt;</tt>, <tt class="literal">&lt;joined-subclass&gt;</tt>
+                and <tt class="literal">&lt;union-subclass&gt;</tt>.
                 The content of the <tt class="literal">subselect</tt> element is a SQL query:
             </p><pre class="programlisting">&lt;subselect&gt;
+    &lt;![CDATA[
     SELECT cat.ID, cat.NAME, cat.SEX, cat.MATE FROM cat
+    ]]&gt;
 &lt;/subselect&gt;</pre><p>
-                Normally, when mapping a query using <tt class="literal">subselect</tt> you will want to mark the class 
-                as not mutable (<tt class="literal">mutable="false"</tt>), unless you specify custom SQL for performing 
-                the UPDATE, DELETE and INSERT operations.
+                Usually, when mapping a query using <tt class="literal">subselect</tt> you will want to mark
+                the class as not mutable (<tt class="literal">mutable="false"</tt>), unless you specify custom
+                SQL for performing the UPDATE, DELETE and INSERT operations.
             </p><p>
-                Also, it makes sense to force synchronization of the tables affected by the query, using one or 
-                more <tt class="literal">&lt;synchronize&gt;</tt> entries:
+                Also, it makes sense to force synchronization of the tables affected by the query, using
+                one or more <tt class="literal">&lt;synchronize&gt;</tt> entries:
             </p><pre class="programlisting">&lt;subselect&gt;
+    &lt;![CDATA[
     SELECT cat.ID, cat.NAME, cat.SEX, cat.MATE FROM cat
+    ]]&gt;
 &lt;/subselect&gt;
-&lt;syncronize table="cat"/&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-id"></a>5.1.5.&nbsp;id</h3></div></div><div></div></div><p>
-                Mapped classes <span class="emphasis"><em>must</em></span> declare the primary key column of the database 
-                table. Most classes will also have a property holding the unique identifier 
+&lt;syncronize table="cat"/&gt;</pre><p>
+                You then still have to declare the class id and properties.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-id"></a>5.1.5.&nbsp;id</h3></div></div><div></div></div><p>
+                Mapped classes <span class="emphasis"><em>must</em></span> declare the primary key column of the database
+                table. Most classes will also have a property holding the unique identifier
                 of an instance. The <tt class="literal">&lt;id&gt;</tt> element defines the mapping from that
                 property to the primary key column.
             </p><div class="programlistingco"><pre class="programlisting">&lt;id
@@ -292,7 +294,7 @@ layout:
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
                             strategy NHibernate should use for accessing the property value.
                         </p></td></tr></table></div></div><p>
-                If the <tt class="literal">name</tt> attribute is missing, it is assumed that the class has no 
+                If the <tt class="literal">name</tt> attribute is missing, it is assumed that the class has no
                 identifier property.
             </p><p>
                 The <tt class="literal">unsaved-value</tt> attribute is almost never needed in NHibernate 1.0.
@@ -301,11 +303,11 @@ layout:
                 legacy data with composite keys. We strongly discourage its use for anything else.
             </p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-generator"></a>5.1.5.1.&nbsp;generator</h4></div></div><div></div></div><p>
                     The required <tt class="literal">generator</tt> names a .NET class used to generate unique identifiers
-					for instances of the persistent class.
-				</p><p>
-					The generator can be declared using the <tt class="literal">&lt;generator&gt;</tt> child element. If 
-					any parameters are required to configure or initialize the generator instance, they are passed 
-					using <tt class="literal">&lt;param&gt;</tt> elements.
+                    for instances of the persistent class.
+                </p><p>
+                  The generator can be declared using the <tt class="literal">&lt;generator&gt;</tt> child element. If
+                  any parameters are required to configure or initialize the generator instance, they are passed
+                  using <tt class="literal">&lt;param&gt;</tt> elements.
                 </p><pre class="programlisting">&lt;id name="Id" type="Int64" column="uid" unsaved-value="0"&gt;
         &lt;generator class="NHibernate.Id.TableHiLoGenerator"&gt;
                 &lt;param name="table"&gt;uid_table&lt;/param&gt;
@@ -313,8 +315,8 @@ layout:
         &lt;/generator&gt;
 &lt;/id&gt;</pre><p>
                     If no parameters are required, the generator can be declared using a <tt class="literal">generator</tt>
-					attribute directly on the <tt class="literal">&lt;id&gt;</tt> element, as follows:
-                 </p><pre class="programlisting">&lt;id name="Id" type="Int64" column="uid" unsaved-value="0" generator="native" /&gt;</pre><p>
+                    attribute directly on the <tt class="literal">&lt;id&gt;</tt> element, as follows:
+                </p><pre class="programlisting">&lt;id name="Id" type="Int64" column="uid" unsaved-value="0" generator="native" /&gt;</pre><p>
                     All generators implement the interface <tt class="literal">NHibernate.Id.IIdentifierGenerator</tt>.
                     This is a very simple interface; some applications may choose to provide their own specialized
                     implementations. However, NHibernate provides a range of built-in implementations. There are shortcut
@@ -340,8 +342,8 @@ layout:
                                 generates identifiers that are unique only for a particular database. <span class="emphasis"><em>Do not
                                 use this generator with a user-supplied connection.</em></span>
                             </p><p>
-								You can use the "where" parameter to specify the row to use in a table. This is useful
-								if you want to use a single tabel for your identifiers, with different rows for each table.
+                                You can use the "where" parameter to specify the row to use in a table. This is useful
+                                if you want to use a single table for your identifiers, with different rows for each table.
                             </p></dd><dt><span class="term"><tt class="literal">seqhilo</tt></span></dt><dd><p>
                                 uses a hi/lo algorithm to efficiently generate identifiers of any integral type,
                                 given a named database sequence.
@@ -356,8 +358,9 @@ layout:
                                 uses a new <tt class="literal">System.Guid</tt> as the identifier.
                             </p></dd><dt><span class="term"><tt class="literal">guid.comb</tt></span></dt><dd><p>
                                 uses the algorithm to generate a new <tt class="literal">System.Guid</tt>
-                                described by Jimmy Nilsson in the article 
-                                http://www.informit.com/articles/article.asp?p=25862.
+                                described by Jimmy Nilsson in
+                                <a href="https://www.informit.com/articles/article.aspx?p=25862" target="_top">this
+                                article</a>.
                             </p></dd><dt><span class="term"><tt class="literal">native</tt></span></dt><dd><p>
                                 picks <tt class="literal">identity</tt>, <tt class="literal">sequence</tt> or
                                 <tt class="literal">hilo</tt> depending upon the capabilities of the
@@ -388,7 +391,7 @@ layout:
         &lt;/generator&gt;
 &lt;/id&gt;</pre><p>
                     Unfortunately, you can't use <tt class="literal">hilo</tt> when supplying your own
-                    <tt class="literal">IDbConnection</tt> to NHibernate. NHibernate must be able to
+                    <tt class="literal">DbConnection</tt> to NHibernate. NHibernate must be able to
                     fetch the "hi" value in a new transaction.
                 </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-uuid-hex"></a>5.1.5.3.&nbsp;UUID Hex Algorithm</h4></div></div><div></div></div><pre class="programlisting">&lt;id name="Id" type="String" column="cat_id"&gt;
         &lt;generator class="uuid.hex"&gt;
@@ -403,14 +406,14 @@ layout:
                     <tt class="literal">separator</tt> can replace the default separator used by
                     the <tt class="literal">format</tt>.
                 </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-uuid-string"></a>5.1.5.4.&nbsp;UUID String Algorithm</h4></div></div><div></div></div><p>
-                    The UUID is generated by calling <tt class="literal">Guid.NewGuid().ToByteArray()</tt> and 
+                    The UUID is generated by calling <tt class="literal">Guid.NewGuid().ToByteArray()</tt> and
                     then converting the <tt class="literal">byte[]</tt> into a <tt class="literal">char[]</tt>.  The
                     <tt class="literal">char[]</tt> is returned as a <tt class="literal">String</tt> consisting of
                     16 characters.
                 </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-guid"></a>5.1.5.5.&nbsp;GUID Algorithms</h4></div></div><div></div></div><p>
                     The <tt class="literal">guid</tt> identifier is generated by calling <tt class="literal">Guid.NewGuid()</tt>.
                     To address some of the performance concerns with using Guids as primary keys, foreign keys, and
-                    as part of indexes with MS SQL the <tt class="literal">guid.comb</tt> can be used.  The benefit of using  
+                    as part of indexes with MS SQL the <tt class="literal">guid.comb</tt> can be used.  The benefit of using
                     the <tt class="literal">guid.comb</tt> with other databases that support GUIDs has not been measured.
                 </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-sequences"></a>5.1.5.6.&nbsp;Identity columns and Sequences</h4></div></div><div></div></div><p>
                     For databases which support identity columns (DB2, MySQL, Sybase, MS SQL), you
@@ -443,13 +446,13 @@ layout:
                 </p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="mapping-declaration-id-enhanced"></a>5.1.5.8.&nbsp;Enhanced identifier generators</h4></div></div><div></div></div><p>Starting with NHibernate release 3.3.0, there are 2 new generators which
                 represent a re-thinking of 2 different aspects of identifier
                 generation. The first aspect is database portability; the second is
-                optimization Optimization means that you do not have to query the
+                optimization. Optimization means that you do not have to query the
                 database for every request for a new identifier value. These two new
                 generators are intended to take the place of some of the named
                 generators described above, starting in 3.3.x. However, they are
                 included in the current releases and can be referenced by FQN.</p><p>The first of these new generators is
                 <tt class="literal">NHibernate.Id.Enhanced.SequenceStyleGenerator</tt>
-				(short name <tt class="literal">enhanced-sequence</tt>)
+                (short name <tt class="literal">enhanced-sequence</tt>)
                 which is intended, firstly, as a replacement for the
                 <tt class="literal">sequence</tt> generator and, secondly, as a better
                 portability generator than <tt class="literal">native</tt>. This is because
@@ -540,8 +543,8 @@ layout:
                       <tt class="literal">increment_size</tt> refers to the values coming
                       from the database.</p></li><li><p><tt class="literal">pooled-lo</tt>: similar to
                       <tt class="literal">pooled</tt>, except that it's the starting value of
-					  the "current group" that is stored into the database structure.
-					  Here,
+                      the "current group" that is stored into the database structure.
+                      Here,
                       <tt class="literal">increment_size</tt> refers to the values coming
                       from the database.</p></li></ul></div></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-compositeid"></a>5.1.6.&nbsp;composite-id</h3></div></div><div></div></div><pre class="programlisting">&lt;composite-id
         name="PropertyName"
@@ -565,12 +568,12 @@ layout:
                 and <tt class="literal">GetHashCode()</tt> to implement composite identifier equality. It must
                 also be marked with the <tt class="literal">Serializable</tt> attribute.
             </p><p>
-                Unfortunately, this approach to composite identifiers means that a persistent object 
-                is its own identifier. There is no convenient "handle" other than the object itself. 
-                You must instantiate an instance of the persistent class itself and populate its 
+                Unfortunately, this approach to composite identifiers means that a persistent object
+                is its own identifier. There is no convenient "handle" other than the object itself.
+                You must instantiate an instance of the persistent class itself and populate its
                 identifier properties before you can <tt class="literal">Load()</tt> the persistent state
                 associated with a composite key. We will describe a much more
-                convenient approach where the composite identifier is implemented as a saparate class
+                convenient approach where the composite identifier is implemented as a separate class
                 in <a href="components.html#components-compositeid" title="7.4.&nbsp;Components as composite identifiers">Section&nbsp;7.4, &#8220;Components as composite identifiers&#8221;</a>. The attributes described below apply only
                 to this alternative approach:
             </p><div class="itemizedlist"><ul type="disc" compact><li><p>
@@ -583,12 +586,12 @@ layout:
                         <tt class="literal">class</tt> (optional - defaults to the property type determined by 
                         reflection): The component class used as a composite identifier (see next section).
                     </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-discriminator"></a>5.1.7.&nbsp;discriminator</h3></div></div><div></div></div><p>
-                The <tt class="literal">&lt;discriminator&gt;</tt> element is required for polymorphic persistence 
-                using the table-per-class-hierarchy mapping strategy and declares a discriminator column of the 
-                table. The discriminator column contains marker values that tell the persistence layer what 
-                subclass to instantiate for a particular row. A restricted set of types may be used: 
-                <tt class="literal">String</tt>, <tt class="literal">Char</tt>, <tt class="literal">Int32</tt>, 
-                <tt class="literal">Byte</tt>, <tt class="literal">Short</tt>, <tt class="literal">Boolean</tt>, 
+                The <tt class="literal">&lt;discriminator&gt;</tt> element is required for polymorphic persistence
+                using the table-per-class-hierarchy mapping strategy and declares a discriminator column of the
+                table. The discriminator column contains marker values that tell the persistence layer what
+                subclass to instantiate for a particular row. A restricted set of types may be used:
+                <tt class="literal">String</tt>, <tt class="literal">Char</tt>, <tt class="literal">Int32</tt>,
+                <tt class="literal">Byte</tt>, <tt class="literal">Short</tt>, <tt class="literal">Boolean</tt>,
                 <tt class="literal">YesNo</tt>, <tt class="literal">TrueFalse</tt>.
             </p><div class="programlistingco"><pre class="programlisting">&lt;discriminator
         column="discriminator_column"  <span class="co">(1)</span>
@@ -603,7 +606,7 @@ layout:
                             <tt class="literal">type</tt> (optional - defaults to <tt class="literal">String</tt>) a
                             name that indicates the NHibernate type
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">force</tt> (optional - defaults to <tt class="literal">false</tt>) 
+                            <tt class="literal">force</tt> (optional - defaults to <tt class="literal">false</tt>)
                             "force" NHibernate to specify allowed discriminator values even when retrieving 
                             all instances of the root class.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
@@ -611,7 +614,7 @@ layout:
                             set this to <tt class="literal">false</tt> if your discriminator column is also part
                             of a mapped composite identifier.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
-                            <tt class="literal">formula</tt> (optional) an arbitrary SQL expression that is 
+                            <tt class="literal">formula</tt> (optional) an arbitrary SQL expression that is
                             executed when a type has to be evaluated. Allows content-based discrimination.
                         </p></td></tr></table></div></div><p>
                 Actual values of the discriminator column are specified by the
@@ -643,13 +646,13 @@ layout:
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
                             <tt class="literal">name</tt>: The name of a property  of the persistent class.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">type</tt> (optional - defaults to <tt class="literal">Int32</tt>): 
+                            <tt class="literal">type</tt> (optional - defaults to <tt class="literal">Int32</tt>):
                             The type of the version number.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
                             strategy NHibernate should use for accessing the property value.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
-                            <tt class="literal">unsaved-value</tt> (optional - defaults to a "sensible" value): 
+                            <tt class="literal">unsaved-value</tt> (optional - defaults to a "sensible" value):
                             A version property value that indicates that an instance is newly instantiated
                             (unsaved), distinguishing it from transient instances that were saved or loaded
                             in a previous session. (<tt class="literal">undefined</tt> specifies that the identifier
@@ -659,9 +662,11 @@ layout:
                             Specifies that this version property value is actually generated by the database.
                             See the discussion of <a href="mapping.html#mapping-generated" title="5.5.&nbsp;Generated Properties">Section&nbsp;5.5, &#8220;Generated Properties&#8221;</a>.
                         </p></td></tr></table></div></div><p>
-                Version numbers may be of type <tt class="literal">Int64</tt>, <tt class="literal">Int32</tt>,
-                <tt class="literal">Int16</tt>, <tt class="literal">Ticks</tt>, <tt class="literal">Timestamp</tt>, 
-                or <tt class="literal">TimeSpan</tt> (or their nullable counterparts in .NET 2.0).
+                Version may be of type <tt class="literal">Int64</tt>, <tt class="literal">Int32</tt>,
+                <tt class="literal">Int16</tt>, <tt class="literal">Ticks</tt>, <tt class="literal">Timestamp</tt>,
+                <tt class="literal">TimeSpan</tt>, <tt class="literal">datetimeoffset</tt>, ... (or their nullable
+                counterparts in .NET 2.0). Any type implementing <tt class="literal">IVersionType</tt> is
+                usable as a version.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-timestamp"></a>5.1.9.&nbsp;timestamp (optional)</h3></div></div><div></div></div><p>
                 The optional <tt class="literal">&lt;timestamp&gt;</tt> element indicates that the table contains 
                 timestamped data. This is intended as an alternative to versioning. Timestamps are by nature
@@ -683,7 +688,7 @@ layout:
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
                             strategy NHibernate should use for accessing the property value.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
-                            <tt class="literal">unsaved-value</tt> (optional - defaults to <tt class="literal">null</tt>): 
+                            <tt class="literal">unsaved-value</tt> (optional - defaults to <tt class="literal">null</tt>):
                             A timestamp property value that indicates that an instance is newly instantiated
                             (unsaved), distinguishing it from transient instances that were saved or loaded
                             in a previous session. (<tt class="literal">undefined</tt> specifies that the identifier
@@ -693,7 +698,7 @@ layout:
                             Specifies that this timestamp property value is actually generated by the database.
                             See the discussion of <a href="mapping.html#mapping-generated" title="5.5.&nbsp;Generated Properties">Section&nbsp;5.5, &#8220;Generated Properties&#8221;</a>.
                         </p></td></tr></table></div></div><p>
-                Note that <tt class="literal">&lt;timestamp&gt;</tt> is equivalent to 
+                Note that <tt class="literal">&lt;timestamp&gt;</tt> is equivalent to
                 <tt class="literal">&lt;version type="timestamp"&gt;</tt>.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-property"></a>5.1.10.&nbsp;property</h3></div></div><div></div></div><p>
                 The <tt class="literal">&lt;property&gt;</tt> element declares a persistent property
@@ -718,7 +723,7 @@ layout:
                             <tt class="literal">type</tt> (optional): a name that indicates the NHibernate type.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
                             <tt class="literal">update, insert</tt> (optional - defaults to <tt class="literal">true</tt>) :
-                            specifies that the mapped columns should be included in SQL <tt class="literal">UPDATE</tt> 
+                            specifies that the mapped columns should be included in SQL <tt class="literal">UPDATE</tt>
                             and/or <tt class="literal">INSERT</tt> statements. Setting both to <tt class="literal">false</tt>
                             allows a pure "derived" property whose value is initialized from some other
                             property that maps to the same column(s) or by a trigger or other application.
@@ -730,7 +735,7 @@ layout:
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
                             strategy NHibernate should use for accessing the property value.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
-                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>): 
+                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
                             Specifies that updates to this property do or do not require acquisition of the
                             optimistic lock. In other words, determines if a version increment should occur when 
                             this property is dirty.
@@ -741,7 +746,7 @@ layout:
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
                             <tt class="literal">lazy</tt> (optional - defaults to <tt class="literal">false</tt>):
                             Specifies that this property is lazy. A lazy property is not loaded when
-                            the object is initially loaded, unless the fetch mode has been overriden
+                            the object is initially loaded, unless the fetch mode has been overridden
                             in a specific query. Values for lazy properties are loaded when any lazy
                             property of the object is accessed.
                         </p></td></tr></table></div></div><p>
@@ -777,11 +782,13 @@ layout:
                 attribute. (For example, to distinguish between <tt class="literal">NHibernateUtil.DateTime</tt> and
                 <tt class="literal">NHibernateUtil.Timestamp</tt>, or to specify a custom type.)
             </p><p>
+                See also <a href="mapping.html#mapping-types" title="5.2.&nbsp;NHibernate Types">Section&nbsp;5.2, &#8220;NHibernate Types&#8221;</a>.
+            </p><p>
                 The <tt class="literal">access</tt> attribute lets you control how NHibernate will access
                 the value of the property at runtime.  The value of the <tt class="literal">access</tt> attribute should
-                be text formatted as <tt class="literal">access-strategy.naming-strategy</tt>.  The 
+                be text formatted as <tt class="literal">access-strategy.naming-strategy</tt>.  The
                 <tt class="literal">.naming-strategy</tt> is not always required.
-                </p><div class="table"><a name="d0e3932"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Access Strategies</b></p><table summary="Access Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Access Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">property</tt></td><td><p>
+                </p><div class="table"><a name="d0e4736"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Access Strategies</b></p><table summary="Access Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Access Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">property</tt></td><td><p>
                                         The default implementation.  NHibernate uses the get/set accessors of
                                         the property.  No naming strategy should be used with this access strategy
                                         because the value of the <tt class="literal">name</tt> attribute is the name
@@ -799,17 +806,17 @@ layout:
                                         Property when getting the value.  This can be used when a property only exposes
                                         a get accessor because the consumers of your API can't change the value directly.
                                         A naming strategy is required because NHibernate uses the value of the
-                                        <tt class="literal">name</tt> attribute as the property name and needs to 
+                                        <tt class="literal">name</tt> attribute as the property name and needs to
                                         be told what the name of the field is.
                                     </p></td></tr><tr><td><tt class="literal">ClassName</tt></td><td><p>
                                         If NHibernate's built in access strategies are not what is needed for your situation
                                         then you can build your own by implementing the interface 
                                         <tt class="literal">NHibernate.Property.IPropertyAccessor</tt>.  The value of the 
-                                        <tt class="literal">access</tt> attribute should be an assembly-qualified name that can be 
+                                        <tt class="literal">access</tt> attribute should be an assembly-qualified name that can be
                                         loaded with <tt class="literal">Activator.CreateInstance(string assemblyQualifiedName)</tt>.
                                     </p></td></tr></tbody></table></div><p>
             </p><p>
-                </p><div class="table"><a name="d0e3992"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Naming Strategies</b></p><table summary="Naming Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Naming Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">camelcase</tt></td><td><p>
+                </p><div class="table"><a name="d0e4796"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Naming Strategies</b></p><table summary="Naming Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Naming Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">camelcase</tt></td><td><p>
                                         The <tt class="literal">name</tt> attribute is converted to camel case to find the field.
                                         <tt class="literal">&lt;property name="FooBar" ... &gt;</tt> uses the field <tt class="literal">fooBar</tt>.
                                     </p></td></tr><tr><td><tt class="literal">camelcase-underscore</tt></td><td><p>
@@ -867,16 +874,16 @@ layout:
                             <tt class="literal">cascade</tt> (optional): Specifies which operations should
                             be cascaded from the parent object to the associated object.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
-                            <tt class="literal">fetch</tt> (optional - defaults to <tt class="literal">select</tt>): 
+                            <tt class="literal">fetch</tt> (optional - defaults to <tt class="literal">select</tt>):
                             Chooses between outer-join fetching or sequential select fetching.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
                             <tt class="literal">update, insert</tt> (optional - defaults to <tt class="literal">true</tt>) 
                             specifies that the mapped columns should be included in SQL <tt class="literal">UPDATE</tt> 
                             and/or <tt class="literal">INSERT</tt> statements. Setting both to <tt class="literal">false</tt>
                             allows a pure "derived" association whose value is initialized from some other
-                            property that maps to the same colum(s) or by a trigger or other application.
+                            property that maps to the same column(s) or by a trigger or other application.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
-                            <tt class="literal">property-ref</tt>: (optional) The name of a property of the associated 
+                            <tt class="literal">property-ref</tt>: (optional) The name of a property of the associated
                             class that is joined to this foreign key. If not specified, the primary key of
                             the associated class is used.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
@@ -886,9 +893,9 @@ layout:
                             <tt class="literal">unique</tt> (optional): Enable the DDL generation of a unique
                             constraint for the foreign-key column.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
-                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>): 
+                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
                             Specifies that updates to this property do or do not require acquisition of the
-                            optimistic lock. In other words, dertermines if a version increment should occur when 
+                            optimistic lock. In other words, determines if a version increment should occur when
                             this property is dirty.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(11)</td><td valign="top" align="left"><p>
                             <tt class="literal">not-found</tt> (optional - defaults to <tt class="literal">exception</tt>):
@@ -897,6 +904,7 @@ layout:
                         </p></td></tr></table></div></div><p>
                 The <tt class="literal">cascade</tt> attribute permits the following values: 
                 <tt class="literal">all</tt>, <tt class="literal">save-update</tt>, <tt class="literal">delete</tt>,
+                <tt class="literal">delete-orphan</tt>, <tt class="literal">all-delete-orphan</tt> and
                 <tt class="literal">none</tt>. Setting a value other than <tt class="literal">none</tt>
                 will propagate certain operations to the associated (child) object.
                 See "Lifecycle Objects" below.
@@ -912,7 +920,7 @@ layout:
                 The <tt class="literal">property-ref</tt> attribute should only be used for mapping legacy
                 data where a foreign key refers to a unique key of the associated table other than
                 the primary key. This is an ugly relational model. For example, suppose the 
-                <tt class="literal">Product</tt> class had a unique serial number, that is not the primary 
+                <tt class="literal">Product</tt> class had a unique serial number, that is not the primary
                 key. (The <tt class="literal">unique</tt> attribute controls NHibernate's DDL generation with
                 the SchemaExport tool.)
             </p><pre class="programlisting">&lt;property name="serialNumber" unique="true" type="string" column="SERIAL_NUMBER"/&gt;</pre><p>
@@ -920,7 +928,7 @@ layout:
             </p><pre class="programlisting">&lt;many-to-one name="product" property-ref="serialNumber" column="PRODUCT_SERIAL_NUMBER"/&gt;</pre><p>
                 This is certainly not encouraged, however.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-onetoone"></a>5.1.12.&nbsp;one-to-one</h3></div></div><div></div></div><p>
-                A one-to-one association to another persistent class is declared using a 
+                A one-to-one association to another persistent class is declared using a
                 <tt class="literal">one-to-one</tt> element.
             </p><div class="programlistingco"><pre class="programlisting">&lt;one-to-one
         name="PropertyName"                                <span class="co">(1)</span>
@@ -945,7 +953,7 @@ layout:
                             <tt class="literal">Delete()</tt> are cascaded (and is also used by the schema export
                             tool).
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
-                            <tt class="literal">fetch</tt> (optional - defaults to <tt class="literal">select</tt>): 
+                            <tt class="literal">fetch</tt> (optional - defaults to <tt class="literal">select</tt>):
                             Chooses between outer-join fetching or sequential select fetching.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
                             <tt class="literal">property-ref</tt>: (optional) The name of a property of the associated class
@@ -983,8 +991,8 @@ layout:
         class="Employee"
         constrained="true"/&gt;
 &lt;/class&gt;</pre><p>
-                A newly saved instance of <tt class="literal">Person</tt> is then assigned the same primar
-                key value as the <tt class="literal">Employee</tt> instance refered with the <tt class="literal">Employee</tt>
+                A newly saved instance of <tt class="literal">Person</tt> is then assigned the same primary
+                key value as the <tt class="literal">Employee</tt> instance referred with the <tt class="literal">Employee</tt>
                 property of that <tt class="literal">Person</tt>.
             </p><p>
                 Alternatively, a foreign key with a unique constraint, from <tt class="literal">Employee</tt> to 
@@ -1023,7 +1031,7 @@ layout:
         upate="true|false"                                 <span class="co">(4)</span>
         access="field|property|nosetter|ClassName"         <span class="co">(5)</span>
         optimistic-lock="true|false"&gt;                      <span class="co">(6)</span>
-        
+
         &lt;property ...../&gt;
         &lt;many-to-one .... /&gt;
         ........
@@ -1033,10 +1041,10 @@ layout:
                             <tt class="literal">class</tt> (optional - defaults to the property type
                             determined by reflection): The name of the component (child) class.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">insert</tt>: Do the mapped columns appear in SQL 
+                            <tt class="literal">insert</tt>: Do the mapped columns appear in SQL
                             <tt class="literal">INSERT</tt>s?
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
-                            <tt class="literal">update</tt>: Do the mapped columns appear in SQL 
+                            <tt class="literal">update</tt>: Do the mapped columns appear in SQL
                             <tt class="literal">UPDATE</tt>s?
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
@@ -1044,14 +1052,14 @@ layout:
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
                             <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
                             Specifies that updates to this component do or do not require acquisition of the
-                            optimistic lock. In other words, determines if a version increment should occur when 
+                            optimistic lock. In other words, determines if a version increment should occur when
                             this property is dirty.
                         </p></td></tr></table></div></div><p>
                 The child <tt class="literal">&lt;property&gt;</tt> tags map properties of the
                 child class to table columns.
             </p><p>
                 The <tt class="literal">&lt;component&gt;</tt> element allows a <tt class="literal">&lt;parent&gt;</tt>
-                subelement that maps a property of the component class as a reference back to the
+                sub-element that maps a property of the component class as a reference back to the
                 containing entity.
             </p><p>
                 The <tt class="literal">&lt;dynamic-component&gt;</tt> element allows an <tt class="literal">IDictionary</tt>
@@ -1133,9 +1141,9 @@ layout:
                             subclass, including its assembly name.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
                             <tt class="literal">discriminator-value</tt> (optional - defaults to the class name): A
-                            value that distiguishes individual subclasses.
+                            value that distinguishes individual subclasses.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">proxy</tt> (optional): Specifies a class or interface to use for 
+                            <tt class="literal">proxy</tt> (optional): Specifies a class or interface to use for
                             lazy initializing proxies.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
                             <tt class="literal">lazy</tt> (optional, defaults to <tt class="literal">true</tt>): Setting
@@ -1149,7 +1157,7 @@ layout:
             </p><p>
                 For information about inheritance mappings, see <a href="inheritance.html" title="Chapter&nbsp;8.&nbsp;Inheritance Mapping">Chapter&nbsp;8, <i>Inheritance Mapping</i></a>.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-declaration-joinedsubclass"></a>5.1.17.&nbsp;joined-subclass</h3></div></div><div></div></div><p>
-                Alternatively, a subclass that is persisted to its own table (table-per-subclass 
+                Alternatively, a subclass that is persisted to its own table (table-per-subclass
                 mapping strategy) is declared using a <tt class="literal">&lt;joined-subclass&gt;</tt>
                 element.
             </p><div class="programlistingco"><pre class="programlisting">&lt;joined-subclass
@@ -1167,11 +1175,11 @@ layout:
 &lt;/joined-subclass&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
                             <tt class="literal">name</tt>: The fully qualified class name of the subclass.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
-                            <tt class="literal">proxy</tt> (optional): Specifies a class or interface to use 
+                            <tt class="literal">proxy</tt> (optional): Specifies a class or interface to use
                             for lazy initializing proxies.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">lazy</tt> (optional): Setting <tt class="literal">lazy="true"</tt> is a shortcut 
-                            equalivalent to specifying the name of the class itself as the <tt class="literal">proxy</tt>
+                            <tt class="literal">lazy</tt> (optional): Setting <tt class="literal">lazy="true"</tt> is a shortcut
+                            equivalent to specifying the name of the class itself as the <tt class="literal">proxy</tt>
                             interface.
                         </p></td></tr></table></div></div><p>
                 No discriminator column is required for this mapping strategy. Each subclass must,
@@ -1351,38 +1359,72 @@ layout:
                 user-defined classes with persistent state are entities. A
                 <span class="emphasis"><em>component</em></span> is a user defined class with value semantics.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-types-basictypes"></a>5.2.2.&nbsp;Basic value types</h3></div></div><div></div></div><p>
-                The <span class="emphasis"><em>basic types</em></span> may be roughly categorized into three groups - <tt class="literal">System.ValueType</tt> 
+                The <span class="emphasis"><em>basic types</em></span> may be roughly categorized into three groups - <tt class="literal">System.ValueType</tt>
                 types, <tt class="literal">System.Object</tt> types, and <tt class="literal">System.Object</tt> types for large objects.  Just like
-                the .NET Types, columns for System.ValueType types <span class="emphasis"><em>can not</em></span> store <tt class="literal">null</tt> values 
-                and System.Object types	<span class="emphasis"><em>can</em></span> store <tt class="literal">null</tt> values.
-            </p><div class="table"><a name="d0e5012"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;System.ValueType Mapping Types</b></p><table summary="System.ValueType Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiChar</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength - 1 char</tt></td><td>&nbsp;</td></tr><tr><td><tt class="literal">Boolean</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.Boolean</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Byte</tt></td><td><tt class="literal">System.Byte</tt></td><td><tt class="literal">DbType.Byte</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Char</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.StringFixedLength - 1 char</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Date</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Date</tt></td><td><tt class="literal">type="Date"</tt> must be specified.</td></tr><tr><td><tt class="literal">DateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> - ignores the milliseconds</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">DateTime2</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime2</tt></td><td><tt class="literal">type="DateTime2"</tt> must be specified.</td></tr><tr><td><tt class="literal">DbTimestamp</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> - as specific as database supports.</td><td><tt class="literal">type="DbTimestamp"</tt> must be specified.  When used as a <tt class="literal">version</tt> field, uses the database's current time rather than the client's current time.</td></tr><tr><td><tt class="literal">LocalDateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> - ignores the milliseconds</td><td>Ensures the <tt class="literal">DateTimeKind</tt> is set to <tt class="literal">DateTimeKind.Local</tt></td></tr><tr><td><tt class="literal">UtcDateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> - ignores the milliseconds</td><td>Ensures the <tt class="literal">DateTimeKind</tt> is set to <tt class="literal">DateTimeKind.Utc</tt></td></tr><tr><td><tt class="literal">Decimal</tt></td><td><tt class="literal">System.Decimal</tt></td><td><tt class="literal">DbType.Decimal</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Double</tt></td><td><tt class="literal">System.Double</tt></td><td><tt class="literal">DbType.Double</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Guid</tt></td><td><tt class="literal">System.Guid</tt></td><td><tt class="literal">DbType.Guid</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int16</tt></td><td><tt class="literal">System.Int16</tt></td><td><tt class="literal">DbType.Int16</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int32</tt></td><td><tt class="literal">System.Int32</tt></td><td><tt class="literal">DbType.Int32</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int64</tt></td><td><tt class="literal">System.Int64</tt></td><td><tt class="literal">DbType.Int64</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">PersistentEnum</tt></td><td>A <tt class="literal">System.Enum</tt></td><td>The <tt class="literal">DbType</tt> for the underlying value.</td><td>Do not specify <tt class="literal">type="PersistentEnum"</tt> in the mapping.  Instead 
-                            specify the Assembly Qualified Name of the Enum or let NHibernate use Reflection to "guess" the Type.  
-                            The UnderlyingType of the Enum is used to determine the correct <tt class="literal">DbType</tt>.</td></tr><tr><td><tt class="literal">Single</tt></td><td><tt class="literal">System.Single</tt></td><td><tt class="literal">DbType.Single</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Ticks</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Int64</tt></td><td><tt class="literal">type="Ticks"</tt> must be specified.</td></tr><tr><td><tt class="literal">Time</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Time</tt></td><td><tt class="literal">type="Time"</tt> must be specified.</td></tr><tr><td><tt class="literal">TimeAsTimeSpan</tt></td><td><tt class="literal">System.TimeSpan</tt></td><td><tt class="literal">DbType.Time</tt></td><td><tt class="literal">type="TimeAsTimeSpan"</tt> must be specified.</td></tr><tr><td><tt class="literal">TimeSpan</tt></td><td><tt class="literal">System.TimeSpan</tt></td><td><tt class="literal">DbType.Int64</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Timestamp</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> - as specific as database supports.</td><td><tt class="literal">type="Timestamp"</tt> must be specified.</td></tr><tr><td><tt class="literal">TrueFalse</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength</tt> - 1 char either 'T' or 'F'</td><td><tt class="literal">type="TrueFalse"</tt> must be specified.</td></tr><tr><td><tt class="literal">YesNo</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength</tt> - 1 char either 'Y' or 'N'</td><td><tt class="literal">type="YesNo"</tt> must be specified.</td></tr></tbody></table></div><div class="table"><a name="d0e5409"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;System.Object Mapping Types</b></p><table summary="System.Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiString</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.AnsiString</tt></td><td><tt class="literal">type="AnsiString"</tt> must be specified.</td></tr><tr><td><tt class="literal">CultureInfo</tt></td><td><tt class="literal">System.Globalization.CultureInfo</tt></td><td><tt class="literal">DbType.String</tt> - 5 chars for culture</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Binary</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Type</tt></td><td><tt class="literal">System.Type</tt></td><td><tt class="literal">DbType.String</tt> holding Assembly Qualified Name.</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">String</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr></tbody></table></div><div class="table"><a name="d0e5500"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Large Object Mapping Types</b></p><table summary="Large Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">StringClob</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td><tt class="literal">type="StringClob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">BinaryBlob</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="BinaryBlob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">Serializable</tt></td><td>Any <tt class="literal">System.Object</tt> that is marked with SerializableAttribute.</td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="Serializable"</tt> should be specified.  This is the fallback type
-                            if no NHibernate Type can be found for the Property.</td></tr></tbody></table></div><p>
+                Columns for System.ValueType types can handle <tt class="literal">null</tt> values only if the entity property is properly
+                typed with a <tt class="literal">Nullable&lt;T&gt;</tt>. Otherwise <tt class="literal">null</tt> will be replaced by the default
+                value for the type when reading, and when be overwritten by it when persisting the entity, potentially leading to
+                phantom updates.
+            </p><div class="table"><a name="d0e5819"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;System.ValueType Mapping Types</b></p><table summary="System.ValueType Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiChar</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength - 1 char</tt></td><td><tt class="literal">type="AnsiChar"</tt> must be specified.</td></tr><tr><td><tt class="literal">Boolean</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.Boolean</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Byte</tt></td><td><tt class="literal">System.Byte</tt></td><td><tt class="literal">DbType.Byte</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Char</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.StringFixedLength - 1 char</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Currency</tt></td><td><tt class="literal">System.Decimal</tt></td><td><tt class="literal">DbType.Currency</tt></td><td><tt class="literal">type="Currency"</tt> must be specified.</td></tr><tr><td><tt class="literal">Date</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Date</tt></td><td><tt class="literal">type="Date"</tt> must be specified.</td></tr><tr><td><tt class="literal">DateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td>
+                                Default when no <tt class="literal">type</tt> attribute specified. Does no
+                                longer ignore fractional seconds since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">DateTimeNoMs</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="DateTimeNoMs"</tt> must be specified. Ignores fractional seconds.
+                                Available since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">DateTime2</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime2</tt></td><td><tt class="literal">type="DateTime2"</tt> must be specified. Obsolete since
+                                NHibernate v5.0, use <tt class="literal">DateTime</tt> instead.
+                            </td></tr><tr><td><tt class="literal">DateTimeOffset</tt></td><td><tt class="literal">System.DateTimeOffset</tt></td><td><tt class="literal">DbType.DateTimeOffset</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">DbTimestamp</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="DbTimestamp"</tt> must be specified.  When used as a
+                                <tt class="literal">version</tt> field, uses the database's current time retrieved
+                                in dedicated queries, rather than the client's current time.
+                            </td></tr><tr><td><tt class="literal">Decimal</tt></td><td><tt class="literal">System.Decimal</tt></td><td><tt class="literal">DbType.Decimal</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Double</tt></td><td><tt class="literal">System.Double</tt></td><td><tt class="literal">DbType.Double</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Guid</tt></td><td><tt class="literal">System.Guid</tt></td><td><tt class="literal">DbType.Guid</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int16</tt></td><td><tt class="literal">System.Int16</tt></td><td><tt class="literal">DbType.Int16</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int32</tt></td><td><tt class="literal">System.Int32</tt></td><td><tt class="literal">DbType.Int32</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Int64</tt></td><td><tt class="literal">System.Int64</tt></td><td><tt class="literal">DbType.Int64</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">LocalDateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="LocalDateTime"</tt> must be specified. Ensures the
+                                <tt class="literal">DateTimeKind</tt> is set to <tt class="literal">DateTimeKind.Local</tt>.
+                                Throws if set with a date having another kind.
+                                Does no longer ignore fractional seconds since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">LocalDateTimeNoMs</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="LocalDateTimeNoMs"</tt> must be specified. Similar to
+                                <tt class="literal">LocalDateTime</tt> but ignores fractional seconds.
+                                Available since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">PersistentEnum</tt></td><td>A <tt class="literal">System.Enum</tt></td><td>The <tt class="literal">DbType</tt> for the underlying value.</td><td>Do not specify <tt class="literal">type="PersistentEnum"</tt> in the mapping.  Instead 
+                            specify the Assembly Qualified Name of the Enum or let NHibernate use Reflection to "guess" the Type.
+                            The UnderlyingType of the Enum is used to determine the correct <tt class="literal">DbType</tt>.</td></tr><tr><td><tt class="literal">SByte</tt></td><td><tt class="literal">System.SByte</tt></td><td><tt class="literal">DbType.SByte</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Single</tt></td><td><tt class="literal">System.Single</tt></td><td><tt class="literal">DbType.Single</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Ticks</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Int64</tt></td><td><tt class="literal">type="Ticks"</tt> must be specified.</td></tr><tr><td><tt class="literal">Time</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Time</tt></td><td><tt class="literal">type="Time"</tt> must be specified.</td></tr><tr><td><tt class="literal">TimeAsTimeSpan</tt></td><td><tt class="literal">System.TimeSpan</tt></td><td><tt class="literal">DbType.Time</tt></td><td><tt class="literal">type="TimeAsTimeSpan"</tt> must be specified.</td></tr><tr><td><tt class="literal">TimeSpan</tt></td><td><tt class="literal">System.TimeSpan</tt></td><td><tt class="literal">DbType.Int64</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Timestamp</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td>
+                                Obsolete, its <tt class="literal">Timestamp</tt> alias will be remapped to
+                                <tt class="literal">DateTime</tt> in a future version.
+                            </td></tr><tr><td><tt class="literal">TrueFalse</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength</tt> - 1 char either 'T' or 'F'</td><td><tt class="literal">type="TrueFalse"</tt> must be specified.</td></tr><tr><td><tt class="literal">UInt16</tt></td><td><tt class="literal">System.UInt16</tt></td><td><tt class="literal">DbType.UInt16</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">UInt32</tt></td><td><tt class="literal">System.UInt32</tt></td><td><tt class="literal">DbType.UInt32</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">UInt64</tt></td><td><tt class="literal">System.UInt64</tt></td><td><tt class="literal">DbType.UInt64</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">UtcDateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td>
+                                Ensures the <tt class="literal">DateTimeKind</tt> is set to <tt class="literal">DateTimeKind.Utc</tt>.
+                                Throws if set with a date having another kind.
+                                Does no longer ignore fractional seconds since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">UtcDateTimeNoMs</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="mapping.html#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="UtcDateTimeNoMs"</tt> must be specified. Similar to
+                                <tt class="literal">UtcDateTime</tt> but ignores fractional seconds.
+                                Available since NHibernate v5.0.
+                            </td></tr><tr><td><tt class="literal">YesNo</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength</tt> - 1 char either 'Y' or 'N'</td><td><tt class="literal">type="YesNo"</tt> must be specified.</td></tr></tbody></table></div><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left"><a name="basic_mapping.datetime"></a><a href="#basic_mapping.datetime-co">(1)</a> </td><td valign="top" align="left"><p>
+                  Since NHibernate v5.0 and if the dialect supports it, <tt class="literal">DbType.DateTime2</tt>
+                  is used instead of <tt class="literal">DbType.DateTime</tt>. This may be disabled by setting
+                  <tt class="literal">sql_types.keep_datetime</tt> to <tt class="literal">true</tt>.
+                </p></td></tr></table></div><div class="table"><a name="d0e6410"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;System.Object Mapping Types</b></p><table summary="System.Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiString</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.AnsiString</tt></td><td><tt class="literal">type="AnsiString"</tt> must be specified.</td></tr><tr><td><tt class="literal">CultureInfo</tt></td><td><tt class="literal">System.Globalization.CultureInfo</tt></td><td><tt class="literal">DbType.String</tt> - 5 chars for culture</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Binary</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Type</tt></td><td><tt class="literal">System.Type</tt></td><td><tt class="literal">DbType.String</tt> holding Assembly Qualified Name.</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">String</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Uri</tt></td><td><tt class="literal">System.Uri</tt></td><td><tt class="literal">DbType.String</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr></tbody></table></div><div class="table"><a name="d0e6516"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Large Object Mapping Types</b></p><table summary="Large Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">StringClob</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td><tt class="literal">type="StringClob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">BinaryBlob</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="BinaryBlob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">Serializable</tt></td><td>Any <tt class="literal">System.Object</tt> that is marked with SerializableAttribute.</td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="Serializable"</tt> should be specified.  This is the fallback type
+                            if no NHibernate Type can be found for the Property.</td></tr><tr><td><tt class="literal">XDoc</tt></td><td><tt class="literal">System.Xml.Linq.XDocument</tt></td><td><tt class="literal">DbType.Xml</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">XmlDoc</tt></td><td><tt class="literal">System.Xml.XmlDocument</tt></td><td><tt class="literal">DbType.Xml</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.  Entire field is read into memory.</td></tr></tbody></table></div><p>
                 NHibernate supports some additional type names for compatibility with Java's Hibernate (useful for those coming over from
                 Hibernate or using some of the tools to generate <tt class="literal">hbm.xml</tt> files).
                 A <tt class="literal">type="integer"</tt> or <tt class="literal">type="int"</tt> will map to an <tt class="literal">Int32</tt>
                 NHibernate type, <tt class="literal">type="short"</tt> to an <tt class="literal">Int16</tt> NHibernateType.
                 To see all of the conversions you can view the source of static constructor of the class
-                <tt class="literal">NHibernate.Type.TypeFactory</tt>. 
+                <tt class="literal">NHibernate.Type.TypeFactory</tt>.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-types-custom"></a>5.2.3.&nbsp;Custom value types</h3></div></div><div></div></div><p>
                 It is relatively easy for developers to create their own value types. For example,
                 you might want to persist properties of type <tt class="literal">Int64</tt>
-                to <tt class="literal">VARCHAR</tt> columns. NHibernate does not provide a built-in type 
-                for this. But custom types are not limited to mapping a property (or collection element) 
-                to a single table column. So, for example, you might have a property 
+                to <tt class="literal">VARCHAR</tt> columns. NHibernate does not provide a built-in type
+                for this. But custom types are not limited to mapping a property (or collection element)
+                to a single table column. So, for example, you might have a property
                 <tt class="literal">Name { get; set; }</tt> of type
-                <tt class="literal">String</tt> that is persisted to the columns 
-                <tt class="literal">FIRST_NAME</tt>, <tt class="literal">INITIAL</tt>, <tt class="literal">SURNAME</tt>. 
+                <tt class="literal">String</tt> that is persisted to the columns
+                <tt class="literal">FIRST_NAME</tt>, <tt class="literal">INITIAL</tt>, <tt class="literal">SURNAME</tt>.
             </p><p>
-                To implement a custom type, implement either <tt class="literal">NHibernate.UserTypes.IUserType</tt> 
-                or <tt class="literal">NHibernate.UserTypes.ICompositeUserType</tt> and declare properties using the 
-                fully qualified name of the type. Check out 
-                <tt class="literal">NHibernate.DomainModel.DoubleStringType</tt> to see the kind of things that 
+                To implement a custom type, implement either <tt class="literal">NHibernate.UserTypes.IUserType</tt>
+                or <tt class="literal">NHibernate.UserTypes.ICompositeUserType</tt> and declare properties using the
+                fully qualified name of the type. Check out
+                <tt class="literal">NHibernate.DomainModel.DoubleStringType</tt> to see the kind of things that
                 are possible.
-            </p><pre class="programlisting">&lt;property name="TwoStrings" type="NHibernate.DomainModel.DoubleStringType, NHibernate.DomainModel"&gt;
-    &lt;column name="first_string"/&gt;
-    &lt;column name="second_string"/&gt;
+            </p><pre class="programlisting">&lt;property name="TwoStrings"
+    type="NHibernate.DomainModel.DoubleStringType, NHibernate.DomainModel"&gt;
+  &lt;column name="first_string"/&gt;
+  &lt;column name="second_string"/&gt;
 &lt;/property&gt;</pre><p>
                 Notice the use of <tt class="literal">&lt;column&gt;</tt> tags to map a property to multiple
                 columns.
@@ -1392,10 +1434,10 @@ layout:
                 and <tt class="literal">IUserVersionType</tt> interfaces provide support for more specialized
                 uses.
             </p><p>
-                You may even supply parameters to an <tt class="literal">IUserType</tt> in the mapping file. To 
-                do this, your <tt class="literal">IUserType</tt> must implement the 
-                <tt class="literal">NHibernate.UserTypes.IParameterizedType</tt> interface. To supply parameters 
-                to your custom type, you can use the <tt class="literal">&lt;type&gt;</tt> element in your mapping 
+                You may even supply parameters to an <tt class="literal">IUserType</tt> in the mapping file. To
+                do this, your <tt class="literal">IUserType</tt> must implement the
+                <tt class="literal">NHibernate.UserTypes.IParameterizedType</tt> interface. To supply parameters
+                to your custom type, you can use the <tt class="literal">&lt;type&gt;</tt> element in your mapping
                 files.
             </p><pre class="programlisting">&lt;property name="priority"&gt;
     &lt;type name="MyCompany.UserTypes.DefaultValueIntegerType"&gt;
@@ -1419,25 +1461,25 @@ layout:
                 will very rarely <span class="emphasis"><em>need</em></span> to use a custom type, it is nevertheless
                 considered good form to use custom types for (non-entity) classes that occur frequently
                 in your application. For example, a <tt class="literal">MonetaryAmount</tt> class is a good
-                candidate for an <tt class="literal">ICompositeUserType</tt>, even though it could easily be mapped 
-                as a component. One motivation for this is abstraction. With a custom type, your mapping 
-                documents would be future-proofed against possible changes in your way of representing 
+                candidate for an <tt class="literal">ICompositeUserType</tt>, even though it could easily be mapped
+                as a component. One motivation for this is abstraction. With a custom type, your mapping
+                documents would be future-proofed against possible changes in your way of representing
                 monetary values.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mapping-types-anymapping"></a>5.2.4.&nbsp;Any type mappings</h3></div></div><div></div></div><p>
-                There is one further type of property mapping. The <tt class="literal">&lt;any&gt;</tt> mapping element 
+                There is one further type of property mapping. The <tt class="literal">&lt;any&gt;</tt> mapping element
                 defines a polymorphic association to classes from multiple tables. This type of mapping always
-                requires more than one column. The first column holds the type of the associated entity. 
+                requires more than one column. The first column holds the type of the associated entity.
                 The remaining columns hold the identifier. It is impossible to specify a foreign key constraint
-                for this kind of association, so this is most certainly not meant as the usual way of mapping 
+                for this kind of association, so this is most certainly not meant as the usual way of mapping
                 (polymorphic) associations. You should use this only in very special cases (eg. audit logs,
                 user session data, etc).
             </p><pre class="programlisting">&lt;any name="AnyEntity" id-type="Int64" meta-type="Eg.Custom.Class2TablenameType"&gt;
     &lt;column name="table_name"/&gt;
     &lt;column name="id"/&gt;
 &lt;/any&gt;</pre><p>
-                 The <tt class="literal">meta-type</tt> attribute lets the application specify a custom type that 
-                 maps database column values to persistent classes which have identifier properties of the 
-                 type specified by <tt class="literal">id-type</tt>. If the meta-type returns instances of 
+                 The <tt class="literal">meta-type</tt> attribute lets the application specify a custom type that
+                 maps database column values to persistent classes which have identifier properties of the
+                 type specified by <tt class="literal">id-type</tt>. If the meta-type returns instances of
                  <tt class="literal">System.Type</tt>, nothing else is required. On the other hand, if it is
                  a basic type like <tt class="literal">String</tt> or <tt class="literal">Char</tt>, you must
                  specify the mapping from values to classes.
@@ -1466,33 +1508,36 @@ layout:
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
                             <tt class="literal">id-type</tt>: the identifier type.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
-                            <tt class="literal">meta-type</tt> (optional - defaults to <tt class="literal">Type</tt>): 
+                            <tt class="literal">meta-type</tt> (optional - defaults to <tt class="literal">Type</tt>):
                             a type that maps <tt class="literal">System.Type</tt> to a single database column
                             or, alternatively, a type that is allowed for a discriminator mapping.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
-                            <tt class="literal">cascade</tt> (optional - defaults to <tt class="literal">none</tt>): 
+                            <tt class="literal">cascade</tt> (optional - defaults to <tt class="literal">none</tt>):
                             the cascade style.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
                             <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): The
                             strategy NHibernate should use for accessing the property value.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
-                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>): 
+                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
                             Specifies that updates to this property do or do not require acquisition of the
                             optimistic lock. In other words, define if a version increment should occur if this
                             property is dirty.
                         </p></td></tr></table></div></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-quotedidentifiers"></a>5.3.&nbsp;SQL quoted identifiers</h2></div></div><div></div></div><p>
-                You may force NHibernate to quote an identifier in the generated SQL by enclosing the table or
-                column name in backticks in the mapping document. NHibernate will use the correct quotation
-                style for the SQL <tt class="literal">Dialect</tt> (usually double quotes, but brackets for SQL
-                Server and backticks for MySQL).
-            </p><pre class="programlisting">&lt;class name="LineItem" table="`Line Item`"&gt;
+            You may force NHibernate to quote an identifier in the generated SQL by enclosing the table or
+            column name in back-ticks in the mapping document. NHibernate will use the correct quotation
+            style for the SQL <tt class="literal">Dialect</tt> (usually double quotes, but brackets for SQL
+            Server and back-ticks for MySQL).
+        </p><pre class="programlisting">&lt;class name="LineItem" table="`Line Item`"&gt;
     &lt;id name="Id" column="`Item Id`"/&gt;&lt;generator class="assigned"/&gt;&lt;/id&gt;
     &lt;property name="ItemNumber" column="`Item #`"/&gt;
     ...
-&lt;/class&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-modularfiles"></a>5.4.&nbsp;Modular mapping files</h2></div></div><div></div></div><p>
+&lt;/class&gt;</pre><p>
+            Quoting column identifiers is required if a table contains two columns differing only by case.
+            Ensure you use consistent casing when quoting identifiers.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="mapping-modularfiles"></a>5.4.&nbsp;Modular mapping files</h2></div></div><div></div></div><p>
             It is possible to define <tt class="literal">subclass</tt> and <tt class="literal">joined-subclass</tt>
-            mappings in saparate mapping documents, directly beneath <tt class="literal">hibernate-mapping</tt>.
-            This allows you to extend a class hierachy just by adding a new mapping file. You must
+            mappings in separate mapping documents, directly beneath <tt class="literal">hibernate-mapping</tt>.
+            This allows you to extend a class hierarchy just by adding a new mapping file. You must
             specify an <tt class="literal">extends</tt> attribute in the subclass mapping, naming a previously
             mapped superclass. Use of this feature makes the ordering of the mapping documents important!
         </p><pre class="programlisting">
@@ -1510,7 +1555,7 @@ layout:
             or UPDATE for an entity which has defined generated properties, it immediately
             issues a select afterwards to retrieve the generated values.
         </p><p>
-            Properties marked as generated must additionally be non-insertable and non-updateable.
+            Properties marked as generated must additionally be non-insertable and non-updatable.
             Only <a href="mapping.html#mapping-declaration-version" title="5.1.8.&nbsp;version (optional)">Section&nbsp;5.1.8, &#8220;version (optional)&#8221;</a>,
             <a href="mapping.html#mapping-declaration-timestamp" title="5.1.9.&nbsp;timestamp (optional)">Section&nbsp;5.1.9, &#8220;timestamp (optional)&#8221;</a>, and
             <a href="mapping.html#mapping-declaration-property" title="5.1.10.&nbsp;property">Section&nbsp;5.1.10, &#8220;property&#8221;</a> can be marked as
@@ -1533,7 +1578,7 @@ layout:
             NHibernate's schema evolution tools, to provide the ability to fully define
             a user schema within the NHibernate mapping files.  Although designed specifically
             for creating and dropping things like triggers or stored procedures, really any
-            SQL command that can be run via a <tt class="literal">IDbCommand.ExecuteNonQuery()</tt>
+            SQL command that can be run via a <tt class="literal">DbCommand.ExecuteNonQuery()</tt>
             method is valid here (ALTERs, INSERTS, etc).  There are essentially two modes for
             defining auxiliary database objects.
         </p><p>
@@ -1576,4 +1621,4 @@ layout:
         &lt;dialect-scope name="NHibernate.Dialect.Oracle9iDialect"/&gt;
         &lt;dialect-scope name="NHibernate.Dialect.Oracle8iDialect"/&gt;
     &lt;/database-object&gt;
-&lt;/hibernate-mapping&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="persistent-classes.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="collections.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;4.&nbsp;Persistent Classes&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;6.&nbsp;Collection Mapping</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+&lt;/hibernate-mapping&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="persistent-classes.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="collections.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;4.&nbsp;Persistent Classes&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;6.&nbsp;Collection Mapping</td></tr></table></div></body></html>

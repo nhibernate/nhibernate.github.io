@@ -1,19 +1,13 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;18.&nbsp;Filtering data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querysql.html" title="Chapter&nbsp;17.&nbsp;Native SQL"><link rel="next" href="performance.html" title="Chapter&nbsp;19.&nbsp;Improving performance"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Filtering data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querysql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="performance.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="filters"></a>Chapter&nbsp;18.&nbsp;Filtering data</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;19.&nbsp;Filtering data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querysql.html" title="Chapter&nbsp;18.&nbsp;Native SQL"><link rel="next" href="performance.html" title="Chapter&nbsp;20.&nbsp;Improving performance"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Filtering data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querysql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="performance.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="filters"></a>Chapter&nbsp;19.&nbsp;Filtering data</h2></div></div><div></div></div><p>
         NHibernate provides an innovative new approach to handling data with "visibility" rules.
         A <span class="emphasis"><em>NHibernate filter</em></span> is a global, named, parameterized filter that may be 
         enabled or disabled for a particular NHibernate session.
-    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-filters"></a>18.1.&nbsp;NHibernate filters</h2></div></div><div></div></div><p>
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-filters"></a>19.1.&nbsp;NHibernate filters</h2></div></div><div></div></div><p>
             NHibernate adds the ability to pre-define filter criteria and attach those filters at both
             a class and a collection level. A filter criteria is the ability to define a restriction clause
-            very similiar to the existing "where" attribute available on the class and various collection
+            very similar to the existing "where" attribute available on the class and various collection
             elements. Except these filter conditions can be parameterized. The application can then make
             the decision at runtime whether given filters should be enabled and what their parameter
             values should be. Filters can be used like database views, but parameterized inside the
@@ -38,7 +32,7 @@ layout:
         </p><p>
             The methods on <tt class="literal">ISession</tt> are: <tt class="literal">EnableFilter(string filterName)</tt>,
             <tt class="literal">GetEnabledFilter(string filterName)</tt>, and <tt class="literal">DisableFilter(string filterName)</tt>.
-            By default, filters are <span class="emphasis"><em>not</em></span> enabled for a given session; they must be explcitly
+            By default, filters are <span class="emphasis"><em>not</em></span> enabled for a given session; they must be explicitly
             enabled through use of the <tt class="literal">ISession.EnableFilter()</tt> method, which returns an
             instance of the <tt class="literal">IFilter</tt> interface. Using the simple filter defined above, this
             would look like:
@@ -78,7 +72,7 @@ layout:
             enable the filter on the session prior to retrieving employee data:
         </p><pre class="programlisting">ISession session = ...;
 session.EnableFilter("effectiveDate").SetParameter("asOfDate", DateTime.Today);
-IList&lt;Employee&gt; results = session.CreateQuery("from Employee as e where e.Salary &gt; :targetSalary")
+var results = session.CreateQuery("from Employee as e where e.Salary &gt; :targetSalary")
          .SetInt64("targetSalary", 1000000L)
          .List&lt;Employee&gt;();
 </pre><p>
@@ -95,4 +89,4 @@ IList&lt;Employee&gt; results = session.CreateQuery("from Employee as e where e.
             <tt class="literal">&lt;one-to-one/&gt;</tt> elements. You can turn off this behaviour by
             using <tt class="literal">use-many-to-one</tt> attribute on <tt class="literal">&lt;filter-def/&gt;</tt>
             element.
-        </p><pre class="programlisting">&lt;filter-def name="effectiveDate" use-many-to-one="false"/&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querysql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="performance.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;Native SQL&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Improving performance</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+        </p><pre class="programlisting">&lt;filter-def name="effectiveDate" use-many-to-one="false"/&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querysql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="performance.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Native SQL&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Improving performance</td></tr></table></div></body></html>

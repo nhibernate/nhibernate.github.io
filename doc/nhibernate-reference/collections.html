@@ -1,32 +1,15 @@
----
-layout: 
----
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;6.&nbsp;Collection Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping"><link rel="next" href="components.html" title="Chapter&nbsp;7.&nbsp;Component Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Collection Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="collections"></a>Chapter&nbsp;6.&nbsp;Collection Mapping</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-persistent"></a>6.1.&nbsp;Persistent Collections</h2></div></div><div></div></div><p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;6.&nbsp;Collection Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping"><link rel="next" href="components.html" title="Chapter&nbsp;7.&nbsp;Component Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Collection Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="collections"></a>Chapter&nbsp;6.&nbsp;Collection Mapping</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-persistent"></a>6.1.&nbsp;Persistent Collections</h2></div></div><div></div></div><p>
             NHibernate requires that persistent collection-valued fields be declared
             as a generic interface type, for example:
         </p><pre class="programlisting">public class Product
 {
-    private string serialNumber;
-    private ISet&lt;Part&gt; parts = new HashSet&lt;Part&gt;();
-    
-    public ISet&lt;Part&gt; Parts
-    {
-        get { return parts; }
-        set { parts = value; }
-    }
+    public ISet&lt;Part&gt; Parts { get; set; } = new HashSet&lt;Part&gt;();
 
-    public string SerialNumber
-    {
-        get { return serialNumber; }
-        set { serialNumber = value; }
-    }
+    public string SerialNumber { get; set; }
 }</pre><p>
-            The actual interface might be 
+            The actual interface might be
             <tt class="literal">System.Collections.Generic.ICollection&lt;T&gt;</tt>,
             <tt class="literal">System.Collections.Generic.IList&lt;T&gt;</tt>,
             <tt class="literal">System.Collections.Generic.IDictionary&lt;K, V&gt;</tt>,
@@ -35,11 +18,11 @@ layout:
             have to write an implementation of <tt class="literal">NHibernate.UserType.IUserCollectionType</tt>.)
         </p><p>
             Notice how we initialized the instance variable with an instance of
-            <tt class="literal">HashSet&lt;Part&gt;</tt>. This is the best way to initialize collection
+            <tt class="literal">HashSet&lt;T&gt;</tt>. This is the best way to initialize collection
             valued properties of newly instantiated (non-persistent) instances. When
             you make the instance persistent - by calling <tt class="literal">Save()</tt>,
-            for example - NHibernate will actually replace the <tt class="literal">HashSet&lt;Part&gt;</tt>
-            with an instance of NHibernate's own implementation of <tt class="literal">ISet&lt;Part&gt;</tt>.
+            for example - NHibernate will actually replace the <tt class="literal">HashSet&lt;T&gt;</tt>
+            with an instance of NHibernate's own implementation of <tt class="literal">ISet&lt;T&gt;</tt>.
             Watch out for errors like this:
         </p><pre class="programlisting">Cat cat = new DomesticCat();
 Cat kitten = new DomesticCat();
@@ -48,7 +31,7 @@ ISet&lt;Cat&gt; kittens = new HashSet&lt;Cat&gt;();
 kittens.Add(kitten);
 cat.Kittens = kittens;
 session.Save(cat);
-kittens = cat.Kittens; //Okay, kittens collection is an ISet&lt;Cat&gt;
+kittens = cat.Kittens; //Okay, kittens collection is an ISet
 HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
             Collection instances have the usual behavior of value types. They are automatically
             persisted when referenced by a persistent object and automatically deleted when
@@ -78,9 +61,9 @@ HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
             <tt class="literal">&lt;many-to-any&gt;</tt>. The first two map elements with value semantics,
             the other three are used to map entity associations.
         </p><p>
-            All collection types except set and bag have an <span class="emphasis"><em>index
-            </em></span> column - a column that maps to an array or <tt class="literal">IList&lt;T&gt;</tt> index or
-            <tt class="literal">IDictionary&lt;TKey, TValue&gt;</tt> key. The index of an <tt class="literal">IDictionary&lt;TKey, TValue&gt;</tt> may be of any
+            All collection types except <tt class="literal">ISet</tt> and bag have an <span class="emphasis"><em>index
+            </em></span> column - a column that maps to an array or <tt class="literal">IList</tt> index or
+            <tt class="literal">IDictionary</tt> key. The index of an <tt class="literal">IDictionary</tt> may be of any
             basic type, an entity type or even a composite type (it may not be a collection). The
             index of an array or list is always of type <tt class="literal">Int32</tt>. Indexes are
             mapped using <tt class="literal">&lt;index&gt;</tt>, <tt class="literal">&lt;index-many-to-many&gt;</tt>,
@@ -131,7 +114,7 @@ HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
                         <tt class="literal">lazy</tt> (optional - defaults to <tt class="literal">true</tt>)
                         may be used to disable lazy fetching and specify that the association
                         is always eagerly fetched. Using <tt class="literal">extra</tt> fetches only the
-						elements that are needed - see <a href="performance.html#performance-fetching" title="19.1.&nbsp;Fetching strategies">Section&nbsp;19.1, &#8220;Fetching strategies&#8221;</a> for more information.
+                        elements that are needed - see <a href="performance.html#performance-fetching" title="20.1.&nbsp;Fetching strategies">Section&nbsp;20.1, &#8220;Fetching strategies&#8221;</a> for more information.
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
                         <tt class="literal">inverse</tt> (optional - defaults to <tt class="literal">false</tt>)
                         mark this collection as the "inverse" end of a bidirectional association
@@ -143,7 +126,7 @@ HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
                         <tt class="literal">natural</tt> sort order, or a given comparator class
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
                         <tt class="literal">order-by</tt> (optional) specify a table column (or columns)
-                        that define the iteration order of the <tt class="literal">IDictionary&lt;TKey, TValue&gt;</tt>, <tt class="literal">ISet&lt;T&gt;</tt>
+                        that define the iteration order of the <tt class="literal">IDictionary</tt>, <tt class="literal">ISet</tt>
                         or bag, together with an optional <tt class="literal">asc</tt> or <tt class="literal">desc</tt>
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
                         <tt class="literal">where</tt> (optional) specify an arbitrary SQL <tt class="literal">WHERE</tt>
@@ -164,29 +147,29 @@ HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
                         owning entity's version. (For one to many associations, it is often reasonable to
                         disable this setting.)
                     </p></td></tr><tr><td width="5%" valign="top" align="left">(14)</td><td valign="top" align="left"><p>
-                        <tt class="literal">generic</tt> (optional, obsolete): Choose between generic and non-generic collection
-                        interfaces, currently NHibernate only supports generic collections.
+                        <tt class="literal">generic</tt> (optional, obsolete): Choose between generic and non-generic
+                        collection interfaces. But currently NHibernate only supports generic collections.
                     </p></td></tr></table></div></div><p>
-            The mapping of an <tt class="literal">IList&lt;T&gt;</tt> or array requires a saparate table column holding the array
+            The mapping of an <tt class="literal">IList</tt> or array requires a separate table column holding the array
             or list index (the <tt class="literal">i</tt> in <tt class="literal">foo[i]</tt>). If your relational model doesn't
-            have an index column, e.g. if you're working with legacy data, use an unordered <tt class="literal">ISet&lt;T&gt;</tt>
-            instead. This seems to put people off who assume that <tt class="literal">IList&lt;T&gt;</tt> should just be a more
+            have an index column, e.g. if you're working with legacy data, use an unordered <tt class="literal">ISet</tt>
+            instead. This seems to put people off who assume that <tt class="literal">IList</tt> should just be a more
             convenient way of accessing an unordered collection. NHibernate collections strictly obey the actual
-            semantics attached to the <tt class="literal">ISet&lt;T&gt;</tt>, <tt class="literal">IList&lt;T&gt;</tt> and <tt class="literal">IDictionary&lt;TKey, TValue&gt;</tt>
-            interfaces. <tt class="literal">IList&lt;T&gt;</tt> elements don't just spontaneously rearrange themselves!
+            semantics attached to the <tt class="literal">ISet</tt>, <tt class="literal">IList</tt> and <tt class="literal">IDictionary</tt>
+            interfaces. <tt class="literal">IList</tt> elements don't just spontaneously rearrange themselves!
         </p><p>
-            On the other hand, people who planned to use the <tt class="literal">IList&lt;T&gt;</tt> to emulate
+            On the other hand, people who planned to use the <tt class="literal">IList</tt> to emulate
             <span class="emphasis"><em>bag</em></span> semantics have a legitimate grievance here.
             A bag is an unordered, unindexed collection which may contain the same element multiple times.
-            The .NET collections framework lacks an <tt class="literal">IBag&lt;T&gt;</tt> interface, hence you have to emulate
-            it with an <tt class="literal">IList&lt;T&gt;</tt>. NHibernate lets you map properties of type <tt class="literal">IList&lt;T&gt;</tt>
-            or <tt class="literal">ICollection&lt;T&gt;</tt> with the <tt class="literal">&lt;bag&gt;</tt> element. Note that bag
-            semantics are not really part of the <tt class="literal">ICollection&lt;T&gt;</tt> contract and they actually
-            conflict with the semantics of the <tt class="literal">IList&lt;T&gt;</tt> contract (however, you can sort
+            The .NET collections framework lacks an <tt class="literal">IBag</tt> interface, hence you have to emulate
+            it with an <tt class="literal">IList</tt>. NHibernate lets you map properties of type <tt class="literal">IList</tt>
+            or <tt class="literal">ICollection</tt> with the <tt class="literal">&lt;bag&gt;</tt> element. Note that bag
+            semantics are not really part of the <tt class="literal">ICollection</tt> contract and they actually
+            conflict with the semantics of the <tt class="literal">IList</tt> contract (however, you can sort
             the bag arbitrarily, discussed later in this chapter).
         </p><p>
             Note: Large NHibernate bags mapped with <tt class="literal">inverse="false"</tt> are inefficient and
-            should be avoided; NHibernate can't create, delete or update rows individually, because there is
+            should be  avoided; NHibernate can't create, delete or update rows individually, because there is
             no key that may be used to identify an individual row.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-ofvalues"></a>6.3.&nbsp;Collections of Values and Many-To-Many Associations</h2></div></div><div></div></div><p>
             A collection table is required for any collection of values and any collection of
@@ -346,14 +329,16 @@ HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
             normally need to worry about this (in fact, transparent lazy initialization is
             the main reason why NHibernate needs its own collection implementations).
             However, if the application tries something like this:
-        </p><pre class="programlisting">s = sessions.OpenSession();
-ITransaction tx = sessions.BeginTransaction();
-User u = s.CreateQuery("from User u where u.Name=:name").SetString("name", userName).UniqueResult&lt;User&gt;();
-IDictionary permissions = u.Permissions;
-tx.Commit();
-s.Close();
+        </p><pre class="programlisting">IDictionary&lt;string, int&gt; permissions;
+using (s = sessions.OpenSession())
+using (ITransaction tx = sessions.BeginTransaction())
+{
+    var u = s.Load&lt;User&gt;(userId);
+    permissions = u.Permissions;
+    tx.Commit();
+}
 
-int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
+int accessLevel = permissions["accounts"];  // Error!</pre><p>
             It could be in for a nasty surprise. Since the permissions collection was not
             initialized when the <tt class="literal">ISession</tt> was committed,
             the collection will never be able to load its state. The fix is to move the
@@ -390,7 +375,7 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                     <tt class="literal">HttpContext.Items</tt> collection (see chapter 1,
                     <a href="quickstart.html#quickstart-playingwithcats" title="1.4.&nbsp;Playing with cats">Section&nbsp;1.4, &#8220;Playing with cats&#8221;</a>, for an example implementation).
                 </p></li><li><p>
-                    In an application with a saparate business tier, the business logic must
+                    In an application with a separate business tier, the business logic must
                     "prepare" all collections that will be needed by the web tier before
                     returning. This means that the business tier should load all the data and
                     return all the data already initialized to the presentation/web tier that
@@ -402,20 +387,19 @@ int accessLevel = (int) permissions["accounts"];  // Error!</pre><p>
                 </p></li><li><p>
                     You may also attach a previously loaded object to a new <tt class="literal">ISession</tt>
                     with <tt class="literal">Update()</tt> or <tt class="literal">Lock()</tt> before
-                    accessing unitialized collections (or other proxies). NHibernate can not
+                    accessing uninitialized collections (or other proxies). NHibernate can not
                     do this automatically, as it would introduce ad hoc transaction semantics!
                 </p></li></ul></div><p>
             You can use the <tt class="literal">CreateFilter()</tt> method of the NHibernate ISession API to
             get the size of a collection without initializing it:
-        </p><pre class="programlisting">ICollection countColl = s.CreateFilter( collection, "select count(*)" ).List();
-IEnumerator countEn = countColl.GetEnumerator();
-countEn.MoveNext();
-int count = (int) countEn.Current;</pre><p>
+        </p><pre class="programlisting">var count = s
+    .CreateFilter(collection, "select count(*)")
+    .UniqueResult&lt;long&gt;();</pre><p>
             <tt class="literal">CreateFilter()</tt> is also used to
             efficiently retrieve subsets of a collection without needing to initialize the whole
             collection.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-sorted"></a>6.6.&nbsp;Sorted Collections</h2></div></div><div></div></div><p>
-            NHibernate supports collections implemented by <tt class="literal">System.Collections.SortedList</tt> and
+            NHibernate supports collections implemented by <tt class="literal">System.Collections.Generic.SortedList&lt;T&gt;</tt> and
             <tt class="literal">System.Collections.Generic.SortedSet&lt;T&gt;</tt>. You must specify a comparer in the mapping file:
         </p><pre class="programlisting">&lt;set name="Aliases" table="person_aliases" sort="natural"&gt;
     &lt;key column="person"/&gt;
@@ -429,7 +413,7 @@ int count = (int) countEn.Current;</pre><p>
 &lt;/map&gt;</pre><p>
             Allowed values of the <tt class="literal">sort</tt> attribute are <tt class="literal">unsorted</tt>,
             <tt class="literal">natural</tt> and the name of a class implementing
-            <tt class="literal">System.Collections.IComparer</tt>.
+            <tt class="literal">System.Collections.Generic.IComparer&lt;T&gt;</tt>.
         </p><p>
             If you want the database itself to order the collection elements use the
             <tt class="literal">order-by</tt> attribute of <tt class="literal">set</tt>, <tt class="literal">bag</tt>
@@ -437,10 +421,8 @@ int count = (int) countEn.Current;</pre><p>
             memory.
         </p><p>
             Setting the <tt class="literal">order-by</tt> attribute tells NHibernate to use
-            <tt class="literal">ListDictionary</tt> or <tt class="literal">ListSet</tt> class
-            internally for dictionaries and sets, maintaining the order of the elements.
-            <span class="emphasis"><em>Note that lookup operations on these collections are very slow if they
-            contain more than a few elements.</em></span>
+            <tt class="literal">Iesi.Collections.Generic.LinkedHashSet</tt> class
+            internally for sets, maintaining the order of the elements. It is not supported on maps.
         </p><pre class="programlisting">&lt;set name="Aliases" table="person_aliases" order-by="name asc"&gt;
     &lt;key column="person"/&gt;
     &lt;element column="name" type="String"/&gt;
@@ -455,8 +437,10 @@ int count = (int) countEn.Current;</pre><p>
             a HQL ordering!
         </p><p>
             Associations may even be sorted by some arbitrary criteria at runtime using a
-            <tt class="literal">Filter()</tt>.
-        </p><pre class="programlisting">sortedUsers = s.Filter( group.Users, "order by this.Name" );</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-idbag"></a>6.7.&nbsp;Using an <tt class="literal">&lt;idbag&gt;</tt></h2></div></div><div></div></div><p>
+            <tt class="literal">CreateFilter()</tt>.
+        </p><pre class="programlisting">sortedUsers = s
+    .CreateFilter(group.Users, "order by this.Name")
+    .List&lt;User&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-idbag"></a>6.7.&nbsp;Using an <tt class="literal">&lt;idbag&gt;</tt></h2></div></div><div></div></div><p>
             If you've fully embraced our view that composite keys are a bad thing and that
             entities should have synthetic identifiers (surrogate keys), then you might
             find it a bit odd that the many to many associations and collections of values
@@ -499,33 +483,30 @@ int count = (int) countEn.Current;</pre><p>
                         </p></dd></dl></div><p>
 
         </p><p>
-            Please note that NHibernate does not support bidirectional one-to-many associations
-            with an indexed collection (list, map or array) as the "many" end, you have to
-            use a set or bag mapping.
-        </p><p>
             You may specify a bidirectional many-to-many association simply by mapping two
             many-to-many associations to the same database table and declaring one end as
             <span class="emphasis"><em>inverse</em></span> (which one is your choice). Here's an example of
             a bidirectional many-to-many association from a class back to <span class="emphasis"><em>itself</em></span>
             (each category can have many items and each item can be in many categories):
         </p><pre class="programlisting">&lt;class name="NHibernate.Auction.Category, NHibernate.Auction"&gt;
-    &lt;id name="Id" column="ID"/&gt;
-    ...
-    &lt;bag name="Items" table="CATEGORY_ITEM" lazy="true"&gt;
-        &lt;key column="CATEGORY_ID"/&gt;
-        &lt;many-to-many class="NHibernate.Auction.Item, NHibernate.Auction" column="ITEM_ID"/&gt;
-    &lt;/bag&gt;
+  &lt;id name="Id" column="ID"/&gt;
+  ...
+  &lt;bag name="Items" table="CATEGORY_ITEM" lazy="true"&gt;
+    &lt;key column="CATEGORY_ID"/&gt;
+    &lt;many-to-many class="NHibernate.Auction.Item, NHibernate.Auction" column="ITEM_ID"/&gt;
+  &lt;/bag&gt;
 &lt;/class&gt;
 
 &lt;class name="NHibernate.Auction.Item, NHibernate.Auction"&gt;
-    &lt;id name="id" column="ID"/&gt;
-    ...
+  &lt;id name="id" column="ID"/&gt;
+  ...
 
-    &lt;!-- inverse end --&gt;
-    &lt;bag name="categories" table="CATEGORY_ITEM" inverse="true" lazy="true"&gt;
-        &lt;key column="ITEM_ID"/&gt;
-        &lt;many-to-many class="NHibernate.Auction.Category, NHibernate.Auction" column="CATEGORY_ID"/&gt;
-    &lt;/bag&gt;
+  &lt;!-- inverse end --&gt;
+  &lt;bag name="categories" table="CATEGORY_ITEM" inverse="true" lazy="true"&gt;
+    &lt;key column="ITEM_ID"/&gt;
+    &lt;many-to-many class="NHibernate.Auction.Category, NHibernate.Auction"
+        column="CATEGORY_ID"/&gt;
+  &lt;/bag&gt;
 &lt;/class&gt;</pre><p>
             Changes made only to the inverse end of the association are <span class="emphasis"><em>not</em></span>
             persisted. This means that NHibernate has two representations in memory for every
@@ -539,7 +520,7 @@ item.Categories.Add(category);     // The item now "knows" about the relationshi
 session.Update(item);                     // No effect, nothing will be saved!
 session.Update(category);                 // The relationship will be saved</pre><p>
             The non-inverse side is used to save the in-memory representation to the database.
-            We would get an unneccessary INSERT/UPDATE and probably even a foreign key violation
+            We would get an unnecessary INSERT/UPDATE and probably even a foreign key violation
             if both would trigger changes! The same is of course also true for bidirectional
             one-to-many associations.
         </p><p>
@@ -562,7 +543,61 @@ session.Update(category);                 // The relationship will be saved</pre
 &lt;/class&gt;</pre><p>
             Mapping one end of an association with <tt class="literal">inverse="true"</tt> doesn't
             affect the operation of cascades, both are different concepts!
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-ternary"></a>6.9.&nbsp;Ternary Associations</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-indexedbidirectional"></a>6.9.&nbsp;Bidirectional associations with indexed collections</h2></div></div><div></div></div><p>
+            There are some additional considerations for bidirectional mappings with indexed collections
+            (where one end is represented as a <tt class="literal">&lt;list&gt;</tt> or <tt class="literal">&lt;map&gt;</tt>)
+            when using NHibernate mapping files. If there is a property of the child class that maps to the
+            index column you can use <tt class="literal">inverse="true"</tt> on the collection mapping:
+        </p><pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="Id" column="parent_id"/&gt;
+    ....
+    &lt;map name="Children" inverse="true"&gt;
+        &lt;key column="parent_id"/&gt;
+        &lt;map-key column="name"
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="Id" column="child_id"/&gt;
+    ....
+    &lt;property name="Name" column="name"
+        not-null="true"/&gt;
+    &lt;many-to-one name="Parent"
+        class="Parent"
+        column="parent_id"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre><p>
+            If there is no such property on the child class, the association cannot be considered truly
+            bidirectional. That is, there is information available at one end of the association that is not
+            available at the other end. In this case, you cannot map the collection
+            <tt class="literal">inverse="true"</tt>. Instead, you could use the following mapping:
+        </p><pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="Id" column="parent_id"/&gt;
+    ....
+    &lt;map name="Children"&gt;
+        &lt;key column="parent_id"
+            not-null="true"/&gt;
+        &lt;map-key column="name"
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="Id" column="child_id"/&gt;
+    ....
+    &lt;many-to-one name="Parent"
+        class="Parent"
+        column="parent_id"
+        insert="false"
+        update="false"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre><p>
+            Note that in this mapping, the collection-valued end of the association is responsible for
+            updates to the foreign key.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-ternary"></a>6.10.&nbsp;Ternary Associations</h2></div></div><div></div></div><p>
             There are two possible approaches to mapping a ternary association. One approach is to use
             composite elements (discussed below). Another is to use an <tt class="literal">IDictionary</tt> with an
             association as its index:
@@ -574,36 +609,25 @@ session.Update(category);                 // The relationship will be saved</pre
     &lt;key column="node1_id"/&gt;
     &lt;index-many-to-many column="node2_id" class="Node"/&gt;
     &lt;many-to-many column="connection_id" class="Connection"/&gt;
-&lt;/map&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-heterogeneous"></a>6.10.&nbsp;Heterogeneous Associations</h2></div></div><div></div></div><p>
+&lt;/map&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-heterogeneous"></a>6.11.&nbsp;Heterogeneous Associations</h2></div></div><div></div></div><p>
 	        The <tt class="literal">&lt;many-to-any&gt;</tt> and <tt class="literal">&lt;index-many-to-any&gt;</tt>
 	        elements provide for true heterogeneous associations. These mapping elements work in the
 	        same way as the <tt class="literal">&lt;any&gt;</tt> element - and should also be used
 	        rarely, if ever.
-	    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-example"></a>6.11.&nbsp;Collection examples</h2></div></div><div></div></div><p>
+	    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-example"></a>6.12.&nbsp;Collection examples</h2></div></div><div></div></div><p>
             The previous sections are pretty confusing. So lets look at an example. This
             class:
         </p><pre class="programlisting">using System;
 using System.Collections.Generic;
 
 namespace Eg
-    
+
     public class Parent
     {
-        private long id;
-        private ISet&lt;Child&gt; children;
-    
-        public long Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-        
-        private ISet&lt;Child&gt; Children
-        {
-            get { return children; }
-            set { children = value; }
-        }
-    
+        public long Id { get; set; }
+
+        private ISet&lt;Child&gt; Children { get; set; }
+
         ....
         ....
     }
@@ -633,8 +657,8 @@ namespace Eg
 
 &lt;/hibernate-mapping&gt;</pre><p>
             This maps to the following table definitions:
-        </p><pre class="programlisting">create table parent ( Id bigint not null primary key )
-create table child ( Id bigint not null primary key, Name varchar(255), parent_id bigint )
+        </p><pre class="programlisting">create table parent (Id bigint not null primary key)
+create table child (Id bigint not null primary key, Name varchar(255), parent_id bigint)
 alter table child add constraint childfk0 (parent_id) references parent</pre><p>
             If the parent is <span class="emphasis"><em>required</em></span>, use a bidirectional one-to-many
             association:
@@ -697,4 +721,6 @@ create table childset ( parent_id bigint not null,
                         child_id bigint not null,
                         primary key ( parent_id, child_id ) )
 alter table childset add constraint childsetfk0 (parent_id) references parent
-alter table childset add constraint childsetfk1 (child_id) references child</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Basic O/R Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Component Mapping</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+alter table childset add constraint childsetfk1 (child_id) references child</pre><p>
+            See also <a href="example-parentchild.html" title="Chapter&nbsp;22.&nbsp;Example: Parent/Child">Chapter&nbsp;22, <i>Example: Parent/Child</i></a>.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Basic O/R Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Component Mapping</td></tr></table></div></body></html>
