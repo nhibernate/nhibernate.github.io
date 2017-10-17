@@ -1,6 +1,7 @@
 ---
-layout: 
+layout:
 ---
+<!doctype html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -44,10 +45,10 @@ public class AuditInterceptor : EmptyInterceptor {
 
     public override bool OnFlushDirty(object entity, 
                                       object id, 
-				      object[] currentState,
-				      object[] previousState, 
-				      string[] propertyNames,
-				      IType[] types) 
+                                      object[] currentState,
+                                      object[] previousState,
+                                      string[] propertyNames,
+                                      IType[] types)
     {
         if ( entity is IAuditable ) {
             updates++;
@@ -63,9 +64,9 @@ public class AuditInterceptor : EmptyInterceptor {
 
     public override bool OnLoad(object entity, 
                                 object id, 
-				object[] state, 
-				string[] propertyNames, 
-				IType[] types)
+                                object[] state,
+                                string[] propertyNames,
+                                IType[] types)
     {
         if ( entity is IAuditable ) {
             loads++;
@@ -75,9 +76,9 @@ public class AuditInterceptor : EmptyInterceptor {
 
     public override bool OnSave(object entity, 
                                 object id, 
-				object[] state, 
-				string[] propertyNames, 
-				IType[] types)
+                                object[] state,
+                                string[] propertyNames,
+                                IType[] types)
     {
         if ( entity is IAuditable ) {
             creates++;
@@ -94,7 +95,10 @@ public class AuditInterceptor : EmptyInterceptor {
     public override void AfterTransactionCompletion(ITransaction tx)
     {
         if ( tx.WasCommitted ) {
-            System.Console.WriteLine("Creations: " + creates + ", Updates: " + updates, "Loads: " + loads);
+            System.Console.WriteLine(
+                "Creations: " + creates +
+                ", Updates: " + updates +
+                ", Loads: " + loads);
         }
         updates=0;
         creates=0;
@@ -128,7 +132,7 @@ public class AuditInterceptor : EmptyInterceptor {
             event and passes it to the configured event listeners for that type. Out-of-the-box,
             these listeners implement the same processing in which those methods always resulted.
             However, you are free to implement a customization of one of the listener interfaces
-            (i.e., the <tt class="literal">LoadEvent</tt> is processed by the registered implemenation
+            (i.e., the <tt class="literal">LoadEvent</tt> is processed by the registered implementation
             of the <tt class="literal">ILoadEventListener</tt> interface), in which case their
             implementation would be responsible for processing any <tt class="literal">Load()</tt> requests
             made of the <tt class="literal">ISession</tt>.
@@ -165,7 +169,8 @@ public class AuditInterceptor : EmptyInterceptor {
 &lt;/hibernate-configuration&gt;</pre><p>
             Instead, you may register it programmatically:
         </p><pre class="programlisting">Configuration cfg = new Configuration();
-ILoadEventListener[] stack = new ILoadEventListener[] { new MyLoadListener(), new DefaultLoadEventListener() };
+ILoadEventListener[] stack =
+    new ILoadEventListener[] { new MyLoadListener(), new DefaultLoadEventListener() };
 cfg.EventListeners.LoadEventListeners = stack;</pre><p>
             Listeners registered declaratively cannot share instances. If the same class name is
             used in multiple <tt class="literal">&lt;listener/&gt;</tt> elements, each reference will

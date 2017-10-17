@@ -1,6 +1,7 @@
 ---
-layout: 
+layout:
 ---
+<!doctype html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -15,52 +16,21 @@ layout:
             (not to architecture-level components). For example, you might model a person like this:
         </p><pre class="programlisting">public class Person
 {
-    private DateTime birthday;
-    private Name name;
-    private string key;
-    
-    public string Key
-    {
-        get { return key; }
-        set { key = value; }
-    }
-    
-    public DateTime Birthday
-    {
-        get { return birthday; }
-        set { birthday = value; }
-    }
+    public string Key { get; set; }
 
-    public Name Name
-    {
-        get { return name; }
-        set { name = value; }
-    }
+    public DateTime Birthday { get; set; }
+
+    public Name Name { get; set; }
+
     ......
     ......
 }</pre><pre class="programlisting">public class Name
 {
-    char initial;
-    string first;
-    string last;
-    
-    public string First
-    {
-        get { return first; }
-        set { first = value; }
-    }
-    
-    public string Last
-    {
-        get { return last; }
-        set { last = value; }
-    }
+    public string First { get; set; }
 
-    public char Initial
-    {
-        get { return initial; }
-        set { initial = value; }
-    }
+    public string Last { get; set; }
+
+    public char Initial { get; set; }
 }</pre><p>
             Now <tt class="literal">Name</tt> may be persisted as a component of
             <tt class="literal">Person</tt>. Notice that <tt class="literal">Name</tt> defines getter
@@ -96,7 +66,7 @@ layout:
             object model.
         </p><p>
             The <tt class="literal">&lt;component&gt;</tt> element allows a <tt class="literal">&lt;parent&gt;</tt>
-            subelement that maps a property of the component class as a reference back to the
+            sub-element that maps a property of the component class as a reference back to the
             containing entity.
         </p><pre class="programlisting">&lt;class name="Eg.Person, Eg" table="person"&gt;
     &lt;id name="Key" column="pid" type="string"&gt;
@@ -122,7 +92,7 @@ layout:
         &lt;property name="Last"/&gt;
     &lt;/composite-element&gt;
 &lt;/set&gt;</pre><p>
-            Note: if you define an <tt class="literal">ISet&lt;T&gt;</tt> of composite elements, it is 
+            Note: if you define an <tt class="literal">ISet</tt> of composite elements, it is 
             very important to implement <tt class="literal">Equals()</tt> and 
             <tt class="literal">GetHashCode()</tt> correctly.
         </p><p>
@@ -184,7 +154,7 @@ layout:
             You may use a component as an identifier of an entity class. Your component
             class must satisfy certain requirements:
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
-                    It must be <tt class="literal">Serializable</tt>.
+                    It must be marked with the <tt class="literal">Serializable</tt> attribute.
                 </p></li><li><p>
                     It must re-implement <tt class="literal">Equals()</tt> and
                     <tt class="literal">GetHashCode()</tt>, consistently with the database's 

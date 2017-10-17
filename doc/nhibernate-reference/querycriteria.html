@@ -1,12 +1,13 @@
 ---
-layout: 
+layout:
 ---
+<!doctype html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-       <title>Chapter&nbsp;15.&nbsp;Criteria Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"><link rel="next" href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Criteria Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querycriteria"></a>Chapter&nbsp;15.&nbsp;Criteria Queries</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+   <title>Chapter&nbsp;15.&nbsp;Criteria Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"><link rel="next" href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Criteria Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querycriteria"></a>Chapter&nbsp;15.&nbsp;Criteria Queries</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
         NHibernate features an intuitive, extensible criteria query API.
     </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-creating"></a>15.1.&nbsp;Creating an <tt class="literal">ICriteria</tt> instance</h2></div></div><div></div></div><p>
             The interface <tt class="literal">NHibernate.ICriteria</tt> represents a query against
@@ -14,24 +15,24 @@ layout:
             <tt class="literal">ICriteria</tt> instances.
         </p><pre class="programlisting">ICriteria crit = sess.CreateCriteria&lt;Cat&gt;();
 crit.SetMaxResults(50);
-List cats = crit.List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-narrowing"></a>15.2.&nbsp;Narrowing the result set</h2></div></div><div></div></div><p>
+var cats = crit.List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-narrowing"></a>15.2.&nbsp;Narrowing the result set</h2></div></div><div></div></div><p>
             An individual query criterion is an instance of the interface
             <tt class="literal">NHibernate.Expression.ICriterion</tt>. The class
             <tt class="literal">NHibernate.Expression.Expression</tt> defines
             factory methods for obtaining certain built-in
             <tt class="literal">ICriterion</tt> types.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.Like("Name", "Fritz%") )
     .Add( Expression.Between("Weight", minWeight, maxWeight) )
     .List&lt;Cat&gt;();</pre><p>
             Expressions may be grouped logically.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.Like("Name", "Fritz%") )
     .Add( Expression.Or(
         Expression.Eq( "Age", 0 ),
         Expression.IsNull("Age")
     ) )
-    .List&lt;Cat&gt;();</pre><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+    .List&lt;Cat&gt;();</pre><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.In( "Name", new String[] { "Fritz", "Izi", "Pk" } ) )
     .Add( Expression.Disjunction()
         .Add( Expression.IsNull("Age") )
@@ -42,16 +43,16 @@ List cats = crit.List();</pre></div><div class="sect1" lang="en"><div class="tit
     .List&lt;Cat&gt;();</pre><p>
             There are quite a range of built-in criterion types (<tt class="literal">Expression</tt>
             subclasses), but one that is especially useful lets you specify SQL directly.
-        </p><pre class="programlisting">
-        // Create a string parameter for the SqlString below
-        IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
-            .Add( Expression.Sql("lower({alias}.Name) like lower(?)", "Fritz%", NHibernateUtil.String )
-            .List&lt;Cat&gt;();</pre><p>
+        </p><pre class="programlisting">// Create a string parameter for the SqlString below
+var cats = sess.CreateCriteria&lt;Cat&gt;()
+    .Add(Expression.Sql("lower({alias}.Name) like lower(?)",
+        "Fritz%", NHibernateUtil.String))
+    .List&lt;Cat&gt;();</pre><p>
             The <tt class="literal">{alias}</tt> placeholder with be replaced by the row alias
             of the queried entity.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-ordering"></a>15.3.&nbsp;Ordering the results</h2></div></div><div></div></div><p>
             You may order the results using <tt class="literal">NHibernate.Expression.Order</tt>.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.Like("Name", "F%")
     .AddOrder( Order.Asc("Name") )
     .AddOrder( Order.Desc("Age") )
@@ -59,17 +60,17 @@ List cats = crit.List();</pre></div><div class="sect1" lang="en"><div class="tit
     .List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-associations"></a>15.4.&nbsp;Associations</h2></div></div><div></div></div><p>
             You may easily specify constraints upon related entities by navigating
             associations using <tt class="literal">CreateCriteria()</tt>.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.Like("Name", "F%")
     .CreateCriteria("Kittens")
         .Add( Expression.Like("Name", "F%") )
     .List&lt;Cat&gt;();</pre><p>
-            note that the second <tt class="literal">CreateCriteria()</tt> returns a new
+            Note that the second <tt class="literal">CreateCriteria()</tt> returns a new
             instance of <tt class="literal">ICriteria</tt>, which refers to the elements of
             the <tt class="literal">Kittens</tt> collection.
         </p><p>
             The following, alternate form is useful in certain circumstances.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .CreateAlias("Kittens", "kt")
     .CreateAlias("Mate", "mt")
     .Add( Expression.EqProperty("kt.Name", "mt.Name") )
@@ -81,11 +82,11 @@ List cats = crit.List();</pre></div><div class="sect1" lang="en"><div class="tit
             returned by the previous two queries are <span class="emphasis"><em>not</em></span> pre-filtered
             by the criteria! If you wish to retrieve just the kittens that match the
             criteria, you must use <tt class="literal">SetResultTransformer(Transformers.AliasToEntityMap)</tt>.
-        </p><pre class="programlisting">IList cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .CreateCriteria("Kittens", "kt")
         .Add( Expression.Eq("Name", "F%") )
     .SetResultTransformer(Transformers.AliasToEntityMap)
-    .List();
+    .List&lt;IDictionary&gt;();
 foreach ( IDictionary map in cats )
 {
     Cat cat = (Cat) map[CriteriaUtil.RootAlias];
@@ -93,20 +94,20 @@ foreach ( IDictionary map in cats )
 }</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-dynamicfetching"></a>15.5.&nbsp;Dynamic association fetching</h2></div></div><div></div></div><p>
             You may specify association fetching semantics at runtime using
             <tt class="literal">SetFetchMode()</tt>.
-        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.Like("Name", "Fritz%") )
     .SetFetchMode("Mate", FetchMode.Eager)
     .SetFetchMode("Kittens", FetchMode.Eager)
     .List&lt;Cat&gt;();</pre><p>
             This query will fetch both <tt class="literal">Mate</tt> and <tt class="literal">Kittens</tt>
-            by outer join. See <a href="performance.html#performance-fetching" title="19.1.&nbsp;Fetching strategies">Section&nbsp;19.1, &#8220;Fetching strategies&#8221;</a> for more information.
+            by outer join. See <a href="performance.html#performance-fetching" title="20.1.&nbsp;Fetching strategies">Section&nbsp;20.1, &#8220;Fetching strategies&#8221;</a> for more information.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-examples"></a>15.6.&nbsp;Example queries</h2></div></div><div></div></div><p>
             The class <tt class="literal">NHibernate.Expression.Example</tt> allows
             you to construct a query criterion from a given instance.
         </p><pre class="programlisting">Cat cat = new Cat();
 cat.Sex = 'F';
 cat.Color = Color.Black;
-List&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
+var results = session.CreateCriteria&lt;Cat&gt;()
     .Add( Example.Create(cat) )
     .List&lt;Cat&gt;();</pre><p>
            Version properties, identifiers and associations are ignored. By default,
@@ -119,11 +120,11 @@ List&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
     .ExcludeProperty("Color")  //exclude the property named "color"
     .IgnoreCase()              //perform case insensitive string comparisons
     .EnableLike();             //use like for string comparisons
-IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
+var results = session.CreateCriteria&lt;Cat&gt;()
     .Add(example)
     .List&lt;Cat&gt;();</pre><p>
             You can even use examples to place criteria upon associated objects.
-        </p><pre class="programlisting">IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .Add( Example.Create(cat) )
     .CreateCriteria("Mate")
         .Add( Example.Create( cat.Mate ) )
@@ -131,17 +132,17 @@ IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
             The class <tt class="literal">NHibernate.Expression.Projections</tt> is a
             factory for <tt class="literal">IProjection</tt> instances. We apply a
             projection to a query by calling <tt class="literal">SetProjection()</tt>.
-        </p><pre class="programlisting">IList results = session.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .SetProjection( Projections.RowCount() )
     .Add( Expression.Eq("Color", Color.BLACK) )
-    .List();</pre><pre class="programlisting">List results = session.CreateCriteria&lt;Cat&gt;()
+    .List&lt;int&gt;();</pre><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .SetProjection( Projections.ProjectionList()
         .Add( Projections.RowCount() )
         .Add( Projections.Avg("Weight") )
         .Add( Projections.Max("Weight") )
         .Add( Projections.GroupProperty("Color") )
     )
-    .List();</pre><p>
+    .List&lt;object[]&gt;();</pre><p>
             There is no explicit "group by" necessary in a criteria query. Certain
             projection types are defined to be <span class="emphasis"><em>grouping projections</em></span>,
             which also appear in the SQL <tt class="literal">group by</tt> clause.
@@ -149,18 +150,18 @@ IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
             An alias may optionally be assigned to a projection, so that the projected value
             may be referred to in restrictions or orderings. Here are two different ways to
             do this:
-        </p><pre class="programlisting">IList results = session.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .SetProjection( Projections.Alias( Projections.GroupProperty("Color"), "colr" ) )
     .AddOrder( Order.Asc("colr") )
-    .List();</pre><pre class="programlisting">IList results = session.CreateCriteria&lt;Cat&gt;()
+    .List&lt;string&gt;();</pre><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .SetProjection( Projections.GroupProperty("Color").As("colr") )
     .AddOrder( Order.Asc("colr") )
-    .List();</pre><p>
+    .List&lt;string&gt;();</pre><p>
             The <tt class="literal">Alias()</tt> and <tt class="literal">As()</tt> methods simply wrap a
             projection instance in another, aliased, instance of <tt class="literal">IProjection</tt>.
             As a shortcut, you can assign an alias when you add the projection to a 
             projection list:
-        </p><pre class="programlisting">IList results = session.CreateCriteria&lt;Cat&gt;()
+        </p><pre class="programlisting">var results = session.CreateCriteria&lt;Cat&gt;()
     .SetProjection( Projections.ProjectionList()
         .Add( Projections.RowCount(), "catCountByColor" )
         .Add( Projections.Avg("Weight"), "avgWeight" )
@@ -169,7 +170,7 @@ IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
     )
     .AddOrder( Order.Desc("catCountByColor") )
     .AddOrder( Order.Desc("avgWeight") )
-    .List();</pre><pre class="programlisting">IList results = session.CreateCriteria&lt;DomesticCat&gt;("cat")
+    .List&lt;object[]&gt;();</pre><pre class="programlisting">var results = session.CreateCriteria(typeof(DomesticCat), "cat")
     .CreateAlias("kittens", "kit")
     .SetProjection( Projections.ProjectionList()
         .Add( Projections.Property("cat.Name"), "catName" )
@@ -177,33 +178,34 @@ IList&lt;Cat&gt; results = session.CreateCriteria&lt;Cat&gt;()
     )
     .AddOrder( Order.Asc("catName") )
     .AddOrder( Order.Asc("kitName") )
-    .List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.8.&nbsp;Detached queries and subqueries</h2></div></div><div></div></div><p>
+    .List&lt;object[]&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.8.&nbsp;Detached queries and sub-queries</h2></div></div><div></div></div><p>
             The <tt class="literal">DetachedCriteria</tt> class lets you create a query outside the scope 
             of a session, and then later execute it using some arbitrary <tt class="literal">ISession</tt>.
         </p><pre class="programlisting">DetachedCriteria query = DetachedCriteria.For&lt;Cat&gt;()
     .Add( Expression.Eq("sex", 'F') );
-    
-ISession session = ....;
-ITransaction txn = session.BeginTransaction();
-IList results = query.GetExecutableCriteria(session).SetMaxResults(100).List();
-txn.Commit();
-session.Close();</pre><p>
-            A <tt class="literal">DetachedCriteria</tt> may also be used to express a subquery. ICriterion
-            instances involving subqueries may be obtained via <tt class="literal">Subqueries</tt>
-            .
+
+using (ISession session = ....)
+using (ITransaction txn = session.BeginTransaction())
+{
+    var results = query.GetExecutableCriteria(session).SetMaxResults(100).List&lt;Cat&gt;();
+    txn.Commit();
+}</pre><p>
+            A <tt class="literal">DetachedCriteria</tt> may also be used to express a sub-query. ICriterion
+            instances involving sub-queries may be obtained via <tt class="literal">Subqueries</tt>.
+            
         </p><pre class="programlisting">DetachedCriteria avgWeight = DetachedCriteria.For&lt;Cat&gt;()
     .SetProjection( Projections.Avg("Weight") );
 session.CreateCriteria&lt;Cat&gt;()
     .Add( Subqueries.Gt("Weight", avgWeight) )
-    .List();</pre><pre class="programlisting">DetachedCriteria weights = DetachedCriteria.For&lt;Cat&gt;()
+    .List&lt;Cat&gt;();</pre><pre class="programlisting">DetachedCriteria weights = DetachedCriteria.For&lt;Cat&gt;()
     .SetProjection( Projections.Property("Weight") );
 session.CreateCriteria&lt;Cat&gt;()
-    .add( Subqueries.GeAll("Weight", weights) )
-    .list();</pre><p>
-            Even correlated subqueries are possible:
+    .Add( Subqueries.GeAll("Weight", weights) )
+    .List&lt;Cat&gt;();</pre><p>
+            Even correlated sub-queries are possible:
         </p><pre class="programlisting">DetachedCriteria avgWeightForSex = DetachedCriteria.For&lt;Cat&gt;("cat2")
     .SetProjection( Projections.Avg("Weight") )
     .Add( Expression.EqProperty("cat2.Sex", "cat.Sex") );
-session.CreateCriteria&lt;Cat&gt;("cat")
+session.CreateCriteria(typeof(Cat), "cat")
     .Add( Subqueries.Gt("weight", avgWeightForSex) )
-    .List();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;QueryOver Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+    .List&lt;Cat&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;QueryOver Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>

@@ -4,3 +4,11 @@ _site
 # Common backup files on Linux.
 *~
 
+# Visual Studio user settings directory
+.vs
+
+# Visual Studio Code user settings directory
+.vscode
+
+# JetBrains Rider IDE user settings directory
+.idea

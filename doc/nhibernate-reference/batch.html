@@ -1,6 +1,7 @@
 ---
-layout: 
+layout:
 ---
+<!doctype html>
 <html><head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -9,14 +10,16 @@ layout:
    <title>Chapter&nbsp;13.&nbsp;Batch processing</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="events.html" title="Chapter&nbsp;12.&nbsp;Interceptors and events"><link rel="next" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;13.&nbsp;Batch processing</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="batch"></a>Chapter&nbsp;13.&nbsp;Batch processing</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
         A naive approach to inserting 100 000 rows in the database using NHibernate might 
         look like this:
-    </p><pre class="programlisting">ISession session = sessionFactory.OpenSession();
-ITransaction tx = session.BeginTransaction();
-for ( int i=0; i&lt;100000; i++ ) {
-    Customer customer = new Customer(.....);
-    session.Save(customer);
-}
-tx.Commit();
-session.Close();</pre><p>
+    </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    for (int i = 0; i &lt; 100000; i++)
+    {
+        Customer customer = new Customer(.....);
+        session.Save(customer);
+    }
+    tx.Commit();
+}</pre><p>
         This would fall over with an <tt class="literal">OutOfMemoryException</tt> somewhere 
         around the 50 000th row. That's because NHibernate caches all the newly inserted 
         <tt class="literal">Customer</tt> instances in the session-level cache. 
@@ -27,7 +30,7 @@ session.Close();</pre><p>
         size to a reasonable number (say, 10-50):
     </p><pre class="programlisting">adonet.batch_size 20</pre><p><a name="disablebatching"></a>
         Note that NHibernate disables insert batching at the ADO level transparently if you
-        use an <tt class="literal">identiy</tt> identifier generator.
+        use an <tt class="literal">identity</tt> identifier generator.
     </p><p>
         You also might like to do this kind of work in a process where interaction with 
         the second-level cache is completely disabled:
@@ -38,21 +41,24 @@ session.Close();</pre><p>
             When making new objects persistent, you must <tt class="literal">Flush()</tt> and 
             then <tt class="literal">Clear()</tt> the session regularly, to control the size of
             the first-level cache.
-        </p><pre class="programlisting">ISession session = sessionFactory.openSession();
-ITransaction tx = session.BeginTransaction();
-   
-for ( int i=0; i&lt;100000; i++ ) {
-    Customer customer = new Customer(.....);
-    session.Save(customer);
-    if ( i % 20 == 0 ) { //20, same as the ADO batch size
-        //flush a batch of inserts and release memory:
-        session.Flush();
-        session.Clear();
+        </p><pre class="programlisting">using (ISession session = sessionFactory.openSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    for (int i = 0; i &lt; 100000; i++)
+    {
+        Customer customer = new Customer(.....);
+        session.Save(customer);
+        // 20, same as the ADO batch size
+        if (i % 20 == 0)
+        {
+            // flush a batch of inserts and release memory:
+            session.Flush();
+            session.Clear();
+        }
     }
-}
-   
-tx.Commit();
-session.Close();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-statelesssession"></a>13.2.&nbsp;The StatelessSession interface</h2></div></div><div></div></div><p>
+
+    tx.Commit();
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-statelesssession"></a>13.2.&nbsp;The StatelessSession interface</h2></div></div><div></div></div><p>
             Alternatively, NHibernate provides a command-oriented API that may be used for 
             streaming data to and from the database in the form of detached objects. A 
             <tt class="literal">IStatelessSession</tt> has no persistence context associated
@@ -65,19 +71,20 @@ session.Close();</pre></div><div class="sect1" lang="en"><div class="titlepage">
             bypass NHibernate's event model and interceptors. Stateless sessions are vulnerable 
             to data aliasing effects, due to the lack of a first-level cache. A stateless
             session is a lower-level abstraction, much closer to the underlying ADO.
-        </p><pre class="programlisting">IStatelessSession session = sessionFactory.OpenStatelessSession();
-ITransaction tx = session.BeginTransaction();
-   
-var customers = session.GetNamedQuery("GetCustomers")
-    .Enumerable&lt;Customer&gt;();
-while ( customers.MoveNext() ) {
-    Customer customer = customers.Current;
-    customer.updateStuff(...);
-    session.Update(customer);
-}
-   
-tx.Commit();
-session.Close();</pre><p>
+        </p><pre class="programlisting">using (IStatelessSession session = sessionFactory.OpenStatelessSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    var customers = session.GetNamedQuery("GetCustomers")
+        .Enumerable&lt;Customer&gt;();
+    while (customers.MoveNext())
+    {
+        Customer customer = customers.Current;
+        customer.updateStuff(...);
+        session.Update(customer);
+    }
+
+    tx.Commit();
+}</pre><p>
             Note that in this code example, the <tt class="literal">Customer</tt> instances returned
             by the query are immediately detached. They are never associated with any persistence
             context.
@@ -96,7 +103,8 @@ session.Close();</pre><p>
             (DML) statements: <tt class="literal">INSERT</tt>, <tt class="literal">UPDATE</tt>, <tt class="literal">DELETE</tt>)
             data directly in the database will not affect in-memory state. However, NHibernate provides methods
             for bulk SQL-style DML statement execution which are performed through the
-            Hibernate Query Language (<a href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language">HQL</a>).
+            Hibernate Query Language (<a href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language">HQL</a>). A
+            <a href="querylinq.html#querylinq-modifying" title="17.6.&nbsp;Modifying entities inside the database">Linq implementation</a> is available too.
         </p><p>
             The pseudo-syntax for <tt class="literal">UPDATE</tt> and <tt class="literal">DELETE</tt> statements
             is: <tt class="literal">( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?</tt>.  Some
@@ -109,25 +117,25 @@ session.Close();</pre><p>
                     be qualified using that alias; if the entity name is not aliased, then it is
                     illegal for any property references to be qualified.
                 </p></li><li><p>
-                    No <a href="">joins</a> (either implicit or explicit)
+                    No <a href="queryhql.html#queryhql-joins" title="14.3.&nbsp;Associations and joins">joins</a> (either implicit or explicit)
 	                can be specified in a bulk HQL query.  Sub-queries may be used in the where-clause;
-	                the subqueries, themselves, may contain joins.
+	                the sub-queries, themselves, may contain joins.
                 </p></li><li><p>
                     The where-clause is also optional.
                 </p></li></ul></div><p>
             As an example, to execute an HQL <tt class="literal">UPDATE</tt>, use the
             <tt class="literal">IQuery.ExecuteUpdate()</tt> method:
-        </p><pre class="programlisting">ISession session = sessionFactory.OpenSession();
-ITransaction tx = session.BeginTransaction();
-
-string hqlUpdate = "update Customer c set c.name = :newName where c.name = :oldName";
-// or string hqlUpdate = "update Customer set name = :newName where name = :oldName";
-int updatedEntities = s.CreateQuery( hqlUpdate )
-        .SetString( "newName", newName )
-        .SetString( "oldName", oldName )
+        </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    string hqlUpdate = "update Customer c set c.name = :newName where c.name = :oldName";
+    // or string hqlUpdate = "update Customer set name = :newName where name = :oldName";
+    int updatedEntities = s.CreateQuery(hqlUpdate)
+        .SetString("newName", newName)
+        .SetString("oldName", oldName)
         .ExecuteUpdate();
-tx.Commit();
-session.Close();</pre><p>
+    tx.Commit();
+}</pre><p>
             HQL <tt class="literal">UPDATE</tt> statements, by default do not effect the
             <a href="mapping.html#mapping-declaration-version" title="5.1.8.&nbsp;version (optional)">version</a>
             or the <a href="mapping.html#mapping-declaration-timestamp" title="5.1.9.&nbsp;timestamp (optional)">timestamp</a> property values
@@ -136,30 +144,32 @@ session.Close();</pre><p>
             <tt class="literal">timestamp</tt> property values through the use of a <tt class="literal">versioned update</tt>.
             This is achieved by adding the <tt class="literal">VERSIONED</tt> keyword after the <tt class="literal">UPDATE</tt>
             keyword.
-        </p><pre class="programlisting">ISession session = sessionFactory.OpenSession();
-ITransaction tx = session.BeginTransaction();
-string hqlVersionedUpdate = "update versioned Customer set name = :newName where name = :oldName";
-int updatedEntities = s.CreateQuery( hqlUpdate )
-        .SetString( "newName", newName )
-        .SetString( "oldName", oldName )
+        </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    string hqlVersionedUpdate =
+        "update versioned Customer set name = :newName where name = :oldName";
+    int updatedEntities = s.CreateQuery(hqlUpdate)
+        .SetString("newName", newName)
+        .SetString("oldName", oldName)
         .ExecuteUpdate();
-tx.Commit();
-session.Close();</pre><p>
+    tx.Commit();
+}</pre><p>
             Note that custom version types (<tt class="literal">NHibernate.Usertype.IUserVersionType</tt>)
             are not allowed in conjunction with a <tt class="literal">update versioned</tt> statement.
         </p><p>
             To execute an HQL <tt class="literal">DELETE</tt>, use the same <tt class="literal">IQuery.ExecuteUpdate()</tt>
             method:
-        </p><pre class="programlisting">ISession session = sessionFactory.OpenSession();
-ITransaction tx = session.BeginTransaction();
-
-String hqlDelete = "delete Customer c where c.name = :oldName";
-// or String hqlDelete = "delete Customer where name = :oldName";
-int deletedEntities = s.CreateQuery( hqlDelete )
-        .SetString( "oldName", oldName )
+        </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    string hqlDelete = "delete Customer c where c.name = :oldName";
+    // or String hqlDelete = "delete Customer where name = :oldName";
+    int deletedEntities = s.CreateQuery(hqlDelete)
+        .SetString("oldName", oldName)
         .ExecuteUpdate();
-tx.Commit();
-session.Close();</pre><p>
+    tx.Commit();
+}</pre><p>
             The <tt class="literal">int</tt> value returned by the <tt class="literal">IQuery.ExecuteUpdate()</tt>
             method indicate the number of entities effected by the operation.  Consider this may or may not
             correlate to the number of rows effected in the database.  An HQL bulk operation might result in
@@ -167,7 +177,7 @@ session.Close();</pre><p>
             number indicates the number of actual entities affected by the statement.  Going back to the
             example of joined-subclass, a delete against one of the subclasses may actually result
             in deletes against not just the table to which that subclass is mapped, but also the "root"
-            table and potentially joined-subclass tables further down the inheritence hierarchy.
+            table and potentially joined-subclass tables further down the inheritance hierarchy.
         </p><p>
             The pseudo-syntax for <tt class="literal">INSERT</tt> statements is:
             <tt class="literal">INSERT INTO EntityName properties_list select_statement</tt>.  Some
@@ -175,9 +185,9 @@ session.Close();</pre><p>
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
                     Only the INSERT INTO ... SELECT ... form is supported; not the INSERT INTO ... VALUES ... form.
                 </p><p>
-                    The properties_list is analogous to the <tt class="literal">column speficiation</tt>
+                    The properties_list is analogous to the <tt class="literal">column specification</tt>
                     in the SQL <tt class="literal">INSERT</tt> statement.  For entities involved in mapped
-                    inheritence, only properties directly defined on that given class-level can be
+                    inheritance, only properties directly defined on that given class-level can be
                     used in the properties_list.  Superclass properties are not allowed; and subclass
                     properties do not make sense.  In other words, <tt class="literal">INSERT</tt>
                     statements are inherently non-polymorphic.
@@ -210,11 +220,13 @@ session.Close();</pre><p>
                     by the <tt class="literal">NHibernate.Type.IVersionType</tt> is used).
                 </p></li></ul></div><p>
             An example HQL <tt class="literal">INSERT</tt> statement execution:
-        </p><pre class="programlisting">ISession session = sessionFactory.OpenSession();
-ITransaction tx = session.BeginTransaction();
-
-var hqlInsert = "insert into DelinquentAccount (id, name) select c.id, c.name from Customer c where ...";
-int createdEntities = s.CreateQuery( hqlInsert )
+        </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    var hqlInsert =
+        "insert into DelinquentAccount (id, name) " +
+        "select c.id, c.name from Customer c where ...";
+    int createdEntities = s.CreateQuery(hqlInsert)
         .ExecuteUpdate();
-tx.Commit();
-session.Close();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Interceptors and events&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+    tx.Commit();
+}</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Interceptors and events&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
