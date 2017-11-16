@@ -159,6 +159,9 @@ layout:
                     It must re-implement <tt class="literal">Equals()</tt> and
                     <tt class="literal">GetHashCode()</tt>, consistently with the database's 
                     notion of composite key equality.
+                </p></li><li><p>
+                    It should re-implement <tt class="literal">ToString()</tt> if you consider
+                    using the second level cache. See <a href="caches.html#NHibernate.Caches-howto" title="26.1.&nbsp;How to use a cache?">Section&nbsp;26.1, &#8220;How to use a cache?&#8221;</a>.
                 </p></li></ul></div><p>
             You can't use an <tt class="literal">IIdentifierGenerator</tt> to generate composite keys.
             Instead the application must assign its own identifiers.
