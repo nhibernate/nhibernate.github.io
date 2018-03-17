@@ -7,6 +7,7 @@ layout:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="canonical" href="http://nhibernate.info/doc/nhibernate-reference/manipulatingdata.html" />
    <title>Chapter&nbsp;9.&nbsp;Manipulating Persistent Data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="inheritance.html" title="Chapter&nbsp;8.&nbsp;Inheritance Mapping"><link rel="next" href="readonly.html" title="Chapter&nbsp;10.&nbsp;Read-only entities"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;9.&nbsp;Manipulating Persistent Data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="inheritance.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="readonly.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="manipulatingdata"></a>Chapter&nbsp;9.&nbsp;Manipulating Persistent Data</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-creating"></a>9.1.&nbsp;Creating a persistent object</h2></div></div><div></div></div><p>
             An object (entity instance) is either <span class="emphasis"><em>transient</em></span> or
             <span class="emphasis"><em>persistent</em></span> with respect to a particular
@@ -472,7 +473,7 @@ sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><
                     all entity deletions, in the same order the corresponding objects
                     were deleted using <tt class="literal">ISession.Delete()</tt>
                 </p></li></ol></div><p>
-            (An exception is that objects using <tt class="literal">identity</tt> ID generation are
+            (An exception is that objects using <tt class="literal">native</tt> ID generation are 
             inserted when they are saved.)
         </p><p>
             Except when you explicitly <tt class="literal">Flush()</tt>, there are absolutely no 
@@ -503,23 +504,7 @@ using (ITransaction tx = sess.BeginTransaction())
     // change to izi is not flushed!
     ...
     tx.Commit(); // flush occurs
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-dirtiness"></a>9.7.&nbsp;Checking dirtiness</h2></div></div><div></div></div><p>
-            <tt class="literal">ISession.IsDirty()</tt> will return whether the session hold any pending
-            change to flush or not. Be cautious when using this method, its default implementation
-            may have the following effects:
-        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
-                    Dirty checks all the loaded entities. NHibernate does not instrument the entities
-                    for being notified of changes done on loaded ones. Instead, it stores their
-                    initial state and compare them to it. If session has loaded a lot of entities,
-                    the dirty checking will have a significant impact.
-                </p></li><li><p>
-                    Triggers pending cascade operations. This includes any pending <tt class="literal">Save</tt>
-                    of, by example, children added to a collection having the <tt class="literal">Save</tt>
-                    cascade enabled. Depending on the entities ID generators (see
-                    <a href="mapping.html#mapping-declaration-id-generator" title="5.1.5.1.&nbsp;generator">Section&nbsp;5.1.5.1, &#8220;generator&#8221;</a>), this may trigger calls to the
-                    database, or even entity insertions if they are using the <tt class="literal">identity</tt>
-                    generator.
-                </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-endingsession"></a>9.8.&nbsp;Ending a Session</h2></div></div><div></div></div><p>
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-endingsession"></a>9.7.&nbsp;Ending a Session</h2></div></div><div></div></div><p>
             Ending a session involves four distinct phases:
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
                     flush the session
@@ -529,13 +514,13 @@ using (ITransaction tx = sess.BeginTransaction())
                     close the session
                 </p></li><li><p>
                     handle exceptions
-                </p></li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-flushing"></a>9.8.1.&nbsp;Flushing the Session</h3></div></div><div></div></div><p>
+                </p></li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-flushing"></a>9.7.1.&nbsp;Flushing the Session</h3></div></div><div></div></div><p>
                 If you happen to be using the <tt class="literal">ITransaction</tt> API, you don't
                 need to worry about this step. It will be performed implicitly when the 
                 transaction is committed. Otherwise you should call 
                 <tt class="literal">ISession.Flush()</tt> to ensure that all changes are synchronized
                 with the database.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-commit"></a>9.8.2.&nbsp;Committing the database transaction</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-commit"></a>9.7.2.&nbsp;Committing the database transaction</h3></div></div><div></div></div><p>
                 If you are using the NHibernate <tt class="literal">ITransaction</tt> API, this looks like:
             </p><pre class="programlisting">tx.Commit(); // flush the session and commit the transaction</pre><p>
                 If you are managing ADO.NET transactions yourself you should manually
@@ -548,7 +533,7 @@ currentTransaction.Commit();</pre><p>
             </p><pre class="programlisting">currentTransaction.Rollback();</pre><p>
                 If you rollback the transaction you should immediately close and discard the current
                 session to ensure that NHibernate's internal state is consistent.
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-close"></a>9.8.3.&nbsp;Closing the ISession</h3></div></div><div></div></div><p>
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-close"></a>9.7.3.&nbsp;Closing the ISession</h3></div></div><div></div></div><p>
                 A call to <tt class="literal">ISession.Close()</tt> marks the end of a session. The main implication
                 of <tt class="literal">Close()</tt> is that the ADO.NET connection will be relinquished by the session.
             </p><pre class="programlisting">tx.Commit();
@@ -558,7 +543,7 @@ sess.Close();</pre><p>
                 If you provided your own connection, <tt class="literal">Close()</tt> returns a reference 
                 to it, so you can manually close it or return it to the pool. Otherwise
                 <tt class="literal">Close()</tt> returns it to the pool.
-            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-exceptions"></a>9.9.&nbsp;Exception handling</h2></div></div><div></div></div><p>
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-exceptions"></a>9.8.&nbsp;Exception handling</h2></div></div><div></div></div><p>
             NHibernate use might lead to exceptions, usually <tt class="literal">HibernateException</tt>.
             This exception can have	a nested inner exception (the root cause), use the
             <tt class="literal">InnerException</tt> property to access it.
@@ -603,7 +588,7 @@ catch (Exception e)
 finally
 {
     sess.Close();
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-graphs"></a>9.10.&nbsp;Lifecycles and object graphs</h2></div></div><div></div></div><p>
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-graphs"></a>9.9.&nbsp;Lifecycles and object graphs</h2></div></div><div></div></div><p>
             To save or update all objects in a graph of associated objects, you must either
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
                     <tt class="literal">Save()</tt>, <tt class="literal">SaveOrUpdate()</tt> or
@@ -665,7 +650,7 @@ finally
             approach throughout your application, it's easier to specify the
             <tt class="literal">default-cascade</tt> attribute of the
             <tt class="literal">&lt;hibernate-mapping&gt;</tt> element.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-interceptors"></a>9.11.&nbsp;Interceptors</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-interceptors"></a>9.10.&nbsp;Interceptors</h2></div></div><div></div></div><p>
             The <tt class="literal">IInterceptor</tt> interface provides callbacks from the session to the 
             application allowing the application to inspect and / or manipulate properties of a 
             persistent object before it is saved, updated, deleted or loaded. One 
@@ -764,7 +749,7 @@ namespace NHibernate.Test
             The interceptor would be specified when a session is created.
         </p><pre class="programlisting">ISession session = sf.OpenSession( new AuditInterceptor() );</pre><p>
             You may also set an interceptor on a global level, using the <tt class="literal">Configuration</tt>:
-        </p><pre class="programlisting">new Configuration().SetInterceptor( new AuditInterceptor() );</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-metadata"></a>9.12.&nbsp;Metadata API</h2></div></div><div></div></div><p>
+        </p><pre class="programlisting">new Configuration().SetInterceptor( new AuditInterceptor() );</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-metadata"></a>9.11.&nbsp;Metadata API</h2></div></div><div></div></div><p>
             NHibernate requires a very rich meta-level model of all entity and value types. From time
             to time, this model is very useful to the application itself. For example, the application
             might use NHibernate's metadata to implement a "smart" deep-copy algorithm that understands

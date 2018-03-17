@@ -7,6 +7,7 @@ layout:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="canonical" href="http://nhibernate.info/doc/nhibernate-reference/performance.html" />
    <title>Chapter&nbsp;20.&nbsp;Improving performance</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="filters.html" title="Chapter&nbsp;19.&nbsp;Filtering data"><link rel="next" href="toolsetguide.html" title="Chapter&nbsp;21.&nbsp;Toolset Guide"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Improving performance</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="filters.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="toolsetguide.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="performance"></a>Chapter&nbsp;20.&nbsp;Improving performance</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-fetching"></a>20.1.&nbsp;Fetching strategies</h2></div></div><div></div></div><p>
             A <span class="emphasis"><em>fetching strategy</em></span> is the strategy NHibernate will use for 
             retrieving associated objects if the application needs to navigate the association. 
@@ -395,7 +396,7 @@ using(var iter = session
                 
             </p></div><p>
             The following table shows which providers are compatible with which concurrency strategies.
-        </p><div class="table"><a name="d0e14930"></a><p class="title"><b>Table&nbsp;20.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
+        </p><div class="table"><a name="d0e14848"></a><p class="title"><b>Table&nbsp;20.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
             Refer to <a href="caches.html" title="Chapter&nbsp;26.&nbsp;NHibernate.Caches">Chapter&nbsp;26, <i>NHibernate.Caches</i></a> for more details.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-sessioncache"></a>20.3.&nbsp;Managing the caches</h2></div></div><div></div></div><p>
             Whenever you pass an object to <tt class="literal">Save()</tt>, <tt class="literal">Update()</tt>
@@ -441,18 +442,11 @@ sessionFactory.EvictCollection("Eg.Cat.Kittens");</pre></div><div class="sect1" 
         </p><pre class="programlisting">&lt;property name="cache.use_query_cache"&gt;true&lt;/property&gt;&gt;</pre><p>
             This setting causes the creation of two new cache regions - one holding cached query
             result sets (<tt class="literal">NHibernate.Cache.StandardQueryCache</tt>), the other
-            holding timestamps of the most recent updates to queryable tables
-            (<tt class="literal">UpdateTimestampsCache</tt>). Those region names will be prefixed by the
-            cache region prefix if <tt class="literal">cache.region_prefix</tt> setting is configured.
-        </p><p>
-            If you use a cache provider handling an expiration for cached entries, you should set
-            the <tt class="literal">UpdateTimestampsCache</tt> region expiration to a value greater than
-            the expiration of query cache regions. (Or disable its expiration.) Otherwise the query
-            cache may yield stale data.
-        </p><p>
-            Note that the query cache does not cache the state of any entities in the result set;
-            it caches only identifier values and results of value type. So the query cache should
-            always be used in conjunction with the second-level cache.
+            holding timestamps of the most recent updates to queryable tables 
+            (<tt class="literal">NHibernate.Cache.UpdateTimestampsCache</tt>). Note that the query
+            cache does not cache the state of any entities in the result set; it caches
+            only identifier values and results of value type. So the query cache should always be
+            used in conjunction with the second-level cache.
         </p><p>
             Most queries do not benefit from caching, so by default queries are not cached. To
             enable caching, call <tt class="literal">IQuery.SetCacheable(true)</tt>. This call allows

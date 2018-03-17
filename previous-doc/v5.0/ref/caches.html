@@ -7,6 +7,7 @@ layout:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <link rel="canonical" href="http://nhibernate.info/doc/nhibernate-reference/caches.html" />
    <title>Chapter&nbsp;26.&nbsp;NHibernate.Caches</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="part-contrib.html" title="Part&nbsp;I.&nbsp;NHibernateContrib Documentation"><link rel="previous" href="contrib-preface.html" title="Preface"><link rel="next" href="mapping-attributes.html" title="Chapter&nbsp;27.&nbsp;NHibernate.Mapping.Attributes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;26.&nbsp;NHibernate.Caches</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="contrib-preface.html">Prev</a>&nbsp;</td><th width="60%" align="center">Part&nbsp;I.&nbsp;NHibernateContrib Documentation</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="mapping-attributes.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="caches"></a>Chapter&nbsp;26.&nbsp;NHibernate.Caches</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="abstract"><a name="NHibernate.Caches-abstract"></a><p class="title"><b>What is NHibernate.Caches?</b></p><p><b>NHibernate.Caches namespace contains several second-level cache providers for NHibernate.&nbsp;</b>
 				A cache is place where entities are kept after being loaded from the database; once cached, they can be
 				retrieved without going to the database. This means that they are faster to (re)load.
@@ -126,7 +127,7 @@ layout:
 				</dd></dl></div><p>
 			SysCache has a config file section handler to allow configuring different expirations and priorities for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e16638"></a><p class="title"><b>Example&nbsp;26.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e16546"></a><p class="title"><b>Example&nbsp;26.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="syscache"
@@ -154,11 +155,11 @@ layout:
 				</dd></dl></div><p>
 			To configure cache regions with SqlCacheDependencies a <tt class="literal">syscache2</tt> config section must be
 			defined in the application's configuration file. See the sample below.
-		</p><div class="example"><a name="d0e16675"></a><p class="title"><b>Example&nbsp;26.2.&nbsp;</b></p><pre class="programlisting">
+		</p><div class="example"><a name="d0e16583"></a><p class="title"><b>Example&nbsp;26.2.&nbsp;</b></p><pre class="programlisting">
 &lt;configSections&gt;
   &lt;section name="syscache2"
     type="NHibernate.Caches.SysCache2.SysCacheSection, NHibernate.Caches.SysCache2"/&gt;
-&lt;/configSections&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16678"></a>26.4.1.&nbsp;Table-based Dependency</h3></div></div><div></div></div><p>
+&lt;/configSections&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16586"></a>26.4.1.&nbsp;Table-based Dependency</h3></div></div><div></div></div><p>
 				A table-based dependency will monitor the data in a database table for changes. Table-based
 				dependencies are generally used for a SQL Server 2000 database but will work with SQL Server 2005 or superior as
 				well. Before you can use SQL Server cache invalidation with table based dependencies, you need to
@@ -169,7 +170,7 @@ layout:
 			</p><p>
 				To configure the data in a cache region to be invalidated when data in an underlying table is changed,
 				a cache region must be configured in the application's configuration file. See the sample below.
-			</p><div class="example"><a name="d0e16688"></a><p class="title"><b>Example&nbsp;26.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
+			</p><div class="example"><a name="d0e16596"></a><p class="title"><b>Example&nbsp;26.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
   &lt;cacheRegion name="Product"&gt;
     &lt;dependencies&gt;
       &lt;tables&gt;
@@ -186,7 +187,7 @@ layout:
 					The name of a database defined in the <tt class="literal">databases</tt> element for
 					<tt class="literal">sqlCacheDependency</tt> for caching (ASP.NET Settings Schema) element of the
 					application's <tt class="literal">Web.config</tt> file.
-				</dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16724"></a>26.4.2.&nbsp;Command-Based Dependencies</h3></div></div><div></div></div><p>
+				</dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16632"></a>26.4.2.&nbsp;Command-Based Dependencies</h3></div></div><div></div></div><p>
 				A command-based dependency will use a SQL command to identify records to monitor for data changes.
 				Command-based dependencies work only with SQL Server 2005.
 			</p><p>
@@ -201,7 +202,7 @@ layout:
 			</p><p>
 				To configure the data in a cache region to be invalidated based on a SQL command, a cache region must
 				be configured in the application's configuration file. See the samples below.
-			</p><div class="example"><a name="d0e16733"></a><p class="title"><b>Example&nbsp;26.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
+			</p><div class="example"><a name="d0e16641"></a><p class="title"><b>Example&nbsp;26.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -209,7 +210,7 @@ layout:
         isStoredProcedure="true"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e16738"></a><p class="title"><b>Example&nbsp;26.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e16646"></a><p class="title"><b>Example&nbsp;26.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -229,10 +230,10 @@ layout:
 						use for registering the cache dependency for change notifications.  If no value is supplied for
 						<tt class="literal">connectionName</tt>, the unnamed connection supplied by the provider will be
 						used.
-					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16794"></a>26.4.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
+					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16702"></a>26.4.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
 				Multiple cache dependencies can be specified.  If any of the dependencies triggers a change
 				notification, the data in the cache region will be invalidated.  See the samples below.
-			</p><div class="example"><a name="d0e16799"></a><p class="title"><b>Example&nbsp;26.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+			</p><div class="example"><a name="d0e16707"></a><p class="title"><b>Example&nbsp;26.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -242,7 +243,7 @@ layout:
         command="Select quantityAvailable from dbo.VideoAvailability"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e16804"></a><p class="title"><b>Example&nbsp;26.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e16712"></a><p class="title"><b>Example&nbsp;26.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -255,12 +256,12 @@ layout:
         tableName=" VideoAvailability" /&gt;
     &lt;/tables&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16809"></a>26.4.4.&nbsp;Additional Settings</h3></div></div><div></div></div><p>
+&lt;/cacheRegion&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e16717"></a>26.4.4.&nbsp;Additional Settings</h3></div></div><div></div></div><p>
 				In addition to data dependencies for the cache regions, time based expiration policies can be specified
 				for each item added to the cache.  Time based expiration policies will not invalidate the data
 				dependencies for the whole cache region, but serve as a way to remove items from the cache after they
 				have been in the cache for a specified amount of time.  See the samples below.
-			</p><div class="example"><a name="d0e16814"></a><p class="title"><b>Example&nbsp;26.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e16819"></a><p class="title"><b>Example&nbsp;26.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
+			</p><div class="example"><a name="d0e16722"></a><p class="title"><b>Example&nbsp;26.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e16727"></a><p class="title"><b>Example&nbsp;26.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
 							Number of seconds that an individual item will exist in the cache before being removed.
 							Defaults to <tt class="literal">300</tt> if neither <tt class="literal">relativeExpiration</tt> nor
 							<tt class="literal">timeOfDayExpiration</tt> are defined, and if no expiration settings are
@@ -289,11 +290,11 @@ layout:
 				</dd></dl></div><p>
 			RtMemoryCache has a config file section handler to allow configuring different expirations for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e16900"></a><p class="title"><b>Example&nbsp;26.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e16808"></a><p class="title"><b>Example&nbsp;26.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="rtmemorycache"
-      type="NHibernate.Caches.RtMemoryCache.RtMemoryCacheSectionHandler,NHibernate.Caches.RtMemoryCache" /&gt;
+        type="NHibernate.Caches.RtMemoryCache.RtMemoryCacheSectionHandler,NHibernate.Caches.RtMemoryCache" /&gt;
   &lt;/configSections&gt;
 
   &lt;rtmemorycache&gt;
