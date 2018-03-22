@@ -13,8 +13,9 @@ For a list of resolved issues, see the release notes:
 https://github.com/nhibernate/nhibernate-core/blob/5.0.0/releasenotes.txt
 
 Binaries are available on NuGet and SourceForge:
-https://sourceforge.net/projects/nhibernate/files/NHibernate/5.0.0/
-https://www.nuget.org/packages/NHibernate/5.0.0
+
+- https://sourceforge.net/projects/nhibernate/files/NHibernate/5.0.0/
+- https://www.nuget.org/packages/NHibernate/5.0.0
 
 ##### Highlights #####
 * IO bound methods have gained an async counterpart. Not intended for parallelism, make sure to await each call before further interacting with a session and its queries.
