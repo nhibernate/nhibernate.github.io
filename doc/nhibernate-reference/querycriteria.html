@@ -1,13 +1,6 @@
----
-layout:
----
-<!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;15.&nbsp;Criteria Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"><link rel="next" href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Criteria Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querycriteria"></a>Chapter&nbsp;15.&nbsp;Criteria Queries</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;15.&nbsp;Criteria Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"><link rel="next" href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Criteria Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querycriteria"></a>Chapter&nbsp;15.&nbsp;Criteria Queries</h2></div></div><div></div></div><p>
         NHibernate features an intuitive, extensible criteria query API.
     </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-creating"></a>15.1.&nbsp;Creating an <tt class="literal">ICriteria</tt> instance</h2></div></div><div></div></div><p>
             The interface <tt class="literal">NHibernate.ICriteria</tt> represents a query against
@@ -89,9 +82,24 @@ var cats = sess.CreateCriteria&lt;Cat&gt;()
     .List&lt;IDictionary&gt;();
 foreach ( IDictionary map in cats )
 {
-    Cat cat = (Cat) map[CriteriaUtil.RootAlias];
+    Cat cat = (Cat) map[CriteriaSpecification.RootAlias];
     Cat kitten = (Cat) map["kt"];
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-dynamicfetching"></a>15.5.&nbsp;Dynamic association fetching</h2></div></div><div></div></div><p>
+}</pre><p>
+        Note that for retrieving just kittens you can also use an entity projection.
+        See <a href="querycriteria.html#querycriteria-projection" title="15.8.&nbsp;Projections, aggregation and grouping">Section&nbsp;15.8, &#8220;Projections, aggregation and grouping&#8221;</a> for more information.
+      </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria_entityjoin"></a>15.5.&nbsp;Join entities without association (Entity joins or ad hoc joins)</h2></div></div><div></div></div><p>
+        In criteria you have the ability to define a join to any entity, not just through a mapped association.
+        To achieve it, use <tt class="literal">CreateEntityAlias</tt> and <tt class="literal">CreateEntityCriteria</tt>. By example:
+      </p><pre class="programlisting">IList&lt;Cat&gt; uniquelyNamedCats = sess.CreateCriteria&lt;Cat&gt;("c")
+    .CreateEntityAlias(
+        "joinedCat",
+        Restrictions.And(
+            Restrictions.EqProperty("c.Name", "joinedCat.Name"),
+            Restrictions.NotEqProperty("c.Id", "joinedCat.Id")),
+        JoinType.LeftOuterJoin,
+        typeof(Cat).FullName)
+    .Add(Restrictions.IsNull("joinedCat.Id"))
+    .List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-dynamicfetching"></a>15.6.&nbsp;Dynamic association fetching</h2></div></div><div></div></div><p>
             You may specify association fetching semantics at runtime using
             <tt class="literal">SetFetchMode()</tt>.
         </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
@@ -101,7 +109,7 @@ foreach ( IDictionary map in cats )
     .List&lt;Cat&gt;();</pre><p>
             This query will fetch both <tt class="literal">Mate</tt> and <tt class="literal">Kittens</tt>
             by outer join. See <a href="performance.html#performance-fetching" title="20.1.&nbsp;Fetching strategies">Section&nbsp;20.1, &#8220;Fetching strategies&#8221;</a> for more information.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-examples"></a>15.6.&nbsp;Example queries</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-examples"></a>15.7.&nbsp;Example queries</h2></div></div><div></div></div><p>
             The class <tt class="literal">NHibernate.Expression.Example</tt> allows
             you to construct a query criterion from a given instance.
         </p><pre class="programlisting">Cat cat = new Cat();
@@ -128,7 +136,7 @@ var results = session.CreateCriteria&lt;Cat&gt;()
     .Add( Example.Create(cat) )
     .CreateCriteria("Mate")
         .Add( Example.Create( cat.Mate ) )
-    .List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-projection"></a>15.7.&nbsp;Projections, aggregation and grouping</h2></div></div><div></div></div><p>
+    .List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-projection"></a>15.8.&nbsp;Projections, aggregation and grouping</h2></div></div><div></div></div><p>
             The class <tt class="literal">NHibernate.Expression.Projections</tt> is a
             factory for <tt class="literal">IProjection</tt> instances. We apply a
             projection to a query by calling <tt class="literal">SetProjection()</tt>.
@@ -178,7 +186,27 @@ var results = session.CreateCriteria&lt;Cat&gt;()
     )
     .AddOrder( Order.Asc("catName") )
     .AddOrder( Order.Asc("kitName") )
-    .List&lt;object[]&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.8.&nbsp;Detached queries and sub-queries</h2></div></div><div></div></div><p>
+    .List&lt;object[]&gt;();</pre><p>
+        You can also add an entity projection to a criteria query:
+      </p><pre class="programlisting">var kittens = sess.CreateCriteria&lt;Cat&gt;()
+    .CreateCriteria("Kittens", "kt")
+    .Add(Expression.Eq("Name", "F%"))
+    .SetProjection(Projections.Entity(typeof(Cat), "kt"))
+    .List();</pre><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
+    .CreateCriteria("Kittens", "kt")
+    .Add(Expression.Eq("Name", "F%"))
+    .SetProjection(
+        Projections.RootEntity(),
+        Projections.Entity(typeof(Cat), "kt"))
+    .List&lt;object[]&gt;();
+
+foreach (var objs in cats)
+{
+    Cat cat = (Cat) objs[0];
+    Cat kitten = (Cat) objs[1];
+}</pre><p>
+        See <a href="queryqueryover.html#queryqueryover-projectionentities" title="16.9.&nbsp;Entities Projection">Section&nbsp;16.9, &#8220;Entities Projection&#8221;</a> for more information.
+      </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.9.&nbsp;Detached queries and sub-queries</h2></div></div><div></div></div><p>
             The <tt class="literal">DetachedCriteria</tt> class lets you create a query outside the scope 
             of a session, and then later execute it using some arbitrary <tt class="literal">ISession</tt>.
         </p><pre class="programlisting">DetachedCriteria query = DetachedCriteria.For&lt;Cat&gt;()
@@ -208,4 +236,4 @@ session.CreateCriteria&lt;Cat&gt;()
     .Add( Expression.EqProperty("cat2.Sex", "cat.Sex") );
 session.CreateCriteria(typeof(Cat), "cat")
     .Add( Subqueries.Gt("weight", avgWeightForSex) )
-    .List&lt;Cat&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;QueryOver Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+    .List&lt;Cat&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;QueryOver Queries</td></tr></table></div></body></html>
