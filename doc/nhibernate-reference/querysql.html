@@ -15,7 +15,7 @@ layout:
   procedures) for all create, update, delete, and load operations.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querysql-creating"></a>18.1.&nbsp;Using an <tt class="literal">ISQLQuery</tt></h2></div></div><div></div></div><p>Execution of native SQL queries is controlled via the
     <tt class="literal">ISQLQuery</tt> interface, which is obtained by calling
     <tt class="literal">ISession.CreateSQLQuery()</tt>. The following describes how
-    to use this API for querying.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13530"></a>18.1.1.&nbsp;Scalar queries</h3></div></div><div></div></div><p>The most basic SQL query is to get a list of scalars
+    to use this API for querying.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-scalar"></a>18.1.1.&nbsp;Scalar queries</h3></div></div><div></div></div><p>The most basic SQL query is to get a list of scalars
       (values).</p><pre class="programlisting">sess.CreateSQLQuery("SELECT * FROM CATS")
  .AddScalar("ID", NHibernateUtil.Int64)
  .AddScalar("NAME", NHibernateUtil.String)
@@ -25,7 +25,7 @@ layout:
       scalar values for each column in the CATS table. Only these three
       columns will be returned, even though the query is using
       <tt class="literal">*</tt> and could return more than the three listed
-      columns.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13560"></a>18.1.2.&nbsp;Entity queries</h3></div></div><div></div></div><p>The above query was about returning scalar values,
+      columns.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-entity"></a>18.1.2.&nbsp;Entity queries</h3></div></div><div></div></div><p>The above query was about returning scalar values,
       basically returning the "raw" values from the result set. The following
       shows how to get entity objects from a native SQL query via
       <tt class="literal">AddEntity()</tt>.</p><pre class="programlisting">sess.CreateSQLQuery("SELECT * FROM CATS").AddEntity(typeof(Cat));
@@ -39,7 +39,7 @@ sess.CreateSQLQuery("SELECT ID, NAME, BIRTHDATE FROM CATS").AddEntity(typeof(Cat
       returned when using the * notation, but we prefer to be explicit as in
       the following example for a <tt class="literal">many-to-one</tt> to a
       <tt class="literal">Dog</tt>:</p><pre class="programlisting">sess.CreateSQLQuery("SELECT ID, NAME, BIRTHDATE, DOG_ID FROM CATS")
-    .AddEntity(typeof(Cat));</pre><p>This will allow cat.Dog property access to function properly.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13596"></a>18.1.3.&nbsp;Handling associations and collections</h3></div></div><div></div></div><p>It is possible to eagerly join in the <tt class="literal">Dog</tt> to
+    .AddEntity(typeof(Cat));</pre><p>This will allow cat.Dog property access to function properly.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-associations-collections"></a>18.1.3.&nbsp;Handling associations and collections</h3></div></div><div></div></div><p>It is possible to eagerly join in the <tt class="literal">Dog</tt> to
       avoid the possible extra round-trip for initializing the proxy. This is
       done via the <tt class="literal">AddJoin()</tt> method, which allows you to
       join in an association or collection.</p><pre class="programlisting">sess
@@ -62,7 +62,7 @@ sess.CreateSQLQuery("SELECT ID, NAME, BIRTHDATE FROM CATS").AddEntity(typeof(Cat
       native queries without starting to enhance the SQL queries to make them
       usable in NHibernate; the problems start to arise when returning
       multiple entities of the same type or when the default alias/column
-      names are not enough.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13627"></a>18.1.4.&nbsp;Returning multiple entities</h3></div></div><div></div></div><p>Until now the result set column names are assumed to be the same
+      names are not enough.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-multiple-entities"></a>18.1.4.&nbsp;Returning multiple entities</h3></div></div><div></div></div><p>Until now the result set column names are assumed to be the same
       as the column names specified in the mapping document. This can be
       problematic for SQL queries which join multiple tables, since the same
       column names may appear in more than one table.</p><p>Column alias injection is needed in the following query (which
@@ -104,16 +104,16 @@ var loggedCats = sess.CreateSQLQuery(sql)
         the alias injection. Note: the alias names in the result are examples,
         each alias will have a unique and probably different name when
         used.</p><div class="table"><a name="aliasinjection-summary"></a><p class="title"><b>Table&nbsp;18.1.&nbsp;Alias injection names</b></p><table summary="Alias injection names" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Description</th><th>Syntax</th><th>Example</th></tr></thead><tbody><tr><td>A simple property</td><td><tt class="literal">{[aliasname].[propertyname]}</tt></td><td><tt class="literal">A_NAME as {item.Name}</tt></td></tr><tr><td>A composite property</td><td><tt class="literal">{[aliasname].[componentname].[propertyname]}</tt></td><td><tt class="literal">CURRENCY as {item.Amount.Currency}, VALUE as
-                {item.Amount.Value}</tt></td></tr><tr><td>Discriminator of an entity</td><td><tt class="literal">{[aliasname].class}</tt></td><td><tt class="literal">DISC as {item.class}</tt></td></tr><tr><td>All properties of an entity</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{item.*}</tt></td></tr><tr><td>A collection key</td><td><tt class="literal">{[aliasname].key}</tt></td><td><tt class="literal">ORGID as {coll.key}</tt></td></tr><tr><td>The id of an collection</td><td><tt class="literal">{[aliasname].id}</tt></td><td><tt class="literal">EMPID as {coll.id}</tt></td></tr><tr><td>The element of an collection</td><td><tt class="literal">{[aliasname].element}</tt></td><td><tt class="literal">XID as {coll.element}</tt></td></tr><tr><td>property of the element in the collection</td><td><tt class="literal">{[aliasname].element.[propertyname]}</tt></td><td><tt class="literal">NAME as {coll.element.Name}</tt></td></tr><tr><td>All properties of the element in the collection</td><td><tt class="literal">{[aliasname].element.*}</tt></td><td><tt class="literal">{coll.element.*}</tt></td></tr><tr><td>All properties of the collection</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{coll.*}</tt></td></tr></tbody></table></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13768"></a>18.1.5.&nbsp;Returning non-managed entities</h3></div></div><div></div></div><p>It is possible to apply an <tt class="literal">IResultTransformer</tt> to native sql queries. Allowing it to e.g. return non-managed entities.</p><pre class="programlisting">sess.CreateSQLQuery("SELECT NAME, BIRTHDATE FROM CATS")
+                {item.Amount.Value}</tt></td></tr><tr><td>Discriminator of an entity</td><td><tt class="literal">{[aliasname].class}</tt></td><td><tt class="literal">DISC as {item.class}</tt></td></tr><tr><td>All properties of an entity</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{item.*}</tt></td></tr><tr><td>A collection key</td><td><tt class="literal">{[aliasname].key}</tt></td><td><tt class="literal">ORGID as {coll.key}</tt></td></tr><tr><td>The id of an collection</td><td><tt class="literal">{[aliasname].id}</tt></td><td><tt class="literal">EMPID as {coll.id}</tt></td></tr><tr><td>The element of an collection</td><td><tt class="literal">{[aliasname].element}</tt></td><td><tt class="literal">XID as {coll.element}</tt></td></tr><tr><td>property of the element in the collection</td><td><tt class="literal">{[aliasname].element.[propertyname]}</tt></td><td><tt class="literal">NAME as {coll.element.Name}</tt></td></tr><tr><td>All properties of the element in the collection</td><td><tt class="literal">{[aliasname].element.*}</tt></td><td><tt class="literal">{coll.element.*}</tt></td></tr><tr><td>All properties of the collection</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{coll.*}</tt></td></tr></tbody></table></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-non-managed-entities"></a>18.1.5.&nbsp;Returning non-managed entities</h3></div></div><div></div></div><p>It is possible to apply an <tt class="literal">IResultTransformer</tt> to native sql queries. Allowing it to e.g. return non-managed entities.</p><pre class="programlisting">sess.CreateSQLQuery("SELECT NAME, BIRTHDATE FROM CATS")
         .SetResultTransformer(Transformers.AliasToBean(typeof(CatDTO)))</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>a result transformer</p></li></ul></div><p>
         The above query will return a list of <tt class="literal">CatDTO</tt> which has been instantiated and injected the values of NAME and BIRTHNAME into its corresponding
         properties or fields.
         </p><p>
 			IMPORTANT: The custom <tt class="literal">IResultTransformer</tt> should override <tt class="literal">Equals</tt> and <tt class="literal">GetHashCode</tt>, 
 			otherwise the query translation won't be cached. This also will result in memory leak.
-		</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13803"></a>18.1.6.&nbsp;Handling inheritance</h3></div></div><div></div></div><p>Native SQL queries which query for entities that are mapped as part
+		</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-inheritance"></a>18.1.6.&nbsp;Handling inheritance</h3></div></div><div></div></div><p>Native SQL queries which query for entities that are mapped as part
       of an inheritance hierarchy must include all properties for the base class and all
-      its subclasses.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="d0e13808"></a>18.1.7.&nbsp;Parameters</h3></div></div><div></div></div><p>Native SQL queries support positional as well as named
+      its subclasses.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-parameters"></a>18.1.7.&nbsp;Parameters</h3></div></div><div></div></div><p>Native SQL queries support positional as well as named
       parameters:</p><pre class="programlisting">var query = sess
     .CreateSQLQuery("SELECT * FROM CATS WHERE NAME like ?")
     .AddEntity(typeof(Cat));

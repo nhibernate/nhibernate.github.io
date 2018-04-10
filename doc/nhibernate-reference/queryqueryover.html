@@ -132,7 +132,19 @@ IList&lt;Cat&gt; cats =
         </p><pre class="programlisting">IQueryOver&lt;Cat,Kitten&gt; catQuery =
     session.QueryOver&lt;Cat&gt;()
         .Left.JoinQueryOver(c =&gt; c.Kittens)
-            .Where(k =&gt; k.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-aliases"></a>16.5.&nbsp;Aliases</h2></div></div><div></div></div><p>
+            .Where(k =&gt; k.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover_entityjoin"></a>16.5.&nbsp;Join entities without association (Entity joins or ad hoc joins)</h2></div></div><div></div></div><p>
+        In QueryOver you have the ability to define a join to any entity, not just through a mapped association.
+        To achieve it, use <tt class="literal">JoinEntityAlias</tt> and <tt class="literal">JoinEntityQueryOver</tt>. By example:
+      </p><pre class="programlisting">Cat cat = null;
+Cat joinedCat = null;
+
+var uniquelyNamedCats = sess.QueryOver&lt;Cat&gt;(() =&gt; cat)
+    .JoinEntityAlias(
+        () =&gt; joinedCat,
+        () =&gt; cat.Name == joinedCat.Name &amp;&amp; cat.Id != joinedCat.Id,
+        JoinType.LeftOuterJoin)
+    .Where(() =&gt; joinedCat.Id == null)
+    .List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-aliases"></a>16.6.&nbsp;Aliases</h2></div></div><div></div></div><p>
             In the traditional ICriteria interface aliases are assigned using 'magic strings', however their value
             does not correspond to a name in the object domain.  For example, when an alias is assigned using
             <tt class="code">.CreateAlias("Kitten", "kittenAlias")</tt>, the string "kittenAlias" does not correspond
@@ -153,7 +165,7 @@ IQueryOver&lt;Cat,Cat&gt; catQuery =
     session.QueryOver&lt;Cat&gt;(() =&gt; catAlias)
         .JoinAlias(() =&gt; catAlias.Kittens, () =&gt; kittenAlias)
         .Where(() =&gt; catAlias.Age &gt; 5)
-        .And(() =&gt; kittenAlias.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projections"></a>16.6.&nbsp;Projections</h2></div></div><div></div></div><p>
+        .And(() =&gt; kittenAlias.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projections"></a>16.7.&nbsp;Projections</h2></div></div><div></div></div><p>
             Simple projections of the properties of the root type can be added using the <tt class="code">.Select</tt> method
             which can take multiple Lambda Expression arguments:
         </p><pre class="programlisting">var selection =
@@ -217,14 +229,29 @@ IList&lt;CatSummary&gt; catReport =
             .SelectGroup(c =&gt; c.Name).WithAlias(() =&gt; summaryDto.Name)
             .SelectAvg(c =&gt; c.Age).WithAlias(() =&gt; summaryDto.AverageAge))
         .TransformUsing(Transformers.AliasToBean&lt;CatSummary&gt;())
-        .List&lt;CatSummary&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionfunctions"></a>16.7.&nbsp;Projection Functions</h2></div></div><div></div></div><p>
+        .List&lt;CatSummary&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionfunctions"></a>16.8.&nbsp;Projection Functions</h2></div></div><div></div></div><p>
             In addition to projecting properties, there are extension methods to allow certain common dialect-registered
             functions to be applied.  For example you can write the following to get 3 letters named people.
         </p><pre class="programlisting">        .Where(p =&gt; p.FirstName.StrLength() == 3)</pre><p>
             The functions can also be used inside projections:
         </p><pre class="programlisting">        .Select(
             p =&gt; Projections.Concat(p.LastName, ", ", p.FirstName),
-            p =&gt; p.Height.Abs())</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-subqueries"></a>16.8.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
+            p =&gt; p.Height.Abs())</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionentities"></a>16.9.&nbsp;Entities Projection</h2></div></div><div></div></div><p>
+        You can add entity projections via the <tt class="literal">AsEntity()</tt> extension.
+      </p><pre class="programlisting">Cat mate = null;
+
+var catAndMateNameList = sess.QueryOver&lt;Cat&gt;()
+    .JoinAlias(c =&gt; c.Mate, () =&gt; mate)
+    .Select(c =&gt; c.AsEntity(), c =&gt; mate.Name)
+    .List&lt;object[]&gt;();</pre><p>
+        Or it can be done via the <tt class="literal">Projections.RootEntity</tt> and <tt class="literal">Projections.Entity</tt> methods
+        if more control over loaded entities is required. For instance, entity projections can be lazy loaded
+        or fetched with lazy properties:
+      </p><pre class="programlisting">.Select(
+    Projections.Entity(() =&gt; alias1).SetLazy(true),
+    Projections.Entity(() =&gt; alias2).SetFetchLazyProperties(true),
+    Projections.RootEntity()
+        )</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-subqueries"></a>16.10.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
             The Sub-queries factory class has overloads to allow Lambda Expressions to express sub-query
             restrictions.  For example:
         </p><pre class="programlisting">QueryOver&lt;Cat&gt; maximumAge =

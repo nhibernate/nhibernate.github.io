@@ -89,9 +89,24 @@ var cats = sess.CreateCriteria&lt;Cat&gt;()
     .List&lt;IDictionary&gt;();
 foreach ( IDictionary map in cats )
 {
-    Cat cat = (Cat) map[CriteriaUtil.RootAlias];
+    Cat cat = (Cat) map[CriteriaSpecification.RootAlias];
     Cat kitten = (Cat) map["kt"];
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-dynamicfetching"></a>15.5.&nbsp;Dynamic association fetching</h2></div></div><div></div></div><p>
+}</pre><p>
+        Note that for retrieving just kittens you can also use an entity projection.
+        See <a href="querycriteria.html#querycriteria-projection" title="15.8.&nbsp;Projections, aggregation and grouping">Section&nbsp;15.8, &#8220;Projections, aggregation and grouping&#8221;</a> for more information.
+      </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria_entityjoin"></a>15.5.&nbsp;Join entities without association (Entity joins or ad hoc joins)</h2></div></div><div></div></div><p>
+        In criteria you have the ability to define a join to any entity, not just through a mapped association.
+        To achieve it, use <tt class="literal">CreateEntityAlias</tt> and <tt class="literal">CreateEntityCriteria</tt>. By example:
+      </p><pre class="programlisting">IList&lt;Cat&gt; uniquelyNamedCats = sess.CreateCriteria&lt;Cat&gt;("c")
+    .CreateEntityAlias(
+        "joinedCat",
+        Restrictions.And(
+            Restrictions.EqProperty("c.Name", "joinedCat.Name"),
+            Restrictions.NotEqProperty("c.Id", "joinedCat.Id")),
+        JoinType.LeftOuterJoin,
+        typeof(Cat).FullName)
+    .Add(Restrictions.IsNull("joinedCat.Id"))
+    .List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-dynamicfetching"></a>15.6.&nbsp;Dynamic association fetching</h2></div></div><div></div></div><p>
             You may specify association fetching semantics at runtime using
             <tt class="literal">SetFetchMode()</tt>.
         </p><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
@@ -101,7 +116,7 @@ foreach ( IDictionary map in cats )
     .List&lt;Cat&gt;();</pre><p>
             This query will fetch both <tt class="literal">Mate</tt> and <tt class="literal">Kittens</tt>
             by outer join. See <a href="performance.html#performance-fetching" title="20.1.&nbsp;Fetching strategies">Section&nbsp;20.1, &#8220;Fetching strategies&#8221;</a> for more information.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-examples"></a>15.6.&nbsp;Example queries</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-examples"></a>15.7.&nbsp;Example queries</h2></div></div><div></div></div><p>
             The class <tt class="literal">NHibernate.Expression.Example</tt> allows
             you to construct a query criterion from a given instance.
         </p><pre class="programlisting">Cat cat = new Cat();
@@ -128,7 +143,7 @@ var results = session.CreateCriteria&lt;Cat&gt;()
     .Add( Example.Create(cat) )
     .CreateCriteria("Mate")
         .Add( Example.Create( cat.Mate ) )
-    .List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-projection"></a>15.7.&nbsp;Projections, aggregation and grouping</h2></div></div><div></div></div><p>
+    .List&lt;Cat&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-projection"></a>15.8.&nbsp;Projections, aggregation and grouping</h2></div></div><div></div></div><p>
             The class <tt class="literal">NHibernate.Expression.Projections</tt> is a
             factory for <tt class="literal">IProjection</tt> instances. We apply a
             projection to a query by calling <tt class="literal">SetProjection()</tt>.
@@ -178,7 +193,27 @@ var results = session.CreateCriteria&lt;Cat&gt;()
     )
     .AddOrder( Order.Asc("catName") )
     .AddOrder( Order.Asc("kitName") )
-    .List&lt;object[]&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.8.&nbsp;Detached queries and sub-queries</h2></div></div><div></div></div><p>
+    .List&lt;object[]&gt;();</pre><p>
+        You can also add an entity projection to a criteria query:
+      </p><pre class="programlisting">var kittens = sess.CreateCriteria&lt;Cat&gt;()
+    .CreateCriteria("Kittens", "kt")
+    .Add(Expression.Eq("Name", "F%"))
+    .SetProjection(Projections.Entity(typeof(Cat), "kt"))
+    .List();</pre><pre class="programlisting">var cats = sess.CreateCriteria&lt;Cat&gt;()
+    .CreateCriteria("Kittens", "kt")
+    .Add(Expression.Eq("Name", "F%"))
+    .SetProjection(
+        Projections.RootEntity(),
+        Projections.Entity(typeof(Cat), "kt"))
+    .List&lt;object[]&gt;();
+
+foreach (var objs in cats)
+{
+    Cat cat = (Cat) objs[0];
+    Cat kitten = (Cat) objs[1];
+}</pre><p>
+        See <a href="queryqueryover.html#queryqueryover-projectionentities" title="16.9.&nbsp;Entities Projection">Section&nbsp;16.9, &#8220;Entities Projection&#8221;</a> for more information.
+      </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querycriteria-detachedqueries"></a>15.9.&nbsp;Detached queries and sub-queries</h2></div></div><div></div></div><p>
             The <tt class="literal">DetachedCriteria</tt> class lets you create a query outside the scope 
             of a session, and then later execute it using some arbitrary <tt class="literal">ISession</tt>.
         </p><pre class="programlisting">DetachedCriteria query = DetachedCriteria.For&lt;Cat&gt;()
