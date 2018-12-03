@@ -1,17 +1,10 @@
----
-layout:
----
-<!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;12.&nbsp;Interceptors and events</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="transactions.html" title="Chapter&nbsp;11.&nbsp;Transactions And Concurrency"><link rel="next" href="batch.html" title="Chapter&nbsp;13.&nbsp;Batch processing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Interceptors and events</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="transactions.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="batch.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="events"></a>Chapter&nbsp;12.&nbsp;Interceptors and events</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;13.&nbsp;Interceptors and events</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="transactions.html" title="Chapter&nbsp;12.&nbsp;Transactions And Concurrency"><link rel="next" href="batch.html" title="Chapter&nbsp;14.&nbsp;Batch processing"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;13.&nbsp;Interceptors and events</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="transactions.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="batch.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="events"></a>Chapter&nbsp;13.&nbsp;Interceptors and events</h2></div></div><div></div></div><p>
         It is often useful for the application to react to certain events that occur
         inside NHibernate. This allows implementation of certain kinds of generic 
         functionality, and extension of NHibernate functionality.
-    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-interceptors"></a>12.1.&nbsp;Interceptors</h2></div></div><div></div></div><p>
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-interceptors"></a>13.1.&nbsp;Interceptors</h2></div></div><div></div></div><p>
             The <tt class="literal">IInterceptor</tt> interface provides callbacks from the session to the 
             application allowing the application to inspect and/or manipulate properties of a
             persistent object before it is saved, updated, deleted or loaded. One 
@@ -119,7 +112,7 @@ public class AuditInterceptor : EmptyInterceptor {
             a session is opened explicitly specifying the interceptor to use.  <tt class="literal">ISessionFactory</tt>-scoped
             interceptors must be thread safe, taking care to not store session-specific state since multiple
             sessions will use this interceptor (potentially) concurrently.
-        </p><pre class="programlisting">new Configuration().SetInterceptor( new AuditInterceptor() );</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-events"></a>12.2.&nbsp;Event system</h2></div></div><div></div></div><p>
+        </p><pre class="programlisting">new Configuration().SetInterceptor( new AuditInterceptor() );</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="objectstate-events"></a>13.2.&nbsp;Event system</h2></div></div><div></div></div><p>
             If you have to react to particular events in your persistence layer, you may
             also use the NHibernate2 <span class="emphasis"><em>event</em></span> architecture. The event
             system can be used in addition or as a replacement for interceptors.
@@ -182,4 +175,4 @@ cfg.EventListeners.LoadEventListeners = stack;</pre><p>
             listener implementation could implement multiple event listener interfaces. Having the
             type additionally defined during registration makes it easier to turn custom listeners on
             or off during configuration.
-        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="transactions.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="batch.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Transactions And Concurrency&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Batch processing</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="transactions.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="batch.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Transactions And Concurrency&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;Batch processing</td></tr></table></div></body></html>

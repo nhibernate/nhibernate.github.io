@@ -1,13 +1,6 @@
----
-layout:
----
-<!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;4.&nbsp;Persistent Classes</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="session-configuration.html" title="Chapter&nbsp;3.&nbsp;ISessionFactory Configuration"><link rel="next" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;4.&nbsp;Persistent Classes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="persistent-classes"></a>Chapter&nbsp;4.&nbsp;Persistent Classes</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;4.&nbsp;Persistent Classes</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="session-configuration.html" title="Chapter&nbsp;3.&nbsp;ISessionFactory Configuration"><link rel="next" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;4.&nbsp;Persistent Classes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="persistent-classes"></a>Chapter&nbsp;4.&nbsp;Persistent Classes</h2></div></div><div></div></div><p>
         Persistent classes are classes in an application that implement the entities
         of the business problem (e.g. Customer and Order in an E-commerce application).
         Persistent classes have, as the name implies, transient and also persistent
@@ -80,7 +73,7 @@ namespace Eg
                 What's more, some functionality is available only to classes which declare an
                 identifier property:
             </p><div class="itemizedlist"><ul type="disc" compact><li><p>
-                        Cascaded updates (see "Lifecycle Objects")
+                        Cascaded updates (see <a href="manipulatingdata.html#manipulatingdata-graphs" title="10.10.&nbsp;Lifecycles and object graphs">Section&nbsp;10.10, &#8220;Lifecycles and object graphs&#8221;</a>)
                     </p></li><li><p>
                         <tt class="literal">ISession.SaveOrUpdate()</tt>
                     </p></li></ul></div><p>
@@ -169,50 +162,46 @@ namespace Eg
         </p><p>
             Persistent entities don't necessarily have to be represented as POCO classes
             at runtime. NHibernate also supports dynamic models
-            (using <tt class="literal">Dictionaries</tt> of <tt class="literal">Dictionary</tt>s at runtime) . With this approach, you don't
-            write persistent classes, only mapping files.
+            (using <tt class="literal">Dictionaries</tt> or C# <tt class="literal">dynamic</tt>). With this approach,
+            you don't write persistent classes, only mapping files.
         </p><p>
-            The following examples demonstrates the representation using <tt class="literal">Map</tt>s (Dictionary).
+            The following examples demonstrates the dynamic model feature.
             First, in the mapping file, an <tt class="literal">entity-name</tt> has to be declared
             instead of a class name:
         </p><pre class="programlisting">&lt;hibernate-mapping&gt;
-
     &lt;class entity-name="Customer"&gt;
-
-        &lt;id name="id"
+        &lt;id name="Id"
             type="long"
             column="ID"&gt;
             &lt;generator class="sequence"/&gt;
         &lt;/id&gt;
 
-        &lt;property name="name"
+        &lt;property name="Name"
             column="NAME"
             type="string"/&gt;
 
-        &lt;property name="address"
+        &lt;property name="Address"
             column="ADDRESS"
             type="string"/&gt;
 
-        &lt;many-to-one name="organization"
+        &lt;many-to-one name="Organization"
             column="ORGANIZATION_ID"
             class="Organization"/&gt;
 
-        &lt;bag name="orders"
+        &lt;bag name="Orders"
             inverse="true"
             lazy="false"
             cascade="all"&gt;
             &lt;key column="CUSTOMER_ID"/&gt;
             &lt;one-to-many class="Order"/&gt;
         &lt;/bag&gt;
-
     &lt;/class&gt;
-    
 &lt;/hibernate-mapping&gt;</pre><p>
             Note that even though associations are declared using target class names,
             the target type of an associations may also be a dynamic entity instead
             of a POCO.
         </p><p>
-            At runtime we can work with <tt class="literal">Dictionaries</tt> of <tt class="literal">Dictionaries</tt>:
+            At runtime we can work with <tt class="literal">Dictionaries</tt>:
         </p><pre class="programlisting">using(ISession s = OpenSession())
 using(ITransaction tx = s.BeginTransaction())
 {
@@ -233,12 +222,56 @@ using(ITransaction tx = s.BeginTransaction())
 
     tx.Commit();
 }</pre><p>
+           Or we can work with <tt class="literal">dynamic</tt>:
+        </p><pre class="programlisting">using(var s = OpenSession())
+using(var tx = s.BeginTransaction())
+{
+    // Create a customer
+    dynamic frank = new ExpandoObject();
+    frank.Name = "Frank";
+
+    // Create an organization
+    dynamic foobar = new ExpandoObject();
+    foobar.Name = "Foobar Inc.";
+
+    // Link both
+    frank.Organization = foobar;
+
+    // Save both
+    s.Save("Customer", frank);
+    s.Save("Organization", foobar);
+
+    tx.Commit();
+}</pre><p>
             The advantages of a dynamic mapping are quick turnaround time for prototyping
             without the need for entity class implementation. However, you lose compile-time
             type checking and will very likely deal with many exceptions at runtime. Thanks
             to the NHibernate mapping, the database schema can easily be normalized and sound,
             allowing to add a proper domain model implementation on top later on.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-tuplizers"></a>4.5.&nbsp;Tuplizers</h2></div></div><div></div></div><p>
+        </p><p>
+            A loaded dynamic entity can be manipulated as an <tt class="literal">IDictionary</tt>,
+            an <tt class="literal">IDictionary&lt;string, object&gt;</tt> or a C#
+            <tt class="literal">dynamic</tt>.
+        </p><pre class="programlisting">using(ISession s = OpenSession())
+using(ITransaction tx = s.BeginTransaction())
+{
+    var customers = s
+        .CreateQuery("from Customer")
+        .List&lt;IDictionary&lt;string, object&gt;&gt;();
+    ...
+}</pre><pre class="programlisting">using System.Linq.Dynamic.Core;
+
+...
+
+using(ISession s = OpenSession())
+using(ITransaction tx = s.BeginTransaction())
+{
+    var customers = s
+        .Query&lt;dynamic&gt;("Customer")
+        .OrderBy("Name")
+        .ToList();
+    ...
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-tuplizers"></a>4.5.&nbsp;Tuplizers</h2></div></div><div></div></div><p>
             <tt class="literal">NHibernate.Tuple.Tuplizer</tt>, and its sub-interfaces, are responsible
             for managing a particular representation of a piece of data, given that representation's
             <tt class="literal">NHibernate.EntityMode</tt>.  If a given piece of data is thought of as
@@ -252,9 +285,9 @@ using(ITransaction tx = s.BeginTransaction())
             contracts in regards to entities, while <tt class="literal">IComponentTuplizer</tt>s do the same for
             components.
         </p><p>
-            Users may also plug in their own tuplizers.  Perhaps you require that a <tt class="literal">System.Collections.IDictionary</tt>
-            implementation other than <tt class="literal">System.Collections.Hashtable</tt> be used while in the
-            dynamic-map entity-mode; or perhaps you need to define a different proxy generation strategy
+            Users may also plug in their own tuplizers.  Perhaps you require that a <tt class="literal">IDictionary</tt> /
+            <tt class="literal">DynamicObject</tt> implementation other than NHibernate own implementation is used while
+            in the dynamic-map entity-mode; or perhaps you need to define a different proxy generation strategy
             than the one used by default.  Both would be achieved by defining a custom tuplizer
             implementation.  Tuplizers definitions are attached to the entity or component mapping they
             are meant to manage.  Going back to the example of our customer entity:
@@ -300,7 +333,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
             the persistent object to perform necessary initialization/cleanup after
             save or load and before deletion or update.
         </p><p>
-            The NHibernate <a href="events.html#objectstate-interceptors" title="12.1.&nbsp;Interceptors"><tt class="literal">IInterceptor</tt></a>
+            The NHibernate <a href="events.html#objectstate-interceptors" title="13.1.&nbsp;Interceptors"><tt class="literal">IInterceptor</tt></a>
             offers a less intrusive alternative, however.
         </p><div class="programlistingco"><pre class="programlisting">public interface ILifecycle
 {                                                                    <span class="co">(1)</span>
@@ -356,4 +389,4 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
             <tt class="literal">Validate()</tt> might be called at unpredictable times. The
             application should not rely upon calls to <tt class="literal">Validate()</tt> for
             business functionality.
-        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;ISessionFactory Configuration&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Basic O/R Mapping</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;ISessionFactory Configuration&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Basic O/R Mapping</td></tr></table></div></body></html>

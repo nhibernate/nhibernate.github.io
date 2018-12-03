@@ -1,13 +1,6 @@
----
-layout:
----
-<!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;17.&nbsp;Linq Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries"><link rel="next" href="querysql.html" title="Chapter&nbsp;18.&nbsp;Native SQL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;17.&nbsp;Linq Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryqueryover.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querylinq"></a>Chapter&nbsp;17.&nbsp;Linq Queries</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;18.&nbsp;Linq Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="queryqueryover.html" title="Chapter&nbsp;17.&nbsp;QueryOver Queries"><link rel="next" href="querysql.html" title="Chapter&nbsp;19.&nbsp;Native SQL"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;18.&nbsp;Linq Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="queryqueryover.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="querylinq"></a>Chapter&nbsp;18.&nbsp;Linq Queries</h2></div></div><div></div></div><p>
     NHibernate 3.0 introduces the Linq to NHibernate provider, which allows the use of the Linq API
     for querying with NHibernate.
   </p><p>
@@ -18,9 +11,9 @@ layout:
     <tt class="literal">NHibernate.Linq</tt> namespace. Of course, the Linq namespace is still needed too.
   </p><pre class="programlisting">using System.Linq;
 using NHibernate.Linq;</pre><p>
-    Note: NHibernate has another querying API which uses lambda, <a href="queryqueryover.html" title="Chapter&nbsp;16.&nbsp;QueryOver Queries">QueryOver</a>.
+    Note: NHibernate has another querying API which uses lambda, <a href="queryqueryover.html" title="Chapter&nbsp;17.&nbsp;QueryOver Queries">QueryOver</a>.
     It should not be confused with a Linq provider.
-  </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-querystructure"></a>17.1.&nbsp;Structure of a Query</h2></div></div><div></div></div><p>
+  </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-querystructure"></a>18.1.&nbsp;Structure of a Query</h2></div></div><div></div></div><p>
       Queries are created from an ISession using the syntax:
     </p><pre class="programlisting">IList&lt;Cat&gt; cats =
     session.Query&lt;Cat&gt;()
@@ -58,7 +51,7 @@ using NHibernate.Linq;</pre><p>
         .Where(c =&gt; c.Color == "black")
         // Allows 10 seconds only.
         .SetOptions(o =&gt; o.SetTimeout(10))
-        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-parametertypes"></a>17.2.&nbsp;Parameter types</h2></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-parametertypes"></a>18.2.&nbsp;Parameter types</h2></div></div><div></div></div><p>
       Query parameters get extracted from the Linq expression. Their types are selected according to 
       <a href="mapping.html#mapping-types" title="5.2.&nbsp;NHibernate Types">NHibernate types</a> default for .Net types.
     </p><p>
@@ -69,12 +62,12 @@ using NHibernate.Linq;</pre><p>
         .ToList();</pre><pre class="programlisting">IList&lt;Cat&gt; cats =
     session.Query&lt;Cat&gt;()
         .Where(c =&gt; c.Name == "Max".MappedAs(TypeFactory.Basic("AnsiString(200)")))
-        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-supportedmethods"></a>17.3.&nbsp;Supported methods and members</h2></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-supportedmethods"></a>18.3.&nbsp;Supported methods and members</h2></div></div><div></div></div><p>
       Many methods and members of common .Net types are supported by the Linq to NHibernate provider.
       They will be translated to the appropriate SQL, provided they are called on an entity property
       (or expression deriving from) or at least one of their arguments references an entity property.
       (Otherwise, their return values will be evaluated with .Net runtime before query execution.)
-    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-common"></a>17.3.1.&nbsp;Common methods</h3></div></div><div></div></div><p>
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-common"></a>18.3.1.&nbsp;Common methods</h3></div></div><div></div></div><p>
         The .Net 4 <tt class="literal">CompareTo</tt> method of strings and numerical types is translated to
         a <tt class="literal">case</tt> statement yielding <tt class="literal">-1|0|1</tt> according to the result
         of the comparison.
@@ -108,7 +101,7 @@ using NHibernate.Linq;</pre><p>
         .ToList();</pre><p>&nbsp;</p><p>
         <tt class="literal">Equals</tt> methods taking a single argument with the same type can be used. Of
         course, <tt class="literal">==</tt> is supported too.
-      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-datetime"></a>17.3.2.&nbsp;<tt class="literal">DateTime</tt> and <tt class="literal">DateTimeOffset</tt></h3></div></div><div></div></div><p>
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-datetime"></a>18.3.2.&nbsp;<tt class="literal">DateTime</tt> and <tt class="literal">DateTimeOffset</tt></h3></div></div><div></div></div><p>
         Date and time parts properties can be called on <tt class="literal">DateTime</tt> and <tt class="literal">DateTimeOffset</tt>.
         Those properties are:
       </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -125,26 +118,26 @@ using NHibernate.Linq;</pre><p>
             <tt class="literal">Second</tt>
           </p></li><li><p>
             <tt class="literal">Year</tt>
-          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-icollection"></a>17.3.3.&nbsp;<tt class="literal">ICollection</tt>, non generic and generic</h3></div></div><div></div></div><p>
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-icollection"></a>18.3.3.&nbsp;<tt class="literal">ICollection</tt>, non generic and generic</h3></div></div><div></div></div><p>
         Collections <tt class="literal">Contains</tt> methods are supported.
       </p><pre class="programlisting">IList&lt;Cat&gt; catsWithWrongKitten =
     session.Query&lt;Cat&gt;()
         .Where(c =&gt; c.Kittens.Contains(c))
-        .ToList();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-idictionary"></a>17.3.4.&nbsp;<tt class="literal">IDictionary</tt>, non generic and generic</h3></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-idictionary"></a>18.3.4.&nbsp;<tt class="literal">IDictionary</tt>, non generic and generic</h3></div></div><div></div></div><p>
         Dictionaries <tt class="literal">Item</tt> getter are supported. This enables referencing a dictionary
         item value in a <tt class="literal">where</tt> condition, as it can be done with
-        <a href="queryhql.html#queryhql-expressions" title="14.8.&nbsp;Expressions">HQL expressions</a>.
+        <a href="queryhql.html#queryhql-expressions" title="15.8.&nbsp;Expressions">HQL expressions</a>.
       </p><p>
         Non generic dictionary method <tt class="literal">Contains</tt> and generic dictionary method
         <tt class="literal">ContainsKey</tt> are translated to corresponding <tt class="literal">indices</tt>
-        <a href="queryhql.html#queryhql-expressions" title="14.8.&nbsp;Expressions">HQL expressions</a>. Supposing <tt class="literal">Acts</tt>
+        <a href="queryhql.html#queryhql-expressions" title="15.8.&nbsp;Expressions">HQL expressions</a>. Supposing <tt class="literal">Acts</tt>
         in following HQL example is generic,
       </p><pre class="programlisting">from Eg.Show show where 'fizard' in indices(show.Acts)</pre><p>
         it could be written with Linq:
       </p><pre class="programlisting">IList&lt;Show&gt; shows =
     session.Query&lt;Show&gt;()
         .Where(s =&gt; s.Acts.ContainsKey("fizard"))
-        .ToList();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-math"></a>17.3.5.&nbsp;Mathematical functions</h3></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-math"></a>18.3.5.&nbsp;Mathematical functions</h3></div></div><div></div></div><p>
         The following list of mathematical functions from <tt class="literal">System.Math</tt> is handled:
       </p><div class="itemizedlist"><ul type="disc"><li><p>
             Trigonometric functions: <tt class="literal">Acos</tt>, <tt class="literal">Asin</tt>, <tt class="literal">Atan</tt>,
@@ -166,10 +159,10 @@ using NHibernate.Linq;</pre><p>
             <tt class="literal">Sqrt</tt>
           </p></li><li><p>
             <tt class="literal">Truncate</tt> (both overloads)
-          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-nullables"></a>17.3.6.&nbsp;Nullables</h3></div></div><div></div></div><p>
+          </p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-nullables"></a>18.3.6.&nbsp;Nullables</h3></div></div><div></div></div><p>
         On <tt class="literal">Nullable&lt;&gt;</tt> types, <tt class="literal">GetValueOrDefault</tt> methods, with or
         without a provided default value, are supported.
-      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-string"></a>17.3.7.&nbsp;Strings</h3></div></div><div></div></div><p>
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-supportedmethods-string"></a>18.3.7.&nbsp;Strings</h3></div></div><div></div></div><p>
         The following properties and methods are supported on strings:
       </p><div class="itemizedlist"><ul type="disc"><li><p>
             <tt class="literal">Contains</tt>
@@ -210,9 +203,9 @@ using NHibernate.Linq;</pre><p>
         If you want to avoid depending on the <tt class="literal">NHibernate.Linq</tt> namespace,
         you can define your own replica of the <tt class="literal">Like</tt> methods. Any 2 or 3 arguments method
         named <tt class="literal">Like</tt> in a class named <tt class="literal">SqlMethods</tt> will be translated.
-      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-futureresults"></a>17.4.&nbsp;Future results</h2></div></div><div></div></div><p>
+      </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-futureresults"></a>18.4.&nbsp;Future results</h2></div></div><div></div></div><p>
       Future results are supported by the Linq provider. They are not evaluated till one gets executed.
-      At that point, all defined future results are evaluated in one single round-trip to database.
+      At that point, all defined future results are evaluated in one single round-trip to the database.
     </p><pre class="programlisting">// Define queries
 IFutureEnumerable&lt;Cat&gt; cats =
     session.Query&lt;Cat&gt;()
@@ -231,11 +224,8 @@ if (catCount.Value &gt; 10)
     // Do something
 }
 </pre><p>
-      In above example, accessing <tt class="literal">catCount.Value</tt> does not trigger a round-trip to database:
-      it has been evaluated with <tt class="literal">cats.GetEnumerable()</tt> call. If instead
-      <tt class="literal">catCount.Value</tt> was accessed first, it would have executed both future and
-      <tt class="literal">cats.GetEnumerable()</tt> would have not trigger a round-trip to database.
-    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-fetching"></a>17.5.&nbsp;Fetching associations</h2></div></div><div></div></div><p>
+      See <a href="performance.html#performance-future" title="21.8.&nbsp;Future results">Section&nbsp;21.8, &#8220;Future results&#8221;</a> for more information.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-fetching"></a>18.5.&nbsp;Fetching associations</h2></div></div><div></div></div><p>
       A Linq query may load associated entities or collection of entities. Once the query is defined, using
       <tt class="literal">Fetch</tt> allows fetching a related entity, and <tt class="literal">FetchMany</tt> allows
       fetching a collection. These methods are defined as extensions in <tt class="literal">NHibernate.Linq</tt>
@@ -248,7 +238,7 @@ if (catCount.Value &gt; 10)
         .ToList();</pre><p>
       Issuing many <tt class="literal">FetchMany</tt> on the same query may cause a cartesian product over
       the fetched collections. This can be avoided by splitting the fetches among 
-      <a href="querylinq.html#querylinq-futureresults" title="17.4.&nbsp;Future results">future queries</a>.
+      <a href="querylinq.html#querylinq-futureresults" title="18.4.&nbsp;Future results">future queries</a>.
     </p><pre class="programlisting">IQueryable&lt;Cat&gt; oldCatsQuery =
     session.Query&lt;Cat&gt;()
         .Where(c =&gt; c.BirthDate.Year &lt; 2010);
@@ -270,7 +260,7 @@ IList&lt;Cat&gt; oldCats =
         .Fetch(c =&gt; c.Mate)
         .FetchMany(c =&gt; c.Kittens)
         .ThenFetch(k =&gt; k.Mate)
-        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-modifying"></a>17.6.&nbsp;Modifying entities inside the database</h2></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-modifying"></a>18.6.&nbsp;Modifying entities inside the database</h2></div></div><div></div></div><p>
       Beginning with NHibernate 5.0, Linq queries can be used for inserting, updating or deleting entities.
       The query defines the data to delete, update or insert, and then <tt class="literal">Delete</tt>,
       <tt class="literal">Update</tt>, <tt class="literal">UpdateBuilder</tt>, <tt class="literal">InsertInto</tt> and
@@ -278,9 +268,9 @@ IList&lt;Cat&gt; oldCats =
       or instruct in which way it should be updated or inserted. Those queries happen entirely inside the
       database, without extracting corresponding entities out of the database.
     </p><p>
-      These operations are a Linq implementation of <a href="batch.html#batch-direct" title="13.3.&nbsp;DML-style operations">Section&nbsp;13.3, &#8220;DML-style operations&#8221;</a>, with the same abilities
+      These operations are a Linq implementation of <a href="batch.html#batch-direct" title="14.3.&nbsp;DML-style operations">Section&nbsp;14.3, &#8220;DML-style operations&#8221;</a>, with the same abilities
       and limitations.
-    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-insert"></a>17.6.1.&nbsp;Inserting new entities</h3></div></div><div></div></div><p>
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-insert"></a>18.6.1.&nbsp;Inserting new entities</h3></div></div><div></div></div><p>
         <tt class="literal">InsertInto</tt> and <tt class="literal">InsertBuilder</tt> method extensions expect a NHibernate
         queryable defining the data source of the insert. This data can be entities or a projection. Then they
         allow specifying the target entity type to insert, and how to convert source data to those target
@@ -309,8 +299,8 @@ IList&lt;Cat&gt; oldCats =
         exceptions. If not specified, they are inserted with their <tt class="literal">seed</tt> value.
       </p><p>
         For more information on <tt class="literal">Insert</tt> limitations, please refer to
-        <a href="batch.html#batch-direct" title="13.3.&nbsp;DML-style operations">Section&nbsp;13.3, &#8220;DML-style operations&#8221;</a>.
-      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-update"></a>17.6.2.&nbsp;Updating entities</h3></div></div><div></div></div><p>
+        <a href="batch.html#batch-direct" title="14.3.&nbsp;DML-style operations">Section&nbsp;14.3, &#8220;DML-style operations&#8221;</a>.
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-update"></a>18.6.2.&nbsp;Updating entities</h3></div></div><div></div></div><p>
         <tt class="literal">Update</tt> and <tt class="literal">UpdateBuilder</tt> method extensions expect a NHibernate
         queryable defining the entities to update. Then they allow specifying which properties should be
         updated with which values. As for insertion, three forms of target specification exist.
@@ -339,14 +329,14 @@ IList&lt;Cat&gt; oldCats =
         When using projection to updated entity, please note that the constructed entity must have the
         exact same type than the underlying queryable source type. Attempting to project to any other class
         (anonymous projections excepted) will fail.
-      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-delete"></a>17.6.3.&nbsp;Deleting entities</h3></div></div><div></div></div><p>
+      </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-modifying-delete"></a>18.6.3.&nbsp;Deleting entities</h3></div></div><div></div></div><p>
         <tt class="literal">Delete</tt> method extension expects a queryable defining the entities to delete.
         It immediately deletes them.
       </p><pre class="programlisting">session.Query&lt;Cat&gt;()
     .Where(c =&gt; c.BodyWeight &gt; 20)
-    .Delete();</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-querycache"></a>17.7.&nbsp;Query cache</h2></div></div><div></div></div><p>
+    .Delete();</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-querycache"></a>18.7.&nbsp;Query cache</h2></div></div><div></div></div><p>
       The Linq provider can use the query cache if it is setup. Refer to
-      <a href="performance.html#performance-querycache" title="20.4.&nbsp;The Query Cache">Section&nbsp;20.4, &#8220;The Query Cache&#8221;</a> for more details on how to set it up.
+      <a href="performance.html#performance-querycache" title="21.4.&nbsp;The Query Cache">Section&nbsp;21.4, &#8220;The Query Cache&#8221;</a> for more details on how to set it up.
     </p><p>&nbsp;</p><p>
       <tt class="literal">SetOptions</tt> extension method allows to enable the cache for the query.
     </p><pre class="programlisting">IList&lt;Cat&gt; oldCats =
@@ -362,10 +352,10 @@ IList&lt;Cat&gt; oldCats =
             .SetCacheable(true)
             .SetCacheRegion("catNames")
             .SetCacheMode(CacheMode.Put))
-        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-extending"></a>17.8.&nbsp;Extending the Linq to NHibernate provider</h2></div></div><div></div></div><p>
+        .ToList();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querylinq-extending"></a>18.8.&nbsp;Extending the Linq to NHibernate provider</h2></div></div><div></div></div><p>
       The Linq to NHibernate provider can be extended for supporting additional SQL functions or
       translating additional methods or properties to a SQL query.
-    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-extending-sqlfunctions"></a>17.8.1.&nbsp;Adding SQL functions</h3></div></div><div></div></div><p>
+    </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-extending-sqlfunctions"></a>18.8.1.&nbsp;Adding SQL functions</h3></div></div><div></div></div><p>
         NHibernate Linq provider feature a <tt class="literal">LinqExtensionMethod</tt> attribute. It allows using an
         arbitrary, built-in or user defined, SQL function. It should be applied on a method having the same
         arguments than the SQL function.
@@ -409,13 +399,13 @@ IList&lt;Cat&gt; cats =
         // In-memory evaluation implementation.
         return input.Replace(otherInput, "blah");
     }
-}</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-extending-generator"></a>17.8.2.&nbsp;Adding a custom generator</h3></div></div><div></div></div><p>
+}</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querylinq-extending-generator"></a>18.8.2.&nbsp;Adding a custom generator</h3></div></div><div></div></div><p>
         Generators are responsible for translating .Net method calls found in lambdas to the proper HQL
         constructs. Adding support for a new method call can be achieved by registering an additional
         generator in the Linq to NHibernate provider.
       </p><p>
         If the purpose of the added method is to simply call some SQL function, using
-        <a href="querylinq.html#querylinq-extending-sqlfunctions" title="17.8.1.&nbsp;Adding SQL functions">Section&nbsp;17.8.1, &#8220;Adding SQL functions&#8221;</a> will be easier.
+        <a href="querylinq.html#querylinq-extending-sqlfunctions" title="18.8.1.&nbsp;Adding SQL functions">Section&nbsp;18.8.1, &#8220;Adding SQL functions&#8221;</a> will be easier.
       </p><p>&nbsp;</p><p>
         As an example, here is how to add support for an <tt class="literal">AsNullable</tt> method which
         would allow to call aggregates which may yield <tt class="literal">null</tt> without to explicitly
@@ -502,4 +492,4 @@ cfg.LinqToHqlGeneratorsRegistry&lt;ExtendedLinqToHqlGeneratorsRegistry&gt;();
         of the parameters of the method call has its value originating from an entity, or if
         the method is marked with the <tt class="literal">NoPreEvaluation</tt> attribute (available
         since NHibernate 5.0).
-      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryqueryover.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;16.&nbsp;QueryOver Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;18.&nbsp;Native SQL</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+      </p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryqueryover.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querysql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;17.&nbsp;QueryOver Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;19.&nbsp;Native SQL</td></tr></table></div></body></html>

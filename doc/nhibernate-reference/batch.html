@@ -1,13 +1,6 @@
----
-layout:
----
-<!doctype html>
 <html><head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;13.&nbsp;Batch processing</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="events.html" title="Chapter&nbsp;12.&nbsp;Interceptors and events"><link rel="next" href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;13.&nbsp;Batch processing</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="batch"></a>Chapter&nbsp;13.&nbsp;Batch processing</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   <title>Chapter&nbsp;14.&nbsp;Batch processing</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="events.html" title="Chapter&nbsp;13.&nbsp;Interceptors and events"><link rel="next" href="queryhql.html" title="Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;14.&nbsp;Batch processing</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="batch"></a>Chapter&nbsp;14.&nbsp;Batch processing</h2></div></div><div></div></div><p>
         A naive approach to inserting 100 000 rows in the database using NHibernate might 
         look like this:
     </p><pre class="programlisting">using (ISession session = sessionFactory.OpenSession())
@@ -37,7 +30,7 @@ using (ITransaction tx = session.BeginTransaction())
     </p><pre class="programlisting">cache.use_second_level_cache false</pre><p>
         However, this is not absolutely necessary, since we can explicitly set the
         <tt class="literal">CacheMode</tt> to disable interaction with the second-level cache.
-    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-inserts"></a>13.1.&nbsp;Batch inserts</h2></div></div><div></div></div><p>
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-inserts"></a>14.1.&nbsp;Batch inserts</h2></div></div><div></div></div><p>
             When making new objects persistent, you must <tt class="literal">Flush()</tt> and 
             then <tt class="literal">Clear()</tt> the session regularly, to control the size of
             the first-level cache.
@@ -58,7 +51,7 @@ using (ITransaction tx = session.BeginTransaction())
     }
 
     tx.Commit();
-}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-statelesssession"></a>13.2.&nbsp;The StatelessSession interface</h2></div></div><div></div></div><p>
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-statelesssession"></a>14.2.&nbsp;The StatelessSession interface</h2></div></div><div></div></div><p>
             Alternatively, NHibernate provides a command-oriented API that may be used for 
             streaming data to and from the database in the form of detached objects. A 
             <tt class="literal">IStatelessSession</tt> has no persistence context associated
@@ -96,15 +89,15 @@ using (ITransaction tx = session.BeginTransaction())
             they have very different semantics to the <tt class="literal">Save(), SaveOrUpdate()</tt> 
             and <tt class="literal">Delete()</tt> operations defined by the <tt class="literal">ISession</tt> 
             interface.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-direct"></a>13.3.&nbsp;DML-style operations</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="batch-direct"></a>14.3.&nbsp;DML-style operations</h2></div></div><div></div></div><p>
             As already discussed, automatic and transparent object/relational mapping is concerned
             with the management of object state. This implies that the object state is available
             in memory, hence manipulating (using the SQL <tt class="literal">Data Manipulation Language</tt>
             (DML) statements: <tt class="literal">INSERT</tt>, <tt class="literal">UPDATE</tt>, <tt class="literal">DELETE</tt>)
             data directly in the database will not affect in-memory state. However, NHibernate provides methods
             for bulk SQL-style DML statement execution which are performed through the
-            Hibernate Query Language (<a href="queryhql.html" title="Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language">HQL</a>). A
-            <a href="querylinq.html#querylinq-modifying" title="17.6.&nbsp;Modifying entities inside the database">Linq implementation</a> is available too.
+            Hibernate Query Language (<a href="queryhql.html" title="Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language">HQL</a>). A
+            <a href="querylinq.html#querylinq-modifying" title="18.6.&nbsp;Modifying entities inside the database">Linq implementation</a> is available too.
         </p><p>
             The pseudo-syntax for <tt class="literal">UPDATE</tt> and <tt class="literal">DELETE</tt> statements
             is: <tt class="literal">( UPDATE | DELETE ) FROM? EntityName (WHERE where_conditions)?</tt>.  Some
@@ -117,7 +110,7 @@ using (ITransaction tx = session.BeginTransaction())
                     be qualified using that alias; if the entity name is not aliased, then it is
                     illegal for any property references to be qualified.
                 </p></li><li><p>
-                    No <a href="queryhql.html#queryhql-joins" title="14.3.&nbsp;Associations and joins">joins</a> (either implicit or explicit)
+                    No <a href="queryhql.html#queryhql-joins" title="15.3.&nbsp;Associations and joins">joins</a> (either implicit or explicit)
 	                can be specified in a bulk HQL query.  Sub-queries may be used in the where-clause;
 	                the sub-queries, themselves, may contain joins.
                 </p></li><li><p>
@@ -229,4 +222,4 @@ using (ITransaction tx = session.BeginTransaction())
     int createdEntities = s.CreateQuery(hqlInsert)
         .ExecuteUpdate();
     tx.Commit();
-}</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Interceptors and events&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+}</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="events.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryhql.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;13.&nbsp;Interceptors and events&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</td></tr></table></div></body></html>
