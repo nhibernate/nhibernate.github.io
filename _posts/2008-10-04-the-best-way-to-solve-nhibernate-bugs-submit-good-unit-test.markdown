@@ -17,7 +17,7 @@ gravatar: 16b044c4f4f55da7e9b9791da4b3e35c
 
 <p>There's no better way to explain some code-related issue than providing a test for them, and that is what any NH team member is going to ask you no matter how clearly you described it; that said.. why not being smart enough to provide it since the beginning? </p>
 <p>For those who doesn't know what a unit test is, or why could possibly be useful, a unit test is nothing more than a method with some code in it to test if a feature works as expected or, in your case, to reproduce a bug. What makes them so useful is the ability to automatically execute them all; if you hypothetically had a set of test for every feature you coded into the software you're designing, after every change you could test if everything is still working or something got broken. If that triggered your attention, you can read further information on Unit Tests and Test Driven Development <a href="http://en.wikipedia.org/wiki/Unit_testing">here</a> and <a href="http://en.wikipedia.org/wiki/Test-driven_development">here</a>, while <a href="http://www.nunit.org/index.php">here</a> you can download and get some info on NUnit, which is the testing framework NHibernate team is currently using; obviously you can google around a bit for more info on this topic, as I'm going to focus on how testing applies to NHibernate bug fixing process. </p>
-<p>Ok, back on topic then. If you dared to download NHibernate sources from SourceForge, or perhaps the trunk itself using a SVN client, you'd find a well established test project with some base classes you should use to implement the test. BTW, for the sake of simplicity, I created a C# project extracting only the few classes you need to build a test, so you don't need to use the actual NH sources anymore. <a href="https://github.com/nhibernate/nhibernate-core-testcase/archive/master.zip">You can download it here</a>.</p>
+<p>Ok, back on topic then. If you dared to download NHibernate sources from SourceForge or GitHub, you'd find a well established test project with some base classes you should use to implement the test. BTW, for the sake of simplicity, I created a C# project extracting only the few classes you need to build a test, so you don't need to use the actual NH sources anymore. <a href="https://github.com/nhibernate/nhibernate-core-testcase/archive/master.zip">You can download it here</a>.</p>
 <p>The project has the following structure, which is very similar to the one you'd find in the official sources:</p>
 <p><img style="border-top-width: 0px; border-left-width: 0px; border-bottom-width: 0px; border-right-width: 0px" alt="image" src="/images/posts/2008/10/04/image_5F00_c8aa69da_2D00_812b_2D00_4164_2D00_ac32_2D00_83fb3645b3e3.png" border="0" height="241" width="344" /> </p>
 <p>I've mantained classes and namespaces naming in order to let your test compile in the actual NH test project without (hopefully) changing anything on it. Next steps will be</p>
@@ -26,9 +26,9 @@ gravatar: 16b044c4f4f55da7e9b9791da4b3e35c
 <li>Setting up the test class  </li>
 <li>Create the test itself  </li>
 <li>Run the test to verify that it reproduces the bug  </li>
-<li>If it does, open a Jira issue and attach the test </li>
+<li>If it does, open a GitHub issue with the test (or even better, a PR on its NHibernate.Test project) </li>
 </ul>
-<p>Please note that all the code should be located in a NHSpecificTest folder's subfolder named like the Jira entry you submitted (for example, NH1234). So, once you've created the issue, you should do a little refactoring work to modify your test's folder and namespaces.</p>
+<p>Please note that all the code should be located in a NHSpecificTest folder's subfolder named like the GitHub issue or PR you submitted (for example, GH1234). So, once you've created the issue or PR, you should do a little refactoring work to modify your test's folder and namespaces.</p>
 <h3>Domain Model and mappings</h3>
 <p>It would be hard to test an <em>ORM</em> without a domain model, so a simple one is mandatory, along with its mappings. My advice here is to keep things as simple as possible: your main aim should be trying to isolate the bug without introducing unnecessary complexity.</p>
 <p>For example, if you find out that NHibernate isn't working fine retrieving a byte[] property when using a Sql Server 2005 RDBMS (it isn't true, NHibernate can deal quite well with such kind of data), you should create a domain entity not so different from the following:</p>
@@ -148,12 +148,12 @@ gravatar: 16b044c4f4f55da7e9b9791da4b3e35c
 <h3>Conclusions</h3>
 <p>When NHibernate doesn't work as expected, the best way to describe the issue is providing a good unit test. NHibernate.LiteTest helps you writing tests that are so similar to the official ones to be directly integrable in the actual NHibernate trunk. So, if you think you've just discovered a bug, </p>
 <ol>
-<li>Go to <a href="http://jira.nhibernate.org/secure/Dashboard.jspa">NHibernate Jira</a> and use its search engine to look for a similar bug (perhaps your problem has already been fixed and you only need to wait for a new release) 
+<li>Go to <a href="https://github.com/nhibernate/nhibernate-core/issues">NHibernate GitHub issues</a> and use its search engine to look for a similar bug (perhaps your problem has already been fixed and you only need to wait for a new release) 
 </li>
 <li>If you don't find anything, write a unit test to reproduce it 
 </li>
 <li>Execute NUnit and test it 
 </li>
-<li>if NUnit bar is red (and NHibernate documentation doesn't state that it's a not supported case), go to the Jira, open a issue, rename your test folder and namespaces with the actual issue number (ex. NH1234) and upload it as an attachment. </li>
+<li>if NUnit bar is red (and NHibernate documentation doesn't state that it's a not supported case), go to GitHub NHibernate issues, open a issue, rename your test folder and namespaces with the actual issue number (ex. GH1234) and upload it as an attachment. </li>
 </ol>
 <p>Obviously, if you think you're good enough, no one will be offended if you submit a patch, too.</p>
