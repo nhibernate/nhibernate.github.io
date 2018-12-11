@@ -7,11 +7,11 @@ layout:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="batch.html" title="Chapter&nbsp;13.&nbsp;Batch processing"><link rel="next" href="querycriteria.html" title="Chapter&nbsp;15.&nbsp;Criteria Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="queryhql"></a>Chapter&nbsp;14.&nbsp;HQL: The Hibernate Query Language</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
+   <title>Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="batch.html" title="Chapter&nbsp;14.&nbsp;Batch processing"><link rel="next" href="querycriteria.html" title="Chapter&nbsp;16.&nbsp;Criteria Queries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="queryhql"></a>Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
         NHibernate is equipped with an extremely powerful query language that (quite intentionally)
         looks very much like SQL. But don't be fooled by the syntax; HQL is fully object-oriented,
         understanding notions like inheritance, polymorphism and association.
-    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-casesensitivity"></a>14.1.&nbsp;Case Sensitivity</h2></div></div><div></div></div><p>
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-casesensitivity"></a>15.1.&nbsp;Case Sensitivity</h2></div></div><div></div></div><p>
             Queries are case-insensitive, except for names of .NET classes and properties.
             So <tt class="literal">SeLeCT</tt> is the same as
             <tt class="literal">sELEct</tt> is the same as
@@ -23,7 +23,7 @@ layout:
         </p><p>
             This manual uses lowercase HQL keywords. Some users find queries with uppercase keywords 
             more readable, but we find this convention ugly when embedded in C# code.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-from"></a>14.2.&nbsp;The from clause</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-from"></a>15.2.&nbsp;The from clause</h2></div></div><div></div></div><p>
             The simplest possible NHibernate query is of the form:
         </p><pre class="programlisting">from Eg.Cat</pre><p>
             which simply returns all instances of the class <tt class="literal">Eg.Cat</tt>. 
@@ -41,7 +41,7 @@ layout:
             It is considered good practice to name query aliases using an initial lowercase,
             consistent with naming standards for local variables
             (eg. <tt class="literal">domesticCat</tt>).
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-joins"></a>14.3.&nbsp;Associations and joins</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-joins"></a>15.3.&nbsp;Associations and joins</h2></div></div><div></div></div><p>
             We may also assign aliases to associated entities, or even to elements of a collection of
             values, using a <tt class="literal">join</tt>.
         </p><pre class="programlisting">from Eg.Cat as cat 
@@ -70,7 +70,7 @@ from Formula form full join form.Parameter param</pre><p>
             initialized along with their parent objects, using a single select. This is particularly 
             useful in the case of a collection. It effectively overrides the outer join and
             lazy declarations of the mapping file for associations and collections. See
-            <a href="performance.html#performance-fetching" title="20.1.&nbsp;Fetching strategies">Section&nbsp;20.1, &#8220;Fetching strategies&#8221;</a> for more information.
+            <a href="performance.html#performance-fetching" title="21.1.&nbsp;Fetching strategies">Section&nbsp;21.1, &#8220;Fetching strategies&#8221;</a> for more information.
         </p><pre class="programlisting">from Eg.Cat as cat 
     inner join fetch cat.Mate
     left join fetch cat.Kittens</pre><p>
@@ -82,7 +82,7 @@ from Formula form full join form.Parameter param</pre><p>
             disabled for bag mappings. Note also that the <tt class="literal">fetch</tt> construct may not
             be used in queries called using <tt class="literal">Enumerable()</tt>. Finally, note that
             <tt class="literal">full join fetch</tt> and <tt class="literal">right join fetch</tt> are not meaningful.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-select"></a>14.4.&nbsp;The select clause</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-select"></a>15.4.&nbsp;The select clause</h2></div></div><div></div></div><p>
             The <tt class="literal">select</tt> clause picks which objects and properties to return in 
             the query result set. Consider:
         </p><pre class="programlisting">select mate 
@@ -111,7 +111,7 @@ from Eg.DomesticCat as mother
     join mother.Mate as mate
     left join mother.Kittens as offspr</pre><p>
             assuming that the class <tt class="literal">Family</tt> has an appropriate constructor.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-aggregation"></a>14.5.&nbsp;Aggregate functions</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-aggregation"></a>15.5.&nbsp;Aggregate functions</h2></div></div><div></div></div><p>
             HQL queries may even return the results of aggregate functions on properties:
         </p><pre class="programlisting">select avg(cat.Weight), sum(cat.Weight), max(cat.Weight), count(cat)
 from Eg.Cat cat</pre><p>
@@ -131,7 +131,7 @@ from Eg.Cat cat group by cat.Id, cat.Weight, ...</pre><p>
             the same semantics as in SQL.
         </p><pre class="programlisting">select distinct cat.Name from Eg.Cat cat
 
-select count(distinct cat.Name), count(cat) from Eg.Cat cat</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-polymorphism"></a>14.6.&nbsp;Polymorphic queries</h2></div></div><div></div></div><p>
+select count(distinct cat.Name), count(cat) from Eg.Cat cat</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-polymorphism"></a>15.6.&nbsp;Polymorphic queries</h2></div></div><div></div></div><p>
             A query like:
         </p><pre class="programlisting">from Eg.Cat as cat</pre><p>
             returns instances not only of <tt class="literal">Cat</tt>, but also of subclasses like
@@ -146,8 +146,8 @@ select count(distinct cat.Name), count(cat) from Eg.Cat cat</pre></div><div clas
             Note that these last two queries will require more than one SQL <tt class="literal">SELECT</tt>. This
             means that the <tt class="literal">order by</tt> clause does not correctly order the whole result set.
         </p><p>
-			In order to use non-mapped base classes or interfaces in HQL queries, they have to be imported. See <a href="mapping.html#mapping-declaration-import" title="5.1.21.&nbsp;import">Section&nbsp;5.1.21, &#8220;import&#8221;</a> for more information.
-		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-where"></a>14.7.&nbsp;The where clause</h2></div></div><div></div></div><p>
+			In order to use non-mapped base classes or interfaces in HQL queries, they have to be imported. See <a href="mapping.html#mapping-declaration-import" title="5.1.23.&nbsp;import">Section&nbsp;5.1.23, &#8220;import&#8221;</a> for more information.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-where"></a>15.7.&nbsp;The where clause</h2></div></div><div></div></div><p>
             The <tt class="literal">where</tt> clause allows you to narrow the list of instances returned.
         </p><pre class="programlisting">from Eg.Cat as cat where cat.Name='Fritz'</pre><p>
             returns instances of <tt class="literal">Cat</tt> named 'Fritz'.
@@ -210,7 +210,7 @@ store.Owner.Address         // error!</pre><p>
 where log.Item.class = 'Eg.Payment, Eg, Version=...' and log.Item.id = payment.id</pre><p>
             Notice that <tt class="literal">log.Item.class</tt> and <tt class="literal">payment.class</tt>
             would refer to the values of completely different database columns in the above query.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-expressions"></a>14.8.&nbsp;Expressions</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-expressions"></a>15.8.&nbsp;Expressions</h2></div></div><div></div></div><p>
             Expressions allowed in the <tt class="literal">where</tt> clause include
             most of the kind of things you could write in SQL:
         </p><div class="itemizedlist"><ul type="disc" compact><li><p>
@@ -343,13 +343,13 @@ WHERE prod.name = 'widget'
         FROM line_items item, orders o
         WHERE item.order_id = o.id
             AND cust.current_order = o.id
-    )</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-ordering"></a>14.9.&nbsp;The order by clause</h2></div></div><div></div></div><p>
+    )</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-ordering"></a>15.9.&nbsp;The order by clause</h2></div></div><div></div></div><p>
             The list returned by a query may be ordered by any property of a returned class or components:
         </p><pre class="programlisting">from Eg.DomesticCat cat
 order by cat.Name asc, cat.Weight desc, cat.Birthdate</pre><p>
             The optional <tt class="literal">asc</tt> or <tt class="literal">desc</tt> indicate ascending or descending order 
             respectively.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-grouping"></a>14.10.&nbsp;The group by clause</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-grouping"></a>15.10.&nbsp;The group by clause</h2></div></div><div></div></div><p>
             A query that returns aggregate values may be grouped by any property of a returned class or components:
         </p><pre class="programlisting">select cat.Color, sum(cat.Weight), count(cat) 
 from Eg.Cat cat
@@ -381,7 +381,7 @@ order by count(kitten) asc, sum(kitten.Weight) desc</pre><p>
             so you can't write <tt class="literal">group by cat</tt> if all properties
             of <tt class="literal">cat</tt> are non-aggregated. You have to list all
             non-aggregated properties explicitly.
-        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-subqueries"></a>14.11.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-subqueries"></a>15.11.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
             For databases that support sub-selects, NHibernate supports sub-queries within queries. A sub-query must
             be surrounded by parentheses (often by an SQL aggregate function call). Even correlated sub-queries
             (sub-queries that refer to an alias in the outer query) are allowed.
@@ -403,7 +403,7 @@ where not exists (
 from Eg.DomesticCat as cat 
 where cat.Name not in ( 
     select name.NickName from Eg.Name as name 
-)</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-examples"></a>14.12.&nbsp;HQL examples</h2></div></div><div></div></div><p>
+)</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-examples"></a>15.12.&nbsp;HQL examples</h2></div></div><div></div></div><p>
             NHibernate queries can be quite powerful and complex. In fact, the power of the query language
             is one of NHibernate's main selling points. Here are some example queries very similar to queries
             that I used on a recent project. Note that most queries you will write are much simpler than these!
@@ -495,7 +495,7 @@ from Account as account
     left outer join account.Payments as payment
 where :currentUser = user
     and PaymentStatus.Unpaid = isNull(payment.CurrentStatus.Name, PaymentStatus.Unpaid)
-order by account.Type.SortOrder, account.AccountNumber, payment.DueDate</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-tipstricks"></a>14.13.&nbsp;Tips &amp; Tricks</h2></div></div><div></div></div><p>
+order by account.Type.SortOrder, account.AccountNumber, payment.DueDate</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-tipstricks"></a>15.13.&nbsp;Tips &amp; Tricks</h2></div></div><div></div></div><p>
             You can count the number of query results without actually returning them:
         </p><pre class="programlisting">var count = session.CreateQuery("select count(*) from ....").UniqueResult&lt;long&gt;();</pre><p>
             To order a result by the size of a collection, use the following query:
@@ -537,4 +537,4 @@ var page = q.List&lt;Cat&gt;();</pre><p>
 var counts = s
     .CreateFilter(collection,
         "select this.Type, count(this) group by this.Type")
-    .List&lt;object[]&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;13.&nbsp;Batch processing&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;15.&nbsp;Criteria Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+    .List&lt;object[]&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Batch processing&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Criteria Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>

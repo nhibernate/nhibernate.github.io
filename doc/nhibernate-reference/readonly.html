@@ -7,7 +7,7 @@ layout:
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-   <title>Chapter&nbsp;10.&nbsp;Read-only entities</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="manipulatingdata.html" title="Chapter&nbsp;9.&nbsp;Manipulating Persistent Data"><link rel="next" href="transactions.html" title="Chapter&nbsp;11.&nbsp;Transactions And Concurrency"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Read-only entities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="readonly"></a>Chapter&nbsp;10.&nbsp;Read-only entities</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
+   <title>Chapter&nbsp;11.&nbsp;Read-only entities</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="manipulatingdata.html" title="Chapter&nbsp;10.&nbsp;Manipulating Persistent Data"><link rel="next" href="transactions.html" title="Chapter&nbsp;12.&nbsp;Transactions And Concurrency"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Read-only entities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="readonly"></a>Chapter&nbsp;11.&nbsp;Read-only entities</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
             NHibernate's treatment of <span class="emphasis"><em>read-only</em></span> entities may 
             differ from what you may have encountered elsewhere. Incorrect usage 
             may cause unexpected results.
@@ -44,10 +44,10 @@ layout:
     </p><p>
         For details about the affect of read-only entities on different
         property and association types, see 
-        <a href="readonly.html#readonly-proptypes" title="10.2.&nbsp;Read-only affect on property type">Section&nbsp;10.2, &#8220;Read-only affect on property type&#8221;</a>.
+        <a href="readonly.html#readonly-proptypes" title="11.2.&nbsp;Read-only affect on property type">Section&nbsp;11.2, &#8220;Read-only affect on property type&#8221;</a>.
     </p><p>     
         For details about how to make entities read-only, see 
-        <a href="readonly.html#readonly-api" title="10.1.&nbsp;Making persistent entities read-only">Section&nbsp;10.1, &#8220;Making persistent entities read-only&#8221;</a>
+        <a href="readonly.html#readonly-api" title="11.1.&nbsp;Making persistent entities read-only">Section&nbsp;11.1, &#8220;Making persistent entities read-only&#8221;</a>
     </p><p>
         NHibernate does some optimizing for read-only entities:
     </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -55,7 +55,7 @@ layout:
                     single-ended associations.
                  </p></li><li><p>
                     It saves memory by deleting database snapshots.
-                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-api"></a>10.1.&nbsp;Making persistent entities read-only</h2></div></div><div></div></div><p>
+                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-api"></a>11.1.&nbsp;Making persistent entities read-only</h2></div></div><div></div></div><p>
             Only persistent entities can be made read-only. Transient and
             detached entities must be put in persistent state before they
             can be made read-only.
@@ -65,21 +65,21 @@ layout:
                     you can map an entity class as <span class="emphasis"><em>immutable</em></span>;
                     when an entity of an immutable class is made persistent,
                     NHibernate automatically makes it read-only.
-                    see <a href="readonly.html#readonly-api-immutable" title="10.1.1.&nbsp;Entities of immutable classes">Section&nbsp;10.1.1, &#8220;Entities of immutable classes&#8221;</a> for details 
+                    see <a href="readonly.html#readonly-api-immutable" title="11.1.1.&nbsp;Entities of immutable classes">Section&nbsp;11.1.1, &#8220;Entities of immutable classes&#8221;</a> for details 
                 </p></li><li><p>
                     you can change a default so that entities loaded
                     into the session by NHibernate are automatically 
-                    made read-only; see <a href="readonly.html#readonly-api-loaddefault" title="10.1.2.&nbsp;Loading persistent entities as read-only">Section&nbsp;10.1.2, &#8220;Loading persistent entities as read-only&#8221;</a> for details
+                    made read-only; see <a href="readonly.html#readonly-api-loaddefault" title="11.1.2.&nbsp;Loading persistent entities as read-only">Section&nbsp;11.1.2, &#8220;Loading persistent entities as read-only&#8221;</a> for details
                 </p></li><li><p>
                     you can make an HQL query or criteria read-only so
                     that entities loaded when the query or criteria executes,
                     or iterates, are automatically 
-                    made read-only; see <a href="readonly.html#readonly-api-querycriteria" title="10.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;10.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> for details
+                    made read-only; see <a href="readonly.html#readonly-api-querycriteria" title="11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;11.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> for details
                 </p></li><li><p>
                     you can make a persistent entity that is already in the
                     in the session read-only; see 
-                    <a href="readonly.html#readonly-api-entity" title="10.1.4.&nbsp;Making a persistent entity read-only">Section&nbsp;10.1.4, &#8220;Making a persistent entity read-only&#8221;</a> for details
-                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-immutable"></a>10.1.1.&nbsp;Entities of immutable classes</h3></div></div><div></div></div><p>
+                    <a href="readonly.html#readonly-api-entity" title="11.1.4.&nbsp;Making a persistent entity read-only">Section&nbsp;11.1.4, &#8220;Making a persistent entity read-only&#8221;</a> for details
+                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-immutable"></a>11.1.1.&nbsp;Entities of immutable classes</h3></div></div><div></div></div><p>
                 When an entity instance of an immutable class is made 
                 persistent, NHibernate automatically makes it read-only. 
             </p><p>
@@ -91,7 +91,7 @@ layout:
                 of a mutable class. The only exception is that 
                 NHibernate will not allow an entity of an immutable
                 class to be changed so it is not read-only.
-            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-loaddefault"></a>10.1.2.&nbsp;Loading persistent entities as read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-loaddefault"></a>11.1.2.&nbsp;Loading persistent entities as read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
                     Entities of immutable classes are automatically loaded
                     as read-only.
                 </p></div><p>
@@ -116,7 +116,7 @@ layout:
                         executing, or iterating HQL queries and 
                         criteria; to override this setting for a particular
                         HQL query or criteria see 
-                        <a href="readonly.html#readonly-api-querycriteria" title="10.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;10.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> 
+                        <a href="readonly.html#readonly-api-querycriteria" title="11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;11.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> 
                     </p></li></ul></div><p>
                 Changing this default has no effect on:
             </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -131,7 +131,7 @@ layout:
                         persistent entities added by the application via
                         <tt class="literal">Session.Persist()</tt>, <tt class="literal">Session.Save()</tt>,
                         <tt class="literal">Session.Update()</tt> and <tt class="literal">Session.SaveOrUpdate()</tt>
-                    </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-querycriteria"></a>10.1.3.&nbsp;Loading read-only entities from an HQL query/criteria</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-querycriteria"></a>11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
                     Entities of immutable classes are automatically loaded
                     as read-only.
                 </p></div><p>
@@ -191,7 +191,7 @@ using (ITransaction tx = session.BeginTransaction())
                 use Query.SetReadOnly(false) and Criteria.SetReadOnly(false)
                 to override this session setting and load entities that are 
                 not read-only.
-            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-entity"></a>10.1.4.&nbsp;Making a persistent entity read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-entity"></a>11.1.4.&nbsp;Making a persistent entity read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
                     Persistent entities of immutable classes are automatically
                     made read-only.
                 </p></div><p>
@@ -220,27 +220,27 @@ session.Evict(entity);
 session.Update(entity);
 
 // now entity is no longer read-only and its changes can be flushed
-s.Flush();</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-proptypes"></a>10.2.&nbsp;Read-only affect on property type</h2></div></div><div></div></div><p>
+s.Flush();</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-proptypes"></a>11.2.&nbsp;Read-only affect on property type</h2></div></div><div></div></div><p>
             The following table summarizes how different property types are 
             affected by making an entity read-only.
-        </p><div class="table"><a name="readonly-proptype-summary"></a><p class="title"><b>Table&nbsp;10.1.&nbsp;Affect of read-only entity on property types</b></p><table summary="Affect of read-only entity on property types" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property/Association Type</th><th>Changes flushed to DB?</th></tr></thead><tbody><tr><td>
+        </p><div class="table"><a name="readonly-proptype-summary"></a><p class="title"><b>Table&nbsp;11.1.&nbsp;Affect of read-only entity on property types</b></p><table summary="Affect of read-only entity on property types" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property/Association Type</th><th>Changes flushed to DB?</th></tr></thead><tbody><tr><td>
                             Simple
                             <p>
-                                (<a href="readonly.html#readonly-proptypes-simple" title="10.2.1.&nbsp;Simple properties">Section&nbsp;10.2.1, &#8220;Simple properties&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-simple" title="11.2.1.&nbsp;Simple properties">Section&nbsp;11.2.1, &#8220;Simple properties&#8221;</a>)
                             </p></td><td>no*</td></tr><tr><td><p>Unidirectional one-to-one</p><p>Unidirectional many-to-one</p><p>
-                                (<a href="readonly.html#readonly-proptypes-singleended-unidir" title="10.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one">Section&nbsp;10.2.2.1, &#8220;Unidirectional one-to-one and many-to-one&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-singleended-unidir" title="11.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one">Section&nbsp;11.2.2.1, &#8220;Unidirectional one-to-one and many-to-one&#8221;</a>)
                             </p></td><td><p>no*</p><p>no*</p></td></tr><tr><td><p>Unidirectional one-to-many</p><p>Unidirectional many-to-many</p><p>
-                                (<a href="readonly.html#readonly-proptypes-manyended-unidir" title="10.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many">Section&nbsp;10.2.2.2, &#8220;Unidirectional one-to-many and many-to-many&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-manyended-unidir" title="11.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many">Section&nbsp;11.2.2.2, &#8220;Unidirectional one-to-many and many-to-many&#8221;</a>)
                             </p></td><td><p>yes</p><p>yes</p></td></tr><tr><td><p>Bidirectional one-to-one</p><p>
-                                (<a href="readonly.html#readonly-proptypes-onetoone-bidir" title="10.2.3.1.&nbsp;Bidirectional one-to-one">Section&nbsp;10.2.3.1, &#8220;Bidirectional one-to-one&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-onetoone-bidir" title="11.2.3.1.&nbsp;Bidirectional one-to-one">Section&nbsp;11.2.3.1, &#8220;Bidirectional one-to-one&#8221;</a>)
                             </p></td><td>only if the owning entity is not read-only*</td></tr><tr><td><p>Bidirectional one-to-many/many-to-one</p><p>inverse collection</p><p>non-inverse collection</p><p>
-                                (<a href="readonly.html#readonly-proptypes-onetomany-manytoone" title="10.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one">Section&nbsp;10.2.3.2, &#8220;Bidirectional one-to-many/many-to-one&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-onetomany-manytoone" title="11.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one">Section&nbsp;11.2.3.2, &#8220;Bidirectional one-to-many/many-to-one&#8221;</a>)
                             </p></td><td><p> </p><p>only added/removed entities that are not read-only*</p><p>yes</p></td></tr><tr><td><p>Bidirectional many-to-many</p><p>
-                                (<a href="readonly.html#readonly-proptypes-manytomany-bidir" title="10.2.3.3.&nbsp;Bidirectional many-to-many">Section&nbsp;10.2.3.3, &#8220;Bidirectional many-to-many&#8221;</a>)
+                                (<a href="readonly.html#readonly-proptypes-manytomany-bidir" title="11.2.3.3.&nbsp;Bidirectional many-to-many">Section&nbsp;11.2.3.3, &#8220;Bidirectional many-to-many&#8221;</a>)
                             </p></td><td>yes</td></tr></tbody></table></div><p>
             * Behavior is different when the entity having the property/association
               is read-only, compared to when it is not read-only.
-        </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-simple"></a>10.2.1.&nbsp;Simple properties</h3></div></div><div></div></div><p>
+        </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-simple"></a>11.2.1.&nbsp;Simple properties</h3></div></div><div></div></div><p>
                 When a persistent object is read-only, NHibernate does not 
                 dirty-check simple properties.
             </p><p>
@@ -264,7 +264,7 @@ using (ITransaction tx = session.BeginTransaction())
     // contract.CustomerName is still "Sherman"
     ...
     tx.Commit();
-}</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-prop-types-unidir"></a>10.2.2.&nbsp;Unidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-singleended-unidir"></a>10.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one</h4></div></div><div></div></div><p>
+}</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-prop-types-unidir"></a>11.2.2.&nbsp;Unidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-singleended-unidir"></a>11.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one</h4></div></div><div></div></div><p>
                     NHibernate treats unidirectional one-to-one and many-to-one
                     associations in the same way when the owning entity is 
                     read-only. 
@@ -351,7 +351,7 @@ using (var tx = session.BeginTransaction())
 
     tx.Commit();
 }
-session.Close();</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manyended-unidir"></a>10.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many</h4></div></div><div></div></div><p>
+session.Close();</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manyended-unidir"></a>11.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many</h4></div></div><div></div></div><p>
                     NHibernate treats unidirectional one-to-many 
                     and many-to-many associations owned by a read-only
                     entity the same as when owned by an entity that is not 
@@ -370,7 +370,7 @@ session.Close();</pre></div><div class="section" lang="en"><div class="titlepage
                     If automatic versioning is used, NHibernate will 
                     update the version due to changes in the collection
                     if they dirty the owning entity.
-                </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-bidir"></a>10.2.3.&nbsp;Bidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetoone-bidir"></a>10.2.3.1.&nbsp;Bidirectional one-to-one</h4></div></div><div></div></div><p>
+                </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-bidir"></a>11.2.3.&nbsp;Bidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetoone-bidir"></a>11.2.3.1.&nbsp;Bidirectional one-to-one</h4></div></div><div></div></div><p>
                     If a read-only entity owns a bidirectional 
                     one-to-one association:
                 </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -395,7 +395,7 @@ session.Close();</pre></div><div class="section" lang="en"><div class="titlepage
                     an association with a read-only entity the same
                     as when the association is with an entity that is
                     not read-only.
-                </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetomany-manytoone"></a>10.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one</h4></div></div><div></div></div><p>
+                </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetomany-manytoone"></a>11.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one</h4></div></div><div></div></div><p>
                     A read-only entity has no impact on a bidirectional
                     one-to-many/many-to-one association if:
                 </p><div class="itemizedlist"><ul type="disc"><li><p>
@@ -416,7 +416,7 @@ session.Close();</pre></div><div class="section" lang="en"><div class="titlepage
                             a read-only entity can only be removed from the
                             collection by an orphan delete or by explicitly
                             deleting the entity.                            
-                        </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manytomany-bidir"></a>10.2.3.3.&nbsp;Bidirectional many-to-many</h4></div></div><div></div></div><p>
+                        </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manytomany-bidir"></a>11.2.3.3.&nbsp;Bidirectional many-to-many</h4></div></div><div></div></div><p>
                     NHibernate treats bidirectional many-to-many 
                     associations owned by a read-only entity the
                     same as when owned by an entity that is not
@@ -437,4 +437,4 @@ session.Close();</pre></div><div class="section" lang="en"><div class="titlepage
                     update the version due to changes in both sides of
                     the collection if they dirty the entity owning the
                     respective collections.
-                </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Manipulating Persistent Data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Transactions And Concurrency</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
+                </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Manipulating Persistent Data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Transactions And Concurrency</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>
