@@ -10,8 +10,9 @@ redirect_from: ["/blogs/nhibernate/archive/2009/11/26/nhibernate-validator-1-2-c
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-{% include imported_disclaimer.html %}
-<p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" />
+{% include imported_disclaimer.html %}
+
+<p><img src="/images/logo-nhv.jpg" />
 
 </p>
 <p>Download NHibernate Validator 1.2 CR1 with sources, binaries and example here <a href="https://sourceforge.net/projects/nhcontrib/files">here</a>
