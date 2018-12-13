@@ -10,8 +10,9 @@ redirect_from: ["/blogs/nhibernate/archive/2009/05/18/nhibernate-validator-quick
 author: darioquintana
 gravatar: f436801727b13a5c4c4a38380fc17290
 ---
-{% include imported_disclaimer.html %}
-<p><img src="http://darioquintana.com.ar/files/NHV-logo-white-background.png" /></p>
+{% include imported_disclaimer.html %}
+
+<p><img src="/images/logo-nhv.jpg" /></p>
 <p>The NHibernate Validator Team had prepared examples to you be able to use this validation framework in a easy way. With four examples we are covering the following topics:</p>
 <p>&nbsp;</p>
 <h3>1) Winforms</h3>
