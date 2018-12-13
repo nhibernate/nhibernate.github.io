@@ -19,14 +19,14 @@ title: Blog
 				<h4 class="CommonAvatarListItemName">
 					<a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
 				</h4>
-				<div class="CommonAvatarListItem"><!--{{}}--></div>
+				<div class="CommonAvatarListItem"><!-- --></div>
 				<div class="CommonAvatarListItemDetails">
 					<div>
 						Posted <a href="{{ post.url | prepend: site.baseurl }}">{{ post.date | date: "%a, %d %B %Y %r" }}</a>
 						by {{ post.author }}
 					</div>
 					<div>
-						<span>Filed under: {{ post.tags | join ', '}}
+						<span>Filed under: {{ post.tags | join: ', ' }}
 					</div>
 				</div>
 			</div>
