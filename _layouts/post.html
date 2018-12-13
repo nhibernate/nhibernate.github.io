@@ -8,10 +8,10 @@ layout: default
 		Posted {{ page.date | date: "%a, %d %B %Y %r" }}
 		{% if page.author %}
 		by {{ page.author }}
-		{% endif %}		
+		{% endif %}
 	</div>
 	<div>
-		<span>Filed under: {{ page.tags | join ', '}}</span>
+		<span>Filed under: {{ page.tags | join: ', ' }}</span>
 	</div>
 </p>
 {% include disqus.html %}
