@@ -11,7 +11,7 @@ NHibernate has now a [MyGet feed](https://www.myget.org/gallery/nhibernate) for 
 
 For a list of resolved issues & pull requests in latest build, see the corresponding milestone in [milestones](https://github.com/nhibernate/nhibernate-core/milestones).
 
-To be able to install NHibernate development builds you need to add additional package source in NuGet options in you IDE:
+To be able to install NHibernate development builds you need to add additional package source in NuGet options in your IDE:
 https://www.myget.org/F/nhibernate/api/v3/index.json
 
 Or alternatively you can add/update `nuget.config` file in top folder of your project with the following content:
