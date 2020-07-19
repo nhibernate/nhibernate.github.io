@@ -12,8 +12,9 @@ NHibernate 5.3.0 is now released.
 For a list of resolved issues & pull requests, see the [milestone](https://github.com/nhibernate/nhibernate-core/milestone/21?closed=1) or [the release notes](https://github.com/nhibernate/nhibernate-core/blob/5.3.0/releasenotes.txt).
 
 Binaries are available on NuGet and SourceForge:
-https://sourceforge.net/projects/nhibernate/files/NHibernate/5.3.0/
-https://www.nuget.org/packages/NHibernate/5.3.0
+
+- https://sourceforge.net/projects/nhibernate/files/NHibernate/5.3.0/
+- https://www.nuget.org/packages/NHibernate/5.3.0
 
 220 issues were resolved in this release.
 
