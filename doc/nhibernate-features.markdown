@@ -6,7 +6,7 @@ Nearly all of the features listed here are described more fully in the document:
 
             **<u>NHibernate - Relational Persistence for Idiomatic .NET</u>**
 
-                        [http://nhibernate.info/doc/nhibernate-reference/index.html](http://nhibernate.info/doc/nhibernate-reference/index.html)
+                        [https://nhibernate.info/doc/nhibernate-reference/index.html](https://nhibernate.info/doc/nhibernate-reference/index.html)
 
 *   Numerous databases supported
     *   SQL Server (2000, 2005, 2008, Express, CE)

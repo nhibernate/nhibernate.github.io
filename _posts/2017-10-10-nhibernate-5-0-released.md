@@ -22,7 +22,7 @@ Binaries are available on NuGet and SourceForge:
 * Strongly typed DML operation (insert/update/delete) are now available as Linq extensions on queryables.
 * Entities collections can be queried with .AsQueryable() Linq extension without being fully loaded.
 * Reference documentation has been curated and completed, notably with a Linq section.
-    http://nhibernate.info/doc/nhibernate-reference/index.html
+    https://nhibernate.info/doc/nhibernate-reference/index.html
 
 ##### Known BREAKING CHANGES from NH4.1.1.GA to 5.0.0 #####
 
