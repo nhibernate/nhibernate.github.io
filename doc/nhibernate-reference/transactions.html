@@ -6,7 +6,6 @@ layout:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
    <title>Chapter&nbsp;12.&nbsp;Transactions And Concurrency</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities"><link rel="next" href="events.html" title="Chapter&nbsp;13.&nbsp;Interceptors and events"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Transactions And Concurrency</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="readonly.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="events.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="transactions"></a>Chapter&nbsp;12.&nbsp;Transactions And Concurrency</h2></div></div><div></div></div>{% include google_adsense.html %}<p>
         NHibernate is not itself a database. It is a lightweight object-relational
         mapping tool. Transaction management is delegated to the underlying database
@@ -369,7 +368,7 @@ finally
                 </p></li></ul></div><p>
             If your application manages transactions through .NET APIs such as <tt class="literal">System.Transactions</tt> library
             while not using a compatible transaction factory (see <tt class="literal">transaction.factory_class</tt>
-            in <a href="session-configuration.html#configuration-optional" title="3.5.&nbsp;Optional configuration properties">Section&nbsp;3.5, &#8220;Optional configuration properties&#8221;</a>), <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt> may cause
+            in <a href="session-configuration.html#configuration-optional" title="3.6.&nbsp;Optional configuration properties">Section&nbsp;3.6, &#8220;Optional configuration properties&#8221;</a>), <tt class="literal">ConnectionReleaseMode.AfterTransaction</tt> may cause
             NHibernate to open and close several connections during one transaction, leading to unnecessary overhead and
             transaction promotion from local to distributed. Specifying <tt class="literal">ConnectionReleaseMode.OnClose</tt>
             will revert to the legacy behavior and prevent this problem from occurring.
@@ -377,7 +376,7 @@ finally
             Instead of using NHibernate <tt class="literal">ITransaction</tt>, <tt class="literal">TransactionScope</tt>
             can be used. Please do not use both simultaneously. Using <tt class="literal">TransactionScope</tt>
             requires using a compatible transaction factory (see <tt class="literal">transaction.factory_class</tt>
-            in <a href="session-configuration.html#configuration-optional" title="3.5.&nbsp;Optional configuration properties">Section&nbsp;3.5, &#8220;Optional configuration properties&#8221;</a>). The default transaction factory supports scopes.
+            in <a href="session-configuration.html#configuration-optional" title="3.6.&nbsp;Optional configuration properties">Section&nbsp;3.6, &#8220;Optional configuration properties&#8221;</a>). The default transaction factory supports scopes.
         </p><p>
             When using <tt class="literal">TransactionScope</tt> with NHibernate, you need to be aware of following
             points:
@@ -394,9 +393,11 @@ finally
                     it is currently enlisted, the connection may enlist in another scope, and the session
                     will then fail to use it.
                 </p><p>
-                    As of NHibernate v5.0, session auto-enlistment can be disabled from the session builder
+                    Session auto-enlistment can be controlled from the session builder
                     obtained with <tt class="literal">ISessionFactory.WithOptions()</tt>, using the
-                    <tt class="literal">AutoJoinTransaction</tt> option. The connection may still enlist itself
+                    <tt class="literal">AutoJoinTransaction</tt> option. It can also be controlled at the configuration level,
+                    see <tt class="literal">transaction.auto_join</tt> in <a href="session-configuration.html#configuration-optional" title="3.6.&nbsp;Optional configuration properties">Section&nbsp;3.6, &#8220;Optional configuration properties&#8221;</a>.
+                    When auto-join is disabled, the connection may still enlist itself
                     if connection string <tt class="literal">Enlist</tt> setting is not <tt class="literal">false</tt>.
                     A session can explicitly join the current system transaction by calling
                     <tt class="literal">ISession.JoinTransaction()</tt>.
