@@ -6,7 +6,6 @@ layout:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
    <title>Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="preface.html" title="Preface"><link rel="next" href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preface.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="architecture.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="quickstart"></a>Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</h2></div></div><div></div></div>{% include google_adsense.html %}<div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-intro"></a>1.1.&nbsp;Getting started with NHibernate</h2></div></div><div></div></div><p>
             This tutorial explains a setup of NHibernate 5.0.0 within a Microsoft
             environment. The tools used in this tutorial are:
@@ -118,6 +117,9 @@ layout:
             requires a parameter-less constructor:  if you add a constructor having parameters,
             make sure to add a parameter-less constructor too.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-mapping"></a>1.3.&nbsp;Mapping the cat</h2></div></div><div></div></div><p>
+            This tutorial directly uses xml mapping files. This is just one among many mapping solutions
+            NHibernate provides, see <a href="mapping.html#mapping-declaration" title="5.1.&nbsp;Mapping declaration">Section&nbsp;5.1, &#8220;Mapping declaration&#8221;</a>.
+        </p><p>
             The <tt class="literal">Cat.hbm.xml</tt> mapping file contains the metadata
             required for the object/relational mapping. The metadata includes declaration
             of persistent classes and the mapping of properties (to columns and
