@@ -230,16 +230,16 @@ using (ITransaction txn = session.BeginTransaction())
         </p><pre class="programlisting">DetachedCriteria avgWeight = DetachedCriteria.For&lt;Cat&gt;()
     .SetProjection( Projections.Avg("Weight") );
 session.CreateCriteria&lt;Cat&gt;()
-    .Add( Subqueries.PropertyGt("Weight", avgWeight) )
+    .Add( Subqueries.Gt("Weight", avgWeight) )
     .List&lt;Cat&gt;();</pre><pre class="programlisting">DetachedCriteria weights = DetachedCriteria.For&lt;Cat&gt;()
     .SetProjection( Projections.Property("Weight") );
 session.CreateCriteria&lt;Cat&gt;()
-    .Add( Subqueries.PropertyGeAll("Weight", weights) )
+    .Add( Subqueries.GeAll("Weight", weights) )
     .List&lt;Cat&gt;();</pre><p>
             Even correlated sub-queries are possible:
         </p><pre class="programlisting">DetachedCriteria avgWeightForSex = DetachedCriteria.For&lt;Cat&gt;("cat2")
     .SetProjection( Projections.Avg("Weight") )
     .Add( Expression.EqProperty("cat2.Sex", "cat.Sex") );
 session.CreateCriteria(typeof(Cat), "cat")
-    .Add( Subqueries.PropertyGt("Weight", avgWeightForSex) )
+    .Add( Subqueries.Gt("weight", avgWeightForSex) )
     .List&lt;Cat&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="queryhql.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="queryqueryover.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;QueryOver Queries</td></tr></table></div>{% include google_analytics.html %}{% include metrika_yandex_ru.html %}</body></html>

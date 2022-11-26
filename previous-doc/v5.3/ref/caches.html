@@ -176,7 +176,7 @@ layout:
 				</dd></dl></div><p>
 			SysCache has a config file section handler to allow configuring different expirations and priorities for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e19668"></a><p class="title"><b>Example&nbsp;27.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e19463"></a><p class="title"><b>Example&nbsp;27.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="syscache"
@@ -209,7 +209,7 @@ layout:
 				</dd></dl></div><p>
 			To configure cache regions with SqlCacheDependencies a <tt class="literal">syscache2</tt> config section must be
 			defined in the application's configuration file. See the sample below.
-		</p><div class="example"><a name="d0e19719"></a><p class="title"><b>Example&nbsp;27.2.&nbsp;</b></p><pre class="programlisting">
+		</p><div class="example"><a name="d0e19514"></a><p class="title"><b>Example&nbsp;27.2.&nbsp;</b></p><pre class="programlisting">
 &lt;configSections&gt;
   &lt;section name="syscache2"
     type="NHibernate.Caches.SysCache2.SysCacheSection, NHibernate.Caches.SysCache2"/&gt;
@@ -224,7 +224,7 @@ layout:
 			</p><p>
 				To configure the data in a cache region to be invalidated when data in an underlying table is changed,
 				a cache region must be configured in the application's configuration file. See the sample below.
-			</p><div class="example"><a name="d0e19732"></a><p class="title"><b>Example&nbsp;27.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
+			</p><div class="example"><a name="d0e19527"></a><p class="title"><b>Example&nbsp;27.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
   &lt;cacheRegion name="Product"&gt;
     &lt;dependencies&gt;
       &lt;tables&gt;
@@ -256,7 +256,7 @@ layout:
 			</p><p>
 				To configure the data in a cache region to be invalidated based on a SQL command, a cache region must
 				be configured in the application's configuration file. See the samples below.
-			</p><div class="example"><a name="d0e19777"></a><p class="title"><b>Example&nbsp;27.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
+			</p><div class="example"><a name="d0e19572"></a><p class="title"><b>Example&nbsp;27.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -264,7 +264,7 @@ layout:
         isStoredProcedure="true"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19782"></a><p class="title"><b>Example&nbsp;27.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19577"></a><p class="title"><b>Example&nbsp;27.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -287,7 +287,7 @@ layout:
 					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Aggregate"></a>27.5.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
 				Multiple cache dependencies can be specified.  If any of the dependencies triggers a change
 				notification, the data in the cache region will be invalidated.  See the samples below.
-			</p><div class="example"><a name="d0e19843"></a><p class="title"><b>Example&nbsp;27.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+			</p><div class="example"><a name="d0e19638"></a><p class="title"><b>Example&nbsp;27.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -297,7 +297,7 @@ layout:
         command="Select quantityAvailable from dbo.VideoAvailability"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19848"></a><p class="title"><b>Example&nbsp;27.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19643"></a><p class="title"><b>Example&nbsp;27.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -315,7 +315,7 @@ layout:
 				for each item added to the cache.  Time based expiration policies will not invalidate the data
 				dependencies for the whole cache region, but serve as a way to remove items from the cache after they
 				have been in the cache for a specified amount of time.  See the samples below.
-			</p><div class="example"><a name="d0e19858"></a><p class="title"><b>Example&nbsp;27.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e19863"></a><p class="title"><b>Example&nbsp;27.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
+			</p><div class="example"><a name="d0e19653"></a><p class="title"><b>Example&nbsp;27.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e19658"></a><p class="title"><b>Example&nbsp;27.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
 							Number of seconds that an individual item will exist in the cache before being removed.
 							Defaults to <tt class="literal">300</tt> if neither <tt class="literal">relativeExpiration</tt> nor
 							<tt class="literal">timeOfDayExpiration</tt> are defined, and if no expiration settings are
@@ -351,7 +351,7 @@ layout:
 				</dd></dl></div><p>
 			RtMemoryCache has a config file section handler to allow configuring different expirations for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e19960"></a><p class="title"><b>Example&nbsp;27.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e19755"></a><p class="title"><b>Example&nbsp;27.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="rtmemorycache"
@@ -513,7 +513,7 @@ layout:
 				</dd></dl></div><p>
 			NHibernate.Caches.StackExchangeRedis has a config file section handler to allow configuring different expirations for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e20364"></a><p class="title"><b>Example&nbsp;27.11.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20159"></a><p class="title"><b>Example&nbsp;27.11.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="redis"
@@ -547,7 +547,7 @@ layout:
 			CoreMemoryCache has a config file section handler to allow configuring different expirations for
 			different regions, and configuring the <tt class="literal">MemoryCache</tt> expiration scan frequency.
 			Here is an example:
-		</p><div class="example"><a name="d0e20414"></a><p class="title"><b>Example&nbsp;27.12.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20209"></a><p class="title"><b>Example&nbsp;27.12.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="corememorycache"
@@ -589,7 +589,7 @@ layout:
 			different regions, configuring the <tt class="literal">IDistributedCacheFactory</tt> to use, and configuring
 			additional properties specific to the chosen <tt class="literal">IDistributedCache</tt> implementation.
 			Here is an example:
-		</p><div class="example"><a name="d0e20488"></a><p class="title"><b>Example&nbsp;27.13.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20283"></a><p class="title"><b>Example&nbsp;27.13.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="coredistributedcache"
@@ -634,7 +634,7 @@ layout:
 						<a href="https://github.com/cnblogs/EnyimMemcachedCore" target="_top">project website</a>. It has to be structured
 						like the value part of the <tt class="literal">"enyimMemcached"</tt> property in an
 						<tt class="literal">appsettings.json</tt> file.
-						<div class="example"><a name="d0e20555"></a><p class="title"><b>Example&nbsp;27.14.&nbsp;</b></p><pre class="programlisting">{
+						<div class="example"><a name="d0e20350"></a><p class="title"><b>Example&nbsp;27.14.&nbsp;</b></p><pre class="programlisting">{
   "Servers": [
     {
       "Address": "localhost",

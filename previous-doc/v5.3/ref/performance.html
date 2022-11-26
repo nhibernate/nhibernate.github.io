@@ -347,15 +347,14 @@ using(var iter = session
         </p><div class="table"><a name="cacheproviders"></a><p class="title"><b>Table&nbsp;21.1.&nbsp;Cache Providers</b></p><table summary="Cache Providers" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">Provider class</th><th align="left">Type</th><th align="left">Cluster Safe</th><th align="left">Query Cache Supported</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left"><tt class="literal">NHibernate.Cache.HashtableCacheProvider</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">ASP.NET Cache (System.Web.Cache)</td><td align="left"><tt class="literal">NHibernate.Caches.SysCache.SysCacheProvider, NHibernate.Caches.SysCache</tt></td><td align="left">memory</td><td align="left">&nbsp;</td><td align="left">yes</td></tr><tr><td align="left">Prevalence Cache</td><td align="left"><tt class="literal">NHibernate.Caches.Prevalence.PrevalenceCacheProvider, NHibernate.Caches.Prevalence</tt></td><td align="left">memory, disk</td><td align="left">&nbsp;</td><td align="left">yes</td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-mapping"></a>21.2.1.&nbsp;Cache mappings</h3></div></div><div></div></div><p>
                 The <tt class="literal">&lt;cache&gt;</tt> element of a class or collection mapping has the
                 following form:
-            </p><div class="programlistingco"><pre class="programlisting">&lt;cache
-    usage="read-write|nonstrict-read-write|read-only|never"          <span class="co">(1)</span>
+            </p><div class="programlistingco"><pre class="programlisting">&lt;cache 
+    usage="read-write|nonstrict-read-write|read-only"                <span class="co">(1)</span>
     region="RegionName"                                              <span class="co">(2)</span>
 /&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
                             <tt class="literal">usage</tt> specifies the caching strategy:
                             <tt class="literal">read-write</tt>,
-                            <tt class="literal">nonstrict-read-write</tt>,
-                            <tt class="literal">read-only</tt> or
-                            <tt class="literal">never</tt>
+                            <tt class="literal">nonstrict-read-write</tt> or
+                            <tt class="literal">read-only</tt>
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
                             <tt class="literal">region</tt> (optional, defaults to the class or
                             collection role name) specifies the name of the second level cache 
@@ -393,20 +392,9 @@ using(var iter = session
                 When using this strategy you should ensure that the transaction is completed when
                 <tt class="literal">ISession.Close()</tt> or <tt class="literal">ISession.Disconnect()</tt> is called.
                 
-            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="performance-cache-never"></a>21.2.5.&nbsp;Strategy: never</h3></div></div><div></div></div><p>
-                By default, without a cache configuration, entities are not cacheable. But they may still be referenced
-                in cacheable queries, which results will then be cached according to the values these non cacheable
-                entities have. So, their data may be indirectly cached through cacheable queries.
-            </p><p>
-                By using the cache strategy <tt class="literal">never</tt>, such indirect caching of these entities data will
-                be forbidden by NHibernate. Setting as cacheable a query referencing entities with strategy
-                <tt class="literal">never</tt> will be treated as an error by default. Alternatively, the
-                <tt class="literal">query.throw_never_cached</tt> <a href="session-configuration.html#configuration-optional" title="3.6.&nbsp;Optional configuration properties">setting</a> can be
-                set to <tt class="literal">false</tt>: instead of raising an error, it will disable the query cache on such
-                queries, and log a warning.
             </p></div><p>
             The following table shows which providers are compatible with which concurrency strategies.
-        </p><div class="table"><a name="d0e17716"></a><p class="title"><b>Table&nbsp;21.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
+        </p><div class="table"><a name="d0e17511"></a><p class="title"><b>Table&nbsp;21.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">PrevalenceCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
             Refer to <a href="caches.html" title="Chapter&nbsp;27.&nbsp;NHibernate.Caches">Chapter&nbsp;27, <i>NHibernate.Caches</i></a> for more details.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-sessioncache"></a>21.3.&nbsp;Managing the caches</h2></div></div><div></div></div><p>
             Whenever you pass an object to <tt class="literal">Save()</tt>, <tt class="literal">Update()</tt>
