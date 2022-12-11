@@ -310,6 +310,17 @@ var session = sessions.OpenSession(conn);
                             <p>
                                 <span class="strong">eg.</span>
                                 <tt class="literal">classname.of.QueryCacheFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.read_write_lock_factory</tt></td><td>
+                            Specify the cache lock factory to use for read-write cache regions.
+                            Defaults to the built-in <tt class="literal">async</tt> cache lock factory.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">async</tt>, or <tt class="literal">sync</tt>, or <tt class="literal">classname.of.CacheLockFactory, assembly</tt> with custom implementation of <tt class="literal">ICacheReadWriteLockFactory</tt>
+                            </p><p>
+                                <tt class="literal">async</tt> uses a single writer multiple readers locking mechanism supporting asynchronous operations.
+                            </p><p>
+                                <tt class="literal">sync</tt> uses a single access locking mechanism which will throw on asynchronous
+                                operations but may have better performances than the <tt class="literal">async</tt> provider for applications using the .Net Framework (4.8 and below).
                             </p></td></tr><tr><td><tt class="literal">cache.region_prefix</tt></td><td>
                             A prefix to use for second-level cache region names.
                             <p>
@@ -353,6 +364,16 @@ var session = sessions.OpenSession(conn);
                             <p>
                                 <span class="strong">eg.</span>
                                 <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.throw_never_cached</tt></td><td>
+                            Should queries set as cacheable raise an error if they reference an entity using the cache
+                            <a href="performance.html#performance-cache-never" title="21.2.5.&nbsp;Strategy: never">Section&nbsp;21.2.5, &#8220;Strategy: never&#8221;</a> (the default is enabled).
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p><p>
+                                Disabling this setting causes NHibernate to ignore the caching of such queries without
+                                raising an error. Furthermore NHibernate will log a warning on cacheable queries
+                                referencing an entity using the <tt class="literal">never</tt> cache strategy.
                             </p></td></tr><tr><td><tt class="literal">query.factory_class</tt></td><td>
                             The class name of a custom <tt class="literal">IQueryTranslatorFactory</tt> implementation
                             (HQL query parser factory). Defaults to the built-in
@@ -612,6 +633,37 @@ var session = sessions.OpenSession(conn);
                             </p><p>
                                 <span class="strong">eg.</span>
                                 <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">oracle.use_binary_floating_point_types</tt></td><td><p>
+                                Set whether NHibernate should map .Net <tt class="literal">double</tt> and <tt class="literal">float</tt>
+                                to Oracle <tt class="literal">BINARY_DOUBLE</tt> and <tt class="literal">BINARY_FLOAT</tt> types or use
+                                Oracle <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types.
+                            </p><p>
+                                Oracle 10g introduced <tt class="literal">BINARY_DOUBLE</tt> and <tt class="literal">BINARY_FLOAT</tt>
+                                types which are compatible with .NET <tt class="literal">double</tt> and <tt class="literal">float</tt>
+                                types, while Oracle <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> are not. Oracle
+                                <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types do not conform to the IEEE
+                                standard as they are internally implemented as <tt class="literal">NUMBER</tt> type, which
+                                makes them an exact numeric type.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> for using Oracle <tt class="literal">BINARY_DOUBLE</tt> and
+                                <tt class="literal">BINARY_FLOAT</tt> types | <tt class="literal">false</tt> for using Oracle
+                                <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types.
+                            </p><p>
+                                <tt class="literal">false</tt> by default. See
+                                <a href="https://docs.oracle.com/database/121/TTSQL/types.htm#TTSQL126" target="_top">ANSI SQL data types</a>.
+                            </p></td></tr><tr><td><tt class="literal">oracle.suppress_decimal_invalid_cast_exception</tt></td><td><p>
+                                This setting specifies whether to suppress or not the <tt class="literal">InvalidCastException</tt>
+                                and return a rounded-off 28 precision value if the Oracle <tt class="literal">NUMBER</tt> value
+                                has more than a 28 precision.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> for suppressing the exception | <tt class="literal">false</tt> for letting
+                                the exception be raised.
+                            </p><p>
+                                <tt class="literal">false</tt> by default. See
+                                <a href="https://docs.oracle.com/en/database/oracle/oracle-data-access-components/19.3/odpnt/DataReaderSuppressGetDecimalInvalidCastException.html" target="_top">SuppressGetDecimalInvalidCastException</a>.
+                                This setting works only with ODP.NET 19.10 or newer.
                             </p></td></tr><tr><td><tt class="literal">odbc.explicit_datetime_scale</tt></td><td>
                             This may need to be set to <tt class="literal">3</tt> if you are using the <tt class="literal">OdbcDriver</tt>
                             with MS SQL Server 2008+.
@@ -748,7 +800,7 @@ in the parameter binding.</pre><p>
                                     Specifies a custom objects factory to use for instantiating NHibernate dependencies.
                                     Use the assembly qualified class name of a custom <tt class="literal">IObjectsFactory</tt>
                                     implementation.
-                                </p><pre class="programlisting">&lt;bytecode-provider
+                                </p><pre class="programlisting">&lt;objects-factory
     type="className" /&gt;</pre><p>
                                     You can also set this property by code by setting
                                     <tt class="literal">NHibernate.Cfg.Environment.ObjectsFactory</tt>
