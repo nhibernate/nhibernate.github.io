@@ -3075,6 +3075,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
     formula="any SQL expression"                           <span class="co">(9)</span>
     entity-name="entityName"                               <span class="co">(10)</span>
     foreign-key="foreignKeyName"                           <span class="co">(11)</span>
+    optimistic-lock="true|false"                           <span class="co">(12)</span>
 /&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
                             <tt class="literal">name</tt>: The name of the property.
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
@@ -3116,9 +3117,14 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                             <tt class="literal">&lt;formula&gt;</tt> element(s).
                         </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
                             <tt class="literal">entity-name</tt> (optional): The entity name of the associated class.
-                        </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(11)</td><td valign="top" align="left"><p>
                             <tt class="literal">foreign-key</tt> (optional): Specifies the name of the foreign key
                             constraint for DDL generation.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(12)</td><td valign="top" align="left"><p>
+                            <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
+                            Specifies that updates to this property do or do not require acquisition of the
+                            optimistic lock. In other words, determines if a version increment should occur when
+                            this property is dirty.
                         </p></td></tr></table></div></div><p>
                 There are two varieties of one-to-one association:
             </p><div class="itemizedlist"><ul type="disc"><li><p>
