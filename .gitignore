@@ -12,3 +12,6 @@ _site
 
 # JetBrains Rider IDE user settings directory
 .idea
+
+# Bundle vendor directory
+vendor
