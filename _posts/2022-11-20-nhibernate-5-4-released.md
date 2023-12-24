@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "NHibernate 5.4 Released"
-date: 2020-11-20T17:20:00Z
+date: 2022-11-20T17:20:00Z
 author: fredericDelaporte
 gravatar: 5eaae4002cdfc206faf907aaf38d8a09
 tags:
