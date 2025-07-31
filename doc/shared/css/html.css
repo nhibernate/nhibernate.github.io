@@ -48,7 +48,7 @@ H4 { font-size: 110%; font-weight: bold;}
 H5 { font-size: 100%; font-style: italic; }
 H6 { font-size: 100%; font-style: italic; }
 
-TT {
+P>CODE, LI>CODE, TT {
 font-size: 90%;
     font-family: "Courier New", Courier, monospace;
     color: #000000;
