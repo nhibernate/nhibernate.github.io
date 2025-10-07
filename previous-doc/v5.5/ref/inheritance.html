@@ -1,0 +1,292 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/inheritance.html" />
+    <title>Chapter&nbsp;9.&nbsp;Inheritance Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="components.html" title="Chapter&nbsp;8.&nbsp;Component Mapping"><link rel="next" href="manipulatingdata.html" title="Chapter&nbsp;10.&nbsp;Manipulating Persistent Data">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;9.&nbsp;Inheritance Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="components.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="manipulatingdata.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="inheritance"></a>Chapter&nbsp;9.&nbsp;Inheritance Mapping</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="inheritance-strategies"></a>9.1.&nbsp;The Three Strategies</h2></div></div><div></div></div><p>
+            NHibernate supports the three basic inheritance mapping strategies:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    table per class hierarchy
+                </p></li><li><p>
+                    table per subclass
+                </p></li><li><p>
+                    table per concrete class
+                </p></li></ul></div><p>
+            In addition, NHibernate supports a fourth, slightly different kind of polymorphism:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    implicit polymorphism
+                </p></li></ul></div><p>
+            It is possible to use different mapping strategies for different branches of the same
+            inheritance hierarchy. You can then make use of implicit polymorphism to achieve polymorphism
+            across the whole hierarchy. However,  NHibernate does not support mixing
+            <tt class="literal">&lt;subclass&gt;</tt>, and <tt class="literal">&lt;joined-subclass&gt;</tt> and
+            <tt class="literal">&lt;union-subclass&gt;</tt> mappings under the same root
+            <tt class="literal">&lt;class&gt;</tt> element. It is possible to mix together the table per
+            hierarchy and table per subclass strategies, under the the same
+            <tt class="literal">&lt;class&gt;</tt> element, by combining the <tt class="literal">&lt;subclass&gt;</tt>
+            and <tt class="literal">&lt;join&gt;</tt> elements (see
+            <a href="inheritance.html#inheritance-mixing-tableperclass-tablepersubclass" title="9.1.4.&nbsp;Mixing table per class hierarchy with table per subclass">Section&nbsp;9.1.4, &#8220;Mixing table per class hierarchy with table per subclass&#8221;</a>).
+        </p><p>
+            It is possible to define <tt class="literal">subclass</tt>, <tt class="literal">union-subclass</tt>,
+            and <tt class="literal">joined-subclass</tt> mappings in separate mapping documents directly beneath
+            <tt class="literal">hibernate-mapping</tt>. This allows you to extend a class hierarchy by adding
+            a new mapping file. You must specify an <tt class="literal">extends</tt> attribute in the subclass
+            mapping, naming a previously mapped superclass.
+        </p><pre class="programlisting">
+ &lt;hibernate-mapping&gt;
+     &lt;subclass name="DomesticCat" extends="Cat" discriminator-value="D"&gt;
+          &lt;property name="name" type="string"/&gt;
+     &lt;/subclass&gt;
+ &lt;/hibernate-mapping&gt;</pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-tableperclass"></a>9.1.1.&nbsp;Table per class hierarchy</h3></div></div><div></div></div><p>
+                Suppose we have an interface <tt class="literal">IPayment</tt>, with implementors
+                <tt class="literal">CreditCardPayment</tt>, <tt class="literal">CashPayment</tt>,
+                <tt class="literal">ChequePayment</tt>. The table-per-hierarchy mapping would display in the
+                following way:
+            </p><pre class="programlisting">&lt;class name="IPayment" table="PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="String"/&gt;
+    &lt;property name="Amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        ...
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre><p>
+                Exactly one table is required. There is a limitation of this mapping strategy: columns
+                declared by the subclasses, such as <tt class="literal">CCTYPE</tt>, cannot have
+                <tt class="literal">NOT NULL</tt> constraints.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-tablepersubclass"></a>9.1.2.&nbsp;Table per subclass</h3></div></div><div></div></div><p>
+                A table-per-subclass mapping would look like:
+            </p><pre class="programlisting">&lt;class name="IPayment" table="PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Amount" column="AMOUNT"/&gt;
+    ...
+    &lt;joined-subclass name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+&lt;/class&gt;</pre><p>
+                Four tables are required. The three subclass tables have primary key associations to the
+                superclass table so the relational model is actually a one-to-one association.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-tablepersubclass-discriminator"></a>9.1.3.&nbsp;Table per subclass, using a discriminator</h3></div></div><div></div></div><p>
+                NHibernate's implementation of table per subclass does not require a discriminator column.
+                Other object/relational mappers use a different implementation of table per subclass that
+                requires a type discriminator column in the superclass table. The approach taken by
+                NHibernate is much more difficult to implement, but arguably more correct from a relational
+                point of view. If you want to use a discriminator column with the table per subclass
+                strategy, you can combine the use of <tt class="literal">&lt;subclass&gt;</tt> and
+                <tt class="literal">&lt;join&gt;</tt>, as follows:
+            </p><pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="string"/&gt;
+    &lt;property name="Amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;join table="CREDIT_PAYMENT"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        &lt;join table="CASH_PAYMENT"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        &lt;join table="CHEQUE_PAYMENT" fetch="select"&gt;
+            &lt;key column="PAYMENT_ID"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre><p>
+                The optional <tt class="literal">fetch="select"</tt> declaration tells NHibernate 
+                not to fetch the <tt class="literal">ChequePayment</tt> subclass data using an
+                outer join when querying the superclass.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-mixing-tableperclass-tablepersubclass"></a>9.1.4.&nbsp;Mixing table per class hierarchy with table per subclass</h3></div></div><div></div></div><p>
+                You can even mix the table per hierarchy and table per subclass strategies
+                using the following approach:
+            </p><pre class="programlisting">&lt;class name="Payment" table="PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="PAYMENT_TYPE" type="string"/&gt;
+    &lt;property name="Amount" column="AMOUNT"/&gt;
+    ...
+    &lt;subclass name="CreditCardPayment" discriminator-value="CREDIT"&gt;
+        &lt;join table="CREDIT_PAYMENT"&gt;
+            &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+            ...
+        &lt;/join&gt;
+    &lt;/subclass&gt;
+    &lt;subclass name="CashPayment" discriminator-value="CASH"&gt;
+        ...
+    &lt;/subclass&gt;
+    &lt;subclass name="ChequePayment" discriminator-value="CHEQUE"&gt;
+        ...
+    &lt;/subclass&gt;
+&lt;/class&gt;</pre><p>
+                For any of these mapping strategies, a polymorphic
+                association to <tt class="literal">IPayment</tt> is mapped using
+                <tt class="literal">&lt;many-to-one&gt;</tt>.
+            </p><pre class="programlisting">&lt;many-to-one name="Payment" column="PAYMENT" class="IPayment"/&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-tableperconcrete"></a>9.1.5.&nbsp;Table per concrete class</h3></div></div><div></div></div><p>
+                There are two ways we can map the table per concrete class strategy. First, you can use
+                <tt class="literal">&lt;union-subclass&gt;</tt>.
+            </p><pre class="programlisting">&lt;class name="Payment"&gt;
+    &lt;id name="Id" type="Int64" column="PAYMENT_ID"&gt;
+        &lt;generator class="sequence"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Amount" column="AMOUNT"/&gt;
+    ...
+    &lt;union-subclass name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+        &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+        ...
+    &lt;/union-subclass&gt;
+    &lt;union-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        ...
+    &lt;/union-subclass&gt;
+    &lt;union-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        ...
+    &lt;/union-subclass&gt;
+&lt;/class&gt;</pre><p>
+                Three tables are involved for the subclasses. Each table defines columns for
+                all properties of the class, including inherited properties.
+            </p><p>
+                The limitation of this approach is that if a property is mapped on the superclass, the
+                column name must be the same on all subclass tables. The identity generator strategy is
+                not allowed in union subclass inheritance. The primary key seed has to be shared across
+                all unioned subclasses of a hierarchy.
+            </p><p>
+                If your superclass is abstract, map it with <tt class="literal">abstract="true"</tt>.
+                If it is not abstract, an additional table (it defaults to
+                <tt class="literal">PAYMENT</tt> in the example above), is needed to hold instances
+                of the superclass.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritance-tableperconcreate-polymorphism"></a>9.1.6.&nbsp;Table per concrete class, using implicit polymorphism</h3></div></div><div></div></div><p>
+                An alternative approach is to make use of implicit polymorphism:
+            </p><pre class="programlisting">&lt;class name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="CREDIT_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Amount" column="CREDIT_AMOUNT"/&gt;
+    &lt;property name="CreditCardType" column="CCTYPE"/&gt;
+    ...
+&lt;/class&gt;
+
+&lt;class name="CashPayment" table="CASH_PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="CASH_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Amount" column="CASH_AMOUNT"/&gt;
+    ...
+&lt;/class&gt;
+
+&lt;class name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="CHEQUE_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Amount" column="CHEQUE_AMOUNT"/&gt;
+    ...
+&lt;/class&gt;</pre><p>
+                Notice that the <tt class="literal">IPayment</tt> interface is not mentioned
+                explicitly. Also notice that properties of <tt class="literal">IPayment</tt> are
+                mapped in each of the subclasses. If you want to avoid duplication, consider
+                using XML entities (by example
+                <tt class="literal">[ &lt;!ENTITY allproperties SYSTEM "allproperties.xml"&gt; ]</tt>
+                in the <tt class="literal">DOCTYPE</tt> declaration and
+                <tt class="literal">&amp;allproperties;</tt> in the mapping).
+            </p><p>
+                The disadvantage of this approach is that NHibernate does not generate SQL
+                <tt class="literal">UNION</tt>s when performing polymorphic queries.
+            </p><p>
+                For this mapping strategy, a polymorphic association to <tt class="literal">IPayment</tt> 
+                is usually mapped using <tt class="literal">&lt;any&gt;</tt>.
+            </p><pre class="programlisting">&lt;any name="Payment" meta-type="string" id-type="Int64"&gt;
+    &lt;meta-value value="CREDIT" class="CreditCardPayment"/&gt;
+    &lt;meta-value value="CASH" class="CashPayment"/&gt;
+    &lt;meta-value value="CHEQUE" class="ChequePayment"/&gt;
+    &lt;column name="PAYMENT_CLASS"/&gt;
+    &lt;column name="PAYMENT_ID"/&gt;
+&lt;/any&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="inheritace-mixingpolymorphism"></a>9.1.7.&nbsp;Mixing implicit polymorphism with other inheritance mappings</h3></div></div><div></div></div><p>
+                Since the subclasses are each mapped in their own
+                <tt class="literal">&lt;class&gt;</tt> element and since
+                <tt class="literal">IPayment</tt> is just an interface, each of
+                the subclasses could easily be part of another inheritance hierarchy. You can
+                still use polymorphic queries against the <tt class="literal">IPayment</tt> interface.
+            </p><pre class="programlisting">&lt;class name="CreditCardPayment" table="CREDIT_PAYMENT"&gt;
+    &lt;id name="Id" type="Int64" column="CREDIT_PAYMENT_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;discriminator column="CREDIT_CARD" type="String"/&gt;
+    &lt;property name="Amount" column="CREDIT_AMOUNT"/&gt;
+    ...
+    &lt;subclass name="MasterCardPayment" discriminator-value="MDC"/&gt;
+    &lt;subclass name="VisaPayment" discriminator-value="VISA"/&gt;
+&lt;/class&gt;
+
+&lt;class name="NonelectronicTransaction" table="NONELECTRONIC_TXN"&gt;
+    &lt;id name="Id" type="Int64" column="TXN_ID"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    ...
+    &lt;joined-subclass name="CashPayment" table="CASH_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="Amount" column="CASH_AMOUNT"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+    &lt;joined-subclass name="ChequePayment" table="CHEQUE_PAYMENT"&gt;
+        &lt;key column="PAYMENT_ID"/&gt;
+        &lt;property name="Amount" column="CHEQUE_AMOUNT"/&gt;
+        ...
+    &lt;/joined-subclass&gt;
+&lt;/class&gt;</pre><p>
+                Once again, <tt class="literal">IPayment</tt> is not mentioned explicitly. If we
+                execute a query against the <tt class="literal">IPayment</tt> interface - for
+                example, <tt class="literal">from IPayment</tt> - NHibernate
+                automatically returns instances of <tt class="literal">CreditCardPayment</tt>
+                (and its subclasses, since they also implement <tt class="literal">IPayment</tt>),
+                <tt class="literal">CashPayment</tt> and <tt class="literal">ChequePayment</tt> but
+                not instances of <tt class="literal">NonelectronicTransaction</tt> (provided it does
+                not implement <tt class="literal">IPayment</tt>).
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="inheritance-limitations"></a>9.2.&nbsp;Limitations</h2></div></div><div></div></div><p>
+            There are limitations to the "implicit polymorphism" approach to the table per concrete-class
+            mapping strategy. There are somewhat less restrictive limitations to
+            <tt class="literal">&lt;union-subclass&gt;</tt> mappings.
+        </p><p>
+            The following table shows the limitations of table per concrete-class
+            mappings, and of implicit polymorphism, in NHibernate.
+        </p><div class="table"><a name="d0e11257"></a><p class="title"><b>Table&nbsp;9.1.&nbsp;Features of inheritance mappings</b></p><table summary="Features of inheritance mappings" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Inheritance strategy</th><th align="left">Polymorphic many-to-one</th><th align="left">Polymorphic one-to-one</th><th align="left">Polymorphic one-to-many</th><th align="left">Polymorphic many-to-many</th><th align="left">Polymorphic <tt class="literal">Load()/Get()</tt></th><th align="left">Polymorphic queries</th><th align="left">Polymorphic joins</th><th align="left">Outer join fetching</th></tr></thead><tbody><tr><td align="left">table per class-hierarchy</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per subclass</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete-class (union-subclass)</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt> (for <tt class="literal">inverse="true"</tt> only)</td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete class (implicit polymorphism)</td><td align="left"><tt class="literal">&lt;any&gt;</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><tt class="literal">&lt;many-to-any&gt;</tt></td><td align="left"><span class="emphasis"><em>use a query</em></span></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="components.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="manipulatingdata.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;8.&nbsp;Component Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

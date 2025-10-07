@@ -1,0 +1,72 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/preface.html" />
+    <title>Preface</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="next" href="quickstart.html" title="Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+	<div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Preface</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="quickstart.html">Next</a></td></tr></table><hr></div>
+	<div class="preface" lang="en">
+		<div class="titlepage"><div><div><h2 class="title"><a name="preface"></a>Preface</h2></div></div><div></div></div>
+		{% include google_adsense.html %}
+		<p>
+		Working with object-oriented software and a relational database can be cumbersome
+		and time consuming in today's enterprise environments. NHibernate is an object/relational
+		mapping tool for .NET environments. The term object/relational mapping (<span class="emphasis"><em>ORM</em></span>) refers to
+		the technique of mapping a data representation from an object model to a relational
+		data model with a SQL-based schema.
+	</p><p>
+		NHibernate not only takes care of the mapping from .NET classes to
+		database tables (and from .NET data types to SQL data types), but also provides data
+		query and retrieval facilities and can significantly reduce development time otherwise
+		spent with manual data handling in SQL and ADO.NET.
+	</p><p>
+		NHibernate's goal is to relieve the developer from 95 percent of common data persistence
+		related programming tasks. NHibernate may not be the best solution for data-centric
+		applications that only use stored-procedures to implement the business logic in the
+		database, it is most useful with object-oriented domain models and business logic in
+		the .NET-based middle-tier. However, NHibernate can certainly help you to remove or
+		encapsulate vendor-specific SQL code and will help with the common task of result set
+		translation from a tabular representation to a graph of objects.
+	</p><p>
+		If you are new to NHibernate and Object/Relational Mapping or even .NET Framework,
+		please follow these steps:
+	</p><div class="orderedlist"><ol type="1"><li><p>
+				Read <a href="quickstart.html" title="Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server">Chapter&nbsp;1, <i>Quick-start with IIS and Microsoft SQL Server</i></a> for a 30 minute tutorial,
+				using Internet Information Services (IIS) web server.
+			</p></li><li><p>
+				Read <a href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture">Chapter&nbsp;2, <i>Architecture</i></a> to understand the environments where
+				NHibernate can be used.
+			</p></li><li><p>
+				Use this reference documentation as your primary source of information.
+				Consider reading <span class="emphasis"><em><a href="https://www.manning.com/books/hibernate-in-action" target="_top">Hibernate in Action</a></em></span>
+				(java)
+				or <span class="emphasis"><em><a href="https://www.manning.com/books/nhibernate-in-action" target="_top">NHibernate in Action</a></em></span>
+				or <span class="emphasis"><em><a href="https://www.packtpub.com/application-development/nhibernate-40-cookbook" target="_top">NHibernate
+				4.x Cookbook - Second Edition</a></em></span>
+				or <span class="emphasis"><em><a href="https://www.packtpub.com/application-development/nhibernate-2-beginners-guide" target="_top">NHibernate 2 Beginner's
+				Guide</a></em></span> if you need more help
+				with application design or if you prefer a step-by-step tutorial. Also visit
+				<a href="http://nhibernate.sourceforge.net/NHibernateEg/" target="_top">http://nhibernate.sourceforge.net/NHibernateEg/</a> for NHibernate
+				tutorial with examples.
+			</p></li><li><p>
+        FAQs are answered on the <a href="https://groups.google.com/forum/#!forum/nhusers" target="_top">NHibernate users group</a>.
+      </p></li><li><p>
+				The Community Area on the <a href="https://nhibernate.info/" target="_top">NHibernate website</a> is a good source for
+				design patterns and various integration solutions (ASP.NET, Windows	Forms).
+			</p></li></ol></div><p>
+		 If you have questions, use the
+		 <a href="https://groups.google.com/forum/#!forum/nhusers" target="_top">NHibernate user forum</a>.
+		 We also provide a <a href="https://github.com/nhibernate/nhibernate-core/issues" target="_top">GitHub issue tracking system</a>
+		 for bug reports and feature requests.
+		 If you are interested in the development of NHibernate, join the developer mailing list.
+		 If you are interested in translating this documentation into your language, contact us
+		 on the <a href="https://groups.google.com/forum/#!forum/nhibernate-development" target="_top">developer mailing list</a>.
+	 </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="quickstart.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">NHibernate - Relational Persistence for Idiomatic .NET&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

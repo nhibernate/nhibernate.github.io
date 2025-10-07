@@ -1,0 +1,408 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/persistent-classes.html" />
+    <title>Chapter&nbsp;4.&nbsp;Persistent Classes</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="session-configuration.html" title="Chapter&nbsp;3.&nbsp;ISessionFactory Configuration"><link rel="next" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;4.&nbsp;Persistent Classes</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="persistent-classes"></a>Chapter&nbsp;4.&nbsp;Persistent Classes</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        Persistent classes are classes in an application that implement the entities
+        of the business problem (e.g. Customer and Order in an E-commerce application).
+        Persistent classes have, as the name implies, transient and also persistent
+        instance stored in the database.
+    </p><p>
+        NHibernate works best if these classes follow some simple rules, also known
+        as the Plain Old CLR Object (POCO) programming model.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-poco"></a>4.1.&nbsp;A simple POCO example</h2></div></div><div></div></div><p>
+            Most .NET applications require a persistent class representing felines.
+        </p><pre class="programlisting">using System;
+using System.Collections.Generic;
+
+namespace Eg
+{
+    public class Cat
+    {
+        long _id;
+        // identifier
+
+        public virtual long Id
+        {
+            get { return _id; }
+            protected set { _id = value; }
+        }
+
+        public virtual string Name { get; set; }
+        public virtual Cat Mate { get; set; }
+        public virtual DateTime Birthdate { get; set; }
+        public virtual float Weight { get; set; }
+        public virtual Color Color { get; set; }
+        public virtual ISet&lt;Cat&gt; Kittens { get; set; }
+        public virtual char Sex { get; set; }
+
+        // AddKitten not needed by NHibernate
+        public virtual void AddKitten(Cat kitten)
+        {
+            kittens.Add(kitten);
+        }
+    }
+}</pre><p>
+            There are four main rules to follow here:
+        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="persistent-classes-poco-accessors"></a>4.1.1.&nbsp;Declare properties for persistent fields</h3></div></div><div></div></div><p>
+                <tt class="literal">Cat</tt> declares properties for all the persistent fields.
+                Many other <span class="emphasis"><em>ORM tools</em></span> directly persist instance variables. We believe 
+                it is far better to decouple this implementation detail from the persistence 
+                mechanism. NHibernate persists properties, using their getter and setter methods.
+            </p><p>
+                Properties need <span class="emphasis"><em>not</em></span> be declared public - NHibernate can
+                persist a property with an <tt class="literal">internal</tt>, <tt class="literal">protected</tt>,
+                <tt class="literal">protected internal</tt> or <tt class="literal">private</tt> visibility.
+            </p><p>
+                As shown in the example, both automatic properties and properties with a
+                backing field are supported.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="persistent-classes-poco-constructor"></a>4.1.2.&nbsp;Implement a default constructor</h3></div></div><div></div></div><p>
+                <tt class="literal">Cat</tt> has an implicit default (no-argument) constructor. All 
+                persistent classes must have a default constructor (which may be non-public) so 
+                NHibernate can instantiate them using <tt class="literal">Activator.CreateInstance()</tt>.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="persistent-classes-poco-identifier"></a>4.1.3.&nbsp;Provide an identifier property (optional)</h3></div></div><div></div></div><p>
+                <tt class="literal">Cat</tt> has a property called <tt class="literal">Id</tt>. This property 
+                holds the primary key column of a database table. The property might have been called 
+                anything, and its type might have been any primitive type, <tt class="literal">string</tt>
+                or <tt class="literal">System.DateTime</tt>. (If your legacy database table has composite
+                keys, you can even use a user-defined class with properties of these types - see the
+                section on composite identifiers below.)
+            </p><p>
+                The identifier property is optional. You can leave it off and let NHibernate keep track 
+                of object identifiers internally. However, for many applications it is still
+                a good (and very popular) design decision.
+            </p><p>
+                What's more, some functionality is available only to classes which declare an
+                identifier property:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        Cascaded updates (see <a href="manipulatingdata.html#manipulatingdata-graphs" title="10.10.&nbsp;Lifecycles and object graphs">Section&nbsp;10.10, &#8220;Lifecycles and object graphs&#8221;</a>)
+                    </p></li><li><p>
+                        <tt class="literal">ISession.SaveOrUpdate()</tt>
+                    </p></li></ul></div><p>
+                We recommend you declare consistently-named identifier properties on persistent
+                classes.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="persistent-classes-poco-sealed"></a>4.1.4.&nbsp;Prefer non-sealed classes and virtual methods (optional)</h3></div></div><div></div></div><p>
+                A central feature of NHibernate, <span class="emphasis"><em>proxies</em></span>, depends upon the
+                persistent class being non-sealed and all its public methods, properties and
+                events declared as virtual. Another possibility is for the class to implement
+                an interface that declares all public members.
+            </p><p>
+                You can persist <tt class="literal">sealed</tt> classes that do not implement an interface
+                and don't have virtual members with NHibernate, but you won't be able to use proxies
+                - which will limit your options for performance tuning.
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-inheritance"></a>4.2.&nbsp;Implementing inheritance</h2></div></div><div></div></div><p>
+            A subclass must also observe the first and second rules. It inherits its
+            identifier property from <tt class="literal">Cat</tt>.
+        </p><pre class="programlisting">using System;
+namespace Eg
+{
+    public class DomesticCat : Cat
+    {
+        public virtual string Name { get; set; }
+    }
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-equalshashcode"></a>4.3.&nbsp;Implementing <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt></h2></div></div><div></div></div><p>
+            You have to override the <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt>
+            methods if you intend to mix objects of persistent classes (e.g. in an <tt class="literal">ISet</tt>).
+        </p><p>
+            <span class="emphasis"><em>This only applies if these objects are loaded in two different
+            <tt class="literal">ISession</tt>s, as NHibernate only guarantees identity (<tt class="literal"> a == b </tt>,
+            the default implementation of <tt class="literal">Equals()</tt>) inside a single
+            <tt class="literal">ISession</tt>!</em></span>
+        </p><p>
+            Even if both objects <tt class="literal">a</tt> and <tt class="literal">b</tt> are the same database row
+            (they have the same primary key value as their identifier), we can't guarantee that they are
+            the same object instance outside of a particular <tt class="literal">ISession</tt> context.
+        </p><p>
+            The most obvious way is to implement <tt class="literal">Equals()</tt>/<tt class="literal">GetHashCode()</tt>
+            by comparing the identifier value of both objects. If the value is the same, both must
+            be the same database row, they are therefore equal (if both are added to an <tt class="literal">ISet</tt>,
+            we will only have one element in the <tt class="literal">ISet</tt>). Unfortunately, we can't use that
+            approach. NHibernate will only assign identifier values to objects that are persistent,
+            a newly created instance will not have any identifier value! We recommend implementing
+            <tt class="literal">Equals()</tt> and <tt class="literal">GetHashCode()</tt> using
+            <span class="emphasis"><em>Business key equality</em></span>.
+        </p><p>
+            Business key equality means that the <tt class="literal">Equals()</tt>
+            method compares only the properties that form the business key, a key that would
+            identify our instance in the real world (a <span class="emphasis"><em>natural</em></span> candidate key):
+        </p><pre class="programlisting">public class Cat
+{
+
+    ...
+    public override bool Equals(object other)
+    {
+        if (this == other) return true;
+        
+        Cat cat = other as Cat;
+        if (cat == null) return false; // null or not a cat
+
+        if (Name != cat.Name) return false;
+        if (!Birthday.Equals(cat.Birthday)) return false;
+
+        return true;
+    }
+
+    public override int GetHashCode()
+    {
+        unchecked
+        {
+            int result;
+            result = Name.GetHashCode();
+            result = 29 * result + Birthday.GetHashCode();
+            return result;
+        }
+    }
+
+}</pre><p>
+            Keep in mind that our candidate key (in this case a composite of name and birthday)
+            has to be only valid for a particular comparison operation (maybe even only in a
+            single use case). We don't need the stability criteria we usually apply to a real
+            primary key!
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-dynamicmodels"></a>4.4.&nbsp;Dynamic models</h2></div></div><div></div></div><p>
+            <span class="emphasis"><em>Note that the following features are currently considered
+                experimental and may change in the near future.</em></span>
+        </p><p>
+            Persistent entities don't necessarily have to be represented as POCO classes
+            at runtime. NHibernate also supports dynamic models
+            (using <tt class="literal">Dictionaries</tt> or C# <tt class="literal">dynamic</tt>). With this approach,
+            you don't write persistent classes, only mapping files.
+        </p><p>
+            The following examples demonstrates the dynamic model feature.
+            First, in the mapping file, an <tt class="literal">entity-name</tt> has to be declared
+            instead of a class name:
+        </p><pre class="programlisting">&lt;hibernate-mapping&gt;
+    &lt;class entity-name="Customer"&gt;
+        &lt;id name="Id"
+            type="long"
+            column="ID"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+
+        &lt;property name="Name"
+            column="NAME"
+            type="string"/&gt;
+
+        &lt;property name="Address"
+            column="ADDRESS"
+            type="string"/&gt;
+
+        &lt;many-to-one name="Organization"
+            column="ORGANIZATION_ID"
+            class="Organization"/&gt;
+
+        &lt;bag name="Orders"
+            inverse="true"
+            lazy="false"
+            cascade="all"&gt;
+            &lt;key column="CUSTOMER_ID"/&gt;
+            &lt;one-to-many class="Order"/&gt;
+        &lt;/bag&gt;
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;</pre><p>
+            Note that even though associations are declared using target class names,
+            the target type of an associations may also be a dynamic entity instead
+            of a POCO.
+        </p><p>
+            At runtime we can work with <tt class="literal">Dictionaries</tt>:
+        </p><pre class="programlisting">using(ISession s = OpenSession())
+using(ITransaction tx = s.BeginTransaction())
+{
+    // Create a customer
+    var frank = new Dictionary&lt;string, object&gt;();
+    frank["name"] = "Frank";
+
+    // Create an organization
+    var foobar = new Dictionary&lt;string, object&gt;();
+    foobar["name"] = "Foobar Inc.";
+
+    // Link both
+    frank["organization"] =  foobar;
+
+    // Save both
+    s.Save("Customer", frank);
+    s.Save("Organization", foobar);
+
+    tx.Commit();
+}</pre><p>
+           Or we can work with <tt class="literal">dynamic</tt>:
+        </p><pre class="programlisting">using(var s = OpenSession())
+using(var tx = s.BeginTransaction())
+{
+    // Create a customer
+    dynamic frank = new ExpandoObject();
+    frank.Name = "Frank";
+
+    // Create an organization
+    dynamic foobar = new ExpandoObject();
+    foobar.Name = "Foobar Inc.";
+
+    // Link both
+    frank.Organization = foobar;
+
+    // Save both
+    s.Save("Customer", frank);
+    s.Save("Organization", foobar);
+
+    tx.Commit();
+}</pre><p>
+            The advantages of a dynamic mapping are quick turnaround time for prototyping
+            without the need for entity class implementation. However, you lose compile-time
+            type checking and will very likely deal with many exceptions at runtime. Thanks
+            to the NHibernate mapping, the database schema can easily be normalized and sound,
+            allowing to add a proper domain model implementation on top later on.
+        </p><p>
+            A loaded dynamic entity can be manipulated as an <tt class="literal">IDictionary</tt>,
+            an <tt class="literal">IDictionary&lt;string, object&gt;</tt> or a C#
+            <tt class="literal">dynamic</tt>.
+        </p><pre class="programlisting">using(ISession s = OpenSession())
+using(ITransaction tx = s.BeginTransaction())
+{
+    var customers = s
+        .CreateQuery("from Customer")
+        .List&lt;IDictionary&lt;string, object&gt;&gt;();
+    ...
+}</pre><pre class="programlisting">using System.Linq.Dynamic.Core;
+
+...
+
+using(ISession s = OpenSession())
+using(ITransaction tx = s.BeginTransaction())
+{
+    var customers = s
+        .Query&lt;dynamic&gt;("Customer")
+        .OrderBy("Name")
+        .ToList();
+    ...
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-tuplizers"></a>4.5.&nbsp;Tuplizers</h2></div></div><div></div></div><p>
+            <tt class="literal">NHibernate.Tuple.Tuplizer</tt>, and its sub-interfaces, are responsible
+            for managing a particular representation of a piece of data, given that representation's
+            <tt class="literal">NHibernate.EntityMode</tt>.  If a given piece of data is thought of as
+            a data structure, then a tuplizer is the thing which knows how to create such a data structure
+            and how to extract values from and inject values into such a data structure.  For example,
+            for the POCO entity mode, the corresponding tuplizer knows how create the POCO through its
+            constructor and how to access the POCO properties using the defined property accessors.
+            There are two high-level types of Tuplizers, represented by the
+            <tt class="literal">NHibernate.Tuple.Entity.IEntityTuplizer</tt> and <tt class="literal">NHibernate.Tuple.Component.IComponentTuplizer</tt>
+            interfaces.  <tt class="literal">IEntityTuplizer</tt>s are responsible for managing the above mentioned
+            contracts in regards to entities, while <tt class="literal">IComponentTuplizer</tt>s do the same for
+            components.
+        </p><p>
+            Users may also plug in their own tuplizers.  Perhaps you require that a <tt class="literal">IDictionary</tt> /
+            <tt class="literal">DynamicObject</tt> implementation other than NHibernate own implementation is used while
+            in the dynamic-map entity-mode; or perhaps you need to define a different proxy generation strategy
+            than the one used by default.  Both would be achieved by defining a custom tuplizer
+            implementation.  Tuplizers definitions are attached to the entity or component mapping they
+            are meant to manage.  Going back to the example of our customer entity:
+        </p><pre class="programlisting">&lt;hibernate-mapping&gt;
+    &lt;class entity-name="Customer"&gt;
+        &lt;!--
+            Override the dynamic-map entity-mode
+            tuplizer for the customer entity
+        --&gt;
+        &lt;tuplizer entity-mode="dynamic-map"
+                class="CustomMapTuplizerImpl"/&gt;
+
+        &lt;id name="id" type="long" column="ID"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+
+        &lt;!-- other properties --&gt;
+        ...
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;
+
+
+public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTuplizer
+{
+    // override the BuildInstantiator() method to plug in our custom map...
+    protected override IInstantiator BuildInstantiator(
+        NHibernate.Mapping.PersistentClass mappingInfo)
+    {
+        return new CustomMapInstantiator(mappingInfo);
+    }
+
+    private sealed class CustomMapInstantiator : NHibernate.Tuple.DynamicMapInstantiator
+    {
+        // override the generateMap() method to return our custom map...
+        protected override IDictionary GenerateMap()
+        {
+            return new CustomMap();
+        }
+    }
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-lifecycle"></a>4.6.&nbsp;Lifecycle Callbacks</h2></div></div><div></div></div><p>
+            Optionally, a persistent class might implement the interface 
+            <tt class="literal">ILifecycle</tt> which provides some callbacks that allow
+            the persistent object to perform necessary initialization/cleanup after
+            save or load and before deletion or update.
+        </p><p>
+            The NHibernate <a href="events.html#objectstate-interceptors" title="13.1.&nbsp;Interceptors"><tt class="literal">IInterceptor</tt></a>
+            offers a less intrusive alternative, however.
+        </p><div class="programlistingco"><pre class="programlisting">public interface ILifecycle
+{                                                                    <span class="co">(1)</span>
+        LifecycleVeto OnSave(ISession s);                            <span class="co">(2)</span>
+        LifecycleVeto OnUpdate(ISession s);                          <span class="co">(3)</span>
+        LifecycleVeto OnDelete(ISession s);                          <span class="co">(4)</span>
+        void OnLoad(ISession s, object id);
+}</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                        <tt class="literal">OnSave</tt> - called just before the object is saved or
+                        inserted
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                        <tt class="literal">OnUpdate</tt> - called just before an object is updated 
+                        (when the object is passed to <tt class="literal">ISession.Update()</tt>)
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                        <tt class="literal">OnDelete</tt> - called just before an object is deleted
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                        <tt class="literal">OnLoad</tt> - called just after an object is loaded
+                    </p></td></tr></table></div></div><p>
+            <tt class="literal">OnSave()</tt>, <tt class="literal">OnDelete()</tt> and
+            <tt class="literal">OnUpdate()</tt> may be used to cascade saves and
+            deletions of dependent objects. This is an alternative to declaring cascaded
+            operations in the mapping file. <tt class="literal">OnLoad()</tt> may
+            be used to initialize transient properties of the object from its persistent
+            state. It may not be used to load dependent objects since the
+            <tt class="literal">ISession</tt> interface may not be invoked from
+            inside this method. A further intended usage of <tt class="literal">OnLoad()</tt>, 
+            <tt class="literal">OnSave()</tt> and <tt class="literal">OnUpdate()</tt> is to store a 
+            reference to the current <tt class="literal">ISession</tt> for later use.
+        </p><p>
+            Note that <tt class="literal">OnUpdate()</tt> is not called every time the object's
+            persistent state is updated. It is called only when a transient object is passed
+            to <tt class="literal">ISession.Update()</tt>.
+        </p><p>
+            If <tt class="literal">OnSave()</tt>, <tt class="literal">OnUpdate()</tt> or
+            <tt class="literal">OnDelete()</tt> return <tt class="literal">LifecycleVeto.Veto</tt>, the operation is 
+            silently vetoed. If a <tt class="literal">CallbackException</tt> is thrown, the operation 
+            is vetoed and the exception is passed back to the application.
+        </p><p>
+            Note that <tt class="literal">OnSave()</tt> is called after an identifier is assigned to 
+            the object, except when native key generation is used.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="persistent-classes-validatable"></a>4.7.&nbsp;IValidatable callback</h2></div></div><div></div></div><p>
+            If the persistent class needs to check invariants before its state is
+            persisted, it may implement the following interface:
+        </p><pre class="programlisting">public interface IValidatable
+{
+        void Validate();
+}</pre><p>
+            The object should throw a <tt class="literal">ValidationFailure</tt> if an invariant 
+            was violated. An instance of <tt class="literal">Validatable</tt> should not change 
+            its state from inside <tt class="literal">Validate()</tt>.
+        </p><p>
+            Unlike the callback methods of the <tt class="literal">ILifecycle</tt> interface, 
+            <tt class="literal">Validate()</tt> might be called at unpredictable times. The
+            application should not rely upon calls to <tt class="literal">Validate()</tt> for
+            business functionality.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="session-configuration.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="mapping.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;3.&nbsp;ISessionFactory Configuration&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;5.&nbsp;Basic O/R Mapping</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

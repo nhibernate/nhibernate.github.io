@@ -6,7 +6,8 @@ layout:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="inheritance.html" title="Chapter&nbsp;9.&nbsp;Inheritance Mapping"><link rel="next" href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/manipulatingdata.html" />
+   <title>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="inheritance.html" title="Chapter&nbsp;9.&nbsp;Inheritance Mapping"><link rel="next" href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
     <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="inheritance.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="readonly.html">Next</a></td></tr></table><hr></div>
@@ -492,9 +493,11 @@ sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><
             It is possible to change the default behavior so that flush occurs less frequently.
             The <tt class="literal">FlushMode</tt> class defines three different modes:
             only flush at commit time (and only when the NHibernate <tt class="literal">ITransaction</tt>
-            API is used, or inside a transaction scope), flush automatically using the explained
-            routine (will only work inside an explicit NHibernate <tt class="literal">ITransaction</tt> or
-            inside a transaction scope), or never flush unless
+            API is used, or inside a transaction scope with a legacy option enabled - see
+            <a href="transactions.html#transactions-scopes" title="12.8.&nbsp;Transaction scopes (System.Transactions)">Section&nbsp;12.8, &#8220;Transaction scopes (System.Transactions)&#8221;</a>), flush automatically using the explained
+            routine (will only work inside an explicit NHibernate <tt class="literal">ITransaction</tt>, or
+            inside a transaction scope with limitations for flushes on commit - see
+            <a href="transactions.html#transactions-scopes" title="12.8.&nbsp;Transaction scopes (System.Transactions)">Section&nbsp;12.8, &#8220;Transaction scopes (System.Transactions)&#8221;</a>), or never flush unless
             <tt class="literal">Flush()</tt> is called explicitly. The last mode is useful for long
             running units of work, where an ISession is kept open and disconnected for a long time
             (see <a href="transactions.html#transactions-optimistic" title="12.4.&nbsp;Optimistic concurrency control">Section&nbsp;12.4, &#8220;Optimistic concurrency control&#8221;</a>).

@@ -1,0 +1,549 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/queryhql.html" />
+    <title>Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="batch.html" title="Chapter&nbsp;14.&nbsp;Batch processing"><link rel="next" href="querycriteria.html" title="Chapter&nbsp;16.&nbsp;Criteria Queries">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="queryhql"></a>Chapter&nbsp;15.&nbsp;HQL: The Hibernate Query Language</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        NHibernate is equipped with an extremely powerful query language that (quite intentionally)
+        looks very much like SQL. But don't be fooled by the syntax; HQL is fully object-oriented,
+        understanding notions like inheritance, polymorphism and association.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-casesensitivity"></a>15.1.&nbsp;Case Sensitivity</h2></div></div><div></div></div><p>
+            Queries are case-insensitive, except for names of .NET classes and properties.
+            So <tt class="literal">SeLeCT</tt> is the same as
+            <tt class="literal">sELEct</tt> is the same as
+            <tt class="literal">SELECT</tt> but
+            <tt class="literal">Eg.FOO</tt> is not
+            <tt class="literal">Eg.Foo</tt> and
+            <tt class="literal">foo.barSet</tt> is not
+            <tt class="literal">foo.BARSET</tt>.
+        </p><p>
+            This manual uses lowercase HQL keywords. Some users find queries with uppercase keywords 
+            more readable, but we find this convention ugly when embedded in C# code.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-from"></a>15.2.&nbsp;The from clause</h2></div></div><div></div></div><p>
+            The simplest possible NHibernate query is of the form:
+        </p><pre class="programlisting">from Eg.Cat</pre><p>
+            which simply returns all instances of the class <tt class="literal">Eg.Cat</tt>. 
+        </p><p>
+            Most of the time, you will need to assign an <span class="emphasis"><em>alias</em></span>, since
+            you will want to refer to the <tt class="literal">Cat</tt> in other parts of the
+            query.
+        </p><pre class="programlisting">from Eg.Cat as cat</pre><p>
+            This query assigns the alias <tt class="literal">cat</tt> to <tt class="literal">Cat</tt>
+            instances, so we could use that alias later in the query. The <tt class="literal">as</tt>
+            keyword is optional; we could also write:
+        </p><pre class="programlisting">from Eg.Cat cat</pre><p>
+            Multiple classes may appear, resulting in a cartesian product or "cross" join.
+        </p><pre class="programlisting">from Formula, Parameter</pre><pre class="programlisting">from Formula as form, Parameter as param</pre><p>
+            It is considered good practice to name query aliases using an initial lowercase,
+            consistent with naming standards for local variables
+            (eg. <tt class="literal">domesticCat</tt>).
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-joins"></a>15.3.&nbsp;Associations and joins</h2></div></div><div></div></div><p>
+            We may also assign aliases to associated entities, or even to elements of a collection of
+            values, using a <tt class="literal">join</tt>.
+        </p><pre class="programlisting">from Eg.Cat as cat 
+    inner join cat.Mate as mate
+    left outer join cat.Kittens as kitten
+
+from Eg.Cat as cat left join cat.Mate.Kittens as kittens
+
+from Formula form full join form.Parameter param</pre><p>
+            The supported join types are borrowed from ANSI SQL
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">inner join</tt>
+                </p></li><li><p>
+                    <tt class="literal">left outer join</tt>
+                </p></li><li><p>
+                    <tt class="literal">right outer join</tt>
+                </p></li><li><p>
+                    <tt class="literal">full join</tt> (not usually useful)
+                </p></li></ul></div><p>
+            The <tt class="literal">inner join</tt>, <tt class="literal">left outer join</tt> and 
+            <tt class="literal">right outer join</tt> constructs may be abbreviated.
+        </p><pre class="programlisting">from Eg.Cat as cat 
+    join cat.Mate as mate
+    left join cat.Kittens as kitten</pre><p>
+            In addition, a "fetch" join allows associations or collections of values to be 
+            initialized along with their parent objects, using a single select. This is particularly 
+            useful in the case of a collection. It effectively overrides the outer join and
+            lazy declarations of the mapping file for associations and collections. See
+            <a href="performance.html#performance-fetching" title="21.1.&nbsp;Fetching strategies">Section&nbsp;21.1, &#8220;Fetching strategies&#8221;</a> for more information.
+        </p><pre class="programlisting">from Eg.Cat as cat 
+    inner join fetch cat.Mate
+    left join fetch cat.Kittens</pre><p>
+            The associated objects are not returned directly in the query results. Instead, they may 
+            be accessed via the parent object.
+        </p><p>
+            It is possible to create a cartesian product by join fetching more than one collection in
+            a query, so take care in this case. Join fetching multiple collection roles is also
+            disabled for bag mappings. Note also that the <tt class="literal">fetch</tt> construct may not
+            be used in queries called using <tt class="literal">Enumerable()</tt>. Finally, note that
+            <tt class="literal">full join fetch</tt> and <tt class="literal">right join fetch</tt> are not meaningful.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-select"></a>15.4.&nbsp;The select clause</h2></div></div><div></div></div><p>
+            The <tt class="literal">select</tt> clause picks which objects and properties to return in 
+            the query result set. Consider:
+        </p><pre class="programlisting">select mate 
+from Eg.Cat as cat 
+    inner join cat.Mate as mate</pre><p>
+            The query will select <tt class="literal">Mate</tt>s of other <tt class="literal">Cat</tt>s.
+            Actually, you may express this query more compactly as:
+        </p><pre class="programlisting">select cat.Mate from Eg.Cat cat</pre><p>
+            You may even select collection elements, using the special <tt class="literal">elements</tt>
+            function. The following query returns all kittens of any cat.
+        </p><pre class="programlisting">select elements(cat.Kittens) from Eg.Cat cat</pre><p>
+            Queries may return properties of any value type including properties of component type:
+        </p><pre class="programlisting">select cat.Name from Eg.DomesticCat cat
+where cat.Name like 'fri%'
+
+select cust.Name.FirstName from Customer as cust</pre><p>
+            Queries may return multiple objects and/or properties as an array of type 
+            <tt class="literal">object[]</tt>
+        </p><pre class="programlisting">select mother, offspr, mate.Name 
+from Eg.DomesticCat as mother
+    inner join mother.Mate as mate
+    left outer join mother.Kittens as offspr</pre><p>
+            or as an actual type-safe object
+        </p><pre class="programlisting">select new Family(mother, mate, offspr)
+from Eg.DomesticCat as mother
+    join mother.Mate as mate
+    left join mother.Kittens as offspr</pre><p>
+            assuming that the class <tt class="literal">Family</tt> has an appropriate constructor.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-aggregation"></a>15.5.&nbsp;Aggregate functions</h2></div></div><div></div></div><p>
+            HQL queries may even return the results of aggregate functions on properties:
+        </p><pre class="programlisting">select avg(cat.Weight), sum(cat.Weight), max(cat.Weight), count(cat)
+from Eg.Cat cat</pre><p>
+            Collections may also appear inside aggregate functions in the <tt class="literal">select</tt> 
+            clause.
+        </p><pre class="programlisting">select cat, count( elements(cat.Kittens) ) 
+from Eg.Cat cat group by cat.Id, cat.Weight, ...</pre><p>
+            The supported aggregate functions are
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">avg(...), sum(...), min(...), max(...)</tt>
+                </p></li><li><p>
+                    <tt class="literal">count(*)</tt>
+                </p></li><li><p>
+                    <tt class="literal">count(...), count(distinct ...), count(all...)</tt>
+                </p></li></ul></div><p>
+            The <tt class="literal">distinct</tt> and <tt class="literal">all</tt> keywords may be used and have
+            the same semantics as in SQL.
+        </p><pre class="programlisting">select distinct cat.Name from Eg.Cat cat
+
+select count(distinct cat.Name), count(cat) from Eg.Cat cat</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-polymorphism"></a>15.6.&nbsp;Polymorphic queries</h2></div></div><div></div></div><p>
+            A query like:
+        </p><pre class="programlisting">from Eg.Cat as cat</pre><p>
+            returns instances not only of <tt class="literal">Cat</tt>, but also of subclasses like
+            <tt class="literal">DomesticCat</tt>. NHibernate queries may name <span class="emphasis"><em>any</em></span> .NET 
+            class or interface in the <tt class="literal">from</tt> clause. The query will return instances 
+            of all persistent classes that extend that class or implement the interface. The following 
+            query would return all persistent objects:
+        </p><pre class="programlisting">from System.Object o</pre><p>
+            The interface <tt class="literal">INamed</tt> might be implemented by various persistent
+            classes:
+        </p><pre class="programlisting">from Eg.Named n, Eg.Named m where n.Name = m.Name</pre><p>
+            Note that these last two queries will require more than one SQL <tt class="literal">SELECT</tt>. This
+            means that the <tt class="literal">order by</tt> clause does not correctly order the whole result set.
+        </p><p>
+			In order to use non-mapped base classes or interfaces in HQL queries, they have to be imported. See <a href="mapping.html#mapping-declaration-import" title="5.1.23.&nbsp;import">Section&nbsp;5.1.23, &#8220;import&#8221;</a> for more information.
+		</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-where"></a>15.7.&nbsp;The where clause</h2></div></div><div></div></div><p>
+            The <tt class="literal">where</tt> clause allows you to narrow the list of instances returned.
+        </p><pre class="programlisting">from Eg.Cat as cat where cat.Name='Fritz'</pre><p>
+            returns instances of <tt class="literal">Cat</tt> named 'Fritz'.
+        </p><pre class="programlisting">select foo 
+from Eg.Foo foo, Eg.Bar bar
+where foo.StartDate = bar.Date</pre><p>
+            will return all instances of <tt class="literal">Foo</tt> for which
+            there exists an instance of <tt class="literal">Bar</tt> with a
+            <tt class="literal">Date</tt> property equal to the
+            <tt class="literal">StartDate</tt> property of the
+            <tt class="literal">Foo</tt>. Compound path expressions make the
+            <tt class="literal">where</tt> clause extremely powerful. Consider:
+        </p><pre class="programlisting">from Eg.Cat cat where cat.Mate.Name is not null</pre><p>
+            This query translates to an SQL query with a table (inner) join. If you were to write
+            something like
+        </p><pre class="programlisting">from Eg.Foo foo  
+where foo.Bar.Baz.Customer.Address.City is not null</pre><p>
+            you would end up with a query that would require four table joins in SQL.
+        </p><p>
+            The <tt class="literal">=</tt> operator may be used to compare not only properties, but also 
+            instances:
+        </p><pre class="programlisting">from Eg.Cat cat, Eg.Cat rival where cat.Mate = rival.Mate
+
+select cat, mate 
+from Eg.Cat cat, Eg.Cat mate
+where cat.Mate = mate</pre><p>
+            The special property (lowercase) <tt class="literal">id</tt> may be used to reference the 
+            unique identifier of an object. (You may also use its property name.)
+        </p><pre class="programlisting">from Eg.Cat as cat where cat.id = 123
+
+from Eg.Cat as cat where cat.Mate.id = 69</pre><p>
+            The second query is efficient. No table join is required!
+        </p><p>
+            Properties of composite identifiers may also be used. Suppose <tt class="literal">Person</tt> 
+            has a composite identifier consisting of <tt class="literal">Country</tt> and 
+            <tt class="literal">MedicareNumber</tt>.
+        </p><pre class="programlisting">from Bank.Person person
+where person.id.Country = 'AU' 
+    and person.id.MedicareNumber = 123456
+
+from Bank.Account account
+where account.Owner.id.Country = 'AU' 
+    and account.Owner.id.MedicareNumber = 123456</pre><p>
+            Once again, the second query requires no table join.
+        </p><p>
+            Likewise, the special property <tt class="literal">class</tt> accesses the discriminator value
+            of an instance in the case of polymorphic persistence. A .Net class name embedded in the 
+            where clause will be translated to its discriminator value.
+        </p><pre class="programlisting">from Eg.Cat cat where cat.class = Eg.DomesticCat</pre><p>
+            You may also specify properties of components or composite user types (and of components 
+            of components, etc). Never try to use a path-expression that ends in a property of component 
+            type (as opposed to a property of a component). For example, if <tt class="literal">store.Owner</tt>
+            is an entity with a component <tt class="literal">Address</tt>
+        </p><pre class="programlisting">store.Owner.Address.City    // okay
+store.Owner.Address         // error!</pre><p>
+            An "any" type has the special properties <tt class="literal">id</tt> and <tt class="literal">class</tt>,
+            allowing us to express a join in the following way (where <tt class="literal">AuditLog.Item</tt>
+            is a property mapped with <tt class="literal">&lt;any&gt;</tt>).
+        </p><pre class="programlisting">from Eg.AuditLog log, Eg.Payment payment 
+where log.Item.class = 'Eg.Payment, Eg, Version=...' and log.Item.id = payment.id</pre><p>
+            Notice that <tt class="literal">log.Item.class</tt> and <tt class="literal">payment.class</tt>
+            would refer to the values of completely different database columns in the above query.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-expressions"></a>15.8.&nbsp;Expressions</h2></div></div><div></div></div><p>
+            Expressions allowed in the <tt class="literal">where</tt> clause include
+            most of the kind of things you could write in SQL:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    mathematical operators <tt class="literal">+, -, *, /</tt>
+                </p></li><li><p>
+                    binary comparison operators <tt class="literal">=, &gt;=, &lt;=, &lt;&gt;, !=, like</tt>
+                </p></li><li><p>
+                    logical operations <tt class="literal">and, or, not</tt>
+                </p></li><li><p>
+                    string concatenation ||
+                </p></li><li><p>
+                    SQL scalar functions like <tt class="literal">upper()</tt> and
+                    <tt class="literal">lower()</tt>
+                </p></li><li><p>
+                    Parentheses <tt class="literal">( )</tt> indicate grouping
+                </p></li><li><p>
+                    <tt class="literal">in</tt>,
+                    <tt class="literal">between</tt>,
+                    <tt class="literal">is null</tt>
+                </p></li><li><p>
+                    positional parameters <tt class="literal">?</tt>
+                </p></li><li><p>
+                    named parameters <tt class="literal">:name</tt>, <tt class="literal">:start_date</tt>, <tt class="literal">:x1</tt>
+                </p></li><li><p>
+                    SQL literals <tt class="literal">'foo'</tt>, <tt class="literal">69</tt>, <tt class="literal">'1970-01-01 10:00:01.0'</tt>
+                </p></li><li><p>
+                    Enumeration values and constants <tt class="literal">Eg.Color.Tabby</tt>
+                </p></li></ul></div><p>
+            <tt class="literal">in</tt> and <tt class="literal">between</tt> may be used as follows:
+        </p><pre class="programlisting">from Eg.DomesticCat cat where cat.Name between 'A' and 'B'
+
+from Eg.DomesticCat cat where cat.Name in ( 'Foo', 'Bar', 'Baz' )</pre><p>
+            and the negated forms may be written
+        </p><pre class="programlisting">from Eg.DomesticCat cat where cat.Name not between 'A' and 'B'
+
+from Eg.DomesticCat cat where cat.Name not in ( 'Foo', 'Bar', 'Baz' )</pre><p>
+            Likewise, <tt class="literal">is null</tt> and <tt class="literal">is not null</tt> may be used to test 
+            for null values.
+        </p><p>
+            Booleans may be easily used in expressions by declaring HQL query substitutions in NHibernate
+            configuration:
+        </p><pre class="programlisting">&lt;property name="query.substitutions"&gt;true 1, false 0&lt;/property&gt;</pre><p>
+            This will replace the keywords <tt class="literal">true</tt> and <tt class="literal">false</tt> with the
+            literals <tt class="literal">1</tt> and <tt class="literal">0</tt> in the translated SQL from this HQL:
+        </p><pre class="programlisting">from Eg.Cat cat where cat.Alive = true</pre><p>
+            You may test the size of a collection with the special property <tt class="literal">size</tt>, or
+            the special <tt class="literal">size()</tt> function.
+        </p><pre class="programlisting">from Eg.Cat cat where cat.Kittens.size &gt; 0
+
+from Eg.Cat cat where size(cat.Kittens) &gt; 0</pre><p>
+            For indexed collections, you may refer to the minimum and maximum indices using
+            <tt class="literal">minIndex</tt> and <tt class="literal">maxIndex</tt>. Similarly, you may refer to the
+            minimum and maximum elements of a collection of basic type using <tt class="literal">minElement</tt> 
+            and <tt class="literal">maxElement</tt>.
+        </p><pre class="programlisting">from Calendar cal where cal.Holidays.maxElement &gt; current date</pre><p>
+            There are also functional forms (which, unlike the constructs above, are not case sensitive):
+        </p><pre class="programlisting">from Order order where maxindex(order.Items) &gt; 100
+
+from Order order where minelement(order.Items) &gt; 10000</pre><p>
+            The SQL functions <tt class="literal">any, some, all, exists, in</tt> are supported when passed the element 
+            or index set of a collection (<tt class="literal">elements</tt> and <tt class="literal">indices</tt> functions)
+            or the result of a sub-query (see below).
+        </p><pre class="programlisting">select mother from Eg.Cat as mother, Eg.Cat as kit
+where kit in elements(mother.Kittens)
+
+select p from Eg.NameList list, Eg.Person p
+where p.Name = some elements(list.Names)
+
+from Eg.Cat cat where exists elements(cat.Kittens)
+
+from Eg.Player p where 3 &gt; all elements(p.Scores)
+
+from Eg.Show show where 'fizard' in indices(show.Acts)</pre><p>
+            Note that these constructs - <tt class="literal">size</tt>, <tt class="literal">elements</tt>,
+            <tt class="literal">indices</tt>, <tt class="literal">minIndex</tt>, <tt class="literal">maxIndex</tt>,
+            <tt class="literal">minElement</tt>, <tt class="literal">maxElement</tt> - have certain usage 
+            restrictions:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    in a <tt class="literal">where</tt> clause: only for databases with sub-selects
+                </p></li><li><p>
+                    in a <tt class="literal">select</tt> clause: only <tt class="literal">elements</tt> and 
+                    <tt class="literal">indices</tt> make sense
+                </p></li></ul></div><p>
+            Elements of indexed collections (arrays, lists, maps) may be referred to by
+            index (in a where clause only):
+        </p><pre class="programlisting">from Order order where order.Items[0].id = 1234
+
+select person from Person person, Calendar calendar
+where calendar.Holidays['national day'] = person.BirthDay
+    and person.Nationality.Calendar = calendar
+
+select item from Item item, Order order
+where order.Items[ order.DeliveredItemIndices[0] ] = item and order.id = 11
+
+select item from Item item, Order order
+where order.Items[ maxindex(order.items) ] = item and order.id = 11</pre><p>
+            The expression inside <tt class="literal">[]</tt> may even be an arithmetic expression.
+        </p><pre class="programlisting">select item from Item item, Order order
+where order.Items[ size(order.Items) - 1 ] = item</pre><p>
+            HQL also provides the built-in <tt class="literal">index()</tt> function, for elements of
+            a one-to-many association or collection of values.
+        </p><pre class="programlisting">select item, index(item) from Order order 
+    join order.Items item
+where index(item) &lt; 5</pre><p>
+            Scalar SQL functions supported by the underlying database may be used
+        </p><pre class="programlisting">from Eg.DomesticCat cat where upper(cat.Name) like 'FRI%'</pre><p>
+            If you are not yet convinced by all this, think how much longer and less readable the 
+            following query would be in SQL:
+        </p><pre class="programlisting">select cust
+from Product prod,
+    Store store
+    inner join store.Customers cust
+where prod.Name = 'widget'
+    and store.Location.Name in ( 'Melbourne', 'Sydney' )
+    and prod = all elements(cust.CurrentOrder.LineItems)</pre><p>
+            <span class="emphasis"><em>Hint:</em></span> something like
+        </p><pre class="programlisting">SELECT cust.name, cust.address, cust.phone, cust.id, cust.current_order
+FROM customers cust,
+    stores store,
+    locations loc,
+    store_customers sc,
+    product prod
+WHERE prod.name = 'widget'
+    AND store.loc_id = loc.id
+    AND loc.name IN ( 'Melbourne', 'Sydney' )
+    AND sc.store_id = store.id
+    AND sc.cust_id = cust.id
+    AND prod.id = ALL(
+        SELECT item.prod_id
+        FROM line_items item, orders o
+        WHERE item.order_id = o.id
+            AND cust.current_order = o.id
+    )</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-ordering"></a>15.9.&nbsp;The order by clause</h2></div></div><div></div></div><p>
+            The list returned by a query may be ordered by any property of a returned class or components:
+        </p><pre class="programlisting">from Eg.DomesticCat cat
+order by cat.Name asc, cat.Weight desc, cat.Birthdate</pre><p>
+            The optional <tt class="literal">asc</tt> or <tt class="literal">desc</tt> indicate ascending or descending order 
+            respectively.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-grouping"></a>15.10.&nbsp;The group by clause</h2></div></div><div></div></div><p>
+            A query that returns aggregate values may be grouped by any property of a returned class or components:
+        </p><pre class="programlisting">select cat.Color, sum(cat.Weight), count(cat) 
+from Eg.Cat cat
+group by cat.Color
+
+select foo.id, avg( elements(foo.Names) ), max( indices(foo.Names) ) 
+from Eg.Foo foo
+group by foo.id</pre><p>
+            Note: You may use the <tt class="literal">elements</tt> and <tt class="literal">indices</tt> constructs
+            inside a select clause, even on databases with no sub-selects.
+        </p><p>
+            A <tt class="literal">having</tt> clause is also allowed.
+        </p><pre class="programlisting">select cat.color, sum(cat.Weight), count(cat) 
+from Eg.Cat cat
+group by cat.Color 
+having cat.Color in (Eg.Color.Tabby, Eg.Color.Black)</pre><p>
+            SQL functions and aggregate functions are allowed in the <tt class="literal">having</tt>
+            and <tt class="literal">order by</tt> clauses, if supported by the underlying database (ie.
+            not in MySQL).
+        </p><pre class="programlisting">select cat
+from Eg.Cat cat
+    join cat.Kittens kitten
+group by cat.Id, cat.Name, cat.Other, cat.Properties
+having avg(kitten.Weight) &gt; 100
+order by count(kitten) asc, sum(kitten.Weight) desc</pre><p>
+            Note that neither the <tt class="literal">group by</tt> clause nor the
+            <tt class="literal">order by</tt> clause may contain arithmetic expressions.
+            Also note that NHibernate currently does not expand a grouped entity,
+            so you can't write <tt class="literal">group by cat</tt> if all properties
+            of <tt class="literal">cat</tt> are non-aggregated. You have to list all
+            non-aggregated properties explicitly.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-subqueries"></a>15.11.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
+            For databases that support sub-selects, NHibernate supports sub-queries within queries. A sub-query must
+            be surrounded by parentheses (often by an SQL aggregate function call). Even correlated sub-queries
+            (sub-queries that refer to an alias in the outer query) are allowed.
+        </p><pre class="programlisting">from Eg.Cat as fatcat 
+where fatcat.Weight &gt; ( 
+    select avg(cat.Weight) from Eg.DomesticCat cat 
+)
+
+from Eg.DomesticCat as cat 
+where cat.Name = some ( 
+    select name.NickName from Eg.Name as name 
+)
+    
+from Eg.Cat as cat 
+where not exists ( 
+    from eg.Cat as mate where mate.Mate = cat 
+)
+
+from Eg.DomesticCat as cat 
+where cat.Name not in ( 
+    select name.NickName from Eg.Name as name 
+)</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-examples"></a>15.12.&nbsp;HQL examples</h2></div></div><div></div></div><p>
+            NHibernate queries can be quite powerful and complex. In fact, the power of the query language
+            is one of NHibernate's main selling points. Here are some example queries very similar to queries
+            that I used on a recent project. Note that most queries you will write are much simpler than these!
+        </p><p>
+            The following query returns the order id, number of items and total value of the order for all 
+            unpaid orders for a particular customer and given minimum total value, ordering the results by 
+            total value. In determining the prices, it uses the current catalog. The resulting SQL query, 
+            against the <tt class="literal">ORDER</tt>, <tt class="literal">ORDER_LINE</tt>, <tt class="literal">PRODUCT</tt>,
+            <tt class="literal">CATALOG</tt> and <tt class="literal">PRICE</tt> tables has four inner joins and an
+            (uncorrelated) subselect.
+        </p><pre class="programlisting">select order.id, sum(price.Amount), count(item)
+from Order as order
+    join order.LineItems as item
+    join item.Product as product,
+    Catalog as catalog
+    join catalog.Prices as price
+where order.Paid = false
+    and order.Customer = :customer
+    and price.Product = product
+    and catalog.EffectiveDate &lt; sysdate
+    and catalog.EffectiveDate &gt;= all (
+        select cat.EffectiveDate 
+        from Catalog as cat
+        where cat.EffectiveDate &lt; sysdate
+    )
+group by order
+having sum(price.Amount) &gt; :minAmount
+order by sum(price.Amount) desc</pre><p>
+            What a monster! Actually, in real life, I'm not very keen on sub-queries, so my query was 
+            really more like this:
+        </p><pre class="programlisting">select order.id, sum(price.amount), count(item)
+from Order as order
+    join order.LineItems as item
+    join item.Product as product,
+    Catalog as catalog
+    join catalog.Prices as price
+where order.Paid = false
+    and order.Customer = :customer
+    and price.Product = product
+    and catalog = :currentCatalog
+group by order
+having sum(price.Amount) &gt; :minAmount
+order by sum(price.Amount) desc</pre><p>
+            The next query counts the number of payments in each status, excluding all payments in the
+            <tt class="literal">AwaitingApproval</tt> status where the most recent status change was made by the 
+            current user. It translates to an SQL query with two inner joins and a correlated subselect 
+            against the <tt class="literal">PAYMENT</tt>, <tt class="literal">PAYMENT_STATUS</tt> and 
+            <tt class="literal">PAYMENT_STATUS_CHANGE</tt> tables.
+        </p><pre class="programlisting">select count(payment), status.Name 
+from Payment as payment 
+    join payment.CurrentStatus as status
+    join payment.StatusChanges as statusChange
+where payment.Status.Name &lt;&gt; PaymentStatus.AwaitingApproval
+    or (
+        statusChange.TimeStamp = ( 
+            select max(change.TimeStamp) 
+            from PaymentStatusChange change 
+            where change.Payment = payment
+        )
+        and statusChange.User &lt;&gt; :currentUser
+    )
+group by status.Name, status.SortOrder
+order by status.SortOrder</pre><p>
+            If I would have mapped the <tt class="literal">StatusChanges</tt> collection as a list, instead of a set, 
+            the query would have been much simpler to write.
+        </p><pre class="programlisting">select count(payment), status.Name 
+from Payment as payment
+    join payment.CurrentStatus as status
+where payment.Status.Name &lt;&gt; PaymentStatus.AwaitingApproval
+    or payment.StatusChanges[ maxIndex(payment.StatusChanges) ].User &lt;&gt; :currentUser
+group by status.Name, status.SortOrder
+order by status.SortOrder</pre><p>
+            The next query uses the MS SQL Server <tt class="literal">isNull()</tt> function to return all
+            the accounts and unpaid payments for the organization to which the current user belongs.
+            It translates to an SQL query with three inner joins, an outer join and a subselect against 
+            the <tt class="literal">ACCOUNT</tt>, <tt class="literal">PAYMENT</tt>, <tt class="literal">PAYMENT_STATUS</tt>,
+            <tt class="literal">ACCOUNT_TYPE</tt>, <tt class="literal">ORGANIZATION</tt> and 
+            <tt class="literal">ORG_USER</tt> tables.
+        </p><pre class="programlisting">select account, payment
+from Account as account
+    left outer join account.Payments as payment
+where :currentUser in elements(account.Holder.Users)
+    and PaymentStatus.Unpaid = isNull(payment.CurrentStatus.Name, PaymentStatus.Unpaid)
+order by account.Type.SortOrder, account.AccountNumber, payment.DueDate</pre><p>
+            For some databases, we would need to do away with the (correlated) subselect.
+        </p><pre class="programlisting">select account, payment
+from Account as account
+    join account.Holder.Users as user
+    left outer join account.Payments as payment
+where :currentUser = user
+    and PaymentStatus.Unpaid = isNull(payment.CurrentStatus.Name, PaymentStatus.Unpaid)
+order by account.Type.SortOrder, account.AccountNumber, payment.DueDate</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryhql-tipstricks"></a>15.13.&nbsp;Tips &amp; Tricks</h2></div></div><div></div></div><p>
+            You can count the number of query results without actually returning them:
+        </p><pre class="programlisting">var count = session.CreateQuery("select count(*) from ....").UniqueResult&lt;long&gt;();</pre><p>
+            To order a result by the size of a collection, use the following query:
+        </p><pre class="programlisting">select usr.id, usr.Name
+from User as usr 
+    left join usr.Messages as msg
+group by usr.id, usr.Name
+order by count(msg)</pre><p>
+            If your database supports sub-selects, you can place a condition upon selection
+            size in the where clause of your query:
+        </p><pre class="programlisting">from User usr where size(usr.Messages) &gt;= 1</pre><p>
+            If your database doesn't support sub-selects, use the following query:
+        </p><pre class="programlisting">select usr.id, usr.Name
+from User usr
+    join usr.Messages msg
+group by usr.id, usr.Name
+having count(msg) &gt;= 1</pre><p>
+            As this solution can't return a <tt class="literal">User</tt> with zero messages
+            because of the inner join, the following form is also useful:
+        </p><pre class="programlisting">select usr.id, usr.Name
+from User as usr
+    left join usr.Messages as msg
+group by usr.id, usr.Name
+having count(msg) = 0</pre><p>
+            Properties of an object can be bound to named query parameters:
+        </p><pre class="programlisting">IQuery q =
+    s.CreateQuery("from foo in class Foo where foo.Name=:Name and foo.Size=:Size");
+q.SetProperties(fooBean); // fooBean has properties Name and Size
+var foos = q.List&lt;Foo&gt;();</pre><p>
+            Collections are pageable by using the <tt class="literal">IQuery</tt> interface with a filter:
+        </p><pre class="programlisting">IQuery q = s.CreateFilter( collection, "" ); // the trivial filter
+q.setMaxResults(PageSize);
+q.setFirstResult(PageSize * pageNumber);
+var page = q.List&lt;Cat&gt;();</pre><p>
+            Collection elements may be ordered or grouped using a query filter:
+        </p><pre class="programlisting">var orderedCollection = s
+    .CreateFilter(collection, "order by this.Amount")
+    .List&lt;Cat&gt;();
+var counts = s
+    .CreateFilter(collection,
+        "select this.Type, count(this) group by this.Type")
+    .List&lt;object[]&gt;();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="batch.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querycriteria.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Batch processing&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Criteria Queries</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

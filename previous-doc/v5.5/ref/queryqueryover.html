@@ -1,0 +1,285 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/queryqueryover.html" />
+    <title>Chapter&nbsp;17.&nbsp;QueryOver Queries</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querycriteria.html" title="Chapter&nbsp;16.&nbsp;Criteria Queries"><link rel="next" href="querylinq.html" title="Chapter&nbsp;18.&nbsp;Linq Queries">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;17.&nbsp;QueryOver Queries</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="querylinq.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="queryqueryover"></a>Chapter&nbsp;17.&nbsp;QueryOver Queries</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        The ICriteria API
+        is NHibernate's implementation of Query Object.
+        NHibernate 3.0 introduces the QueryOver API, which combines the use of
+        Extension Methods
+        and
+        Lambda Expressions
+        (both new in .Net 3.5) to provide a statically type-safe wrapper round the ICriteria API.
+    </p><p>
+        QueryOver uses Lambda Expressions to provide some extra
+        syntax to remove the 'magic strings' from your ICriteria queries.
+    </p><p>
+        So, for example:
+    </p><pre class="programlisting">.Add(Expression.Eq("Name", "Smith"))</pre><p>becomes:</p><pre class="programlisting">.Where&lt;Person&gt;(p =&gt; p.Name == "Smith")</pre><p>
+        With this kind of syntax there are no 'magic strings', and refactoring tools like
+        'Find All References', and 'Refactor-&gt;Rename' work perfectly.
+    </p><p>
+        Note: QueryOver is intended to remove the references to 'magic strings'
+        from the ICriteria API while maintaining it's opaqueness.  It is <span class="underline">not</span> a LINQ provider;
+        NHibernate has a built-in <a href="querylinq.html" title="Chapter&nbsp;18.&nbsp;Linq Queries">Linq provider</a> for this.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-querystructure"></a>17.1.&nbsp;Structure of a Query</h2></div></div><div></div></div><p>
+            Queries are created from an ISession using the syntax:
+        </p><pre class="programlisting">IList&lt;Cat&gt; cats =
+    session.QueryOver&lt;Cat&gt;()
+        .Where(c =&gt; c.Name == "Max")
+        .List();</pre><p>&nbsp;</p><p>
+            Detached QueryOver (analogous to DetachedCriteria) can be created, and then used with an ISession using:
+        </p><pre class="programlisting">QueryOver&lt;Cat&gt; query =
+    QueryOver.Of&lt;Cat&gt;()
+        .Where(c =&gt; c.Name == "Paddy");
+        
+IList&lt;Cat&gt; cats =
+    query.GetExecutableQueryOver(session)
+        .List();</pre><p>
+            Queries can be built up to use restrictions, projections, and ordering using
+            a fluent inline syntax:    
+        </p><pre class="programlisting">var catNames =
+    session.QueryOver&lt;Cat&gt;()
+        .WhereRestrictionOn(c =&gt; c.Age).IsBetween(2).And(8)
+        .Select(c =&gt; c.Name)
+        .OrderBy(c =&gt; c.Name).Asc
+        .List&lt;string&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-simpleexpressions"></a>17.2.&nbsp;Simple Expressions</h2></div></div><div></div></div><p>
+            The Restrictions class (used by ICriteria) has been extended to include overloads
+            that allow Lambda Expression syntax.  The Where() method works for simple expressions (&lt;, &lt;=, ==, !=, &gt;, &gt;=)
+            so instead of:
+        </p><pre class="programlisting">ICriterion equalCriterion = Restrictions.Eq("Name", "Max")</pre><p>
+            You can write:
+        </p><pre class="programlisting">ICriterion equalCriterion = Restrictions.Where&lt;Cat&gt;(c =&gt; c.Name == "Max")</pre><p>&nbsp;</p><p>
+            Since the QueryOver class (and IQueryOver interface) is generic and knows the type of the query,
+            there is an inline syntax for restrictions that does not require the additional qualification
+            of class name.  So you can also write:
+        </p><pre class="programlisting">var cats =
+    session.QueryOver&lt;Cat&gt;()
+        .Where(c =&gt; c.Name == "Max")
+        .And(c =&gt; c.Age &gt; 4)
+        .List();</pre><p>
+            Note, the methods Where() and And() are semantically identical; the And() method is purely to allow
+            QueryOver to look similar to HQL/SQL.
+        </p><p>&nbsp;</p><p>
+            Boolean comparisons can be made directly instead of comparing to true/false:
+        </p><pre class="programlisting">        .Where(p =&gt; p.IsParent)
+        .And(p =&gt; !p.IsRetired)</pre><p>&nbsp;</p><p>
+            Simple expressions can also be combined using the || and &amp;&amp; operators.  So ICriteria like:
+        </p><pre class="programlisting">        .Add(Restrictions.And(
+                Restrictions.Eq("Name", "test name"),
+                Restrictions.Or(
+                    Restrictions.Gt("Age", 21),
+                    Restrictions.Eq("HasCar", true))))</pre><p>
+            Can be written in QueryOver as:
+        </p><pre class="programlisting">        .Where(p =&gt; p.Name == "test name" &amp;&amp; (p.Age &gt; 21 || p.HasCar))</pre><p>&nbsp;</p><p>
+            Each of the corresponding overloads in the QueryOver API allows the use of regular ICriterion
+            to allow access to private properties.
+        </p><pre class="programlisting">        .Where(Restrictions.Eq("Name", "Max"))</pre><p>&nbsp;</p><p>
+            It is worth noting that the QueryOver API is built on top of the ICriteria API.  Internally the structures are the same, so at runtime
+            the statement below, and the statement above, are stored as exactly the same ICriterion.  The actual Lambda Expression is not stored
+            in the query.
+        </p><pre class="programlisting">        .Where(c =&gt; c.Name == "Max")</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-additionalrestrictions"></a>17.3.&nbsp;Additional Restrictions</h2></div></div><div></div></div><p>
+            Some SQL operators/functions do not have a direct equivalent in C#.
+            (e.g., the SQL <tt class="literal">where name like '%anna%'</tt>).
+            These operators have overloads for QueryOver in the Restrictions class, so you can write:
+        </p><pre class="programlisting">        .Where(Restrictions.On&lt;Cat&gt;(c =&gt; c.Name).IsLike("%anna%"))</pre><p>
+            There is also an inline syntax to avoid the qualification of the type:
+        </p><pre class="programlisting">        .WhereRestrictionOn(c =&gt; c.Name).IsLike("%anna%")</pre><p>&nbsp;</p><p>
+            While simple expressions (see above) can be combined using the || and &amp;&amp; operators, this is not possible with the other
+            restrictions.  So this ICriteria:
+        </p><pre class="programlisting">        .Add(Restrictions.Or(
+            Restrictions.Gt("Age", 5)
+            Restrictions.In("Name", new string[] { "Max", "Paddy" })))</pre><p>
+            Would have to be written as:
+        </p><pre class="programlisting">        .Add(Restrictions.Or(
+            Restrictions.Where&lt;Cat&gt;(c =&gt; c.Age &gt; 5)
+            Restrictions.On&lt;Cat&gt;(c =&gt; c.Name).IsIn(new string[] { "Max", "Paddy" })))</pre><p>
+            However, in addition to the additional restrictions factory methods, there are extension methods to allow
+            a more concise inline syntax for some of the operators.  So this:
+        </p><pre class="programlisting">        .WhereRestrictionOn(c =&gt; c.Name).IsLike("%anna%")</pre><p>
+            May also be written as:
+        </p><pre class="programlisting">        .Where(c =&gt; c..Name.IsLike("%anna%"))</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-associations"></a>17.4.&nbsp;Associations</h2></div></div><div></div></div><p>
+            QueryOver can navigate association paths using JoinQueryOver() (analogous to ICriteria.CreateCriteria() to create sub-criteria).
+        </p><p>
+            The factory method QuerOver&lt;T&gt;() on ISession returns an IQueryOver&lt;T&gt;.
+            More accurately, it returns an IQueryOver&lt;T,T&gt; (which inherits from IQueryOver&lt;T&gt;).
+        </p><p>
+            An IQueryOver has two types of interest; the root type (the type of entity that the query returns),
+            and the type of the 'current' entity being queried.  For example, the following query uses
+            a join to create a sub-QueryOver (analogous to creating sub-criteria in the ICriteria API):
+        </p><pre class="programlisting">IQueryOver&lt;Cat,Kitten&gt; catQuery =
+    session.QueryOver&lt;Cat&gt;()
+        .JoinQueryOver(c =&gt; c.Kittens)
+            .Where(k =&gt; k.Name == "Tiddles");</pre><p>
+            The JoinQueryOver returns a new instance of the IQueryOver than has its root at the Kittens collection.
+            The default type for restrictions is now Kitten (restricting on the name 'Tiddles' in the above example),
+            while calling .List() will return an IList&lt;Cat&gt;.  The type IQueryOver&lt;Cat,Kitten&gt; inherits from IQueryOver&lt;Cat&gt;.
+        </p><p>
+            Note, the overload for JoinQueryOver takes an IEnumerable&lt;T&gt;, and the C# compiler infers the type from that.
+            If your collection type is not IEnumerable&lt;T&gt;, then you need to qualify the type of the sub-criteria:
+        </p><pre class="programlisting">IQueryOver&lt;Cat,Kitten&gt; catQuery =
+    session.QueryOver&lt;Cat&gt;()
+        .JoinQueryOver&lt;<span class="emphasis"><em>Kitten</em></span>&gt;(c =&gt; c.Kittens)
+            .Where(k =&gt; k.Name == "Tiddles");</pre><p>&nbsp;</p><p>
+            The default join is an inner-join.  Each of the additional join types can be specified using
+            the methods <tt class="code">.Inner, .Left, .Right,</tt> or <tt class="code">.Full</tt>.
+            For example, to left outer-join on Kittens use:
+        </p><pre class="programlisting">IQueryOver&lt;Cat,Kitten&gt; catQuery =
+    session.QueryOver&lt;Cat&gt;()
+        .Left.JoinQueryOver(c =&gt; c.Kittens)
+            .Where(k =&gt; k.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover_entityjoin"></a>17.5.&nbsp;Join entities without association (Entity joins or ad hoc joins)</h2></div></div><div></div></div><p>
+        In QueryOver you have the ability to define a join to any entity, not just through a mapped association.
+        To achieve it, use <tt class="literal">JoinEntityAlias</tt> and <tt class="literal">JoinEntityQueryOver</tt>. By example:
+      </p><pre class="programlisting">Cat cat = null;
+Cat joinedCat = null;
+
+var uniquelyNamedCats = sess.QueryOver&lt;Cat&gt;(() =&gt; cat)
+    .JoinEntityAlias(
+        () =&gt; joinedCat,
+        () =&gt; cat.Name == joinedCat.Name &amp;&amp; cat.Id != joinedCat.Id,
+        JoinType.LeftOuterJoin)
+    .Where(() =&gt; joinedCat.Id == null)
+    .List();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-aliases"></a>17.6.&nbsp;Aliases</h2></div></div><div></div></div><p>
+            In the traditional ICriteria interface aliases are assigned using 'magic strings', however their value
+            does not correspond to a name in the object domain.  For example, when an alias is assigned using
+            <tt class="code">.CreateAlias("Kitten", "kittenAlias")</tt>, the string "kittenAlias" does not correspond
+            to a property or class in the domain.
+        </p><p>
+            In QueryOver, aliases are assigned using an empty variable.
+            The variable can be declared anywhere (but should
+            be <tt class="code">null</tt> at runtime).  The compiler can then check the syntax against the variable is
+            used correctly, but at runtime the variable is not evaluated (it's just used as a placeholder for
+            the alias).
+        </p><p>
+            Each Lambda Expression function in QueryOver has a corresponding overload to allow use of aliases,
+            and a .JoinAlias function to traverse associations using aliases without creating a sub-QueryOver.
+        </p><pre class="programlisting">Cat catAlias = null;
+Kitten kittenAlias = null;
+
+IQueryOver&lt;Cat,Cat&gt; catQuery =
+    session.QueryOver&lt;Cat&gt;(() =&gt; catAlias)
+        .JoinAlias(() =&gt; catAlias.Kittens, () =&gt; kittenAlias)
+        .Where(() =&gt; catAlias.Age &gt; 5)
+        .And(() =&gt; kittenAlias.Name == "Tiddles");</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projections"></a>17.7.&nbsp;Projections</h2></div></div><div></div></div><p>
+            Simple projections of the properties of the root type can be added using the <tt class="code">.Select</tt> method
+            which can take multiple Lambda Expression arguments:
+        </p><pre class="programlisting">var selection =
+    session.QueryOver&lt;Cat&gt;()
+        .Select(
+            c =&gt; c.Name,
+            c =&gt; c.Age)
+        .List&lt;object[]&gt;();</pre><p>
+            Because this query no longer returns a Cat, the return type must be explicitly specified.
+            If a single property is projected, the return type can be specified using:
+        </p><pre class="programlisting">IList&lt;int&gt; ages =
+    session.QueryOver&lt;Cat&gt;()
+        .Select(c =&gt; c.Age)
+        .List&lt;int&gt;();</pre><p>
+            However, if multiple properties are projected, then the returned list will contain
+            object arrays, as per a projection
+            in ICriteria.  This could be fed into an anonymous type using:
+        </p><pre class="programlisting">var catDetails =
+    session.QueryOver&lt;Cat&gt;()
+        .Select(
+            c =&gt; c.Name,
+            c =&gt; c.Age)
+        .List&lt;object[]&gt;()
+        .Select(properties =&gt; new {
+            CatName = (string)properties[0],
+            CatAge = (int)properties[1],
+            });
+            
+Console.WriteLine(catDetails[0].CatName);
+Console.WriteLine(catDetails[0].CatAge);</pre><p>
+            Note that the second <tt class="code">.Select</tt> call in this example is an extension method on IEnumerable&lt;T&gt; supplied in System.Linq;
+            it is not part of NHibernate.
+        </p><p>&nbsp;</p><p>
+            QueryOver allows arbitrary IProjection to be added (allowing private properties to be projected).  The Projections factory
+            class also has overloads to allow Lambda Expressions to be used:
+        </p><pre class="programlisting">var selection =
+    session.QueryOver&lt;Cat&gt;()
+        .Select(Projections.ProjectionList()
+            .Add(Projections.Property&lt;Cat&gt;(c =&gt; c.Name))
+            .Add(Projections.Avg&lt;Cat&gt;(c =&gt; c.Age)))
+        .List&lt;object[]&gt;();</pre><p>&nbsp;</p><p>
+            In addition there is an inline syntax for creating projection lists that does not require the explicit class qualification:
+        </p><pre class="programlisting">var selection =
+    session.QueryOver&lt;Cat&gt;()
+        .SelectList(list =&gt; list
+            .Select(c =&gt; c.Name)
+            .SelectAvg(c =&gt; c.Age))
+        .List&lt;object[]&gt;();</pre><p>&nbsp;</p><p>
+            Projections can also have arbitrary aliases assigned to them to allow result transformation.
+            If there is a CatSummary DTO class defined as:
+        </p><pre class="programlisting">public class CatSummary
+{
+    public string Name { get; set; }
+    public int AverageAge { get; set; }
+}</pre><p>
+            ... then aliased projections can be used with the AliasToBean&lt;T&gt; transformer:
+        </p><pre class="programlisting">CatSummary summaryDto = null;
+IList&lt;CatSummary&gt; catReport =
+    session.QueryOver&lt;Cat&gt;()
+        .SelectList(list =&gt; list
+            .SelectGroup(c =&gt; c.Name).WithAlias(() =&gt; summaryDto.Name)
+            .SelectAvg(c =&gt; c.Age).WithAlias(() =&gt; summaryDto.AverageAge))
+        .TransformUsing(Transformers.AliasToBean&lt;CatSummary&gt;())
+        .List&lt;CatSummary&gt;();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionfunctions"></a>17.8.&nbsp;Projection Functions</h2></div></div><div></div></div><p>
+            In addition to projecting properties, there are extension methods to allow certain common dialect-registered
+            functions to be applied.  For example you can write the following to get 3 letters named people.
+        </p><pre class="programlisting">        .Where(p =&gt; p.FirstName.StrLength() == 3)</pre><p>
+            The functions can also be used inside projections:
+        </p><pre class="programlisting">        .Select(
+            p =&gt; Projections.Concat(p.LastName, ", ", p.FirstName),
+            p =&gt; p.Height.Abs())</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-projectionentities"></a>17.9.&nbsp;Entities Projection</h2></div></div><div></div></div><p>
+        You can add entity projections via the <tt class="literal">AsEntity()</tt> extension.
+      </p><pre class="programlisting">Cat mate = null;
+
+var catAndMateNameList = sess.QueryOver&lt;Cat&gt;()
+    .JoinAlias(c =&gt; c.Mate, () =&gt; mate)
+    .Select(c =&gt; c.AsEntity(), c =&gt; mate.Name)
+    .List&lt;object[]&gt;();</pre><p>
+        Or it can be done via the <tt class="literal">Projections.RootEntity</tt> and <tt class="literal">Projections.Entity</tt> methods
+        if more control over loaded entities is required. For instance, entity projections can be lazy loaded
+        or fetched with lazy properties:
+      </p><pre class="programlisting">.Select(
+    Projections.Entity(() =&gt; alias1).SetLazy(true),
+    Projections.Entity(() =&gt; alias2).SetFetchLazyProperties(true),
+    Projections.RootEntity()
+        )</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="queryqueryover-subqueries"></a>17.10.&nbsp;Sub-queries</h2></div></div><div></div></div><p>
+            The Sub-queries factory class has overloads to allow Lambda Expressions to express sub-query
+            restrictions.  For example:
+        </p><pre class="programlisting">QueryOver&lt;Cat&gt; maximumAge =
+    QueryOver.Of&lt;Cat&gt;()
+        .SelectList(p =&gt; p.SelectMax(c =&gt; c.Age));
+
+IList&lt;Cat&gt; oldestCats =
+    session.QueryOver&lt;Cat&gt;()
+        .Where(Subqueries.WhereProperty&lt;Cat&gt;(c =&gt; c.Age).Eq(maximumAge))
+        .List();</pre><p>&nbsp;</p><p>
+            The inline syntax allows you to use sub-queries without re-qualifying the type:
+        </p><pre class="programlisting">IList&lt;Cat&gt; oldestCats =
+    session.QueryOver&lt;Cat&gt;()
+        .WithSubquery.WhereProperty(c =&gt; c.Age).Eq(maximumAge)
+        .List();</pre><p>&nbsp;</p><p>
+            There is an extension method <tt class="code">As()</tt> on (a detached) QueryOver that allows you to cast it to any type.
+            This is used in conjunction with the overloads <tt class="code">Where(), WhereAll(),</tt> and <tt class="code">WhereSome()</tt>
+            to allow use of the built-in C# operators for comparison, so the above query can be written as:
+        </p><pre class="programlisting">IList&lt;Cat&gt; oldestCats =
+    session.QueryOver&lt;Cat&gt;()
+        .WithSubquery.Where(c =&gt; c.Age == maximumAge.As&lt;int&gt;())
+        .List();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querycriteria.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="querylinq.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;16.&nbsp;Criteria Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;18.&nbsp;Linq Queries</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

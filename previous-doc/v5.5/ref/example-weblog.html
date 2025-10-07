@@ -1,0 +1,332 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/example-weblog.html" />
+    <title>Chapter&nbsp;24.&nbsp;Example: Weblog Application</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="example-parentchild.html" title="Chapter&nbsp;23.&nbsp;Example: Parent/Child"><link rel="next" href="example-mappings.html" title="Chapter&nbsp;25.&nbsp;Example: Various Mappings">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;24.&nbsp;Example: Weblog Application</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="example-parentchild.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="example-mappings.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="example-weblog"></a>Chapter&nbsp;24.&nbsp;Example: Weblog Application</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-weblog-classes"></a>24.1.&nbsp;Persistent Classes</h2></div></div><div></div></div><p>
+            The persistent classes represent a weblog, and an item posted
+            in a weblog. They are to be modelled as a standard parent/child
+            relationship, but we will use an ordered bag, instead of a set.
+        </p><pre class="programlisting">using System;
+using System.Collections.Generic;
+
+namespace Eg
+{
+    public class Blog
+    {
+        public virtual long Id { get; set;}
+
+        public virtual IList&lt;BlogItem&gt; Items { get; set;}
+
+        public virtual string Name { get; set;}
+    }
+}</pre><pre class="programlisting">using System;
+
+namespace Eg
+{
+    public class BlogItem
+    {
+        public virtual Blog Blog { get; set;}
+
+        public virtual DateTime DateTime { get; set;}
+
+        public virtual long Id { get; set;}
+
+        public virtual string Text { get; set;}
+
+        public virtual string Title { get; set;}
+    }
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-weblog-mappings"></a>24.2.&nbsp;NHibernate Mappings</h2></div></div><div></div></div><p>
+            The XML mappings should now be quite straightforward.
+        </p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+
+    &lt;class 
+        name="Blog" 
+        table="BLOGS" 
+        lazy="true"&gt;
+        
+        &lt;id 
+            name="Id" 
+            column="BLOG_ID"&gt;
+            
+            &lt;generator class="native"/&gt;
+            
+        &lt;/id&gt;
+        
+        &lt;property 
+            name="Name" 
+            column="NAME" 
+            not-null="true" 
+            unique="true"/&gt;
+            
+        &lt;bag
+            name="Items" 
+            inverse="true" 
+            lazy="true"
+            order-by="DATE_TIME" 
+            cascade="all"&gt;
+            
+            &lt;key column="BLOG_ID"/&gt;
+            &lt;one-to-many class="BlogItem"/&gt;
+            
+        &lt;/bag&gt;
+        
+    &lt;/class&gt;
+    
+&lt;/hibernate-mapping&gt;</pre><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+    
+    &lt;class 
+        name="BlogItem" 
+        table="BLOG_ITEMS" 
+        dynamic-update="true"&gt;
+        
+        &lt;id 
+            name="Id" 
+            column="BLOG_ITEM_ID"&gt;
+            
+            &lt;generator class="native"/&gt;
+            
+        &lt;/id&gt;
+        
+        &lt;property 
+            name="Title" 
+            column="TITLE" 
+            not-null="true"/&gt;
+            
+        &lt;property 
+            name="Text" 
+            column="TEXT" 
+            not-null="true"/&gt;
+            
+        &lt;property 
+            name="DateTime" 
+            column="DATE_TIME" 
+            not-null="true"/&gt;
+            
+        &lt;many-to-one 
+            name="Blog" 
+            column="BLOG_ID" 
+            not-null="true"/&gt;
+            
+    &lt;/class&gt;
+    
+&lt;/hibernate-mapping&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-weblog-code"></a>24.3.&nbsp;NHibernate Code</h2></div></div><div></div></div><p>
+            The following class demonstrates some of the kinds of things
+            we can do with these classes, using NHibernate.
+        </p><pre class="programlisting">using System;
+using System.Collections.Generic;
+using NHibernate;
+using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
+
+namespace Eg
+{
+    public class BlogMain
+    {
+        private ISessionFactory _sessions;
+
+        public void Configure()
+        {
+            _sessions = new Configuration().Configure()
+                .BuildSessionFactory();
+        }
+
+        public void ExportTables()
+        {
+            var cfg = new Configuration().Configure();
+            new SchemaExport(cfg).Create(true, true);
+        }
+
+        public Blog CreateBlog(string name)
+        {
+            var blog = new Blog
+            {
+                Name = name,
+                Items = new List&lt;BlogItem&gt;()
+            };
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                session.Save(blog);
+                tx.Commit();
+            }
+
+            return blog;
+        }
+
+        public BlogItem CreateBlogItem(Blog blog, string title, string text)
+        {
+            var item = new BlogItem
+            {
+                Title = title,
+                Text = text,
+                Blog = blog,
+                DateTime = DateTime.Now
+            };
+            blog.Items.Add(item);
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                session.Update(blog);
+                tx.Commit();
+            }
+
+            return item;
+        }
+
+        public BlogItem CreateBlogItem(long blogId, string title, string text)
+        {
+            var item = new BlogItem
+            {
+                Title = title,
+                Text = text,
+                DateTime = DateTime.Now
+            };
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                var blog = session.Load&lt;Blog&gt;(blogId);
+                item.Blog = blog;
+                blog.Items.Add(item);
+                tx.Commit();
+            }
+
+            return item;
+        }
+
+        public void UpdateBlogItem(BlogItem item, string text)
+        {
+            item.Text = text;
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                session.Update(item);
+                tx.Commit();
+            }
+        }
+
+        public void UpdateBlogItem(long itemId, string text)
+        {
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                var item = session.Load&lt;BlogItem&gt;(itemId);
+                item.Text = text;
+                tx.Commit();
+            }
+        }
+
+        public IList&lt;object[]&gt; ListAllBlogNamesAndItemCounts(int max)
+        {
+            IList&lt;object[]&gt; result;
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                var q = session.CreateQuery(
+                    "select blog.id, blog.Name, count(blogItem) " +
+                    "from Blog as blog " +
+                    "left outer join blog.Items as blogItem " +
+                    "group by blog.Name, blog.id " +
+                    "order by max(blogItem.DateTime)"
+                );
+                q.SetMaxResults(max);
+                result = q.List&lt;object[]&gt;();
+                tx.Commit();
+            }
+
+            return result;
+        }
+
+        public Blog GetBlogAndAllItems(long blogId)
+        {
+            Blog blog = null;
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                var q = session.CreateQuery(
+                    "from Blog as blog " +
+                    "left outer join fetch blog.Items " +
+                    "where blog.id = :blogId"
+                );
+                q.SetParameter("blogId", blogId);
+                blog = q.UniqueResult&lt;Blog&gt;();
+                tx.Commit();
+            }
+
+            return blog;
+        }
+
+        public IList&lt;object[]&gt; ListBlogsAndRecentItems()
+        {
+            IList&lt;object[]&gt; result = null;
+
+            using (var session = _sessions.OpenSession())
+            using (var tx = session.BeginTransaction())
+            {
+                var q = session.CreateQuery(
+                    "from Blog as blog " +
+                    "inner join blog.Items as blogItem " +
+                    "where blogItem.DateTime &gt; :minDate"
+                );
+
+                var date = DateTime.Now.AddMonths(-1);
+                q.SetDateTime("minDate", date);
+
+                result = q.List&lt;object[]&gt;();
+                tx.Commit();
+            }
+
+            return result;
+        }
+    }
+}</pre><p>
+            It requires some configuration settings in <tt class="literal">web.config</tt>, such as:
+        </p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;!-- Add this element --&gt;
+  &lt;configSections&gt;
+    &lt;section
+        name="hibernate-configuration"
+        type="NHibernate.Cfg.ConfigurationSectionHandler, NHibernate" /&gt;
+  &lt;/configSections&gt;
+
+  &lt;!-- Add this element --&gt;
+  &lt;hibernate-configuration xmlns="urn:nhibernate-configuration-2.2"&gt;
+    &lt;session-factory&gt;
+      &lt;property name="dialect"&gt;NHibernate.Dialect.MsSql2012Dialect&lt;/property&gt;
+      &lt;property name="connection.connection_string"&gt;
+        Server=localhost\SQLEXPRESS;initial catalog=Eg;Integrated Security=True
+      &lt;/property&gt;
+
+      &lt;mapping assembly="Eg" /&gt;
+    &lt;/session-factory&gt;
+  &lt;/hibernate-configuration&gt;
+
+  &lt;!-- Leave the other sections unchanged --&gt;
+  &lt;system.web&gt;
+    ...
+  &lt;/system.web&gt;
+&lt;/configuration&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="example-parentchild.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="example-mappings.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;23.&nbsp;Example: Parent/Child&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;25.&nbsp;Example: Various Mappings</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

@@ -1,0 +1,896 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/session-configuration.html" />
+    <title>Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture"><link rel="next" href="persistent-classes.html" title="Chapter&nbsp;4.&nbsp;Persistent Classes">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="architecture.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="persistent-classes.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="session-configuration"></a>Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        Because NHibernate is designed to operate in many different environments, there
+        are a large number of configuration parameters. Fortunately, most have sensible
+        default values and NHibernate is distributed with an example 
+        <tt class="literal">App.config</tt> file (found in <tt class="literal">src\NHibernate.Test</tt>)
+        that shows the various options. You usually only have to put that file in your
+        project and customize it.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-programmatic"></a>3.1.&nbsp;Programmatic Configuration</h2></div></div><div></div></div><p>
+            An instance of <tt class="literal">NHibernate.Cfg.Configuration</tt>
+            represents an entire set of mappings of an application's .NET types to a
+            SQL database. The <tt class="literal">Configuration</tt> is used to build an
+            (immutable) <tt class="literal">ISessionFactory</tt>. The mappings are compiled
+            from various XML mapping files.
+        </p><p>
+            You may obtain a <tt class="literal">Configuration</tt> instance by
+            instantiating it directly. Here is an example of setting up a datastore from 
+            mappings defined in two XML configuration files:
+        </p><pre class="programlisting">Configuration cfg = new Configuration()
+    .AddFile("Item.hbm.xml")
+    .AddFile("Bid.hbm.xml");</pre><p>
+            An alternative (sometimes better) way is to let NHibernate load a mapping file
+            from an embedded resource:
+        </p><pre class="programlisting">Configuration cfg = new Configuration()
+    .AddClass(typeof(NHibernate.Auction.Item))
+    .AddClass(typeof(NHibernate.Auction.Bid));</pre><p>
+            Then NHibernate will look for mapping files named
+            <tt class="literal">NHibernate.Auction.Item.hbm.xml</tt> and
+            <tt class="literal">NHibernate.Auction.Bid.hbm.xml</tt> embedded as resources in the
+            assembly that the types are contained in. This approach eliminates any hardcoded
+            filenames.
+        </p><p>
+            Another alternative (probably the best) way is to let NHibernate load all of 
+            the mapping files contained in an Assembly:
+        </p><pre class="programlisting">Configuration cfg = new Configuration()
+    .AddAssembly( "NHibernate.Auction" );</pre><p>
+            Then NHibernate will look through the assembly for any resources that
+            end with <tt class="literal">.hbm.xml</tt>.  This approach eliminates 
+            any hardcoded filenames and ensures the mapping files in the assembly
+            get added.
+        </p><p>
+            If a tool like Visual Studio .NET or NAnt is used to build the assembly,
+            then make sure that the <tt class="literal">.hbm.xml</tt> files are compiled
+            into the assembly as <tt class="literal">Embedded Resources</tt>.
+        </p><p>
+            A <tt class="literal">Configuration</tt> also specifies various optional properties:
+        </p><pre class="programlisting">var props = new Dictionary&lt;string, string&gt;();
+...
+Configuration cfg = new Configuration()
+    .AddClass(typeof(NHibernate.Auction.Item))
+    .AddClass(typeof(NHibernate.Auction.Bind))
+    .SetProperties(props);</pre><p>
+            A <tt class="literal">Configuration</tt> is intended as a configuration-time object, to be
+            discarded once an <tt class="literal">ISessionFactory</tt> is built.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-sessionfactory"></a>3.2.&nbsp;Obtaining an ISessionFactory</h2></div></div><div></div></div><p>
+            When all mappings have been parsed by the <tt class="literal">Configuration</tt>, the application
+            must obtain a factory for <tt class="literal">ISession</tt> instances. This factory is intended
+            to be shared by all application threads:
+        </p><pre class="programlisting">ISessionFactory sessions = cfg.BuildSessionFactory();</pre><p>
+            However, NHibernate does allow your application to instantiate more than one
+            <tt class="literal">ISessionFactory</tt>. This is useful if you are using more than one database.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-userjdbc"></a>3.3.&nbsp;User provided ADO.NET connection</h2></div></div><div></div></div><p>
+            An <tt class="literal">ISessionFactory</tt> may open an <tt class="literal">ISession</tt> on 
+            a user-provided ADO.NET connection. This design choice frees the application to 
+            obtain ADO.NET connections wherever it pleases:
+        </p><pre class="programlisting">var conn = myApp.GetOpenConnection();
+var session = sessions.OpenSession(conn);
+
+// do some data access work</pre><p>
+            The application must be careful not to open two concurrent
+            <tt class="literal">ISession</tt>s on the same ADO.NET connection!
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-hibernatejdbc"></a>3.4.&nbsp;NHibernate provided ADO.NET connection</h2></div></div><div></div></div><p>
+            Alternatively, you can have the <tt class="literal">ISessionFactory</tt>
+            open connections for you. The <tt class="literal">ISessionFactory</tt>
+            must be provided with ADO.NET connection properties in one of the
+            following ways:
+        </p><div class="orderedlist"><ol type="1" compact><li><p>
+                    Pass an instance of <tt class="literal">IDictionary</tt> mapping
+                    property names to property values to
+                    <tt class="literal">Configuration.SetProperties()</tt>.
+                </p></li><li><p>
+                    Include <tt class="literal">&lt;property&gt;</tt> elements in a configuration
+                    section in the application configuration file. The section should be named
+                    <tt class="literal">hibernate-configuration</tt> and its handler set to
+                    <tt class="literal">NHibernate.Cfg.ConfigurationSectionHandler</tt>.
+                    The XML namespace of the section should be set to
+                    <tt class="literal">urn:nhibernate-configuration-2.2</tt>.
+                </p></li><li><p>
+                    Include <tt class="literal">&lt;property&gt;</tt> elements in
+                    <tt class="literal">hibernate.cfg.xml</tt> (discussed later).
+                </p></li></ol></div><p>
+            If you take this approach, opening an <tt class="literal">ISession</tt> is as simple as:
+        </p><pre class="programlisting">ISession session = sessions.OpenSession(); // open a new Session
+// do some data access work, an ADO.NET connection will be used on demand</pre><p>
+            All NHibernate property names and semantics are defined on the class 
+            <tt class="literal">NHibernate.Cfg.Environment</tt>. We will now describe the most
+            important settings for ADO.NET connection configuration.
+        </p><p>
+            NHibernate will obtain (and pool) connections using an ADO.NET data provider
+            if you set the following properties:
+        </p><div class="table"><a name="d0e879"></a><p class="title"><b>Table&nbsp;3.1.&nbsp;NHibernate ADO.NET Properties</b></p><table summary="NHibernate ADO.NET Properties" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property name</th><th>Purpose</th></tr></thead><tbody><tr><td><tt class="literal">connection.provider</tt></td><td>
+                    The type of a custom <tt class="literal">IConnectionProvider</tt> implementation.
+                    <p>
+                        <span class="strong">eg.</span> 
+                        <tt class="literal">full.classname.of.ConnectionProvider</tt> if the Provider 
+                        is built into NHibernate, or <tt class="literal">full.classname.of.ConnectionProvider, 
+                        assembly</tt> if using an implementation of <tt class="literal">IConnectionProvider</tt>
+                        not included in NHibernate. The default is 
+                        <tt class="literal">NHibernate.Connection.DriverConnectionProvider</tt>.
+                    </p></td></tr><tr><td><tt class="literal">connection.driver_class</tt></td><td>
+                    The type of a custom <tt class="literal">IDriver</tt>, if using <tt class="literal">DriverConnectionProvider</tt>.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">full.classname.of.Driver</tt> if the Driver 
+                        is built into NHibernate, or <tt class="literal">full.classname.of.Driver, assembly</tt> 
+                        if using an implementation of IDriver not included in NHibernate.
+                    </p><p>
+                        This is usually not needed, most of the time the <tt class="literal">dialect</tt> will
+                        take care of setting the <tt class="literal">IDriver</tt> using a sensible default.  See the API
+                        documentation of the specific dialect for the defaults.
+                    </p></td></tr><tr><td><tt class="literal">connection.connection_string</tt></td><td>
+                    Connection string to use to obtain the connection.
+                </td></tr><tr><td><tt class="literal">connection.connection_string_name</tt></td><td>
+                    The name of the connection string (defined in <tt class="literal">&lt;connectionStrings&gt;</tt>
+                    configuration file element) to use to obtain the connection.
+                </td></tr><tr><td><tt class="literal">connection.isolation</tt></td><td>
+                    Set the ADO.NET transaction isolation level. Check
+                    <tt class="literal">System.Data.IsolationLevel</tt> for meaningful values
+                    and the database's documentation to ensure that level is supported.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">Chaos</tt> | <tt class="literal">ReadCommitted</tt> | <tt class="literal">ReadUncommitted</tt> |
+                        <tt class="literal">RepeatableRead</tt> | <tt class="literal">Serializable</tt> | <tt class="literal">Unspecified</tt>
+                    </p></td></tr><tr><td><tt class="literal">connection.release_mode</tt></td><td>
+                    Specify when NHibernate should release ADO.NET connections.
+                    See <a href="transactions.html#transactions-connection-release" title="12.7.&nbsp;Connection Release Modes">Section&nbsp;12.7, &#8220;Connection Release Modes&#8221;</a>.
+                    <p>
+                        <span class="strong">eg.</span> 
+                        <tt class="literal">auto</tt> (default) | <tt class="literal">on_close</tt> |
+                        <tt class="literal">after_transaction</tt>
+                    </p><p>
+                        Note that for <tt class="literal">ISession</tt>s obtained through
+                        <tt class="literal">ISessionFactory.GetCurrentSession</tt>, the
+                        <tt class="literal">ICurrentSessionContext</tt> implementation configured for use
+                        may control the connection release mode for those <tt class="literal">ISession</tt>s.
+                        See <a href="architecture.html#architecture-current-session" title="2.3.&nbsp;Contextual Sessions">Section&nbsp;2.3, &#8220;Contextual Sessions&#8221;</a>.
+                    </p></td></tr><tr><td><tt class="literal">prepare_sql</tt></td><td>
+                    Specify to prepare <tt class="literal">DbCommand</tt>s generated by NHibernate.
+                    Defaults to <tt class="literal">false</tt>.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                    </p></td></tr><tr><td><tt class="literal">command_timeout</tt></td><td>
+                    Specify the default timeout in seconds of <tt class="literal">DbCommand</tt>s
+                    generated by NHibernate. Negative values disable it.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">30</tt>
+                    </p></td></tr><tr><td><tt class="literal">adonet.batch_size</tt></td><td>
+                    Specify the batch size to use when batching update statements. Setting this to 0
+                    (the default) disables the functionality.
+                    See <a href="performance.html#performance-batch-updates" title="21.6.&nbsp;Batch updates">Section&nbsp;21.6, &#8220;Batch updates&#8221;</a>.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">20</tt>
+                    </p></td></tr><tr><td><tt class="literal">order_inserts</tt></td><td>
+                    Enable ordering of insert statements for the purpose of more efficient batching. Defaults
+                    to <tt class="literal">true</tt> if batching is enabled, <tt class="literal">false</tt> otherwise.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                    </p></td></tr><tr><td><tt class="literal">order_updates</tt></td><td>
+                    Enable ordering of update statements for the purpose of more efficient batching. Defaults
+                    to <tt class="literal">true</tt> if batching is enabled, <tt class="literal">false</tt> otherwise.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                    </p></td></tr><tr><td><tt class="literal">adonet.batch_versioned_data</tt></td><td>
+                    If batching is enabled, specify that versioned data can also be batched. Requires a dialect which
+                    batcher correctly returns rows count. Defaults to <tt class="literal">false</tt>.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                    </p></td></tr><tr><td><tt class="literal">adonet.factory_class</tt></td><td>
+                    The class name of a <tt class="literal">IBatcherFactory</tt> implementation.
+                    <p>
+                        This is usually not needed, most of the time the <tt class="literal">driver</tt> will
+                        take care of setting the <tt class="literal">IBatcherFactory</tt> using a sensible default
+                        according to the database capabilities.
+                    </p><p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">classname.of.BatcherFactory, assembly</tt>
+                    </p></td></tr><tr><td><tt class="literal">adonet.wrap_result_sets</tt></td><td>
+                    Some database vendor data reader implementation have inefficient columnName-to-columnIndex
+                    resolution. Enabling this setting allows to wrap them in a data reader that will cache those
+                    resolutions. Defaults to <tt class="literal">false</tt>.
+                    <p>
+                        <span class="strong">eg.</span>
+                        <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                    </p></td></tr></tbody></table></div><p>
+            This is an example of how to specify the database connection properties inside a 
+            <tt class="literal">web.config</tt>:
+        </p><a name="we-config-configuration"></a><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;configSections&gt;
+    &lt;section name="hibernate-configuration"
+        type="NHibernate.Cfg.ConfigurationSectionHandler, NHibernate" /&gt;
+  &lt;/configSections&gt;
+
+  &lt;hibernate-configuration xmlns="urn:nhibernate-configuration-2.2"&gt;
+    &lt;session-factory&gt;
+      &lt;property name="dialect"&gt;NHibernate.Dialect.MsSql2012Dialect&lt;/property&gt;
+      &lt;property name="connection.connection_string"&gt;
+        Server=(local);initial catalog=theDb;Integrated Security=SSPI
+      &lt;/property&gt;
+      &lt;property name="connection.isolation"&gt;ReadCommitted&lt;/property&gt;
+    &lt;/session-factory&gt;
+  &lt;/hibernate-configuration&gt;
+
+  &lt;!-- other app specific config follows --&gt;
+&lt;/configuration&gt;</pre><p>
+            NHibernate relies on the ADO.NET data provider implementation of connection pooling.
+        </p><p>
+            You may define your own plug-in strategy for obtaining ADO.NET connections by implementing the
+            interface <tt class="literal">NHibernate.Connection.IConnectionProvider</tt>. You may select
+            a custom implementation by setting <tt class="literal">connection.provider</tt>.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-provider"></a>3.5.&nbsp;Using a custom configuration provider</h2></div></div><div></div></div><p>
+            By default, NHibernate attempts to read the <tt class="literal">hibernate-configuration</tt> section
+            through the .Net <tt class="literal">ConfigurationManager</tt>. Some environments do not support it, so
+            NHibernate provides a way to set a custom configuration provider, through the
+            <tt class="literal">NHibernate.Cfg.ConfigurationProvider.Current</tt> property.
+        </p><p>
+            To disable the configuration provider, in case you configure NHibernate entirely programmatically,
+            set this property to <tt class="literal">null</tt>.
+        </p><pre class="programlisting">ConfigurationProvider.Current = null;</pre><p>
+            To provide directly the <tt class="literal">System.Configuration.Configuration</tt> instance to use, assign
+            the <tt class="literal">Current</tt> property with an instance of
+            <tt class="literal">NHibernate.Cfg.SystemConfigurationProvider</tt> built with your
+            <tt class="literal">Configuration</tt> instance.
+        </p><pre class="programlisting">ConfigurationProvider.Current = new SystemConfigurationProvider(yourConfig);</pre><p>
+            You may also derive a custom provider from <tt class="literal">NHibernate.Cfg.ConfigurationProvider</tt>,
+            implements its abstract methods, and assign an instance of your custom provider to the
+            <tt class="literal">NHibernate.Cfg.ConfigurationProvider.Current</tt> property.
+        </p><p>
+            Changes of the <tt class="literal">ConfigurationProvider.Current</tt> property value are to be done very
+            early in the application lifecycle, before any other call on a NHibernate API. Otherwise they
+            may not be taken into account.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-optional"></a>3.6.&nbsp;Optional configuration properties</h2></div></div><div></div></div><p>
+            There are a number of other properties that control the behaviour of NHibernate
+            at runtime. All are optional and have reasonable default values.
+        </p><div class="table"><a name="configuration-optional-properties"></a><p class="title"><b>Table&nbsp;3.2.&nbsp;NHibernate Configuration Properties</b></p><table summary="NHibernate Configuration Properties" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property name</th><th>Purpose</th></tr></thead><tbody><tr><td><tt class="literal">dialect</tt></td><td>
+                            The class name of a NHibernate <tt class="literal">Dialect</tt> - enables
+                            certain platform dependent features. See <a href="session-configuration.html#configuration-optional-dialects" title="3.6.1.&nbsp;SQL Dialects">Section&nbsp;3.6.1, &#8220;SQL Dialects&#8221;</a>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">full.classname.of.Dialect, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">default_catalog</tt></td><td>
+                            Qualify unqualified table names with the given catalog name
+                            in generated SQL.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">CATALOG_NAME</tt>
+                            </p></td></tr><tr><td><tt class="literal">default_schema</tt></td><td>
+                            Qualify unqualified table names with the given schema/table-space
+                            in generated SQL.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">SCHEMA_NAME</tt>
+                            </p></td></tr><tr><td><tt class="literal">max_fetch_depth</tt></td><td>
+                            Set a maximum "depth" for the outer join fetch tree
+                            for single-ended associations (one-to-one, many-to-one).
+                            A <tt class="literal">0</tt> disables default outer join fetching.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                recommended values between <tt class="literal">0</tt> and <tt class="literal">3</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.use_second_level_cache</tt></td><td>
+                            Enable the second level cache. Requires specifying a <tt class="literal">cache.provider_class</tt>.
+                            See <a href="caches.html" title="Chapter&nbsp;27.&nbsp;NHibernate.Caches">Chapter&nbsp;27, <i>NHibernate.Caches</i></a>. Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.provider_class</tt></td><td>
+                            The class name of a <tt class="literal">ICacheProvider</tt> implementation.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.CacheProvider, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.use_minimal_puts</tt></td><td>
+                            Optimize second-level cache operation to minimize writes, at the
+                            cost of more frequent reads (useful for clustered caches).
+                            Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.use_query_cache</tt></td><td>
+                            Enable the query cache, individual queries still have to be set cacheable.
+                            Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.query_cache_factory</tt></td><td>
+                            The class name of a custom <tt class="literal">IQueryCacheFactory</tt> implementation.
+                            Defaults to the built-in <tt class="literal">StandardQueryCacheFactory</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.QueryCacheFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.read_write_lock_factory</tt></td><td>
+                            Specify the cache lock factory to use for read-write cache regions.
+                            Defaults to the built-in <tt class="literal">async</tt> cache lock factory.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">async</tt>, or <tt class="literal">sync</tt>, or <tt class="literal">classname.of.CacheLockFactory, assembly</tt> with custom implementation of <tt class="literal">ICacheReadWriteLockFactory</tt>
+                            </p><p>
+                                <tt class="literal">async</tt> uses a single writer multiple readers locking mechanism supporting asynchronous operations.
+                            </p><p>
+                                <tt class="literal">sync</tt> uses a single access locking mechanism which will throw on asynchronous
+                                operations but may have better performances than the <tt class="literal">async</tt> provider for applications using the .Net Framework (4.8 and below).
+                            </p></td></tr><tr><td><tt class="literal">cache.region_prefix</tt></td><td>
+                            A prefix to use for second-level cache region names.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">prefix</tt>
+                            </p></td></tr><tr><td><tt class="literal">cache.default_expiration</tt></td><td>
+                            The default expiration delay in seconds for cached entries, for providers supporting
+                            this setting.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">300</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.substitutions</tt></td><td>
+                            Mapping from tokens in NHibernate queries to SQL tokens
+                            (tokens might be function or literal names, for example).
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">hqlLiteral=SQL_LITERAL, hqlFunction=SQLFUNC</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.default_cast_length</tt></td><td>
+                            Set the default length used in casting when the target type is length bound and
+                            does not specify it. Defaults to <tt class="literal">4000</tt>, automatically trimmed down
+                            according to dialect type registration.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">255</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.default_cast_precision</tt></td><td>
+                            Set the default precision used in casting when the target type is decimal and
+                            does not specify it. Defaults to <tt class="literal">28</tt>, automatically trimmed down
+                            according to dialect type registration.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">19</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.default_cast_scale</tt></td><td>
+                            Set the default scale used in casting when the target type is decimal and
+                            does not specify it. Defaults to <tt class="literal">10</tt>, automatically trimmed down
+                            according to dialect type registration.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">5</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.startup_check</tt></td><td>
+                            Should named queries be checked during startup (the default is enabled).
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.throw_never_cached</tt></td><td>
+                            Should queries set as cacheable raise an error if they reference an entity using the cache
+                            <a href="performance.html#performance-cache-never" title="21.2.5.&nbsp;Strategy: never">Section&nbsp;21.2.5, &#8220;Strategy: never&#8221;</a> (the default is enabled).
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p><p>
+                                Disabling this setting causes NHibernate to ignore the caching of such queries without
+                                raising an error. Furthermore NHibernate will log a warning on cacheable queries
+                                referencing an entity using the <tt class="literal">never</tt> cache strategy.
+                            </p></td></tr><tr><td><tt class="literal">query.factory_class</tt></td><td>
+                            The class name of a custom <tt class="literal">IQueryTranslatorFactory</tt> implementation
+                            (HQL query parser factory). Defaults to the built-in
+                            <tt class="literal">ASTQueryTranslatorFactory</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.QueryTranslatorFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.linq_provider_class</tt></td><td>
+                            The class name of a custom <tt class="literal">INhQueryProvider</tt> implementation
+                            (LINQ provider). Defaults to the built-in <tt class="literal">DefaultQueryProvider</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.LinqProvider, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.query_model_rewriter_factory</tt></td><td>
+                            The class name of a custom <tt class="literal">IQueryModelRewriterFactory</tt> implementation
+                            (LINQ query model rewriter factory). Defaults to <tt class="literal">null</tt> (no rewriter).
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.QueryModelRewriterFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">query.pre_transformer_registrar</tt></td><td>
+                            The class name of the LINQ query pre-transformer registrar, implementing
+                            <tt class="literal">IExpressionTransformerRegistrar</tt>. Defaults to <tt class="literal">null</tt> (no registrar).
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.ExpressionTransformerRegistrar, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">linqtohql.generatorsregistry</tt></td><td>
+                            The class name of a custom <tt class="literal">ILinqToHqlGeneratorsRegistry</tt> implementation.
+                            Defaults to the built-in <tt class="literal">DefaultLinqToHqlGeneratorsRegistry</tt>. See
+                            <a href="querylinq.html#querylinq-extending-generator" title="18.8.2.&nbsp;Adding a custom generator">Section&nbsp;18.8.2, &#8220;Adding a custom generator&#8221;</a>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.LinqToHqlGeneratorsRegistry, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">linqtohql.legacy_preevaluation</tt></td><td>
+                            Whether to use the legacy pre-evaluation or not in Linq queries. Defaults to <tt class="literal">true</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p><p>
+                                Legacy pre-evaluation is causing special properties or functions like <tt class="literal">DateTime.Now</tt>
+                                or <tt class="literal">Guid.NewGuid()</tt> to be always evaluated with the .Net runtime and replaced in the
+                                query by parameter values.
+                            </p><p>
+                                The new pre-evaluation allows them to be converted to HQL function calls which will be run on the db
+                                side. This allows for example to retrieve the server time instead of the client time, or to generate
+                                UUIDs for each row instead of an unique one for all rows.
+                            </p><p>
+                                The new pre-evaluation will likely be enabled by default in the next major version (6.0).
+                            </p></td></tr><tr><td><tt class="literal">linqtohql.fallback_on_preevaluation</tt></td><td>
+                            When the new pre-evaluation is enabled, should methods which translation is not supported by the current
+                            dialect fallback to pre-evaluation? Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p><p>
+                                When this fallback option is enabled while legacy pre-evaluation is disabled, properties or functions
+                                like <tt class="literal">DateTime.Now</tt> or <tt class="literal">Guid.NewGuid()</tt> used in Linq expressions
+                                will not fail when the dialect does not support them, but will instead be pre-evaluated.
+                            </p><p>
+                                When this fallback option is disabled while legacy pre-evaluation is disabled, properties or functions
+                                like <tt class="literal">DateTime.Now</tt> or <tt class="literal">Guid.NewGuid()</tt> used in Linq expressions
+                                will fail when the dialect does not support them.
+                            </p><p>
+                                This option has no effect if the legacy pre-evaluation is enabled.
+                            </p></td></tr><tr><td><tt class="literal">sql_exception_converter</tt></td><td>
+                            The class name of a custom <tt class="literal">ISQLExceptionConverter</tt> implementation.
+                            Defaults to <tt class="literal">Dialect.BuildSQLExceptionConverter()</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.SQLExceptionConverter, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">show_sql</tt></td><td>
+                            Write all SQL statements to console. Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">format_sql</tt></td><td>
+                            Log formatted SQL. Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">use_sql_comments</tt></td><td>
+                            Generate SQL with comments. Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">hbm2ddl.auto</tt></td><td>
+                            Automatically export schema DDL to the database when the
+                            <tt class="literal">ISessionFactory</tt> is created. With
+                            <tt class="literal">create-drop</tt>, the database schema
+                            will be dropped when the <tt class="literal">ISessionFactory</tt>
+                            is closed explicitly.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">create</tt> | <tt class="literal">create-drop</tt> | <tt class="literal">update</tt> | <tt class="literal">validate</tt>
+                            </p></td></tr><tr><td><tt class="literal">hbm2ddl.keywords</tt></td><td>
+                            Automatically import <tt class="literal">reserved/keywords</tt> from the database when the
+                            <tt class="literal">ISessionFactory</tt> is created.
+                            <p>
+                                <span class="strong">none :</span>
+                                disable any operation regarding RDBMS KeyWords (the default).
+                            </p><p>
+                                <span class="strong">keywords :</span>
+                                imports all RDBMS KeyWords where the <tt class="literal">Dialect</tt> can provide the implementation of <tt class="literal">IDataBaseSchema</tt>.
+                            </p><p>
+                                <span class="strong">auto-quote :</span>
+                                imports all RDBMS KeyWords and auto-quote all table-names/column-names.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">none</tt> | <tt class="literal">keywords</tt> | <tt class="literal">auto-quote</tt>
+                            </p></td></tr><tr><td><tt class="literal">hbm2ddl.throw_on_update</tt></td><td>
+                            When <tt class="literal">hbm2ddl.auto</tt> is <tt class="literal">update</tt>, whether to throw or not on schema auto-update failures.
+                            
+                            Disabled by default.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">use_proxy_validator</tt></td><td>
+                            Enables or disables validation of interfaces or classes specified
+                            as proxies. Enabled by default.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">proxyfactory.factory_class</tt></td><td>
+                            The class name of a custom <tt class="literal">IProxyFactoryFactory</tt> implementation.
+                            Defaults to the built-in <tt class="literal">StaticProxyFactoryFactory</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.ProxyFactoryFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">collectiontype.factory_class</tt></td><td>
+                            The class name of a custom <tt class="literal">ICollectionTypeFactory</tt> implementation.
+                            Defaults to the built-in <tt class="literal">DefaultCollectionTypeFactory</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.CollectionTypeFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">transaction.factory_class</tt></td><td>
+                            The class name of a custom <tt class="literal">ITransactionFactory</tt> implementation.
+                            Defaults to the built-in <tt class="literal">AdoNetWithSystemTransactionFactory</tt>.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">classname.of.TransactionFactory, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">transaction.use_connection_on_system_prepare</tt></td><td>
+                            When a system transaction is being prepared, is using connection during this process enabled?
+                            <p>
+                              Default is <tt class="literal">true</tt>, for supporting <tt class="literal">FlushMode.Commit</tt> with transaction factories
+                              supporting system transactions. But this requires enlisting additional connections, retaining disposed
+                              sessions and their connections until transaction end, and may trigger undesired transaction promotions to
+                              distributed.
+                            </p><p>
+                              Set to <tt class="literal">false</tt> for disabling using connections from system
+                              transaction preparation, while still benefiting from <tt class="literal">FlushMode.Auto</tt> on querying.
+                            </p><p>
+                              See <a href="transactions.html#transactions-scopes" title="12.8.&nbsp;Transaction scopes (System.Transactions)">Section&nbsp;12.8, &#8220;Transaction scopes (System.Transactions)&#8221;</a>.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">transaction.system_completion_lock_timeout</tt></td><td>
+                            Timeout duration in milliseconds for the system transaction completion lock.
+                            <p>
+                                When a system transaction completes, it may have its completion events running on concurrent threads,
+                                after scope disposal. This occurs when the transaction is distributed.
+                                This notably concerns <tt class="literal">ISessionImplementor.AfterTransactionCompletion(bool, ITransaction)</tt>.
+                                NHibernate protects the session from being concurrently used by the code following the scope disposal
+                                with a lock. To prevent any application freeze, this lock has a default timeout of five seconds. If the
+                                application appears to require longer (!) running transaction completion events, this setting allows to
+                                raise this timeout. <tt class="literal">-1</tt> disables the timeout.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">10000</tt>
+                            </p></td></tr><tr><td><tt class="literal">transaction.auto_join</tt></td><td>
+                            Should sessions check on every operation whether there is an ongoing system transaction or not, and enlist
+                            into it if any?
+                            <p>
+                                Default is <tt class="literal">true</tt>. It can also be controlled at session opening, with
+                                <tt class="literal">ISessionFactory.WithOptions</tt>. A session can also be instructed to explicitly join the current
+                                transaction by calling <tt class="literal">ISession.JoinTransaction</tt>. This setting has no effect when using a
+                                transaction factory that is not system transactions aware.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">default_flush_mode</tt></td><td>
+                            The default <tt class="literal">FlushMode</tt>, <tt class="literal">Auto</tt> when not specified.
+                            See <a href="manipulatingdata.html#manipulatingdata-flushing" title="10.6.&nbsp;Flush">Section&nbsp;10.6, &#8220;Flush&#8221;</a>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">Manual</tt> | <tt class="literal">Commit</tt> | <tt class="literal">Auto</tt> | <tt class="literal">Always</tt>
+                            </p></td></tr><tr><td><tt class="literal">default_batch_fetch_size</tt></td><td>
+                            The default batch fetch size to use when lazily loading an entity or collection.
+                            Defaults to <tt class="literal">1</tt>. See <a href="performance.html#performance-fetching-batch" title="21.1.5.&nbsp;Using batch fetching">Section&nbsp;21.1.5, &#8220;Using batch fetching&#8221;</a>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">20</tt>
+                            </p></td></tr><tr><td><tt class="literal">current_session_context_class</tt></td><td>
+                            The class name of an <tt class="literal">ICurrentSessionContext</tt> implementation.
+                            See <a href="architecture.html#architecture-current-session" title="2.3.&nbsp;Contextual Sessions">Section&nbsp;2.3, &#8220;Contextual Sessions&#8221;</a>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.CurrentSessionContext, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">id.optimizer.pooled.prefer_lo</tt></td><td>
+                            When using an enhanced id generator and pooled optimizers (see
+                            <a href="mapping.html#mapping-declaration-id-enhanced" title="5.1.5.9.&nbsp;Enhanced identifier generators">Section&nbsp;5.1.5.9, &#8220;Enhanced identifier generators&#8221;</a>), prefer interpreting the database
+                            value as the lower (lo) boundary. The default is to interpret it as the high boundary.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">generate_statistics</tt></td><td>
+                            Enable statistics collection within <tt class="literal">ISessionFactory.Statistics</tt> property.
+                            Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">track_session_id</tt></td><td>
+                            Set whether the session id should be tracked in logs or not. When <tt class="literal">true</tt>, each
+                            session will have an unique <tt class="literal">Guid</tt> that can be retrieved with
+                            <tt class="literal">ISessionImplementor.SessionId</tt>, otherwise <tt class="literal">ISessionImplementor.SessionId</tt>
+                            will be <tt class="literal">Guid.Empty</tt>.
+                            <p>
+                                Session id is used for logging purpose and can also be retrieved on the static property
+                                <tt class="literal">NHibernate.Impl.SessionIdLoggingContext.SessionId</tt>, when tracking is enabled.
+                            </p><p>
+                                Disabling tracking by setting <tt class="literal">track_session_id</tt> to <tt class="literal">false</tt>
+                                increases performances. Default is <tt class="literal">true</tt>.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">sql_types.keep_datetime</tt></td><td>
+                            Since NHibernate v5.0 and if the dialect supports it, <tt class="literal">DbType.DateTime2</tt>
+                            is used instead of <tt class="literal">DbType.DateTime</tt>. This may be disabled by setting
+                            <tt class="literal">sql_types.keep_datetime</tt> to <tt class="literal">true</tt>.
+                            Defaults to <tt class="literal">false</tt>.
+                            <p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">firebird.disable_parameter_casting</tt></td><td><p>
+                                Firebird with FirebirdSql.Data.FirebirdClient may be unable to determine the type
+                                of parameters in many circumstances, unless they are explicitly casted in the SQL
+                                query. To avoid this trouble, the NHibernate <tt class="literal">FirebirdClientDriver</tt> parses SQL
+                                commands for detecting parameters in them and adding an explicit SQL cast around
+                                parameters which may trigger the issue.
+                            </p><p>
+                                Defaults to <tt class="literal">false</tt>.
+                                For disabling this behavior, set this setting to true.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">oracle.use_n_prefixed_types_for_unicode</tt></td><td><p>Oracle has a dual Unicode support model.</p><p>
+                                Either the whole database use an Unicode encoding, and then all string types
+                                will be Unicode. In such case, Unicode strings should be mapped to non <tt class="literal">N</tt> prefixed
+                                types, such as <tt class="literal">Varchar2</tt>. This is the default.
+                            </p><p>
+                                Or <tt class="literal">N</tt> prefixed types such as <tt class="literal">NVarchar2</tt> are to be used for Unicode strings, the
+                                others type are using a non Unicode encoding. In such case this setting needs to be set to
+                                <tt class="literal">true</tt>.
+                            </p><p>
+                                See
+                                <a href="https://docs.oracle.com/cd/B19306_01/server.102/b14225/ch6unicode.htm#CACHCAHF" target="_top">Implementing
+                                a Unicode Solution in the Database</a>.
+                                This setting applies only to Oracle dialects and ODP.Net managed or unmanaged driver.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
+                            </p></td></tr><tr><td><tt class="literal">oracle.use_binary_floating_point_types</tt></td><td><p>
+                                Set whether NHibernate should map .Net <tt class="literal">double</tt> and <tt class="literal">float</tt>
+                                to Oracle <tt class="literal">BINARY_DOUBLE</tt> and <tt class="literal">BINARY_FLOAT</tt> types or use
+                                Oracle <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types.
+                            </p><p>
+                                Oracle 10g introduced <tt class="literal">BINARY_DOUBLE</tt> and <tt class="literal">BINARY_FLOAT</tt>
+                                types which are compatible with .NET <tt class="literal">double</tt> and <tt class="literal">float</tt>
+                                types, while Oracle <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> are not. Oracle
+                                <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types do not conform to the IEEE
+                                standard as they are internally implemented as <tt class="literal">NUMBER</tt> type, which
+                                makes them an exact numeric type.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> for using Oracle <tt class="literal">BINARY_DOUBLE</tt> and
+                                <tt class="literal">BINARY_FLOAT</tt> types | <tt class="literal">false</tt> for using Oracle
+                                <tt class="literal">DOUBLE</tt> and <tt class="literal">FLOAT</tt> types.
+                            </p><p>
+                                <tt class="literal">false</tt> by default. See
+                                <a href="https://docs.oracle.com/database/121/TTSQL/types.htm#TTSQL126" target="_top">ANSI SQL data types</a>.
+                            </p></td></tr><tr><td><tt class="literal">oracle.suppress_decimal_invalid_cast_exception</tt></td><td><p>
+                                This setting specifies whether to suppress or not the <tt class="literal">InvalidCastException</tt>
+                                and return a rounded-off 28 precision value if the Oracle <tt class="literal">NUMBER</tt> value
+                                has more than a 28 precision.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> for suppressing the exception | <tt class="literal">false</tt> for letting
+                                the exception be raised.
+                            </p><p>
+                                <tt class="literal">false</tt> by default. See
+                                <a href="https://docs.oracle.com/en/database/oracle/oracle-data-access-components/19.3/odpnt/DataReaderSuppressGetDecimalInvalidCastException.html" target="_top">SuppressGetDecimalInvalidCastException</a>.
+                                This setting works only with ODP.NET 19.10 or newer.
+                            </p></td></tr><tr><td><tt class="literal">odbc.explicit_datetime_scale</tt></td><td>
+                            This may need to be set to <tt class="literal">3</tt> if you are using the <tt class="literal">OdbcDriver</tt>
+                            with MS SQL Server 2008+.
+                            <p>
+                                This is intended to work around issues like:
+                                </p><pre class="programlisting">System.Data.Odbc.OdbcException :
+ERROR [22008]
+[Microsoft][SQL Server Native Client 11.0]
+Datetime field overflow. Fractional second
+precision exceeds the scale specified
+in the parameter binding.</pre><p>
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">3</tt>
+                            </p></td></tr><tr><td><tt class="literal">sqlite.binaryguid</tt></td><td>
+                            SQLite can store GUIDs in binary or text form, controlled by the BinaryGuid
+                            connection string parameter (default is 'true'). The BinaryGuid setting will affect
+                            how to cast GUID to string in SQL. NHibernate will attempt to detect this
+                            setting automatically from the connection string, but if the connection
+                            or connection string is being handled by the application instead of by NHibernate,
+                            you can use the <tt class="literal">sqlite.binaryguid</tt> NHibernate setting to override the behavior.
+                            The value can be <tt class="literal">true</tt> or <tt class="literal">false</tt>.
+                        </td></tr><tr><td><tt class="literal">nhibernate-logger</tt></td><td>
+                            The class name of an <tt class="literal">ILoggerFactory</tt> implementation. It allows using another
+                            logger than log4net.
+                            <p>
+                                The default is not defined, which causes NHibernate to search for log4net assembly. If this
+                                search succeeds, NHibernate will log with log4net. Otherwise, its internal logging will
+                                be disabled.
+                            </p><p>
+                                This is a very special system-level property. It can only be set through an
+                                <a href="https://docs.microsoft.com/en-us/dotnet/framework/configure-apps/file-schema/appsettings/" target="_top">appSetting</a>
+                                named <tt class="literal">nhibernate-logger</tt> in the application configuration file. It cannot
+                                be set neither with <tt class="literal">NHibernate.Cfg.Environment</tt> class, nor be defined in the
+                                <tt class="literal">&lt;hibernate-configuration&gt;</tt> section of the application
+                                configuration file, nor supplied by using <tt class="literal">Configuration.SetProperties</tt>, nor
+                                set in the <tt class="literal">hibernate.cfg.xml</tt> configuration file.
+                            </p><p>
+                                Alternatively to using the setting, a logger factory can be programmatically supplied by using
+                                <tt class="literal">NHibernateLogger.SetLoggersFactory</tt>.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">classname.of.LoggerFactory, assembly</tt>
+                            </p></td></tr></tbody></table></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-dialects"></a>3.6.1.&nbsp;SQL Dialects</h3></div></div><div></div></div><p>
+                You should always set the <tt class="literal">dialect</tt> property to the correct
+                <tt class="literal">NHibernate.Dialect.Dialect</tt> subclass for your database. This is not
+                strictly essential unless you wish to use <tt class="literal">native</tt> or
+                <tt class="literal">sequence</tt> primary key generation or pessimistic locking (with, eg.
+                <tt class="literal">ISession.Lock()</tt> or <tt class="literal">IQuery.SetLockMode()</tt>).
+                However, if you specify a dialect, NHibernate will use sensible defaults for some of the
+                other properties listed above, saving you the effort of specifying them manually.
+            </p><div class="table"><a name="sql-dialects"></a><p class="title"><b>Table&nbsp;3.3.&nbsp;NHibernate SQL Dialects (<tt class="literal">dialect</tt>)</b></p><table summary="NHibernate SQL Dialects (dialect)" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>RDBMS</th><th>Dialect</th><th>Remarks</th></tr></thead><tbody><tr><td>DB2</td><td><tt class="literal">NHibernate.Dialect.DB2Dialect</tt></td><td>&nbsp;</td></tr><tr><td>DB2 for iSeries (OS/400)</td><td><tt class="literal">NHibernate.Dialect.DB2400Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Firebird</td><td><tt class="literal">NHibernate.Dialect.FirebirdDialect</tt></td><td>
+                                Set <tt class="literal">driver_class</tt> to
+                                <tt class="literal">NHibernate.Driver.FirebirdClientDriver</tt>
+                                for Firebird ADO.NET provider 2.0.
+                            </td></tr><tr><td>Informix</td><td><tt class="literal">NHibernate.Dialect.InformixDialect</tt></td><td>&nbsp;</td></tr><tr><td>Informix 9.40</td><td><tt class="literal">NHibernate.Dialect.InformixDialect0940</tt></td><td>&nbsp;</td></tr><tr><td>Informix 10.00</td><td><tt class="literal">NHibernate.Dialect.InformixDialect1000</tt></td><td>&nbsp;</td></tr><tr><td>Ingres</td><td><tt class="literal">NHibernate.Dialect.IngresDialect</tt></td><td>&nbsp;</td></tr><tr><td>Ingres 9</td><td><tt class="literal">NHibernate.Dialect.Ingres9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 7</td><td><tt class="literal">NHibernate.Dialect.MsSql7Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2000</td><td><tt class="literal">NHibernate.Dialect.MsSql2000Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2005</td><td><tt class="literal">NHibernate.Dialect.MsSql2005Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2008</td><td><tt class="literal">NHibernate.Dialect.MsSql2008Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Azure Server 2008</td><td><tt class="literal">NHibernate.Dialect.MsSqlAzure2008Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server 2012</td><td><tt class="literal">NHibernate.Dialect.MsSql2012Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Microsoft SQL Server Compact Edition</td><td><tt class="literal">NHibernate.Dialect.MsSqlCeDialect</tt></td><td class="auto-generated">&nbsp;</td></tr><tr><td>Microsoft SQL Server Compact Edition 4.0</td><td><tt class="literal">NHibernate.Dialect.MsSqlCe40Dialect</tt></td><td class="auto-generated">&nbsp;</td></tr><tr><td>MySQL 3 or 4</td><td><tt class="literal">NHibernate.Dialect.MySQLDialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5</td><td><tt class="literal">NHibernate.Dialect.MySQL5Dialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5 Inno DB</td><td><tt class="literal">NHibernate.Dialect.MySQL5InnoDBDialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5.5</td><td><tt class="literal">NHibernate.Dialect.MySQL55Dialect</tt></td><td>&nbsp;</td></tr><tr><td>MySQL 5.5 Inno DB</td><td><tt class="literal">NHibernate.Dialect.MySQL55InnoDBDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle</td><td><tt class="literal">NHibernate.Dialect.Oracle8iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 9i</td><td><tt class="literal">NHibernate.Dialect.Oracle9iDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 10g, Oracle 11g</td><td><tt class="literal">NHibernate.Dialect.Oracle10gDialect</tt></td><td>&nbsp;</td></tr><tr><td>Oracle 12c</td><td><tt class="literal">NHibernate.Dialect.Oracle12cDialect</tt></td><td>&nbsp;</td></tr><tr><td>PostgreSQL</td><td><tt class="literal">NHibernate.Dialect.PostgreSQLDialect</tt></td><td>&nbsp;</td></tr><tr><td>PostgreSQL 8.1</td><td><tt class="literal">NHibernate.Dialect.PostgreSQL81Dialect</tt></td><td>
+                                This dialect supports <tt class="literal">FOR UPDATE NOWAIT</tt>
+                                available in PostgreSQL 8.1.
+                            </td></tr><tr><td>PostgreSQL 8.2</td><td><tt class="literal">NHibernate.Dialect.PostgreSQL82Dialect</tt></td><td>
+                                This dialect supports <tt class="literal">IF EXISTS</tt> keyword in
+                                <tt class="literal">DROP TABLE</tt> and <tt class="literal">DROP SEQUENCE</tt>
+                                available in PostgreSQL 8.2.
+                            </td></tr><tr><td>PostgreSQL 8.3</td><td><tt class="literal">NHibernate.Dialect.PostgreSQL83Dialect</tt></td><td>
+                                This dialect supports <tt class="literal">XML</tt> type.
+                            </td></tr><tr><td>SQLite</td><td><tt class="literal">NHibernate.Dialect.SQLiteDialect</tt></td><td>
+                                Set <tt class="literal">driver_class</tt> to
+                                <tt class="literal">NHibernate.Driver.SQLite20Driver</tt>
+                                for System.Data.SQLite provider for .NET 2.0.
+                                <p>
+                                    Due to
+                                    <a href="https://system.data.sqlite.org/index.html/tktview/44a0955ea344a777ffdbcc077831e1adc8b77a36" target="_top">the
+                                    behavior of System.Data.SQLite</a> with <tt class="literal">DateTime</tt>, consider using
+                                    <tt class="literal">DateTimeFormatString=yyyy-MM-dd HH:mm:ss.FFFFFFF;</tt> in the SQLite
+                                    connection string for preventing undesired time shifts with its default configuration.
+                                </p></td></tr><tr><td>Sybase Adaptive Server Anywhere 9</td><td><tt class="literal">NHibernate.Dialect.SybaseASA9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 15</td><td><tt class="literal">NHibernate.Dialect.SybaseASE15Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 10</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere10Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 11</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere11Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 12</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere12Dialect</tt></td><td>&nbsp;</td></tr></tbody></table></div><p>
+                Additional dialects may be available in the NHibernate.Dialect namespace.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-outerjoin"></a>3.6.2.&nbsp;Outer Join Fetching</h3></div></div><div></div></div><p>
+                If your database supports ANSI or Oracle style outer joins, <span class="emphasis"><em>outer join
+                fetching</em></span> might increase performance by limiting the number of round
+                trips to and from the database (at the cost of possibly more work performed by
+                the database itself). Outer join fetching allows a graph of objects connected
+                by many-to-one, one-to-many or one-to-one associations to be retrieved in a single
+                SQL <tt class="literal">SELECT</tt>.
+            </p><p>
+                By default, the fetched graph when loading an objects ends at leaf objects,
+                collections, objects with proxies, or where circularities occur.
+            </p><p>
+                For a <span class="emphasis"><em>particular  association</em></span>, fetching may be configured
+                (and the default behaviour overridden) by setting the <tt class="literal">fetch</tt>
+                attribute in the XML mapping.
+            </p><p>
+                Outer join fetching may be disabled <span class="emphasis"><em>globally</em></span> by setting
+                the property <tt class="literal">max_fetch_depth</tt> to <tt class="literal">0</tt>.
+                A setting of <tt class="literal">1</tt> or higher enables outer join fetching for
+                one-to-one and many-to-one associations which have been mapped with
+                <tt class="literal">fetch="join"</tt>.
+            </p><p>
+                See <a href="performance.html#performance-fetching" title="21.1.&nbsp;Fetching strategies">Section&nbsp;21.1, &#8220;Fetching strategies&#8221;</a> for more information.
+            </p><p>
+                In NHibernate 1.0, <tt class="literal">outer-join</tt> attribute could be used to achieve
+                a similar effect. This attribute is now deprecated in favor of <tt class="literal">fetch</tt>.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-cacheprovider"></a>3.6.3.&nbsp;Custom <tt class="literal">ICacheProvider</tt></h3></div></div><div></div></div><p>
+                You may integrate a process-level (or clustered) second-level cache system by
+                implementing the interface <tt class="literal">NHibernate.Cache.ICacheProvider</tt>.
+                You may select the custom implementation by setting
+                <tt class="literal">cache.provider_class</tt>. See the 
+                <a href="performance.html#performance-cache" title="21.2.&nbsp;The Second Level Cache">Section&nbsp;21.2, &#8220;The Second Level Cache&#8221;</a> for more details.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-querysubstitution"></a>3.6.4.&nbsp;Query Language Substitution</h3></div></div><div></div></div><p>
+                You may define new NHibernate query tokens using <tt class="literal">query.substitutions</tt>.
+                For example:
+            </p><pre class="programlisting">query.substitutions true=1, false=0</pre><p>
+                would cause the tokens <tt class="literal">true</tt> and <tt class="literal">false</tt> to be translated to
+                integer literals in the generated SQL.
+            </p><pre class="programlisting">query.substitutions toLowercase=LOWER</pre><p>
+                would allow you to rename the SQL <tt class="literal">LOWER</tt> function.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-systemlevel"></a>3.6.5.&nbsp;System level optional properties</h3></div></div><div></div></div><p>
+                Some properties are system-level properties. They can only be set manually by setting static
+                properties of <tt class="literal">NHibernate.Cfg.Environment</tt> class or be defined in the
+                <tt class="literal">&lt;hibernate-configuration&gt;</tt> section of the application configuration
+                file, as direct sub-elements. These properties can neither be set using
+                <tt class="literal">Configuration.SetProperties</tt> or the <tt class="literal">hibernate.cfg.xml</tt>
+                configuration file, nor be set as <tt class="literal">&lt;session-factory&gt;</tt> properties.
+            </p><div class="table"><a name="configuration-systemlevel-properties"></a><p class="title"><b>Table&nbsp;3.4.&nbsp;NHibernate system level properties</b></p><table summary="NHibernate system level properties" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property name</th><th>Purpose</th></tr></thead><tbody><tr><td><tt class="literal">bytecode-provider</tt></td><td><p>
+                                    Specifies the bytecode provider to use to optimize the use of reflection in NHibernate.
+                                    Use <tt class="literal">null</tt> to disable the optimization completely, <tt class="literal">lcg</tt>
+                                    to use built-in lightweight code generation, or the assembly qualified class name of a custom
+                                    <tt class="literal">IBytecodeProvider</tt> implementation. Defaults to <tt class="literal">lcg</tt>.
+                                </p><pre class="programlisting">&lt;bytecode-provider
+    type="lcg|null|className" /&gt;</pre><p>
+                                    You can also set this property by code by setting
+                                    <tt class="literal">NHibernate.Cfg.Environment.BytecodeProvider</tt>
+                                    before creating any <tt class="literal">NHibernate.Cfg.Configuration</tt> instance.
+                                </p></td></tr><tr><td><tt class="literal">objects-factory</tt></td><td><p>
+                                    Specifies a custom objects factory to use for instantiating NHibernate dependencies.
+                                    Use the assembly qualified class name of a custom <tt class="literal">IObjectsFactory</tt>
+                                    implementation.
+                                </p><pre class="programlisting">&lt;objects-factory
+    type="className" /&gt;</pre><p>
+                                    You can also set this property by code by setting
+                                    <tt class="literal">NHibernate.Cfg.Environment.ObjectsFactory</tt>
+                                    before creating any <tt class="literal">NHibernate.Cfg.Configuration</tt> instance.
+                                </p></td></tr><tr><td><tt class="literal">reflection-optimizer</tt></td><td><p>
+                                    Enables use of a runtime-generated class to set or get properties of an entity
+                                    or component instead of using runtime reflection. The use of the reflection
+                                    optimizer inflicts a certain startup cost on the application but should lead to
+                                    better performance in the long run. Defaults to <tt class="literal">true</tt>.
+                                </p><pre class="programlisting">&lt;reflection-optimizer
+    use="true|false"/&gt;</pre><p>
+                                    You can also set this property by code by setting
+                                    <tt class="literal">NHibernate.Cfg.Environment.UseReflectionOptimizer</tt>
+                                    before creating any <tt class="literal">NHibernate.Cfg.Configuration</tt> instance.
+                                </p></td></tr></tbody></table></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-logging"></a>3.7.&nbsp;Logging</h2></div></div><div></div></div><p>
+            NHibernate logs various events using Apache log4net.
+        </p><p>
+            You may download log4net from <a href="https://logging.apache.org/log4net/" target="_top">https://logging.apache.org/log4net/</a>,
+            or install it with NuGet.
+            To use log4net you will need a <tt class="literal">log4net</tt> configuration section in
+            the application configuration file.  An example of the configuration section is
+            distributed with NHibernate in the <tt class="literal">src/NHibernate.Test</tt> project.
+        </p><p>
+            We strongly recommend that you familiarize yourself with NHibernate's log
+            messages. A lot of work has been put into making the NHibernate log as
+            detailed as possible, without making it unreadable. It is an essential
+            troubleshooting device. Also don't forget to enable SQL logging as
+            described above (<tt class="literal">show_sql</tt>), it is your first
+            step when looking for performance problems.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-namingstrategy"></a>3.8.&nbsp;Implementing an <tt class="literal">INamingStrategy</tt></h2></div></div><div></div></div><p>
+            The interface <tt class="literal">NHibernate.Cfg.INamingStrategy</tt> allows you
+            to specify a "naming standard" for database objects and schema elements.
+        </p><p>
+            You may provide rules for automatically generating database identifiers from
+            .NET identifiers or for processing "logical" column and table names given in
+            the mapping file into  "physical" table and column names. This feature helps
+            reduce the verbosity of the mapping document, eliminating repetitive noise
+            (<tt class="literal">TBL_</tt> prefixes, for example). The default strategy used by
+            NHibernate is quite minimal.
+        </p><p>
+            You may specify a different strategy by calling
+            <tt class="literal">Configuration.SetNamingStrategy()</tt> before adding mappings:
+        </p><pre class="programlisting">ISessionFactory sf = new Configuration()
+    .SetNamingStrategy(ImprovedNamingStrategy.Instance)
+    .AddFile("Item.hbm.xml")
+    .AddFile("Bid.hbm.xml")
+    .BuildSessionFactory();</pre><p>
+            <tt class="literal">NHibernate.Cfg.ImprovedNamingStrategy</tt> is a built-in
+            strategy that might be a useful starting point for some applications.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuration-xmlconfig"></a>3.9.&nbsp;XML Configuration File</h2></div></div><div></div></div><p>
+            An alternative approach is to specify a full configuration in a file named
+            <tt class="literal">hibernate.cfg.xml</tt>. This file can be used as a replacement
+            for the <tt class="literal">&lt;hibernate-configuration&gt;</tt>
+            sections of the application configuration file.
+        </p><p>
+            The XML configuration file is by default expected to be in your application directory.
+            Here is an example:
+        </p><pre class="programlisting">&lt;?xml version='1.0' encoding='utf-8'?&gt;
+&lt;hibernate-configuration xmlns="urn:nhibernate-configuration-2.2"&gt;
+
+  &lt;!-- an ISessionFactory instance --&gt;
+  &lt;session-factory&gt;
+
+    &lt;!-- properties --&gt;
+    &lt;property name="connection.connection_string"&gt;
+      Server=localhost;initial catalog=nhibernate;User Id=;Password=
+    &lt;/property&gt;
+    &lt;property name="show_sql"&gt;false&lt;/property&gt;
+    &lt;property name="dialect"&gt;NHibernate.Dialect.MsSql2012Dialect&lt;/property&gt;
+
+    &lt;!-- mapping files --&gt;
+    &lt;mapping resource="NHibernate.Auction.Item.hbm.xml" assembly="NHibernate.Auction" /&gt;
+    &lt;mapping resource="NHibernate.Auction.Bid.hbm.xml" assembly="NHibernate.Auction" /&gt;
+
+  &lt;/session-factory&gt;
+
+&lt;/hibernate-configuration&gt;</pre><p>
+           Configuring NHibernate is then as simple as
+       </p><pre class="programlisting">ISessionFactory sf = new Configuration().Configure().BuildSessionFactory();</pre><p>
+           You can pick a different XML configuration file using
+       </p><a name="configuration-xmlconfig-ex3"></a><pre class="programlisting">ISessionFactory sf = new Configuration()
+    .Configure("/path/to/config.cfg.xml")
+    .BuildSessionFactory();</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="architecture.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="persistent-classes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;2.&nbsp;Architecture&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;4.&nbsp;Persistent Classes</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

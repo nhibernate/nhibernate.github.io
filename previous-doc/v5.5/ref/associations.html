@@ -1,0 +1,441 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/associations.html" />
+    <title>Chapter&nbsp;7.&nbsp;Association Mappings</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="collections.html" title="Chapter&nbsp;6.&nbsp;Collection Mapping"><link rel="next" href="components.html" title="Chapter&nbsp;8.&nbsp;Component Mapping">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;7.&nbsp;Association Mappings</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="collections.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="associations"></a>Chapter&nbsp;7.&nbsp;Association Mappings</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-intro"></a>7.1.&nbsp;Introduction</h2></div></div><div></div></div><p>
+            Association mappings are often the most difficult thing to implement correctly. In this section
+            we examine some canonical cases one by one, starting with unidirectional mappings and then
+            bidirectional cases. We will use <tt class="literal">Person</tt> and <tt class="literal">Address</tt> in all
+            the examples.
+        </p><p>
+            Associations will be classified by multiplicity and whether or not they map to an intervening join table.
+        </p><p>
+            Nullable foreign keys are not considered to be good practice in traditional data modelling, so our
+            examples do not use nullable foreign keys. This is not a requirement of NHibernate, and the mappings
+            will work if you drop the nullability constraints.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-unidirectional"></a>7.2.&nbsp;Unidirectional associations</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-m21"></a>7.2.1.&nbsp;Many-to-one</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional many-to-one association</em></span> is the most common kind of
+                unidirectional association.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="Address"
+        column="addressId"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person (
+    personId bigint not null primary key, addressId bigint not null
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-121"></a>7.2.2.&nbsp;One-to-one</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional one-to-one association on a foreign key</em></span> is almost
+                identical to a many-to-one. The only difference is the column unique constraint.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="Address"
+        column="addressId"
+        unique="true"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person (
+    personId bigint not null primary key, addressId bigint not null unique
+)
+create table Address ( addressId bigint not null primary key )</pre><p>
+                An <span class="emphasis"><em>unidirectional one-to-one association on a primary key</em></span> usually uses
+                a special id generator In this example, however, we have reversed the direction of the
+                association:
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="foreign"&gt;
+            &lt;param name="property"&gt;Person&lt;/param&gt;
+        &lt;/generator&gt;
+    &lt;/id&gt;
+    &lt;one-to-one name="Person" constrained="true"/&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table Address ( personId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-12m"></a>7.2.3.&nbsp;One-to-many</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional one-to-many association on a foreign key</em></span> is an
+                unusual case, and is not recommended.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="Addresses"&gt;
+        &lt;key column="personId"
+            not-null="true"/&gt;
+        &lt;one-to-many class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table Address (
+    addressId bigint not null primary key, personId bigint not null
+)</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-unidirectional-join"></a>7.3.&nbsp;Unidirectional associations with join tables</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-join-12m"></a>7.3.1.&nbsp;One-to-Many</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional one-to-many association on a join table</em></span> is the
+                preferred option. Specifying <tt class="literal">unique="true"</tt> changes the multiplicity
+                from many-to-many to one-to-many.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="Addresses" table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            unique="true"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId not null, addressId bigint not null primary key
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-join-m21"></a>7.3.2.&nbsp;Many-to-one</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional many-to-one association on a join table</em></span> is common
+                when the association is optional (while avoiding nullable foreign key).
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress"
+        optional="true"&gt;
+        &lt;key column="personId" unique="true"/&gt;
+        &lt;many-to-one name="Address"
+            column="addressId"
+            not-null="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null primary key, addressId bigint not null
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-join-121"></a>7.3.3.&nbsp;One-to-one</h3></div></div><div></div></div><p>
+                An <span class="emphasis"><em>unidirectional one-to-one association on a join table</em></span> is possible,
+                but extremely unusual.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress"
+        optional="true"&gt;
+        &lt;key column="personId"
+            unique="true"/&gt;
+        &lt;many-to-one name="Address"
+            column="addressId"
+            not-null="true"
+            unique="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null primary key, addressId bigint not null unique
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-unidirectional-join-m2m"></a>7.3.4.&nbsp;Many-to-many</h3></div></div><div></div></div><p>
+                Finally, here is an example of an <span class="emphasis"><em>unidirectional many-to-many association</em></span>.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="Addresses" table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null, addressId bigint not null,
+    primary key (personId, addressId)
+)
+create table Address ( addressId bigint not null primary key )</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-bidirectional"></a>7.4.&nbsp;Bidirectional associations</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-bidirectional-m21"></a>7.4.1.&nbsp;One-to-many / many-to-one</h3></div></div><div></div></div><p>
+                A <span class="emphasis"><em>bidirectional many-to-one association</em></span> is the most common kind of
+                association. The following example illustrates the standard parent/child relationship.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="Address"
+        column="addressId"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="People" inverse="true"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;one-to-many class="Person"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person (
+    personId bigint not null primary key, addressId bigint not null
+)
+create table Address ( addressId bigint not null primary key )</pre><p>
+                If you use an <tt class="literal">IList</tt>, or other indexed collection, set the
+                <tt class="literal">key</tt> column of the foreign key to <tt class="literal">not null</tt>. NHibernate
+                will manage the association from the collections side to maintain the index of each element,
+                making the other side virtually inverse by setting <tt class="literal">update="false"</tt> and
+                <tt class="literal">insert="false"</tt>:
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+   &lt;many-to-one name="Address"
+      column="addressId"
+      not-null="true"
+      insert="false"
+      update="false"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+   &lt;list name="People"&gt;
+      &lt;key column="addressId" not-null="true"/&gt;
+      &lt;list-index column="peopleIdx"/&gt;
+      &lt;one-to-many class="Person"/&gt;
+   &lt;/list&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person (
+    personId bigint not null primary key,
+    addressId bigint not null,
+    peopleIdx int not null
+)
+create table Address ( addressId bigint not null primary key )</pre><p>
+                When the underlying foreign key column is <tt class="literal">NOT NULL</tt>, it is important
+                that you define <tt class="literal">not-null="true"</tt> on the <tt class="literal">&lt;key&gt;</tt>
+                element of the collection mapping. Do not only declare <tt class="literal">not-null="true"</tt>
+                on a possible nested <tt class="literal">&lt;column&gt;</tt> element, but always declare it on
+                the <tt class="literal">&lt;key&gt;</tt> element too.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-bidirectional-121"></a>7.4.2.&nbsp;One-to-one</h3></div></div><div></div></div><p>
+                A <span class="emphasis"><em>bidirectional one-to-one association on a foreign key</em></span> is common.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;many-to-one name="Address"
+        column="addressId"
+        unique="true"
+        not-null="true"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+   &lt;one-to-one name="Person"
+        property-ref="Address"/&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person (
+    personId bigint not null primary key, addressId bigint not null unique
+)
+create table Address ( addressId bigint not null primary key )</pre><p>
+                A <span class="emphasis"><em>bidirectional one-to-one association on a primary key</em></span> uses the
+                special <tt class="literal">foreign</tt> id generator.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;one-to-one name="Address"/&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="foreign"&gt;
+            &lt;param name="property"&gt;Person&lt;/param&gt;
+        &lt;/generator&gt;
+    &lt;/id&gt;
+    &lt;one-to-one name="Person"
+        constrained="true"/&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table Address ( personId bigint not null primary key )</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-bidirectional-join"></a>7.5.&nbsp;Bidirectional associations with join tables</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-bidirectional-join-12m"></a>7.5.1.&nbsp;One-to-many / many-to-one</h3></div></div><div></div></div><p>
+                The following is an example of a <span class="emphasis"><em>bidirectional one-to-many association on a
+                join table</em></span>. The <tt class="literal">inverse="true"</tt> can go on either end of
+                the association, on the collection, or on the join.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="Addresses"
+        table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            unique="true"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress"
+        inverse="true"
+        optional="true"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;many-to-one name="Person"
+            column="personId"
+            not-null="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null, addressId bigint not null primary key
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-bidirectional-join-121"></a>7.5.2.&nbsp;One-to-one</h3></div></div><div></div></div><p>
+                A <span class="emphasis"><em>bidirectional one-to-one association on a join table</em></span> is possible,
+                but extremely unusual.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress"
+        optional="true"&gt;
+        &lt;key column="personId"
+            unique="true"/&gt;
+        &lt;many-to-one name="Address"
+            column="addressId"
+            not-null="true"
+            unique="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;join table="PersonAddress"
+        optional="true"
+        inverse="true"&gt;
+        &lt;key column="addressId"
+            unique="true"/&gt;
+        &lt;many-to-one name="Person"
+            column="personId"
+            not-null="true"
+            unique="true"/&gt;
+    &lt;/join&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null primary key, addressId bigint not null unique
+)
+create table Address ( addressId bigint not null primary key )</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="associations-bidirectional-join-m2m"></a>7.5.3.&nbsp;Many-to-many</h3></div></div><div></div></div><p>
+                Here is an example of a <span class="emphasis"><em>bidirectional many-to-many association</em></span>.
+            </p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id" column="personId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="Addresses" table="PersonAddress"&gt;
+        &lt;key column="personId"/&gt;
+        &lt;many-to-many column="addressId"
+            class="Address"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Address"&gt;
+    &lt;id name="Id" column="addressId"&gt;
+        &lt;generator class="native"/&gt;
+    &lt;/id&gt;
+    &lt;set name="People" inverse="true" table="PersonAddress"&gt;
+        &lt;key column="addressId"/&gt;
+        &lt;many-to-many column="personId"
+            class="Person"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre><pre class="programlisting">create table Person ( personId bigint not null primary key )
+create table PersonAddress (
+    personId bigint not null, addressId bigint not null,
+    primary key (personId, addressId)
+)
+create table Address ( addressId bigint not null primary key )</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="associations-complex"></a>7.6.&nbsp;More complex association mappings</h2></div></div><div></div></div><p>
+            More complex association joins are <span class="emphasis"><em>extremely</em></span> rare. NHibernate handles
+            more complex situations by using SQL fragments embedded in the mapping document. For example,
+            if a table with historical account information data defines <tt class="literal">AccountNumber</tt>,
+            <tt class="literal">EffectiveEndDate</tt> and <tt class="literal">EffectiveStartDatecolumns</tt>, it would
+            be mapped as follows:
+        </p><pre class="programlisting">&lt;properties name="CurrentAccountKey"&gt;
+    &lt;property name="AccountNumber" type="string" not-null="true"/&gt;
+    &lt;property name="CurrentAccount" type="boolean"&gt;
+        &lt;formula&gt;case when EffectiveEndDate is null then 1 else 0 end&lt;/formula&gt;
+    &lt;/property&gt;
+&lt;/properties&gt;
+&lt;property name="EffectiveEndDate" type="date"/&gt;
+&lt;property name="EffectiveStateDate" type="date" not-null="true"/&gt;</pre><p>
+            You can then map an association to the <span class="emphasis"><em>current</em></span> instance, the one with null
+            <tt class="literal">EffectiveEndDate</tt>, by using:
+        </p><pre class="programlisting">&lt;many-to-one name="CurrentAccountInfo"
+        property-ref="CurrentAccountKey"
+        class="AccountInfo"&gt;
+    &lt;column name="AccountNumber"/&gt;
+    &lt;formula&gt;'1'&lt;/formula&gt;
+&lt;/many-to-one&gt;</pre><p>
+            In a more complex example, imagine that the association between <tt class="literal">Employee</tt> and
+            <tt class="literal">Organization</tt> is maintained in an <tt class="literal">Employment</tt> table full of
+            historical employment data. An association to the employee's <span class="emphasis"><em>most recent</em></span>
+            employer, the one with the most recent <tt class="literal">startDate</tt>, could be mapped in the
+            following way:
+        </p><pre class="programlisting">&lt;join&gt;
+    &lt;key column="employeeId"/&gt;
+    &lt;subselect&gt;
+        select employeeId, orgId
+        from Employments
+        group by orgId
+        having startDate = max(startDate)
+    &lt;/subselect&gt;
+    &lt;many-to-one name="MostRecentEmployer"
+            class="Organization"
+            column="orgId"/&gt;
+&lt;/join&gt;</pre><p>
+            This functionality allows a degree of creativity and flexibility, but it is more practical to
+            handle these kinds of cases by using queries.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="collections.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="components.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;6.&nbsp;Collection Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;8.&nbsp;Component Mapping</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

@@ -1,0 +1,960 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/collections.html" />
+    <title>Chapter&nbsp;6.&nbsp;Collection Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="mapping.html" title="Chapter&nbsp;5.&nbsp;Basic O/R Mapping"><link rel="next" href="associations.html" title="Chapter&nbsp;7.&nbsp;Association Mappings">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;6.&nbsp;Collection Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="associations.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="collections"></a>Chapter&nbsp;6.&nbsp;Collection Mapping</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-persistent"></a>6.1.&nbsp;Persistent Collections</h2></div></div><div></div></div><p>
+            NHibernate requires that persistent collection-valued fields be declared
+            as a generic interface type, for example:
+        </p><pre class="programlisting">public class Product
+{
+    public virtual ISet&lt;Part&gt; Parts { get; set; } = new HashSet&lt;Part&gt;();
+
+    public virtual string SerialNumber { get; set; }
+}</pre><p>
+            The actual interface might be
+            <tt class="literal">System.Collections.Generic.ICollection&lt;T&gt;</tt>,
+            <tt class="literal">System.Collections.Generic.IList&lt;T&gt;</tt>,
+            <tt class="literal">System.Collections.Generic.IDictionary&lt;K, V&gt;</tt>,
+            <tt class="literal">System.Collections.Generic.ISet&lt;T&gt;</tt>
+            or ... anything you like! (Where "anything you like" means you will
+            have to write an implementation of <tt class="literal">NHibernate.UserType.IUserCollectionType</tt>.)
+        </p><p>
+            Notice how we initialized the instance variable with an instance of
+            <tt class="literal">HashSet&lt;T&gt;</tt>. This is the best way to initialize collection
+            valued properties of newly instantiated (non-persistent) instances. When
+            you make the instance persistent - by calling <tt class="literal">Save()</tt>,
+            for example - NHibernate will actually replace the <tt class="literal">HashSet&lt;T&gt;</tt>
+            with an instance of NHibernate's own implementation of <tt class="literal">ISet&lt;T&gt;</tt>.
+            Watch out for errors like this:
+        </p><pre class="programlisting">Cat cat = new DomesticCat();
+Cat kitten = new DomesticCat();
+...
+ISet&lt;Cat&gt; kittens = new HashSet&lt;Cat&gt;();
+kittens.Add(kitten);
+cat.Kittens = kittens;
+session.Save(cat);
+kittens = cat.Kittens; //Okay, kittens collection is an ISet
+HashSet&lt;Cat&gt; hs = (HashSet&lt;Cat&gt;) cat.Kittens; //Error!</pre><p>
+            Collection instances have the usual behavior of value types. They are automatically
+            persisted when referenced by a persistent object and automatically deleted when
+            unreferenced. If a collection is passed from one persistent object to another,
+            its elements might be moved from one table to another. Two entities may not share
+            a reference to the same collection instance. Due to the underlying relational model,
+            collection-valued properties do not support null value semantics; NHibernate does
+            not distinguish between a null collection reference and an empty collection.
+        </p><p>
+            You shouldn't have to worry much about any of this. Just use NHibernate's collections
+            the same way you use ordinary .NET collections, but make sure you understand the
+            semantics of bidirectional associations (discussed later) before using them.
+        </p><p>
+            Collection instances are distinguished in the database by a foreign key to
+            the owning entity. The collection key is mapped by
+            the <a href="collections.html#collections-foreignkeys" title="6.2.1.&nbsp;Collection foreign keys"><tt class="literal">&lt;key&gt;</tt> element</a>.
+        </p><p>
+            Collections may contain almost any other NHibernate type, including all basic types,
+            custom types, entity types and components. See <a href="collections.html#collections-elements" title="6.2.2.&nbsp;Collection elements">Section&nbsp;6.2.2, &#8220;Collection elements&#8221;</a>.
+        </p><p>
+            All collection types except <tt class="literal">ISet</tt> and bag have an <span class="emphasis"><em>index</em></span>
+            column - a column that maps to an array or <tt class="literal">IList</tt> index or
+            <tt class="literal">IDictionary</tt> key. See <a href="collections.html#collections-indexed" title="6.2.3.&nbsp;Indexed collections">Section&nbsp;6.2.3, &#8220;Indexed collections&#8221;</a> for more
+            information.
+        </p><p>
+            There are quite a range of mappings that can be generated for collections,
+            covering many common relational models. We suggest you experiment with the
+            schema generation tool to get a feeling for how various mapping declarations
+            translate to database tables.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-mapping"></a>6.2.&nbsp;Mapping a Collection</h2></div></div><div></div></div><p>
+            The NHibernate mapping element used for mapping a collection depends upon the type of interface.
+            By example, a <tt class="literal">&lt;set&gt;</tt> element is used for mapping properties of type
+            <tt class="literal">ISet</tt>.
+        </p><pre class="programlisting">&lt;class name="Product"&gt;
+    &lt;id name="SerialNumber" column="productSerialNumber"/&gt;
+    &lt;set name="Parts"&gt;
+        &lt;key column="productSerialNumber" not-null="true"/&gt;
+        &lt;one-to-many class="Part"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre><p>
+            Apart from
+            <tt class="literal">&lt;set&gt;</tt>, there is also
+            <tt class="literal">&lt;list&gt;</tt>,
+            <tt class="literal">&lt;map&gt;</tt>,
+            <tt class="literal">&lt;bag&gt;</tt>,
+            <tt class="literal">&lt;array&gt;</tt> and
+            <tt class="literal">&lt;primitive-array&gt;</tt> mapping elements.
+            The <tt class="literal">&lt;map&gt;</tt> element is representative:
+        </p><div class="programlistingco"><pre class="programlisting">&lt;map
+    name="propertyName"                                         <span class="co">(1)</span>
+    table="tableName"                                           <span class="co">(2)</span>
+    schema="schemaName"                                         <span class="co">(3)</span>
+    catalog="catalogName"                                       <span class="co">(4)</span>
+    lazy="true|false|extra"                                     <span class="co">(5)</span>
+    inverse="true|false"                                        <span class="co">(6)</span>
+    cascade="all|none|save-update|delete|all-delete-orphan"     <span class="co">(7)</span>
+    sort="unsorted|natural|comparatorClass"                     <span class="co">(8)</span>
+    order-by="columnName asc|desc"                              <span class="co">(9)</span>
+    where="arbitrary sql where condition"                       <span class="co">(10)</span>
+    fetch="select|join|subselect"                               <span class="co">(11)</span>
+    batch-size="N"                                              <span class="co">(12)</span>
+    access="field|property|className"                           <span class="co">(13)</span>
+    optimistic-lock="true|false"                                <span class="co">(14)</span>
+    mutable="true|false"                                        <span class="co">(15)</span>
+    subselect="SQL expression"                                  <span class="co">(16)</span>
+    check="arbitrary sql check condition"                       <span class="co">(17)</span>
+    persister="persisterClass"                                  <span class="co">(18)</span>
+    collection-type="collectionClass"                           <span class="co">(19)</span>
+    outer-join="auto|true|false"                                <span class="co">(20)</span>
+    generic="true|false"&gt;                                       <span class="co">(21)</span>
+
+    &lt;key ... /&gt;
+    &lt;map-key ... /&gt;
+    &lt;element ... /&gt;
+&lt;/map&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                        <tt class="literal">name</tt>: the collection property name.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                        <tt class="literal">table</tt> (optional - defaults to property name): the
+                        name of the collection table. It is not used for one-to-many associations.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                        <tt class="literal">schema</tt> (optional): overrides the schema name specified by
+                            the root <tt class="literal">&lt;hibernate-mapping&gt;</tt> element.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                        <tt class="literal">catalog</tt> (optional): overrides the catalog name specified by
+                        the root <tt class="literal">&lt;hibernate-mapping&gt;</tt> element.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
+                        <tt class="literal">lazy</tt> (optional - defaults to <tt class="literal">true</tt>):
+                        may be used to disable lazy fetching and specify that the association
+                        is always eagerly fetched. Using <tt class="literal">extra</tt> fetches only the
+                        elements that are needed - see <a href="performance.html#performance-fetching" title="21.1.&nbsp;Fetching strategies">Section&nbsp;21.1, &#8220;Fetching strategies&#8221;</a> for more information.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
+                        <tt class="literal">inverse</tt> (optional - defaults to <tt class="literal">false</tt>):
+                        marks this collection as the "inverse" end of a bidirectional association.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
+                        <tt class="literal">cascade</tt> (optional - defaults to <tt class="literal">none</tt>):
+                        enables operations to cascade to child entities.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
+                        <tt class="literal">sort</tt> (optional): specifies a sorted collection with a
+                        <tt class="literal">natural</tt> sort order, or a given comparator class. See
+                        <a href="collections.html#collections-sorted" title="6.3.1.&nbsp;Sorted Collections">Section&nbsp;6.3.1, &#8220;Sorted Collections&#8221;</a>.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
+                        <tt class="literal">order-by</tt> (optional): specifies a table column (or columns)
+                        that defines the iteration order of the <tt class="literal">IDictionary</tt>, <tt class="literal">ISet</tt>
+                        or bag, together with an optional <tt class="literal">asc</tt> or <tt class="literal">desc</tt>.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
+                        <tt class="literal">where</tt> (optional): specifies an arbitrary SQL <tt class="literal">WHERE</tt>
+                        condition to be used when retrieving or removing the collection. It is useful if the
+                        collection should contain only a subset of the available data.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(11)</td><td valign="top" align="left"><p>
+                        <tt class="literal">fetch</tt> (optional, defaults to <tt class="literal">select</tt>): chooses between
+                        outer-join fetching, fetching by sequential select, and fetching by sequential subselect -
+                        see <a href="performance.html#performance-fetching-subselect" title="21.1.6.&nbsp;Using subselect fetching">Section&nbsp;21.1.6, &#8220;Using subselect fetching&#8221;</a>. <tt class="literal">join</tt> takes
+                        precedence over the <tt class="literal">lazy</tt> attribute and causes the association to be
+                        eagerly fetched.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(12)</td><td valign="top" align="left"><p>
+                        <tt class="literal">batch-size</tt> (optional, defaults to <tt class="literal">1</tt>): specifies a
+                        "batch size" for lazily fetching instances of this collection. See
+                        <a href="performance.html#performance-fetching-batch" title="21.1.5.&nbsp;Using batch fetching">Section&nbsp;21.1.5, &#8220;Using batch fetching&#8221;</a>.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(13)</td><td valign="top" align="left"><p>
+                        <tt class="literal">access</tt> (optional - defaults to <tt class="literal">property</tt>): the
+                        strategy NHibernate should use for accessing the property value.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(14)</td><td valign="top" align="left"><p>
+                        <tt class="literal">optimistic-lock</tt> (optional - defaults to <tt class="literal">true</tt>):
+                        specifies that changes to the state of the collection results in increment of the
+                        owning entity's version. For one to many associations, you may want to disable this
+                        setting.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(15)</td><td valign="top" align="left"><p>
+                        <tt class="literal">mutable</tt> (optional - defaults to <tt class="literal">true</tt>): a value of
+                        <tt class="literal">false</tt> specifies that the elements of the collection never change.
+                        This allows for minor performance optimization in some cases.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(16)</td><td valign="top" align="left"><p>
+                        <tt class="literal">subselect</tt> (optional): maps an immutable and read-only collection to a
+                        database sub-select. This is useful if you want to have a view instead of a base table.
+                        It is not used for one-to-many associations.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(17)</td><td valign="top" align="left"><p>
+                        <tt class="literal">check</tt> (optional): an SQL expression used to generate a multi-row check
+                        constraint for automatic schema generation. It is not used for one-to-many associations.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(18)</td><td valign="top" align="left"><p>
+                        <tt class="literal">persister</tt> (optional&gt;): specifies a custom
+                        <tt class="literal">ICollectionPersister</tt>.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(19)</td><td valign="top" align="left"><p>
+                        <tt class="literal">collection-type</tt> (optional): the fully qualified type name of a class
+                        implementing <tt class="literal">IUserCollectionType</tt>.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(20)</td><td valign="top" align="left"><p>
+                        <tt class="literal">outer-join</tt> (optional): This attribute is obsoleted in favor of
+                        <tt class="literal">fetch</tt>. <tt class="literal">auto</tt> is equivalent to not specifying
+                        <tt class="literal">fetch</tt>, <tt class="literal">true</tt> is equivalent to
+                        <tt class="literal">join</tt> and <tt class="literal">false</tt> is equivalent to
+                        <tt class="literal">select</tt>. It has no value matching the <tt class="literal">subselect</tt>
+                        <tt class="literal">fetch</tt> value.
+                    </p></td></tr><tr><td width="5%" valign="top" align="left">(21)</td><td valign="top" align="left"><p>
+                        <tt class="literal">generic</tt> (optional, defaults according to the reflected property type):
+                        if <tt class="literal">false</tt>, NHibernate will type the collection elements as
+                        <tt class="literal">object</tt>. Otherwise NHibernate will use reflection to determine the
+                        element type to use.
+                    </p></td></tr></table></div></div><p>
+            The mapping of an <tt class="literal">IList</tt> or array requires a separate table column holding the array
+            or list index (the <tt class="literal">i</tt> in <tt class="literal">foo[i]</tt>). If your relational model doesn't
+            have an index column, use an unordered <tt class="literal">ISet</tt> instead. This seems to put people off
+            who assume that <tt class="literal">IList</tt> should just be a more
+            convenient way of accessing an unordered collection. NHibernate collections strictly obey the actual
+            semantics attached to the <tt class="literal">ISet</tt>, <tt class="literal">IList</tt> and <tt class="literal">IDictionary</tt>
+            interfaces. <tt class="literal">IList</tt> elements don't just spontaneously rearrange themselves!
+        </p><p>
+            On the other hand, people who planned to use the <tt class="literal">IList</tt> to emulate
+            <span class="emphasis"><em>bag</em></span> semantics have a legitimate grievance here.
+            A bag is an unordered, unindexed collection which may contain the same element multiple times.
+            The .NET collections framework lacks an <tt class="literal">IBag</tt> interface, hence you have to emulate
+            it with an <tt class="literal">IList</tt>. NHibernate lets you map properties of type <tt class="literal">IList</tt>
+            or <tt class="literal">ICollection</tt> with the <tt class="literal">&lt;bag&gt;</tt> element. Note that bag
+            semantics are not really part of the <tt class="literal">ICollection</tt> contract and they actually
+            conflict with the semantics of the <tt class="literal">IList</tt> contract (however, you can sort
+            the bag arbitrarily, discussed later in this chapter).
+        </p><p>
+            Note: large NHibernate bags mapped with <tt class="literal">inverse="false"</tt> are inefficient and
+            should be avoided. NHibernate can't create, delete or update rows individually, because there is
+            no key that may be used to identify an individual row.
+        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-foreignkeys"></a>6.2.1.&nbsp;Collection foreign keys</h3></div></div><div></div></div><p>
+                Collection instances are distinguished in the database by the foreign key of the entity that owns the
+                collection. This foreign key is referred to as the <span class="emphasis"><em>collection key column</em></span>, or
+                columns, of the collection table. The collection key column is mapped by the
+                <tt class="literal">&lt;key&gt;</tt> element.
+            </p><p>
+                There can be a nullability constraint on the foreign key column. For most collections, this is implied.
+                For unidirectional one-to-many associations, the foreign key column is nullable by default, so you may
+                need to specify <tt class="literal">not-null="true"</tt>.
+            </p><pre class="programlisting">&lt;key column="productSerialNumber" not-null="true"/&gt;</pre><p>
+                The foreign key constraint can use <tt class="literal">ON DELETE CASCADE</tt>.
+            </p><pre class="programlisting">&lt;key column="productSerialNumber" on-delete="cascade"/&gt;</pre><p>
+                See <a href="mapping.html#mapping-declaration-key" title="5.1.20.&nbsp;key">Section&nbsp;5.1.20, &#8220;key&#8221;</a> for a full definition of the
+                <tt class="literal">&lt;key&gt;</tt> element.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-elements"></a>6.2.2.&nbsp;Collection elements</h3></div></div><div></div></div><p>
+                Collections can contain almost any other NHibernate type, including: basic types, custom types, components
+                and references to other entities. This is an important distinction. An object in a collection might be
+                handled with "value" semantics (its life cycle fully depends on the collection owner), or it might be a
+                reference to another entity with its own life cycle. In the latter case, only the "link" between the two
+                objects is considered to be a state held by the collection.
+            </p><p>
+                The contained type is referred to as the collection element type. Collection elements are mapped by
+                <tt class="literal">&lt;element&gt;</tt> or <tt class="literal">&lt;composite-element&gt;</tt>, or in the case of entity
+                references, with <tt class="literal">&lt;one-to-many&gt;</tt> or <tt class="literal">&lt;many-to-many&gt;</tt>. The
+                first two map elements with value semantics, the next two are used to map entity associations. A last one
+                exist for exotic entity associations, <tt class="literal">&lt;many-to-any&gt;</tt>, similar to
+                <a href="mapping.html#mapping-types-anymapping" title="5.1.24.&nbsp;any">the <tt class="literal">&lt;any&gt;</tt> mapping element</a>.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-indexed"></a>6.2.3.&nbsp;Indexed collections</h3></div></div><div></div></div><p>
+                All collection mappings, except those with set and bag semantics, need an <span class="emphasis"><em>index column</em></span>
+                in the collection table. An index column is a column that maps to an array index, or <tt class="literal">IList</tt>
+                index, or <tt class="literal">IDictionary</tt> key. The index of an <tt class="literal">IDictionary</tt> may be of any
+                basic type, mapped with <tt class="literal">&lt;map-key&gt;</tt>. It can be an entity reference mapped with
+                <tt class="literal">&lt;map-key-many-to-many&gt;</tt> (or in exotic cases <tt class="literal">&lt;index-many-to-any&gt;</tt>,
+                similar to <a href="mapping.html#mapping-types-anymapping" title="5.1.24.&nbsp;any">the <tt class="literal">&lt;any&gt;</tt> mapping element</a>),
+                or it can be a composite type mapped with <tt class="literal">&lt;composite-map-key&gt;</tt>. The index of an array or
+                list is always of type <tt class="literal">Int32</tt> and is mapped using the &lt;list-index&gt; element. The mapped
+                column contains sequential integers that are numbered from zero by default.
+            </p><div class="programlistingco"><pre class="programlisting">&lt;list-index
+    column="columnName"                               <span class="co">(1)</span>
+    base="0|1|..."                                    <span class="co">(2)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">column</tt> (required): the name of the column holding the collection index values.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">base</tt> (optional - defaults to <tt class="literal">0</tt>): the value of the index column
+                            that corresponds to the first element of the list or array.
+                        </p></td></tr></table></div></div><div class="programlistingco"><pre class="programlisting">&lt;map-key
+    column="columnName"                               <span class="co">(1)</span>
+    formula="any SQL expression"                      <span class="co">(2)</span>
+    type="typeName"                                   <span class="co">(3)</span>
+    length="N"                                        <span class="co">(4)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">column</tt> (required unless <tt class="literal">formula</tt> is used): the name of the column
+                            holding the map key values.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">formula</tt> (optional): a SQL formula used to evaluate the key of the map.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">type</tt> (required): the type of the map keys.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                            <tt class="literal">length</tt> (optional): If the type takes a length and does not
+                            already specify it, its length.
+                        </p></td></tr></table></div></div><div class="programlistingco"><pre class="programlisting">&lt;map-key-many-to-many
+    column="columnName"                               <span class="co">(1)</span>
+    formula="any SQL expression"                      <span class="co">(2)</span>
+    class="className"                                 <span class="co">(3)</span>
+    entity-name="entityName"                          <span class="co">(4)</span>
+    foreign-key="foreignKeyName"                      <span class="co">(5)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">column</tt> (required unless <tt class="literal">formula</tt> is used): the name of the column
+                            holding the map key values.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">formula</tt> (optional): a SQL formula used to evaluate the key of the map.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">class</tt> (required): the entity class used as the map key.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                            <tt class="literal">entity-name</tt> (optional): the entity name of the associated class.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
+                            <tt class="literal">foreign-key</tt> (optional): specifies the name of the foreign key
+                            constraint for DDL generation.
+                        </p></td></tr></table></div></div><div class="programlistingco"><pre class="programlisting">&lt;composite-map-key
+    class="className"&gt;                                <span class="co">(1)</span>
+
+    &lt;key-property .../&gt;                               <span class="co">(2)</span>
+    &lt;key-many-to-one .../&gt;                            <span class="co">(3)</span>
+    ...
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">class</tt> (required): the component class used as the map key. Make sure
+                            you override <tt class="literal">GetHashCode()</tt> and <tt class="literal">Equals()</tt>
+                            correctly on the component class.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">&lt;key-property&gt;</tt>: maps a component property.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">&lt;key-many-to-one&gt;</tt>: maps a component many-to-one association.
+                        </p></td></tr></table></div></div><p>
+                If your table does not have an index column, and you still wish to use <tt class="literal">IList</tt> as the
+                property type, you can map the property as a NHibernate <tt class="literal">&lt;bag&gt;</tt>. A bag does not
+                retain its order when it is retrieved from the database, but it can be optionally sorted or ordered.
+                Also consider using an <tt class="literal">ISet</tt> as the property type.
+            </p><p>
+                 The <tt class="literal">&lt;index&gt;</tt>, <tt class="literal">&lt;index-many-to-many&gt;</tt> and
+                <tt class="literal">&lt;composite-index&gt;</tt> elements are obsoleted predecessors to
+                <tt class="literal">&lt;map-key&gt;</tt>/<tt class="literal">&lt;list-index&gt;</tt>,
+                <tt class="literal">&lt;map-key-many-to-many&gt;</tt> and <tt class="literal">&lt;composite-map-key&gt;</tt> respectively.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-ofvalues"></a>6.2.4.&nbsp;Collections of Values and Many-To-Many Associations</h3></div></div><div></div></div><p>
+                Any collection of values or many-to-many associations requires a dedicated
+                <span class="emphasis"><em>collection table</em></span> with a <a href="collections.html#collections-foreignkeys" title="6.2.1.&nbsp;Collection foreign keys">foreign
+                key column or columns</a>, <span class="emphasis"><em>collection element column</em></span> or columns, and
+                possibly an <a href="collections.html#collections-indexed" title="6.2.3.&nbsp;Indexed collections">index column or columns</a>.
+            </p><p>
+                For a collection of values, use the <tt class="literal">&lt;element&gt;</tt> tag.
+            </p><div class="programlistingco"><pre class="programlisting">&lt;element
+    column="columnName"                               <span class="co">(1)</span>
+    formula="any SQL expression"                      <span class="co">(2)</span>
+    type="typeName"                                   <span class="co">(3)</span>
+    length="L"                                        <span class="co">(4)</span>
+    precision="P"                                     <span class="co">(5)</span>
+    scale="S"                                         <span class="co">(6)</span>
+    not-null="true|false"                             <span class="co">(7)</span>
+    unique="true|false"                               <span class="co">(8)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">column</tt> (required unless <tt class="literal">formula</tt> is used): the
+                            name of the column holding the collection element values.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">formula</tt> (optional): an SQL formula used to evaluate the element.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">type</tt> (required): the type of the collection element.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                            <tt class="literal">length</tt> (optional): if the type takes a length and does not
+                            already specify it, its length.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
+                            <tt class="literal">precision</tt> (optional): if the type takes a precision and does not
+                            already specify it, its precision.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
+                            <tt class="literal">scale</tt> (optional): if the type takes a scale and does not
+                            already specify it, its scale.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
+                            <tt class="literal">not-null</tt> (optional - defaults to <tt class="literal">false</tt>):
+                            sets the column nullability for DDL generation.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
+                            <tt class="literal">unique</tt> (optional - defaults to <tt class="literal">false</tt>):
+                            sets the column uniqueness for DDL generation.
+                        </p></td></tr></table></div></div><p>
+                A <span class="emphasis"><em>many-to-many association</em></span> is specified using the
+                <tt class="literal">&lt;many-to-many&gt;</tt> element.
+            </p><div class="programlistingco"><pre class="programlisting">&lt;many-to-many
+    column="columnName"                                    <span class="co">(1)</span>
+    formula="any SQL expression"                           <span class="co">(2)</span>
+    class="className"                                      <span class="co">(3)</span>
+    fetch="join|select"                                    <span class="co">(4)</span>
+    lazy="false|proxy"                                     <span class="co">(5)</span>
+    not-found="ignore|exception"                           <span class="co">(6)</span>
+    entity-name="entityName"                               <span class="co">(7)</span>
+    property-ref="propertyNameFromAssociatedClass"         <span class="co">(8)</span>
+    order-by="columnName asc|desc"                         <span class="co">(9)</span>
+    where="arbitrary sql where condition"                  <span class="co">(10)</span>
+    unique="true|false"                                    <span class="co">(11)</span>
+    foreign-key="foreignKeyName"                           <span class="co">(12)</span>
+    outer-join="auto|true|false"                           <span class="co">(13)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">column</tt> (required unless <tt class="literal">formula</tt> is used): the
+                            name of the element foreign key column.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">formula</tt> (optional): an SQL formula used to evaluate the element
+                            foreign key value.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">class</tt> (required): the name of the associated class.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(4)</td><td valign="top" align="left"><p>
+                            <tt class="literal">fetch</tt> (optional, defaults to <tt class="literal">join</tt>):
+                            enables outer-join or sequential select fetching for this association. This is a
+                            special case; for full eager fetching (in a single SELECT) of an entity and its
+                            many-to-many relationships to other entities, you would enable join fetching not
+                            only of the collection itself, but also with this attribute on the
+                            <tt class="literal">&lt;many-to-many&gt;</tt> nested element.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(5)</td><td valign="top" align="left"><p>
+                            <tt class="literal">lazy</tt> (optional, defaults to <tt class="literal">proxy</tt>):
+                            may be used to disable lazy fetching and specify that the associated entities
+                            are always eagerly fetched. This is a special case; disabling laziness of the
+                            collection itself only would only eagerly load the list of ids of the associated
+                            entities. For fully loading the associated entities instead, while keeping
+                            <tt class="literal">fetch</tt> value as <tt class="literal">select</tt>, you would also
+                            disable laziness with this attribute on the <tt class="literal">&lt;many-to-many&gt;</tt>
+                            nested element.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(6)</td><td valign="top" align="left"><p>
+                            <tt class="literal">not-found</tt> (optional - defaults to <tt class="literal">exception</tt>):
+                            specifies how foreign keys that reference missing rows will be handled.
+                            <tt class="literal">ignore</tt> will treat a missing row as a null association.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(7)</td><td valign="top" align="left"><p>
+                            <tt class="literal">entity-name</tt> (optional): the entity name of the associated class.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(8)</td><td valign="top" align="left"><p>
+                            <tt class="literal">property-ref</tt> (optional): the name of a property of the associated
+                            class that is joined to this foreign key. If not specified, the primary key of the
+                            associated class is used.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(9)</td><td valign="top" align="left"><p>
+                            <tt class="literal">order-by</tt> (optional): specifies a table column (or columns) that
+                            defines the iteration order of the collection. This is a special case; the
+                            <tt class="literal">order-by</tt> on the collection could order only by the foreign key.
+                            The <tt class="literal">order-by</tt> on the <tt class="literal">&lt;many-to-many&gt;</tt>
+                            nested element allows to order by the associated entity columns.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(10)</td><td valign="top" align="left"><p>
+                            <tt class="literal">where</tt> (optional): specifies an arbitrary SQL <tt class="literal">WHERE</tt>
+                        condition to be used when retrieving or removing the collection. This is a special case; the
+                            <tt class="literal">where</tt> on the collection could filter only by the foreign key.
+                            The <tt class="literal">where</tt> on the <tt class="literal">&lt;many-to-many&gt;</tt>
+                            nested element allows to filter by the associated entity columns.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(11)</td><td valign="top" align="left"><p>
+                            <tt class="literal">unique</tt> (optional): enables the DDL generation of a unique constraint
+                            for the foreign-key column. This makes the association multiplicity effectively
+                            one-to-many.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(12)</td><td valign="top" align="left"><p>
+                            <tt class="literal">foreign-key</tt> (optional): specifies the name of the foreign key
+                            constraint for DDL generation.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(13)</td><td valign="top" align="left"><p>
+                            <tt class="literal">outer-join</tt> (optional): This attribute is obsoleted in favor of
+                            <tt class="literal">fetch</tt>. <tt class="literal">auto</tt> is equivalent to not specifying
+                            <tt class="literal">fetch</tt>, <tt class="literal">true</tt> is equivalent to
+                            <tt class="literal">join</tt> and <tt class="literal">false</tt> is equivalent to
+                            <tt class="literal">select</tt>.
+                        </p></td></tr></table></div></div><p>
+                Here are some examples.
+            </p><p>
+                A set of strings:
+            </p><pre class="programlisting">&lt;set name="Names" table="NAMES"&gt;
+    &lt;key column="GROUPID"/&gt;
+    &lt;element column="NAME" type="String"/&gt;
+&lt;/set&gt;</pre><p>
+                A bag containing integers with an iteration order determined by the
+                <tt class="literal">order-by</tt> attribute:
+            </p><pre class="programlisting">&lt;bag name="Sizes" table="SIZES" order-by="SIZE ASC"&gt;
+    &lt;key column="OWNER"/&gt;
+    &lt;element column="SIZE" type="Int32"/&gt;
+&lt;/bag&gt;</pre><p>
+                An array of entities, in this case, a many-to-many association (note that
+                the entities are lifecycle objects, <tt class="literal">cascade="all"</tt>, see
+                <a href="manipulatingdata.html#manipulatingdata-graphs" title="10.10.&nbsp;Lifecycles and object graphs">Section&nbsp;10.10, &#8220;Lifecycles and object graphs&#8221;</a>):
+            </p><pre class="programlisting">&lt;array name="Addresses" table="PersonAddress" cascade="all"&gt;
+    &lt;key column="personId"/&gt;
+    &lt;list-index column="sortOrder"/&gt;
+    &lt;many-to-many column="addressId" class="Address"/&gt;
+&lt;/array&gt;</pre><p>
+                A map from string indices to dates:
+            </p><pre class="programlisting">&lt;map name="Holidays" table="holidays" schema="dbo" order-by="hol_name asc"&gt;
+    &lt;key column="id"/&gt;
+    &lt;map-key column="hol_name" type="string"/&gt;
+    &lt;element column="hol_date" type="Date"/&gt;
+&lt;/map&gt;</pre><p>
+                A list of components (discussed in <a href="components.html" title="Chapter&nbsp;8.&nbsp;Component Mapping">Chapter&nbsp;8, <i>Component Mapping</i></a>):
+            </p><pre class="programlisting">&lt;list name="CarComponents" table="car_components"&gt;
+    &lt;key column="car_id"/&gt;
+    &lt;list-index column="sortOrder"/&gt;
+    &lt;composite-element class="Eg.Car.CarComponent"&gt;
+        &lt;property name="Price"/&gt;
+        &lt;property name="Type"/&gt;
+        &lt;property name="SerialNumber" column="serial_no"/&gt;
+    &lt;/composite-element&gt;
+&lt;/list&gt;</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-onetomany"></a>6.2.5.&nbsp;One-To-Many Associations</h3></div></div><div></div></div><p>
+                A <span class="emphasis"><em>one-to-many association</em></span> links the tables of two classes via a
+                foreign key with no intervening collection table. This mapping loses certain semantics
+                of normal .NET collections:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        No null values may be contained in a dictionary, set or list (unless
+                        using <tt class="literal">not-found</tt> value <tt class="literal">ignore</tt>).
+                    </p></li><li><p>
+                        An instance of the contained entity class cannot belong to more than
+                        one instance of the collection.
+                    </p></li><li><p>
+                        An instance of the contained entity class cannot appear at more than
+                        one value of the collection index.
+                    </p></li></ul></div><p>
+                An association from <tt class="literal">Product</tt> to <tt class="literal">Part</tt> requires the
+                existence of a foreign key column and possibly an index column into the Part table. A
+                <tt class="literal">&lt;one-to-many&gt;</tt> tag indicates that this is a one-to-many
+                association.
+            </p><div class="programlistingco"><pre class="programlisting">&lt;one-to-many
+    class="className"                                      <span class="co">(1)</span>
+    not-found="ignore|exception"                           <span class="co">(2)</span>
+    entity-name="entityName"                               <span class="co">(3)</span>
+/&gt;</pre><div class="calloutlist"><table border="0" summary="Callout list"><tr><td width="5%" valign="top" align="left">(1)</td><td valign="top" align="left"><p>
+                            <tt class="literal">class</tt> (required): the name of the associated class.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(2)</td><td valign="top" align="left"><p>
+                            <tt class="literal">not-found</tt> (optional - defaults to <tt class="literal">exception</tt>):
+                            specifies how foreign keys that reference missing rows will be handled.
+                            <tt class="literal">ignore</tt> will treat a missing row as a null association.
+                        </p></td></tr><tr><td width="5%" valign="top" align="left">(3)</td><td valign="top" align="left"><p>
+                            <tt class="literal">entity-name</tt> (optional): the entity name of the associated class.
+                        </p></td></tr></table></div></div><p>
+                The <tt class="literal">&lt;one-to-many&gt;</tt> element does not need to declare any columns. Nor is
+                it necessary to specify the table name anywhere. 
+            </p><p>
+                <span class="emphasis"><em>Very Important Note:</em></span> If the foreign key column of an
+                <tt class="literal">&lt;one-to-many&gt;</tt> association is declared <tt class="literal">NOT NULL</tt>, you
+                must declare the <tt class="literal">&lt;key&gt;</tt> mapping <tt class="literal">not-null="true"</tt> or
+                <span class="emphasis"><em>use a bidirectional association</em></span> with the collection mapping marked
+                <tt class="literal">inverse="true"</tt>. See <a href="collections.html#collections-bidirectional" title="6.3.2.&nbsp;Bidirectional Associations">Section&nbsp;6.3.2, &#8220;Bidirectional Associations&#8221;</a> for more
+                information.
+            </p><p>
+                Example:
+            </p><pre class="programlisting">&lt;set name="Parts"&gt;
+    &lt;key column="product_id"/&gt;
+    &lt;one-to-many class="Eg.Part, Eg"/&gt;
+&lt;/set&gt;</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-advancedmappings"></a>6.3.&nbsp;Advanced collection mappings</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-sorted"></a>6.3.1.&nbsp;Sorted Collections</h3></div></div><div></div></div><p>
+                NHibernate supports collections implemented by <tt class="literal">System.Collections.Generic.SortedList&lt;T&gt;</tt> and
+                <tt class="literal">System.Collections.Generic.SortedSet&lt;T&gt;</tt>. You must specify a comparer in the mapping file:
+            </p><pre class="programlisting">&lt;set name="Aliases" table="person_aliases" sort="natural"&gt;
+    &lt;key column="person"/&gt;
+    &lt;element column="name" type="String"/&gt;
+&lt;/set&gt;
+
+&lt;map name="Holidays" sort="My.Custom.HolidayComparer, MyAssembly"&gt;
+    &lt;key column="year_id"/&gt;
+    &lt;map-key column="hol_name" type="String"/&gt;
+    &lt;element column="hol_date" type="Date"/&gt;
+&lt;/map&gt;</pre><p>
+                Allowed values of the <tt class="literal">sort</tt> attribute are <tt class="literal">unsorted</tt>,
+                <tt class="literal">natural</tt> and the name of a class implementing
+                <tt class="literal">System.Collections.Generic.IComparer&lt;T&gt;</tt>.
+            </p><p>
+                If you want the database itself to order the collection elements use the
+                <tt class="literal">order-by</tt> attribute of <tt class="literal">set</tt>, <tt class="literal">bag</tt>
+                or <tt class="literal">map</tt> mappings. This performs the ordering in the SQL query, not in
+                memory.
+            </p><p>
+                Setting the <tt class="literal">order-by</tt> attribute tells NHibernate to use
+                <tt class="literal">Iesi.Collections.Generic.LinkedHashSet</tt> class
+                internally for sets, maintaining the order of the elements. It is not supported on maps,
+                unless specifying also a custom <tt class="literal">collection-type</tt> implementing
+                <tt class="literal">IUserCollectionType</tt>.
+            </p><pre class="programlisting">&lt;set name="Aliases" table="person_aliases" order-by="name asc"&gt;
+    &lt;key column="person"/&gt;
+    &lt;element column="name" type="String"/&gt;
+&lt;/set&gt;
+
+&lt;map name="Holidays" order-by="hol_date, hol_name" collection-type="..."&gt;
+    &lt;key column="year_id"/&gt;
+    &lt;map-key column="hol_name" type="String"/&gt;
+    &lt;element column="hol_date type="Date"/&gt;
+&lt;/map&gt;</pre><p>
+                Note that the value of the <tt class="literal">order-by</tt> attribute is an SQL ordering, not
+                a HQL ordering!
+            </p><p>
+                Associations can even be sorted by some arbitrary criteria at runtime using a
+                <tt class="literal">CreateFilter()</tt>.
+            </p><pre class="programlisting">sortedUsers = s
+    .CreateFilter(group.Users, "order by this.Name")
+    .List&lt;User&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-bidirectional"></a>6.3.2.&nbsp;Bidirectional Associations</h3></div></div><div></div></div><p>
+                A <span class="emphasis"><em>bidirectional association</em></span> allows navigation from both
+                "ends" of the association. Two kinds of bidirectional association are
+                supported:
+
+                </p><div class="variablelist"><dl><dt><span class="term">one-to-many</span></dt><dd><p>
+                                set or bag valued at one end, single-valued at the other
+                            </p></dd><dt><span class="term">many-to-many</span></dt><dd><p>
+                                set or bag valued at both ends
+                            </p></dd></dl></div><p>
+
+            </p><p>
+                You can specify a bidirectional many-to-many association simply by mapping two
+                many-to-many associations to the same database table and declaring one end as
+                <span class="emphasis"><em>inverse</em></span>. You cannot select an indexed collection.
+            </p><p>
+                Here is an example of a bidirectional many-to-many association that illustrates how each
+                category can have many items and each item can be in many categories: 
+            </p><pre class="programlisting">&lt;class name="Category"&gt;
+    &lt;id name="Id" column="CATEGORY_ID"/&gt;
+    ...
+    &lt;bag name="Items" table="CATEGORY_ITEM"&gt;
+        &lt;key column="CATEGORY_ID"/&gt;
+        &lt;many-to-many class="Item" column="ITEM_ID"/&gt;
+    &lt;/bag&gt;
+&lt;/class&gt;
+
+&lt;class name="Item"&gt;
+    &lt;id name="Id" column="ITEM_ID"/&gt;
+    ...
+
+    &lt;!-- inverse end --&gt;
+    &lt;bag name="Categories" table="CATEGORY_ITEM" inverse="true"&gt;
+        &lt;key column="ITEM_ID"/&gt;
+        &lt;many-to-many class="Category" column="CATEGORY_ID"/&gt;
+    &lt;/bag&gt;
+&lt;/class&gt;</pre><p>
+                Changes made only to the inverse end of the association are <span class="emphasis"><em>not</em></span>
+                persisted. This means that NHibernate has two representations in memory for every
+                bidirectional association, one link from A to B and another link from B to A. This
+                is easier to understand if you think about the .NET object model and how we create
+                a many-to-many relationship in C#:
+            </p><pre class="programlisting">category.Items.Add(item);      // The category now "knows" about the relationship
+item.Categories.Add(category); // The item now "knows" about the relationship
+
+session.Update(item);          // No effect, nothing will be saved!
+session.Update(category);      // The relationship will be saved</pre><p>
+                The non-inverse side is used to save the in-memory representation to the database.
+                We would get an unnecessary INSERT/UPDATE and probably even a foreign key violation
+                if both would trigger changes! The same is of course also true for bidirectional
+                one-to-many associations.
+            </p><p>
+                You can map a bidirectional one-to-many association by mapping a one-to-many association
+                to the same table column(s) as a many-to-one association and declaring the many-valued
+                end <tt class="literal">inverse="true"</tt>.
+            </p><pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="Id" column="id"/&gt;
+    ...
+    &lt;set name="Children" inverse="true"&gt;
+        &lt;key column="parent_id"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/set&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="Id" column="id"/&gt;
+    ...
+    &lt;many-to-one name="Parent" class="Parent" column="parent_id"/&gt;
+&lt;/class&gt;</pre><p>
+                Mapping one end of an association with <tt class="literal">inverse="true"</tt> doesn't
+                affect the operation of cascades as these are orthogonal concepts.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-indexedbidirectional"></a>6.3.3.&nbsp;Bidirectional associations with indexed collections</h3></div></div><div></div></div><p>
+                A bidirectional association where one end is represented as a <tt class="literal">&lt;list&gt;</tt>
+                or <tt class="literal">&lt;map&gt;</tt>, requires special consideration. If there is a property of
+                the child class that maps to the index column you can use <tt class="literal">inverse="true"</tt>
+                on the collection mapping:
+            </p><pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="Id" column="parent_id"/&gt;
+    ...
+    &lt;map name="Children" inverse="true"&gt;
+        &lt;key column="parent_id"/&gt;
+        &lt;map-key column="name"
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="Id" column="child_id"/&gt;
+    ...
+    &lt;property name="Name" column="name"
+        not-null="true"/&gt;
+    &lt;many-to-one name="Parent"
+        class="Parent"
+        column="parent_id"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre><p>
+                If there is no such property on the child class, the association cannot be considered truly
+                bidirectional. That is, there is information available at one end of the association that is not
+                available at the other end. In this case, you cannot map the collection
+                <tt class="literal">inverse="true"</tt>. Instead, you could use the following mapping:
+            </p><pre class="programlisting">&lt;class name="Parent"&gt;
+    &lt;id name="Id" column="parent_id"/&gt;
+    ...
+    &lt;map name="Children"&gt;
+        &lt;key column="parent_id"
+            not-null="true"/&gt;
+        &lt;map-key column="name"
+            type="string"/&gt;
+        &lt;one-to-many class="Child"/&gt;
+    &lt;/map&gt;
+&lt;/class&gt;
+
+&lt;class name="Child"&gt;
+    &lt;id name="Id" column="child_id"/&gt;
+    ...
+    &lt;many-to-one name="Parent"
+        class="Parent"
+        column="parent_id"
+        insert="false"
+        update="false"
+        not-null="true"/&gt;
+&lt;/class&gt;</pre><p>
+                Note that in this mapping, the collection-valued end of the association is responsible for
+                updates to the foreign key.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-ternary"></a>6.3.4.&nbsp;Ternary Associations</h3></div></div><div></div></div><p>
+                There are three possible approaches to mapping a ternary association. One approach is to use
+                an <tt class="literal">IDictionary</tt> with an association as its index:
+            </p><pre class="programlisting">&lt;map name="Contracts"&gt;
+    &lt;key column="employer_id"/&gt;
+    &lt;map-key-many-to-many column="employee_id" class="Employee"/&gt;
+    &lt;one-to-many class="Contract"/&gt;
+&lt;/map&gt;</pre><pre class="programlisting">&lt;map name="Connections"&gt;
+    &lt;key column="incoming_node_id"/&gt;
+    &lt;map-key-many-to-many column="outgoing_node_id" class="Node"/&gt;
+    &lt;many-to-many column="connection_id" class="Connection"/&gt;
+&lt;/map&gt;</pre><p>
+                A second approach is to remodel the association as an entity class. This is the most common
+                approach.
+            </p><p>
+                A final alternative is to use composite elements, see <a href="components.html#components-incollections" title="8.2.&nbsp;Collections of dependent objects">Section&nbsp;8.2, &#8220;Collections of dependent objects&#8221;</a>.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-idbag"></a>6.3.5.&nbsp;Using an <tt class="literal">&lt;idbag&gt;</tt></h3></div></div><div></div></div><p>
+                If you've fully embraced our view that composite keys are a bad thing and that
+                entities should have synthetic identifiers (surrogate keys), then you might
+                find it a bit odd that the many to many associations and collections of values
+                that we've shown so far all map to tables with composite keys! Now, this point
+                is quite arguable; a pure association table doesn't seem to benefit much from
+                a surrogate key (though a collection of composite values <span class="emphasis"><em>might</em></span>).
+                Nevertheless, NHibernate provides a feature that allows you to map many-to-many
+                associations and collections of values to a table with a surrogate key.
+            </p><p>
+                The <tt class="literal">&lt;idbag&gt;</tt> element lets you map a <tt class="literal">List</tt>
+                (or <tt class="literal">Collection</tt>) with bag semantics.
+            </p><pre class="programlisting">&lt;idbag name="Lovers" table="LOVERS"&gt;
+    &lt;collection-id column="ID" type="Int64"&gt;
+        &lt;generator class="hilo"/&gt;
+    &lt;/collection-id&gt;
+    &lt;key column="PERSON1"/&gt;
+    &lt;many-to-many column="PERSON2" class="Person" fetch="join"/&gt;
+&lt;/idbag&gt;</pre><p>
+                An <tt class="literal">&lt;idbag&gt;</tt> has a synthetic id generator,
+                just like an entity class. A different surrogate key is assigned to each collection
+                row. NHibernate does not, however, provide any mechanism to discover the surrogate key value
+                of a particular row.
+            </p><p>
+                The update performance of an <tt class="literal">&lt;idbag&gt;</tt> supersedes a regular
+                <tt class="literal">&lt;bag&gt;</tt>. NHibernate can locate individual rows efficiently and update
+                or delete them individually, similar to a <tt class="literal">&lt;list&gt;</tt>,
+                <tt class="literal">&lt;map&gt;</tt> or <tt class="literal">&lt;set&gt;</tt>.
+            </p><p>
+                As of version 2.0, the <tt class="literal">native</tt> identifier generation
+                strategy is supported for <tt class="literal">&lt;idbag&gt;</tt> collection identifiers.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="collections-heterogeneous"></a>6.3.6.&nbsp;Heterogeneous Associations</h3></div></div><div></div></div><p>
+                The <tt class="literal">&lt;many-to-any&gt;</tt> and <tt class="literal">&lt;index-many-to-any&gt;</tt>
+                elements provide for true heterogeneous associations. These mapping elements work in the
+                same way than the <a href="mapping.html#mapping-types-anymapping" title="5.1.24.&nbsp;any"><tt class="literal">&lt;any&gt;</tt>
+                element</a> - and should also be used rarely, if ever.
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-lazy"></a>6.4.&nbsp;Lazy Initialization</h2></div></div><div></div></div><p>
+            Collections (other than arrays) may be lazily initialized, meaning they load
+            their state from the database only when the application needs to access it.
+            Initialization happens transparently to the user so the application would not
+            normally need to worry about this (in fact, transparent lazy initialization is
+            the main reason why NHibernate needs its own collection implementations).
+            However, if the application tries something like this:
+        </p><pre class="programlisting">IDictionary&lt;string, int&gt; permissions;
+using (s = sessions.OpenSession())
+using (ITransaction tx = sessions.BeginTransaction())
+{
+    var u = s.Load&lt;User&gt;(userId);
+    permissions = u.Permissions;
+    tx.Commit();
+}
+
+int accessLevel = permissions["accounts"];  // Error!</pre><p>
+            It could be in for a nasty surprise. Since the permissions collection was not
+            initialized when the <tt class="literal">ISession</tt> was committed,
+            the collection will never be able to load its state. The fix is to move the
+            line that reads from the collection to just before the commit. (There are
+            other more advanced ways to solve this problem, however.)
+        </p><p>
+            Alternatively, use a non-lazy collection. However, it is intended that
+            lazy initialization be used for almost all collections, especially for
+            collections of entities (for reasons of efficiency).
+        </p><p>
+            Exceptions that occur while lazily initializing a collection are wrapped in a
+            <tt class="literal">LazyInitializationException</tt>.
+        </p><p>
+            Disable lazy initialization of collection by using the optional <tt class="literal">lazy</tt>
+            attribute:
+        </p><pre class="programlisting">&lt;set name="Names" table="NAMES" lazy="false"&gt;
+    &lt;key column="group_id"/&gt;
+    &lt;element column="NAME" type="String"/&gt;
+&lt;/set&gt;</pre><p>
+            In some application architectures, particularly where the code that accesses data
+            using NHibernate, and the code that uses it are in different application layers, it
+            can be a problem to ensure that the <tt class="literal">ISession</tt> is open when a
+            collection is initialized. There are two basic ways to deal with this issue:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    In a web-based application, an event handler can be used to close the
+                    <tt class="literal">ISession</tt> only at the very end of a user request, once
+                    the rendering of the view is complete. Of course, this places heavy
+                    demands upon the correctness of the exception handling of your application
+                    infrastructure. It is vitally important that the <tt class="literal">ISession</tt>
+                    is closed and the transaction ended before returning to the user, even
+                    when an exception occurs during rendering of the view. The event handler
+                    has to be able to access the <tt class="literal">ISession</tt> for this approach.
+                    We recommend that the current <tt class="literal">ISession</tt> is stored in the
+                    <tt class="literal">HttpContext.Items</tt> collection (see chapter 1,
+                    <a href="quickstart.html#quickstart-playingwithcats" title="1.4.&nbsp;Playing with cats">Section&nbsp;1.4, &#8220;Playing with cats&#8221;</a>, for an example implementation).
+                </p></li><li><p>
+                    In an application with a separate business tier, the business logic must
+                    "prepare" all collections that will be needed by the web tier before
+                    returning. This means that the business tier should load all the data and
+                    return all the data already initialized to the presentation/web tier that
+                    is required for a particular use case. Usually, the application calls
+                    <tt class="literal">NHibernateUtil.Initialize()</tt> for each collection that will
+                    be needed in the web tier (this call must occur before the session is closed)
+                    or retrieves the collection eagerly using a NHibernate query with a
+                    <tt class="literal">FETCH</tt> clause.
+                </p></li><li><p>
+                    You may also attach a previously loaded object to a new <tt class="literal">ISession</tt>
+                    with <tt class="literal">Update()</tt> or <tt class="literal">Lock()</tt> before
+                    accessing uninitialized collections (or other proxies). NHibernate can not
+                    do this automatically, as it would introduce ad hoc transaction semantics!
+                </p></li></ul></div><p>
+            You can use the <tt class="literal">CreateFilter()</tt> method of the NHibernate ISession API to
+            get the size of a collection without initializing it:
+        </p><pre class="programlisting">var count = s
+    .CreateFilter(collection, "select count(*)")
+    .UniqueResult&lt;long&gt;();</pre><p>
+            <tt class="literal">CreateFilter()</tt> is also used to
+            efficiently retrieve subsets of a collection without needing to initialize the whole
+            collection.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="collections-example"></a>6.5.&nbsp;Collection examples</h2></div></div><div></div></div><p>
+            This section covers collection examples.
+        </p><p>
+            The following class has a collection of <tt class="literal">Child</tt> instances: 
+        </p><pre class="programlisting">using System;
+using System.Collections.Generic;
+
+namespace Eg
+
+    public class Parent
+    {
+        public virtual long Id { get; set; }
+
+        public virtual ISet&lt;Child&gt; Children { get; set; }
+
+        ...
+    }
+}</pre><p>
+            If each child has at most one parent, the most natural mapping is a one-to-many
+            association:
+        </p><pre class="programlisting">&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+
+    &lt;class name="Parent"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;set name="Children"&gt;
+            &lt;key column="parent_id"/&gt;
+            &lt;one-to-many class="Child"/&gt;
+        &lt;/set&gt;
+    &lt;/class&gt;
+
+    &lt;class name="Child"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;property name="Name"/&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre><p>
+            This maps to the following table definitions:
+        </p><pre class="programlisting">create table parent (Id bigint not null primary key)
+create table child (Id bigint not null primary key, Name varchar(255), parent_id bigint)
+alter table child add constraint childfk0 (parent_id) references parent</pre><p>
+            The <tt class="literal">Child</tt> class has no property referencing its parent.
+        </p><p>
+            If the parent is <span class="emphasis"><em>required</em></span>, use a bidirectional one-to-many
+            association:
+        </p><pre class="programlisting">&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+
+    &lt;class name="Parent"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;set name="Children" inverse="true"&gt;
+            &lt;key column="parent_id"/&gt;
+            &lt;one-to-many class="Child"/&gt;
+        &lt;/set&gt;
+    &lt;/class&gt;
+
+    &lt;class name="Child"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;property name="Name"/&gt;
+        &lt;many-to-one name="Parent" class="Parent" column="parent_id" not-null="true"/&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre><p>
+            Notice the <tt class="literal">NOT NULL</tt> constraint:
+        </p><pre class="programlisting">create table parent ( Id bigint not null primary key )
+create table child ( Id bigint not null
+                     primary key,
+                     Name varchar(255),
+                     parent_id bigint not null )
+alter table child add constraint childfk0 (parent_id) references parent</pre><p>
+            Here, the <tt class="literal">Child</tt> class has a <tt class="literal">Parent</tt> property.
+        </p><p>
+            Alternatively, if this association must be unidirectional you can declare the
+            <tt class="literal">NOT NULL</tt> constraint on the <tt class="literal">&lt;key&gt;</tt>
+            mapping:
+        </p><pre class="programlisting">&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+
+    &lt;class name="Parent"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;set name="Children"&gt;
+            &lt;key column="parent_id" not-null="true"/&gt;
+            &lt;one-to-many class="Child"/&gt;
+        &lt;/set&gt;
+    &lt;/class&gt;
+
+    &lt;class name="Child"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;property name="Name"/&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre><p>
+            On the other hand, if a child might have multiple parents, a many-to-many
+            association is appropriate:
+        </p><pre class="programlisting">&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    assembly="Eg" namespace="Eg"&gt;
+
+    &lt;class name="Parent"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;set name="Children" table="childset"&gt;
+            &lt;key column="parent_id"/&gt;
+            &lt;many-to-many class="Child" column="child_id"/&gt;
+        &lt;/set&gt;
+    &lt;/class&gt;
+
+    &lt;class name="eg.Child"&gt;
+        &lt;id name="Id"&gt;
+            &lt;generator class="sequence"/&gt;
+        &lt;/id&gt;
+        &lt;property name="Name"/&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre><p>
+            Table definitions:
+        </p><pre class="programlisting">create table parent ( Id bigint not null primary key )
+create table child ( Id bigint not null primary key, name varchar(255) )
+create table childset ( parent_id bigint not null,
+                        child_id bigint not null,
+                        primary key ( parent_id, child_id ) )
+alter table childset add constraint childsetfk0 (parent_id) references parent
+alter table childset add constraint childsetfk1 (child_id) references child</pre><p>
+            For more examples and a complete explanation of a parent/child relationship mapping,
+            see <a href="associations.html" title="Chapter&nbsp;7.&nbsp;Association Mappings">Chapter&nbsp;7, <i>Association Mappings</i></a> and <a href="example-parentchild.html" title="Chapter&nbsp;23.&nbsp;Example: Parent/Child">Chapter&nbsp;23, <i>Example: Parent/Child</i></a>.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="mapping.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="associations.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;Basic O/R Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;Association Mappings</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

@@ -1,0 +1,449 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/readonly.html" />
+    <title>Chapter&nbsp;11.&nbsp;Read-only entities</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="manipulatingdata.html" title="Chapter&nbsp;10.&nbsp;Manipulating Persistent Data"><link rel="next" href="transactions.html" title="Chapter&nbsp;12.&nbsp;Transactions And Concurrency">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Read-only entities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="readonly"></a>Chapter&nbsp;11.&nbsp;Read-only entities</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
+            NHibernate's treatment of <span class="emphasis"><em>read-only</em></span> entities may 
+            differ from what you may have encountered elsewhere. Incorrect usage 
+            may cause unexpected results.
+        </p></div><p>
+        When an entity is read-only:
+
+        </p><div class="itemizedlist"><ul type="disc"><li><p> 
+                    NHibernate does not dirty-check the entity's simple 
+                    properties or single-ended associations;
+                </p></li><li><p> 
+                    NHibernate will not update simple properties or updatable
+                    single-ended associations; 
+                </p></li><li><p> 
+                    NHibernate will not update the version of the read-only 
+                    entity if only simple properties or single-ended 
+                    updatable associations are changed;
+                </p></li></ul></div><p>
+    </p><p>
+        In some ways, NHibernate treats read-only entities the same as entities that are 
+        not read-only:
+ 
+        </p><div class="itemizedlist"><ul type="disc"><li><p> 
+                    NHibernate cascades operations to associations as
+                    defined in the entity mapping.
+                </p></li><li><p> 
+                    NHibernate updates the version if the entity has a 
+                    collection with changes that dirties the entity;
+                </p></li><li><p> 
+                    A read-only entity can be deleted.
+                </p></li></ul></div><p>
+    </p><p>
+        Even if an entity is not read-only, its collection association can 
+        be affected if it contains a read-only entity.
+    </p><p>
+        For details about the affect of read-only entities on different
+        property and association types, see 
+        <a href="readonly.html#readonly-proptypes" title="11.2.&nbsp;Read-only affect on property type">Section&nbsp;11.2, &#8220;Read-only affect on property type&#8221;</a>.
+    </p><p>     
+        For details about how to make entities read-only, see 
+        <a href="readonly.html#readonly-api" title="11.1.&nbsp;Making persistent entities read-only">Section&nbsp;11.1, &#8220;Making persistent entities read-only&#8221;</a>
+    </p><p>
+        NHibernate does some optimizing for read-only entities:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    It saves execution time by not dirty-checking simple properties or 
+                    single-ended associations.
+                 </p></li><li><p>
+                    It saves memory by deleting database snapshots.
+                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-api"></a>11.1.&nbsp;Making persistent entities read-only</h2></div></div><div></div></div><p>
+            Only persistent entities can be made read-only. Transient and
+            detached entities must be put in persistent state before they
+            can be made read-only.
+        </p><p>
+            NHibernate provides the following ways to make persistent entities read-only:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    you can map an entity class as <span class="emphasis"><em>immutable</em></span>;
+                    when an entity of an immutable class is made persistent,
+                    NHibernate automatically makes it read-only.
+                    see <a href="readonly.html#readonly-api-immutable" title="11.1.1.&nbsp;Entities of immutable classes">Section&nbsp;11.1.1, &#8220;Entities of immutable classes&#8221;</a> for details 
+                </p></li><li><p>
+                    you can change a default so that entities loaded
+                    into the session by NHibernate are automatically 
+                    made read-only; see <a href="readonly.html#readonly-api-loaddefault" title="11.1.2.&nbsp;Loading persistent entities as read-only">Section&nbsp;11.1.2, &#8220;Loading persistent entities as read-only&#8221;</a> for details
+                </p></li><li><p>
+                    you can make an HQL query or criteria read-only so
+                    that entities loaded when the query or criteria executes,
+                    or iterates, are automatically 
+                    made read-only; see <a href="readonly.html#readonly-api-querycriteria" title="11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;11.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> for details
+                </p></li><li><p>
+                    you can make a persistent entity that is already in the
+                    in the session read-only; see 
+                    <a href="readonly.html#readonly-api-entity" title="11.1.4.&nbsp;Making a persistent entity read-only">Section&nbsp;11.1.4, &#8220;Making a persistent entity read-only&#8221;</a> for details
+                </p></li></ul></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-immutable"></a>11.1.1.&nbsp;Entities of immutable classes</h3></div></div><div></div></div><p>
+                When an entity instance of an immutable class is made 
+                persistent, NHibernate automatically makes it read-only. 
+            </p><p>
+                An entity of an immutable class can created
+                and deleted the same as an entity of a mutable class.
+            </p><p>
+                NHibernate treats a persistent entity of an immutable 
+                class the same way as a read-only persistent entity
+                of a mutable class. The only exception is that 
+                NHibernate will not allow an entity of an immutable
+                class to be changed so it is not read-only.
+            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-loaddefault"></a>11.1.2.&nbsp;Loading persistent entities as read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    Entities of immutable classes are automatically loaded
+                    as read-only.
+                </p></div><p>
+                To change the default behavior so NHibernate loads entity 
+                instances of mutable classes into the session and automatically 
+                makes them read-only, call:
+            </p><pre class="programlisting">Session.DefaultReadOnly = true;</pre><p>
+                To change the default back so entities loaded by NHibernate are not
+                made read-only, call:
+            </p><pre class="programlisting">Session.DefaultReadOnly = false;</pre><p>
+                You can determine the current setting by using the property:
+            </p><pre class="programlisting">Session.DefaultReadOnly;</pre><p> 
+                If <tt class="literal">Session.DefaultReadOnly</tt> property returns true, entities loaded by
+                the following are automatically made read-only:
+            </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        Session.Load() and Session.Load&lt;T&gt;
+                    </p></li><li><p>
+                        Session.Get() and Session.Get&lt;T&gt;
+                    </p></li><li><p>
+                        Session.Merge()
+                    </p></li><li><p>
+                        executing, or iterating HQL queries and 
+                        criteria; to override this setting for a particular
+                        HQL query or criteria see 
+                        <a href="readonly.html#readonly-api-querycriteria" title="11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria">Section&nbsp;11.1.3, &#8220;Loading read-only entities from an HQL query/criteria&#8221;</a> 
+                    </p></li></ul></div><p>
+                Changing this default has no effect on:
+            </p><div class="itemizedlist"><ul type="disc"><li><p>
+                        persistent entities already in the session when the 
+                        default was changed
+                    </p></li><li><p>
+                        persistent entities that are refreshed via
+                        <tt class="literal">Session.Refresh()</tt>; a refreshed persistent
+                        entity will only be read-only if it was 
+                        read-only before refreshing
+                    </p></li><li><p>
+                        persistent entities added by the application via
+                        <tt class="literal">Session.Persist()</tt>, <tt class="literal">Session.Save()</tt>,
+                        <tt class="literal">Session.Update()</tt> and <tt class="literal">Session.SaveOrUpdate()</tt>
+                    </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-querycriteria"></a>11.1.3.&nbsp;Loading read-only entities from an HQL query/criteria</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    Entities of immutable classes are automatically loaded
+                    as read-only.
+                </p></div><p>
+                If <tt class="literal">Session.DefaultReadOnly</tt> returns false (the default)
+                when an HQL query or criteria executes, then entities 
+                and proxies of mutable classes loaded by the query will 
+                not be read-only.
+            </p><p>
+                You can override this behavior so that entities and proxies loaded 
+                by an HQL query or criteria are automatically made read-only. 
+            </p><p>
+                For an HQL query, call:
+            </p><pre class="programlisting">Query.SetReadOnly(true);</pre><p>
+                <tt class="literal">Query.SetReadOnly(true)</tt> must be called before
+                <tt class="literal">Query.List()</tt>, <tt class="literal">Query.UniqueResult()</tt>, or <tt class="literal">Query.Enumerable()</tt>
+            </p><p>
+                For an HQL criteria, call:
+            </p><pre class="programlisting">Criteria.SetReadOnly(true);</pre><p>
+                <tt class="literal">Criteria.SetReadOnly(true)</tt> must be called before
+                <tt class="literal">Criteria.List()</tt>, or <tt class="literal">Criteria.UniqueResult()</tt>
+            </p><p>
+                Entities and proxies that exist in the session before being returned
+                by an HQL query or criteria are not affected.
+            </p><p>
+                Uninitialized persistent collections returned by the query are 
+                not affected. Later, when the collection is initialized,
+                entities loaded into the session will be read-only if 
+                <tt class="literal">Session.DefaultReadOnly</tt> returns true.
+            </p><p>
+                Using <tt class="literal">Query.SetReadOnly(true)</tt> or
+                <tt class="literal">Criteria.SetReadOnly(true)</tt> works well
+                when a single HQL query or criteria loads all the entities and 
+                initializes all the proxies and collections that the application
+                needs to be read-only.
+            </p><p>
+                When it is not possible to load and initialize all 
+                necessary entities in a single query or criteria,
+                you can temporarily change the session default to load
+                entities as read-only before the query is executed.
+                Then you can explicitly initialize proxies and collections 
+                before restoring the session default.
+            </p><pre class="programlisting">using (ISession session = factory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    session.DefaultReadOnly = true;
+    Contract contract = session
+        .CreateQuery("from Contract where CustomerName = 'Sherman'")
+        .UniqueResult&lt;Contract&gt;();
+    NHibernate.Initialize(contract.Plan);
+    NHibernate.Initialize(contract.Variations);
+    NHibernate.Initialize(contract.Notes);
+    session.DefaultReadOnly = false;
+    ...
+    tx.Commit();
+}</pre><p>
+                If <tt class="literal">Session.DefaultReadOnly</tt> returns true, then you can
+                use Query.SetReadOnly(false) and Criteria.SetReadOnly(false)
+                to override this session setting and load entities that are 
+                not read-only.
+            </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-api-entity"></a>11.1.4.&nbsp;Making a persistent entity read-only</h3></div></div><div></div></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                    Persistent entities of immutable classes are automatically
+                    made read-only.
+                </p></div><p>
+                To make a persistent entity or proxy read-only, call:
+            </p><pre class="programlisting">Session.SetReadOnly(entityOrProxy, true)</pre><p>
+                To change a read-only entity or proxy of a mutable class so 
+                it is no longer read-only, call:
+            </p><pre class="programlisting">Session.SetReadOnly(entityOrProxy, false)</pre><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>
+                    When a read-only entity or proxy is changed so it is no longer 
+                    read-only, NHibernate assumes that the current state of the 
+                    read-only entity is consistent with its database representation. 
+                    If this is not true, then any non-flushed changes made before
+                    or while the entity was read-only, will be ignored.
+                </p></div><p>        
+                To throw away non-flushed changes and make the persistent entity 
+                consistent with its database representation, call:
+            </p><pre class="programlisting">Session.Refresh(entity);</pre><p>
+                To flush changes made before or while the entity
+                was read-only and make the database representation 
+                consistent with the current state of the persistent
+                entity:
+            </p><pre class="programlisting">// evict the read-only entity so it is detached
+session.Evict(entity);
+
+// make the detached entity (with the non-flushed changes) persistent
+session.Update(entity);
+
+// now entity is no longer read-only and its changes can be flushed
+s.Flush();</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="readonly-proptypes"></a>11.2.&nbsp;Read-only affect on property type</h2></div></div><div></div></div><p>
+            The following table summarizes how different property types are 
+            affected by making an entity read-only.
+        </p><div class="table"><a name="readonly-proptype-summary"></a><p class="title"><b>Table&nbsp;11.1.&nbsp;Affect of read-only entity on property types</b></p><table summary="Affect of read-only entity on property types" border="1"><colgroup><col><col></colgroup><thead><tr><th>Property/Association Type</th><th>Changes flushed to DB?</th></tr></thead><tbody><tr><td>
+                            Simple
+                            <p>
+                                (<a href="readonly.html#readonly-proptypes-simple" title="11.2.1.&nbsp;Simple properties">Section&nbsp;11.2.1, &#8220;Simple properties&#8221;</a>)
+                            </p></td><td>no*</td></tr><tr><td><p>Unidirectional one-to-one</p><p>Unidirectional many-to-one</p><p>
+                                (<a href="readonly.html#readonly-proptypes-singleended-unidir" title="11.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one">Section&nbsp;11.2.2.1, &#8220;Unidirectional one-to-one and many-to-one&#8221;</a>)
+                            </p></td><td><p>no*</p><p>no*</p></td></tr><tr><td><p>Unidirectional one-to-many</p><p>Unidirectional many-to-many</p><p>
+                                (<a href="readonly.html#readonly-proptypes-manyended-unidir" title="11.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many">Section&nbsp;11.2.2.2, &#8220;Unidirectional one-to-many and many-to-many&#8221;</a>)
+                            </p></td><td><p>yes</p><p>yes</p></td></tr><tr><td><p>Bidirectional one-to-one</p><p>
+                                (<a href="readonly.html#readonly-proptypes-onetoone-bidir" title="11.2.3.1.&nbsp;Bidirectional one-to-one">Section&nbsp;11.2.3.1, &#8220;Bidirectional one-to-one&#8221;</a>)
+                            </p></td><td>only if the owning entity is not read-only*</td></tr><tr><td><p>Bidirectional one-to-many/many-to-one</p><p>inverse collection</p><p>non-inverse collection</p><p>
+                                (<a href="readonly.html#readonly-proptypes-onetomany-manytoone" title="11.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one">Section&nbsp;11.2.3.2, &#8220;Bidirectional one-to-many/many-to-one&#8221;</a>)
+                            </p></td><td><p> </p><p>only added/removed entities that are not read-only*</p><p>yes</p></td></tr><tr><td><p>Bidirectional many-to-many</p><p>
+                                (<a href="readonly.html#readonly-proptypes-manytomany-bidir" title="11.2.3.3.&nbsp;Bidirectional many-to-many">Section&nbsp;11.2.3.3, &#8220;Bidirectional many-to-many&#8221;</a>)
+                            </p></td><td>yes</td></tr></tbody></table></div><p>
+            * Behavior is different when the entity having the property/association
+              is read-only, compared to when it is not read-only.
+        </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-simple"></a>11.2.1.&nbsp;Simple properties</h3></div></div><div></div></div><p>
+                When a persistent object is read-only, NHibernate does not 
+                dirty-check simple properties.
+            </p><p>
+                NHibernate will not synchronize simple property state changes 
+                to the database. If you have automatic versioning, NHibernate 
+                will not increment the version if any simple properties change.
+            </p><pre class="programlisting">using (ISession session = factory.OpenSession())
+using (ITransaction tx = session.BeginTransaction())
+{
+    // get a contract and make it read-only
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
+
+    // contract.CustomerName is "Sherman"
+    contract.CustomerName = "Yogi";
+    tx.Commit();
+
+    tx = session.BeginTransaction();
+
+    contract = session.Get&lt;Contract&gt;(contractId);
+    // contract.CustomerName is still "Sherman"
+    ...
+    tx.Commit();
+}</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-prop-types-unidir"></a>11.2.2.&nbsp;Unidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-singleended-unidir"></a>11.2.2.1.&nbsp;Unidirectional one-to-one and many-to-one</h4></div></div><div></div></div><p>
+                    NHibernate treats unidirectional one-to-one and many-to-one
+                    associations in the same way when the owning entity is 
+                    read-only. 
+                </p><p>
+                    We use the term <span class="emphasis"><em>unidirectional single-ended 
+                    association</em></span> when referring to functionality
+                    that is common to unidirectional one-to-one and many-to-one
+                    associations.
+                </p><p>
+                    NHibernate does not dirty-check unidirectional single-ended
+                    associations when the owning entity is read-only. 
+                </p><p>
+                    If you change a read-only entity's reference to a 
+                    unidirectional single-ended association to null,
+                    or to refer to a different entity, that change
+                    will not be flushed to the database. 
+                </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                        If an entity is of an immutable class,
+                        then its references to unidirectional single-ended
+                        associations must be assigned when that 
+                        entity is first created. Because the entity is
+                        automatically made read-only, these references can
+                        not be updated.
+                    </p></div><p>
+                    If automatic versioning is used, NHibernate will not 
+                    increment the version due to local changes to 
+                    unidirectional single-ended associations.
+                </p><p>
+                    In the following examples, Contract has a unidirectional 
+                    many-to-one association with Plan. Contract cascades save and
+                    update operations to the association.
+                </p><p>
+                    The following shows that changing a read-only entity's 
+                    many-to-one association reference to null has no effect
+                    on the entity's database representation.
+                </p><pre class="programlisting">// get a contract with an existing plan;
+// make the contract read-only and set its plan to null
+using (var tx = session.BeginTransaction())
+{
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
+    contract.Plan = null;
+    tx.Commit();
+}
+
+// get the same contract
+using (var tx = session.BeginTransaction())
+{
+    Contract contract = session.Get&lt;Contract&gt;(contractId);
+
+    // contract.Plan still refers to the original plan;
+
+    tx.Commit();
+}
+session.Close();</pre><p>
+                    The following shows that, even though
+                    an update to a read-only entity's many-to-one 
+                    association has no affect on the entity's 
+                    database representation, flush still cascades 
+                    the save-update operation to the locally
+                    changed association.
+                </p><pre class="programlisting">// get a contract with an existing plan;
+// make the contract read-only and change to a new plan
+Contract contract;
+Plan newPlan;
+using (var tx = session.BeginTransaction())
+{
+    contract = session.Get&lt;Contract&gt;(contractId);
+    session.SetReadOnly(contract, true);
+    newPlan = new Plan("new plan");
+    contract.Plan = newPlan;
+    tx.Commit();
+}
+
+// get the same contract
+using (var tx = session.BeginTransaction())
+{
+    contract = session.Get&lt;Contract&gt;(contractId);
+    newPlan = session.Get&lt;Plan&gt;(newPlan.Id);
+
+    // contract.Plan still refers to the original plan;
+    // newPlan is non-null because it was persisted when
+    // the previous transaction was committed;
+
+    tx.Commit();
+}
+session.Close();</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manyended-unidir"></a>11.2.2.2.&nbsp;Unidirectional one-to-many and many-to-many</h4></div></div><div></div></div><p>
+                    NHibernate treats unidirectional one-to-many 
+                    and many-to-many associations owned by a read-only
+                    entity the same as when owned by an entity that is not 
+                    read-only.
+                </p><p>
+                    NHibernate dirty-checks unidirectional one-to-many and 
+                    many-to-many associations;
+                </p><p>
+                    The collection can contain entities that 
+                    are read-only, as well as entities
+                    that are not read-only.
+                </p><p> 
+                    Entities can be added and removed from the
+                    collection; changes are flushed to the database.
+                </p><p> 
+                    If automatic versioning is used, NHibernate will 
+                    update the version due to changes in the collection
+                    if they dirty the owning entity.
+                </p></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="readonly-proptypes-bidir"></a>11.2.3.&nbsp;Bidirectional associations</h3></div></div><div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetoone-bidir"></a>11.2.3.1.&nbsp;Bidirectional one-to-one</h4></div></div><div></div></div><p>
+                    If a read-only entity owns a bidirectional 
+                    one-to-one association:
+                </p><div class="itemizedlist"><ul type="disc"><li><p>
+                            NHibernate does not dirty-check the association. 
+                        </p></li><li><p>
+                            updates that change the association reference 
+                            to null or to refer to a different entity
+                            will not be flushed to the database. 
+                        </p></li><li><p>
+                            If automatic versioning is used, NHibernate will not 
+                            increment the version due to local changes to 
+                            the association.
+                       </p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+                        If an entity is of an immutable class,
+                        and it owns a bidirectional one-to-one
+                        association, then its reference must be
+                        assigned when that entity is first created. 
+                        Because the entity is automatically made 
+                        read-only, these references cannot be updated.
+                    </p></div><p>
+                    When the owner is not read-only, NHibernate treats 
+                    an association with a read-only entity the same
+                    as when the association is with an entity that is
+                    not read-only.
+                </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-onetomany-manytoone"></a>11.2.3.2.&nbsp;Bidirectional one-to-many/many-to-one</h4></div></div><div></div></div><p>
+                    A read-only entity has no impact on a bidirectional
+                    one-to-many/many-to-one association if:
+                </p><div class="itemizedlist"><ul type="disc"><li><p>
+                            the read-only entity is on the one-to-many side
+                            using an inverse collection;
+                        </p></li><li><p>
+                            the read-only entity is on the one-to-many side
+                            using a non-inverse collection;                            
+                        </p></li><li><p>
+                            the one-to-many side uses a non-inverse collection 
+                            that contains the read-only entity
+                       </p></li></ul></div><p>
+                    When the one-to-many side uses an inverse collection:
+                </p><div class="itemizedlist"><ul type="disc"><li><p>
+                            a read-only entity can only be added to the collection
+                            when it is created;
+                        </p></li><li><p>
+                            a read-only entity can only be removed from the
+                            collection by an orphan delete or by explicitly
+                            deleting the entity.                            
+                        </p></li></ul></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="readonly-proptypes-manytomany-bidir"></a>11.2.3.3.&nbsp;Bidirectional many-to-many</h4></div></div><div></div></div><p>
+                    NHibernate treats bidirectional many-to-many 
+                    associations owned by a read-only entity the
+                    same as when owned by an entity that is not
+                    read-only.
+                </p><p>
+                    NHibernate dirty-checks bidirectional many-to-many 
+                    associations.
+                </p><p> 
+                    The collection on either side of the association
+                    can contain entities that are read-only, as well
+                    as entities that are not read-only.
+                </p><p> 
+                    Entities are added and removed from both sides 
+                    of the collection; changes are flushed to the 
+                    database.
+                </p><p> 
+                    If automatic versioning is used, NHibernate will 
+                    update the version due to changes in both sides of
+                    the collection if they dirty the entity owning the
+                    respective collections.
+                </p></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="manipulatingdata.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="transactions.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Manipulating Persistent Data&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Transactions And Concurrency</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

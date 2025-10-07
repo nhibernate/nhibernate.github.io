@@ -1,0 +1,287 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/example-parentchild.html" />
+    <title>Chapter&nbsp;23.&nbsp;Example: Parent/Child</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="toolsetguide.html" title="Chapter&nbsp;22.&nbsp;Toolset Guide"><link rel="next" href="example-weblog.html" title="Chapter&nbsp;24.&nbsp;Example: Weblog Application">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;23.&nbsp;Example: Parent/Child</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="example-parentchild"></a>Chapter&nbsp;23.&nbsp;Example: Parent/Child</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        One of the first things that new users want to do with NHibernate is to model a parent/child type
+        relationship. There are two different approaches to this. The most convenient
+        approach, especially for new users, is to model both <tt class="literal">Parent</tt> and <tt class="literal">Child</tt>
+        as entity classes with a <tt class="literal">&lt;one-to-many&gt;</tt> association from <tt class="literal">Parent</tt>
+        to <tt class="literal">Child</tt>. The alternative approach is to declare the <tt class="literal">Child</tt> as a
+        <tt class="literal">&lt;composite-element&gt;</tt>. The default semantics of a one to many
+        association in NHibernate are much less close to the usual semantics of a parent/child relationship than
+        those of a composite element mapping. We will explain how to use a <span class="emphasis"><em>bidirectional one to many
+        association with cascades</em></span> to model a parent/child relationship efficiently and elegantly.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-collections"></a>23.1.&nbsp;A note about collections</h2></div></div><div></div></div><p>
+            NHibernate collections are considered to be a logical part of their owning entity and not of the
+            contained entities. Be aware that this is a critical distinction that has the following consequences:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                When you remove/add an object from/to a collection, the version number of the collection owner
+                is incremented.
+            </p></li><li><p>
+                If an object that was removed from a collection is an instance of a value type (e.g., a composite
+                element), that object will cease to be persistent and its state will be completely removed from
+                the database. Likewise, adding a value type instance to the collection will cause its state to
+                be immediately persistent.
+            </p></li><li><p>
+                Conversely, if an entity is removed from a collection (a one-to-many or many-to-many
+                association), it will not be deleted by default. This behavior is completely consistent; a
+                change to the internal state of another entity should not cause the associated entity to vanish.
+                Likewise, adding an entity to a collection does not cause that entity to become persistent, by
+                default.
+            </p></li></ul></div><p>
+            Adding an entity to a collection, by default, merely creates a link between the two entities. Removing
+            the entity will remove the link. This is appropriate for all sorts of cases. However, it is not
+            appropriate in the case of a parent/child relationship. In this case, the life of the child is bound to
+            the life cycle of the parent.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-bidir"></a>23.2.&nbsp;Bidirectional one-to-many</h2></div></div><div></div></div><p>
+            Suppose we start with a simple <tt class="literal">&lt;one-to-many&gt;</tt> association from
+            <tt class="literal">Parent</tt> to <tt class="literal">Child</tt>.
+        </p><pre class="programlisting">&lt;set name="Children"&gt;
+    &lt;key column="parent_id" /&gt;
+    &lt;one-to-many class="Child" /&gt;
+&lt;/set&gt;</pre><p>
+            If we were to execute the following code:
+        </p><pre class="programlisting">Parent p = ...;
+Child c = new Child();
+p.Children.Add(c);
+session.Save(c);
+session.Flush();</pre><p>
+            NHibernate would issue two SQL statements:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>an <tt class="literal">INSERT</tt> to create the record for <tt class="literal">c</tt></p></li><li><p>
+                    an <tt class="literal">UPDATE</tt> to create the link from <tt class="literal">p</tt> to
+                    <tt class="literal">c</tt>
+                </p></li></ul></div><p>
+            This is not only inefficient, but also violates any <tt class="literal">NOT NULL</tt> constraint on the
+            <tt class="literal">parent_id</tt> column. You can fix the nullability constraint violation by specifying
+            <tt class="literal">not-null="true"</tt> in the collection mapping:
+        </p><pre class="programlisting">&lt;set name="Children"&gt;
+    &lt;key column="parent_id" not-null="true"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre><p>
+            However, this is not the recommended solution.
+        </p><p>
+            The underlying cause of this behavior is that the link (the foreign key
+            <tt class="literal">parent_id</tt>) from <tt class="literal">p</tt> to <tt class="literal">c</tt> is not considered
+            part of the state of the <tt class="literal">Child</tt> object and is therefore not created in the
+            <tt class="literal">INSERT</tt>. The solution is to make the link part of the <tt class="literal">Child</tt>
+            mapping.
+        </p><pre class="programlisting">&lt;many-to-one name="Parent" column="parent_id" not-null="true"/&gt;</pre><p>
+            You also need to add the <tt class="literal">Parent</tt> property to the <tt class="literal">Child</tt> class.
+        </p><p>
+            Now that the <tt class="literal">Child</tt> entity is managing the state of the link, we tell the collection not
+            to update the link. We use the <tt class="literal">inverse</tt> attribute to do this:
+        </p><pre class="programlisting">&lt;set name="Children" inverse="true"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre><p>
+            The following code would be used to add a new <tt class="literal">Child</tt>:
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+Child c = new Child();
+c.Parent = p;
+p.Children.Add(c);
+session.Save(c);
+session.Flush();</pre><p>
+            Only one SQL <tt class="literal">INSERT</tt> would now be issued.
+        </p><p>
+            You could also create an <tt class="literal">AddChild()</tt> method of <tt class="literal">Parent</tt>.
+        </p><pre class="programlisting">public void AddChild(Child c)
+{
+    c.Parent = this;
+    children.Add(c);
+}</pre><p>
+            The code to add a <tt class="literal">Child</tt> looks like
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+Child c = new Child();
+p.AddChild(c);
+session.Save(c);
+session.Flush();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-cascades"></a>23.3.&nbsp;Cascading lifecycle</h2></div></div><div></div></div><p>
+            You can address the frustrations of the explicit call to <tt class="literal">Save()</tt> by using
+            cascades.
+        </p><pre class="programlisting">&lt;set name="Children" inverse="true" cascade="all"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre><p>
+            This simplifies the code above to:
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+Child c = new Child();
+p.AddChild(c);
+session.Flush();</pre><p>
+            Similarly, we do no more need to iterate over the children when saving or deleting a
+            <tt class="literal">Parent</tt>. The following removes <tt class="literal">p</tt> and all its children
+            from the database.
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+session.Delete(p);
+session.Flush();</pre><p>
+            However, the following code:
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+// Get one child out of the set
+Child c = p.Children.First();
+
+p.Children.Remove(c);
+c.Parent = null;
+session.Flush();</pre><p>
+            will not remove <tt class="literal">c</tt> from the database. In this case, it will only remove
+            the link to <tt class="literal">p</tt> and cause a <tt class="literal">NOT NULL</tt> constraint violation.
+            You need to explicitly <tt class="literal">Delete()</tt> the <tt class="literal">Child</tt>.
+        </p><pre class="programlisting">Parent p = session.Load&lt;Parent&gt;(pid);
+// Get one child out of the set
+Child c = p.Children.First();
+
+p.Children.Remove(c);
+session.Delete(c);
+session.Flush();</pre><p>
+            In our case, a <tt class="literal">Child</tt> cannot exist without its parent. So if we remove a
+            <tt class="literal">Child</tt> from the collection, we do want it to be deleted. To do this, we must
+            use <tt class="literal">cascade="all-delete-orphan"</tt>.
+        </p><pre class="programlisting">&lt;set name="Children" inverse="true" cascade="all-delete-orphan"&gt;
+    &lt;key column="parent_id"/&gt;
+    &lt;one-to-many class="Child"/&gt;
+&lt;/set&gt;</pre><p>
+            Even though the collection mapping specifies <tt class="literal">inverse="true"</tt>, cascades are still
+            processed by iterating the collection elements. If you need an object be saved, deleted or
+            updated by cascade, you must add it to the collection. It is not enough to simply set its parent.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-update"></a>23.4.&nbsp;Using cascading <tt class="literal">Update()</tt></h2></div></div><div></div></div><p>
+            Suppose we loaded up a <tt class="literal">Parent</tt> in one <tt class="literal">ISession</tt>, made some
+            changes in a UI action and wanted to persist these changes in a new <tt class="literal">ISession</tt>
+            by calling <tt class="literal">Update()</tt>. The <tt class="literal">Parent</tt> will contain a collection
+            of children and, since the cascading update is enabled, NHibernate needs to know which children
+            are newly instantiated and which represent existing rows in the database. We will also assume
+            that both <tt class="literal">Parent</tt> and <tt class="literal">Child</tt> have generated identifier
+            properties of type <tt class="literal">long</tt>. NHibernate will use the identifier and
+            version/timestamp property value to determine which of the children are new. (See
+            <a href="manipulatingdata.html#manipulatingdata-updating-detached" title="10.4.2.&nbsp;Updating detached objects">Section&nbsp;10.4.2, &#8220;Updating detached objects&#8221;</a>.)
+        </p><p>
+            The <tt class="literal">unsaved-value</tt> attribute is used to specify the identifier value of a newly
+            instantiated instance. <span class="emphasis"><em>In NHibernate it is not necessary to specify
+            <tt class="literal">unsaved-value</tt> explicitly.</em></span>
+        </p><p>
+            The following code will update <tt class="literal">parent</tt> and <tt class="literal">child</tt> and insert
+            <tt class="literal">newChild</tt>.
+        </p><pre class="programlisting">//parent and child were both loaded in a previous session
+parent.AddChild(child);
+Child newChild = new Child();
+parent.AddChild(newChild);
+session.Update(parent);
+session.Flush();</pre><p>
+            This may be suitable for the case of a generated identifier, but what about assigned identifiers
+            and composite identifiers? This is more difficult, since NHibernate cannot use the identifier
+            property to distinguish between a newly instantiated object, with an identifier assigned by the
+            user, and an object loaded in a previous session. In this case, NHibernate will either use the
+            timestamp or version property, or will actually query the second-level cache or, worst case, the
+            database, to see if the row exists.
+        </p><p>
+            To avoid the worst case, either:
+        </p><div class="itemizedlist"><ul type="disc"><li><p>
+                    define an <tt class="literal">unsaved-value</tt> on a <tt class="literal">&lt;version&gt;</tt>
+                    or <tt class="literal">&lt;timestamp&gt;</tt> property mapping for the class.
+                </p></li><li><p>
+                    set <tt class="literal">unsaved-value="none"</tt> and explicitly <tt class="literal">Save()</tt>
+                    newly instantiated children before calling <tt class="literal">Update(parent)</tt>.
+                </p></li><li><p>
+                    set <tt class="literal">unsaved-value="any"</tt> and explicitly <tt class="literal">Update()</tt>
+                    previously persistent children before calling <tt class="literal">Update(parent)</tt>.
+                </p></li><li><p>
+                    implement <tt class="literal">IInterceptor.IsTransient()</tt> for providing your own strategy
+                    for distinguishing newly instantiated objects.
+                </p></li></ul></div><p>
+            For the <tt class="literal">IInterceptor</tt> solution, you could by example define a base class for
+            your persistent classes:
+        </p><pre class="programlisting">public class Persistent
+{
+    private bool _saved = false;
+
+    public virtual void OnSave()
+    {
+        _saved = true;
+    }
+
+    public virtual void OnLoad()
+    {
+        _saved = true;
+    }
+
+    public virtual void OnDelete()
+    {
+        _saved = false;
+    }
+
+    ...
+
+    public virtual bool IsSaved
+    {
+        get { return _saved; }
+    }
+}</pre><p>
+            (The <tt class="literal">saved</tt> property is non-persistent.)
+            Then implement in you interceptor class <tt class="literal">IsTransient()</tt>, along with
+            <tt class="literal">OnLoad()</tt>, <tt class="literal">OnSave()</tt> and <tt class="literal">OnDelete()</tt>
+            as follows:
+        </p><pre class="programlisting">public object IsTransient(object entity)
+{
+    if (entity is Persistent)
+    {
+        return !((Persistent) entity).IsSaved;
+    }
+    else
+    {
+        return null;
+    }
+}
+
+public bool OnLoad(object entity,
+    object id,
+    object[] state,
+    string[] propertyNames,
+    IType[] types)
+{
+    if (entity is Persistent)
+        ((Persistent) entity).OnLoad();
+    return false;
+}
+
+public boolean OnSave(object entity,
+    object id,
+    object[] state,
+    string[] propertyNames,
+    IType[] types)
+{
+    if (entity is Persistent)
+        ((Persistent) entity).OnSave();
+    return false;
+}
+
+public virtual void OnDelete(object entity,
+    object id,
+    object[] state,
+    string[] propertyNames,
+    IType[] types)
+{
+    if (entity is Persistent)
+        ((Persistent) entity).OnDelete();
+}</pre><p>
+            See <a href="events.html#objectstate-interceptors" title="13.1.&nbsp;Interceptors">Section&nbsp;13.1, &#8220;Interceptors&#8221;</a> for more information.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="example-parentchild-conclusion"></a>23.5.&nbsp;Conclusion</h2></div></div><div></div></div><p>
+            There is quite a bit to digest here and it might look confusing first time around. However, in practice, it
+            all works out quite nicely. Most NHibernate applications use the parent / child pattern in many places.
+        </p><p>
+            We mentioned an alternative in the first paragraph. None of the above issues exist in the case of
+            <tt class="literal">&lt;composite-element&gt;</tt> mappings, which have exactly the semantics of a parent/child
+            relationship. Unfortunately, there are two big limitations to composite element classes: composite elements
+            cannot own collections, and they should not be the child of any entity other than the unique parent. (However,
+            they <span class="emphasis"><em>may</em></span> have a surrogate primary key, using an <tt class="literal">&lt;idbag&gt;</tt> mapping.)
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="toolsetguide.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="example-weblog.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;22.&nbsp;Toolset Guide&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;24.&nbsp;Example: Weblog Application</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

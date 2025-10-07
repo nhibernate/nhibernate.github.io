@@ -1,0 +1,112 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/toolsetguide.html" />
+    <title>Chapter&nbsp;22.&nbsp;Toolset Guide</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="performance.html" title="Chapter&nbsp;21.&nbsp;Improving performance"><link rel="next" href="example-parentchild.html" title="Chapter&nbsp;23.&nbsp;Example: Parent/Child">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;22.&nbsp;Toolset Guide</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="performance.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="example-parentchild.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="toolsetguide"></a>Chapter&nbsp;22.&nbsp;Toolset Guide</h2></div></div><div></div></div>
+    {% include google_adsense.html %}
+    <p>
+        Roundtrip engineering with NHibernate is possible using a set of commandline tools 
+        maintained as part of the NHibernate project, along with NHibernate support built into
+        various code generation tools (MyGeneration, CodeSmith, ObjectMapper, AndroMDA).
+    </p><p>
+        The NHibernate main package comes bundled with the most important tool (it can even
+        be used from "inside" NHibernate on-the-fly):
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+            DDL schema generation from a mapping file
+            (aka <tt class="literal">SchemaExport</tt>, <tt class="literal">hbm2ddl</tt>)
+        </p></li></ul></div><p>
+        Other tools directly provided by the NHibernate project are delivered with a separate
+        package, <span class="emphasis"><em>NHibernateContrib</em></span>. This package includes tools for
+        the following tasks:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+            mapping file generation from .NET classes marked with attributes
+            (<tt class="literal">NHibernate.Mapping.Attributes</tt>, or NHMA for short)
+        </p></li></ul></div><p>
+        Third party tools with NHibernate support are:
+    </p><div class="itemizedlist"><ul type="disc"><li><p>
+            CodeSmith, MyGeneration, and ObjectMapper (mapping file generation from an existing
+            database schema)
+        </p></li><li><p>
+            AndroMDA (MDA (Model-Driven Architecture) approach generating code for
+            persistent classes from UML diagrams and their XML/XMI representation)
+        </p></li></ul></div><p>
+        These 3rd party tools are not documented in this reference. Please refer to the NHibernate
+        website for up-to-date information.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="toolsetguide-s1"></a>22.1.&nbsp;Schema Generation</h2></div></div><div></div></div><p>
+            The generated schema includes referential integrity constraints (primary and foreign keys) for entity
+            and collection tables. Tables and sequences are also created for mapped identifier generators.
+        </p><p>
+            You <span class="emphasis"><em>must</em></span> specify a SQL <tt class="literal">Dialect</tt> via the 
+            <tt class="literal">dialect</tt> configuration property when using this tool.
+        </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="toolsetguide-s1-2"></a>22.1.1.&nbsp;Customizing the schema</h3></div></div><div></div></div><p>
+                Many NHibernate mapping elements define an optional attribute named <tt class="literal">length</tt>. You may set 
+                the length of a column with this attribute. (Or, for numeric/decimal data types, the precision.)
+            </p><p>
+                Some tags also accept a <tt class="literal">not-null</tt> attribute (for generating a <tt class="literal">NOT NULL</tt>
+                constraint on table columns) and a <tt class="literal">unique</tt> attribute (for generating <tt class="literal">UNIQUE</tt>
+                constraint on table columns).
+            </p><p>
+                Some tags accept an <tt class="literal">index</tt> attribute for specifying the
+                name of an index for that column. A <tt class="literal">unique-key</tt> attribute
+                can be used to group columns in a single unit key constraint. Currently, the
+                specified value of the <tt class="literal">unique-key</tt> attribute is
+                <span class="emphasis"><em>not</em></span> used to name the constraint, only to group the
+                columns in the mapping file.
+            </p><p>
+                Examples:
+            </p><pre class="programlisting">&lt;property name="Foo" type="String" length="64" not-null="true"/&gt;
+
+&lt;many-to-one name="Bar" foreign-key="fk_foo_bar" not-null="true"/&gt;
+
+&lt;element column="serial_number" type="Int64" not-null="true" unique="true"/&gt;</pre><p>
+                Alternatively, these elements also accept a child <tt class="literal">&lt;column&gt;</tt> element. This is
+                particularly useful for multi-column types:
+            </p><pre class="programlisting">&lt;property name="Foo" type="String"&gt;
+    &lt;column name="foo" length="64" not-null="true" sql-type="text"/&gt;
+&lt;/property&gt;
+
+&lt;property name="Bar" type="My.CustomTypes.MultiColumnType, My.CustomTypes"/&gt;
+    &lt;column name="fee" not-null="true" index="bar_idx"/&gt;
+    &lt;column name="fi" not-null="true" index="bar_idx"/&gt;
+    &lt;column name="fo" not-null="true" index="bar_idx"/&gt;
+&lt;/property&gt;</pre><p>
+                The <tt class="literal">sql-type</tt> attribute allows the user to override the default mapping
+                of NHibernate type to SQL data type.
+            </p><p>
+                The <tt class="literal">check</tt> attribute allows you to specify a check constraint.
+            </p><pre class="programlisting">&lt;property name="Foo" type="Int32"&gt;
+    &lt;column name="foo" check="foo &gt; 10"/&gt;
+&lt;/property&gt;
+
+&lt;class name="Foo" table="foos" check="bar &lt; 100.0"&gt;
+    ...
+    &lt;property name="Bar" type="Single"/&gt;
+&lt;/class&gt;</pre><div class="table"><a name="schemattributes-summary"></a><p class="title"><b>Table&nbsp;22.1.&nbsp;Summary</b></p><table summary="Summary" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Attribute</th><th>Values</th><th>Interpretation</th></tr></thead><tbody><tr><td><tt class="literal">length</tt></td><td>number</td><td>column length/decimal precision</td></tr><tr><td><tt class="literal">not-null</tt></td><td><tt class="literal">true|false</tt></td><td>specifies that the column should be non-nullable</td></tr><tr><td><tt class="literal">unique</tt></td><td><tt class="literal">true|false</tt></td><td>specifies that the column should have a unique constraint</td></tr><tr><td><tt class="literal">index</tt></td><td><tt class="literal">index_name</tt></td><td>specifies the name of a (multi-column) index</td></tr><tr><td><tt class="literal">unique-key</tt></td><td><tt class="literal">unique_key_name</tt></td><td>specifies the name of a multi-column unique constraint</td></tr><tr><td><tt class="literal">foreign-key</tt></td><td><tt class="literal">foreign_key_name</tt></td><td>
+                                specifies the name of the foreign key constraint generated
+                                for an association, use it on &lt;one-to-one&gt;, &lt;many-to-one&gt;,
+                                &lt;key&gt;, and &lt;many-to-many&gt; mapping elements. Note that
+                                <tt class="literal">inverse="true"</tt> sides will not be considered
+                                by <tt class="literal">SchemaExport</tt>.
+                            </td></tr><tr><td><tt class="literal">sql-type</tt></td><td><tt class="literal">column_type</tt></td><td>
+                                overrides the default column type (attribute of 
+                                <tt class="literal">&lt;column&gt;</tt> element only)
+                            </td></tr><tr><td><tt class="literal">check</tt></td><td>SQL expression</td><td>
+                                create an SQL check constraint on either column or table
+                            </td></tr></tbody></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="toolsetguide-s1-3"></a>22.1.2.&nbsp;Running the tool</h3></div></div><div></div></div><p>
+                The <tt class="literal">SchemaExport</tt> tool writes a DDL script to standard out and/or
+                executes the DDL statements.
+            </p><p>
+                You may embed <tt class="literal">SchemaExport</tt> in your application:
+            </p><pre class="programlisting">Configuration cfg = ....;
+new SchemaExport(cfg).Create(false, true);</pre></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="performance.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="example-parentchild.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;21.&nbsp;Improving performance&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;23.&nbsp;Example: Parent/Child</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

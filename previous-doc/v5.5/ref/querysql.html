@@ -1,0 +1,370 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/querysql.html" />
+    <title>Chapter&nbsp;19.&nbsp;Native SQL</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="querylinq.html" title="Chapter&nbsp;18.&nbsp;Linq Queries"><link rel="next" href="filters.html" title="Chapter&nbsp;20.&nbsp;Filtering data">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Native SQL</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="querylinq.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="filters.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="querysql"></a>Chapter&nbsp;19.&nbsp;Native SQL</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>You may also express queries in the native SQL dialect of your
+  database. This is useful if you want to utilize database specific features
+  such as query hints or the <tt class="literal">CONNECT</tt> keyword in Oracle. It
+  also provides a clean migration path from a direct SQL/ADO.NET based
+  application to NHibernate.</p><p>NHibernate allows you to specify handwritten SQL (including stored
+  procedures) for all create, update, delete, and load operations.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querysql-creating"></a>19.1.&nbsp;Using an <tt class="literal">ISQLQuery</tt></h2></div></div><div></div></div><p>Execution of native SQL queries is controlled via the
+    <tt class="literal">ISQLQuery</tt> interface, which is obtained by calling
+    <tt class="literal">ISession.CreateSQLQuery()</tt>. The following describes how
+    to use this API for querying.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-scalar"></a>19.1.1.&nbsp;Scalar queries</h3></div></div><div></div></div><p>The most basic SQL query is to get a list of scalars
+      (values).</p><pre class="programlisting">sess.CreateSQLQuery("SELECT * FROM CATS")
+ .AddScalar("ID", NHibernateUtil.Int64)
+ .AddScalar("NAME", NHibernateUtil.String)
+ .AddScalar("BIRTHDATE", NHibernateUtil.Date)
+</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>the columns and types to return</p></li></ul></div><p>This will return an <tt class="literal">IList</tt> of <tt class="literal">Object</tt>
+      arrays (<tt class="literal">object[]</tt>) with
+      scalar values for each column in the CATS table. Only these three
+      columns will be returned, even though the query is using
+      <tt class="literal">*</tt> and could return more than the three listed
+      columns.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-entity"></a>19.1.2.&nbsp;Entity queries</h3></div></div><div></div></div><p>The above query was about returning scalar values,
+      basically returning the "raw" values from the result set. The following
+      shows how to get entity objects from a native SQL query via
+      <tt class="literal">AddEntity()</tt>.</p><pre class="programlisting">sess.CreateSQLQuery("SELECT * FROM CATS").AddEntity(typeof(Cat));
+sess.CreateSQLQuery("SELECT ID, NAME, BIRTHDATE FROM CATS").AddEntity(typeof(Cat));
+</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>the entity returned by the query</p></li></ul></div><p>Assuming that Cat is mapped as a class with the columns ID, NAME
+      and BIRTHDATE the above queries will both return an IList where each
+      element is a Cat entity.</p><p>If the entity is mapped with a <tt class="literal">many-to-one</tt> to
+      another entity it is required to also return its identifier when
+      performing the native query, otherwise a database specific "column not
+      found" error will occur. The additional columns will automatically be
+      returned when using the * notation, but we prefer to be explicit as in
+      the following example for a <tt class="literal">many-to-one</tt> to a
+      <tt class="literal">Dog</tt>:</p><pre class="programlisting">sess.CreateSQLQuery("SELECT ID, NAME, BIRTHDATE, DOG_ID FROM CATS")
+    .AddEntity(typeof(Cat));</pre><p>This will allow cat.Dog property access to function properly.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-associations-collections"></a>19.1.3.&nbsp;Handling associations and collections</h3></div></div><div></div></div><p>It is possible to eagerly join in the <tt class="literal">Dog</tt> to
+      avoid the possible extra round-trip for initializing the proxy. This is
+      done via the <tt class="literal">AddJoin()</tt> method, which allows you to
+      join in an association or collection.</p><pre class="programlisting">sess
+    .CreateSQLQuery(
+        "SELECT cat.ID, NAME, BIRTHDATE, DOG_ID, D_ID, D_NAME " +
+        "FROM CATS cat, DOGS d WHERE cat.DOG_ID = d.D_ID")
+    .AddEntity("cat", typeof(Cat))
+    .AddJoin("cat.Dog");</pre><p>In this example the returned <tt class="literal">Cat</tt>'s will have
+      their <tt class="literal">Dog</tt> property fully initialized without any
+      extra round-trip to the database. Notice that we added a alias name
+      ("cat") to be able to specify the target property path of the join. It
+      is possible to do the same eager joining for collections, e.g. if the
+      <tt class="literal">Cat</tt> had a one-to-many to <tt class="literal">Dog</tt>
+      instead.</p><pre class="programlisting">sess
+    .CreateSQLQuery(
+        "SELECT ID, NAME, BIRTHDATE, D_ID, D_NAME, CAT_ID " +
+        "FROM CATS cat, DOGS d WHERE cat.ID = d.CAT_ID")
+    .AddEntity("cat", typeof(Cat))
+    .AddJoin("cat.Dogs");</pre><p>At this stage we are reaching the limits of what is possible with
+      native queries without starting to enhance the SQL queries to make them
+      usable in NHibernate; the problems start to arise when returning
+      multiple entities of the same type or when the default alias/column
+      names are not enough.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-multiple-entities"></a>19.1.4.&nbsp;Returning multiple entities</h3></div></div><div></div></div><p>Until now the result set column names are assumed to be the same
+      as the column names specified in the mapping document. This can be
+      problematic for SQL queries which join multiple tables, since the same
+      column names may appear in more than one table.</p><p>Column alias injection is needed in the following query (which
+      most likely will fail):</p><pre class="programlisting">sess
+    .CreateSQLQuery(
+        "SELECT cat.*, mother.* " +
+        "FROM CATS cat, CATS mother WHERE cat.MOTHER_ID = mother.ID")
+    .AddEntity("cat", typeof(Cat))
+    .AddEntity("mother", typeof(Cat))</pre><p>The intention for this query is to return two Cat instances per
+      row, a cat and its mother. This will fail since there is a conflict of
+      names since they are mapped to the same column names and on some
+      databases the returned column aliases will most likely be on the form
+      "c.ID", "c.NAME", etc. which are not equal to the columns specified in
+      the mappings ("ID" and "NAME").</p><p>The following form is not vulnerable to column name
+      duplication:</p><pre class="programlisting">sess
+    .CreateSQLQuery(
+        "SELECT {cat.*}, {mother.*} " +
+        "FROM CATS cat, CATS mother WHERE cat.MOTHER_ID = mother.ID")
+    .AddEntity("cat", typeof(Cat))
+    .AddEntity("mother", typeof(Cat))</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string, with placeholders for NHibernate to
+          inject column aliases</p></li><li><p>the entities returned by the query</p></li></ul></div><p>The {cat.*} and {mother.*} notation used above is a shorthand for
+      "all properties". Alternatively, you may list the columns explicitly, but
+      even in this case we let NHibernate inject the SQL column aliases for
+      each property. The placeholder for a column alias is just the property
+      name qualified by the table alias. In the following example, we retrieve
+      Cats and their mothers from a different table (cat_log) to the one
+      declared in the mapping metadata. Notice that we may even use the
+      property aliases in the where clause if we like.</p><pre class="programlisting">String sql = "SELECT c.ID as {c.Id}, c.NAME as {c.Name}, " + 
+         "c.BIRTHDATE as {c.BirthDate}, c.MOTHER_ID as {c.Mother}, {mother.*} " +
+         "FROM CAT_LOG c, CAT_LOG m WHERE {c.Mother} = m.ID";
+
+var loggedCats = sess.CreateSQLQuery(sql)
+    .AddEntity("c", typeof(Cat))
+    .AddEntity("m", typeof(Cat)).List&lt;object[]&gt;();
+</pre><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="querysql-aliasreferences"></a>19.1.4.1.&nbsp;Alias and property references</h4></div></div><div></div></div><p>For most cases the above alias injection is needed, but for
+        queries relating to more complex mappings like composite properties,
+        inheritance discriminators, collections etc. there are some specific
+        aliases to use to allow NHibernate to inject the proper aliases.</p><p>The following table shows the different possibilities of using
+        the alias injection. Note: the alias names in the result are examples,
+        each alias will have a unique and probably different name when
+        used.</p><div class="table"><a name="aliasinjection-summary"></a><p class="title"><b>Table&nbsp;19.1.&nbsp;Alias injection names</b></p><table summary="Alias injection names" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>Description</th><th>Syntax</th><th>Example</th></tr></thead><tbody><tr><td>A simple property</td><td><tt class="literal">{[aliasname].[propertyname]}</tt></td><td><tt class="literal">A_NAME as {item.Name}</tt></td></tr><tr><td>A composite property</td><td><tt class="literal">{[aliasname].[componentname].[propertyname]}</tt></td><td><tt class="literal">CURRENCY as {item.Amount.Currency}, VALUE as
+                {item.Amount.Value}</tt></td></tr><tr><td>Discriminator of an entity</td><td><tt class="literal">{[aliasname].class}</tt></td><td><tt class="literal">DISC as {item.class}</tt></td></tr><tr><td>All properties of an entity</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{item.*}</tt></td></tr><tr><td>A collection key</td><td><tt class="literal">{[aliasname].key}</tt></td><td><tt class="literal">ORGID as {coll.key}</tt></td></tr><tr><td>The id of an collection</td><td><tt class="literal">{[aliasname].id}</tt></td><td><tt class="literal">EMPID as {coll.id}</tt></td></tr><tr><td>The element of an collection</td><td><tt class="literal">{[aliasname].element}</tt></td><td><tt class="literal">XID as {coll.element}</tt></td></tr><tr><td>property of the element in the collection</td><td><tt class="literal">{[aliasname].element.[propertyname]}</tt></td><td><tt class="literal">NAME as {coll.element.Name}</tt></td></tr><tr><td>All properties of the element in the collection</td><td><tt class="literal">{[aliasname].element.*}</tt></td><td><tt class="literal">{coll.element.*}</tt></td></tr><tr><td>All properties of the collection</td><td><tt class="literal">{[aliasname].*}</tt></td><td><tt class="literal">{coll.*}</tt></td></tr></tbody></table></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-non-managed-entities"></a>19.1.5.&nbsp;Returning non-managed entities</h3></div></div><div></div></div><p>It is possible to apply an <tt class="literal">IResultTransformer</tt> to native sql queries. Allowing it to e.g. return non-managed entities.</p><pre class="programlisting">sess.CreateSQLQuery("SELECT NAME, BIRTHDATE FROM CATS")
+        .SetResultTransformer(Transformers.AliasToBean(typeof(CatDTO)))</pre><p>This query specified:</p><div class="itemizedlist"><ul type="disc"><li><p>the SQL query string</p></li><li><p>a result transformer</p></li></ul></div><p>
+        The above query will return a list of <tt class="literal">CatDTO</tt> which has been instantiated and injected the values of NAME and BIRTHNAME into its corresponding
+        properties or fields.
+        </p><p>
+			IMPORTANT: The custom <tt class="literal">IResultTransformer</tt> should override <tt class="literal">Equals</tt> and <tt class="literal">GetHashCode</tt>, 
+			otherwise the query translation won't be cached. This also will result in memory leak.
+		</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-inheritance"></a>19.1.6.&nbsp;Handling inheritance</h3></div></div><div></div></div><p>Native SQL queries which query for entities that are mapped as part
+      of an inheritance hierarchy must include all properties for the base class and all
+      its subclasses.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="querysql-parameters"></a>19.1.7.&nbsp;Parameters</h3></div></div><div></div></div><p>Native SQL queries support positional as well as named
+      parameters:</p><pre class="programlisting">var query = sess
+    .CreateSQLQuery("SELECT * FROM CATS WHERE NAME like ?")
+    .AddEntity(typeof(Cat));
+var pusList = query.SetString(0, "Pus%").List&lt;Cat&gt;();
+
+query = sess
+    .createSQLQuery("SELECT * FROM CATS WHERE NAME like :name")
+    .AddEntity(typeof(Cat));
+var pusList = query.SetString("name", "Pus%").List&lt;Cat&gt;();</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querysql-namedqueries"></a>19.2.&nbsp;Named SQL queries</h2></div></div><div></div></div><p>Named SQL queries may be defined in the mapping document and called
+    in exactly the same way as a named HQL query. In this case, we do
+    <span class="emphasis"><em>not</em></span> need to call
+    <tt class="literal">AddEntity()</tt>.</p><pre class="programlisting">&lt;sql-query name="persons"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    SELECT person.NAME AS {person.Name},
+           person.AGE AS {person.Age},
+           person.SEX AS {person.Sex}
+    FROM PERSON person
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre><pre class="programlisting">var people = sess.GetNamedQuery("persons")
+    .SetString("namePattern", namePattern)
+    .SetMaxResults(50)
+    .List&lt;Person&gt;();</pre><p>The <tt class="literal">&lt;return-join&gt;</tt> and
+    <tt class="literal">&lt;load-collection&gt;</tt> elements are used to join
+    associations and define queries which initialize collections,
+    respectively.</p><pre class="programlisting">&lt;sql-query name="personsWith"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    &lt;return-join alias="address" property="person.MailingAddress"/&gt;
+    SELECT person.NAME AS {person.Name},
+           person.AGE AS {person.Age},
+           person.SEX AS {person.Sex},
+           adddress.STREET AS {address.Street},
+           adddress.CITY AS {address.City},
+           adddress.STATE AS {address.State},
+           adddress.ZIP AS {address.Zip}
+    FROM PERSON person
+    JOIN ADDRESS adddress
+        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre><p>A named SQL query may return a scalar value. You must declare the
+    column alias and NHibernate type using the
+    <tt class="literal">&lt;return-scalar&gt;</tt> element:</p><pre class="programlisting">&lt;sql-query name="mySqlQuery"&gt;
+    &lt;return-scalar column="name" type="String"/&gt;
+    &lt;return-scalar column="age" type="Int64"/&gt;
+    SELECT p.NAME AS name,
+           p.AGE AS age,
+    FROM PERSON p WHERE p.NAME LIKE 'Hiber%'
+&lt;/sql-query&gt;</pre><p>You can externalize the resultset mapping information in a
+    <tt class="literal">&lt;resultset&gt;</tt> element to either reuse them across
+    several named queries or through the
+    <tt class="literal">SetResultSetMapping()</tt> API.</p><pre class="programlisting">&lt;resultset name="personAddress"&gt;
+    &lt;return alias="person" class="eg.Person"/&gt;
+    &lt;return-join alias="address" property="person.MailingAddress"/&gt;
+&lt;/resultset&gt;
+
+&lt;sql-query name="personsWith" resultset-ref="personAddress"&gt;
+    SELECT person.NAME AS {person.Name},
+           person.AGE AS {person.Age},
+           person.SEX AS {person.Sex},
+           adddress.STREET AS {address.Street},
+           adddress.CITY AS {address.City},
+           adddress.STATE AS {address.State},
+           adddress.ZIP AS {address.Zip}
+    FROM PERSON person
+    JOIN ADDRESS adddress
+        ON person.ID = address.PERSON_ID AND address.TYPE='MAILING'
+    WHERE person.NAME LIKE :namePattern
+&lt;/sql-query&gt;</pre><p>You can alternatively use the resultset mapping information in your
+    .hbm.xml files directly in code.</p><pre class="programlisting">var cats = sess.CreateSQLQuery(
+        "select {cat.*}, {kitten.*} " +
+        "from cats cat, cats kitten " +
+        "where kitten.mother = cat.id")
+    .SetResultSetMapping("catAndKitten")
+    .List&lt;Cat&gt;();</pre><p>
+                Like HQL named queries, SQL named queries accepts a number of attributes matching settings
+                available on the <tt class="literal">ISQLQuery</tt> interface.
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">flush-mode</tt> - override the session flush mode just for this query.
+                    </p></li><li><p>
+                    <tt class="literal">cacheable</tt> - allow the query results to be cached by the second level cache.
+                    See <a href="caches.html" title="Chapter&nbsp;27.&nbsp;NHibernate.Caches">Chapter&nbsp;27, <i>NHibernate.Caches</i></a>.
+                    </p></li><li><p>
+                    <tt class="literal">cache-region</tt> - specify the cache region of the query.
+                    </p></li><li><p>
+                    <tt class="literal">cache-mode</tt> - specify the cache mode of the query.
+                    </p></li><li><p>
+                    <tt class="literal">fetch-size</tt> - set a fetch size for the underlying ADO query.
+                    </p></li><li><p>
+                    <tt class="literal">timeout</tt> - set the query timeout in seconds.
+                    </p></li><li><p>
+                    <tt class="literal">read-only</tt> - <tt class="literal">true</tt> switches yielded entities to read-only.
+                    See <a href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities">Chapter&nbsp;11, <i>Read-only entities</i></a>.
+                    </p></li><li><p>
+                    <tt class="literal">comment</tt> - add a custom comment to the SQL.
+                    </p></li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="propertyresults"></a>19.2.1.&nbsp;Using return-property to explicitly specify column/alias
+      names</h3></div></div><div></div></div><p>With <tt class="literal">&lt;return-property&gt;</tt> you can explicitly
+      tell NHibernate what column aliases to use, instead of using the
+      <tt class="literal">{}</tt>-syntax to let NHibernate inject its own
+      aliases.</p><pre class="programlisting">&lt;sql-query name="mySqlQuery"&gt;
+    &lt;return alias="person" class="eg.Person"&gt;
+        &lt;return-property name="Name" column="myName"/&gt;
+        &lt;return-property name="Age" column="myAge"/&gt;
+        &lt;return-property name="Sex" column="mySex"/&gt;
+    &lt;/return&gt;
+    SELECT person.NAME AS myName,
+           person.AGE AS myAge,
+           person.SEX AS mySex,
+    FROM PERSON person WHERE person.NAME LIKE :name
+&lt;/sql-query&gt;
+</pre><p><tt class="literal">&lt;return-property&gt;</tt> also works with
+      multiple columns. This solves a limitation with the
+      <tt class="literal">{}</tt>-syntax which can not allow fine grained control of
+      multi-column properties.</p><pre class="programlisting">&lt;sql-query name="organizationCurrentEmployments"&gt;
+    &lt;return alias="emp" class="Employment"&gt;
+        &lt;return-property name="Salary"&gt;
+            &lt;return-column name="VALUE"/&gt;
+            &lt;return-column name="CURRENCY"/&gt;
+        &lt;/return-property&gt;
+        &lt;return-property name="EndDate" column="myEndDate"/&gt;
+    &lt;/return&gt;
+        SELECT EMPLOYEE AS {emp.Employee}, EMPLOYER AS {emp.Employer},
+        STARTDATE AS {emp.StartDate}, ENDDATE AS {emp.EndDate},
+        REGIONCODE as {emp.RegionCode}, EID AS {emp.Id}, VALUE, CURRENCY
+        FROM EMPLOYMENT
+        WHERE EMPLOYER = :id AND ENDDATE IS NULL
+        ORDER BY STARTDATE ASC
+&lt;/sql-query&gt;</pre><p>Notice that in this example we used
+      <tt class="literal">&lt;return-property&gt;</tt> in combination with the
+      <tt class="literal">{}</tt>-syntax for injection, allowing users to choose how
+      they want to refer column and properties.</p><p>If your mapping has a discriminator you must use
+      <tt class="literal">&lt;return-discriminator&gt;</tt> to specify the
+      discriminator column.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="sp_query"></a>19.2.2.&nbsp;Using stored procedures for querying</h3></div></div><div></div></div><p>NHibernate introduces support for queries via stored procedures
+      and functions. Most of the following documentation is equivalent for
+      both. The stored procedure/function must return a resultset to be able to work
+      with NHibernate. An example of such a stored function in MS SQL Server 2000 and
+      higher is as follows:</p><pre class="programlisting">CREATE PROCEDURE selectAllEmployments AS
+    SELECT EMPLOYEE, EMPLOYER, STARTDATE, ENDDATE,
+    REGIONCODE, EMPID, VALUE, CURRENCY
+    FROM EMPLOYMENT
+</pre><p>To use this query in NHibernate you need to map it via a named
+      query.</p><pre class="programlisting">&lt;sql-query name="selectAllEmployments_SP"&gt;
+    &lt;return alias="emp" class="Employment"&gt;
+        &lt;return-property name="employee" column="EMPLOYEE"/&gt;
+        &lt;return-property name="employer" column="EMPLOYER"/&gt;
+        &lt;return-property name="startDate" column="STARTDATE"/&gt;
+        &lt;return-property name="endDate" column="ENDDATE"/&gt;
+        &lt;return-property name="regionCode" column="REGIONCODE"/&gt;
+        &lt;return-property name="id" column="EID"/&gt;
+        &lt;return-property name="salary"&gt;
+            &lt;return-column name="VALUE"/&gt;
+            &lt;return-column name="CURRENCY"/&gt;
+        &lt;/return-property&gt;
+    &lt;/return&gt;
+    exec selectAllEmployments
+&lt;/sql-query&gt;</pre><p>Notice that stored procedures currently only return scalars and
+      entities. <tt class="literal">&lt;return-join&gt;</tt> and
+      <tt class="literal">&lt;load-collection&gt;</tt> are not supported.</p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="querysql-limits-storedprocedures"></a>19.2.2.1.&nbsp;Rules/limitations for using stored procedures</h4></div></div><div></div></div><p>To use stored procedures with NHibernate the procedures/functions
+        have to follow some rules. If they do not follow those rules they are
+        not usable with NHibernate. If you still want to use these procedures
+        you have to execute them via <tt class="literal">session.Connection</tt>.
+        The rules are different for each database, since database vendors have
+        different stored procedure semantics/syntax.</p><p>Stored procedure queries can't be paged with
+        <tt class="literal">SetFirstResult()/SetMaxResults()</tt>.</p><p>Recommended call form is dependent on your database. For MS
+        SQL Server use <tt class="literal">exec functionName &lt;parameters&gt;</tt>.
+        </p><p>For Oracle the following rules apply:</p><div class="itemizedlist"><ul type="disc" compact><li><p>A function must return a result set. The first parameter of
+            a procedure must be an <tt class="literal">OUT</tt> that returns a
+            result set. This is done by using a
+            <tt class="literal">SYS_REFCURSOR</tt> type in Oracle 9i or later. In Oracle
+            you need to define a <tt class="literal">REF CURSOR</tt> type, see
+            Oracle literature.</p></li></ul></div><p>For MS SQL server the following rules apply:</p><div class="itemizedlist"><ul type="disc" compact><li><p>The procedure must return a result set. NHibernate will
+            use <tt class="literal">DbCommand.ExecuteReader()</tt> to obtain
+            the results.
+            </p></li><li><p>If you can enable <tt class="literal">SET NOCOUNT ON</tt> in your
+            procedure it will probably be more efficient, but this is not a
+            requirement.</p></li></ul></div></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querysql-cud"></a>19.3.&nbsp;Custom SQL for create, update and delete</h2></div></div><div></div></div><p>NHibernate can use custom SQL statements for create, update, and
+    delete operations. The class and collection persisters in NHibernate
+    already contain a set of configuration time generated strings (insertsql,
+    deletesql, updatesql etc.). The mapping tags
+    <tt class="literal">&lt;sql-insert&gt;</tt>,
+    <tt class="literal">&lt;sql-delete&gt;</tt>, and
+    <tt class="literal">&lt;sql-update&gt;</tt> override these strings:</p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id"&gt;
+        &lt;generator class="increment"/&gt;
+    &lt;/id&gt;
+    &lt;property name="name" not-null="true"/&gt;
+    &lt;sql-insert&gt;INSERT INTO PERSON (NAME, ID) VALUES ( UPPER(?), ? )&lt;/sql-insert&gt;
+    &lt;sql-update&gt;UPDATE PERSON SET NAME=UPPER(?) WHERE ID=?&lt;/sql-update&gt;
+    &lt;sql-delete&gt;DELETE FROM PERSON WHERE ID=?&lt;/sql-delete&gt;
+&lt;/class&gt;</pre><p>Note that the custom <tt class="literal">sql-insert</tt> will not be used
+    if you use <tt class="literal">identity</tt> to generate identifier values for
+    the class.
+    </p><p>The SQL is directly executed in your database, so you are free to
+    use any dialect you like. This will of course reduce the portability of
+    your mapping if you use database specific SQL.</p><p>Stored procedures are supported if the database-native syntax is used:</p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="id"&gt;
+        &lt;generator class="increment"/&gt;
+    &lt;/id&gt;
+    &lt;property name="name" not-null="true"/&gt;
+    &lt;sql-insert&gt;exec createPerson ?, ?&lt;/sql-insert&gt;
+    &lt;sql-delete&gt;exec deletePerson ?&lt;/sql-delete&gt;
+    &lt;sql-update&gt;exec updatePerson ?, ?&lt;/sql-update&gt;
+&lt;/class&gt;</pre><p>The order of the positional parameters is currently vital, as they
+    must be in the same sequence as NHibernate expects them.</p><p>You can see the expected order by enabling debug logging for the
+    <tt class="literal">NHibernate.Persister.Entity</tt> level. With this level
+    enabled NHibernate will print out the static SQL that is used to create,
+    update, delete etc. entities. (To see the expected sequence, remember to
+    not include your custom SQL in the mapping files as that will override the
+    NHibernate generated static sql.)</p><p>The stored procedures are by default required to affect the same number
+    of rows as NHibernate-generated SQL would. NHibernate uses
+    <tt class="literal">DbCommand.ExecuteNonQuery</tt> to retrieve the number of rows
+    affected. This check can be disabled by using <tt class="literal">check="none"</tt>
+    attribute in <tt class="literal">sql-insert</tt> element.
+    </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="querysql-load"></a>19.4.&nbsp;Custom SQL for loading</h2></div></div><div></div></div><p>You may also declare your own SQL (or HQL) queries for entity
+    loading:</p><pre class="programlisting">&lt;sql-query name="person"&gt;
+    &lt;return alias="pers" class="Person" lock-mode="upgrade"/&gt;
+    SELECT NAME AS {pers.Name}, ID AS {pers.Id}
+    FROM PERSON
+    WHERE ID=?
+    FOR UPDATE
+&lt;/sql-query&gt;</pre><p>This is just a named query declaration, as discussed earlier. You
+    may reference this named query in a class mapping:</p><pre class="programlisting">&lt;class name="Person"&gt;
+    &lt;id name="Id"&gt;
+        &lt;generator class="increment"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Name" not-null="true"/&gt;
+    &lt;loader query-ref="person"/&gt;
+&lt;/class&gt;</pre><p>This even works with stored procedures.</p><p>You may even define a query for collection loading:</p><pre class="programlisting">&lt;set name="Employments" inverse="true"&gt;
+    &lt;key/&gt;
+    &lt;one-to-many class="Employment"/&gt;
+    &lt;loader query-ref="employments"/&gt;
+&lt;/set&gt;</pre><pre class="programlisting">&lt;sql-query name="employments"&gt;
+    &lt;load-collection alias="emp" role="Person.Employments"/&gt;
+    SELECT {emp.*}
+    FROM EMPLOYMENT emp
+    WHERE EMPLOYER = :id
+    ORDER BY STARTDATE ASC, EMPLOYEE ASC
+&lt;/sql-query&gt;</pre><p>You could even define an entity loader that loads a collection by
+    join fetching:</p><pre class="programlisting">&lt;sql-query name="person"&gt;
+    &lt;return alias="pers" class="Person"/&gt;
+    &lt;return-join alias="emp" property="pers.Employments"/&gt;
+    SELECT NAME AS {pers.*}, {emp.*}
+    FROM PERSON pers
+    LEFT OUTER JOIN EMPLOYMENT emp
+        ON pers.ID = emp.PERSON_ID
+    WHERE ID=?
+&lt;/sql-query&gt;</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="querylinq.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="filters.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Linq Queries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Filtering data</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

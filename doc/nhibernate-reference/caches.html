@@ -3,10 +3,11 @@ layout:
 ---
 <!doctype html>
 <html><head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chapter&nbsp;27.&nbsp;NHibernate.Caches</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="part-contrib.html" title="Part&nbsp;I.&nbsp;NHibernateContrib Documentation"><link rel="previous" href="contrib-preface.html" title="Preface"><link rel="next" href="mapping-attributes.html" title="Chapter&nbsp;28.&nbsp;NHibernate.Mapping.Attributes">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/caches.html" />
+   <title>Chapter&nbsp;27.&nbsp;NHibernate.Caches</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="part-contrib.html" title="Part&nbsp;I.&nbsp;NHibernateContrib Documentation"><link rel="previous" href="contrib-preface.html" title="Preface"><link rel="next" href="mapping-attributes.html" title="Chapter&nbsp;28.&nbsp;NHibernate.Mapping.Attributes">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 	<div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;27.&nbsp;NHibernate.Caches</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="contrib-preface.html">Prev</a>&nbsp;</td><th width="60%" align="center">Part&nbsp;I.&nbsp;NHibernateContrib Documentation</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="mapping-attributes.html">Next</a></td></tr></table><hr></div>
@@ -36,16 +37,11 @@ layout:
 			<tt class="literal">cache.region_prefix</tt>. See <a href="session-configuration.html#configuration-optional" title="3.6.&nbsp;Optional configuration properties">Section&nbsp;3.6, &#8220;Optional configuration properties&#8221;</a>.
 		</p><p>
 			Several cache providers have been contributed by NHibernate users:
-			</p><div class="variablelist"><dl><dt><span class="term"><tt class="classname">NHibernate.Caches.Prevalence</tt></span></dt><dd><p>
-							Uses <tt class="classname">Bamboo.Prevalence</tt> as the cache provider. Open the
-							file <tt class="filename">Bamboo.Prevalence.license.txt</tt> for more information about its license;
-							you can also visit its <a href="http://bbooprevalence.sourceforge.net/" target="_top">website</a>. This
-							provider is available for the .Net Framework only. Also see <a href="caches.html#NHibernate.Caches.Prevalence" title="27.3.&nbsp;Prevalence Cache Configuration">Section&nbsp;27.3, &#8220;Prevalence Cache Configuration&#8221;</a>.
-						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.SysCache</tt></span></dt><dd><p>
+			</p><div class="variablelist"><dl><dt><span class="term"><tt class="classname">NHibernate.Caches.SysCache</tt></span></dt><dd><p>
 							Uses <tt class="classname">System.Web.Caching.Cache</tt> as the cache provider. This means that you can
 							rely on ASP.NET caching feature to understand how it works. For more information, read (on the MSDN):
 							<a href="https://msdn.microsoft.com/en-us/library/6hbbsfk6.aspx" target="_top">Caching Application Data</a>.
-							This provider is available for the .Net Framework only. Also see <a href="caches.html#NHibernate.Caches.SysCache" title="27.4.&nbsp;SysCache Configuration">Section&nbsp;27.4, &#8220;SysCache Configuration&#8221;</a>.
+							This provider is available for the .Net Framework only. Also see <a href="caches.html#NHibernate.Caches.SysCache" title="27.3.&nbsp;SysCache Configuration">Section&nbsp;27.3, &#8220;SysCache Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.SysCache2</tt></span></dt><dd><p>
 							Similar to <tt class="classname">NHibernate.Caches.SysCache</tt>, uses ASP.NET cache. This provider also supports
 							SQL dependency-based expiration, meaning that it is possible to configure certain cache regions to automatically
@@ -53,11 +49,11 @@ layout:
 						</p><p>
 							SysCache2 requires Microsoft SQL Server 2000 or higher. This provider is available for the .Net Framework only.
 						</p><p>
-							See <a href="caches.html#NHibernate.Caches.SysCache2" title="27.5.&nbsp;SysCache2 Configuration">Section&nbsp;27.5, &#8220;SysCache2 Configuration&#8221;</a>.
+							See <a href="caches.html#NHibernate.Caches.SysCache2" title="27.4.&nbsp;SysCache2 Configuration">Section&nbsp;27.4, &#8220;SysCache2 Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.EnyimMemcached</tt></span></dt><dd><p>
 							Uses <tt class="literal">Memcached</tt>. See <a href="https://memcached.org/" target="_top">memcached homepage</a>
 							for more information on Memcached. This provider is available for the .Net Framework only. Also see
-							<a href="caches.html#NHibernate.Caches.EnyimMemcached" title="27.6.&nbsp;EnyimMemcached Configuration">Section&nbsp;27.6, &#8220;EnyimMemcached Configuration&#8221;</a>.
+							<a href="caches.html#NHibernate.Caches.EnyimMemcached" title="27.5.&nbsp;EnyimMemcached Configuration">Section&nbsp;27.5, &#8220;EnyimMemcached Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NCache provider for NHibernate</tt></span></dt><dd><p>
 							Uses <tt class="literal">NCache</tt>. NCache is a commercial distributed caching system with a provider for NHibernate. 
 							The NCache Express version is free for use, see 
@@ -65,14 +61,14 @@ layout:
 							for more information.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.RtMemoryCache</tt></span></dt><dd><p>
 							Uses <tt class="classname">System.Runtime.Caching.MemoryCache.Default</tt> as the cache provider. This provider
-							is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.RtMemoryCache" title="27.7.&nbsp;RtMemoryCache Configuration">Section&nbsp;27.7, &#8220;RtMemoryCache Configuration&#8221;</a>.
+							is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.RtMemoryCache" title="27.6.&nbsp;RtMemoryCache Configuration">Section&nbsp;27.6, &#8220;RtMemoryCache Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.StackExchangeRedis</tt></span></dt><dd><p>
 							Uses <tt class="classname">StackExchange.Redis</tt>. This provider is available as a .Net Standard
 							NuGet package. It can batch together puts and reads, reducing incurred IOs.
-							See <a href="caches.html#NHibernate.Caches.StackExchangeRedis" title="27.8.&nbsp;NHibernate.Caches.StackExchangeRedis Configuration">Section&nbsp;27.8, &#8220;NHibernate.Caches.StackExchangeRedis Configuration&#8221;</a>.
+							See <a href="caches.html#NHibernate.Caches.StackExchangeRedis" title="27.7.&nbsp;NHibernate.Caches.StackExchangeRedis Configuration">Section&nbsp;27.7, &#8220;NHibernate.Caches.StackExchangeRedis Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.CoreMemoryCache</tt></span></dt><dd><p>
 							Uses <tt class="classname">Microsoft.Extensions.Caching.Memory.MemoryCache</tt> as the cache provider. This provider
-							is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.CoreMemoryCache" title="27.9.&nbsp;CoreMemoryCache Configuration">Section&nbsp;27.9, &#8220;CoreMemoryCache Configuration&#8221;</a>.
+							is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.CoreMemoryCache" title="27.8.&nbsp;CoreMemoryCache Configuration">Section&nbsp;27.8, &#8220;CoreMemoryCache Configuration&#8221;</a>.
 						</p></dd><dt><span class="term"><tt class="classname">NHibernate.Caches.CoreDistributedCache</tt></span></dt><dd><p>
 							Uses <tt class="classname">Microsoft.Extensions.Caching.Abstractions.IDistributedCache</tt> implementations as the cache
 							provider. The implementation has to be provided through an <tt class="literal">IDistributedCacheFactory</tt>.
@@ -80,15 +76,14 @@ layout:
 							and <tt class="literal">Memory</tt> caches are available through their own package, prefixed by
 							<tt class="literal">NHibernate.Caches.CoreDistributedCache.</tt>.
 						</p><p>
-							This provider is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.CoreDistributedCache" title="27.10.&nbsp;CoreDistributedCache Configuration">Section&nbsp;27.10, &#8220;CoreDistributedCache Configuration&#8221;</a>.
+							This provider is available as a .Net Standard NuGet package. See <a href="caches.html#NHibernate.Caches.CoreDistributedCache" title="27.9.&nbsp;CoreDistributedCache Configuration">Section&nbsp;27.9, &#8220;CoreDistributedCache Configuration&#8221;</a>.
 						</p></dd></dl></div><p>
 		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches-howto"></a>27.1.&nbsp;How to use a cache?</h2></div></div><div></div></div><p>
 			Here are the steps to follow to enable the second-level cache in NHibernate:
 
 			</p><div class="itemizedlist"><ul type="disc"><li><p>
 						Choose the cache provider you want to use and copy its assembly in your assemblies directory.
-						(For example, <tt class="filename">NHibernate.Caches.Prevalence.dll</tt> or
-						<tt class="filename">NHibernate.Caches.SysCache.dll</tt>.)
+						(For example, <tt class="filename">NHibernate.Caches.SysCache.dll</tt>.)
 					</p></li><li><p>
 						To tell NHibernate which cache provider to use, add in your NHibernate configuration file
 						(can be <tt class="filename">YourAssembly.exe.config</tt> or <tt class="filename">web.config</tt> or a
@@ -154,14 +149,7 @@ layout:
 			Changes of the <tt class="literal">ConfigurationProvider.Current</tt> property value are to be done very
 			early in the application lifecycle, before building any session factory using the cache provider or
 			before any other call on the cache API. Otherwise they will not be taken into account.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.Prevalence"></a>27.3.&nbsp;Prevalence Cache Configuration</h2></div></div><div></div></div><p>
-			There is only one configurable parameter: <tt class="literal">prevalenceBase</tt>. This is the directory on the
-			file system where the Prevalence engine will save data. It can be relative to the current directory or a
-			full path. If the directory doesn't exist, it will be created.
-		</p><p>
-			The <tt class="literal">prevalenceBase</tt> setting can only be set programmatically through the NHibernate
-			configuration object, by example with <tt class="literal">Configuration.SetProperty</tt>.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.SysCache"></a>27.4.&nbsp;SysCache Configuration</h2></div></div><div></div></div><p>
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.SysCache"></a>27.3.&nbsp;SysCache Configuration</h2></div></div><div></div></div><p>
 			SysCache relies on <tt class="classname">System.Web.Caching.Cache</tt> for the underlying implementation.
 			This is a .Net Framework only library, since <tt class="literal">System.Web.Caching</tt> is available neither
 			in the .Net Standard nor in .Net Core.
@@ -194,7 +182,7 @@ layout:
     &lt;cache region="foo" expiration="500" priority="4" /&gt;
     &lt;cache region="bar" expiration="300" priority="3" sliding="true" /&gt;
   &lt;/syscache&gt;
-&lt;/configuration&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.SysCache2"></a>27.5.&nbsp;SysCache2 Configuration</h2></div></div><div></div></div><p>
+&lt;/configuration&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.SysCache2"></a>27.4.&nbsp;SysCache2 Configuration</h2></div></div><div></div></div><p>
 			SysCache2 uses <tt class="literal">System.Web.Caching</tt> like SysCache, but can use <tt class="literal">SqlCacheDependencies</tt>
 			to invalidate cache regions when data in an underlying SQL Server
 			table or query changes. Query dependencies are only available for SQL Server 2005 or higher. To use the cache
@@ -220,7 +208,7 @@ layout:
 &lt;configSections&gt;
   &lt;section name="syscache2"
     type="NHibernate.Caches.SysCache2.SysCacheSection, NHibernate.Caches.SysCache2"/&gt;
-&lt;/configSections&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Table"></a>27.5.1.&nbsp;Table-based Dependency</h3></div></div><div></div></div><p>
+&lt;/configSections&gt;</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Table"></a>27.4.1.&nbsp;Table-based Dependency</h3></div></div><div></div></div><p>
 				A table-based dependency will monitor the data in a database table for changes. Table-based
 				dependencies are generally used for a SQL Server 2000 database but will work with SQL Server 2005 or superior as
 				well. Before you can use SQL Server cache invalidation with table based dependencies, you need to
@@ -248,7 +236,7 @@ layout:
 					The name of a database defined in the <tt class="literal">databases</tt> element for
 					<tt class="literal">sqlCacheDependency</tt> for caching (ASP.NET Settings Schema) element of the
 					application's <tt class="literal">Web.config</tt> file.
-				</dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Command"></a>27.5.2.&nbsp;Command-Based Dependencies</h3></div></div><div></div></div><p>
+				</dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Command"></a>27.4.2.&nbsp;Command-Based Dependencies</h3></div></div><div></div></div><p>
 				A command-based dependency will use a SQL command to identify records to monitor for data changes.
 				Command-based dependencies work only with SQL Server 2005.
 			</p><p>
@@ -291,7 +279,7 @@ layout:
 						use for registering the cache dependency for change notifications.  If no value is supplied for
 						<tt class="literal">connectionName</tt>, the unnamed connection supplied by the provider will be
 						used.
-					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Aggregate"></a>27.5.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
+					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Aggregate"></a>27.4.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
 				Multiple cache dependencies can be specified.  If any of the dependencies triggers a change
 				notification, the data in the cache region will be invalidated.  See the samples below.
 			</p><div class="example"><a name="d0e19853"></a><p class="title"><b>Example&nbsp;27.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
@@ -317,7 +305,7 @@ layout:
         tableName=" VideoAvailability" /&gt;
     &lt;/tables&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-AdditionalSettings"></a>27.5.4.&nbsp;Additional Settings</h3></div></div><div></div></div><p>
+&lt;/cacheRegion&gt;</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-AdditionalSettings"></a>27.4.4.&nbsp;Additional Settings</h3></div></div><div></div></div><p>
 				In addition to data dependencies for the cache regions, time based expiration policies can be specified
 				for each item added to the cache.  Time based expiration policies will not invalidate the data
 				dependencies for the whole cache region, but serve as a way to remove items from the cache after they
@@ -337,12 +325,12 @@ layout:
 							after a daily process completes. 
 						</p></dd><dt><span class="term"><tt class="literal">priority</tt></span></dt><dd><tt class="classname">System.Web.Caching.CacheItemPriority</tt> that identifies the relative
 						priority of items stored in the cache.
-					</dd></dl></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.EnyimMemcached"></a>27.6.&nbsp;EnyimMemcached Configuration</h2></div></div><div></div></div><p>
+					</dd></dl></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.EnyimMemcached"></a>27.5.&nbsp;EnyimMemcached Configuration</h2></div></div><div></div></div><p>
 			Its configuration relies on the EnyimMemcached library own configuration, through its
 			<tt class="literal">enyim.com/memcached</tt> configuration section. See
 			<a href="https://github.com/enyim/EnyimMemcached" target="_top">project site</a>.
 			This is a .Net Framework only library.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.RtMemoryCache"></a>27.7.&nbsp;RtMemoryCache Configuration</h2></div></div><div></div></div><p>
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.RtMemoryCache"></a>27.6.&nbsp;RtMemoryCache Configuration</h2></div></div><div></div></div><p>
 			RtMemoryCache relies on <tt class="classname">System.Runtime.Caching.MemoryCache</tt> for the
 			underlying implementation.
 		</p><p>
@@ -373,7 +361,7 @@ layout:
 			The loading of this section can be customized with the
 			<tt class="literal">NHibernate.Caches.RtMemoryCache.ConfigurationProvider</tt> class. See
 			<a href="caches.html#NHibernate.Caches.ConfigurationProvider" title="27.2.&nbsp;Using a custom configuration provider">Section&nbsp;27.2, &#8220;Using a custom configuration provider&#8221;</a>.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.StackExchangeRedis"></a>27.8.&nbsp;NHibernate.Caches.StackExchangeRedis Configuration</h2></div></div><div></div></div><p>
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.StackExchangeRedis"></a>27.7.&nbsp;NHibernate.Caches.StackExchangeRedis Configuration</h2></div></div><div></div></div><p>
 			NHibernate.Caches.StackExchangeRedis relies on <tt class="classname">StackExchange.Redis</tt> for the
 			underlying implementation.
 		</p><p>
@@ -555,7 +543,7 @@ layout:
 			The loading of this section can be customized with the
 			<tt class="literal">NHibernate.Caches.StackExchangeRedis.ConfigurationProvider</tt> class. See
 			<a href="caches.html#NHibernate.Caches.ConfigurationProvider" title="27.2.&nbsp;Using a custom configuration provider">Section&nbsp;27.2, &#8220;Using a custom configuration provider&#8221;</a>.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.CoreMemoryCache"></a>27.9.&nbsp;CoreMemoryCache Configuration</h2></div></div><div></div></div><p>
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.CoreMemoryCache"></a>27.8.&nbsp;CoreMemoryCache Configuration</h2></div></div><div></div></div><p>
 			CoreMemoryCache relies on <tt class="classname">Microsoft.Extensions.Caching.Memory.MemoryCache</tt> for the
 			underlying implementation.
 		</p><p>
@@ -588,7 +576,7 @@ layout:
 			The loading of this section can be customized with the
 			<tt class="literal">NHibernate.Caches.CoreMemoryCache.ConfigurationProvider</tt> class. See
 			<a href="caches.html#NHibernate.Caches.ConfigurationProvider" title="27.2.&nbsp;Using a custom configuration provider">Section&nbsp;27.2, &#8220;Using a custom configuration provider&#8221;</a>.
-		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.CoreDistributedCache"></a>27.10.&nbsp;CoreDistributedCache Configuration</h2></div></div><div></div></div><p>
+		</p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="NHibernate.Caches.CoreDistributedCache"></a>27.9.&nbsp;CoreDistributedCache Configuration</h2></div></div><div></div></div><p>
 			CoreDistributedCache relies on <tt class="classname">Microsoft.Extensions.Caching.Abstractions.IDistributedCache</tt>
 			implementations. The implementation has to be provided through an <tt class="literal">IDistributedCacheFactory</tt>, either
 			supplied through configuration or programmatically by affecting
@@ -643,7 +631,7 @@ layout:
 		</p><p>
 			CoreDistributedCache does not support <tt class="literal">NHibernate.Cache.ICache.Clear</tt>. Clearing the NHibernate
 			cache has no effects with CoreDistributedCache.
-		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Memcached"></a>27.10.1.&nbsp;Memcached distributed cache factory</h3></div></div><div></div></div><p>
+		</p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Memcached"></a>27.9.1.&nbsp;Memcached distributed cache factory</h3></div></div><div></div></div><p>
 				<tt class="literal">NHibernate.Caches.CoreDistributedCache.Memcached</tt> provides a Memcached distributed cache factory.
 				This factory yields a <tt class="literal">Enyim.Caching.MemcachedClient</tt> from <tt class="literal">EnyimMemcachedCore</tt>.
 				For using it, reference the cache factory package and set the <tt class="literal">factory-class</tt> attribute of the
@@ -666,7 +654,7 @@ layout:
       "Port": 11211
     }
   ]
-}</pre></div></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Redis"></a>27.10.2.&nbsp;Redis distributed cache factory</h3></div></div><div></div></div><p>
+}</pre></div></dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Redis"></a>27.9.2.&nbsp;Redis distributed cache factory</h3></div></div><div></div></div><p>
 				<tt class="literal">NHibernate.Caches.CoreDistributedCache.Redis</tt> provides a Redis distributed cache factory.
 				This factory yields a <tt class="literal">Microsoft.Extensions.Caching.Redis.RedisCache</tt>. For using it,
 				reference the cache factory package and set the <tt class="literal">factory-class</tt> attribute of the
@@ -680,7 +668,7 @@ layout:
 					</dd><dt><span class="term"><tt class="literal">instance-name</tt></span></dt><dd>
 						Its value will be used to set the <tt class="literal">InstanceName</tt> property of the
 						<tt class="literal">RedisCache</tt> options (<tt class="literal">RedisCacheOptions</tt>).
-					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.SqlServer"></a>27.10.3.&nbsp;SQL Server distributed cache factory</h3></div></div><div></div></div><p>
+					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.SqlServer"></a>27.9.3.&nbsp;SQL Server distributed cache factory</h3></div></div><div></div></div><p>
 				<tt class="literal">NHibernate.Caches.CoreDistributedCache.SqlServer</tt> provides a SQL Server distributed cache factory.
 				This factory yields a <tt class="literal">Microsoft.Extensions.Caching.SqlServer.SqlServerCache</tt>. For using it,
 				reference the cache factory package and set the <tt class="literal">factory-class</tt> attribute of the
@@ -702,7 +690,7 @@ layout:
 						<tt class="literal">SqlServerCache</tt> options (<tt class="literal">SqlServerCacheOptions</tt>). It can be
 						provided either as an integer being a number of minutes or as a <tt class="literal">TimeSpan</tt> string
 						representation.
-					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Memory"></a>27.10.4.&nbsp;Memory distributed cache factory</h3></div></div><div></div></div><p>
+					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.CoreDistributedCache.Memory"></a>27.9.4.&nbsp;Memory distributed cache factory</h3></div></div><div></div></div><p>
 				<tt class="literal">NHibernate.Caches.CoreDistributedCache.Memory</tt> provides a memory "distributed" cache factory.
 				This factory yields a <tt class="literal">Microsoft.Extensions.Caching.Memory.MemoryDistributedCache</tt>. For using it,
 				reference the cache factory package and set the <tt class="literal">factory-class</tt> attribute of the

@@ -1,0 +1,263 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/components.html" />
+    <title>Chapter&nbsp;8.&nbsp;Component Mapping</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="associations.html" title="Chapter&nbsp;7.&nbsp;Association Mappings"><link rel="next" href="inheritance.html" title="Chapter&nbsp;9.&nbsp;Inheritance Mapping">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;8.&nbsp;Component Mapping</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="associations.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="inheritance.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="components"></a>Chapter&nbsp;8.&nbsp;Component Mapping</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <p>
+        The notion of a <span class="emphasis"><em>component</em></span> is re-used in several different contexts,
+        for different purposes, throughout NHibernate.
+    </p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="components-dependentobjects"></a>8.1.&nbsp;Dependent objects</h2></div></div><div></div></div><p>
+            A component is a contained object that is persisted as a value type and not an entity
+            reference. The term "component" refers to the object-oriented notion of composition and
+            not to architecture-level components. For example, you can model a person like this:
+        </p><pre class="programlisting">public class Person
+{
+    public virtual string Key { get; set; }
+
+    public virtual DateTime Birthday { get; set; }
+
+    public virtual Name Name { get; set; }
+
+    ...
+}</pre><pre class="programlisting">public class Name
+{
+    public string First { get; set; }
+
+    public string Last { get; set; }
+
+    public char Initial { get; set; }
+}</pre><p>
+            Now <tt class="literal">Name</tt> may be persisted as a component of
+            <tt class="literal">Person</tt>. <tt class="literal">Name</tt> defines getter
+            and setter methods for its persistent properties, but it does not need to declare
+            any interfaces or identifier properties.
+        </p><p>
+            Our NHibernate mapping would look like:
+        </p><pre class="programlisting">&lt;class name="Eg.Person, Eg" table="person"&gt;
+    &lt;id name="Key" column="pid" type="string"&gt;
+        &lt;generator class="uuid.hex"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Birthday" type="date"/&gt;
+    &lt;component name="Name" class="Eg.Name, Eg"&gt; &lt;!-- class attribute optional --&gt;
+        &lt;property name="Initial"/&gt;
+        &lt;property name="First"/&gt;
+        &lt;property name="Last"/&gt;
+    &lt;/component&gt;
+&lt;/class&gt;</pre><p>
+            The person table would have the columns <tt class="literal">pid</tt>,
+            <tt class="literal">Birthday</tt>,
+            <tt class="literal">Initial</tt>,
+            <tt class="literal">First</tt> and
+            <tt class="literal">Last</tt>.
+        </p><p>
+            Like value types, components do not support shared references. In other words, two
+            persons could have the same name, but the two person objects would contain two
+            independent name objects that were only "the same" by value. The null
+            value semantics of a component are <span class="emphasis"><em>ad hoc</em></span>. When reloading the
+            containing object, NHibernate will assume that if all component columns are
+            null, then the entire component is null. This is suitable for most purposes.
+        </p><p>
+            The properties of a component can be of any NHibernate type (collections, many-to-one 
+            associations, other components, etc). Nested components should <span class="emphasis"><em>not</em></span> 
+            be considered an exotic usage. NHibernate is intended to support a fine-grained 
+            object model.
+        </p><p>
+            The <tt class="literal">&lt;component&gt;</tt> element allows a <tt class="literal">&lt;parent&gt;</tt>
+            sub-element that maps a property of the component class as a reference back to the
+            containing entity.
+        </p><pre class="programlisting">&lt;class name="Eg.Person, Eg" table="person"&gt;
+    &lt;id name="Key" column="pid" type="string"&gt;
+        &lt;generator class="uuid.hex"/&gt;
+    &lt;/id&gt;
+    &lt;property name="Birthday" type="date"/&gt;
+    &lt;component name="Name" class="Eg.Name, Eg"&gt;
+        &lt;parent name="NamedPerson"/&gt; &lt;!-- reference back to the Person --&gt;
+        &lt;property name="Initial"/&gt;
+        &lt;property name="First"/&gt;
+        &lt;property name="Last"/&gt;
+    &lt;/component&gt;
+&lt;/class&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="components-incollections"></a>8.2.&nbsp;Collections of dependent objects</h2></div></div><div></div></div><p>
+            Collections of components are supported (eg. an array of type
+            <tt class="literal">Name</tt>). Declare your component collection by
+            replacing the <tt class="literal">&lt;element&gt;</tt> tag with a
+            <tt class="literal">&lt;composite-element&gt;</tt> tag.
+        </p><pre class="programlisting">&lt;set name="SomeNames" table="some_names"&gt;
+    &lt;key column="id"/&gt;
+    &lt;composite-element class="Eg.Name, Eg"&gt; &lt;!-- class attribute required --&gt;
+        &lt;property name="Initial"/&gt;
+        &lt;property name="First"/&gt;
+        &lt;property name="Last"/&gt;
+    &lt;/composite-element&gt;
+&lt;/set&gt;</pre><p>
+            Note: if you define an <tt class="literal">ISet</tt> of composite elements, it is 
+            very important to implement <tt class="literal">Equals()</tt> and 
+            <tt class="literal">GetHashCode()</tt> correctly.
+        </p><p>
+            Composite elements can contain components but not collections. If your composite
+            element contains components, use the
+            <tt class="literal">&lt;nested-composite-element&gt;</tt> tag. This case is a collection
+            of components which themselves have components. You may want to consider if a
+            one-to-many association is more appropriate. Remodel the composite element as an
+            entity, but be aware that even though the .Net model is the same, the relational
+            model and persistence semantics are still slightly different.
+        </p><p>
+            A special case of a composite element is a composite element with a nested
+            <tt class="literal">&lt;many-to-one&gt;</tt> element. This mapping allows you to map extra
+            columns of a many-to-many association table to the composite element class. The
+            following is a many-to-many association from
+            <tt class="literal">Order</tt> to <tt class="literal">Item</tt> where
+            <tt class="literal">PurchaseDate</tt>, <tt class="literal">Price</tt> and
+            <tt class="literal">Quantity</tt> are properties of the association:
+        </p><pre class="programlisting">&lt;class name="Order" ... &gt;
+    ...
+    &lt;set name="PurchasedItems" table="purchase_items"&gt;
+        &lt;key column="order_id"&gt;
+        &lt;composite-element class="Purchase"&gt;
+            &lt;property name="PurchaseDate"/&gt;
+            &lt;property name="Price"/&gt;
+            &lt;property name="Quantity"/&gt;
+            &lt;many-to-one name="Item" class="Item"/&gt; &lt;!-- class attribute is optional --&gt;
+        &lt;/composite-element&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre><p>
+            There cannot be a reference to the purchase on the other side for bidirectional association
+            navigation. Components are value types and do not allow shared references. A single
+            <tt class="literal">Purchase</tt> can be in the set of an <tt class="literal">Order</tt>, but it cannot
+            be referenced by the <tt class="literal">Item</tt> at the same time.
+        </p><p>Even ternary (or quaternary, etc) associations are possible:</p><pre class="programlisting">&lt;class name="Order" ... &gt;
+    ...
+    &lt;set name="PurchasedItems" table="purchase_items"&gt;
+        &lt;key column="order_id"&gt;
+        &lt;composite-element class="OrderLine"&gt;
+            &lt;many-to-one name="PurchaseDetails class="Purchase"/&gt;
+            &lt;many-to-one name="Item" class="Item"/&gt;
+        &lt;/composite-element&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre><p>
+            Composite elements can appear in queries using the same syntax as
+            associations to other entities.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="components-asmapindex"></a>8.3.&nbsp;Components as IDictionary indices</h2></div></div><div></div></div><p>
+            The <tt class="literal">&lt;composite-map-key&gt;</tt> element lets you map a
+            component class as the key of an <tt class="literal">IDictionary</tt>. Make sure
+            you override <tt class="literal">GetHashCode()</tt> and <tt class="literal">Equals()</tt>
+            correctly on the component class. See <a href="collections.html#collections-indexed" title="6.2.3.&nbsp;Indexed collections">Section&nbsp;6.2.3, &#8220;Indexed collections&#8221;</a>
+            for more information on the <tt class="literal">&lt;composite-map-key&gt;</tt>
+            element.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="components-compositeid"></a>8.4.&nbsp;Components as composite identifiers</h2></div></div><div></div></div><p>
+            You can use a component as an identifier of an entity class. Your component
+            class must satisfy certain requirements:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    It must be marked with the <tt class="literal">Serializable</tt> attribute.
+                </p></li><li><p>
+                    It must re-implement <tt class="literal">Equals()</tt> and
+                    <tt class="literal">GetHashCode()</tt>, consistently with the database's 
+                    notion of composite key equality.
+                </p></li><li><p>
+                    It should re-implement <tt class="literal">ToString()</tt> if you consider
+                    using the second level cache. See <a href="caches.html#NHibernate.Caches-howto" title="27.1.&nbsp;How to use a cache?">Section&nbsp;27.1, &#8220;How to use a cache?&#8221;</a>.
+                </p></li></ul></div><p>
+            You cannot use an <tt class="literal">IIdentifierGenerator</tt> to generate composite keys.
+            Instead the application must assign its own identifiers.
+        </p><p>
+            Since a composite identifier must be assigned to the object before saving it,
+            you cannot use <tt class="literal">unsaved-value</tt> of the identifier to distinguish
+            between newly instantiated instances and instances saved in a previous session.
+            See <a href="mapping.html#mapping-declaration-id-assigned" title="5.1.5.7.&nbsp;Assigned Identifiers">Section&nbsp;5.1.5.7, &#8220;Assigned Identifiers&#8221;</a> for more information.
+        </p><p>
+            Use the <tt class="literal">&lt;composite-id&gt;</tt> tag, with nested
+            <tt class="literal">&lt;key-property&gt;</tt> or <tt class="literal">&lt;key-many-to-one&gt;</tt>
+            elements, in place of the usual <tt class="literal">&lt;id&gt;</tt> declaration. For example,
+            the following <tt class="literal">OrderLine</tt> class has a primary key that depends upon
+            the (composite) primary key of <tt class="literal">Order</tt>.
+        </p><pre class="programlisting">&lt;class name="OrderLine"&gt;
+    &lt;composite-id name="Id" class="OrderLineId"&gt;
+        &lt;key-property name="lineId"/&gt;
+        &lt;key-property name="orderId"/&gt;
+        &lt;key-property name="customerId"/&gt;
+    &lt;/composite-id&gt;
+
+    &lt;property name="Name"/&gt;
+
+    &lt;many-to-one name="Order" class="Order"
+            insert="false" update="false"&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/many-to-one&gt;
+    ...
+&lt;/class&gt;</pre><p>
+            Any foreign keys referencing the <tt class="literal">OrderLine</tt> table are now composite.
+            Declare this in your mappings for other classes. An association to
+            <tt class="literal">OrderLine</tt> is mapped like this:
+        </p><pre class="programlisting">&lt;many-to-one name="OrderLine" class="OrderLine"&gt;
+&lt;!-- the "class" attribute is optional, as usual --&gt;
+    &lt;column name="lineId"/&gt;
+    &lt;column name="orderId"/&gt;
+    &lt;column name="customerId"/&gt;
+&lt;/many-to-one&gt;</pre><p>
+            The <tt class="literal">&lt;column&gt;</tt> element is an alternative to the <tt class="literal">column</tt>
+            attribute everywhere. Using the <tt class="literal">&lt;column&gt;</tt> element is required for
+            composite keys, but also gives more declaration options, which are mostly useful when using
+            <tt class="literal">hbm2ddl</tt>. See <a href="mapping.html#mapping-column" title="5.1.21.&nbsp;column and formula elements">Section&nbsp;5.1.21, &#8220;column and formula elements&#8221;</a>.
+        </p><p>
+            A many-to-many association to <tt class="literal">OrderLine</tt> also uses the composite foreign key:
+        </p><pre class="programlisting">&lt;set name="UndeliveredOrderLines"&gt;
+    &lt;key column name="warehouseId"/&gt;
+    &lt;many-to-many class="OrderLine"&gt;
+        &lt;column name="lineId"/&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/many-to-many&gt;
+&lt;/set&gt;</pre><p>
+            The collection of <tt class="literal">OrderLine</tt> in <tt class="literal">Order</tt> would use:
+        </p><pre class="programlisting">&lt;set name="OrderLines" inverse="true"&gt;
+    &lt;key&gt;
+        &lt;column name="orderId"/&gt;
+        &lt;column name="customerId"/&gt;
+    &lt;/key&gt;
+    &lt;one-to-many class="OrderLine"/&gt;
+&lt;/set&gt;</pre><p>
+            The <tt class="literal">&lt;one-to-many&gt;</tt> element declares no columns.
+        </p><p>
+            If <tt class="literal">OrderLine</tt> itself owns a collection, it also has a composite foreign key.
+        </p><pre class="programlisting">&lt;class name="OrderLine"&gt;
+    ...
+    &lt;list name="DeliveryAttempts"&gt;
+        &lt;key&gt;   &lt;!-- a collection inherits the composite key type --&gt;
+            &lt;column name="lineId"/&gt;
+            &lt;column name="orderId"/&gt;
+            &lt;column name="customerId"/&gt;
+        &lt;/key&gt;
+        &lt;list-index column="attemptId" base="1"/&gt;
+        &lt;composite-element class="DeliveryAttempt"&gt;
+            ...
+        &lt;/composite-element&gt;
+    &lt;/set&gt;
+&lt;/class&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="components-dynamic"></a>8.5.&nbsp;Dynamic components</h2></div></div><div></div></div><p>
+            You can also map a property of type <tt class="literal">IDictionary</tt> or
+            <tt class="literal">IDictionary&lt;string, object&gt;</tt>, or declared as a C#
+            <tt class="literal">dynamic</tt>:
+        </p><pre class="programlisting">&lt;dynamic-component name="UserAttributes"&gt;
+    &lt;property name="Foo" column="FOO"/&gt;
+    &lt;property name="Bar" column="BAR"/&gt;
+    &lt;many-to-one name="Baz" class="Baz" column="BAZ_ID"/&gt;
+&lt;/dynamic-component&gt;</pre><p>
+            The semantics of a <tt class="literal">&lt;dynamic-component&gt;</tt> mapping are identical
+            to <tt class="literal">&lt;component&gt;</tt>. The advantage of this kind of mapping is
+            the ability to determine the actual properties of the component at deployment time, just
+            by editing the mapping document. Runtime manipulation of the mapping document is also
+            possible, using a DOM parser. You can also access, and change, NHibernate's
+            configuration-time metamodel via the <tt class="literal">Configuration</tt> object.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="associations.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="inheritance.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;7.&nbsp;Association Mappings&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;9.&nbsp;Inheritance Mapping</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

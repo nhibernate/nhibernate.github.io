@@ -1,0 +1,713 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/manipulatingdata.html" />
+    <title>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="inheritance.html" title="Chapter&nbsp;9.&nbsp;Inheritance Mapping"><link rel="next" href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="inheritance.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="readonly.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="manipulatingdata"></a>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-creating"></a>10.1.&nbsp;Creating a persistent object</h2></div></div><div></div></div><p>
+            An object (entity instance) is either <span class="emphasis"><em>transient</em></span> or
+            <span class="emphasis"><em>persistent</em></span> with respect to a particular
+            <tt class="literal">ISession</tt>. Newly instantiated objects are, of course, transient. 
+            The session offers services for saving (ie. persisting) transient instances:
+        </p><pre class="programlisting">DomesticCat fritz = new DomesticCat();
+fritz.Color = Color.Ginger;
+fritz.Sex = 'M';
+fritz.Name = "Fritz";
+long generatedId = (long) sess.Save(fritz);</pre><pre class="programlisting">DomesticCat pk = new DomesticCat();
+pk.Color = Color.Tabby;
+pk.Sex = 'F';
+pk.Name = "PK";
+pk.Kittens = new HashSet&lt;Cat&gt;();
+pk.AddKitten(fritz);
+sess.Save( pk, 1234L );</pre><p>
+            The single-argument <tt class="literal">Save()</tt> generates and assigns a unique
+            identifier to <tt class="literal">fritz</tt>. The two-argument form attempts to persist
+            <tt class="literal">pk</tt> using the given identifier. We generally discourage the use of 
+            the two-argument form since it may be used to create primary keys with business meaning.
+        </p><p>
+            Associated objects may be made persistent in any order you like unless you 
+            have a <tt class="literal">NOT NULL</tt> constraint upon a foreign key column.
+            There is never a risk of violating foreign key constraints. However, you 
+            might violate a <tt class="literal">NOT NULL</tt> constraint if you
+            <tt class="literal">Save()</tt> the objects in the wrong order.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-loading"></a>10.2.&nbsp;Loading an object</h2></div></div><div></div></div><p>
+            The <tt class="literal">Load()</tt> methods of <tt class="literal">ISession</tt> give you 
+            a way to retrieve a persistent instance if you already know its identifier. 
+            One version takes a class object and will load the state into a newly instantiated 
+            object. The second version allows you to supply an instance into which the state 
+            will be loaded. The form which takes an instance is only useful in special
+            circumstances (DIY instance pooling etc.)
+        </p><pre class="programlisting">Cat fritz = sess.Load&lt;Cat&gt;(generatedId);</pre><pre class="programlisting">long pkId = 1234;
+DomesticCat pk = sess.Load&lt;DomesticCat&gt;(pkId);</pre><pre class="programlisting">Cat cat = new DomesticCat();
+// load pk's state into cat
+sess.Load( cat, pkId );
+var kittens = cat.Kittens;</pre><p>
+            Note that <tt class="literal">Load()</tt> will throw an unrecoverable exception if there is no matching 
+            database row. If the class is mapped with a proxy, <tt class="literal">Load()</tt> returns an object
+            that is an uninitialized proxy and does not actually hit the database until you invoke a method of 
+            the object. This behaviour is very useful if you wish to create an association to an object
+            without actually loading it from the database.
+        </p><p>
+            If you are not certain that a matching row exists, you should use the <tt class="literal">Get()</tt>
+            method, which hits the database immediately and returns null if there is no matching row.
+        </p><pre class="programlisting">Cat cat = sess.Get&lt;Cat&gt;(id);
+if (cat==null) {
+    cat = new Cat();
+    sess.Save(cat, id);
+}
+return cat;</pre><p>
+            You may also load an objects using an SQL <tt class="literal">SELECT ... FOR UPDATE</tt>. See the next
+            section for a discussion of NHibernate <tt class="literal">LockMode</tt>s.
+        </p><pre class="programlisting">Cat cat = sess.Get&lt;Cat&gt;(id, LockMode.Upgrade);</pre><p>
+            Note that any associated instances or contained collections are <span class="emphasis"><em>not</em></span> selected 
+            <tt class="literal">FOR UPDATE</tt>.
+        </p><p>
+            It is possible to re-load an object and all its collections at any time, using the 
+            <tt class="literal">Refresh()</tt> method. This is useful when database triggers are used to
+            initialize some of the properties of the object.
+        </p><pre class="programlisting">sess.Save(cat);
+sess.Flush(); //force the SQL INSERT
+sess.Refresh(cat); //re-read the state (after the trigger executes)</pre><p>
+            An important question usually appears at this point: How much does NHibernate load
+            from the database and how many SQL <tt class="literal">SELECT</tt>s will it use? This
+            depends on the <span class="emphasis"><em>fetching strategy</em></span> and is explained in
+            <a href="performance.html#performance-fetching" title="21.1.&nbsp;Fetching strategies">Section&nbsp;21.1, &#8220;Fetching strategies&#8221;</a>.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-querying"></a>10.3.&nbsp;Querying</h2></div></div><div></div></div><p>
+            If you don't know the identifier(s) of the object(s) you are looking for, use the
+            <tt class="literal">CreateQuery()</tt> method of <tt class="literal">ISession</tt>. NHibernate
+            supports a simple but powerful object oriented query language.
+        </p><pre class="programlisting">IList&lt;Cat&gt; cats = sess
+    .CreateQuery("from Cat as cat where cat.Birthdate = ?")
+    .SetDateTime(0, date)
+    .List&lt;Cat&gt;();
+
+var mates = sess
+    .CreateQuery("select mate from Cat as cat join cat.Mate as mate " +
+        "where cat.name = ?")
+    .SetString(0, name)
+    .List&lt;Cat&gt;();
+
+var cats = sess
+    .CreateQuery("from Cat as cat where cat.Mate.Birthdate is null")
+    .List&lt;Cat&gt;();
+
+var moreCats = sess
+    .CreateQuery("from Cat as cat where " +
+        "cat.Name = 'Fritz' or cat.id = ? or cat.id = ?")
+    .SetInt64(0, id1)
+    .SetParameter(1, id2, NHibernateUtil.Int64)
+    .List&lt;Cat&gt;();
+
+var mates = sess
+    .CreateQuery("from Cat as cat where cat.Mate = ?")
+    .SetEntity(0, izi)
+    .List&lt;Cat&gt;();
+);
+
+var problems = sess
+    .CreateQuery("from GoldFish as fish " +
+        "where fish.Birthday &gt; fish.Deceased or fish.Birthday is null")
+    .List&lt;GoldFish&gt;();</pre><p>
+            These given <tt class="literal">Set</tt> parameters are used to bind the given values to the
+            <tt class="literal">?</tt> query placeholders (which map to input
+            parameters of an ADO.NET <tt class="literal">DbCommand</tt>). Just
+            as in ADO.NET, you should use this binding mechanism in preference to string
+            manipulation.
+        </p><p>
+            The <tt class="literal">NHibernateUtil</tt> class defines a number of static methods
+            and constants, providing access to most of the built-in types, as instances
+            of <tt class="literal">NHibernate.Type.IType</tt>.
+        </p><p>
+            If you expect your query to return a very large number of objects, but you 
+            don't expect to use them all, you might get better performance from the
+            <tt class="literal">Enumerable()</tt> method, which return a
+            <tt class="literal">IEnumerable</tt>. The iterator will load objects
+            on demand, using the identifiers returned by an initial SQL query (n+1 selects
+            total).
+        </p><pre class="programlisting">// fetch ids
+IEnumerable&lt;Qux&gt; en = sess
+    .CreateQuery("from eg.Qux q order by q.Likeliness")
+    .Enumerable&lt;Qux&gt;();
+foreach (Qux qux in en)
+{
+    // something we couldnt express in the query
+    if ( qux.CalculateComplicatedAlgorithm() ) {
+        // dont need to process the rest
+        break;
+    }
+}</pre><p>
+            The <tt class="literal">Enumerable()</tt> method also performs better if
+            you expect that many of the objects are already loaded and cached by 
+            the session, or if the query results contain the same objects many
+            times. (When no data is cached or repeated, <tt class="literal">CreateQuery()</tt>
+            is almost always faster.) Here is an example of a query that should be
+            called using <tt class="literal">Enumerable()</tt>:
+        </p><pre class="programlisting">
+var en = sess
+    .CreateQuery(
+        "select customer, product " +
+        "from Customer customer, " +
+        "Product product " +
+        "join customer.Purchases purchase " +
+        "where product = purchase.Product")
+    .Enumerable&lt;object[]&gt;();</pre><p>
+            Calling the previous query using <tt class="literal">CreateQuery()</tt> would return a very
+            large ADO.NET result set containing the same data many times.
+        </p><p>
+            NHibernate queries sometimes return tuples of objects, in which case each tuple
+            is returned as an array:
+        </p><pre class="programlisting">var foosAndBars = sess
+    .CreateQuery(
+        "select foo, bar from Foo foo, Bar bar " +
+        "where bar.Date = foo.Date")
+    .Enumerable&lt;object[]&gt;();
+foreach (object[] tuple in foosAndBars)
+{
+    Foo foo = tuple[0]; Bar bar = tuple[1];
+    ....
+}</pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-scalarqueries"></a>10.3.1.&nbsp;Scalar queries</h3></div></div><div></div></div><p>
+                Queries may specify a property of a class in the <tt class="literal">select</tt> clause.
+                They may even call SQL aggregate functions. Properties or aggregates are considered
+                "scalar" results.
+            </p><pre class="programlisting">var results = sess
+    .CreateQuery(
+        "select cat.Color, min(cat.Birthdate), count(cat) from Cat cat " +
+        "group by cat.Color")
+    .Enumerable&lt;object[]&gt;();
+foreach (object[] row in results)
+{
+    Color type = (Color) row[0];
+    DateTime oldest = (DateTime) row[1];
+    int count = (int) row[2];
+    .....
+}</pre><pre class="programlisting">var en = sess
+    .CreateQuery(
+        "select cat.Type, cat.Birthdate, cat.Name from DomesticCat cat")
+    .Enumerable&lt;object[]&gt;();</pre><pre class="programlisting">IList&lt;object[]&gt; list = sess
+    .CreateQuery("select cat, cat.Mate.Name from DomesticCat cat")
+    .List&lt;object[]&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-queryinterface"></a>10.3.2.&nbsp;The IQuery interface</h3></div></div><div></div></div><p>
+                If you need to specify bounds upon your result set (the maximum number of rows
+                you want to retrieve and / or the first row you want to retrieve) you should
+                obtain an instance of <tt class="literal">NHibernate.IQuery</tt>:
+            </p><pre class="programlisting">IQuery q = sess.CreateQuery("from DomesticCat cat");
+q.SetFirstResult(20);
+q.SetMaxResults(10);
+var cats = q.List&lt;Cat&gt;();</pre><p>
+                You may even define a named query in the mapping document. (Remember to use a
+                <tt class="literal">CDATA</tt> section if your query contains characters that could
+                be interpreted as markup.)
+            </p><pre class="programlisting">&lt;query name="Eg.DomesticCat.by.name.and.minimum.weight"&gt;&lt;![CDATA[
+    from Eg.DomesticCat as cat
+        where cat.Name = ?
+        and cat.Weight &gt; ?
+] ]&gt;&lt;/query&gt;</pre><pre class="programlisting">IQuery q = sess.GetNamedQuery("Eg.DomesticCat.by.name.and.minimum.weight");
+q.SetString(0, name);
+q.SetInt32(1, minWeight);
+var cats = q.List&lt;Cat&gt;();</pre><p>
+                Named queries are by default validated at startup time, allowing to catch errors
+                more easily than having to test all the application features using HQL queries. In
+                case of validation errors, the details of failing queries are logged and a
+                validation error is raised.
+            </p><p>
+                Named queries accepts a number of attributes matching settings available on the
+                <tt class="literal">IQuery</tt> interface.
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">flush-mode</tt> - override the session flush mode just for this query.
+                    </p></li><li><p>
+                    <tt class="literal">cacheable</tt> - allow the query results to be cached by the second level cache.
+                    See <a href="caches.html" title="Chapter&nbsp;27.&nbsp;NHibernate.Caches">Chapter&nbsp;27, <i>NHibernate.Caches</i></a>.
+                    </p></li><li><p>
+                    <tt class="literal">cache-region</tt> - specify the cache region of the query.
+                    </p></li><li><p>
+                    <tt class="literal">cache-mode</tt> - specify the cache mode of the query.
+                    </p></li><li><p>
+                    <tt class="literal">fetch-size</tt> - set a fetch size for the underlying ADO query.
+                    </p></li><li><p>
+                    <tt class="literal">timeout</tt> - set the query timeout in seconds.
+                    </p></li><li><p>
+                    <tt class="literal">read-only</tt> - <tt class="literal">true</tt> switches yielded entities to read-only.
+                    See <a href="readonly.html" title="Chapter&nbsp;11.&nbsp;Read-only entities">Chapter&nbsp;11, <i>Read-only entities</i></a>.
+                    </p></li><li><p>
+                    <tt class="literal">comment</tt> - add a custom comment to the generated SQL.
+                    </p></li></ul></div><p>
+                The query interface supports the use of named parameters. Named parameters
+                are identifiers of the form <tt class="literal">:name</tt> in the query string.
+                There are methods on <tt class="literal">IQuery</tt> for binding values to named
+                or positional parameters. NHibernate numbers parameters from zero.
+                The advantages of named parameters are:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        named parameters are insensitive to the order they occur in the
+                        query string
+                    </p></li><li><p>
+                        they may occur multiple times in the same query
+                    </p></li><li><p>
+                        they are self-documenting
+                    </p></li></ul></div><pre class="programlisting">//named parameter (preferred)
+IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name = :name");
+q.SetString("name", "Fritz");
+var cats = q.Enumerable&lt;DomesticCat&gt;();</pre><pre class="programlisting">//positional parameter
+IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name = ?");
+q.SetString(0, "Izi");
+var cats = q.Enumerable&lt;DomesticCat&gt;();</pre><pre class="programlisting">//named parameter list
+var names = new List&lt;string&gt;();
+names.Add("Izi");
+names.Add("Fritz");
+IQuery q = sess.CreateQuery("from DomesticCat cat where cat.Name in (:namesList)");
+q.SetParameterList("namesList", names);
+var cats = q.List&lt;DomesticCat&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-filtering"></a>10.3.3.&nbsp;Filtering collections</h3></div></div><div></div></div><p>
+                A collection <span class="emphasis"><em>filter</em></span> is a special type of query that may be applied to
+                a persistent collection or array. The query string may refer to <tt class="literal">this</tt>,
+                meaning the current collection element.
+            </p><pre class="programlisting">var blackKittens = session
+    .CreateFilter(pk.Kittens, "where this.Color = ?")
+    .SetEnum(0, Color.Black)
+    .List&lt;Cat&gt;();</pre><p>
+                The returned collection is considered a bag.
+            </p><p>
+                Observe that filters do not require a <tt class="literal">from</tt> clause (though they may have
+                one if required). Filters are not limited to returning the collection elements themselves.
+            </p><pre class="programlisting">var blackKittenMates = session
+    .CreateFilter(pk.Kittens,
+        "select this.Mate where this.Color = Eg.Color.Black")
+    .List&lt;Cat&gt;();</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-criteria"></a>10.3.4.&nbsp;Criteria queries</h3></div></div><div></div></div><p>
+                HQL is extremely powerful but some people prefer to build queries dynamically, using an
+                object oriented API, rather than embedding strings in their .NET code. For these people,
+                NHibernate provides an intuitive <tt class="literal">ICriteria</tt> query API.
+            </p><pre class="programlisting">ICriteria crit = session.CreateCriteria&lt;Cat&gt;();
+crit.Add(Expression.Eq("color", Eg.Color.Black));
+crit.SetMaxResults(10);
+var cats = crit.List&lt;Cat&gt;();</pre><p>
+                If you are uncomfortable with SQL-like syntax, this is perhaps the easiest way to get started
+                with NHibernate. This API is also more extensible than HQL. Applications might provide their
+                own implementations of the <tt class="literal">ICriterion</tt> interface.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-nativesql"></a>10.3.5.&nbsp;Queries in native SQL</h3></div></div><div></div></div><p>
+                You may express a query in SQL, using <tt class="literal">CreateSQLQuery()</tt>. You must enclose
+                SQL aliases in braces.
+            </p><pre class="programlisting">var cats = session
+    .CreateSQLQuery("SELECT {cat.*} FROM CAT {cat} WHERE ROWNUM&lt;10")
+    .AddEntity("cat", typeof(Cat))
+    .List&lt;Cat&gt;();</pre><pre class="programlisting">var cats = session
+    .CreateSQLQuery(
+        "SELECT {cat}.ID AS {cat.Id}, {cat}.SEX AS {cat.Sex}, " +
+           "{cat}.MATE AS {cat.Mate}, {cat}.SUBCLASS AS {cat.class}, ... " +
+        "FROM CAT {cat} WHERE ROWNUM&lt;10")
+    .AddEntity("cat", typeof(Cat))
+    .List&lt;Cat&gt;()</pre><p>
+                SQL queries may contain named and positional parameters, just like NHibernate queries.
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-updating"></a>10.4.&nbsp;Updating objects</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-updating-insession"></a>10.4.1.&nbsp;Updating in the same ISession</h3></div></div><div></div></div><p>
+                <span class="emphasis"><em>Transactional persistent instances</em></span> (ie. objects loaded, saved, created or
+                queried by the <tt class="literal">ISession</tt>) may be manipulated by the application
+                and any changes to persistent state will be persisted when the <tt class="literal">ISession</tt>
+                is <span class="emphasis"><em>flushed</em></span> (discussed later in this chapter). So the most
+                straightforward way to update the state of an object is to <tt class="literal">Load()</tt> it,
+                and then manipulate it directly, while the <tt class="literal">ISession</tt> is open:
+            </p><pre class="programlisting">DomesticCat cat = sess.Load&lt;DomesticCat&gt;(69L);
+cat.Name = "PK";
+sess.Flush();  // changes to cat are automatically detected and persisted</pre><p>
+                Sometimes this programming model is inefficient since it would require both an SQL
+                <tt class="literal">SELECT</tt> (to load an object) and an SQL <tt class="literal">UPDATE</tt>
+                (to persist its updated state) in the same session. Therefore NHibernate offers an
+                alternate approach.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-updating-detached"></a>10.4.2.&nbsp;Updating detached objects</h3></div></div><div></div></div><p>
+                Many applications need to retrieve an object in one transaction, send it to the
+                UI layer for manipulation, then save the changes in a new transaction.
+                (Applications  that use this kind of approach in a high-concurrency environment
+                usually use versioned  data to ensure transaction isolation.) This approach
+                requires a slightly different  programming model to the one described in the
+                last section. NHibernate supports this model by providing the
+                method <tt class="literal">ISession.Update()</tt>.
+            </p><pre class="programlisting">// in the first session
+Cat cat = firstSession.Load&lt;Cat&gt;(catId);
+Cat potentialMate = new Cat();
+firstSession.Save(potentialMate);
+
+// in a higher tier of the application
+cat.Mate = potentialMate;
+
+// later, in a new session
+secondSession.Update(cat);  // update cat</pre><p>
+                If the <tt class="literal">Cat</tt> with identifier <tt class="literal">catId</tt> had already
+                been loaded  by <tt class="literal">secondSession</tt> when the application tried to
+                update it, an exception would have been thrown.
+            </p><p>
+                The application should individually <tt class="literal">Update()</tt> transient instances
+                reachable from the given transient instance if and <span class="emphasis"><em>only</em></span> if it wants
+                their state also updated. (Except for lifecycle objects, see
+                <a href="manipulatingdata.html#manipulatingdata-graphs" title="10.10.&nbsp;Lifecycles and object graphs">Section&nbsp;10.10, &#8220;Lifecycles and object graphs&#8221;</a>.)
+            </p><p>
+                NHibernate users have requested a general purpose method that either saves a
+                transient instance by generating a new identifier or update the persistent
+                state associated with its current identifier. The <tt class="literal">SaveOrUpdate()</tt>
+                method now implements this functionality.
+            </p><p>
+                NHibernate distinguishes "new" (unsaved) instances from "existing" (saved or
+                loaded in a previous session) instances by the value of their identifier
+                (or version, or timestamp) property. The <tt class="literal">unsaved-value</tt>
+                attribute of the <tt class="literal">&lt;id&gt;</tt> (or <tt class="literal">&lt;version&gt;</tt>,
+                or <tt class="literal">&lt;timestamp&gt;</tt>) mapping specifies which values should
+                be interpreted as representing a "new" instance.
+            </p><pre class="programlisting">&lt;id name="Id" type="Int64" column="uid" unsaved-value="0"&gt;
+    &lt;generator class="hilo"/&gt;
+&lt;/id&gt;</pre><p>
+                The allowed values of <tt class="literal">unsaved-value</tt> are:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">any</tt> - always save
+                    </p></li><li><p>
+                    <tt class="literal">none</tt> - always update
+                    </p></li><li><p>
+                    <tt class="literal">null</tt> - save when identifier is null
+                    </p></li><li><p>
+                    valid identifier value - save when identifier is null or the given value
+                    </p></li><li><p>
+                        <tt class="literal">undefined</tt> - do not infer the operation from the identifier
+                        (or <tt class="literal">version</tt>, or <tt class="literal">timestamp</tt>). Ultimately,
+                        NHibernate may query the database for determining the operation it has to
+                        perform.
+                    </p></li></ul></div><p>
+                If <tt class="literal">unsaved-value</tt> is not specified for a class, NHibernate
+                will attempt to guess it by creating an instance of the class using the no-argument
+                constructor and reading the property value from the instance.
+            </p><pre class="programlisting">// in the first session
+Cat cat = firstSession.Load&lt;Cat&gt;(catID);
+
+// in a higher tier of the application
+Cat mate = new Cat();
+cat.Mate = mate;
+
+// later, in a new session
+secondSession.SaveOrUpdate(cat);   // update existing state (cat has a non-null id)
+secondSession.SaveOrUpdate(mate);  // save the new instance (mate has a null id)</pre><p>
+                The usage and semantics of <tt class="literal">SaveOrUpdate()</tt> seems to be confusing
+                for new users. Firstly, so long as you are not trying to use instances from one session
+                in another new session, you should not need to use <tt class="literal">Update()</tt> or
+                <tt class="literal">SaveOrUpdate()</tt>. Some whole applications will never use either of
+                these methods.
+            </p><p>
+                Usually <tt class="literal">Update()</tt> or <tt class="literal">SaveOrUpdate()</tt> are used in
+                the following scenario:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        the application loads an object in the first session
+                    </p></li><li><p>
+                        the object is passed up to the UI tier
+                    </p></li><li><p>
+                        some modifications are made to the object
+                    </p></li><li><p>
+                        the object is passed back down to the business logic tier
+                    </p></li><li><p>
+                        the application persists these modifications by calling
+                        <tt class="literal">Update()</tt> in a second session
+                    </p></li></ul></div><p>
+                <tt class="literal">SaveOrUpdate()</tt> does the following:
+            </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                        if the object is already persistent in this session, do nothing
+                    </p></li><li><p>
+                        if the object has no identifier property, <tt class="literal">Save()</tt> it
+                    </p></li><li><p>
+                        if the object's identifier matches the criteria specified by
+                        <tt class="literal">unsaved-value</tt>, <tt class="literal">Save()</tt> it
+                    </p></li><li><p>
+                        if the object is versioned (<tt class="literal">version</tt> or
+                        <tt class="literal">timestamp</tt>), and its version matches the criteria
+                        specified by <tt class="literal">unsaved-value</tt>, <tt class="literal">Save()</tt>
+                        it
+                    </p></li><li><p>
+                        if another object associated with the session has the same
+                        identifier, throw an exception
+                    </p></li></ul></div><p>
+                The last case can be avoided by using <tt class="literal">Merge(Object o)</tt>. This method
+                copies the state of the given object onto the persistent object with the same identifier. If
+                there is no persistent instance currently associated with the session, it will be loaded.
+                The method returns the persistent instance. If the given instance is unsaved or does not
+                exist in the database, NHibernate will save it and return it as a newly persistent instance.
+                Otherwise, the given instance  does not become associated with the session. In most
+                applications with detached objects, you need both methods, <tt class="literal">SaveOrUpdate()</tt>
+                and <tt class="literal">Merge()</tt>.
+             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-update-lock"></a>10.4.3.&nbsp;Reattaching detached objects</h3></div></div><div></div></div><p>
+                The <tt class="literal">Lock()</tt> method allows the application to re-associate
+                an unmodified object with a new session.
+            </p><pre class="programlisting">//just reassociate:
+sess.Lock(fritz, LockMode.None);
+//do a version check, then reassociate:
+sess.Lock(izi, LockMode.Read);
+//do a version check, using SELECT ... FOR UPDATE, then reassociate:
+sess.Lock(pk, LockMode.Upgrade);</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-deleting"></a>10.5.&nbsp;Deleting persistent objects</h2></div></div><div></div></div><p>
+            <tt class="literal">ISession.Delete()</tt> will remove an object's state from the database. 
+            Of course, your application might still hold a reference to it. So it's best to think 
+            of <tt class="literal">Delete()</tt> as making a persistent instance transient.
+        </p><pre class="programlisting">sess.Delete(cat);</pre><p>
+            You may also delete many objects at once by passing a NHibernate query string to
+            <tt class="literal">Delete()</tt>.
+        </p><pre class="programlisting">sess.Delete("from Cat");</pre><p>
+            You may now delete objects in any order you like, without risk of foreign key
+            constraint violations. Of course, it is still possible to violate a <tt class="literal">NOT
+            NULL</tt> constraint on a foreign key column by deleting objects in
+            the wrong order.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-flushing"></a>10.6.&nbsp;Flush</h2></div></div><div></div></div><p>
+            From time to time the <tt class="literal">ISession</tt> will execute the SQL statements 
+            needed to synchronize the ADO.NET connection's state with the state of objects held in 
+            memory. This process, <span class="emphasis"><em>flush</em></span>, occurs by default at the following 
+            points
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    from some invocations of <tt class="literal">IQuery</tt> methods such as <tt class="literal">List</tt>
+                    or <tt class="literal">Enumerable</tt>, and from similar methods of other querying API.
+                </p></li><li><p>
+                    from <tt class="literal">NHibernate.ITransaction.Commit()</tt>
+                </p></li><li><p>
+                    from <tt class="literal">ISession.Flush()</tt>
+                </p></li></ul></div><p>
+            The SQL statements are issued in the following order
+        </p><div class="orderedlist"><ol type="1" compact><li><p>
+                    all entity insertions, in the same order the corresponding objects
+                    were saved using <tt class="literal">ISession.Save()</tt>
+                </p></li><li><p>
+                    all entity updates
+                </p></li><li><p>
+                    all collection deletions
+                </p></li><li><p>
+                    all collection element deletions, updates and insertions
+                </p></li><li><p>
+                    all collection insertions
+                </p></li><li><p>
+                    all entity deletions, in the same order the corresponding objects
+                    were deleted using <tt class="literal">ISession.Delete()</tt>
+                </p></li></ol></div><p>
+            (An exception is that objects using <tt class="literal">identity</tt> ID generation are
+            inserted when they are saved.)
+        </p><p>
+            Except when you explicitly <tt class="literal">Flush()</tt>, there are absolutely no 
+            guarantees about <span class="emphasis"><em>when</em></span> the <tt class="literal">Session</tt> executes 
+            the ADO.NET calls, only the <span class="emphasis"><em>order</em></span> in which they are executed.
+            However, NHibernate does guarantee that the queries methods will never return stale
+            data; nor will they return the wrong data.
+        </p><p>
+            It is possible to change the default behavior so that flush occurs less frequently.
+            The <tt class="literal">FlushMode</tt> class defines three different modes:
+            only flush at commit time (and only when the NHibernate <tt class="literal">ITransaction</tt>
+            API is used, or inside a transaction scope), flush automatically using the explained
+            routine (will only work inside an explicit NHibernate <tt class="literal">ITransaction</tt> or
+            inside a transaction scope), or never flush unless
+            <tt class="literal">Flush()</tt> is called explicitly. The last mode is useful for long
+            running units of work, where an ISession is kept open and disconnected for a long time
+            (see <a href="transactions.html#transactions-optimistic" title="12.4.&nbsp;Optimistic concurrency control">Section&nbsp;12.4, &#8220;Optimistic concurrency control&#8221;</a>).
+        </p><pre class="programlisting">sess = sf.OpenSession();
+using (ITransaction tx = sess.BeginTransaction())
+{
+    // allow queries to return stale state
+    sess.FlushMode = FlushMode.Commit;
+    Cat izi = sess.Load&lt;Cat&gt;(id);
+    izi.Name = "iznizi";
+    // execute some queries....
+    sess.CreateQuery("from Cat as cat left outer join cat.Kittens kitten")
+        .List&lt;object[]&gt;();
+    // change to izi is not flushed!
+    ...
+    tx.Commit(); // flush occurs
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-dirtiness"></a>10.7.&nbsp;Checking dirtiness</h2></div></div><div></div></div><p>
+            <tt class="literal">ISession.IsDirty()</tt> will return whether the session hold any pending
+            change to flush or not. Be cautious when using this method, its default implementation
+            may have the following effects:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    Dirty checks all the loaded entities. NHibernate does not instrument the entities
+                    for being notified of changes done on loaded ones. Instead, it stores their
+                    initial state and compare them to it. If session has loaded a lot of entities,
+                    the dirty checking will have a significant impact.
+                </p></li><li><p>
+                    Triggers pending cascade operations. This includes any pending <tt class="literal">Save</tt>
+                    of, by example, children added to a collection having the <tt class="literal">Save</tt>
+                    cascade enabled. Depending on the entities ID generators (see
+                    <a href="mapping.html#mapping-declaration-id-generator" title="5.1.5.1.&nbsp;generator">Section&nbsp;5.1.5.1, &#8220;generator&#8221;</a>), this may trigger calls to the
+                    database, or even entity insertions if they are using the <tt class="literal">identity</tt>
+                    generator.
+                </p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-endingsession"></a>10.8.&nbsp;Ending a Session</h2></div></div><div></div></div><p>
+            Ending a session involves four distinct phases:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    flush the session
+                </p></li><li><p>
+                    commit the transaction
+                </p></li><li><p>
+                    close the session
+                </p></li><li><p>
+                    handle exceptions
+                </p></li></ul></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-flushing"></a>10.8.1.&nbsp;Flushing the Session</h3></div></div><div></div></div><p>
+                If you happen to be using the <tt class="literal">ITransaction</tt> API, you don't
+                need to worry about this step. It will be performed implicitly when the 
+                transaction is committed. Otherwise you should call 
+                <tt class="literal">ISession.Flush()</tt> to ensure that all changes are synchronized
+                with the database.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-commit"></a>10.8.2.&nbsp;Committing the database transaction</h3></div></div><div></div></div><p>
+                If you are using the NHibernate <tt class="literal">ITransaction</tt> API, this looks like:
+            </p><pre class="programlisting">tx.Commit(); // flush the session and commit the transaction</pre><p>
+                If you are managing ADO.NET transactions yourself you should manually
+                <tt class="literal">Commit()</tt> the ADO.NET transaction.
+            </p><pre class="programlisting">sess.Flush();
+currentTransaction.Commit();</pre><p>
+                If you decide <span class="emphasis"><em>not</em></span> to commit your changes:
+            </p><pre class="programlisting">tx.Rollback();  // rollback the transaction</pre><p>
+                or:
+            </p><pre class="programlisting">currentTransaction.Rollback();</pre><p>
+                If you rollback the transaction you should immediately close and discard the current
+                session to ensure that NHibernate's internal state is consistent.
+            </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="manipulatingdata-endingsession-close"></a>10.8.3.&nbsp;Closing the ISession</h3></div></div><div></div></div><p>
+                A call to <tt class="literal">ISession.Close()</tt> marks the end of a session. The main implication
+                of <tt class="literal">Close()</tt> is that the ADO.NET connection will be relinquished by the session.
+            </p><pre class="programlisting">tx.Commit();
+sess.Close();</pre><pre class="programlisting">sess.Flush();
+currentTransaction.Commit();
+sess.Close();</pre><p>
+                If you provided your own connection, <tt class="literal">Close()</tt> returns a reference 
+                to it, so you can manually close it or return it to the pool. Otherwise
+                <tt class="literal">Close()</tt> returns it to the pool.
+            </p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-exceptions"></a>10.9.&nbsp;Exception handling</h2></div></div><div></div></div><p>
+            NHibernate use might lead to exceptions, usually <tt class="literal">HibernateException</tt>.
+            This exception can have	a nested inner exception (the root cause), use the
+            <tt class="literal">InnerException</tt> property to access it.
+        </p><p>
+            If the <tt class="literal">ISession</tt> throws an exception you should immediately
+            rollback the transaction, call <tt class="literal">ISession.Close()</tt>
+            and discard the <tt class="literal">ISession</tt> instance. Certain
+            methods of <tt class="literal">ISession</tt> will <span class="emphasis"><em>not</em></span>
+            leave the session in a consistent state.
+        </p><p>
+            For exceptions thrown by the data provider while interacting with the database,
+            NHibernate will wrap the error in an instance of <tt class="literal">ADOException</tt>.
+            The underlying exception is accessible by calling <tt class="literal">ADOException.InnerException</tt>.
+            NHibernate converts the <tt class="literal">DbException</tt> into an appropriate <tt class="literal">ADOException</tt>
+            subclass using the <tt class="literal">ISQLExceptionConverter</tt> attached to the SessionFactory.
+            By default, the <tt class="literal">ISQLExceptionConverter</tt> is defined by the configured dialect;
+            however, it is also possible to plug in a custom implementation
+            (see the api-docs for the <tt class="literal">ISQLExceptionConverter</tt> class for details).
+        </p><p>
+            The following exception handling idiom shows the typical case in NHibernate applications:
+        </p><pre class="programlisting">using (ISession sess = factory.OpenSession())
+using (ITransaction tx = sess.BeginTransaction())
+{
+    // do some work
+    ...
+    tx.Commit();
+}</pre><p>
+            Or, when manually managing ADO.NET transactions:
+        </p><pre class="programlisting">ISession sess = factory.openSession();
+try
+{
+    // do some work
+    ...
+    sess.Flush();
+    currentTransaction.Commit();
+}
+catch (Exception e)
+{
+    currentTransaction.Rollback();
+    throw;
+}
+finally
+{
+    sess.Close();
+}</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-graphs"></a>10.10.&nbsp;Lifecycles and object graphs</h2></div></div><div></div></div><p>
+            To save or update all objects in a graph of associated objects, you must either
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">Save()</tt>, <tt class="literal">SaveOrUpdate()</tt> or
+                    <tt class="literal">Update()</tt> each individual object OR
+                </p></li><li><p>
+                    map associated objects using <tt class="literal">cascade="all"</tt> or
+                    <tt class="literal">cascade="save-update"</tt>.
+                </p></li></ul></div><p>
+            Likewise, to delete all objects in a graph, either
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    <tt class="literal">Delete()</tt> each individual object OR
+                </p></li><li><p>
+                    map associated objects using <tt class="literal">cascade="all"</tt>,
+                    <tt class="literal">cascade="all-delete-orphan"</tt> or
+                    <tt class="literal">cascade="delete"</tt>.
+                </p></li></ul></div><p>
+            Recommendation:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    If the child object's lifespan is bounded by the lifespan of the of the parent
+                    object make it a <span class="emphasis"><em>lifecycle object</em></span> by specifying
+                    <tt class="literal">cascade="all"</tt>.
+                </p></li><li><p>
+                    Otherwise, <tt class="literal">Save()</tt> and <tt class="literal">Delete()</tt> it
+                    explicitly from application code. If you really want to save yourself some
+                    extra typing, use <tt class="literal">cascade="save-update"</tt> and explicit
+                    <tt class="literal">Delete()</tt>.
+                </p></li></ul></div><p>
+            Mapping an association (many-to-one, one-to-one or collection) with <tt class="literal">cascade="all"</tt>
+            marks the association as a <span class="emphasis"><em>parent/child</em></span> style relationship where
+            save/update/deletion of the parent results in save/update/deletion of the child(ren).
+            Furthermore, a mere reference to a child from a persistent parent will result in save / update
+            of the child. The metaphor is incomplete, however. A child which becomes unreferenced by its
+            parent is <span class="emphasis"><em>not</em></span> automatically deleted, except in the cases of 
+            <tt class="literal">&lt;one-to-many&gt;</tt> and <tt class="literal">&lt;one-to-one&gt;</tt> associations 
+            that have been mapped with <tt class="literal">cascade="all-delete-orphan"</tt> or 
+            <tt class="literal">cascade="delete-orphan"</tt>. The precise semantics of cascading operations
+            are as follows:
+        </p><div class="itemizedlist"><ul type="disc" compact><li><p>
+                    If a parent is saved, all children are passed to <tt class="literal">SaveOrUpdate()</tt>
+                </p></li><li><p>
+                    If a parent is passed to <tt class="literal">Update()</tt> or <tt class="literal">SaveOrUpdate()</tt>,
+                    all children are passed to <tt class="literal">SaveOrUpdate()</tt>
+                </p></li><li><p>
+                    If a transient child becomes referenced by a persistent parent, it is passed to
+                    <tt class="literal">SaveOrUpdate()</tt>
+                </p></li><li><p>
+                    If a parent is deleted, all children are passed to <tt class="literal">Delete()</tt>
+                </p></li><li><p>
+                    If a transient child is dereferenced by a persistent parent, <span class="emphasis"><em>nothing
+                    special happens</em></span> (the application should explicitly delete the child if
+                    necessary) unless <tt class="literal">cascade="all-delete-orphan"</tt> or 
+                    <tt class="literal">cascade="delete-orphan"</tt>, in which case the "orphaned" child is deleted.
+                </p></li></ul></div><p>
+            NHibernate does not fully implement "persistence by reachability", which would imply
+            (inefficient) persistent garbage collection. However, due to popular demand,
+            NHibernate does support the notion of entities becoming persistent when referenced
+            by another persistent object. Associations marked
+            <tt class="literal">cascade="save-update"</tt> behave in this way. If you wish to use this
+            approach throughout your application, it's easier to specify the
+            <tt class="literal">default-cascade</tt> attribute of the
+            <tt class="literal">&lt;hibernate-mapping&gt;</tt> element.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-interceptors"></a>10.11.&nbsp;Interceptors</h2></div></div><div></div></div><p>
+            The <tt class="literal">IInterceptor</tt> interface provides callbacks from the session to the 
+            application allowing the application to inspect and / or manipulate properties of a 
+            persistent object before it is saved, updated, deleted or loaded. One 
+            possible use for this is to track auditing information. See
+            <a href="events.html#objectstate-interceptors" title="13.1.&nbsp;Interceptors">Section&nbsp;13.1, &#8220;Interceptors&#8221;</a> for more information.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-metadata"></a>10.12.&nbsp;Metadata API</h2></div></div><div></div></div><p>
+            NHibernate requires a very rich meta-level model of all entity and value types. From time
+            to time, this model is very useful to the application itself. For example, the application
+            might use NHibernate's metadata to implement a "smart" deep-copy algorithm that understands
+            which objects should be copied (eg. mutable value types) and which should not (eg. 
+            immutable value types and, possibly, associated entities).
+        </p><p>
+            NHibernate exposes metadata via the <tt class="literal">IClassMetadata</tt> and
+            <tt class="literal">ICollectionMetadata</tt> interfaces and the <tt class="literal">IType</tt>
+            hierarchy. Instances of the metadata interfaces may be obtained from the 
+            <tt class="literal">ISessionFactory</tt>.
+        </p><pre class="programlisting">Cat fritz = ......;
+IClassMetadata catMeta = sessionfactory.GetClassMetadata(typeof(Cat));
+long id = (long) catMeta.GetIdentifier(fritz);
+object[] propertyValues = catMeta.GetPropertyValues(fritz);
+string[] propertyNames = catMeta.PropertyNames;
+IType[] propertyTypes = catMeta.PropertyTypes;
+
+// get an dictionary of all properties which are not collections or associations
+// TODO: what about components?
+
+var namedValues = new Dictionary&lt;string, object&gt;();
+for (int i = 0; i &lt; propertyNames.Length; i++)
+{
+    if (!propertyTypes[i].IsEntityType &amp;&amp; !propertyTypes[i].IsCollectionType)
+    {
+        namedValues[propertyNames[i]] = propertyValues[i];
+    }
+}</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="inheritance.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="readonly.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Inheritance Mapping&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Read-only entities</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>

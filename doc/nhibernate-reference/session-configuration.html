@@ -6,7 +6,8 @@ layout:
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture"><link rel="next" href="persistent-classes.html" title="Chapter&nbsp;4.&nbsp;Persistent Classes">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/session-configuration.html" />
+   <title>Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture"><link rel="next" href="persistent-classes.html" title="Chapter&nbsp;4.&nbsp;Persistent Classes">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
     <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;3.&nbsp;ISessionFactory Configuration</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="architecture.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="persistent-classes.html">Next</a></td></tr></table><hr></div>
@@ -450,6 +451,13 @@ var session = sessions.OpenSession(conn);
                             <p>
                                 <span class="strong">eg.</span>
                                 <tt class="literal">classname.of.SQLExceptionConverter, assembly</tt>
+                            </p></td></tr><tr><td><tt class="literal">escape_backslash_in_strings</tt></td><td>
+                            Indicates if the database needs to have backslash escaped in string literals.
+                            The default value is dialect dependant. That is <tt class="literal">false</tt> for
+                            most dialects.
+                            <p>
+                                <span class="strong">eg.</span> 
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
                             </p></td></tr><tr><td><tt class="literal">show_sql</tt></td><td>
                             Write all SQL statements to console. Defaults to <tt class="literal">false</tt>.
                             <p>
@@ -542,12 +550,30 @@ var session = sessions.OpenSession(conn);
                                 after scope disposal. This occurs when the transaction is distributed.
                                 This notably concerns <tt class="literal">ISessionImplementor.AfterTransactionCompletion(bool, ITransaction)</tt>.
                                 NHibernate protects the session from being concurrently used by the code following the scope disposal
-                                with a lock. To prevent any application freeze, this lock has a default timeout of five seconds. If the
-                                application appears to require longer (!) running transaction completion events, this setting allows to
+                                with a lock. To prevent any application freeze, this lock has a default timeout of one second. If the
+                                application appears to require longer running transaction completion events, this setting allows to
                                 raise this timeout. <tt class="literal">-1</tt> disables the timeout.
                             </p><p>
                                 <span class="strong">eg.</span>
                                 <tt class="literal">10000</tt>
+                            </p></td></tr><tr><td><tt class="literal">transaction.ignore_session_synchronization_failures</tt></td><td>
+                            Whether session synchronisation failures occuring during finalizations of system transaction should be
+                            ignored or not. <tt class="literal">false</tt> by default.
+                            <p>
+                                When a system transaction terminates abnormaly, especially through timeouts, it may have its
+                                completion events running on concurrent threads while the session is still performing some processing.
+                                To prevent threading concurrency failures, NHibernate then wait for the session to end its processing,
+                                up to <tt class="literal">transaction.system_completion_lock_timeout</tt>. If the session processing is still ongoing
+                                afterwards, it will by default log an error, perform transaction finalization processing concurrently,
+                                then throw a synchronization error. This setting allows to disable that later throw.
+                            </p><p>
+                                Disabling the throw can be useful if the used data provider has its own locking mechanism applied
+                                during transaction completion, preventing the session to end its processing. It may then be safe to
+                                ignore this synchronization failure. In case of threading concurrency failure, you may then need to
+                                raise <tt class="literal">transaction.system_completion_lock_timeout</tt>.
+                            </p><p>
+                                <span class="strong">eg.</span>
+                                <tt class="literal">true</tt> | <tt class="literal">false</tt>
                             </p></td></tr><tr><td><tt class="literal">transaction.auto_join</tt></td><td>
                             Should sessions check on every operation whether there is an ongoing system transaction or not, and enlist
                             into it if any?
@@ -745,7 +771,7 @@ in the parameter binding.</pre><p>
                                     behavior of System.Data.SQLite</a> with <tt class="literal">DateTime</tt>, consider using
                                     <tt class="literal">DateTimeFormatString=yyyy-MM-dd HH:mm:ss.FFFFFFF;</tt> in the SQLite
                                     connection string for preventing undesired time shifts with its default configuration.
-                                </p></td></tr><tr><td>Sybase Adaptive Server Anywhere 9</td><td><tt class="literal">NHibernate.Dialect.SybaseASA9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 15</td><td><tt class="literal">NHibernate.Dialect.SybaseASE15Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 10</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere10Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 11</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere11Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 12</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere12Dialect</tt></td><td>&nbsp;</td></tr></tbody></table></div><p>
+                                </p></td></tr><tr><td>Sybase Adaptive Server Anywhere 9</td><td><tt class="literal">NHibernate.Dialect.SybaseASA9Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 15</td><td><tt class="literal">NHibernate.Dialect.SybaseASE15Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase Adaptive Server Enterprise 16</td><td><tt class="literal">NHibernate.Dialect.SybaseASE16Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 10</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere10Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 11</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere11Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Sybase SQL Anywhere 12</td><td><tt class="literal">NHibernate.Dialect.SybaseSQLAnywhere12Dialect</tt></td><td>&nbsp;</td></tr></tbody></table></div><p>
                 Additional dialects may be available in the NHibernate.Dialect namespace.
             </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="configuration-optional-outerjoin"></a>3.6.2.&nbsp;Outer Join Fetching</h3></div></div><div></div></div><p>
                 If your database supports ANSI or Oracle style outer joins, <span class="emphasis"><em>outer join

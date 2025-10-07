@@ -1,0 +1,360 @@
+---
+layout:
+---
+<!doctype html>
+<html><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="canonical" href="https://nhibernate.info/doc/nhibernate-reference/quickstart.html" />
+    <title>Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</title><link rel="stylesheet" href="../shared/css/html.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="up" href="index.html" title="NHibernate - Relational Persistence for Idiomatic .NET"><link rel="previous" href="preface.html" title="Preface"><link rel="next" href="architecture.html" title="Chapter&nbsp;2.&nbsp;Architecture">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+    <div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="preface.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="architecture.html">Next</a></td></tr></table><hr></div>
+    <div class="chapter" lang="en">
+        <div class="titlepage"><div><div><h2 class="title"><a name="quickstart"></a>Chapter&nbsp;1.&nbsp;Quick-start with IIS and Microsoft SQL Server</h2></div></div><div></div></div>
+        {% include google_adsense.html %}
+        <div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-intro"></a>1.1.&nbsp;Getting started with NHibernate</h2></div></div><div></div></div><p>
+            This tutorial explains a setup of NHibernate 5.0.0 within a Microsoft
+            environment. The tools used in this tutorial are:
+        </p><div class="orderedlist"><ol type="1"><li>
+                Microsoft Internet Information Services (IIS) - web server supporting
+                ASP.NET.
+            </li><li>
+                Microsoft SQL Server 2012 - the database server. This tutorial uses
+                the desktop edition (SQL Express), a free download from Microsoft. Support
+                for other databases is only a matter of changing the NHibernate SQL
+                dialect and driver configuration.
+            </li><li>
+                Microsoft Visual Studio .NET (at least 2013) - the development environment.
+            </li></ol></div><p>
+            First, we have to create a new Web project. We use the name <tt class="literal">QuickStart</tt>.
+            In the project, add a NuGet reference to <tt class="literal">NHibernate</tt>. Visual Studio
+            will automatically copy the library and its dependencies to the project output directory.
+            If you are using a database other than SQL Server, add a reference to its driver assembly
+            to your project.
+        </p><p>
+            We now set up the database connection information for NHibernate. To do this, open
+            the file <tt class="literal">Web.config</tt> automatically generated for your project and add
+            configuration elements according to the listing below:
+        </p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;configuration&gt;
+  &lt;!-- Add this element --&gt;
+  &lt;configSections&gt;
+    &lt;section
+        name="hibernate-configuration"
+        type="NHibernate.Cfg.ConfigurationSectionHandler, NHibernate" /&gt;
+  &lt;/configSections&gt;
+
+  &lt;!-- Add this element --&gt;
+  &lt;hibernate-configuration xmlns="urn:nhibernate-configuration-2.2"&gt;
+    &lt;session-factory&gt;
+      &lt;property name="dialect"&gt;NHibernate.Dialect.MsSql2012Dialect&lt;/property&gt;
+      &lt;property name="connection.connection_string"&gt;
+        Server=localhost\SQLEXPRESS;initial catalog=quickstart;Integrated Security=True
+      &lt;/property&gt;
+
+      &lt;mapping assembly="QuickStart" /&gt;
+    &lt;/session-factory&gt;
+  &lt;/hibernate-configuration&gt;
+
+  &lt;!-- Leave the other sections unchanged --&gt;
+  &lt;system.web&gt;
+    ...
+  &lt;/system.web&gt;
+&lt;/configuration&gt;</pre><p>
+            The <tt class="literal">&lt;configSections&gt;</tt> element contains definitions of
+            sections that follow and handlers to use to process their content. We declare
+            the handler for the configuration section here. The <tt class="literal">
+            &lt;hibernate-configuration&gt;</tt> section contains the configuration
+            itself, telling NHibernate that we will use a Microsoft SQL Server 2012
+            database and connect to it through the specified connection string.
+            The dialect is a required setting, databases differ in their interpretation
+            of the SQL "standard". NHibernate will take care of the differences and comes
+            bundled with dialects for several major commercial and open source databases.
+        </p><p>
+            An <tt class="literal">ISessionFactory</tt> is NHibernate's concept of a single
+            datastore, multiple databases can be used by creating multiple XML
+            configuration files and creating multiple <tt class="literal">Configuration</tt>
+            and <tt class="literal">ISessionFactory</tt> objects in your application.
+        </p><p>
+            The last element of the <tt class="literal">&lt;hibernate-configuration&gt;</tt>
+            section declares <tt class="literal">QuickStart</tt> as the name of an assembly
+            containing class declarations and mapping files. The mapping files
+            contain the metadata for the mapping of the POCO class to a database table
+            (or multiple tables). We'll come back to mapping files soon. Let's write the
+            POCO class first and then declare the mapping metadata for it.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-persistentclass"></a>1.2.&nbsp;First persistent class</h2></div></div><div></div></div><p>
+            NHibernate works best with the Plain Old CLR Objects (POCOs, sometimes
+            called Plain Ordinary CLR Objects) programming model for persistent classes.
+            A POCO has its data accessible through the standard .NET property mechanisms,
+            shielding the internal representation from the publicly visible interface:
+        </p><pre class="programlisting">namespace QuickStart
+{
+    public class Cat
+    {
+        public virtual string Id { get; set; }
+
+        public virtual string Name { get; set; }
+
+        public virtual char Sex { get; set; }
+
+        public virtual float Weight { get; set; }
+    }
+}</pre><p>
+            NHibernate is not restricted in its usage of property types, all .NET
+            types and primitives (like <tt class="literal">string</tt>, <tt class="literal">char</tt>
+            and <tt class="literal">DateTime</tt>) can be mapped, including classes from the
+            <tt class="literal">System.Collections.Generic</tt> namespace. You can map them as values,
+            collections of values, or associations to other entities. The <tt class="literal">Id</tt>
+            is a special property that represents the database identifier (primary key) of
+            that class, it is highly recommended for entities like a <tt class="literal">Cat</tt>.
+            NHibernate can use identifiers only internally, without having to declare them
+            on the class, but we would lose some of the flexibility in our application
+            architecture.
+        </p><p>
+            No special interface has to be implemented for persistent classes nor do we have
+            to subclass from a special root persistent class. NHibernate also doesn't use any
+            build time processing, such as IL manipulation, it relies solely on
+            .NET reflection and runtime class enhancement.
+            So, without any dependency in the POCO class on NHibernate, we can map it to
+            a database table.
+        </p><p>
+            For the above mentioned runtime class enhancement to work, NHibernate requires that all
+            public properties of an entity class are declared as <tt class="literal">virtual</tt>. It also
+            requires a parameter-less constructor:  if you add a constructor having parameters,
+            make sure to add a parameter-less constructor too.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-mapping"></a>1.3.&nbsp;Mapping the cat</h2></div></div><div></div></div><p>
+            This tutorial directly uses xml mapping files. This is just one among many mapping solutions
+            NHibernate provides, see <a href="mapping.html#mapping-declaration" title="5.1.&nbsp;Mapping declaration">Section&nbsp;5.1, &#8220;Mapping declaration&#8221;</a>.
+        </p><p>
+            The <tt class="literal">Cat.hbm.xml</tt> mapping file contains the metadata
+            required for the object/relational mapping. The metadata includes declaration
+            of persistent classes and the mapping of properties (to columns and
+            foreign key relationships to other entities) to database tables.
+        </p><p>
+            Please note that the <tt class="literal">Cat.hbm.xml</tt> file should be set to an embedded resource.
+        </p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+    namespace="QuickStart" assembly="QuickStart"&gt;
+
+    &lt;class name="Cat" table="Cat"&gt;
+
+        &lt;!-- A 32 hex character is our surrogate key. It's automatically
+            generated by NHibernate with the UUID pattern. --&gt;
+        &lt;id name="Id"&gt;
+            &lt;column name="CatId" sql-type="char(32)" not-null="true"/&gt;
+            &lt;generator class="uuid.hex" /&gt;
+        &lt;/id&gt;
+
+        &lt;!-- A cat has to have a name, but it shouldn't be too long. --&gt;
+        &lt;property name="Name"&gt;
+            &lt;column name="Name" length="16" not-null="true" /&gt;
+        &lt;/property&gt;
+        &lt;property name="Sex" /&gt;
+        &lt;property name="Weight" /&gt;
+    &lt;/class&gt;
+
+&lt;/hibernate-mapping&gt;</pre><p>
+            Every persistent class should have an identifier attribute (actually, only
+            classes representing entities, not dependent value objects, which
+            are mapped as components of an entity). This property is used to distinguish
+            persistent objects: Two cats are equal if
+            <tt class="literal">catA.Id.Equals(catB.Id)</tt> is true, this concept is
+            called <span class="emphasis"><em>database identity</em></span>. NHibernate comes bundled with
+            various identifier generators for different scenarios (including native generators
+            for database sequences, hi/lo identifier tables, and application assigned
+            identifiers). We use the UUID generator (only recommended for testing, as integer
+            surrogate keys generated by the database should be preferred) and also specify the
+            column <tt class="literal">CatId</tt> of the table <tt class="literal">Cat</tt> for the
+            NHibernate generated identifier value (as a primary key of the table).
+        </p><p>
+            All other properties of <tt class="literal">Cat</tt> are mapped to the same table. In
+            the case of the <tt class="literal">Name</tt> property, we mapped it with an explicit
+            database column declaration. This is especially useful when the database
+            schema is automatically generated (as SQL DDL statements) from the mapping
+            declaration with NHibernate's <span class="emphasis"><em>SchemaExport</em></span> tool. All other
+            properties are mapped using NHibernate's default settings, which is what you
+            need most of the time. Here the specification of the table name with the attribute
+            <tt class="literal">table</tt> is redundant, it default to the class name when not specified.
+            The table <tt class="literal">Cat</tt> in the database looks like this:
+        </p><pre class="programlisting"> Column |     Type     | Modifiers
+--------+--------------+----------------------
+ CatId  | char(32)     | not null, primary key
+ Name   | nvarchar(16) | not null
+ Sex    | nchar(1)     |
+ Weight | real         |</pre><p>
+            You should now create the database and this table manually, and later read
+            <a href="toolsetguide.html" title="Chapter&nbsp;22.&nbsp;Toolset Guide">Chapter&nbsp;22, <i>Toolset Guide</i></a> if you want to automate this step with the
+            SchemaExport tool. This tool can create a full SQL DDL, including table
+            definition, custom column type constraints, unique constraints and indexes.
+            If you are using SQL Server, you should also make sure the <tt class="literal">ASPNET</tt>
+            user has permissions to use the database.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-playingwithcats"></a>1.4.&nbsp;Playing with cats</h2></div></div><div></div></div><p>
+            We're now ready to start NHibernate's <tt class="literal">ISession</tt>. It is the
+            <span class="emphasis"><em>persistence manager</em></span> interface, we use it
+            to store and retrieve <tt class="literal">Cat</tt>s to and from the database.
+            But first, we've to get an <tt class="literal">ISession</tt> (NHibernate's unit-of-work)
+            from the <tt class="literal">ISessionFactory</tt>:
+        </p><pre class="programlisting">ISessionFactory sessionFactory =
+            new Configuration().Configure().BuildSessionFactory();</pre><p>
+            An <tt class="literal">ISessionFactory</tt> is responsible for one database and
+            may only use one XML configuration file (<tt class="literal">Web.config</tt> or
+            <tt class="literal">hibernate.cfg.xml</tt>).
+            You can set other properties (and even change the mapping metadata) by
+            accessing the <tt class="literal">Configuration</tt> <span class="emphasis"><em>before</em></span>
+            you build the <tt class="literal">ISessionFactory</tt> (it is immutable). Where
+            do we create the <tt class="literal">ISessionFactory</tt> and how can we access
+            it in our application?
+        </p><p>
+            An <tt class="literal">ISessionFactory</tt> is usually only built once,
+            e.g. at start-up inside <tt class="literal">Application_Start</tt> event handler.
+            This also means you should not keep it in an instance variable in your
+            ASP.NET pages or MVC controllers, but in some other location. Furthermore,
+            we need some kind of <span class="emphasis"><em>Singleton</em></span>, so we can access the
+            <tt class="literal">ISessionFactory</tt> easily in application code. The approach
+            shown next solves both problems: configuration and easy access to a
+            <tt class="literal">ISessionFactory</tt>.
+        </p><p>
+            We implement a <tt class="literal">NHibernateHelper</tt> helper class:
+        </p><pre class="programlisting">using System;
+using System.Web;
+using NHibernate;
+using NHibernate.Cfg;
+
+namespace QuickStart
+{
+    public sealed class NHibernateHelper
+    {
+        private const string CurrentSessionKey = "nhibernate.current_session";
+        private static readonly ISessionFactory _sessionFactory;
+
+        static NHibernateHelper()
+        {
+            _sessionFactory = new Configuration().Configure().BuildSessionFactory();
+        }
+
+        public static ISession GetCurrentSession()
+        {
+            var context = HttpContext.Current;
+            var currentSession = context.Items[CurrentSessionKey] as ISession;
+
+            if (currentSession == null)
+            {
+                currentSession = _sessionFactory.OpenSession();
+                context.Items[CurrentSessionKey] = currentSession;
+            }
+
+            return currentSession;
+        }
+
+        public static void CloseSession()
+        {
+            var context = HttpContext.Current;
+            var currentSession = context.Items[CurrentSessionKey] as ISession;
+
+            if (currentSession == null)
+            {
+                // No current session
+                return;
+            }
+
+            currentSession.Close();
+            context.Items.Remove(CurrentSessionKey);
+        }
+
+        public static void CloseSessionFactory()
+        {
+            if (_sessionFactory != null)
+            {
+                _sessionFactory.Close();
+            }
+        }
+    }
+}</pre><p>
+            This class does not only take care of the <tt class="literal">ISessionFactory</tt>
+            with its static attribute, but also has code to remember the <tt class="literal">ISession</tt>
+            for the current HTTP request.
+        </p><p>
+            An <tt class="literal">ISessionFactory</tt> is threadsafe, many threads can access
+            it concurrently and request <tt class="literal">ISession</tt>s. An <tt class="literal">ISession</tt>
+            is a non-threadsafe object that represents a single unit-of-work with the database.
+            <tt class="literal">ISession</tt>s are opened by an <tt class="literal">ISessionFactory</tt> and
+            are closed when all work is completed:
+        </p><pre class="programlisting">ISession session = NHibernateHelper.GetCurrentSession();
+try
+{
+    using (ITransaction tx = session.BeginTransaction())
+    {
+        var princess = new Cat
+        {
+            Name = "Princess",
+            Sex = 'F',
+            Weight = 7.4f
+        };
+
+        session.Save(princess);
+        tx.Commit();
+    }
+}
+finally
+{
+    NHibernateHelper.CloseSession();
+}</pre><p>
+            In an <tt class="literal">ISession</tt>, every database operation occurs inside a
+            transaction that isolates the database operations (even read-only operations).
+            We use NHibernate's <tt class="literal">ITransaction</tt> API to abstract from the underlying
+            transaction strategy (in our case, ADO.NET transactions). Please note that the example
+            above does not handle any exceptions.
+        </p><p>
+            Also note that you may call <tt class="literal">NHibernateHelper.GetCurrentSession();</tt>
+            as many times as you like, you will always get the current <tt class="literal">ISession</tt>
+            of this HTTP request. You have to make sure the <tt class="literal">ISession</tt> is closed
+            after your unit-of-work completes, either in <tt class="literal">Application_EndRequest</tt>
+            event handler in your application class, or with a MVC action filter, or in a
+            <tt class="literal">HttpModule</tt> before the HTTP response is sent. The nice side effect
+            of the latter is easy lazy initialization: the <tt class="literal">ISession</tt> is still
+            open when the view is rendered, so NHibernate can load uninitialized objects while you
+            navigate the graph.
+        </p><p>
+            NHibernate has various methods that can be used to retrieve objects from the
+            database. Nowadays the most standard way is using Linq:
+        </p><pre class="programlisting">using(var tx = session.BeginTransaction())
+{
+    var females = session
+        .Query&lt;Cat&gt;()
+        .Where(c =&gt; c.Sex == 'F')
+        .ToList();
+    foreach (var cat in females)
+    {
+        Console.Out.WriteLine("Female Cat: " + cat.Name);
+    }
+
+    tx.Commit();
+}</pre><p>
+            If you use an older NHibernate, you may have to import the
+            <tt class="literal">NHibernate.Linq</tt> namespace.
+        </p><p>
+            NHibernate also offers an object-oriented <span class="emphasis"><em>query by criteria</em></span> API
+            that can be used to formulate type-safe queries, the Hibernate Query Language (HQL),
+            which is an easy to learn and powerful object-oriented extension to SQL, as well as a
+            strongly-typed LINQ API which translates internally to HQL.
+            NHibernate of course uses <tt class="literal">DbCommand</tt>s and parameter binding for all
+            SQL communication with the database. You may also use NHibernate's direct SQL query
+            feature or get a plain ADO.NET connection from an <tt class="literal">ISession</tt> in rare
+            cases.
+        </p><p>
+            Since NHibernate 5.0, the session and its queries IO bound methods have async counterparts.
+            Each call to an async method must be awaited before further interacting with the session or
+            its queries.
+        </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="quickstart-summary"></a>1.5.&nbsp;Finally</h2></div></div><div></div></div><p>
+            We only scratched the surface of NHibernate in this small tutorial. Please note that
+            we don't include any ASP.NET specific code in our examples. You have to create an
+            ASP.NET page yourself and insert the NHibernate code as you see fit.
+        </p><p>
+            Keep in mind that NHibernate, as a data access layer, is tightly integrated into
+            your application. Usually, all other layers depend on the persistence mechanism.
+            Make sure you understand the implications of this design.
+        </p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="preface.html">Prev</a>&nbsp;</td><td width="20%" align="center"><a accesskey="u" href="index.html">Up</a></td><td width="40%" align="right">&nbsp;<a accesskey="n" href="architecture.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Preface&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;2.&nbsp;Architecture</td></tr></table></div>
+    {% include google_analytics.html %}
+</body></html>
