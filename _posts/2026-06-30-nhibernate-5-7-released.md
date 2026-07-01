@@ -16,7 +16,7 @@ https://sourceforge.net/projects/nhibernate/files/NHibernate/5.7.0/
 https://www.nuget.org/packages/NHibernate/5.7.0
 
 ##### Highlights #####
-* NHibernate targets now directly include .NET 10. This new target come with changes to adapt to the "first-class span types" C# 14 language feature which was breaking some NHibernate features.
+* NHibernate targets now directly include .NET 10. This new target comes with changes to adapt to the "first-class span types" C# 14 language feature which was breaking some NHibernate features.
 * 14 issues were resolved in this release.
 
 ##### Possible Breaking Changes #####
