@@ -748,6 +748,13 @@ in the parameter binding.</pre><p>
                 <tt class="literal">ISession.Lock()</tt> or <tt class="literal">IQuery.SetLockMode()</tt>).
                 However, if you specify a dialect, NHibernate will use sensible defaults for some of the
                 other properties listed above, saving you the effort of specifying them manually.
+            </p><p>
+                When a dialect refers to a version of a database engine, that is the minimal version
+                supported by the dialect. The dialect will support later versions of the engine, unless
+                the newer engine version has some incompatible breaking changes (which happens seldomly).
+                Dialects targeting higher versions of an engine are provided when new features in these
+                versions may be used by the dialect, like enabling the use of sequences with SQL Server
+                2012 or later.
             </p><div class="table"><a name="sql-dialects"></a><p class="title"><b>Table&nbsp;3.3.&nbsp;NHibernate SQL Dialects (<tt class="literal">dialect</tt>)</b></p><table summary="NHibernate SQL Dialects (dialect)" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>RDBMS</th><th>Dialect</th><th>Remarks</th></tr></thead><tbody><tr><td>DB2 for Linux, UNIX and Windows</td><td><tt class="literal">NHibernate.Dialect.DB2Dialect</tt></td><td>&nbsp;</td></tr><tr><td>DB2 for IBM i (formerly iSeries, formerly OS/400)</td><td><tt class="literal">NHibernate.Dialect.DB2400Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Firebird</td><td><tt class="literal">NHibernate.Dialect.FirebirdDialect</tt></td><td>
                                 Set <tt class="literal">driver_class</tt> to
                                 <tt class="literal">NHibernate.Driver.FirebirdClientDriver</tt>

@@ -1286,6 +1286,13 @@ in the parameter binding.</pre><p>
                 <tt class="literal">ISession.Lock()</tt> or <tt class="literal">IQuery.SetLockMode()</tt>).
                 However, if you specify a dialect, NHibernate will use sensible defaults for some of the
                 other properties listed above, saving you the effort of specifying them manually.
+            </p><p>
+                When a dialect refers to a version of a database engine, that is the minimal version
+                supported by the dialect. The dialect will support later versions of the engine, unless
+                the newer engine version has some incompatible breaking changes (which happens seldomly).
+                Dialects targeting higher versions of an engine are provided when new features in these
+                versions may be used by the dialect, like enabling the use of sequences with SQL Server
+                2012 or later.
             </p><div class="table"><a name="sql-dialects"></a><p class="title"><b>Table&nbsp;3.3.&nbsp;NHibernate SQL Dialects (<tt class="literal">dialect</tt>)</b></p><table summary="NHibernate SQL Dialects (dialect)" border="1"><colgroup><col><col><col></colgroup><thead><tr><th>RDBMS</th><th>Dialect</th><th>Remarks</th></tr></thead><tbody><tr><td>DB2 for Linux, UNIX and Windows</td><td><tt class="literal">NHibernate.Dialect.DB2Dialect</tt></td><td>&nbsp;</td></tr><tr><td>DB2 for IBM i (formerly iSeries, formerly OS/400)</td><td><tt class="literal">NHibernate.Dialect.DB2400Dialect</tt></td><td>&nbsp;</td></tr><tr><td>Firebird</td><td><tt class="literal">NHibernate.Dialect.FirebirdDialect</tt></td><td>
                                 Set <tt class="literal">driver_class</tt> to
                                 <tt class="literal">NHibernate.Driver.FirebirdClientDriver</tt>
@@ -2879,7 +2886,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                 the value of the property at runtime.  The value of the <tt class="literal">access</tt> attribute should
                 be text formatted as <tt class="literal">access-strategy.naming-strategy</tt>.  The
                 <tt class="literal">.naming-strategy</tt> is not always required.
-                </p><div class="table"><a name="d0e5942"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Access Strategies</b></p><table summary="Access Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Access Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">property</tt></td><td><p>
+                </p><div class="table"><a name="d0e5944"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Access Strategies</b></p><table summary="Access Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Access Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">property</tt></td><td><p>
                                         The default implementation.  NHibernate uses the get/set accessors of
                                         the property.  No naming strategy should be used with this access strategy
                                         because the value of the <tt class="literal">name</tt> attribute is the name
@@ -2916,7 +2923,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                                         loaded with <tt class="literal">Activator.CreateInstance(string assemblyQualifiedName)</tt>.
                                     </p></td></tr></tbody></table></div><p>
             </p><p>
-                </p><div class="table"><a name="d0e6029"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Naming Strategies</b></p><table summary="Naming Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Naming Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">camelcase</tt></td><td><p>
+                </p><div class="table"><a name="d0e6031"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Naming Strategies</b></p><table summary="Naming Strategies" border="1"><colgroup><col><col></colgroup><thead><tr><th>Naming Strategy Name</th><th>Description</th></tr></thead><tbody><tr><td><tt class="literal">camelcase</tt></td><td><p>
                                         The <tt class="literal">name</tt> attribute is converted to camel case to find the field.
                                         <tt class="literal">&lt;property name="FooBar" ... &gt;</tt> uses the field <tt class="literal">fooBar</tt>.
                                     </p></td></tr><tr><td><tt class="literal">camelcase-underscore</tt></td><td><p>
@@ -3755,7 +3762,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                 typed with a <tt class="literal">Nullable&lt;T&gt;</tt>. Otherwise <tt class="literal">null</tt> will be replaced by the default
                 value for the type when reading, and then will be overwritten by it when persisting the entity, potentially leading to
                 phantom updates.
-            </p><div class="table"><a name="d0e7764"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;System.ValueType Mapping Types</b></p><table summary="System.ValueType Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiChar</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength - 1 char</tt></td><td><tt class="literal">type="AnsiChar"</tt> must be specified.</td></tr><tr><td><tt class="literal">Boolean</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.Boolean</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Byte</tt></td><td><tt class="literal">System.Byte</tt></td><td><tt class="literal">DbType.Byte</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Char</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.StringFixedLength - 1 char</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Currency</tt></td><td><tt class="literal">System.Decimal</tt></td><td><tt class="literal">DbType.Currency</tt></td><td><tt class="literal">type="Currency"</tt> must be specified.</td></tr><tr><td><tt class="literal">Date</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Date</tt></td><td><tt class="literal">type="Date"</tt> must be specified.</td></tr><tr><td><tt class="literal">DateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="#basic_mapping.datetime">(1)</a></td><td>
+            </p><div class="table"><a name="d0e7766"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;System.ValueType Mapping Types</b></p><table summary="System.ValueType Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiChar</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.AnsiStringFixedLength - 1 char</tt></td><td><tt class="literal">type="AnsiChar"</tt> must be specified.</td></tr><tr><td><tt class="literal">Boolean</tt></td><td><tt class="literal">System.Boolean</tt></td><td><tt class="literal">DbType.Boolean</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Byte</tt></td><td><tt class="literal">System.Byte</tt></td><td><tt class="literal">DbType.Byte</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Char</tt></td><td><tt class="literal">System.Char</tt></td><td><tt class="literal">DbType.StringFixedLength - 1 char</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Currency</tt></td><td><tt class="literal">System.Decimal</tt></td><td><tt class="literal">DbType.Currency</tt></td><td><tt class="literal">type="Currency"</tt> must be specified.</td></tr><tr><td><tt class="literal">Date</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.Date</tt></td><td><tt class="literal">type="Date"</tt> must be specified.</td></tr><tr><td><tt class="literal">DateTime</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="#basic_mapping.datetime">(1)</a></td><td>
                                 Default when no <tt class="literal">type</tt> attribute specified. Does no
                                 longer ignore fractional seconds since NHibernate v5.0.
                             </td></tr><tr><td><tt class="literal">DateTimeNoMs</tt></td><td><tt class="literal">System.DateTime</tt></td><td><tt class="literal">DbType.DateTime</tt> / <tt class="literal">DbType.DateTime2</tt><a name="basic_mapping.datetime-co" href="#basic_mapping.datetime">(1)</a></td><td><tt class="literal">type="DateTimeNoMs"</tt> must be specified. Ignores fractional seconds.
@@ -3799,7 +3806,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                   Since NHibernate v5.0 and if the dialect supports it, <tt class="literal">DbType.DateTime2</tt>
                   is used instead of <tt class="literal">DbType.DateTime</tt>. This may be disabled by setting
                   <tt class="literal">sql_types.keep_datetime</tt> to <tt class="literal">true</tt>.
-                </p></td></tr></table></div><div class="table"><a name="d0e8402"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;System.Object Mapping Types</b></p><table summary="System.Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiString</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.AnsiString</tt></td><td><tt class="literal">type="AnsiString"</tt> must be specified.</td></tr><tr><td><tt class="literal">CultureInfo</tt></td><td><tt class="literal">System.Globalization.CultureInfo</tt></td><td><tt class="literal">DbType.String</tt> - 5 chars for culture by default;
+                </p></td></tr></table></div><div class="table"><a name="d0e8404"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;System.Object Mapping Types</b></p><table summary="System.Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">AnsiString</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.AnsiString</tt></td><td><tt class="literal">type="AnsiString"</tt> must be specified.</td></tr><tr><td><tt class="literal">CultureInfo</tt></td><td><tt class="literal">System.Globalization.CultureInfo</tt></td><td><tt class="literal">DbType.String</tt> - 5 chars for culture by default;
                               can be modified by the <tt class="literal">length</tt> mapping attribute.</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Binary</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Type</tt></td><td><tt class="literal">System.Type</tt></td><td><tt class="literal">DbType.String</tt> holding Assembly Qualified Name.</td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">String</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr><tr><td><tt class="literal">Uri</tt></td><td><tt class="literal">System.Uri</tt></td><td><tt class="literal">DbType.String</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.</td></tr></tbody></table></div><p>
                 String types use by default .Net default string equality, which is case sensitive and culture
                 insensitive. When a string type is used as an identifier, if the underlying database string
@@ -3833,7 +3840,7 @@ public class CustomMapTuplizerImpl : NHibernate.Tuple.Entity.DynamicMapEntityTup
                 These settings should be used in order to match the database or column behavior. They are not taken into
                 account by the hbm2ddl tool for generating the database schema. (In other words, it will not generate
                 matching <tt class="literal">collate</tt> statements for SQL-Server.)
-            </p><div class="table"><a name="d0e8576"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Large Object Mapping Types</b></p><table summary="Large Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">StringClob</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td><tt class="literal">type="StringClob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">BinaryBlob</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="BinaryBlob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">Serializable</tt></td><td>Any <tt class="literal">System.Object</tt> that is marked with SerializableAttribute.</td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="Serializable"</tt> should be specified.  This is the fallback type
+            </p><div class="table"><a name="d0e8578"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Large Object Mapping Types</b></p><table summary="Large Object Mapping Types" border="1"><colgroup><col><col><col><col></colgroup><thead><tr><th>NHibernate Type</th><th>.NET Type</th><th>Database Type</th><th>Remarks</th></tr></thead><tbody><tr><td><tt class="literal">StringClob</tt></td><td><tt class="literal">System.String</tt></td><td><tt class="literal">DbType.String</tt></td><td><tt class="literal">type="StringClob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">BinaryBlob</tt></td><td><tt class="literal">System.Byte[]</tt></td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="BinaryBlob"</tt> must be specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">Serializable</tt></td><td>Any <tt class="literal">System.Object</tt> that is marked with SerializableAttribute.</td><td><tt class="literal">DbType.Binary</tt></td><td><tt class="literal">type="Serializable"</tt> should be specified.  This is the fallback type
                             if no NHibernate Type can be found for the Property.</td></tr><tr><td><tt class="literal">XDoc</tt></td><td><tt class="literal">System.Xml.Linq.XDocument</tt></td><td><tt class="literal">DbType.Xml</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.  Entire field is read into memory.</td></tr><tr><td><tt class="literal">XmlDoc</tt></td><td><tt class="literal">System.Xml.XmlDocument</tt></td><td><tt class="literal">DbType.Xml</tt></td><td>Default when no <tt class="literal">type</tt> attribute specified.  Entire field is read into memory.</td></tr></tbody></table></div><p>
                 NHibernate supports some additional type names for compatibility with Java's Hibernate (useful for those coming over from
                 Hibernate or using some of the tools to generate <tt class="literal">hbm.xml</tt> files).
@@ -5924,7 +5931,7 @@ create table Address ( addressId bigint not null primary key )</pre></div></div>
         </p><p>
             The following table shows the limitations of table per concrete-class
             mappings, and of implicit polymorphism, in NHibernate.
-        </p><div class="table"><a name="d0e11310"></a><p class="title"><b>Table&nbsp;9.1.&nbsp;Features of inheritance mappings</b></p><table summary="Features of inheritance mappings" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Inheritance strategy</th><th align="left">Polymorphic many-to-one</th><th align="left">Polymorphic one-to-one</th><th align="left">Polymorphic one-to-many</th><th align="left">Polymorphic many-to-many</th><th align="left">Polymorphic <tt class="literal">Load()/Get()</tt></th><th align="left">Polymorphic queries</th><th align="left">Polymorphic joins</th><th align="left">Outer join fetching</th></tr></thead><tbody><tr><td align="left">table per class-hierarchy</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per subclass</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete-class (union-subclass)</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt> (for <tt class="literal">inverse="true"</tt> only)</td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete class (implicit polymorphism)</td><td align="left"><tt class="literal">&lt;any&gt;</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><tt class="literal">&lt;many-to-any&gt;</tt></td><td align="left"><span class="emphasis"><em>use a query</em></span></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td></tr></tbody></table></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="manipulatingdata"></a>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-creating"></a>10.1.&nbsp;Creating a persistent object</h2></div></div><div></div></div><p>
+        </p><div class="table"><a name="d0e11312"></a><p class="title"><b>Table&nbsp;9.1.&nbsp;Features of inheritance mappings</b></p><table summary="Features of inheritance mappings" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Inheritance strategy</th><th align="left">Polymorphic many-to-one</th><th align="left">Polymorphic one-to-one</th><th align="left">Polymorphic one-to-many</th><th align="left">Polymorphic many-to-many</th><th align="left">Polymorphic <tt class="literal">Load()/Get()</tt></th><th align="left">Polymorphic queries</th><th align="left">Polymorphic joins</th><th align="left">Outer join fetching</th></tr></thead><tbody><tr><td align="left">table per class-hierarchy</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per subclass</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt></td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete-class (union-subclass)</td><td align="left"><tt class="literal">&lt;many-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-one&gt;</tt></td><td align="left"><tt class="literal">&lt;one-to-many&gt;</tt> (for <tt class="literal">inverse="true"</tt> only)</td><td align="left"><tt class="literal">&lt;many-to-many&gt;</tt></td><td align="left"><tt class="literal">s.Get&lt;IPayment&gt;(id)</tt></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><tt class="literal">from Order o join o.Payment p</tt></td><td align="left"><span class="emphasis"><em>supported</em></span></td></tr><tr><td align="left">table per concrete class (implicit polymorphism)</td><td align="left"><tt class="literal">&lt;any&gt;</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><tt class="literal">&lt;many-to-any&gt;</tt></td><td align="left"><span class="emphasis"><em>use a query</em></span></td><td align="left"><tt class="literal">from IPayment p</tt></td><td align="left"><span class="emphasis"><em>not supported</em></span></td><td align="left"><span class="emphasis"><em>not supported</em></span></td></tr></tbody></table></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="manipulatingdata"></a>Chapter&nbsp;10.&nbsp;Manipulating Persistent Data</h2></div></div><div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="manipulatingdata-creating"></a>10.1.&nbsp;Creating a persistent object</h2></div></div><div></div></div><p>
             An object (entity instance) is either <span class="emphasis"><em>transient</em></span> or
             <span class="emphasis"><em>persistent</em></span> with respect to a particular
             <tt class="literal">ISession</tt>. Newly instantiated objects are, of course, transient. 
@@ -10242,7 +10249,7 @@ using(var iter = session
                 queries, and log a warning.
             </p></div><p>
             The following table shows which providers are compatible with which concurrency strategies.
-        </p><div class="table"><a name="d0e17772"></a><p class="title"><b>Table&nbsp;21.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
+        </p><div class="table"><a name="d0e17774"></a><p class="title"><b>Table&nbsp;21.2.&nbsp;Cache Concurrency Strategy Support</b></p><table summary="Cache Concurrency Strategy Support" border="1"><colgroup><col align="left"><col align="left"><col align="left"><col align="left"></colgroup><thead><tr><th align="left">Cache</th><th align="left">read-only</th><th align="left">nonstrict-read-write</th><th align="left">read-write</th></tr></thead><tbody><tr><td align="left">Hashtable (not intended for production use)</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr><tr><td align="left">SysCache</td><td align="left">yes</td><td align="left">yes</td><td align="left">yes</td></tr></tbody></table></div><p>
             Refer to <a href="#caches" title="Chapter&nbsp;27.&nbsp;NHibernate.Caches">Chapter&nbsp;27, <i>NHibernate.Caches</i></a> for more details.
         </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="performance-sessioncache"></a>21.3.&nbsp;Managing the caches</h2></div></div><div></div></div><p>
             Whenever you pass an object to <tt class="literal">Save()</tt>, <tt class="literal">Update()</tt>
@@ -12043,7 +12050,7 @@ alter table line_items
 				</dd></dl></div><p>
 			SysCache has a config file section handler to allow configuring different expirations and priorities for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e19678"></a><p class="title"><b>Example&nbsp;27.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e19680"></a><p class="title"><b>Example&nbsp;27.1.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="syscache"
@@ -12076,7 +12083,7 @@ alter table line_items
 				</dd></dl></div><p>
 			To configure cache regions with SqlCacheDependencies a <tt class="literal">syscache2</tt> config section must be
 			defined in the application's configuration file. See the sample below.
-		</p><div class="example"><a name="d0e19729"></a><p class="title"><b>Example&nbsp;27.2.&nbsp;</b></p><pre class="programlisting">
+		</p><div class="example"><a name="d0e19731"></a><p class="title"><b>Example&nbsp;27.2.&nbsp;</b></p><pre class="programlisting">
 &lt;configSections&gt;
   &lt;section name="syscache2"
     type="NHibernate.Caches.SysCache2.SysCacheSection, NHibernate.Caches.SysCache2"/&gt;
@@ -12091,7 +12098,7 @@ alter table line_items
 			</p><p>
 				To configure the data in a cache region to be invalidated when data in an underlying table is changed,
 				a cache region must be configured in the application's configuration file. See the sample below.
-			</p><div class="example"><a name="d0e19742"></a><p class="title"><b>Example&nbsp;27.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
+			</p><div class="example"><a name="d0e19744"></a><p class="title"><b>Example&nbsp;27.3.&nbsp;</b></p><pre class="programlisting">&lt;syscache2&gt;
   &lt;cacheRegion name="Product"&gt;
     &lt;dependencies&gt;
       &lt;tables&gt;
@@ -12123,7 +12130,7 @@ alter table line_items
 			</p><p>
 				To configure the data in a cache region to be invalidated based on a SQL command, a cache region must
 				be configured in the application's configuration file. See the samples below.
-			</p><div class="example"><a name="d0e19787"></a><p class="title"><b>Example&nbsp;27.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
+			</p><div class="example"><a name="d0e19789"></a><p class="title"><b>Example&nbsp;27.4.&nbsp;Stored Procedure</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High" &gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -12131,7 +12138,7 @@ alter table line_items
         isStoredProcedure="true"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19792"></a><p class="title"><b>Example&nbsp;27.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19794"></a><p class="title"><b>Example&nbsp;27.5.&nbsp;SELECT Statement</b></p><pre class="programlisting">&lt;cacheRegion name="Product" priority="High"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -12154,7 +12161,7 @@ alter table line_items
 					</dd></dl></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="NHibernate.Caches.SysCache2-Aggregate"></a>27.4.3.&nbsp;Aggregate Dependencies</h3></div></div><div></div></div><p>
 				Multiple cache dependencies can be specified.  If any of the dependencies triggers a change
 				notification, the data in the cache region will be invalidated.  See the samples below.
-			</p><div class="example"><a name="d0e19853"></a><p class="title"><b>Example&nbsp;27.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+			</p><div class="example"><a name="d0e19855"></a><p class="title"><b>Example&nbsp;27.6.&nbsp;Multiple commands</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -12164,7 +12171,7 @@ alter table line_items
         command="Select quantityAvailable from dbo.VideoAvailability"/&gt;
     &lt;/commands&gt;
   &lt;/dependencies&gt;
-&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19858"></a><p class="title"><b>Example&nbsp;27.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
+&lt;/cacheRegion&gt;</pre></div><div class="example"><a name="d0e19860"></a><p class="title"><b>Example&nbsp;27.7.&nbsp;Mixed</b></p><pre class="programlisting">&lt;cacheRegion name="Product"&gt;
   &lt;dependencies&gt;
     &lt;commands&gt;
       &lt;add name="price"
@@ -12182,7 +12189,7 @@ alter table line_items
 				for each item added to the cache.  Time based expiration policies will not invalidate the data
 				dependencies for the whole cache region, but serve as a way to remove items from the cache after they
 				have been in the cache for a specified amount of time.  See the samples below.
-			</p><div class="example"><a name="d0e19868"></a><p class="title"><b>Example&nbsp;27.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e19873"></a><p class="title"><b>Example&nbsp;27.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
+			</p><div class="example"><a name="d0e19870"></a><p class="title"><b>Example&nbsp;27.8.&nbsp;Relative Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" relativeExpiration="300" priority="High" useSlidingExpiration="true" /&gt;</pre></div><div class="example"><a name="d0e19875"></a><p class="title"><b>Example&nbsp;27.9.&nbsp;Time of Day Expiration</b></p><pre class="programlisting">&lt;cacheRegion name="Product" timeOfDayExpiration="2:00:00" priority="High" /&gt;</pre></div><div class="variablelist"><p class="title"><b>Additional Configuration Properties</b></p><dl><dt><span class="term"><tt class="literal">relativeExpiration</tt></span></dt><dd><p>
 							Number of seconds that an individual item will exist in the cache before being removed.
 							Defaults to <tt class="literal">300</tt> if neither <tt class="literal">relativeExpiration</tt> nor
 							<tt class="literal">timeOfDayExpiration</tt> are defined, and if no expiration settings are
@@ -12218,7 +12225,7 @@ alter table line_items
 				</dd></dl></div><p>
 			RtMemoryCache has a config file section handler to allow configuring different expirations for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e19970"></a><p class="title"><b>Example&nbsp;27.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e19972"></a><p class="title"><b>Example&nbsp;27.10.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="rtmemorycache"
@@ -12398,7 +12405,7 @@ alter table line_items
 				</dd></dl></div><p>
 			NHibernate.Caches.StackExchangeRedis has a config file section handler to allow configuring different expirations for
 			different regions. Here is an example:
-		</p><div class="example"><a name="d0e20413"></a><p class="title"><b>Example&nbsp;27.11.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20415"></a><p class="title"><b>Example&nbsp;27.11.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="redis"
@@ -12432,7 +12439,7 @@ alter table line_items
 			CoreMemoryCache has a config file section handler to allow configuring different expirations for
 			different regions, and configuring the <tt class="literal">MemoryCache</tt> expiration scan frequency.
 			Here is an example:
-		</p><div class="example"><a name="d0e20463"></a><p class="title"><b>Example&nbsp;27.12.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20465"></a><p class="title"><b>Example&nbsp;27.12.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="corememorycache"
@@ -12474,7 +12481,7 @@ alter table line_items
 			different regions, configuring the <tt class="literal">IDistributedCacheFactory</tt> to use, and configuring
 			additional properties specific to the chosen <tt class="literal">IDistributedCache</tt> implementation.
 			Here is an example:
-		</p><div class="example"><a name="d0e20537"></a><p class="title"><b>Example&nbsp;27.13.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+		</p><div class="example"><a name="d0e20539"></a><p class="title"><b>Example&nbsp;27.13.&nbsp;</b></p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8" ?&gt;
 &lt;configuration&gt;
   &lt;configSections&gt;
     &lt;section name="coredistributedcache"
@@ -12519,7 +12526,7 @@ alter table line_items
 						<a href="https://github.com/cnblogs/EnyimMemcachedCore" target="_top">project website</a>. It has to be structured
 						like the value part of the <tt class="literal">"enyimMemcached"</tt> property in an
 						<tt class="literal">appsettings.json</tt> file.
-						<div class="example"><a name="d0e20604"></a><p class="title"><b>Example&nbsp;27.14.&nbsp;</b></p><pre class="programlisting">{
+						<div class="example"><a name="d0e20606"></a><p class="title"><b>Example&nbsp;27.14.&nbsp;</b></p><pre class="programlisting">{
   "Servers": [
     {
       "Address": "localhost",
